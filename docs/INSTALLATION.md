@@ -7,7 +7,6 @@ This package can be installed as a local plugin or used as a portable collection
 ### macOS / Linux
 
 ```bash
-unzip scholarly-research-book-plugin-v1.0.0.zip
 cd scholarly-research-book-plugin
 python3 scripts/install_codex_plugin.py
 ```
@@ -15,7 +14,6 @@ python3 scripts/install_codex_plugin.py
 ### Windows PowerShell
 
 ```powershell
-Expand-Archive scholarly-research-book-plugin-v1.0.0.zip
 cd scholarly-research-book-plugin
 py scripts\install_codex_plugin.py
 ```
