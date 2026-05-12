@@ -1,0 +1,20 @@
+{
+  "name": "local-scholarly-plugins",
+  "interface": {
+    "displayName": "Local Scholarly Plugins"
+  },
+  "plugins": [
+    {
+      "name": "scholarly-research-book",
+      "source": {
+        "source": "local",
+        "path": "./.codex/plugins/scholarly-research-book"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

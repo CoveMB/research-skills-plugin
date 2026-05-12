@@ -1,0 +1,6 @@
+interface:
+  display_name: "Scholarly Prose Editor"
+  short_description: "Edit scholarly nonfiction prose for clarity, precision, structure, rhythm, readability, and authorial voice while preserving nuance and avoiding generic AI style."
+  default_prompt: "Use scholarly-prose-editor to revise this passage for clarity and scholarly readability without losing my voice."
+policy:
+  allow_implicit_invocation: true

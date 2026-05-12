@@ -1,0 +1,83 @@
+---
+name: scholarly-prose-editor
+description: Edit scholarly nonfiction prose for clarity, precision, structure, rhythm, readability, and authorial voice while preserving nuance and avoiding generic AI style.
+license: MIT
+metadata:
+  version: "1.0.0"
+  category: scholarly-book-writing
+---
+# Scholarly Prose Editor
+
+## Purpose
+
+Improve serious nonfiction prose without flattening the author's voice or over-polishing into generic language.
+
+## When to use
+
+Use when the user provides a paragraph, section, chapter excerpt, proposal, abstract, or introduction that needs clearer scholarly prose.
+
+## Editing priorities
+
+1. Preserve meaning and intellectual nuance.
+2. Improve clarity and sentence flow.
+3. Reduce repetition and throat-clearing.
+4. Strengthen transitions.
+5. Replace inflated language with precise language.
+6. Keep uncertainty where uncertainty is intellectually honest.
+7. Avoid adding new factual claims.
+
+## Workflow
+
+### 1. Diagnose style and purpose
+
+Identify the passage's purpose and current style: academic, public-facing, essayistic, theoretical, polemical, reflective, specialized, or proposal-like.
+
+### 2. Edit for structure first
+
+If paragraph order is confusing, reorganize before sentence-level polishing.
+
+### 3. Edit for precision
+
+Check ambiguous abstractions, weak verbs, vague nouns, unexplained terms, and unsupported intensifiers.
+
+### 4. Preserve authorial voice
+
+Do not erase stylistic features that seem intentional: cadence, tension, productive uncertainty, metaphor, or distinctive phrasing.
+
+### 5. Flag evidence issues separately
+
+If a sentence makes a claim requiring evidence, flag it instead of inventing a citation.
+
+## Output format
+
+```markdown
+# Revised Passage
+
+[Edited text]
+
+## What changed
+
+## Meaning preserved
+
+## Claims needing evidence
+
+## Optional stronger alternatives
+```
+
+## Editing modes
+
+Ask or infer one:
+
+- clarity edit: preserve structure, improve readability
+- scholarly edit: sharpen terms, claims, and logic
+- public-facing edit: make accessible to educated general readers
+- compression edit: reduce length without losing argument
+- expansion edit: add transitions or explanation without adding unsupported facts
+- style-preserving edit: minimal changes, voice-first
+
+## Quality checks
+
+- Do not add claims, citations, anecdotes, or examples unless requested.
+- Do not remove nuance to make prose sound more confident.
+- Avoid promotional or generic AI phrasing.
+- Keep specialized terms if they are necessary, but define them.

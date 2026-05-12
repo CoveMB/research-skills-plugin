@@ -1,0 +1,6 @@
+interface:
+  display_name: "Book Proposal Scholarship"
+  short_description: "Develop a serious scholarly nonfiction book proposal with thesis, contribution, audience, market/field positioning, chapter summaries, comparable titles, and sample-material plan."
+  default_prompt: "Use book-proposal-scholarship to turn my project into a serious scholarly nonfiction book proposal."
+policy:
+  allow_implicit_invocation: true

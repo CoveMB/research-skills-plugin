@@ -1,0 +1,6 @@
+interface:
+  display_name: "Methodology Source Auditor"
+  short_description: "Evaluate source credibility, methodology, evidence quality, bias, generalizability, and what each source can or cannot support in a scholarly manuscript."
+  default_prompt: "Use methodology-source-auditor to assess whether these sources are credible and what claims they can support."
+policy:
+  allow_implicit_invocation: true

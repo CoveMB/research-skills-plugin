@@ -1,0 +1,6 @@
+interface:
+  display_name: "Case Study Integration"
+  short_description: "Select, compare, and integrate case studies into scholarly arguments while avoiding cherry-picking, weak analogy, anecdotal overreach, and unsupported generalization."
+  default_prompt: "Use case-study-integration to choose and integrate case studies for this chapter without overclaiming."
+policy:
+  allow_implicit_invocation: true

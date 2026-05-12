@@ -1,0 +1,6 @@
+interface:
+  display_name: "Chapter Architecture"
+  short_description: "Design scholarly nonfiction chapters with purpose, central question, main claim, concept definitions, evidence placement, counterarguments, transitions, and revision priorities."
+  default_prompt: "Use chapter-architecture to turn these notes into a strong scholarly chapter outline."
+policy:
+  allow_implicit_invocation: true

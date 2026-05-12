@@ -1,0 +1,6 @@
+interface:
+  display_name: "Argument Architecture"
+  short_description: "Build a scholarly book-level thesis tree with claims, warrants, evidence, assumptions, counterarguments, chapter sequence, and argumentative dependencies."
+  default_prompt: "Use argument-architecture to build a thesis tree and chapter-level argument map for my book."
+policy:
+  allow_implicit_invocation: true

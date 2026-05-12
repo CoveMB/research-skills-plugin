@@ -1,0 +1,40 @@
+{
+  "name": "scholarly-research-book",
+  "version": "1.0.0",
+  "description": "Agent Skills plugin for rigorous scholarly nonfiction and research book writing: research agenda, source discovery, literature review, argument architecture, chapters, prose, citations, and manuscript continuity.",
+  "author": {
+    "name": "Generated local scholarly skills pack",
+    "url": "https://agentskills.io"
+  },
+  "license": "MIT",
+  "keywords": [
+    "scholarship",
+    "research",
+    "book-writing",
+    "literature-review",
+    "citations",
+    "academic-writing",
+    "nonfiction",
+    "argument"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Scholarly Research Book Skills",
+    "shortDescription": "Research, argument, citation, and manuscript workflows for scholarly nonfiction.",
+    "longDescription": "A local Codex-compatible plugin bundling focused Agent Skills for planning, researching, drafting, auditing, and revising a serious scholarly nonfiction or research book. Includes source discovery, literature review mapping, claim-evidence ledgers, counterargument review, citation integrity checks, and book proposal support.",
+    "developerName": "Generated local package",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "brandColor": "#334155",
+    "composerIcon": "./assets/icon.svg",
+    "logo": "./assets/logo.svg",
+    "defaultPrompt": [
+      "Use Scholarly Research Book Skills to turn my book idea into a staged research and writing plan.",
+      "Audit this chapter with the claim-evidence ledger and citation-integrity auditor.",
+      "Map this literature into schools of thought, debates, gaps, and a chapter strategy."
+    ]
+  }
+}

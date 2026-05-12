@@ -1,0 +1,6 @@
+interface:
+  display_name: "Citation Integrity Auditor"
+  short_description: "Audit scholarly drafts for citation accuracy, unsupported claims, quote integrity, page-number needs, fabricated-reference risk, source-claim mismatch, and bibliography problems."
+  default_prompt: "Use citation-integrity-auditor to audit this draft for unsupported claims, source mismatches, and citation problems."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Claim Evidence Ledger"
+  short_description: "Extract major claims from a scholarly draft and classify claim type, evidence status, citation need, confidence, overclaiming risk, and safer wording."
+  default_prompt: "Use claim-evidence-ledger to extract the major claims in this draft and show what evidence each one needs."
+policy:
+  allow_implicit_invocation: true

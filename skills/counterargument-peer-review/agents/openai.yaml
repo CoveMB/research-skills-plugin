@@ -1,0 +1,6 @@
+interface:
+  display_name: "Counterargument Peer Review"
+  short_description: "Simulate rigorous scholarly peer review by generating strong objections, rival explanations, missing literatures, positional blind spots, and thesis revisions."
+  default_prompt: "Use counterargument-peer-review to challenge my thesis like a rigorous peer reviewer."
+policy:
+  allow_implicit_invocation: true

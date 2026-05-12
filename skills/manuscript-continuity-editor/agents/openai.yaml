@@ -1,0 +1,6 @@
+interface:
+  display_name: "Manuscript Continuity Editor"
+  short_description: "Review multiple chapters or a whole manuscript for thesis coherence, repetition, contradictions, concept tracking, tone consistency, chapter order, and revision priorities."
+  default_prompt: "Use manuscript-continuity-editor to review these chapters for coherence, repetition, contradictions, and structure."
+policy:
+  allow_implicit_invocation: true

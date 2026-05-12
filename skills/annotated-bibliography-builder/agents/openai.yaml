@@ -1,0 +1,6 @@
+interface:
+  display_name: "Annotated Bibliography Builder"
+  short_description: "Create scholarly annotated bibliographies that summarize argument, method, evidence, relevance, limitations, key terms, and chapter placement for research book sources."
+  default_prompt: "Use annotated-bibliography-builder to turn these sources into scholarly annotations and chapter-use notes."
+policy:
+  allow_implicit_invocation: true
