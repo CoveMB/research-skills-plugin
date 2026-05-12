@@ -15,7 +15,7 @@ Use it again when the thesis changes. A research agenda is not a prison. It is a
 ## Good inputs
 
 - A book idea, premise, or half-formed thesis.
-- Intended audience, such as academic, serious trade, professional, or general reader.
+- Intended audience, such as academic, trade, professional, or general reader.
 - Fields or disciplines the book touches.
 - Known cases, examples, or source types.
 - Constraints such as timeline, length, geography, period, or method.

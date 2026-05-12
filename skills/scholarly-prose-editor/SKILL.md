@@ -6,11 +6,11 @@ metadata:
   version: "1.0.0"
   category: research-book-writing
 ---
-# Research Prose Editor
+# Research prose editor
 
 ## Purpose
 
-Improve serious nonfiction prose without flattening the author's voice or over-polishing into generic language.
+Improve research nonfiction prose without flattening the author's voice or over-polishing into generic language.
 
 ## When to use
 
@@ -97,7 +97,7 @@ Confirm whether the edit introduced any new factual claims. The default should b
 ## Output format
 
 ```markdown
-# Revised Passage
+# Revised passage
 
 ## Source basis
 
@@ -142,7 +142,7 @@ Ask or infer one:
 
 - Do not add claims, citations, anecdotes, or examples unless requested.
 - Do not remove nuance to make prose sound more confident.
-- Avoid promotional or generic AI phrasing.
+- Avoid promotional or formulaic phrasing.
 - Keep specialized terms if they are necessary, but define them.
 - Preserve warranted hedging when evidence remains uncertain.
 - Suggested next step must reduce a named scholarly risk, not promote a skill because it exists.

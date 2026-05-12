@@ -35,7 +35,7 @@ Classify these sources as core evidence, context, counterpoint, or not suitable 
 
 ## Typical output
 
-The output usually includes a source audit table with type, method, credibility, bias risk, supportable claims, unsupported claims, and use recommendation. It also lists high-risk sources, missing stronger evidence, recommended upgrades, and the next skill to use.
+The output usually includes a source audit table with type, method, credibility, bias risk, supportable claims, unsupported claims, and use recommendation. It also lists high-risk sources, missing stronger evidence, recommended upgrades, and a risk-gated follow-up when it is useful.
 
 ## Procedure
 

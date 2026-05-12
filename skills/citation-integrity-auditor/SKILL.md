@@ -6,7 +6,7 @@ metadata:
   version: "1.0.0"
   category: research-book-writing
 ---
-# Citation Integrity Auditor
+# Citation integrity auditor
 
 ## Purpose
 
@@ -123,7 +123,7 @@ Offer safer wording, stronger source types, or citation placement changes.
 ## Output format
 
 ```markdown
-# Citation Integrity Audit
+# Citation integrity audit
 
 ## Source basis
 

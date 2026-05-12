@@ -1,4 +1,4 @@
-# Chapter Brief
+# Chapter brief
 
 ## Chapter purpose
 

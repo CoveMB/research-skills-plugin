@@ -6,11 +6,11 @@ metadata:
   version: "1.0.0"
   category: research-book-writing
 ---
-# Research Book Orchestrator
+# Research book orchestrator
 
 ## Purpose
 
-Coordinate a serious research-book workflow from idea to manuscript. This skill does not replace the specialized skills. It decides which skill should be used next, sequences the work, and keeps the project grounded in scholarly standards.
+Coordinate a research-book workflow with scholarly standards from idea to manuscript. This skill does not replace the specialized skills. It decides which skill should be used next, sequences the work, and keeps the project grounded in scholarly standards.
 
 Use `docs/ARCHITECTURE.md` as the stage map and `MODE_REGISTRY.md` as the route registry when the user asks for a full workflow, mode choice, or package-level orchestration.
 
@@ -150,7 +150,7 @@ At each transition, check:
 ## Output format
 
 ```markdown
-# Research Book Workflow Plan
+# Research book workflow plan
 
 ## Source basis
 

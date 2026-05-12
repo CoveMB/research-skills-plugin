@@ -1,4 +1,4 @@
-# Research Intent Router
+# research-intent-router
 
 Routes scholarly nonfiction research prompts to the smallest useful skill. It protects speed and rigor by using light routing first and allowing deep lookup only when it materially improves evidence quality.
 

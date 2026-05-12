@@ -1,4 +1,4 @@
-# Usage Examples
+# Usage examples
 
 ## Build the full research workflow
 
@@ -33,7 +33,7 @@ Use claim-evidence-ledger. Extract the major claims in this draft and classify e
 ## Challenge the thesis
 
 ```text
-Use counterargument-peer-review. Attack this thesis like a rigorous peer reviewer, then revise it into a stronger form.
+Use counterargument-peer-review. Challenge this thesis like a skeptical peer reviewer, then revise it into a stronger form.
 ```
 
 ## Audit citations

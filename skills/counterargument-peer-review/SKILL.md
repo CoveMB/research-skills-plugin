@@ -1,12 +1,12 @@
 ---
 name: counterargument-peer-review
-description: Simulate rigorous research peer review when a thesis, chapter, outline, proposal, or argument needs strong objections, rival explanations, missing literatures, positional blind spots, and revision paths.
+description: Run a research peer-review style critique when a thesis, chapter, outline, proposal, or argument needs objections, rival explanations, missing literatures, positional blind spots, and revision paths.
 license: MIT
 metadata:
   version: "1.0.0"
   category: research-book-writing
 ---
-# Counterargument Peer Review
+# Counterargument peer review
 
 ## Purpose
 
@@ -14,7 +14,7 @@ Stress-test a research argument. The goal is not negativity; it is to make the b
 
 ## When to use
 
-Use when the user has a thesis, chapter draft, outline, proposal, or argument and wants serious critique.
+Use when the user has a thesis, chapter draft, outline, proposal, or argument and wants direct critique.
 
 ## Automatic selection guidance
 
@@ -38,7 +38,7 @@ Use when the user has a thesis, chapter draft, outline, proposal, or argument an
 
 ## Review stance
 
-Be charitable first, then rigorous. Steelman the argument before attacking it. Do not flatter. Do not dismiss. Improve.
+Be charitable first, then direct. Steelman the argument before attacking it, and avoid flattery or dismissal.
 
 ## Source basis and AI limits
 
@@ -121,7 +121,7 @@ For high-severity objections, state what evidence would falsify or materially we
 ## Output format
 
 ```markdown
-# Peer-Review Style Critique
+# Peer-review style critique
 
 ## Source basis
 

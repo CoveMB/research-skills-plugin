@@ -6,7 +6,7 @@ metadata:
   version: "1.0.0"
   category: research-book-writing
 ---
-# Claim Evidence Ledger
+# Claim evidence ledger
 
 ## Purpose
 
@@ -121,7 +121,7 @@ Recommend source types, not fake sources.
 ## Output format
 
 ```markdown
-# Claim-Evidence Ledger
+# Claim-evidence ledger
 
 ## Source basis
 

@@ -6,7 +6,7 @@ metadata:
   version: "1.0.0"
   category: research-book-writing
 ---
-# Chapter Architecture
+# Chapter architecture
 
 ## Purpose
 
@@ -124,7 +124,7 @@ Common risks:
 ## Output format
 
 ```markdown
-# Chapter Architecture
+# Chapter architecture
 
 ## Source basis
 

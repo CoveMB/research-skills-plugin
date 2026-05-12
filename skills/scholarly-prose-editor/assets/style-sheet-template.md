@@ -1,4 +1,4 @@
-# Manuscript Style Sheet
+# Manuscript style sheet
 
 ## Voice
 

@@ -1,4 +1,4 @@
-# Literature Map Template
+# Literature map template
 
 ## Schools of thought
 | School | Core claim | Representative sources | Methods | Strengths | Limits |

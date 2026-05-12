@@ -1,12 +1,12 @@
 ---
 name: systematic-source-discovery
-description: Design rigorous source-discovery strategies when research books or literature reviews need source plans, keyword banks, database searches, inclusion rules, citation chaining, primary-source targets, candidate sources, or search logs.
+description: Design source-discovery strategies when research books or literature reviews need source plans, keyword banks, database searches, inclusion rules, citation chaining, primary-source targets, candidate sources, or search logs.
 license: MIT
 metadata:
   version: "1.0.0"
   category: research-book-writing
 ---
-# Systematic Source Discovery
+# Systematic source discovery
 
 ## Purpose
 
@@ -14,7 +14,7 @@ Create a repeatable source-discovery strategy for research nonfiction: search te
 
 ## When to use
 
-Use when the user needs to find high-quality sources, build a literature base, avoid cherry-picking, or document how sources were discovered.
+Use when the user needs to find credible sources, build a literature base, avoid cherry-picking, or document how sources were discovered.
 
 ## Automatic selection guidance
 
@@ -43,7 +43,7 @@ Prefer a balanced mix of:
 1. Primary or source materials: original documents, records, reports, data, interviews, field notes, or working papers when they are objects of study.
 2. Peer-reviewed journal articles and academic books.
 3. Review articles and handbooks.
-4. Books from reputable academic or serious trade presses.
+4. Books from reputable academic or trade presses.
 5. Institutional or organizational reports.
 6. Reputable journalism for recent events or narrative context.
 7. Persuasive or organizational material only with explicit perspective/context labeling.
@@ -134,7 +134,7 @@ Record every search query, venue, date, filters, number of useful hits, and note
 ## Output format
 
 ```markdown
-# Source Discovery Plan
+# Source discovery plan
 
 ## Search status
 

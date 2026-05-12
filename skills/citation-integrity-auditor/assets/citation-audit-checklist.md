@@ -1,4 +1,4 @@
-# Citation Audit Checklist
+# Citation audit checklist
 
 - [ ] Every factual, causal, field-specific, or controversial claim has support.
 - [ ] Citations actually support the sentence they are attached to.

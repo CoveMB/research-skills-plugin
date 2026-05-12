@@ -6,7 +6,7 @@ Use this structure when adding or refreshing a skill README. Put skill-specific 
 
 Explain the skill's job in plain language.
 
-## When to use it in the book writing process
+## When to use it
 
 Name the manuscript stage, useful inputs, and strongest trigger cases.
 
@@ -27,22 +27,22 @@ Describe the main output. Note that follow-up suggestions are optional and risk-
 
 ## Procedure
 
-1. Establish source basis and source access level using `docs/SOURCE_LIMITS.md`.
+1. State the source basis and source access level using `docs/SOURCE_LIMITS.md`.
 2. Follow the procedure in the skill's `SKILL.md`.
-3. Produce the stated output format and separate verified facts, interpretation, speculation, and recommendation.
-4. End with verification gaps and a risk-gated follow-up only when useful.
+3. Produce the stated output format and keep verified facts, interpretation, speculation, and recommendation separate.
+4. End with verification gaps. Add a risk-gated follow-up only when it is useful.
 
 ## Quality checks
 
 - Evidence strength must match claim strength.
-- Missing source access must be marked.
+- Missing source access must be marked clearly.
 - Uncertainty, limits, and user verification needs must be visible.
 
 ## Failure modes
 
 - Fabricated scholarly facts or verification.
 - Confident synthesis from partial sources.
-- Generic prose or structure that hides weak evidence.
+- Generic prose or structure that hides weak evidence or weak reasoning.
 
 ## Files/folders it may read
 

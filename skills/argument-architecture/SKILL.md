@@ -6,7 +6,7 @@ metadata:
   version: "1.0.0"
   category: research-book-writing
 ---
-# Argument Architecture
+# Argument architecture
 
 ## Purpose
 
@@ -132,7 +132,7 @@ Offer versions:
 ## Output format
 
 ```markdown
-# Argument Architecture
+# Argument architecture
 
 ## Source basis
 

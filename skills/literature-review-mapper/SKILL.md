@@ -6,7 +6,7 @@ metadata:
   version: "1.0.0"
   category: research-book-writing
 ---
-# Literature Review Mapper
+# Literature review mapper
 
 ## Purpose
 
@@ -14,7 +14,7 @@ Create an intellectual map of a research field. The goal is not to summarize sou
 
 ## When to use
 
-Use when the user has a topic, source list, annotations, or scattered notes and needs a literature review structure for a research book or serious nonfiction project.
+Use when the user has a topic, source list, annotations, or scattered notes and needs a literature review structure for a research book or scholarly nonfiction project.
 
 ## Automatic selection guidance
 
@@ -107,7 +107,7 @@ Gaps can be empirical, theoretical, contextual, methodological, geographic, conc
 ## Output format
 
 ```markdown
-# Literature Review Map
+# Literature review map
 
 ## Source basis
 

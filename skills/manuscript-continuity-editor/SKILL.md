@@ -6,7 +6,7 @@ metadata:
   version: "1.0.0"
   category: research-book-writing
 ---
-# Manuscript Continuity Editor
+# Manuscript continuity editor
 
 ## Purpose
 
@@ -107,7 +107,7 @@ Rank fixes by impact.
 ## Output format
 
 ```markdown
-# Manuscript Continuity Review
+# Manuscript continuity review
 
 ## Source basis
 

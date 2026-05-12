@@ -1,4 +1,4 @@
-# Thesis Tree
+# Thesis tree
 
 ## Main thesis
 

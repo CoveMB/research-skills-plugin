@@ -8,7 +8,7 @@ Use it when the author needs to know where the book sits. It helps separate a re
 
 ## When to use it
 
-Use it after the first serious round of source discovery and annotation. It belongs before argument architecture because the book's thesis should be shaped by the field, not only by the author's starting intuition.
+Use it after the first substantial round of source discovery and annotation. It belongs before argument architecture because the field should shape the book's thesis alongside the author's starting intuition.
 
 Use it again when a chapter enters a new debate or when reviewers say the project is missing a field, tradition, or method.
 

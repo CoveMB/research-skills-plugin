@@ -1,4 +1,4 @@
-# Annotated Bibliography Entry
+# Annotated bibliography entry
 
 **Source:**
 **Type:**

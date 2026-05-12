@@ -1,4 +1,4 @@
-# First-Week Research Sprint
+# First-week research sprint
 
 Day 1: Use `scholarly-research-agenda` to define the project.
 

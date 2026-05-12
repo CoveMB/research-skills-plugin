@@ -6,7 +6,7 @@ metadata:
   version: "1.0.0"
   category: research-book-writing
 ---
-# Case Study Integration
+# Case study integration
 
 ## Purpose
 
@@ -111,7 +111,7 @@ Include timeline, actors, source base, relevance, limits, and chapter placement.
 ## Output format
 
 ```markdown
-# Case Study Integration Plan
+# Case study integration plan
 
 ## Source basis
 

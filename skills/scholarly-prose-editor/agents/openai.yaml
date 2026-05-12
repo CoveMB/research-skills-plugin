@@ -1,6 +1,6 @@
 interface:
   display_name: "Research Prose Editor"
-  short_description: "Edit research nonfiction prose for clarity, precision, structure, rhythm, readability, and authorial voice while preserving nuance and avoiding generic AI style."
+  short_description: "Edit research nonfiction prose for clarity, precision, structure, rhythm, readability, and authorial voice while preserving nuance and avoiding formulaic style."
   default_prompt: "Use scholarly-prose-editor to revise this passage for clarity and research readability without losing my voice."
 policy:
   allow_implicit_invocation: true

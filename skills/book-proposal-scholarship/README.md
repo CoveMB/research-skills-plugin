@@ -4,7 +4,7 @@
 
 Use this skill to develop a research nonfiction book proposal. It helps shape the premise, thesis, contribution, audience, source base, chapter summaries, comparable-title needs, author positioning, manuscript status, timeline, sample chapter strategy, and submission risks.
 
-A proposal is not only a description of the book. It is an argument that the book has a clear contribution, a real audience, a credible source base, and a workable path to completion.
+A proposal describes the book and argues that it has a clear contribution, a real audience, a credible source base, and a workable path to completion.
 
 ## When to use it
 

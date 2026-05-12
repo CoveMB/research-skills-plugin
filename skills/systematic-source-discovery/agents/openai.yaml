@@ -1,6 +1,6 @@
 interface:
   display_name: "Systematic Source Discovery"
-  short_description: "Design rigorous research source-discovery strategies, keyword sets, database searches, citation-chaining plans, primary-source targets, and search logs for research books and literature reviews."
+  short_description: "Design research source-discovery strategies, keyword sets, database searches, citation-chaining plans, primary-source targets, and search logs for research books and literature reviews."
   default_prompt: "Use systematic-source-discovery to create a search strategy and source log for my book topic."
 policy:
   allow_implicit_invocation: true

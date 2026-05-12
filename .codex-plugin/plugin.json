@@ -23,7 +23,7 @@
   "interface": {
     "displayName": "Research Book Skills",
     "shortDescription": "Research intent routing plus argument, citation, and manuscript workflows for scholarly nonfiction.",
-    "longDescription": "A local plugin bundling focused Agent Skills for planning, researching, drafting, auditing, and revising a serious research nonfiction or research book. Includes lightweight research-intent routing, staged architecture docs, a mode registry, book artifact contracts, source discovery, literature review mapping, claim-evidence ledgers, counterargument review, citation integrity checks, and book proposal support.",
+    "longDescription": "A local plugin with focused Agent Skills for planning, researching, drafting, auditing, and revising scholarly nonfiction or a research book. Includes lightweight research-intent routing, staged architecture docs, a mode registry, book artifact contracts, source discovery, literature review mapping, claim-evidence ledgers, counterargument review, citation integrity checks, and book proposal support.",
     "developerName": "Generated local package",
     "category": "Productivity",
     "capabilities": [

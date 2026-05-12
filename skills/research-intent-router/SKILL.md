@@ -6,11 +6,11 @@ metadata:
   version: "1.0.0"
   category: research-book-writing
 ---
-# Research Intent Router
+# Research intent router
 
 ## Purpose
 
-This skill must auto-detect research intent and route the user to the smallest useful research-book skill. It supports scholar-grade research by strengthening source, claim, and argument decisions while using the selected research mode to control lookup depth.
+This skill can auto-detect research intent and route the user to the smallest useful research-book skill. It protects source, claim, and argument decisions while using the selected research mode to control lookup depth.
 
 ## When to use
 
@@ -32,7 +32,7 @@ MODE_REGISTRY.md is canonical for mode names and aliases.
 | Mode | Default action | Lookup rule | Failure behavior |
 |---|---|---|---|
 | normal mode | Light routing first: classify the request and choose the smallest useful skill. | Use the Normal mode lookup gate. | State what remains unverified and recommend the light next step. |
-| deep mode | Deep mode always attempts deep lookup for scholar-grade research tasks after routing. | Use the Deep mode lookup policy and deep lookup bounds. | Report blockers, missing tools, missing source access, and verification limits. |
+| deep mode | Deep mode always attempts deep lookup for scholarly research tasks after routing. | Use the Deep mode lookup policy and deep lookup bounds. | Report blockers, missing tools, missing source access, and verification limits. |
 
 Mode persistence:
 
@@ -56,7 +56,7 @@ Normal mode lookup gate:
 
 Deep mode lookup policy:
 
-- treat scholar-grade research intent itself as sufficient reason to attempt deep lookup
+- treat scholarly research intent itself as sufficient reason to attempt deep lookup
 - route first, then attempt the safest lookup path available
 - report blockers, unavailable tools, missing source access, and verification limits
 - never treat failed or unavailable lookup as verified evidence
@@ -140,7 +140,7 @@ Follow `docs/SOURCE_LIMITS.md`: state the source access level, separate source b
 
 ### 1. Detect research intent
 
-Decide whether the prompt is a scholar-grade research task. If not, do not use this router.
+Decide whether the prompt is a research task with scholarly standards. If not, do not use this router.
 
 ### 2. Classify the work
 
@@ -165,7 +165,7 @@ Make source basis, verification gaps, and user verification needs visible.
 This is a non-contract routing output unless the user explicitly asks for a book artifact that follows `shared/contracts/book/book_artifact.schema.json`.
 
 ```markdown
-# Research Intent Route
+# Research intent route
 
 ## Source basis
 

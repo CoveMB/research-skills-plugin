@@ -1,4 +1,4 @@
-# Source Audit Rubric
+# Source audit rubric
 
 | Dimension | Questions | Rating |
 |---|---|---|

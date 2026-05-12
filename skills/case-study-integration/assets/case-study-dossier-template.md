@@ -1,4 +1,4 @@
-# Case Study Dossier
+# Case study dossier
 
 ## Case
 

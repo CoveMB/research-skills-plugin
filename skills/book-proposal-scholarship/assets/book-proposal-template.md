@@ -1,4 +1,4 @@
-# Research Book Proposal Template
+# Research book proposal template
 
 ## Title and subtitle
 

@@ -1,4 +1,4 @@
-# Peer-Review Style Critique
+# Peer-review style critique
 
 ## Charitable restatement
 

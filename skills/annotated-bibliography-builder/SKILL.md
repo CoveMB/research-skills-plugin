@@ -1,16 +1,16 @@
 ---
 name: annotated-bibliography-builder
-description: Create research-grade annotated bibliographies when sources, citations, excerpts, abstracts, notes, PDFs, or bibliographies need structured notes on argument, method, evidence, relevance, limits, and chapter placement.
+description: Create structured annotated bibliographies when sources, citations, excerpts, abstracts, notes, PDFs, or bibliographies need notes on argument, method, evidence, relevance, limits, and chapter placement.
 license: MIT
 metadata:
   version: "1.0.0"
   category: research-book-writing
 ---
-# Annotated Bibliography Builder
+# Annotated bibliography builder
 
 ## Purpose
 
-Produce high-quality research annotations that help a book author remember what each source argues, how it argues, why it matters, and how it can be used.
+Produce research annotations that help a book author remember what each source argues, how it argues, why it matters, and how it can be used.
 
 ## When to use
 
@@ -91,7 +91,7 @@ Recommend book chapter or section placement.
 ## Output format
 
 ```markdown
-# Annotated Bibliography
+# Annotated bibliography
 
 ## Source basis
 

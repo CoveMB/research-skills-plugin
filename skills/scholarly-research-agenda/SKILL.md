@@ -6,7 +6,7 @@ metadata:
   version: "1.0.0"
   category: research-book-writing
 ---
-# Research Agenda
+# Research agenda
 
 ## Purpose
 
@@ -137,7 +137,7 @@ Assess whether the project is answerable at book scale. Check scope size, likely
 ## Output format
 
 ```markdown
-# Research Agenda
+# Research agenda
 
 ## Source basis
 

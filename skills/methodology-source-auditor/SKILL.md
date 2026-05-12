@@ -6,7 +6,7 @@ metadata:
   version: "1.0.0"
   category: research-book-writing
 ---
-# Methodology Source Auditor
+# Methodology source auditor
 
 ## Purpose
 
@@ -119,7 +119,7 @@ Decide whether to use as core evidence, contextual support, counterpoint, object
 ## Output format
 
 ```markdown
-# Source Methodology Audit
+# Source methodology audit
 
 ## Source basis
 

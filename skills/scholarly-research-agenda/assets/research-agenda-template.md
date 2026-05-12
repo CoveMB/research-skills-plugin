@@ -1,4 +1,4 @@
-# Research Agenda Template
+# Research agenda template
 
 ## One-sentence project definition
 
