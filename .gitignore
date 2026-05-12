@@ -1,1 +1,21 @@
-/**/__pycache__
+# Python/runtime caches
+__pycache__/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+*.pyc
+
+# Build and generated output
+build/
+coverage/
+dist/
+htmlcov/
+node_modules/
+*.log
+*.tmp
+*.zip
+
+# Local OS/editor metadata
+.DS_Store

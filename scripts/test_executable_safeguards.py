@@ -346,6 +346,26 @@ class TestExecutableSafeguards(unittest.TestCase):
             "claim_evidence_ledger",
         )
 
+    def test_gitignore_tracks_generated_file_exclusions(self) -> None:
+        plugin_utils = load_module("plugin_utils.py")
+        ignored_patterns = {
+            line.strip().rstrip("/")
+            for line in (ROOT / ".gitignore").read_text(encoding="utf-8").splitlines()
+            if line.strip() and not line.lstrip().startswith("#")
+        }
+        expected_patterns = [
+            pattern
+            for pattern in plugin_utils.generated_file_patterns()
+            if pattern != ".git"
+        ]
+
+        missing = [
+            pattern
+            for pattern in expected_patterns
+            if pattern.rstrip("/") not in ignored_patterns
+        ]
+        self.assertEqual(missing, [])
+
     def test_validate_script_uses_unittest_discovery(self) -> None:
         text = (ROOT / "validate.sh").read_text(encoding="utf-8")
         self.assertIn("-m unittest discover", text)

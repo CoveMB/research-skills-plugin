@@ -51,6 +51,8 @@ PROVENANCE_FIELDS = [
     "what_remains_uncertain",
     "user_verification_needed",
 ]
+
+
 @cache
 def read_text(path: Path) -> str:
     return path.read_text(encoding="utf-8")
