@@ -38,6 +38,46 @@ My book idea feels too broad. Help me decide what belongs in scope and what shou
 
 The output usually includes a one-sentence project definition, central research question, subquestions, provisional thesis, contribution claim, scope boundaries, terms needing definition, evidence plan, risks, and recommended next skill.
 
+## Procedure
+
+1. Establish source basis and source access level.
+2. Use the skill's `SKILL.md` procedure, not memory-only shortcuts.
+3. Produce the stated output format and separate verified facts, interpretation, speculation, and recommendation.
+4. End with verification gaps and the next best skill or repair step.
+
+## Quality checks
+
+- Evidence strength must match claim strength.
+- Missing source access must be marked, not hidden.
+- Uncertainty, limits, and user verification needs must be visible.
+- Output should preserve scholarly caution without becoming vague.
+
+## Failure modes
+
+- Fabricated citations, quotes, page numbers, source metadata, datasets, market facts, or field consensus.
+- Confident synthesis from partial sources.
+- Generic prose or structure that hides weak evidence.
+- Overstated claims, missing counterarguments, or unclear source basis.
+
+## Files/folders it may read
+
+- This skill's `SKILL.md`, `README.md`, `assets/`, `references/`, and `agents/openai.yaml` when present and relevant.
+- User-provided drafts, notes, sources, artifacts, or project files explicitly named in the request.
+- Shared project documentation only when needed for workflow, quality, or artifact compatibility.
+
+## Files/folders it may write
+
+- None by default.
+- May create or update user-requested research artifacts, notes, drafts, or review files in the current project.
+- Must not overwrite source material, bibliography databases, manuscript files, or plugin files without explicit user request.
+
+## What it must not do
+
+- Invent missing scholarly facts or verification.
+- Treat unavailable evidence as confirmed.
+- Use style polish to mask weak argument, weak sources, or unsupported claims.
+- Claim external searches, source checks, or database access that did not happen.
+
 ## Best next steps
 
 After this skill, use `systematic-source-discovery` to build a source strategy. If the user already has many sources, move to `literature-review-mapper` and check whether the agenda matches the field.

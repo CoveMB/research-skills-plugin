@@ -16,7 +16,7 @@ Transform a broad nonfiction or research book idea into a disciplined research a
 
 Use this when the user has a broad intellectual project, book premise, thesis idea, manifesto, research theme, or interdisciplinary question and needs it made researchable.
 
-## Inputs to look for
+## Inputs expected
 
 - Working topic or book premise
 - Intended audience
@@ -27,7 +27,37 @@ Use this when the user has a broad intellectual project, book premise, thesis id
 
 If inputs are missing, proceed with assumptions and label them.
 
-## Workflow
+## Source basis and AI limits
+
+Before creating the agenda, state the source access level as one of:
+
+- user-provided full text
+- excerpt only
+- citation only
+- model knowledge only
+- live/current search needed
+
+Every output must separate source basis, what can be verified from available material, what remains uncertain, and what the user must verify. Do not invent citations, page numbers, quotations, DOIs, datasets, market facts, field consensus, source metadata, or claims of having searched a database. Separate verified facts, interpretation, speculation, and recommendation.
+
+## Files/folders it may read
+
+- This skill's `SKILL.md`, `README.md`, `assets/research-agenda-template.md`, and `agents/openai.yaml`.
+- User-provided book premises, notes, outlines, bibliographies, or project files explicitly named in the request.
+- Repository quality docs when the user asks for contract-compatible or workflow-aligned artifacts.
+
+## Files/folders it may write
+
+- None by default.
+- May create or update a user-requested research agenda artifact in the current project.
+- Must not modify source texts, citation databases, or plugin files unless explicitly asked.
+
+## What it must not do
+
+- Do not present a provisional thesis as established.
+- Do not turn an evocative topic into a false research question.
+- Do not invent evidence availability, field consensus, sources, or definitions.
+
+## Procedure
 
 ### 1. Identify the intellectual object
 
@@ -89,10 +119,22 @@ For each major claim, specify the evidence needed:
 
 Flag risks such as excessive breadth, weak evidence availability, unstated assumptions, anachronism, presentism, single-cause explanation, or unclear audience.
 
+### 7. Run a feasibility check
+
+Assess whether the project is answerable at book scale. Check scope size, likely evidence availability, field coverage, missing disciplines, source access barriers, and whether the central question can produce a defensible thesis instead of only a theme.
+
 ## Output format
 
 ```markdown
 # Research Agenda
+
+## Source basis
+
+## What I can verify
+
+## What remains uncertain
+
+## User verification needed
 
 ## One-sentence project definition
 
@@ -114,6 +156,11 @@ Flag risks such as excessive breadth, weak evidence availability, unstated assum
 
 ## Risks and mitigation
 
+## Feasibility check
+| Dimension | Assessment | Risk | Needed next step |
+
+## Limits / failure risks
+
 ## Next best skill
 ```
 
@@ -123,3 +170,11 @@ Flag risks such as excessive breadth, weak evidence availability, unstated assum
 - Normative claims must not masquerade as empirical claims.
 - Each major question must imply a source strategy.
 - The project must have boundaries tight enough to write a chapter, not a conversation topic.
+- Treat the provisional thesis as provisional until source discovery and literature mapping test it.
+
+## Failure modes
+
+- Scope remains too broad to research.
+- Question mixes empirical, normative, and speculative claims without separation.
+- Agenda assumes sources exist without verification.
+- Contribution claim overstates novelty before literature mapping.

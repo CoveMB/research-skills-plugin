@@ -14,12 +14,19 @@ Coordinate a serious research-book workflow from idea to manuscript. This skill 
 
 Use `docs/ARCHITECTURE.md` as the stage map and `MODE_REGISTRY.md` as the route registry when the user asks for a full workflow, mode choice, or package-level orchestration.
 
-## Use this skill when
+## When to use
 
 - The user has a broad book idea and needs a complete workflow.
 - The user is unsure whether to start with sources, outline, argument, chapters, or citation audit.
 - The task spans multiple phases of a research nonfiction manuscript.
 - The project involves academic standards, evidence management, citations, literature review, or peer-review style critique.
+
+## Inputs expected
+
+- Book premise, working thesis, table of contents, chapter draft, proposal, or source list.
+- User's intended audience, discipline, manuscript stage, deadline, and known constraints when available.
+- Current materials available for verification: sources, excerpts, notes, bibliography, case notes, or prior artifacts.
+- The user's main uncertainty about what to do next.
 
 ## Do not use this skill when
 
@@ -59,7 +66,37 @@ Use these routes:
 7. Keep a claim-evidence ledger for all major factual and causal claims.
 8. Treat theory, empirical evidence, source records, case studies, and normative argument as different kinds of support.
 
-## Workflow
+## Source basis and AI limits
+
+Before routing or planning, state the source access level as one of:
+
+- user-provided full text
+- excerpt only
+- citation only
+- model knowledge only
+- live/current search needed
+
+Every output must separate source basis, what can be verified from available material, what remains uncertain, and what the user must verify. Do not invent citations, page numbers, quotations, DOIs, datasets, market facts, field consensus, source metadata, or claims of having searched a database. Separate verified facts, interpretation, speculation, and recommendation.
+
+## Files/folders it may read
+
+- This skill's `SKILL.md`, `README.md`, and `agents/openai.yaml`.
+- `docs/ARCHITECTURE.md`, `MODE_REGISTRY.md`, `docs/QUALITY_STANDARD.md`, and `shared/contracts/book/book_artifact.schema.json` when routing, artifacts, or quality gates matter.
+- User-provided files, drafts, notes, bibliographies, and artifacts explicitly named in the request.
+
+## Files/folders it may write
+
+- None by default.
+- May create or update user-requested workflow plans or book artifacts in the current project when explicitly asked.
+- Must not rewrite skill files, source files, external libraries, or citation databases unless the user explicitly requests that maintenance work.
+
+## What it must not do
+
+- Do not skip source, literature, argument, evidence, or citation gates to produce confident prose faster.
+- Do not treat routing recommendations as proof that the underlying scholarship is sound.
+- Do not fabricate missing sources, market facts, field consensus, or manuscript status.
+
+## Procedure
 
 ### 1. Diagnose project phase
 
@@ -79,7 +116,19 @@ Classify the project into one or more phases:
 
 List only high-impact missing inputs. Do not stall if the user has provided enough to proceed. Infer a reasonable workflow and mark assumptions.
 
-### 3. Choose next skill sequence
+### 3. Apply phase gates
+
+Do not route directly to drafting or prose polish when the agenda, source plan, or claim-evidence status is weak. If a gate is not met, name the blocked phase, explain the risk, and route to the skill that resolves it.
+
+Block or qualify forward movement when:
+
+- central question, audience, or scope is undefined
+- source plan is missing or only anecdotal
+- literature map is one-sided or based on a narrow corpus
+- thesis claims lack evidence status
+- citation or quotation verification is unavailable
+
+### 4. Choose next skill sequence
 
 Recommend a sequence of 3–6 skills. For each, explain:
 
@@ -88,7 +137,7 @@ Recommend a sequence of 3–6 skills. For each, explain:
 - dependency on prior work
 - risk it reduces
 
-### 4. Produce a concrete work plan
+### 5. Produce a concrete work plan
 
 Create a plan with deliverables. Prefer concrete artifacts: research agenda, search log, literature map, thesis tree, chapter brief, claim ledger, citation audit, continuity memo.
 
@@ -103,7 +152,7 @@ When the user requests machine-readable artifacts, use `shared/contracts/book/bo
 - `continuity_review`
 - `book_proposal`
 
-### 5. Enforce scholarly quality gates
+### 6. Enforce scholarly quality gates
 
 At each transition, check:
 
@@ -119,6 +168,14 @@ At each transition, check:
 ```markdown
 # Research Book Workflow Plan
 
+## Source basis
+
+## What I can verify
+
+## What remains uncertain
+
+## User verification needed
+
 ## Project diagnosis
 
 ## Assumptions I am making
@@ -130,13 +187,22 @@ At each transition, check:
 
 ## Quality gates
 
+## Limits / failure risks
+
 ## Longer-term manuscript roadmap
 ```
 
-## Common failure modes
+## Failure modes
 
 - Starting with a chapter draft before the thesis and evidence are stable.
 - Treating all sources as equal.
 - Using case studies as proof when they are only illustrations.
 - Ignoring literatures that would challenge the user's preferred thesis.
 - Producing a confident synthesis without source verification.
+
+## Quality checks
+
+- The recommended sequence must name the risk each step reduces.
+- Block drafting when phase gates are not met.
+- Make assumptions and verification gaps visible.
+- Prefer concrete artifacts over vague next steps.
