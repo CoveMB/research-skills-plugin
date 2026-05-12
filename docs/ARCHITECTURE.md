@@ -1,14 +1,15 @@
 # Research book plugin architecture
 
-This package is a book-length research workflow, not a loose set of writing prompts. Each stage has a skill, an expected artifact, and a quality gate before the next stage.
+This package is organized as a book-length research workflow, not a loose set of writing prompts. Each stage has a skill, an expected artifact, and a quality gate before the next stage.
 
 ## How to read this file
 
 - Use the flow diagram for the high-level sequence.
 - Use the stage matrix to see which skill produces which artifact.
-- Use the quality gates before moving from planning to drafting or from drafting to audit.
+- Check the quality gates before moving from planning to drafting or from drafting to audit.
 - Use `MODE_REGISTRY.md` as the short routing reference.
 - Use `shared/contracts/book/book_artifact.schema.json` when JSON artifacts are requested or examples are changed.
+- Use `docs/SKILL_README_TEMPLATE.md` when adding or refreshing skill README files.
 
 ## Pipeline flow
 
@@ -52,7 +53,7 @@ flowchart TD
     class Agenda,Discovery,Literature,Argument,Review,Chapter,Evidence,Citation,Continuity,Proposal gate
 ```
 
-You can enter the workflow at any stage. The research intent router chooses the smallest useful skill first; the orchestrator handles broader multi-stage workflow planning.
+You can enter the workflow at any stage. The research intent router chooses the smallest useful skill first. The orchestrator handles broader multi-stage workflow planning.
 
 ## Stage matrix
 
@@ -139,7 +140,7 @@ graph TD
 | Audited artifact | Artifact after evidence or citation checks | Claim ledger, citation audit, continuity review |
 | Proposal artifact | External-facing synthesis | Book proposal, sample-material plan |
 
-JSON artifacts must use `schema_version: "book-artifact-v1"` and one of the artifact types listed in the contract.
+JSON artifacts must use `schema_version: "book-artifact-v1"` and one artifact type listed in the contract.
 
 ## Quality gates
 
@@ -181,4 +182,4 @@ JSON artifacts must use `schema_version: "book-artifact-v1"` and one of the arti
       assets/
 ```
 
-The `skills/*/assets/` folders currently hold templates or checklists. A future cleanup can rename them to `templates/` if the package needs to match academic-pipeline naming exactly. Nothing depends on that name today.
+The `skills/*/assets/` folders currently hold templates or checklists. Nothing depends on that folder name today. If the package later needs academic-pipeline naming, those folders can be renamed to `templates/` in one mechanical cleanup.

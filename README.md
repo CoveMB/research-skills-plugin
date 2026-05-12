@@ -2,13 +2,13 @@
 
 Version: 1.0.0
 
-Research Book Skills is a local Agent Skills plugin for people writing scholarly nonfiction, research monographs, long-form essays, or book proposals. It turns loose research work into concrete artifacts: a research agenda, source discovery log, literature map, thesis tree, chapter brief, claim ledger, citation audit, continuity review, and proposal.
+Research Book Skills is a local skills plugin for people writing scholarly nonfiction, research monographs, long-form essays, or book proposals. It helps turn loose research work into concrete artifacts: a research agenda, source discovery log, literature map, thesis tree, chapter brief, claim ledger, citation audit, continuity review, and proposal.
 
-The plugin assumes a person is still doing the research. It can sort, pressure-test, and clean up the work, but it will not pretend that model memory verifies a source. It asks what kind of claim you are making, what evidence can support it, where the argument is too strong, and what an expert reader would challenge.
+The package assumes a person is still doing the research. It can sort, pressure-test, and clean up the work, but it will not treat model memory as source verification. It keeps asking practical scholarly questions: what kind of claim is this, what evidence can support it, where is the argument too strong, and what would an expert reader challenge?
 
 ## Install in 30 seconds
 
-You need Python 3 and an app that can load local Agent Skills plugins.
+You need Python 3 and an app that can load local skills plugins.
 
 From the unzipped folder:
 
@@ -22,7 +22,7 @@ On Windows PowerShell:
 .\install.ps1
 ```
 
-The installer validates the plugin, copies it to your local plugin directory, and updates your personal marketplace file. Restart the app after installation, then enable **Research Book Skills** from the plugin directory.
+The installer validates the package, copies it to your local plugin directory, and updates your personal marketplace file. Restart the app after installation, then enable **Research Book Skills** from the plugin directory.
 
 Preview the install first:
 
@@ -60,7 +60,7 @@ Use citation-integrity-auditor. Check whether the citations in this draft suppor
 
 ## What it helps with
 
-Reach for this plugin when you need help with research structure, source discipline, argument design, or manuscript repair. It is useful before drafting, while drafting, and after a draft exists.
+Use this package when the project needs clearer research structure, stricter source discipline, stronger argument design, or manuscript repair. It works before drafting, while drafting, and after a draft exists.
 
 Typical jobs:
 
@@ -73,68 +73,21 @@ Typical jobs:
 - keep chapters consistent across concepts, tone, thesis, and structure
 - shape a research book proposal around the actual argument and source base
 
-## Recommended paths
+## Choose a workflow
 
-| Situation | Start here | Then use |
-|---|---|---|
-| You have a topic but no plan | `research-intent-router` | `scholarly-research-agenda`, then `systematic-source-discovery` |
-| You want a full book workflow | `research-book-orchestrator` | Follow the staged plan it returns |
-| You need sources | `systematic-source-discovery` | `annotated-bibliography-builder`, then `literature-review-mapper` |
-| You have sources but no argument | `literature-review-mapper` | `argument-architecture` |
-| You have a chapter outline | `chapter-architecture` | `claim-evidence-ledger`, then `scholarly-prose-editor` |
-| You have a draft | `claim-evidence-ledger` | `counterargument-peer-review`, then `citation-integrity-auditor` |
-| You have several chapters | `manuscript-continuity-editor` | `chapter-architecture` for chapters that need rebuilding |
-| You need a proposal | `book-proposal-scholarship` | `citation-integrity-auditor` for factual and source claims |
+Use [`docs/SKILL_INDEX.md`](docs/SKILL_INDEX.md) for the full skill list and [`docs/ROUTING_MATRIX.md`](docs/ROUTING_MATRIX.md) for canonical routing. The short version is:
 
-## Workflows included
+- unclear request: start with `research-intent-router`
+- whole-project planning: use `research-book-orchestrator`
+- source, argument, chapter, claim, citation, continuity, and proposal work: choose the narrow specialist in the skill index
 
-| Workflow | Best for | Main output |
-|---|---|---|
-| [`research-intent-router`](skills/research-intent-router/README.md) | Choosing the smallest useful skill for a research request | Route, mode, source access status, next step |
-| [`research-book-orchestrator`](skills/research-book-orchestrator/README.md) | Planning or restarting a whole book project | Staged workflow plan |
-| [`scholarly-research-agenda`](skills/scholarly-research-agenda/README.md) | Turning a broad idea into a research agenda | Research questions, scope, contribution, evidence plan |
-| [`systematic-source-discovery`](skills/systematic-source-discovery/README.md) | Planning a source search | Query bank, inclusion rules, search log |
-| [`literature-review-mapper`](skills/literature-review-mapper/README.md) | Making sense of a body of sources | Literature map, debates, gaps, thesis implications |
-| [`annotated-bibliography-builder`](skills/annotated-bibliography-builder/README.md) | Taking structured notes on sources | Annotated bibliography entries |
-| [`methodology-source-auditor`](skills/methodology-source-auditor/README.md) | Checking whether a source is strong enough for a claim | Source credibility and method audit |
-| [`claim-evidence-ledger`](skills/claim-evidence-ledger/README.md) | Extracting claims from a draft and testing support | Claim/evidence ledger |
-| [`argument-architecture`](skills/argument-architecture/README.md) | Building the book-level argument | Thesis tree and argument dependencies |
-| [`counterargument-peer-review`](skills/counterargument-peer-review/README.md) | Stress-testing a thesis or chapter | Objections, rival explanations, revision priorities |
-| [`chapter-architecture`](skills/chapter-architecture/README.md) | Designing or repairing a chapter | Chapter brief |
-| [`scholarly-prose-editor`](skills/scholarly-prose-editor/README.md) | Editing research prose without adding facts | Revised passage and style notes |
-| [`citation-integrity-auditor`](skills/citation-integrity-auditor/README.md) | Checking citations, quotes, page needs, and source fit | Citation integrity audit |
-| [`manuscript-continuity-editor`](skills/manuscript-continuity-editor/README.md) | Reviewing multiple chapters together | Continuity review |
-| [`case-study-integration`](skills/case-study-integration/README.md) | Using cases without cherry-picking or weak analogy | Case study integration plan |
-| [`book-proposal-scholarship`](skills/book-proposal-scholarship/README.md) | Writing a serious nonfiction or scholarly book proposal | Proposal draft and submission risks |
-
-Every skill folder also has its own `README.md` with example requests, useful inputs, expected outputs, and common failure modes.
+Every skill folder has its own `README.md` with example requests, useful inputs, expected outputs, and common failure modes.
 
 ## Mode and automation summary
 
-This package does not install scheduled background jobs. Its "automation" is routing: the router and orchestrator decide which workflow should run, how deep the source lookup should go, and what artifact should come next.
+This package does not install scheduled background jobs. Its "automation" is routing: the router and orchestrator decide which workflow should run, how deep source lookup should go, and what artifact should come next.
 
-| Mode | Primary skill | Use it for | Output |
-|---|---|---|---|
-| `research-route` | `research-intent-router` | Default routing when the next skill is unclear | Research route |
-| `research-route-normal` | `research-intent-router` | Plan-first routing with lookup only when justified | Research route and verification limits |
-| `research-route-deep` | `research-intent-router` | Routing plus source lookup attempt where tools and access allow it | Deep route with source access labels |
-| `orchestrate` | `research-book-orchestrator` | Full project planning | Staged workflow plan |
-| `agenda` | `scholarly-research-agenda` | Research questions, scope, and contribution | Book research agenda |
-| `source-discovery` | `systematic-source-discovery` | Search strategy and source collection plan | Source discovery log |
-| `literature-map` | `literature-review-mapper` | Schools, debates, methods, gaps | Literature map |
-| `argument-architecture` | `argument-architecture` | Book-level thesis and claim structure | Thesis tree |
-| `counterargument-review` | `counterargument-peer-review` | Strong objections and rival explanations | Peer-review style critique |
-| `chapter-architecture` | `chapter-architecture` | Chapter logic and section order | Chapter brief |
-| `claim-ledger` | `claim-evidence-ledger` | Claim extraction and support checks | Claim/evidence ledger |
-| `citation-audit` | `citation-integrity-auditor` | Citation accuracy and source/claim fit | Citation integrity audit |
-| `continuity-audit` | `manuscript-continuity-editor` | Whole-manuscript coherence | Continuity review |
-| `proposal` | `book-proposal-scholarship` | Press or agent-facing proposal work | Research book proposal |
-| `annotated-bibliography` | `annotated-bibliography-builder` | Source notes | Annotated bibliography |
-| `source-audit` | `methodology-source-auditor` | Source quality review | Source methodology audit |
-| `case-study` | `case-study-integration` | Case selection and comparison | Case study integration plan |
-| `prose-edit` | `scholarly-prose-editor` | Style, clarity, and structure edits | Revised passage |
-
-See `MODE_REGISTRY.md` for the full registry and [`docs/ROUTING_MATRIX.md`](docs/ROUTING_MATRIX.md) for routing rules.
+The common route modes are `research-route-normal` and `research-route-deep`. See `MODE_REGISTRY.md` for the full registry and [`docs/ROUTING_MATRIX.md`](docs/ROUTING_MATRIX.md) for routing rules.
 
 ## Source lookup modes
 
@@ -165,7 +118,7 @@ The plugin includes a shared book artifact schema at [`shared/contracts/book/boo
 - `continuity-review.json`
 - `book-proposal.json`
 
-These artifacts are useful when a project needs to survive across sessions, tools, or chapter drafts.
+These artifacts are useful when a project needs to stay coherent across sessions, tools, or chapter drafts.
 
 ## Limits
 
@@ -176,7 +129,7 @@ Research Book Skills is strict about source truth:
 - no claims about field consensus without a representative source set or lookup result
 - no overwriting manuscript files, source files, bibliography databases, or plugin files unless you ask for that directly
 
-It also does not replace a researcher, editor, advisor, peer reviewer, or fact checker.
+It also does not replace a researcher, editor, advisor, peer reviewer, or fact-checker.
 
 ## Package layout
 

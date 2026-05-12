@@ -6,9 +6,9 @@ Use this skill to turn a broad book idea into research questions that can actual
 
 It is especially helpful when a book idea is interesting but still too large. "A book about technology and democracy" may be a theme, but it is not yet a research agenda. This skill narrows that theme into a central question, subquestions, scope limits, terms to define, and an evidence plan.
 
-## When to use it in the book writing process
+## When to use it
 
-Use it before serious source gathering, literature review, chapter outlining, or drafting. It gives the project a research spine before the author spends weeks collecting material that may not serve the argument.
+Use it before substantial source gathering, literature review, chapter outlining, or drafting. It gives the project a research spine before the author spends weeks collecting material that may not serve the argument.
 
 Use it again when the thesis changes. A research agenda is not a prison. It is a working contract between the question, the scope, and the evidence.
 
@@ -40,15 +40,15 @@ The output usually includes a one-sentence project definition, central research 
 
 ## Procedure
 
-1. Establish source basis and source access level.
-2. Use the skill's `SKILL.md` procedure, not memory-only shortcuts.
-3. Produce the stated output format and separate verified facts, interpretation, speculation, and recommendation.
-4. End with verification gaps and the next best skill or repair step.
+1. State the source basis and source access level.
+2. Follow the skill's `SKILL.md` procedure instead of working from memory.
+3. Produce the stated output format and keep verified facts, interpretation, speculation, and recommendation separate.
+4. End with verification gaps. Add a risk-gated follow-up only when it is useful.
 
 ## Quality checks
 
 - Evidence strength must match claim strength.
-- Missing source access must be marked, not hidden.
+- Missing source access must be marked clearly.
 - Uncertainty, limits, and user verification needs must be visible.
 - Output should preserve scholarly caution without becoming vague.
 
@@ -56,14 +56,14 @@ The output usually includes a one-sentence project definition, central research 
 
 - Fabricated citations, quotes, page numbers, source metadata, datasets, market facts, or field consensus.
 - Confident synthesis from partial sources.
-- Generic prose or structure that hides weak evidence.
+- Generic prose or structure that hides weak evidence or weak reasoning.
 - Overstated claims, missing counterarguments, or unclear source basis.
 
 ## Files/folders it may read
 
 - This skill's `SKILL.md`, `README.md`, `assets/`, `references/`, and `agents/openai.yaml` when present and relevant.
 - User-provided drafts, notes, sources, artifacts, or project files explicitly named in the request.
-- Shared project documentation only when needed for workflow, quality, or artifact compatibility.
+- Shared project documentation when it is needed for workflow, quality, or artifact compatibility.
 
 ## Files/folders it may write
 

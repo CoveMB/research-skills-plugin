@@ -4,9 +4,9 @@
 
 Use this skill to turn a chapter, outline, thesis, or draft into a ledger of claims. It extracts the claims that carry the argument, classifies each one, checks evidence status, flags overclaiming, and suggests safer wording.
 
-This is one of the best safeguards against research prose that sounds confident but outruns the evidence. It helps the author see which sentences are interpretive, which need citations, which need stronger evidence, and which should be narrowed.
+Use it to catch research prose that sounds confident but outruns the evidence. It shows which sentences are interpretive, which need citations, which need stronger evidence, and which should be narrowed.
 
-## When to use it in the book writing process
+## When to use it
 
 Use it before polishing prose and before citation integrity review. It works well after a chapter draft exists, after an argument architecture has been built, or before sending a chapter to readers.
 
@@ -35,19 +35,19 @@ Rewrite the risky claims in safer language without weakening the argument too mu
 
 ## Typical output
 
-Expect a table with claim, claim type, evidence status, current support, evidence needed, risk, and safer wording. The output also lists high-risk claims, claims that can remain interpretive or normative, source priorities, and the next best skill.
+Expect a table with claim, claim type, evidence status, current support, evidence needed, risk, and safer wording. The output also lists high-risk claims, claims that can remain interpretive or normative, source priorities, and a risk-gated follow-up when it is useful.
 
 ## Procedure
 
-1. Establish source basis and source access level.
-2. Use the skill's `SKILL.md` procedure, not memory-only shortcuts.
-3. Produce the stated output format and separate verified facts, interpretation, speculation, and recommendation.
-4. End with verification gaps and the next best skill or repair step.
+1. State the source basis and source access level.
+2. Follow the skill's `SKILL.md` procedure instead of working from memory.
+3. Produce the stated output format and keep verified facts, interpretation, speculation, and recommendation separate.
+4. End with verification gaps. Add a risk-gated follow-up only when it is useful.
 
 ## Quality checks
 
 - Evidence strength must match claim strength.
-- Missing source access must be marked, not hidden.
+- Missing source access must be marked clearly.
 - Uncertainty, limits, and user verification needs must be visible.
 - Output should preserve scholarly caution without becoming vague.
 
@@ -55,14 +55,14 @@ Expect a table with claim, claim type, evidence status, current support, evidenc
 
 - Fabricated citations, quotes, page numbers, source metadata, datasets, market facts, or field consensus.
 - Confident synthesis from partial sources.
-- Generic prose or structure that hides weak evidence.
+- Generic prose or structure that hides weak evidence or weak reasoning.
 - Overstated claims, missing counterarguments, or unclear source basis.
 
 ## Files/folders it may read
 
 - This skill's `SKILL.md`, `README.md`, `assets/`, `references/`, and `agents/openai.yaml` when present and relevant.
 - User-provided drafts, notes, sources, artifacts, or project files explicitly named in the request.
-- Shared project documentation only when needed for workflow, quality, or artifact compatibility.
+- Shared project documentation when it is needed for workflow, quality, or artifact compatibility.
 
 ## Files/folders it may write
 

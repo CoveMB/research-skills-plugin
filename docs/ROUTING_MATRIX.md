@@ -1,6 +1,6 @@
-# Routing Matrix
+# Routing matrix
 
-Use this as the canonical route table for research-book skill selection. The router should choose the smallest useful skill, or a short sequence only when the request crosses stages.
+Use this as the canonical route table for research-book skill selection. The router should choose the smallest useful skill. Use a short sequence only when the request crosses stages.
 
 | Scenario | Route |
 |---|---|

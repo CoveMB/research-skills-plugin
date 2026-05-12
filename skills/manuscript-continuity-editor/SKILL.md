@@ -38,15 +38,11 @@ Use when the user provides multiple chapters, a table of contents, chapter summa
 
 ## Source basis and AI limits
 
-Before reviewing continuity, state the source access level as one of:
+Follow `docs/SOURCE_LIMITS.md`: state the source access level, separate source basis from interpretation, include What I can verify, What remains uncertain, and User verification needed. Do not invent citations or source support.
 
-- user-provided full text
-- excerpt only
-- citation only
-- model knowledge only
-- live/current search needed
+## Machine-readable artifacts
 
-Apply `docs/SOURCE_LIMITS.md`: state the source access level, separate source basis from interpretation, and include What I can verify, What remains uncertain, and User verification needed. Do not invent citations or source support.
+When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: continuity_review`. If the output is normal Markdown, do not force the JSON contract.
 
 ## Files/folders it may read
 
@@ -147,10 +143,6 @@ Rank fixes by impact.
 
 ## Suggested next step
 
-Use `skill-name` to [specific next action].
-Why this helps scholarship: [named risk reduced].
-Use only if: [condition].
-Skip if: [reason it would add noise now].
 ```
 
 Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.md`. The section may be omitted. If included, it must identify the named scholarly risk it reduces and use one skill only.

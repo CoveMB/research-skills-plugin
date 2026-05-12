@@ -10,23 +10,65 @@ Checks:
 """
 from __future__ import annotations
 
-import json
 import re
 import sys
 from pathlib import Path
+from typing import Any
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from plugin_utils import load_json_object
 
 NAME_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 MARKDOWN_LINK_RE = re.compile(r"\[[^\]]+\]\(([^)#]+)(?:#[^)]+)?\)")
-LOCAL_REFERENCE_PREFIXES = ("assets/", "references/", "scripts/")
+BACKTICK_REFERENCE_RE = re.compile(r"`([^`\n]+)`")
+LOCAL_REFERENCE_PREFIXES = (
+    ".codex-plugin/",
+    "assets/",
+    "docs/",
+    "examples/",
+    "references/",
+    "scripts/",
+    "shared/",
+    "skills/",
+)
+LOCAL_REFERENCE_ROOT_FILES = {
+    "AGENTS.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "MODE_REGISTRY.md",
+    "README.md",
+    "marketplace.sample.json",
+    "validate.sh",
+}
+DESCRIPTION_STOPWORDS = {
+    "after",
+    "before",
+    "books",
+    "book",
+    "from",
+    "grade",
+    "needs",
+    "need",
+    "nonfiction",
+    "research",
+    "scholarly",
+    "skill",
+    "source",
+    "sources",
+    "that",
+    "this",
+    "when",
+    "while",
+    "with",
+}
+MIN_SHARED_DESCRIPTION_TERMS = 8
 
 
 def load_json(path: Path) -> tuple[dict | None, str | None]:
     try:
-        payload = json.loads(path.read_text(encoding="utf-8"))
+        payload = load_json_object(path)
     except Exception as exc:
         return None, f"{path.name} parse error: {exc}"
-    if not isinstance(payload, dict):
-        return None, f"{path.name} root must be an object"
     return payload, None
 
 
@@ -47,31 +89,65 @@ def parse_frontmatter(path: Path) -> dict[str, str]:
     raise ValueError("missing closing YAML frontmatter delimiter")
 
 
-def field_value(text: str, field: str) -> str:
-    match = re.search(rf"^\s*{re.escape(field)}:\s*(.+?)\s*$", text, re.MULTILINE)
-    return match.group(1).strip().strip('"').strip("'") if match else ""
-
-
 def is_external_reference(reference: str) -> bool:
     return bool(re.match(r"^[a-zA-Z][a-zA-Z0-9+.-]*:", reference))
 
 
-def broken_local_references(skill_dir: Path, path: Path) -> list[str]:
+def is_path_like_reference(reference: str) -> bool:
+    if not reference or any(token in reference for token in [" ", "*", "<", ">", "|"]):
+        return False
+    if reference in {"assets/", "references/", "scripts/"}:
+        return False
+    if reference.startswith(("/", "~", "#")) or is_external_reference(reference):
+        return False
+    return (
+        reference.startswith(("./", "../"))
+        or reference.startswith(LOCAL_REFERENCE_PREFIXES)
+        or reference in LOCAL_REFERENCE_ROOT_FILES
+    )
+
+
+def reference_candidates(root: Path, path: Path, reference: str) -> list[Path]:
+    return [
+        (path.parent / reference).resolve(),
+        (root / reference).resolve(),
+    ]
+
+
+def reference_exists_inside_root(root: Path, candidates: list[Path]) -> tuple[bool, bool]:
+    escaped = False
+    for candidate in candidates:
+        try:
+            candidate.relative_to(root.resolve())
+        except ValueError:
+            escaped = True
+            continue
+        if candidate.exists():
+            return True, False
+    return False, escaped
+
+
+def clean_reference(reference: str) -> str:
+    return reference.strip().split("#", 1)[0]
+
+
+def broken_local_references(root: Path, path: Path) -> list[str]:
     errors: list[str] = []
     text = path.read_text(encoding="utf-8")
-    for reference in MARKDOWN_LINK_RE.findall(text):
-        normalized = reference.strip()
-        if not normalized or normalized.startswith("#") or is_external_reference(normalized):
+    references = [*MARKDOWN_LINK_RE.findall(text), *BACKTICK_REFERENCE_RE.findall(text)]
+    for reference in references:
+        normalized = clean_reference(reference)
+        if not is_path_like_reference(normalized):
             continue
-        if normalized.startswith(LOCAL_REFERENCE_PREFIXES):
-            target = (skill_dir / normalized).resolve()
-            try:
-                target.relative_to(skill_dir.resolve())
-            except ValueError:
-                errors.append(f"{path.name}: local reference escapes skill directory: {normalized}")
-                continue
-            if not target.exists():
-                errors.append(f"{path.name}: broken local reference: {normalized}")
+        exists, escaped = reference_exists_inside_root(
+            root,
+            reference_candidates(root, path, normalized),
+        )
+        if escaped:
+            errors.append(f"{path.name}: local reference escapes plugin root: {normalized}")
+            continue
+        if not exists:
+            errors.append(f"{path.name}: broken local reference: {normalized}")
     return errors
 
 
@@ -111,22 +187,94 @@ def manifest_errors(root: Path) -> tuple[dict | None, Path, list[str]]:
     return manifest, skills_dir, errors
 
 
-def validate_agent_metadata(skill_dir: Path, skill_name: str) -> tuple[str, list[str]]:
+def parse_simple_yaml_mapping(text: str) -> dict[str, Any]:
+    data: dict[str, Any] = {}
+    current_section = ""
+    for raw_line in text.splitlines():
+        if not raw_line.strip() or raw_line.lstrip().startswith("#"):
+            continue
+        indent = len(raw_line) - len(raw_line.lstrip(" "))
+        key, separator, value = raw_line.strip().partition(":")
+        if not separator:
+            continue
+        parsed_value = parse_yaml_scalar(value.strip())
+        if indent == 0:
+            if value.strip():
+                data[key] = parsed_value
+                current_section = ""
+            else:
+                data[key] = {}
+                current_section = key
+            continue
+        if indent == 2 and current_section and isinstance(data.get(current_section), dict):
+            data[current_section][key] = parsed_value
+    return data
+
+
+def parse_yaml_scalar(value: str) -> Any:
+    if value in {"true", "false"}:
+        return value == "true"
+    if (value.startswith('"') and value.endswith('"')) or (value.startswith("'") and value.endswith("'")):
+        return value[1:-1]
+    return value
+
+
+def nested_mapping(data: dict[str, Any], key: str) -> dict[str, Any]:
+    value = data.get(key)
+    return value if isinstance(value, dict) else {}
+
+
+def nested_string(data: dict[str, Any], key: str) -> str:
+    value = data.get(key)
+    return value if isinstance(value, str) else ""
+
+
+def significant_description_terms(description: str) -> set[str]:
+    return {
+        term
+        for term in re.findall(r"[a-z0-9]+", description.lower())
+        if len(term) >= 5 and term not in DESCRIPTION_STOPWORDS
+    }
+
+
+def validate_agent_metadata(
+    skill_dir: Path,
+    skill_name: str,
+    skill_description: str,
+) -> tuple[str, list[str]]:
     errors: list[str] = []
     agent_path = skill_dir / "agents" / "openai.yaml"
     if not agent_path.exists():
         return "", [f"{skill_name}: missing agents/openai.yaml"]
     text = agent_path.read_text(encoding="utf-8")
-    short_description = field_value(text, "short_description")
-    default_prompt = field_value(text, "default_prompt")
+    metadata = parse_simple_yaml_mapping(text)
+    interface = nested_mapping(metadata, "interface")
+    policy = nested_mapping(metadata, "policy")
+    short_description = nested_string(interface, "short_description")
+    default_prompt = nested_string(interface, "default_prompt")
     if not short_description:
-        errors.append(f"{skill_name}: agents/openai.yaml missing short_description")
+        errors.append(f"{skill_name}: agents/openai.yaml missing interface.short_description")
     if not default_prompt:
-        errors.append(f"{skill_name}: agents/openai.yaml missing default_prompt")
+        errors.append(f"{skill_name}: agents/openai.yaml missing interface.default_prompt")
+    if not nested_string(interface, "display_name"):
+        errors.append(f"{skill_name}: agents/openai.yaml missing interface.display_name")
+    if not isinstance(policy.get("allow_implicit_invocation"), bool):
+        errors.append(
+            f"{skill_name}: agents/openai.yaml policy.allow_implicit_invocation must be boolean"
+        )
+    if short_description and skill_description:
+        shared_terms = significant_description_terms(short_description) & significant_description_terms(
+            skill_description
+        )
+        if len(shared_terms) < MIN_SHARED_DESCRIPTION_TERMS:
+            errors.append(
+                f"{skill_name}: agents/openai.yaml short_description appears stale "
+                f"({len(shared_terms)} shared significant terms)"
+            )
     return default_prompt, errors
 
 
-def validate_skill_dir(skill_dir: Path, seen_names: set[str]) -> tuple[str, str, list[str]]:
+def validate_skill_dir(root: Path, skill_dir: Path, seen_names: set[str]) -> tuple[str, str, list[str]]:
     errors: list[str] = []
     skill_name = skill_dir.name
     skill_path = skill_dir / "SKILL.md"
@@ -159,15 +307,30 @@ def validate_skill_dir(skill_dir: Path, seen_names: set[str]) -> tuple[str, str,
         errors.append(f"duplicate skill name: {name}")
     seen_names.add(name)
 
-    default_prompt, agent_errors = validate_agent_metadata(skill_dir, skill_name)
+    default_prompt, agent_errors = validate_agent_metadata(skill_dir, skill_name, description)
     errors.extend(agent_errors)
     for path in [skill_path, readme_path]:
         if path.exists():
-            errors.extend(f"{skill_name}: {error}" for error in broken_local_references(skill_dir, path))
+            errors.extend(f"{skill_name}: {error}" for error in broken_local_references(root, path))
     return skill_name, default_prompt, errors
 
 
-def validate_skills(skills_dir: Path) -> list[str]:
+def validate_project_references(root: Path) -> list[str]:
+    errors: list[str] = []
+    for path in sorted(root.rglob("*")):
+        if ".git" in path.parts or path.is_dir():
+            continue
+        if path.relative_to(root).parts[:1] == ("skills",):
+            continue
+        if path.suffix in {".md", ".yaml", ".yml"}:
+            errors.extend(
+                f"{path.relative_to(root)}: {error}"
+                for error in broken_local_references(root, path)
+            )
+    return errors
+
+
+def validate_skills(root: Path, skills_dir: Path) -> list[str]:
     errors: list[str] = []
     if not skills_dir.exists():
         return ["Missing skills/ directory"]
@@ -179,7 +342,7 @@ def validate_skills(skills_dir: Path) -> list[str]:
     seen_names: set[str] = set()
     seen_prompts: dict[str, str] = {}
     for skill_dir in skill_dirs:
-        skill_name, default_prompt, skill_errors = validate_skill_dir(skill_dir, seen_names)
+        skill_name, default_prompt, skill_errors = validate_skill_dir(root, skill_dir, seen_names)
         errors.extend(skill_errors)
         if default_prompt:
             previous_skill = seen_prompts.get(default_prompt)
@@ -192,7 +355,8 @@ def validate_skills(skills_dir: Path) -> list[str]:
 def main() -> int:
     root = Path(sys.argv[1] if len(sys.argv) > 1 else ".").expanduser().resolve()
     _, skills_dir, errors = manifest_errors(root)
-    errors.extend(validate_skills(skills_dir))
+    errors.extend(validate_skills(root, skills_dir))
+    errors.extend(validate_project_references(root))
 
     if errors:
         print("Validation failed:")

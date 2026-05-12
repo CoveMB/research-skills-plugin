@@ -18,7 +18,9 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-PLUGIN_NAME = "scholarly-research-book"
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from plugin_utils import generated_file_patterns, load_plugin_manifest, plugin_name
+
 MARKETPLACE_NAME = "local-personal-plugins"
 VALIDATION_SCRIPTS = [
     "validate_plugin.py",
@@ -55,28 +57,37 @@ def run_validation(root: Path) -> None:
 
 def load_json(path: Path) -> dict:
     if not path.exists():
-        return {"name": MARKETPLACE_NAME, "interface": {"displayName": "Local Personal Plugins"}, "plugins": []}
+        return {
+            "name": MARKETPLACE_NAME,
+            "interface": {"displayName": "Local Personal Plugins"},
+            "plugins": [],
+        }
     try:
         return json.loads(path.read_text(encoding="utf-8"))
-    except Exception as exc:
-        backup = path.with_suffix(path.suffix + f".backup-{datetime.now().strftime('%Y%m%d%H%M%S')}")
+    except Exception:
+        timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+        backup = path.with_suffix(path.suffix + f".backup-{timestamp}")
         shutil.copy2(path, backup)
         print(f"Existing marketplace JSON could not be parsed; backed up to {backup}")
-        return {"name": MARKETPLACE_NAME, "interface": {"displayName": "Local Personal Plugins"}, "plugins": []}
+        return {
+            "name": MARKETPLACE_NAME,
+            "interface": {"displayName": "Local Personal Plugins"},
+            "plugins": [],
+        }
 
 
-def update_marketplace(path: Path, plugin_source_path: str, dry_run: bool) -> None:
+def update_marketplace(path: Path, plugin_name_value: str, plugin_source_path: str, dry_run: bool) -> None:
     data = load_json(path)
     data.setdefault("name", MARKETPLACE_NAME)
     data.setdefault("interface", {"displayName": "Local Personal Plugins"})
     data.setdefault("plugins", [])
     entry = {
-        "name": PLUGIN_NAME,
+        "name": plugin_name_value,
         "source": {"source": "local", "path": plugin_source_path},
         "policy": {"installation": "AVAILABLE", "authentication": "ON_INSTALL"},
         "category": "Productivity",
     }
-    plugins = [p for p in data["plugins"] if p.get("name") != PLUGIN_NAME]
+    plugins = [p for p in data["plugins"] if p.get("name") != plugin_name_value]
     plugins.append(entry)
     data["plugins"] = plugins
     if dry_run:
@@ -85,7 +96,8 @@ def update_marketplace(path: Path, plugin_source_path: str, dry_run: bool) -> No
         return
     path.parent.mkdir(parents=True, exist_ok=True)
     if path.exists():
-        backup = path.with_suffix(path.suffix + f".backup-{datetime.now().strftime('%Y%m%d%H%M%S')}")
+        timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+        backup = path.with_suffix(path.suffix + f".backup-{timestamp}")
         shutil.copy2(path, backup)
         print(f"Backed up existing marketplace to {backup}")
     path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
@@ -103,30 +115,31 @@ def plugin_manifest_name(path: Path) -> str:
     return str(payload.get("name", "")) if isinstance(payload, dict) else ""
 
 
-def is_safe_destination(dest: Path) -> bool:
+def is_safe_destination(dest: Path, expected_plugin_name: str) -> bool:
     if not dest.exists():
-        return dest.name == PLUGIN_NAME
-    if plugin_manifest_name(dest) == PLUGIN_NAME:
+        return dest.name == expected_plugin_name
+    if plugin_manifest_name(dest) == expected_plugin_name:
         return True
-    return dest.name == PLUGIN_NAME and not any(dest.iterdir())
+    return dest.name == expected_plugin_name and not any(dest.iterdir())
 
 
-def ensure_safe_destination(dest: Path) -> None:
-    if not is_safe_destination(dest):
+def ensure_safe_destination(dest: Path, expected_plugin_name: str) -> None:
+    if not is_safe_destination(dest, expected_plugin_name):
         raise ValueError(
             f"Refusing to replace destination outside expected plugin path: {dest}"
         )
 
 
 def copy_plugin(src: Path, dest: Path, dry_run: bool) -> None:
-    ensure_safe_destination(dest)
+    expected_plugin_name = plugin_name(src)
+    ensure_safe_destination(dest, expected_plugin_name)
     if dry_run:
         print(f"Would copy plugin from {src} to {dest}")
         return
     if dest.exists():
         shutil.rmtree(dest)
     dest.parent.mkdir(parents=True, exist_ok=True)
-    ignore = shutil.ignore_patterns("*.zip", "__pycache__", ".DS_Store", ".git")
+    ignore = shutil.ignore_patterns(*generated_file_patterns())
     shutil.copytree(src, dest, ignore=ignore)
     print(f"Copied plugin to {dest}")
 
@@ -142,9 +155,14 @@ def print_dry_run_plan(root: Path, dest: Path, marketplace: Path, source_path: s
 def main() -> int:
     parser = argparse.ArgumentParser(description="Install Research Book Skills Plugin locally for Codex.")
     parser.add_argument("--plugin-root", type=Path, default=plugin_root_from_script(), help="Path to this plugin root")
-    parser.add_argument("--dest", type=Path, default=home() / ".codex" / "plugins" / PLUGIN_NAME, help="Destination plugin directory")
-    parser.add_argument("--marketplace", type=Path, default=home() / ".agents" / "plugins" / "marketplace.json", help="Marketplace JSON path")
-    parser.add_argument("--source-path", default=f"./.codex/plugins/{PLUGIN_NAME}", help="source.path to write in marketplace.json")
+    parser.add_argument("--dest", type=Path, help="Destination plugin directory")
+    parser.add_argument(
+        "--marketplace",
+        type=Path,
+        default=home() / ".agents" / "plugins" / "marketplace.json",
+        help="Marketplace JSON path",
+    )
+    parser.add_argument("--source-path", help="source.path to write in marketplace.json")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
 
@@ -152,14 +170,24 @@ def main() -> int:
     if not (root / ".codex-plugin" / "plugin.json").exists():
         print(f"Not a plugin root: {root}", file=sys.stderr)
         return 1
-    dest = args.dest.expanduser()
+    try:
+        plugin_name_value = str(load_plugin_manifest(root)["name"])
+    except Exception as exc:
+        print(f"Unable to read plugin manifest: {exc}", file=sys.stderr)
+        return 1
+    dest = (
+        args.dest.expanduser()
+        if args.dest is not None
+        else home() / ".codex" / "plugins" / plugin_name_value
+    )
     marketplace = args.marketplace.expanduser()
+    source_path = args.source_path or f"./.codex/plugins/{plugin_name_value}"
     if args.dry_run:
-        print_dry_run_plan(root, dest, marketplace, args.source_path)
+        print_dry_run_plan(root, dest, marketplace, source_path)
     try:
         run_validation(root)
         copy_plugin(root, dest, args.dry_run)
-        update_marketplace(marketplace, args.source_path, args.dry_run)
+        update_marketplace(marketplace, plugin_name_value, source_path, args.dry_run)
     except ValueError as exc:
         print(f"Install failed: {exc}", file=sys.stderr)
         return 1

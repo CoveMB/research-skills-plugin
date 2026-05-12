@@ -6,7 +6,7 @@ Use this skill to review coherence across several chapters or a full manuscript.
 
 This skill is not a sentence-level copyedit. It is a structural continuity pass for long-form research nonfiction.
 
-## When to use it in the book writing process
+## When to use it
 
 Use it after several chapters exist, after a full draft, before a major revision, or before proposal/sample submission when chapter summaries must line up with the manuscript.
 
@@ -35,19 +35,19 @@ Build a priority revision list for this full draft based on argument coherence.
 
 ## Typical output
 
-The output usually includes the global thesis as currently expressed, chapter function map, repetition map, concept tracking table, contradictions or unresolved tensions, tone and audience consistency notes, suggested restructuring, priority revision list, and next best skill.
+The output usually includes the global thesis as currently expressed, chapter function map, repetition map, concept tracking table, contradictions or unresolved tensions, tone and audience consistency notes, suggested restructuring, priority revision list, and a risk-gated follow-up when it is useful.
 
 ## Procedure
 
-1. Establish source basis and source access level.
-2. Use the skill's `SKILL.md` procedure, not memory-only shortcuts.
-3. Produce the stated output format and separate verified facts, interpretation, speculation, and recommendation.
-4. End with verification gaps and the next best skill or repair step.
+1. State the source basis and source access level.
+2. Follow the skill's `SKILL.md` procedure instead of working from memory.
+3. Produce the stated output format and keep verified facts, interpretation, speculation, and recommendation separate.
+4. End with verification gaps. Add a risk-gated follow-up only when it is useful.
 
 ## Quality checks
 
 - Evidence strength must match claim strength.
-- Missing source access must be marked, not hidden.
+- Missing source access must be marked clearly.
 - Uncertainty, limits, and user verification needs must be visible.
 - Output should preserve scholarly caution without becoming vague.
 
@@ -55,14 +55,14 @@ The output usually includes the global thesis as currently expressed, chapter fu
 
 - Fabricated citations, quotes, page numbers, source metadata, datasets, market facts, or field consensus.
 - Confident synthesis from partial sources.
-- Generic prose or structure that hides weak evidence.
+- Generic prose or structure that hides weak evidence or weak reasoning.
 - Overstated claims, missing counterarguments, or unclear source basis.
 
 ## Files/folders it may read
 
 - This skill's `SKILL.md`, `README.md`, `assets/`, `references/`, and `agents/openai.yaml` when present and relevant.
 - User-provided drafts, notes, sources, artifacts, or project files explicitly named in the request.
-- Shared project documentation only when needed for workflow, quality, or artifact compatibility.
+- Shared project documentation when it is needed for workflow, quality, or artifact compatibility.
 
 ## Files/folders it may write
 

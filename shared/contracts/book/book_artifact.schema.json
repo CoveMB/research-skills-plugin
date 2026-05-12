@@ -300,6 +300,9 @@
   "allOf": [
     {
       "if": {
+        "required": [
+          "artifact_type"
+        ],
         "properties": {
           "artifact_type": {
             "const": "book_research_agenda"
@@ -320,6 +323,9 @@
     },
     {
       "if": {
+        "required": [
+          "artifact_type"
+        ],
         "properties": {
           "artifact_type": {
             "const": "source_discovery_log"
@@ -342,6 +348,9 @@
     },
     {
       "if": {
+        "required": [
+          "artifact_type"
+        ],
         "properties": {
           "artifact_type": {
             "const": "literature_map"
@@ -364,6 +373,9 @@
     },
     {
       "if": {
+        "required": [
+          "artifact_type"
+        ],
         "properties": {
           "artifact_type": {
             "const": "thesis_tree"
@@ -383,6 +395,9 @@
     },
     {
       "if": {
+        "required": [
+          "artifact_type"
+        ],
         "properties": {
           "artifact_type": {
             "const": "chapter_brief"
@@ -407,6 +422,9 @@
     },
     {
       "if": {
+        "required": [
+          "artifact_type"
+        ],
         "properties": {
           "artifact_type": {
             "const": "claim_evidence_ledger"
@@ -423,6 +441,9 @@
     },
     {
       "if": {
+        "required": [
+          "artifact_type"
+        ],
         "properties": {
           "artifact_type": {
             "const": "continuity_review"
@@ -444,6 +465,9 @@
     },
     {
       "if": {
+        "required": [
+          "artifact_type"
+        ],
         "properties": {
           "artifact_type": {
             "const": "book_proposal"
@@ -724,6 +748,9 @@
       "allOf": [
         {
           "if": {
+            "required": [
+              "verification_status"
+            ],
             "properties": {
               "verification_status": {
                 "const": "verified"

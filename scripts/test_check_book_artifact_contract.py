@@ -276,6 +276,21 @@ class TestBookArtifactContract(unittest.TestCase):
             self.assertEqual(result.returncode, 1)
             self.assertIn("unresolved schema reference", result.stdout)
 
+    def test_unsupported_schema_keyword_fails_loudly(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_schema(root)
+            schema_path = root / "shared" / "contracts" / "book" / "book_artifact.schema.json"
+            schema = json.loads(schema_path.read_text(encoding="utf-8"))
+            schema["properties"]["project_title"] = {"type": "string", "pattern": "^Fixture"}
+            schema_path.write_text(json.dumps(schema), encoding="utf-8")
+            write_example(root, "claim-ledger.json", valid_claim_ledger())
+
+            result = run_checker(root)
+
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("unsupported schema keyword", result.stdout)
+
     def test_missing_artifact_type_does_not_trigger_artifact_specific_requirements(self) -> None:
         with TemporaryDirectory() as temporary_directory:
             root = Path(temporary_directory)

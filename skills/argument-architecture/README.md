@@ -6,7 +6,7 @@ Use this skill to design the book's argument rather than only its topic order. I
 
 An outline says what the book covers. Argument architecture says what the book must prove, in what order, and what happens if a supporting claim fails. That distinction matters in research nonfiction because chapters should advance an argument, not simply collect related material.
 
-## When to use it in the book writing process
+## When to use it
 
 Use it after the research agenda and literature map are strong enough to support a thesis. It belongs before chapter architecture and drafting.
 
@@ -36,19 +36,19 @@ Give me bold, moderate, conservative, academic, and public-facing versions of th
 
 ## Typical output
 
-The output usually includes the main thesis, thesis variants, a thesis tree, hidden assumptions, chapter-level argument sequence, weak links, a stronger formulation, and next best skill.
+The output usually includes the main thesis, thesis variants, a thesis tree, hidden assumptions, chapter-level argument sequence, weak links, a stronger formulation, and a risk-gated follow-up when it is useful.
 
 ## Procedure
 
-1. Establish source basis and source access level.
-2. Use the skill's `SKILL.md` procedure, not memory-only shortcuts.
-3. Produce the stated output format and separate verified facts, interpretation, speculation, and recommendation.
-4. End with verification gaps and the next best skill or repair step.
+1. State the source basis and source access level.
+2. Follow the skill's `SKILL.md` procedure instead of working from memory.
+3. Produce the stated output format and keep verified facts, interpretation, speculation, and recommendation separate.
+4. End with verification gaps. Add a risk-gated follow-up only when it is useful.
 
 ## Quality checks
 
 - Evidence strength must match claim strength.
-- Missing source access must be marked, not hidden.
+- Missing source access must be marked clearly.
 - Uncertainty, limits, and user verification needs must be visible.
 - Output should preserve scholarly caution without becoming vague.
 
@@ -56,14 +56,14 @@ The output usually includes the main thesis, thesis variants, a thesis tree, hid
 
 - Fabricated citations, quotes, page numbers, source metadata, datasets, market facts, or field consensus.
 - Confident synthesis from partial sources.
-- Generic prose or structure that hides weak evidence.
+- Generic prose or structure that hides weak evidence or weak reasoning.
 - Overstated claims, missing counterarguments, or unclear source basis.
 
 ## Files/folders it may read
 
 - This skill's `SKILL.md`, `README.md`, `assets/`, `references/`, and `agents/openai.yaml` when present and relevant.
 - User-provided drafts, notes, sources, artifacts, or project files explicitly named in the request.
-- Shared project documentation only when needed for workflow, quality, or artifact compatibility.
+- Shared project documentation when it is needed for workflow, quality, or artifact compatibility.
 
 ## Files/folders it may write
 

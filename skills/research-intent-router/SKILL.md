@@ -111,15 +111,7 @@ Use `docs/ROUTING_MATRIX.md` as the canonical route table. If the request matche
 
 ## Source basis and AI limits
 
-Before routing, state the source access level as one of:
-
-- user-provided full text
-- excerpt only
-- citation only
-- model knowledge only
-- live/current search needed
-
-Apply `docs/SOURCE_LIMITS.md`: state the source access level, separate source basis from interpretation, and include What I can verify, What remains uncertain, and User verification needed. Do not invent citations or source support.
+Follow `docs/SOURCE_LIMITS.md`: state the source access level, separate source basis from interpretation, include What I can verify, What remains uncertain, and User verification needed. Do not invent citations or source support.
 
 ## Files/folders it may read
 
@@ -194,10 +186,6 @@ This is a non-contract routing output unless the user explicitly asks for a book
 
 ## Suggested next step
 
-Use `skill-name` to [specific next action].
-Why this helps scholarship: [named risk reduced].
-Use only if: [condition].
-Skip if: [reason it would add noise now].
 ```
 
 The `## Suggested next step` section is optional. Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted. If included, it must identify the named scholarly risk it reduces and use one skill only.

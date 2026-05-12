@@ -43,24 +43,7 @@ Use `docs/ARCHITECTURE.md` as the stage map and `MODE_REGISTRY.md` as the route 
 
 ## Core routing map
 
-Use these routes:
-
-| User need | Route to skill |
-|---|---|
-| Broad idea, scope, research questions | `scholarly-research-agenda` |
-| Search terms, databases, source plan | `systematic-source-discovery` |
-| Schools of thought, debates, gaps | `literature-review-mapper` |
-| Source summaries and annotations | `annotated-bibliography-builder` |
-| Credibility, method, bias, evidence quality | `methodology-source-auditor` |
-| Claims needing evidence or safer wording | `claim-evidence-ledger` |
-| Thesis tree, warrants, argument sequence | `argument-architecture` |
-| Strong objections and rival explanations | `counterargument-peer-review` |
-| Chapter design and section flow | `chapter-architecture` |
-| Style, clarity, research readability | `scholarly-prose-editor` |
-| Citation verification and quote/page audit | `citation-integrity-auditor` |
-| Whole-manuscript coherence | `manuscript-continuity-editor` |
-| Case studies and real-world examples | `case-study-integration` |
-| Book proposal and positioning | `book-proposal-scholarship` |
+Use `docs/ROUTING_MATRIX.md` as the canonical route table. This skill should summarize only the route sequence needed for the current project, not duplicate the full route matrix.
 
 ## Operating principles
 
@@ -75,15 +58,7 @@ Use these routes:
 
 ## Source basis and AI limits
 
-Before routing or planning, state the source access level as one of:
-
-- user-provided full text
-- excerpt only
-- citation only
-- model knowledge only
-- live/current search needed
-
-Apply `docs/SOURCE_LIMITS.md`: state the source access level, separate source basis from interpretation, and include What I can verify, What remains uncertain, and User verification needed. Do not invent citations or source support.
+Follow `docs/SOURCE_LIMITS.md`: state the source access level, separate source basis from interpretation, include What I can verify, What remains uncertain, and User verification needed. Do not invent citations or source support.
 
 ## Files/folders it may read
 

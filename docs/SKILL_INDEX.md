@@ -1,6 +1,6 @@
 # Skill index
 
-Use this file to choose a skill. Use `MODE_REGISTRY.md` for route names and artifact outputs. Use `docs/ROUTING_MATRIX.md` for canonical automatic routing.
+Use this file when you already have a sense of the work needed and want the right skill. Use `MODE_REGISTRY.md` for route names and artifact outputs. Use `docs/ROUTING_MATRIX.md` for canonical automatic routing.
 
 | Skill folder | Display name | When to use |
 |---|---|---|
@@ -15,7 +15,7 @@ Use this file to choose a skill. Use `MODE_REGISTRY.md` for route names and arti
 | `argument-architecture` | Argument Architecture | Build a research book-level thesis tree with claims, warrants, evidence, assumptions, counterarguments, chapter sequence, and argumentative dependencies. |
 | `counterargument-peer-review` | Counterargument Peer Review | Simulate rigorous research peer review by generating strong objections, rival explanations, missing literatures, positional blind spots, and thesis revisions. |
 | `chapter-architecture` | Chapter Architecture | Design research nonfiction chapters with purpose, central question, main claim, concept definitions, evidence placement, counterarguments, transitions, and revision priorities. |
-| `scholarly-prose-editor` | Research Prose Editor | Edit research nonfiction prose for clarity, precision, structure, rhythm, readability, and authorial voice while preserving nuance and avoiding generic AI style. |
+| `scholarly-prose-editor` | Research Prose Editor | Edit research nonfiction prose for clarity, precision, structure, rhythm, readability, and authorial voice while preserving nuance and avoiding formulaic style. |
 | `citation-integrity-auditor` | Citation Integrity Auditor | Audit research drafts for citation accuracy, unsupported claims, quote integrity, page-number needs, fabricated-reference risk, source-claim mismatch, and bibliography problems. |
 | `manuscript-continuity-editor` | Manuscript Continuity Editor | Review multiple chapters or a whole manuscript for thesis coherence, repetition, contradictions, concept tracking, tone consistency, chapter order, and revision priorities. |
 | `case-study-integration` | Case Study Integration | Select, compare, and integrate case studies into research arguments while avoiding cherry-picking, weak analogy, anecdotal overreach, and unsupported generalization. |
@@ -34,11 +34,11 @@ For a serious research book, start with:
 7. `counterargument-peer-review`
 8. `citation-integrity-auditor`
 
-These catch the common failures: vague scope, weak sources, literature blindness, unsupported claims, one-sided argument, and citation errors.
+These catch the common failures: vague scope, weak sources, missing literature context, unsupported claims, one-sided argument, and citation errors.
 
 ## Automatic selection policy
 
-Use `research-intent-router` as the light first pass when a prompt could match several research skills. It should classify intent, artifact stage, source access, and risk level, then choose the smallest useful skill or short skill sequence. It should not run live/deep source lookup unless the user asks to find or check sources, source existence or metadata is central, quote/page/citation verification is requested, a claim depends on current facts, or a high-risk claim would otherwise be unsupported.
+Use `research-intent-router` as the light first pass when a prompt could match several research skills. It should classify intent, artifact stage, source access, and risk level, then choose the smallest useful skill or short skill sequence. It should not run live or deep source lookup unless the user asks to find or check sources, source existence or metadata is central, quote/page/citation verification is requested, a claim depends on current facts, or a high-risk claim would otherwise be unsupported.
 
 Router modes: `research-route-normal` and `research-route-deep`. See `MODE_REGISTRY.md` for mode behavior.
 

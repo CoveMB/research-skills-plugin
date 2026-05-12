@@ -1,6 +1,6 @@
 # Workflow playbook
 
-For the staged architecture, see `docs/ARCHITECTURE.md`. For route names and outputs, see `MODE_REGISTRY.md`.
+Use this playbook when you know the project stage and need the next concrete artifact. For the staged architecture, see `docs/ARCHITECTURE.md`. For route names and outputs, see `MODE_REGISTRY.md`.
 
 ## 0. Start with the research intent router
 
@@ -17,7 +17,7 @@ Use `research-intent-router` to classify:
 - source access level
 - scholarly risk level
 
-Default: light routing first. Do not run live/deep source lookup unless the user asks to find or check sources, source existence or metadata is central, citation/page/quote verification is requested, current facts matter, or a high-risk claim would otherwise be unsupported.
+Default: light routing first. Do not run live or deep source lookup unless the user asks to find or check sources, source existence or metadata is central, citation/page/quote verification is requested, current facts matter, or a high-risk claim would otherwise be unsupported.
 
 Router modes: `research-route-normal` and `research-route-deep`. See `MODE_REGISTRY.md` for mode behavior.
 
@@ -73,7 +73,7 @@ Contract artifact type: `literature_map`.
 
 ## 4. Argument design sprint
 
-Use `argument-architecture` and `counterargument-peer-review` together.
+Use `argument-architecture` first, then use `counterargument-peer-review` to test the result.
 
 Output artifacts:
 
@@ -96,7 +96,7 @@ Use `scholarly-prose-editor` after the chapter's logic is stable. Do not use pro
 
 ## 7. Evidence audit sprint
 
-Use `claim-evidence-ledger` before `citation-integrity-auditor`.
+Use `claim-evidence-ledger` before `citation-integrity-auditor`, so the claims and evidence status are clear before citation audit.
 
 Output artifacts:
 

@@ -1,6 +1,6 @@
 # Research book quality standard
 
-The skills in this plugin use this research standard.
+Use this standard whenever a skill plans, searches, audits, drafts, or revises scholarly nonfiction.
 
 ## Claim discipline
 
@@ -26,4 +26,4 @@ Every major thesis should survive at least one peer-review style critique that i
 
 ## Prose discipline
 
-Readable prose is not a substitute for evidence. Strong style should clarify the argument, not mask weak support.
+Readable prose is not a substitute for evidence. Strong style should clarify the argument, not hide weak support.

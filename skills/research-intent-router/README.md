@@ -6,14 +6,14 @@ Routes scholarly nonfiction research prompts to the smallest useful skill. It pr
 
 Normal mode is the default. Use it for plan-first routing: classify the request, choose the smallest useful skill, and only do deep lookup when the deep-work gate is met.
 
-Deep mode always attempts deep lookup for scholar-grade research tasks after routing. It still labels source access, refuses fabricated evidence, and marks lookup as unavailable when tools or full text are missing.
+Deep mode always attempts deep lookup for scholarly research tasks after routing. It still labels source access, refuses fabricated evidence, and marks lookup as unavailable when tools or full text are missing.
 
 Switches:
 
 - `research normal mode`
 - `research deep mode`
 
-## When to use it in the book writing process
+## When to use it
 
 Use at the start of a research interaction, when the user's next step is unclear, or when a request could match several research-book skills.
 

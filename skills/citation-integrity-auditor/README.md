@@ -6,7 +6,7 @@ Use this skill to protect a research draft from citation problems. It checks whe
 
 It does not pretend to verify sources it cannot see. If source text is unavailable, it marks verification as unavailable and states what would be needed.
 
-## When to use it in the book writing process
+## When to use it
 
 Use it after a draft has citations, footnotes, bibliography entries, paraphrases, or quoted material. It is most useful after the claim-evidence ledger, because the ledger identifies what needs support and the citation audit checks whether the support is actually there.
 
@@ -36,19 +36,19 @@ Review this bibliography and flag missing details, possible fabricated reference
 
 ## Typical output
 
-Expect a citation integrity audit with summary verdict, claim-level audit, quotation audit, bibliography issues, high-priority repairs, claims safe as interpretation or argument, severity labels, and next best skill.
+Expect a citation integrity audit with summary verdict, claim-level audit, quotation audit, bibliography issues, high-priority repairs, claims safe as interpretation or argument, severity labels, and a risk-gated follow-up when it is useful.
 
 ## Procedure
 
-1. Establish source basis and source access level.
-2. Use the skill's `SKILL.md` procedure, not memory-only shortcuts.
-3. Produce the stated output format and separate verified facts, interpretation, speculation, and recommendation.
-4. End with verification gaps and the next best skill or repair step.
+1. State the source basis and source access level.
+2. Follow the skill's `SKILL.md` procedure instead of working from memory.
+3. Produce the stated output format and keep verified facts, interpretation, speculation, and recommendation separate.
+4. End with verification gaps. Add a risk-gated follow-up only when it is useful.
 
 ## Quality checks
 
 - Evidence strength must match claim strength.
-- Missing source access must be marked, not hidden.
+- Missing source access must be marked clearly.
 - Uncertainty, limits, and user verification needs must be visible.
 - Output should preserve scholarly caution without becoming vague.
 
@@ -56,14 +56,14 @@ Expect a citation integrity audit with summary verdict, claim-level audit, quota
 
 - Fabricated citations, quotes, page numbers, source metadata, datasets, market facts, or field consensus.
 - Confident synthesis from partial sources.
-- Generic prose or structure that hides weak evidence.
+- Generic prose or structure that hides weak evidence or weak reasoning.
 - Overstated claims, missing counterarguments, or unclear source basis.
 
 ## Files/folders it may read
 
 - This skill's `SKILL.md`, `README.md`, `assets/`, `references/`, and `agents/openai.yaml` when present and relevant.
 - User-provided drafts, notes, sources, artifacts, or project files explicitly named in the request.
-- Shared project documentation only when needed for workflow, quality, or artifact compatibility.
+- Shared project documentation when it is needed for workflow, quality, or artifact compatibility.
 
 ## Files/folders it may write
 

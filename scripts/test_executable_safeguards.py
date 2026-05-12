@@ -94,6 +94,14 @@ class TestExecutableSafeguards(unittest.TestCase):
             (root / ".git" / "config").write_text("git", encoding="utf-8")
             (root / "__pycache__").mkdir()
             (root / "__pycache__" / "cache.pyc").write_bytes(b"cache")
+            (root / ".pytest_cache").mkdir()
+            (root / ".pytest_cache" / "state").write_text("cache", encoding="utf-8")
+            (root / "dist").mkdir()
+            (root / "dist" / "artifact.txt").write_text("dist", encoding="utf-8")
+            (root / "build").mkdir()
+            (root / "build" / "artifact.txt").write_text("build", encoding="utf-8")
+            (root / "coverage").mkdir()
+            (root / "coverage" / "summary.txt").write_text("coverage", encoding="utf-8")
             output_path = root / "bundle.zip"
 
             result = run_script("package_plugin.py", "--root", str(root), "--out", str(output_path))
@@ -107,6 +115,18 @@ class TestExecutableSafeguards(unittest.TestCase):
             self.assertFalse(any(name.endswith(".zip") for name in names))
             self.assertFalse(any("__pycache__" in name for name in names))
             self.assertFalse(any(name.endswith(".DS_Store") for name in names))
+            self.assertFalse(any(".pytest_cache" in name for name in names))
+            self.assertFalse(any("/dist/" in name for name in names))
+            self.assertFalse(any("/build/" in name for name in names))
+            self.assertFalse(any("/coverage/" in name for name in names))
+
+    def test_package_default_output_uses_manifest_version(self) -> None:
+        packager = load_module("package_plugin.py")
+
+        self.assertEqual(
+            packager.default_output_path(ROOT).name,
+            "scholarly-research-book-plugin-v1.0.0.zip",
+        )
 
     def test_installer_refuses_to_replace_unexpected_destination(self) -> None:
         installer = load_module("install_codex_plugin.py")
@@ -120,6 +140,25 @@ class TestExecutableSafeguards(unittest.TestCase):
                 installer.copy_plugin(ROOT, destination, dry_run=False)
 
             self.assertTrue(sentinel.exists())
+
+    def test_installer_excludes_generated_files(self) -> None:
+        installer = load_module("install_codex_plugin.py")
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory) / "source" / "sample-plugin"
+            write_minimal_plugin(root)
+            (root / ".pytest_cache").mkdir()
+            (root / ".pytest_cache" / "state").write_text("cache", encoding="utf-8")
+            (root / "dist").mkdir()
+            (root / "dist" / "artifact.txt").write_text("dist", encoding="utf-8")
+            (root / "debug.log").write_text("log", encoding="utf-8")
+            destination = Path(temporary_directory) / "sample-plugin"
+
+            installer.copy_plugin(root, destination, dry_run=False)
+
+            self.assertTrue((destination / ".codex-plugin" / "plugin.json").exists())
+            self.assertFalse((destination / ".pytest_cache").exists())
+            self.assertFalse((destination / "dist").exists())
+            self.assertFalse((destination / "debug.log").exists())
 
     def test_validate_script_uses_unittest_discovery(self) -> None:
         text = (ROOT / "validate.sh").read_text(encoding="utf-8")
@@ -160,6 +199,97 @@ class TestExecutableSafeguards(unittest.TestCase):
 
             self.assertEqual(result.returncode, 1)
             self.assertIn("broken local reference", result.stdout)
+
+    def test_validator_rejects_any_broken_relative_markdown_link(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_minimal_plugin(
+                root,
+                skill_body="\n".join(
+                    [
+                        "---",
+                        "name: sample-skill",
+                        "description: Sample skill for validation.",
+                        "---",
+                        "# Sample Skill",
+                        "",
+                        "Use [missing project doc](docs/missing.md).",
+                    ]
+                ),
+            )
+
+            result = run_script("validate_plugin.py", str(root))
+
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("broken local reference", result.stdout)
+
+    def test_validator_rejects_broken_backtick_path_reference(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_minimal_plugin(
+                root,
+                skill_body="\n".join(
+                    [
+                        "---",
+                        "name: sample-skill",
+                        "description: Sample skill for validation.",
+                        "---",
+                        "# Sample Skill",
+                        "",
+                        "Read `docs/missing.md` before using this skill.",
+                    ]
+                ),
+            )
+
+            result = run_script("validate_plugin.py", str(root))
+
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("broken local reference", result.stdout)
+
+    def test_validator_requires_structured_agent_metadata(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_minimal_plugin(root)
+            (root / "skills" / "sample-skill" / "agents" / "openai.yaml").write_text(
+                "\n".join(
+                    [
+                        'short_description: "Sample skill for validation."',
+                        'default_prompt: "Use sample-skill."',
+                        "allow_implicit_invocation: true",
+                        "",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            result = run_script("validate_plugin.py", str(root))
+
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("missing interface.short_description", result.stdout)
+
+    def test_validator_requires_boolean_agent_invocation_policy(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_minimal_plugin(root)
+            (root / "skills" / "sample-skill" / "agents" / "openai.yaml").write_text(
+                "\n".join(
+                    [
+                        "interface:",
+                        '  display_name: "Sample Skill"',
+                        '  short_description: "Sample skill for validation."',
+                        '  default_prompt: "Use sample-skill."',
+                        "policy:",
+                        '  allow_implicit_invocation: "true"',
+                        "",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            result = run_script("validate_plugin.py", str(root))
+
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("policy.allow_implicit_invocation must be boolean", result.stdout)
 
 
 if __name__ == "__main__":

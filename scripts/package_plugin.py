@@ -3,12 +3,17 @@
 from __future__ import annotations
 
 import argparse
+import sys
 import zipfile
 from pathlib import Path
 
-EXCLUDED_DIRECTORIES = {".git", "__pycache__"}
-EXCLUDED_FILE_NAMES = {".DS_Store"}
-EXCLUDED_SUFFIXES = {".pyc", ".zip", ".tmp"}
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from plugin_utils import (
+    EXCLUDED_DIRECTORIES,
+    EXCLUDED_FILE_NAMES,
+    EXCLUDED_SUFFIXES,
+    plugin_version,
+)
 
 
 def should_package_file(path: Path, output_path: Path, temporary_output_path: Path) -> bool:
@@ -42,16 +47,21 @@ def write_package(root: Path, output_path: Path) -> None:
     temporary_output_path.replace(output_path)
 
 
+def default_output_path(root: Path) -> Path:
+    return Path(f"{root.name}-v{plugin_version(root)}.zip")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
-    parser.add_argument("--out", type=Path, default=Path("scholarly-research-book-plugin-v1.0.0.zip"))
+    parser.add_argument("--out", type=Path)
     args = parser.parse_args()
     root = args.root.resolve()
-    out = args.out.resolve()
+    out = (args.out if args.out is not None else default_output_path(root)).resolve()
     write_package(root, out)
     print(f"Wrote {out}")
     return 0
+
 
 if __name__ == "__main__":
     raise SystemExit(main())

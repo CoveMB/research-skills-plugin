@@ -1,6 +1,7 @@
 """Structure tests for plugin skill routing and naming."""
 from __future__ import annotations
 
+import json
 import re
 import unittest
 from pathlib import Path
@@ -35,6 +36,16 @@ SUGGESTED_NEXT_STEP_TEMPLATE_PHRASES = [
     "Use only if: [condition].",
     "Skip if: [reason it would add noise now].",
 ]
+CONTRACT_ARTIFACT_SKILLS = {
+    "scholarly-research-agenda": "book_research_agenda",
+    "systematic-source-discovery": "source_discovery_log",
+    "literature-review-mapper": "literature_map",
+    "argument-architecture": "thesis_tree",
+    "chapter-architecture": "chapter_brief",
+    "claim-evidence-ledger": "claim_evidence_ledger",
+    "manuscript-continuity-editor": "continuity_review",
+    "book-proposal-scholarship": "book_proposal",
+}
 DESCRIPTION_STOPWORDS = {
     "after",
     "before",
@@ -99,6 +110,30 @@ def missing_phrases(text: str, phrases: list[str]) -> list[str]:
 
 def missing_labeled_phrases(label: str, text: str, phrases: list[str]) -> list[str]:
     return [f"{label}: {phrase}" for phrase in missing_phrases(text, phrases)]
+
+
+def schema_conditionals(schema_node: object) -> list[dict]:
+    conditionals: list[dict] = []
+    if isinstance(schema_node, dict):
+        if isinstance(schema_node.get("if"), dict):
+            conditionals.append(schema_node)
+        for value in schema_node.values():
+            conditionals.extend(schema_conditionals(value))
+    elif isinstance(schema_node, list):
+        for value in schema_node:
+            conditionals.extend(schema_conditionals(value))
+    return conditionals
+
+
+def const_condition_keys(condition: dict) -> list[str]:
+    properties = condition.get("properties")
+    if not isinstance(properties, dict):
+        return []
+    return [
+        key
+        for key, property_schema in properties.items()
+        if isinstance(key, str) and isinstance(property_schema, dict) and "const" in property_schema
+    ]
 
 
 class TestPluginStructure(unittest.TestCase):
@@ -243,7 +278,7 @@ class TestPluginStructure(unittest.TestCase):
         output_section = router.split("## Output format", maxsplit=1)[1]
         self.assertIn("## Suggested next step", output_section)
         self.assertIn("optional", output_section)
-        self.assertEqual(missing_phrases(output_section, SUGGESTED_NEXT_STEP_TEMPLATE_PHRASES), [])
+        self.assertIn("docs/AUTO_SELECTION_GUARDRAILS.md", output_section)
 
     def test_suggested_next_step_wording_requires_named_risk(self) -> None:
         missing: list[str] = []
@@ -256,8 +291,18 @@ class TestPluginStructure(unittest.TestCase):
             text = (skill_dir / "SKILL.md").read_text(encoding="utf-8")
             if "## Suggested next step" in text:
                 missing.extend(missing_labeled_phrases(skill_dir.name, text, required_phrases))
-                missing.extend(missing_labeled_phrases(skill_dir.name, text, SUGGESTED_NEXT_STEP_TEMPLATE_PHRASES))
         self.assertEqual(missing, [])
+
+    def test_suggested_next_step_template_lives_only_in_shared_policy(self) -> None:
+        policy = (ROOT / "docs" / "AUTO_SELECTION_GUARDRAILS.md").read_text(encoding="utf-8")
+        self.assertEqual(missing_phrases(policy, SUGGESTED_NEXT_STEP_TEMPLATE_PHRASES), [])
+
+        duplicated_templates = [
+            str(path.relative_to(ROOT))
+            for path in SKILLS_DIR.glob("*/SKILL.md")
+            if any(phrase in path.read_text(encoding="utf-8") for phrase in SUGGESTED_NEXT_STEP_TEMPLATE_PHRASES)
+        ]
+        self.assertEqual(duplicated_templates, [])
 
     def test_citation_audit_suggestion_is_blocked_before_cited_material_exists(self) -> None:
         files = [
@@ -456,6 +501,62 @@ class TestPluginStructure(unittest.TestCase):
             if "docs/ROUTING_MATRIX.md" not in path.read_text(encoding="utf-8")
         ]
         self.assertEqual(missing_references, [])
+
+    def test_contract_schema_conditionals_require_discriminating_properties(self) -> None:
+        schema = json.loads((ROOT / "shared" / "contracts" / "book" / "book_artifact.schema.json").read_text(encoding="utf-8"))
+        missing: list[str] = []
+        for conditional in schema_conditionals(schema):
+            condition = conditional["if"]
+            required = condition.get("required")
+            required = required if isinstance(required, list) else []
+            for key in const_condition_keys(condition):
+                if key not in required:
+                    missing.append(key)
+        self.assertEqual(missing, [])
+
+    def test_contract_skills_document_machine_readable_artifact_mode(self) -> None:
+        missing: list[str] = []
+        for skill_name, artifact_type in CONTRACT_ARTIFACT_SKILLS.items():
+            text = (SKILLS_DIR / skill_name / "SKILL.md").read_text(encoding="utf-8")
+            missing.extend(missing_labeled_phrases(
+                skill_name,
+                text,
+                [
+                    "## Machine-readable artifacts",
+                    "shared/contracts/book/book_artifact.schema.json",
+                    f"`artifact_type: {artifact_type}`",
+                ],
+            ))
+        self.assertEqual(missing, [])
+
+    def test_public_readme_defers_route_tables_to_canonical_docs(self) -> None:
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        self.assertNotIn("| Mode | Primary skill |", readme)
+        self.assertNotIn("## Recommended paths", readme)
+        self.assertIn("docs/SKILL_INDEX.md", readme)
+        self.assertIn("docs/ROUTING_MATRIX.md", readme)
+
+    def test_manifest_version_matches_public_docs(self) -> None:
+        manifest = json.loads((ROOT / ".codex-plugin" / "plugin.json").read_text(encoding="utf-8"))
+        version = manifest["version"]
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+
+        self.assertIn(f"Version: {version}", readme)
+        self.assertIn(f"## {version}", changelog)
+
+    def test_skill_readmes_use_risk_gated_followup_language(self) -> None:
+        disallowed_phrases = [
+            "next best skill",
+            "next best skill or repair step",
+        ]
+        offenders = [
+            f"{path.relative_to(ROOT)}: {phrase}"
+            for path in SKILLS_DIR.glob("*/README.md")
+            for phrase in disallowed_phrases
+            if phrase in path.read_text(encoding="utf-8")
+        ]
+        self.assertEqual(offenders, [])
 
     def test_router_modes_are_registered_in_user_facing_docs(self) -> None:
         files = [

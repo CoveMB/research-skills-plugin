@@ -1,4 +1,4 @@
-# Source Limits
+# Source limits
 
 Use this shared policy whenever a skill routes, searches, annotates, audits, drafts, or revises research material.
 
@@ -10,7 +10,7 @@ State the source access level before making research claims:
 - excerpt only
 - citation only
 - model knowledge only
-- live/current search needed
+- live or current search needed
 
 ## Verification rules
 

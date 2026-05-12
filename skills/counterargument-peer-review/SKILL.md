@@ -42,15 +42,7 @@ Be charitable first, then rigorous. Steelman the argument before attacking it. D
 
 ## Source basis and AI limits
 
-Before reviewing, state the source access level as one of:
-
-- user-provided full text
-- excerpt only
-- citation only
-- model knowledge only
-- live/current search needed
-
-Apply `docs/SOURCE_LIMITS.md`: state the source access level, separate source basis from interpretation, and include What I can verify, What remains uncertain, and User verification needed. Do not invent citations or source support.
+Follow `docs/SOURCE_LIMITS.md`: state the source access level, separate source basis from interpretation, include What I can verify, What remains uncertain, and User verification needed. Do not invent citations or source support.
 
 ## Files/folders it may read
 
@@ -160,10 +152,6 @@ For high-severity objections, state what evidence would falsify or materially we
 
 ## Suggested next step
 
-Use `skill-name` to [specific next action].
-Why this helps scholarship: [named risk reduced].
-Use only if: [condition].
-Skip if: [reason it would add noise now].
 ```
 
 Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.md`. The section may be omitted. If included, it must identify the named scholarly risk it reduces and use one skill only.

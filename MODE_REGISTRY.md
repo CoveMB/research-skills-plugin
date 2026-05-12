@@ -1,6 +1,6 @@
 # Mode registry
 
-Book workflow modes across the plugin.
+Book workflow modes for this package.
 
 Last updated: 2026-05-12
 
@@ -29,11 +29,11 @@ Use `docs/ROUTING_MATRIX.md` for canonical skill-routing choices.
 
 `research-route` is an alias for `research-route-normal`.
 
-Start with `research-route` when a prompt involves scholarly research but the best specialist skill is unclear. The router should use light routing first, then allow deep source lookup only when it materially strengthens evidence quality: source finding/checking is requested, source existence or metadata is central, citation/page/quote verification is requested, current facts matter, or a high-risk claim would otherwise be unsupported.
+Start with `research-route` when a prompt involves scholarly research but the best specialist skill is unclear. The router should use light routing first, then allow deep source lookup only when it materially strengthens evidence quality: source finding or checking is requested, source existence or metadata is central, citation/page/quote verification is requested, current facts matter, or a high-risk claim would otherwise be unsupported.
 
-Use `research-route-normal` for Normal mode. Normal mode is the default and plans first.
+Use `research-route-normal` for normal mode. Normal mode is the default and plans first.
 
-Use `research-route-deep` for Deep mode. Deep mode always attempts lookup after routing, but it still marks missing tools, missing full text, and unavailable sources as unverified.
+Use `research-route-deep` for deep mode. Deep mode always attempts lookup after routing, but it still marks missing tools, missing full text, and unavailable sources as unverified.
 
 ## Support modes
 

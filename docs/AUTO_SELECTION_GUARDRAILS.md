@@ -1,4 +1,4 @@
-# Auto-Selection Guardrails
+# Auto-selection guardrails
 
 Use this shared policy when deciding whether a research-book skill should trigger automatically.
 
@@ -17,7 +17,7 @@ Each skill should define:
 - Use the router when multiple skills could reasonably own the request.
 - Prefer plan-first routing unless the user selects deep mode or the deep-work gate is met.
 - Do not trigger on casual, fictional, grammar-only, or non-research tasks.
-- Do not perform deep lookup when it does not reduce a concrete scholarly risk.
+- Do not perform deep lookup when it would not reduce a concrete scholarly risk.
 
 ## Suggested next step policy
 
@@ -44,7 +44,7 @@ Skip if: [reason it would add noise now].
 
 One suggested skill max. Do not add generic skill menus, broad "also use" prompts, or a skill sequence unless the router is explicitly producing a route.
 
-Do not suggest `citation-integrity-auditor` before citations, quotes, page numbers, bibliography entries, or cited claims exist. Use source-access labels visibly: user-provided full text, excerpt only, citation only, model knowledge only, or live/current search needed. Use cautious verbs such as can test, can audit, or can map; do not claim the next skill will prove or verify something without source access.
+Do not suggest `citation-integrity-auditor` before citations, quotes, page numbers, bibliography entries, or cited claims exist. Use source-access labels visibly: user-provided full text, excerpt only, citation only, model knowledge only, or live or current search needed. Use cautious verbs such as can test, can audit, or can map; do not claim the next skill will prove or verify something without source access.
 
 Omit the section when no specific unresolved scholarly risk remains.
 Omit the section when no one skill clearly reduces the remaining risk.

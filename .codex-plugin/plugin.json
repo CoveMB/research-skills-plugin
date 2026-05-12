@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "Agent Skills plugin for rigorous research nonfiction and research book writing: research intent routing, research agenda, source discovery, literature review, argument architecture, chapters, prose, citations, and manuscript continuity.",
   "author": {
-    "name": "Generated local scholarly skills pack",
-    "url": "https://agentskills.io"
+    "name": "Cove"
   },
   "license": "MIT",
   "keywords": [

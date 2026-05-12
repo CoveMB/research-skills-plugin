@@ -4,9 +4,9 @@
 
 Use this skill to create useful annotations for sources in a research book project. A good annotation records more than a summary. It explains the source's argument, method, evidence, limits, relevance, terms, and possible chapter placement.
 
-This skill helps an author avoid rereading the same source months later because the original notes were too thin. It also keeps source use honest by separating what the source says from what the author wants it to prove.
+Use it when thin notes would force the author to reread the same source months later. It also keeps source use honest by separating what the source says from what the author wants it to prove.
 
-## When to use it in the book writing process
+## When to use it
 
 Use it after source discovery and before literature mapping, chapter writing, or evidence auditing. It is especially helpful during the first research sprint, when the author is still learning the field.
 
@@ -39,15 +39,15 @@ Expect an annotated bibliography with source type, main argument, method or evid
 
 ## Procedure
 
-1. Establish source basis and source access level.
-2. Use the skill's `SKILL.md` procedure, not memory-only shortcuts.
-3. Produce the stated output format and separate verified facts, interpretation, speculation, and recommendation.
-4. End with verification gaps and the next best skill or repair step.
+1. State the source basis and source access level.
+2. Follow the skill's `SKILL.md` procedure instead of working from memory.
+3. Produce the stated output format and keep verified facts, interpretation, speculation, and recommendation separate.
+4. End with verification gaps. Add a risk-gated follow-up only when it is useful.
 
 ## Quality checks
 
 - Evidence strength must match claim strength.
-- Missing source access must be marked, not hidden.
+- Missing source access must be marked clearly.
 - Uncertainty, limits, and user verification needs must be visible.
 - Output should preserve scholarly caution without becoming vague.
 
@@ -55,14 +55,14 @@ Expect an annotated bibliography with source type, main argument, method or evid
 
 - Fabricated citations, quotes, page numbers, source metadata, datasets, market facts, or field consensus.
 - Confident synthesis from partial sources.
-- Generic prose or structure that hides weak evidence.
+- Generic prose or structure that hides weak evidence or weak reasoning.
 - Overstated claims, missing counterarguments, or unclear source basis.
 
 ## Files/folders it may read
 
 - This skill's `SKILL.md`, `README.md`, `assets/`, `references/`, and `agents/openai.yaml` when present and relevant.
 - User-provided drafts, notes, sources, artifacts, or project files explicitly named in the request.
-- Shared project documentation only when needed for workflow, quality, or artifact compatibility.
+- Shared project documentation when it is needed for workflow, quality, or artifact compatibility.
 
 ## Files/folders it may write
 

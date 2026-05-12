@@ -12,6 +12,26 @@ from typing import Any
 
 SCHEMA_RELATIVE_PATH = Path("shared/contracts/book/book_artifact.schema.json")
 EXAMPLES_RELATIVE_DIR = Path("examples/book_artifacts")
+SUPPORTED_SCHEMA_KEYWORDS = {
+    "$defs",
+    "$id",
+    "$ref",
+    "$schema",
+    "additionalProperties",
+    "allOf",
+    "const",
+    "enum",
+    "if",
+    "items",
+    "minimum",
+    "minItems",
+    "minLength",
+    "properties",
+    "required",
+    "then",
+    "title",
+    "type",
+}
 
 
 def load_json(path: Path) -> tuple[dict[str, Any] | None, str | None]:
@@ -29,6 +49,44 @@ def load_json(path: Path) -> tuple[dict[str, Any] | None, str | None]:
 
 def location(path_parts: list[str]) -> str:
     return "/".join(path_parts) if path_parts else "<root>"
+
+
+def unsupported_schema_keywords(subschema: Any, path_parts: list[str]) -> list[str]:
+    if not isinstance(subschema, dict):
+        return []
+
+    errors = [
+        f"unsupported schema keyword {key!r} at {location(path_parts)}"
+        for key in subschema
+        if key not in SUPPORTED_SCHEMA_KEYWORDS
+    ]
+
+    schema_maps = ["$defs", "properties"]
+    for map_key in schema_maps:
+        child_map = subschema.get(map_key)
+        if isinstance(child_map, dict):
+            for key, child_schema in child_map.items():
+                errors.extend(
+                    unsupported_schema_keywords(child_schema, [*path_parts, map_key, str(key)])
+                )
+
+    items_schema = subschema.get("items")
+    if isinstance(items_schema, dict):
+        errors.extend(unsupported_schema_keywords(items_schema, [*path_parts, "items"]))
+
+    for schema_key in ["if", "then"]:
+        child_schema = subschema.get(schema_key)
+        if isinstance(child_schema, dict):
+            errors.extend(unsupported_schema_keywords(child_schema, [*path_parts, schema_key]))
+
+    all_of = subschema.get("allOf")
+    if isinstance(all_of, list):
+        for index, child_schema in enumerate(all_of):
+            errors.extend(
+                unsupported_schema_keywords(child_schema, [*path_parts, "allOf", str(index)])
+            )
+
+    return errors
 
 
 def resolve_reference(schema: dict[str, Any], reference: str) -> dict[str, Any] | None:
@@ -206,6 +264,10 @@ def validate_schema(schema_path: Path) -> tuple[dict[str, Any] | None, list[str]
     if error is not None:
         return None, [error]
     assert schema is not None
+
+    unsupported_keywords = unsupported_schema_keywords(schema, [])
+    if unsupported_keywords:
+        return None, [f"{schema_path}: {error}" for error in unsupported_keywords]
 
     properties = schema.get("properties")
     if not isinstance(properties, dict) or "artifact_type" not in properties:
