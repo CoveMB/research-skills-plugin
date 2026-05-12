@@ -2,7 +2,7 @@
 
 ## What it does
 
-Use this skill when the project needs a map before it needs more text. It looks at the state of a research book and decides which specialized skill should come next. It can route a project through research agenda work, source discovery, literature mapping, argument design, chapter planning, evidence checks, citation review, continuity review, and proposal work.
+Use this skill when the project needs a map before it needs more text. It looks at the state of a research book and decides which specialized skill should come next. It can route a project through accessibility triage, research agenda work, source discovery, literature mapping, argument design, chapter planning, evidence checks, citation review, continuity review, and proposal work.
 
 Use it when the author feels stuck because there are too many possible next steps. Should the project search for sources, sharpen the thesis, outline chapters, audit citations, or revise prose? This skill answers that by diagnosing the manuscript stage and building a practical sequence of work.
 
@@ -19,6 +19,7 @@ Use it again when the project changes shape. For example, if a literature map re
 - Notes about the audience, field, deadline, or intended press.
 - A list of available materials, such as sources, chapter drafts, interviews, or case notes.
 - A description of where the author feels blocked.
+- Any rough-note, dictation, spelling, or reading-load constraint that affects the first step.
 
 ## Example requests
 
@@ -64,4 +65,4 @@ Follow the shared prohibitions in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
 
 ## Best next steps
 
-After this skill, use the skill it recommends. Early projects often move to `scholarly-research-agenda`. Projects with sources often move to `literature-review-mapper` or `annotated-bibliography-builder`. Draft-heavy projects often move to `claim-evidence-ledger`, `chapter-architecture`, or `manuscript-continuity-editor`.
+After this skill, use the skill it recommends. Projects blocked by text friction often move to the smallest accessibility entry point in `docs/ROUTING_MATRIX.md`. Early projects often move to `scholarly-research-agenda`. Projects with sources often move to `literature-review-mapper` or `annotated-bibliography-builder`. Draft-heavy projects often move to `claim-evidence-ledger`, `chapter-architecture`, or `manuscript-continuity-editor`.

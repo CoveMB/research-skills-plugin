@@ -12,6 +12,8 @@ Use it after the chapter logic and evidence are reasonably stable. It is useful 
 
 Use it earlier only for targeted clarity work. If the draft has unsupported claims or structural problems, use `claim-evidence-ledger` or `chapter-architecture` first.
 
+If the input is rough notes, dictation, typo-heavy fragments, dense material, or accessibility-focused surface repair before prose editing, use the smallest accessibility entry point in `docs/ROUTING_MATRIX.md` first.
+
 ## Good inputs
 
 - A paragraph, section, chapter excerpt, introduction, abstract, or proposal passage.

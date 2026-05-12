@@ -2,9 +2,11 @@
 
 Version: 1.0.0
 
-Research Book Skills is a local skills plugin for people writing scholarly nonfiction, research monographs, long-form essays, or book proposals. It helps turn loose research work into concrete artifacts: a research agenda, source discovery log, source notes, extraction tables, literature map, thesis tree, chapter brief, claim ledger, claim traceability graph, citation audit, release audit, continuity review, comparable-title check, and proposal.
+Research Book Skills is a local skills plugin for people writing scholarly nonfiction, research monographs, long-form essays, or book proposals. It helps turn loose research work into concrete artifacts: low-load research notes, dictation notes, reading triage, meaning-preserving prose repair, a research agenda, source discovery log, source notes, extraction tables, literature map, thesis tree, chapter brief, claim ledger, claim traceability graph, citation audit, release audit, continuity review, comparable-title check, and proposal.
 
 The package assumes a person is still doing the research. It can sort, pressure-test, and clean up the work, but it will not treat model memory as source verification. It keeps asking practical scholarly questions: what kind of claim is this, what evidence can support it, where is the argument too strong, and what would an expert reader challenge?
+
+It also includes accessibility skills for dyslexic, dysorthographic, dictation-heavy, or reading-fatigued authors. These skills turn rough thoughts, typo-heavy notes, voice transcripts, dense material, and existing prose into short tables, repair passes, and next actions without changing the author's meaning.
 
 ## Install in 30 seconds
 
@@ -38,6 +40,26 @@ Use `research-intent-router` when the next skill is unclear:
 
 ```text
 Use research-intent-router. I want to write a research book about urban climate adaptation. Route this request and tell me the smallest useful next step.
+```
+
+Use the narrower accessibility skills when the bottleneck is clear:
+
+```text
+Use dictation-to-research-notes. Turn this voice transcript into claims, questions, evidence needs, ambiguities, and next actions.
+```
+
+```text
+Use reading-load-reducer. Tell me what to read closely, skim, park, or skip for this chapter.
+```
+
+```text
+Use dyslexia-friendly-prose-editor. Fix spelling and sentence boundaries without changing my argument.
+```
+
+Use `dyslexia-research-companion` when the accessibility bottleneck is mixed or unclear:
+
+```text
+Use dyslexia-research-companion. I have rough notes, dictation fragments, and too much source material. Choose the smallest low-load first step without changing my meaning.
 ```
 
 For a full project plan:
@@ -77,6 +99,10 @@ Use this package when the project needs clearer research structure, stricter sou
 Typical jobs:
 
 - turn a broad book idea into research questions, scope boundaries, and contribution claims
+- turn rough notes, dictation, fragments, or dense source material into low-load research structures
+- turn voice transcripts into structured scholarly notes
+- reduce dense source material into read/skim/park/skip triage
+- repair spelling, grammar, and sentence boundaries without changing meaning
 - design a repeatable source search instead of collecting sources randomly
 - dedupe candidate source exports and keep search logs honest
 - turn annotations and highlights into source-bound notes
@@ -95,6 +121,10 @@ Typical jobs:
 
 Use [`docs/SKILL_INDEX.md`](docs/SKILL_INDEX.md) for the full skill list and [`docs/ROUTING_MATRIX.md`](docs/ROUTING_MATRIX.md) for canonical routing. The short version is:
 
+- voice transcript only: use `dictation-to-research-notes`
+- too much to read: use `reading-load-reducer`
+- existing prose needs spelling or sentence repair: use `dyslexia-friendly-prose-editor`
+- mixed or unclear accessibility bottleneck: start with `dyslexia-research-companion`
 - unclear request: start with `research-intent-router`
 - whole-project planning: use `research-book-orchestrator`
 - source, note, extraction, argument, chapter, claim, citation, release, continuity, and proposal work: choose the narrow specialist in the skill index
@@ -105,7 +135,7 @@ Every skill folder has its own `README.md` with example requests, useful inputs,
 
 This package does not install scheduled background jobs. Its "automation" is routing: the router and orchestrator decide which workflow should run, how deep source lookup should go, and what artifact should come next.
 
-The common route modes are `research-route-normal` and `research-route-deep`. See `MODE_REGISTRY.md` for the full registry and [`docs/ROUTING_MATRIX.md`](docs/ROUTING_MATRIX.md) for routing rules.
+The common route modes are `accessibility-companion`, `dictation-notes`, `reading-load`, `accessible-prose-repair`, `research-route-normal`, and `research-route-deep`. See `MODE_REGISTRY.md` for the full registry and [`docs/ROUTING_MATRIX.md`](docs/ROUTING_MATRIX.md) for routing rules.
 
 ## Source lookup modes
 
@@ -155,6 +185,10 @@ It also does not replace a researcher, editor, advisor, peer reviewer, or fact-c
 scholarly-research-book-plugin/
   .codex-plugin/plugin.json
   skills/
+    dyslexia-research-companion/
+    dictation-to-research-notes/
+    reading-load-reducer/
+    dyslexia-friendly-prose-editor/
     research-intent-router/
     research-book-orchestrator/
     scholarly-research-agenda/
@@ -193,6 +227,7 @@ Script details, arguments, side effects, and dependency notes are in [`docs/SCRI
 - [`docs/WORKFLOW_PLAYBOOK.md`](docs/WORKFLOW_PLAYBOOK.md): practical book workflows
 - [`docs/QUALITY_STANDARD.md`](docs/QUALITY_STANDARD.md): source, claim, and citation standards
 - [`docs/SOURCE_LIMITS.md`](docs/SOURCE_LIMITS.md): what counts as verified source access
+- [`docs/ROUTING_MATRIX.md`](docs/ROUTING_MATRIX.md): canonical route choices, including accessibility entry points
 - [`docs/TROUBLESHOOTING.md`](docs/TROUBLESHOOTING.md): common setup and routing issues
 
 ## License

@@ -2,7 +2,28 @@
 
 Use this playbook when you know the project stage and need the next concrete artifact. For the staged architecture, see `docs/ARCHITECTURE.md`. For route names and outputs, see `MODE_REGISTRY.md`.
 
-## 0. Start with the research intent router
+## 0. Choose the smallest accessibility entry point
+
+Prompt:
+
+```text
+Use dictation-to-research-notes. Turn this voice transcript into claims, questions, evidence needs, ambiguities, and next actions.
+```
+
+Use the smallest accessibility skill before routing when text friction makes the next scholarly action hard to see:
+
+- `dictation-to-research-notes` for voice transcripts or speech-to-text output
+- `reading-load-reducer` for dense material or source-volume triage
+- `dyslexia-friendly-prose-editor` for existing prose needing meaning-preserving repair
+- `dyslexia-research-companion` when the bottleneck is mixed, unclear, or explicitly requested as a wrapper
+
+For mixed cases:
+
+```text
+Use dyslexia-research-companion. I have rough notes, dictation fragments, and dense sources. Choose the smallest low-load first step and keep ambiguities visible.
+```
+
+## 0.1. Start with the research intent router
 
 Prompt:
 
@@ -21,7 +42,7 @@ Default: light routing first. Do not run live or deep source lookup unless the u
 
 Router modes: `research-route-normal` and `research-route-deep`. See `MODE_REGISTRY.md` for mode behavior.
 
-## 0.1. Use the orchestrator for multi-stage work
+## 0.2. Use the orchestrator for multi-stage work
 
 Prompt:
 

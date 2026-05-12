@@ -20,6 +20,10 @@ Match source type to claim type:
 
 Keep summary, paraphrase, direct quotation, and interpretation separate. Direct quotes and passage-specific claims need locators, or the gap must stay visible.
 
+## Accessibility discipline
+
+When spelling, dictation, rough fragments, dense material, or reading fatigue shape the task, reduce text load before adding scholarly complexity. Preserve the author's meaning, mark only ambiguities that affect claims or evidence, and prefer short tables with one next action. Use specific accessibility skills for clear bottlenecks: spoken input, reading triage, or prose repair.
+
 ## Extraction discipline
 
 Do not synthesize before extraction is even enough to compare sources. Empty fields are better than guessed fields.

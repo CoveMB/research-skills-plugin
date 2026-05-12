@@ -7,7 +7,8 @@ This file is the shared operating policy for skill READMEs. Individual READMEs s
 1. State the source basis and source access level.
 2. Follow the skill's `SKILL.md` procedure instead of working from memory.
 3. Produce the stated output format and keep verified facts, interpretation, speculation, and recommendation separate.
-4. End with verification gaps. Add a risk-gated follow-up only when it is useful.
+4. End with verification gaps. Add a risk-gated follow-up only when it is useful and does not add avoidable reading load.
+5. For accessibility work, follow `docs/ROUTING_MATRIX.md`: use the smallest clear accessibility skill first, and use `dyslexia-research-companion` only for mixed or unclear bottlenecks.
 
 ## Quality checks
 
@@ -15,6 +16,7 @@ This file is the shared operating policy for skill READMEs. Individual READMEs s
 - Missing source access must be marked clearly.
 - Uncertainty, limits, and user verification needs must be visible.
 - Output should preserve scholarly caution without becoming vague.
+- If the request involves rough notes, dictation, spelling ambiguity, or reading fatigue, preserve meaning and keep the output easy to scan.
 
 ## Failure modes
 
@@ -22,6 +24,7 @@ This file is the shared operating policy for skill READMEs. Individual READMEs s
 - Confident synthesis from partial sources.
 - Generic prose or structure that hides weak evidence or weak reasoning.
 - Overstated claims, missing counterarguments, or unclear source basis.
+- Overcorrected text that changes the author's intended claim.
 
 ## Files/folders it may read
 

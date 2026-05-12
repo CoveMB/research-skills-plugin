@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Added smaller accessibility skills for dictation-to-notes, reading-load triage, and meaning-preserving prose repair.
+- Added dyslexia research companion skill for mixed or unclear accessibility bottlenecks and low-load scholarly next actions.
 - Added six gated research skills for source notes, claim traceability, extraction tables, discovery dedupe, release audits, and comparable-title verification.
 - Updated routing, workflow, architecture, mode registry, public README, and prompt examples for the new skills.
 - Added research intent routing skill.

@@ -17,6 +17,8 @@ Switches:
 
 Use at the start of a research interaction, when the user's next step is unclear, or when a request could match several research-book skills.
 
+Use the smallest accessibility skill first when text friction blocks the user's intended claim or next action: `dictation-to-research-notes` for voice transcripts, `reading-load-reducer` for dense material, `dyslexia-friendly-prose-editor` for existing prose repair, and `dyslexia-research-companion` when the bottleneck is mixed.
+
 ## Useful inputs
 
 - Topic, thesis, question, draft, source list, bibliography, chapter, manuscript, or proposal.
@@ -52,6 +54,7 @@ Follow the shared prohibitions in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
 Use the optional `## Suggested next step` section only when one follow-on skill reduces a named scholarly risk. Common gated routes:
 
 - Use `scholarly-research-agenda` for broad topics whose scope is unstable.
+- Use `dictation-to-research-notes`, `reading-load-reducer`, `dyslexia-friendly-prose-editor`, or `dyslexia-research-companion` when text friction prevents reliable routing.
 - Use `systematic-source-discovery` when the question is stable but no corpus exists.
 - Use `claim-evidence-ledger` before citation audit on unsupported drafts.
 - Use `citation-integrity-auditor` only when citations, quotes, pages, bibliography entries, or cited claims need audit.

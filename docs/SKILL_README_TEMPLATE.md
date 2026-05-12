@@ -10,6 +10,8 @@ Explain the skill's job in plain language.
 
 Name the manuscript stage, useful inputs, and strongest trigger cases.
 
+If the skill should defer rough notes, dictation, spelling ambiguity, prose repair, or reading-load triage to a specific accessibility skill or to `dyslexia-research-companion`, say so here.
+
 ## Good inputs
 
 - User-provided drafts, notes, source lists, citations, artifacts, or constraints.
@@ -24,6 +26,7 @@ Use skill-name to [specific task].
 ## Typical output
 
 Describe the main output. Note that follow-up suggestions are optional and risk-gated.
+For low-load or accessibility-facing skills, say whether the output should prefer tables, short chunks, or ambiguity flags.
 
 ## Procedure
 

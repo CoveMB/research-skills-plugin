@@ -10,6 +10,10 @@ Use `docs/ROUTING_MATRIX.md` for canonical skill-routing choices.
 
 | Mode | Primary skill | Output | Oversight | Triggers |
 |---|---|---|---|---|
+| `accessibility-companion` | `dyslexia-research-companion` | Low-load route, cleaned structure, ambiguity table, or next action for mixed cases | Medium | "mixed accessibility bottleneck", "unclear accessibility route", "dictation plus reading load", "spelling ambiguity plus rough notes" |
+| `dictation-notes` | `dictation-to-research-notes` | Cleaned research notes with claims, questions, evidence needs, ambiguities, and next actions | Medium | "dictated notes", "voice memo", "speech-to-text", "transcript", "spoken fragments" |
+| `reading-load` | `reading-load-reducer` | Read/skim/park/skip triage and close-reading targets | Medium | "reading fatigue", "too much to read", "skim", "read closely", "source triage" |
+| `accessible-prose-repair` | `dyslexia-friendly-prose-editor` | Meaning-preserving prose repair with ambiguity and evidence flags | Medium | "spelling repair", "grammar cleanup", "sentence boundaries", "dysorthographic", "typo-heavy prose" |
 | `research-route` | `research-intent-router` | Research intent route; non-contract routing output | Medium | "start research", "what skill should I use", "route this research task", unclear research request |
 | `research-route-normal` | `research-intent-router` | Plan-first research route; non-contract routing output | Medium | "research normal mode", "normal research mode", "plan first" |
 | `research-route-deep` | `research-intent-router` | Deep research route with lookup attempt; non-contract routing output | High | "research deep mode", "deep research mode", "deep lookup by default" |
@@ -34,6 +38,10 @@ Use `docs/ROUTING_MATRIX.md` for canonical skill-routing choices.
 ## Automatic selection rule
 
 `research-route` is an alias for `research-route-normal`.
+
+Use the specific accessibility mode when ownership is clear: `dictation-notes` for spoken input, `reading-load` for dense material triage, and `accessible-prose-repair` for existing prose repair.
+
+Start with `accessibility-companion` only when text friction blocks the user's next scholarly action and the smaller accessibility skill is unclear or several bottlenecks overlap.
 
 Start with `research-route` when a prompt involves scholarly research but the best specialist skill is unclear. The router should use light routing first, then allow deep source lookup only when it materially strengthens evidence quality: source finding or checking is requested, source existence or metadata is central, citation/page/quote verification is requested, current facts matter, or a high-risk claim would otherwise be unsupported.
 

@@ -4,6 +4,10 @@ Use this file when you already have a sense of the work needed and want the righ
 
 | Skill folder | Display name | When to use |
 |---|---|---|
+| `dyslexia-research-companion` | Dyslexia Research Companion | Route mixed or unclear accessibility bottlenecks for dyslexic, dysorthographic, dictation-heavy, or reading-fatigued scholarly authors when no smaller accessibility skill clearly owns the task. |
+| `dictation-to-research-notes` | Dictation to Research Notes | Turn dictated research thoughts, voice transcripts, speech-to-text output, meeting notes, or rambling spoken fragments into structured scholarly notes, claims, questions, evidence needs, ambiguities, and next actions without changing meaning. |
+| `reading-load-reducer` | Reading Load Reducer | Reduce reading burden by turning dense articles, source excerpts, search results, bibliographies, chapter drafts, or long notes into skim-read-skip triage, close-reading targets, extraction priorities, evidence needs, and next actions. |
+| `dyslexia-friendly-prose-editor` | Dyslexia-Friendly Prose Editor | Repair spelling, grammar, sentence boundaries, punctuation, and readability in scholarly prose while preserving meaning, authorial voice, uncertainty, evidence limits, and a compact change summary. |
 | `research-intent-router` | Research Intent Router | Auto-detect scholarly research intent, choose the smallest useful research-book skill, and gate deep source lookup so it only runs when it materially improves evidence quality. |
 | `research-book-orchestrator` | Research Book Orchestrator | Coordinate a full research nonfiction or research book workflow. Use for project planning, routing tasks across research agenda, source discovery, literature review, argument design, chapter work, evidence ledgers, citation audits, and manuscript revision. |
 | `scholarly-research-agenda` | Research Agenda | Turn a broad research book idea into precise research questions, scope boundaries, contribution claims, key terms, evidence needs, and an initial research agenda. Use before source gathering or outlining. |
@@ -27,7 +31,16 @@ Use this file when you already have a sense of the work needed and want the righ
 | `book-proposal-scholarship` | Book Proposal Scholarship | Develop a research nonfiction book proposal with thesis, contribution, audience, market/field positioning, chapter summaries, comparable titles, and sample-material plan. |
 | `book-comps-verifier` | Book Comps Verifier | Verify comparable titles and positioning claims for research nonfiction proposals, press pitches, grants, audience claims, market claims, timeliness claims, and publication positioning. |
 
-## Core set
+## Accessibility entry points
+
+Use one of these before the core research workflow only when text friction blocks the next scholarly action:
+
+1. `dictation-to-research-notes` when voice transcripts are the first bottleneck
+2. `reading-load-reducer` when dense material or source volume is the first bottleneck
+3. `dyslexia-friendly-prose-editor` when existing prose needs meaning-preserving repair
+4. `dyslexia-research-companion` when the accessibility bottleneck is mixed or unclear
+
+## Core research workflow
 
 For a research book with scholarly standards, start with:
 
@@ -47,6 +60,8 @@ These catch the common failures: vague scope, weak sources, missing literature c
 
 ## Automatic selection policy
 
+Use the smallest accessibility skill before routing when text friction blocks the user's intended claim or next action: `dictation-to-research-notes` for spoken input, `reading-load-reducer` for dense material triage, and `dyslexia-friendly-prose-editor` for existing prose repair. Use `dyslexia-research-companion` when the accessibility bottleneck is mixed or unclear.
+
 Use `research-intent-router` as the light first pass when a prompt could match several research skills. It should classify intent, artifact stage, source access, and risk level, then choose the smallest useful skill or short skill sequence. It should not run live or deep source lookup unless the user asks to find or check sources, source existence or metadata is central, quote/page/citation verification is requested, a claim depends on current facts, or a high-risk claim would otherwise be unsupported.
 
 Router modes: `research-route-normal` and `research-route-deep`. See `MODE_REGISTRY.md` for mode behavior.
@@ -55,14 +70,15 @@ Suggested next steps are optional and risk-gated. They should appear only when o
 
 ## Later-stage manuscript set
 
-Use these once chapters exist:
+Use these once chapters exist. Start with one accessibility entry point only if text friction blocks revision:
 
-1. `chapter-architecture`
-2. `scholarly-prose-editor`
-3. `manuscript-continuity-editor`
-4. `rights-privacy-release-auditor`
-5. `book-proposal-scholarship`
-6. `book-comps-verifier`
+1. `dictation-to-research-notes`, `reading-load-reducer`, `dyslexia-friendly-prose-editor`, or `dyslexia-research-companion`
+2. `chapter-architecture`
+3. `scholarly-prose-editor`
+4. `manuscript-continuity-editor`
+5. `rights-privacy-release-auditor`
+6. `book-proposal-scholarship`
+7. `book-comps-verifier`
 
 ## Case and evidence set
 

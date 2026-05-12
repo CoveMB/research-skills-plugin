@@ -14,11 +14,11 @@ This skill can auto-detect research intent and route the user to the smallest us
 
 ## When to use
 
-Use when the prompt involves scholarly or research nonfiction work, source discovery, source notes, extraction tables, literature review, evidence quality, citations, claims, methodology, thesis design, chapters, manuscript continuity, case studies, proposal positioning, release risk, or an unclear next step in a research project.
+Use when the prompt involves scholarly or research nonfiction work, source discovery, source notes, extraction tables, literature review, evidence quality, citations, claims, methodology, thesis design, chapters, manuscript continuity, case studies, proposal positioning, release risk, accessibility routing, or an unclear next step in a research project.
 
 ## Automatic selection guidance
 
-- High-signal triggers: research intent, start research, literature review, source notes, extraction tables, source quality, evidence audit, claim traceability, citations, methodology, thesis, chapters, manuscript continuity, case studies, release audit, comparable titles, or book proposal positioning.
+- High-signal triggers: research intent, start research, literature review, source notes, extraction tables, source quality, evidence audit, claim traceability, citations, methodology, thesis, chapters, manuscript continuity, case studies, release audit, comparable titles, book proposal positioning, or requests to route accessibility bottlenecks.
 - Light-route behavior: classify the request, select one next skill or a short sequence, and state what remains unverified.
 - Deep-work gate: Normal mode lookup gate controls when plan-first routing may escalate into lookup.
 - Noise and slowdown guard: prefer light routing first; do not browse, validate sources, or audit citations just because a topic is named.
@@ -84,7 +84,7 @@ Stop conditions:
 
 ## Inputs expected
 
-- User prompt, topic, draft, notes, thesis, outline, source list, candidate export, bibliography, proposal, or manuscript context.
+- User prompt, topic, rough notes, draft, thesis, outline, source list, candidate export, bibliography, proposal, or manuscript context.
 - Any source material or access level the user provides.
 - The user's visible goal: plan, discover, map, audit, draft, revise, verify, or propose.
 
@@ -104,6 +104,12 @@ First classify:
 - artifact stage: idea, source list, notes, draft, chapter, manuscript, or proposal
 - source access level: user-provided full text, excerpt only, citation only, model knowledge only, or live/current search needed
 - risk level: low, medium, or high
+If text friction blocks the user's intended claim or next action, route to the smallest accessibility skill before other specialist work:
+
+- voice transcript or speech-to-text output: `dictation-to-research-notes`
+- dense material or reading fatigue: `reading-load-reducer`
+- existing prose needing spelling or sentence repair: `dyslexia-friendly-prose-editor`
+- mixed or unclear accessibility bottleneck: `dyslexia-research-companion`
 
 ## Per-skill routing rules
 

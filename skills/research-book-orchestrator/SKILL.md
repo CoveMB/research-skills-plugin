@@ -1,6 +1,6 @@
 ---
 name: research-book-orchestrator
-description: Coordinate a full research nonfiction or research book workflow when a project spans multiple stages, has an unclear next step, or mixes agenda, sources, literature review, argument, chapters, evidence ledgers, citation audits, and manuscript revision.
+description: Coordinate a full research nonfiction or research book workflow when a project spans multiple stages, has an unclear next step, or mixes accessibility triage, agenda, sources, literature review, argument, chapters, evidence ledgers, citation audits, and manuscript revision.
 license: MIT
 metadata:
   version: "1.0.0"
@@ -17,7 +17,7 @@ Use `docs/ARCHITECTURE.md` as the stage map and `MODE_REGISTRY.md` as the route 
 ## When to use
 
 - The user has a broad book idea and needs a complete workflow.
-- The user is unsure whether to start with sources, outline, argument, chapters, or citation audit.
+- The user is unsure whether to start with accessibility triage, sources, outline, argument, chapters, or citation audit.
 - The task spans multiple phases of a research nonfiction manuscript, source trail, proposal, or release packet.
 - The project involves academic standards, evidence management, citations, literature review, or peer-review style critique.
 
@@ -36,7 +36,7 @@ Use `docs/ARCHITECTURE.md` as the stage map and `MODE_REGISTRY.md` as the route 
 
 ## Automatic selection guidance
 
-- High-signal triggers: broad multi-stage research book task, unclear next step, or mixed request spanning sources, notes, extraction, argument, chapters, evidence, citations, proposal, release, and revision.
+- High-signal triggers: broad multi-stage research book task, unclear next step, or mixed request spanning accessibility triage, sources, notes, extraction, argument, chapters, evidence, citations, proposal, release, and revision.
 - Light-route behavior: produce a workflow diagnosis and route sequence without performing source validation itself.
 - Deep-work gate: send source lookup, citation verification, and claim audits to specialized skills only when the route requires them.
 - Noise and slowdown guard: do not replace narrow specialist skills when the user's request has one clear owner.
@@ -55,6 +55,7 @@ Use `docs/ROUTING_MATRIX.md` as the canonical route table. This skill should sum
 6. Include opposing literatures and rival explanations early.
 7. Keep a claim-evidence ledger for all major factual and causal claims.
 8. Treat theory, empirical evidence, source records, case studies, and normative argument as different kinds of support.
+9. Use the smallest accessibility skill before workflow routing when text friction hides the author's intended claim or next action.
 
 ## Source basis and AI limits
 
@@ -86,6 +87,7 @@ Follow `docs/SOURCE_LIMITS.md`: state the source access level, separate source b
 Classify the project into one or more phases:
 
 - Phase A: concept and scope
+- Phase A0: accessibility triage for rough notes, dictation, spelling ambiguity, dense material, reading fatigue, or prose repair
 - Phase B: source discovery
 - Phase C: source notes, extraction, and candidate screening
 - Phase D: literature mapping
@@ -106,11 +108,13 @@ Do not route directly to drafting or prose polish when the agenda, source plan, 
 
 Block or qualify forward movement when:
 
+- rough input or reading load hides the intended claim or next action
 - central question, audience, or scope is undefined
 - source plan is missing or only anecdotal
 - literature map is one-sided or based on a narrow corpus
 - thesis claims lack evidence status
 - citation or quotation verification is unavailable
+- existing prose needs meaning-preserving surface repair before broader revision
 
 ### 4. Choose next skill sequence
 

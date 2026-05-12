@@ -54,9 +54,31 @@ Skill activation depends heavily on the `description` field. If automatic select
 Use claim-evidence-ledger on this chapter draft.
 ```
 
+For mixed or unclear accessibility bottlenecks, name the accessibility companion directly:
+
+```text
+Use dyslexia-research-companion. Turn this into a low-load table without changing my meaning.
+```
+
+When the bottleneck is narrower, name the smaller skill directly:
+
+```text
+Use dictation-to-research-notes. Turn this transcript into claims, evidence needs, ambiguities, and next actions.
+```
+
+```text
+Use reading-load-reducer. Tell me what to read closely, skim, park, or skip.
+```
+
+```text
+Use dyslexia-friendly-prose-editor. Fix spelling and sentence boundaries without changing my argument.
+```
+
 ## Too many skills appear
 
 Install only the core set as direct skills, or use the plugin and name the specific skill you want.
+
+If the problem is too much text rather than unclear scholarship, start with the smallest accessibility skill before asking for a route or audit.
 
 ## The agent invents citations
 
@@ -65,3 +87,7 @@ Use `citation-integrity-auditor` and require unverified citation details to stay
 ## The prose becomes generic
 
 Use `scholarly-prose-editor` in style-preserving mode and provide a paragraph that represents the voice you want.
+
+## Rough notes are being overcorrected
+
+Use `dictation-to-research-notes` when transcript cleanup is changing the claim, `dyslexia-friendly-prose-editor` when existing prose repair is changing the argument, or `dyslexia-research-companion` when several accessibility bottlenecks are mixed. Require ambiguity to stay visible when spelling, transcription, or repair could change meaning.

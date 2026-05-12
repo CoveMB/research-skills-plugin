@@ -1,0 +1,6 @@
+interface:
+  display_name: "Dyslexia Research Companion"
+  short_description: "Route mixed or unclear accessibility bottlenecks for dyslexic, dysorthographic, dictation-heavy, or reading-fatigued scholarly authors when no smaller accessibility skill clearly owns the task."
+  default_prompt: "Use dyslexia-research-companion to route this mixed accessibility bottleneck and choose the smallest low-load first step without changing my meaning."
+policy:
+  allow_implicit_invocation: true

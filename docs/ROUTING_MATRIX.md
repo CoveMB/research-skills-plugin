@@ -2,8 +2,14 @@
 
 Use this as the canonical route table for research-book skill selection. The router should choose the smallest useful skill. Use a short sequence only when the request crosses stages.
 
+Accessibility entry rule: use `dictation-to-research-notes`, `reading-load-reducer`, or `dyslexia-friendly-prose-editor` when one clear bottleneck owns the request. Use `dyslexia-research-companion` only when the accessibility bottleneck is mixed, unclear, or explicitly requested as a wrapper.
+
 | Scenario | Route |
 |---|---|
+| Dictated research thoughts, voice transcripts, speech-to-text output, meeting notes, rambling spoken fragments, or "I talked this out" notes | `dictation-to-research-notes` |
+| Reading fatigue, dense article, too much to read, source triage, skim/read/skip decisions, close-reading targets, or reading-priority plan | `reading-load-reducer` |
+| Spelling repair, grammar cleanup, dysorthographic prose, sentence-boundary repair, typo-heavy passage, or meaning-preserving edit of existing prose | `dyslexia-friendly-prose-editor` |
+| Mixed or unclear accessibility bottleneck, broad dyslexia or dysorthographia support request, overlapping dictation plus reading load, spelling ambiguity plus rough notes, or explicit wrapper request | `dyslexia-research-companion` |
 | User asks what research skill or mode to use, route is unclear, or request needs normal versus deep lookup gating | `research-intent-router` |
 | Broad multi-stage book task, unclear next step, mixed sources plus argument plus chapters | `research-book-orchestrator` |
 | Start research on a subject, broad topic, research question, scope, contribution, audience, evidence plan | `scholarly-research-agenda` |
@@ -33,6 +39,10 @@ Use this table only for the optional final `## Suggested next step` section. It 
 
 | Risk or prerequisite | Allowed next skill | Blocked early suggestion |
 |---|---|---|
+| Voice transcript or speech-to-text noise hides claims, questions, or evidence needs | `dictation-to-research-notes` | Prose editing or argument mapping before spoken ideas are segmented |
+| Dense material or source volume blocks close reading | `reading-load-reducer` | Literature synthesis before read/skim/park/skip triage |
+| Existing prose has spelling, grammar, or sentence-boundary friction | `dyslexia-friendly-prose-editor` | Broad style editing before meaning-preserving repair is done |
+| Mixed or unclear accessibility bottleneck blocks the next scholarly action | `dyslexia-research-companion` | Prose editing, source synthesis, or audit before the user's intended claim, route, and ambiguity are clear |
 | High-level topic with unstable scope | `scholarly-research-agenda` | Source discovery or citation audit before the research question is stable |
 | Stable question, no corpus | `systematic-source-discovery` | Literature mapping or citation audit before a search plan exists |
 | Completed candidate export with duplicates or unclear screening | `discovery-runner-deduper` | Adding candidates to a bibliography before dedupe and screening |

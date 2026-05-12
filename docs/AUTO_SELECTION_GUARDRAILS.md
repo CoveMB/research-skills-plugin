@@ -14,6 +14,7 @@ Each skill should define:
 ## Selection rules
 
 - Prefer the smallest useful skill over a broad sequence.
+- Prefer the smallest accessibility skill before router or research specialist skills when text friction blocks the user's intended claim or next action: `dictation-to-research-notes`, `reading-load-reducer`, or `dyslexia-friendly-prose-editor` when one clearly owns the request; `dyslexia-research-companion` when ownership is mixed or unclear.
 - Use the router when multiple skills could reasonably own the request.
 - Prefer plan-first routing unless the user selects deep mode or the deep-work gate is met.
 - Do not trigger on casual, fictional, grammar-only, or non-research tasks.
@@ -28,6 +29,7 @@ Add the section only when all gates pass:
 - A specific unresolved scholarly risk remains.
 - One skill clearly reduces that named scholarly risk.
 - The required input for that skill exists or can be requested.
+- The suggestion does not add reading load when the user's immediate bottleneck is text processing rather than scholarly uncertainty.
 - The suggestion does not require automatic lookup unless normal mode or deep mode allows it.
 - The explanation fits in 2-4 lines.
 

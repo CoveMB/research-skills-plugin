@@ -1,0 +1,6 @@
+interface:
+  display_name: "Dictation to Research Notes"
+  short_description: "Turn dictated research thoughts, voice transcripts, speech-to-text output, meeting notes, or rambling spoken fragments into structured scholarly notes, claims, questions, evidence needs, ambiguities, and next actions without changing meaning."
+  default_prompt: "Use dictation-to-research-notes to turn this voice transcript into cleaned scholarly notes, claims, evidence needs, ambiguities, and next actions without changing my meaning."
+policy:
+  allow_implicit_invocation: true

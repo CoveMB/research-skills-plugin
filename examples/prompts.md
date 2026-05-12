@@ -6,6 +6,30 @@
 Use research-book-orchestrator. My book argues that [thesis]. Build a full research, writing, and verification workflow.
 ```
 
+## Route a mixed accessibility bottleneck
+
+```text
+Use dyslexia-research-companion. I have rough notes, dictation fragments, and dense source excerpts. Choose the smallest low-load first step and keep ambiguities visible.
+```
+
+## Turn dictation into research notes
+
+```text
+Use dictation-to-research-notes. Turn this voice transcript into cleaned notes, claims, questions, evidence needs, ambiguities, and next actions.
+```
+
+## Reduce reading load
+
+```text
+Use reading-load-reducer. Triage these sources into read closely, skim, park, or skip for my current chapter.
+```
+
+## Repair prose without changing meaning
+
+```text
+Use dyslexia-friendly-prose-editor. Repair spelling, grammar, and sentence boundaries in this passage without changing my argument.
+```
+
 ## Turn a broad idea into research questions
 
 ```text

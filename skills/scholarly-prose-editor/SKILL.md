@@ -29,6 +29,7 @@ Use when the user provides a paragraph, section, chapter excerpt, proposal, abst
 - The user needs citation verification; use `citation-integrity-auditor`.
 - The user needs privacy, copyright, quote, license, or release risk checked before sharing; use `rights-privacy-release-auditor`.
 - The user asks for new source-backed claims rather than prose revision.
+- The user needs rough notes, dictation, spelling ambiguity, reading load, or meaning-preserving surface repair before broader style work; use the smallest accessibility entry point in `docs/ROUTING_MATRIX.md`.
 
 ## Inputs expected
 

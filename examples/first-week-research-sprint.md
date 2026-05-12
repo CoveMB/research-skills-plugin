@@ -1,5 +1,7 @@
 # First-week research sprint
 
+Day 0, if text friction blocks the start: Use `dictation-to-research-notes` for voice transcripts, `reading-load-reducer` for dense material, `dyslexia-friendly-prose-editor` for existing prose repair, or `dyslexia-research-companion` when the bottleneck is mixed.
+
 Day 1: Use `scholarly-research-agenda` to define the project.
 
 Day 2: Use `systematic-source-discovery` to build a search plan.

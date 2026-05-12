@@ -1,6 +1,6 @@
 # Research book plugin architecture
 
-This package is organized as a book-length research workflow, not a loose set of writing prompts. Each stage has a skill, an expected artifact, and a quality gate before the next stage.
+This package is organized as a book-length research workflow, not a loose set of writing prompts. Each stage has a skill, an expected artifact, and a quality gate before the next stage. Accessibility skills can be used before or between stages when rough input, dictation, spelling ambiguity, dense material, or reading fatigue blocks the next scholarly action.
 
 ## How to read this file
 
@@ -16,6 +16,10 @@ This package is organized as a book-length research workflow, not a loose set of
 ```mermaid
 flowchart TD
     Start([Book idea or manuscript material])
+    Access[0A. Mixed accessibility companion]
+    Dictation[0A.1 Dictation notes]
+    Reading[0A.2 Reading load reducer]
+    Repair[0A.3 Prose repair]
     Router[0. Research intent router]
     Specialists[Specialists: choose the smallest useful skill]
     Orchestrator[research-book-orchestrator]
@@ -37,7 +41,19 @@ flowchart TD
     Release[12. Release audit]
     End([Book-ready artifacts])
 
+    Start --> Access
+    Start --> Dictation
+    Start --> Reading
+    Start --> Repair
     Start --> Router
+    Dictation --> Router
+    Reading --> Router
+    Repair --> Router
+    Dictation --> Specialists
+    Reading --> Specialists
+    Repair --> Specialists
+    Access --> Router
+    Access --> Specialists
     Router --> Specialists
     Specialists --> Orchestrator
     Specialists --> Agenda
@@ -60,7 +76,7 @@ flowchart TD
     Release --> End
 
     classDef gate fill:#fff4e6,stroke:#d48806,stroke-width:2px
-    class Agenda,Discovery,Dedupe,Notes,Literature,Argument,Review,Chapter,Evidence,Trace,Citation,Continuity,Proposal,Comps,Release gate
+    class Access,Dictation,Reading,Repair,Agenda,Discovery,Dedupe,Notes,Literature,Argument,Review,Chapter,Evidence,Trace,Citation,Continuity,Proposal,Comps,Release gate
 ```
 
 You can enter the workflow at any stage. The research intent router chooses the smallest useful skill first. The orchestrator handles broader multi-stage workflow planning.
@@ -69,6 +85,10 @@ You can enter the workflow at any stage. The research intent router chooses the 
 
 | Stage | Primary skill | Artifact | Gate |
 |---|---|---|---|
+| 0A. Mixed accessibility companion | `dyslexia-research-companion` | Low-load route, cleaned structure, ambiguity table, or next action | Mixed or unclear bottleneck routed; meaning preserved; ambiguity marked; one useful next action visible |
+| 0A.1 Dictation notes | `dictation-to-research-notes` | Cleaned note table | Spoken ideas segmented into claims, questions, evidence needs, ambiguities, and next actions |
+| 0A.2 Reading load | `reading-load-reducer` | Read/skim/park/skip triage | Source access labeled; close-reading targets visible |
+| 0A.3 Prose repair | `dyslexia-friendly-prose-editor` | Meaning-preserving repaired passage | Spelling and sentence repair does not change claim meaning or hide evidence gaps |
 | 0. Intent routing | `research-intent-router` | Research intent route; non-contract routing output | Smallest useful skill chosen; deep lookup justified or declined |
 | 0.1. Orchestration | `research-book-orchestrator` | Workflow plan | Correct route chosen; assumptions labeled |
 | 1. Agenda | `scholarly-research-agenda` | Book Research Agenda | Question is answerable; scope has boundaries |
@@ -93,6 +113,10 @@ You can enter the workflow at any stage. The research intent router chooses the 
 ```mermaid
 graph TD
     O[research-book-orchestrator]
+    A11y[dyslexia-research-companion]
+    DN[dictation-to-research-notes]
+    RL[reading-load-reducer]
+    DP[dyslexia-friendly-prose-editor]
     T[research-intent-router]
     Specialists[Specialists]
     A[scholarly-research-agenda]
@@ -117,6 +141,14 @@ graph TD
     V[book-comps-verifier]
     Contract[book artifact contract]
 
+    DN --> T
+    RL --> T
+    DP --> T
+    DN --> Specialists
+    RL --> Specialists
+    DP --> Specialists
+    A11y --> T
+    A11y --> Specialists
     T --> Specialists
     Specialists --> O
     Specialists --> A
@@ -180,6 +212,10 @@ JSON artifacts must use `schema_version: "book-artifact-v1"` and one artifact ty
 
 | Gate | Blocks on | Why it matters |
 |---|---|---|
+| Accessibility gate | Rough notes, dictation errors, spelling ambiguity, dense material, or reading fatigue hide the user's intended claim or next action | Prevents text friction from being mistaken for weak analysis |
+| Dictation gate | Spoken ideas are mixed with transcript noise, repetition, and unclear claims | Prevents voice-capture friction from becoming argument confusion |
+| Reading-load gate | Dense material or source volume prevents close reading | Prevents premature synthesis from unread or thinly accessed material |
+| Prose-repair gate | Spelling, grammar, or sentence-boundary friction blocks review of existing prose | Prevents surface errors from being mistaken for weak argument while keeping meaning stable |
 | Intent route gate | Unclear research intent, artifact stage, source access, or risk level | Prevents noisy skill chains and premature deep lookup |
 | Scope gate | Vague central question or undefined audience | Prevents scope drift |
 | Source gate | Unclear source strategy or undocumented search path | Prevents cherry-picking |
