@@ -1,16 +1,16 @@
 ---
 name: argument-architecture
-description: Build a scholarly book-level thesis tree with claims, warrants, evidence, assumptions, counterarguments, chapter sequence, and argumentative dependencies.
+description: Build a research book-level thesis tree with claims, warrants, evidence, assumptions, counterarguments, chapter sequence, and argumentative dependencies.
 license: MIT
 metadata:
   version: "1.0.0"
-  category: scholarly-book-writing
+  category: research-book-writing
 ---
 # Argument Architecture
 
 ## Purpose
 
-Design the book's argument as a structure, not just an outline. This skill builds thesis trees, warrants, assumptions, evidence paths, and chapter dependencies.
+Design the book's argument as a structure rather than a plain outline. This skill builds thesis trees, warrants, assumptions, evidence paths, and chapter dependencies.
 
 ## When to use
 

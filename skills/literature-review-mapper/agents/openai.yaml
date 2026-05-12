@@ -1,6 +1,6 @@
 interface:
   display_name: "Literature Review Mapper"
-  short_description: "Map a scholarly literature into schools of thought, debates, consensus, intellectual genealogy, methods, gaps, and how each cluster supports or challenges a book thesis."
+  short_description: "Map a research literature into schools of thought, debates, consensus, intellectual genealogy, methods, gaps, and how each cluster supports or challenges a book thesis."
   default_prompt: "Use literature-review-mapper to organize these sources into schools of thought, debates, and research gaps."
 policy:
   allow_implicit_invocation: true

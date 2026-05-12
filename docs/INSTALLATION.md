@@ -1,4 +1,4 @@
-# Installation Guide
+# Installation guide
 
 This package is a Codex-compatible plugin plus a portable Agent Skills folder collection.
 
@@ -20,7 +20,7 @@ cd scholarly-research-book-plugin
 py scripts\install_codex_plugin.py
 ```
 
-The installer:
+The installer does this:
 
 1. validates `.codex-plugin/plugin.json`,
 2. validates every `skills/*/SKILL.md`,
@@ -90,12 +90,19 @@ cp -R skills/* ~/.agents/skills/
 
 ## Option D: ChatGPT Skills upload
 
-ChatGPT Skills upload expects skill bundles from the Skills interface. This package is primarily a multi-skill plugin. If your ChatGPT workspace requires one skill per upload, zip an individual folder under `skills/<skill-name>/` and upload that zip. See `docs/SKILL_INDEX.md` to choose the highest-impact skills first.
+ChatGPT Skills upload expects skill bundles from the Skills interface. This package is mainly a multi-skill plugin. If your ChatGPT workspace requires one skill per upload, zip an individual folder under `skills/<skill-name>/` and upload that zip. See `docs/SKILL_INDEX.md` to choose the core skills first.
 
 ## Validate after install
 
 ```bash
 python3 scripts/validate_plugin.py .
+python3 scripts/check_book_artifact_contract.py --path .
+```
+
+For a full local package check, run:
+
+```bash
+./validate.sh
 ```
 
 ## Uninstall

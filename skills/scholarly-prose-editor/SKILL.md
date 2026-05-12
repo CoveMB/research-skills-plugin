@@ -1,12 +1,12 @@
 ---
 name: scholarly-prose-editor
-description: Edit scholarly nonfiction prose for clarity, precision, structure, rhythm, readability, and authorial voice while preserving nuance and avoiding generic AI style.
+description: Edit research nonfiction prose for clarity, precision, structure, rhythm, readability, and authorial voice while preserving nuance and avoiding generic AI style.
 license: MIT
 metadata:
   version: "1.0.0"
-  category: scholarly-book-writing
+  category: research-book-writing
 ---
-# Scholarly Prose Editor
+# Research Prose Editor
 
 ## Purpose
 
@@ -14,7 +14,7 @@ Improve serious nonfiction prose without flattening the author's voice or over-p
 
 ## When to use
 
-Use when the user provides a paragraph, section, chapter excerpt, proposal, abstract, or introduction that needs clearer scholarly prose.
+Use when the user provides a paragraph, section, chapter excerpt, proposal, abstract, or introduction that needs clearer research prose.
 
 ## Editing priorities
 
@@ -69,7 +69,7 @@ If a sentence makes a claim requiring evidence, flag it instead of inventing a c
 Ask or infer one:
 
 - clarity edit: preserve structure, improve readability
-- scholarly edit: sharpen terms, claims, and logic
+- research edit: sharpen terms, claims, and logic
 - public-facing edit: make accessible to educated general readers
 - compression edit: reduce length without losing argument
 - expansion edit: add transitions or explanation without adding unsupported facts

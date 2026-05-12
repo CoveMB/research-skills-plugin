@@ -1,0 +1,50 @@
+{
+  "schema_version": "book-artifact-v1",
+  "artifact_type": "source_discovery_log",
+  "project_title": "Fixture Research Book",
+  "created_at": "2026-05-12",
+  "search_families": [
+    "Core concept terms",
+    "Opposing-view terms"
+  ],
+  "query_bank": [
+    {
+      "purpose": "Find source clusters around the central concept",
+      "query": "\"central concept\" AND \"research debate\"",
+      "venue": "Library catalogue",
+      "notes": "Broad starting query; refine after first screening."
+    }
+  ],
+  "priority_venues": [
+    "Library catalogues",
+    "Subject databases selected for the project"
+  ],
+  "inclusion_criteria": [
+    "Direct relevance to a chapter claim",
+    "Transparent method or source base"
+  ],
+  "exclusion_criteria": [
+    "No clear connection to the project question",
+    "Unsupported opinion presented as evidence"
+  ],
+  "citation_chaining_plan": [
+    "Backward-chain references from foundational sources.",
+    "Forward-chain recent sources that cite foundational works."
+  ],
+  "source_targets": [
+    "Primary or source materials relevant to the object of study"
+  ],
+  "opposing_literature_targets": [
+    "Sources that challenge the provisional thesis"
+  ],
+  "search_log": [
+    {
+      "date": "2026-05-12",
+      "venue": "Library catalogue",
+      "query": "\"central concept\" AND \"research debate\"",
+      "filters": "Books and peer-reviewed material",
+      "useful_results": 0,
+      "notes": "Fixture entry; no actual search claimed."
+    }
+  ]
+}

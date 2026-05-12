@@ -93,7 +93,7 @@ def copy_plugin(src: Path, dest: Path, dry_run: bool) -> None:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Install Scholarly Research Book Skills Plugin locally for Codex.")
+    parser = argparse.ArgumentParser(description="Install Research Book Skills Plugin locally for Codex.")
     parser.add_argument("--plugin-root", type=Path, default=plugin_root_from_script(), help="Path to this plugin root")
     parser.add_argument("--dest", type=Path, default=home() / ".codex" / "plugins" / PLUGIN_NAME, help="Destination plugin directory")
     parser.add_argument("--marketplace", type=Path, default=home() / ".agents" / "plugins" / "marketplace.json", help="Marketplace JSON path")
@@ -108,7 +108,7 @@ def main() -> int:
     run_validation(root)
     copy_plugin(root, args.dest.expanduser(), args.dry_run)
     update_marketplace(args.marketplace.expanduser(), args.source_path, args.dry_run)
-    print("Done. Restart Codex, then open the plugin directory and install/enable 'Scholarly Research Book Skills'.")
+    print("Done. Restart Codex, then open the plugin directory and install/enable 'Research Book Skills'.")
     return 0
 
 

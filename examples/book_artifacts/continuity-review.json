@@ -1,0 +1,36 @@
+{
+  "schema_version": "book-artifact-v1",
+  "artifact_type": "continuity_review",
+  "project_title": "Fixture Research Book",
+  "created_at": "2026-05-12",
+  "global_thesis": "The manuscript advances a staged account of the central problem.",
+  "chapter_function_map": [
+    {
+      "chapter": "Chapter 1",
+      "function": "Define the problem.",
+      "status": "needs sharper evidence boundary"
+    }
+  ],
+  "repetition_map": [
+    "The introduction and first chapter repeat the stakes in similar language."
+  ],
+  "concept_tracking": [
+    {
+      "concept": "Scope boundary",
+      "first_introduced": "Introduction",
+      "defined": true,
+      "later_use": "Chapter 1",
+      "continuity_issue": "Later use is broader than the first definition."
+    }
+  ],
+  "contradictions_or_tensions": [
+    "The proposal promises a narrow claim while the chapter draft implies a broader one."
+  ],
+  "tone_and_audience_consistency": "The manuscript is mostly research-focused but occasionally shifts into promotional phrasing.",
+  "suggested_restructuring": [
+    "Move repeated stakes language into the introduction only."
+  ],
+  "priority_revision_list": [
+    "Align chapter-level claims with the global thesis."
+  ]
+}

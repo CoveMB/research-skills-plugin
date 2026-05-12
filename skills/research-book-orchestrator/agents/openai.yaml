@@ -1,0 +1,6 @@
+interface:
+  display_name: "Research Book Orchestrator"
+  short_description: "Coordinate a full research nonfiction or research book workflow. Use for project planning, routing tasks across research agenda, source discovery, literature review, argument design, chapter work, evidence ledgers, citation audits, and manuscript revision."
+  default_prompt: "Use the research-book-orchestrator skill to turn my book idea into a staged research, writing, and audit plan."
+policy:
+  allow_implicit_invocation: true

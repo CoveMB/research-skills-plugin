@@ -1,16 +1,16 @@
 ---
 name: scholarly-research-agenda
-description: Turn a broad scholarly book idea into precise research questions, scope boundaries, contribution claims, key terms, evidence needs, and an initial research agenda. Use before source gathering or outlining.
+description: Turn a broad research book idea into precise research questions, scope boundaries, contribution claims, key terms, evidence needs, and an initial research agenda. Use before source gathering or outlining.
 license: MIT
 metadata:
   version: "1.0.0"
-  category: scholarly-book-writing
+  category: research-book-writing
 ---
-# Scholarly Research Agenda
+# Research Agenda
 
 ## Purpose
 
-Transform a broad nonfiction or scholarly book idea into a disciplined research agenda: central question, subquestions, scope boundaries, key terms, provisional thesis, contribution, and evidence plan.
+Transform a broad nonfiction or research book idea into a disciplined research agenda: central question, subquestions, scope boundaries, key terms, provisional thesis, contribution, and evidence plan.
 
 ## When to use
 
@@ -122,4 +122,4 @@ Flag risks such as excessive breadth, weak evidence availability, unstated assum
 - The central question must be answerable, not merely evocative.
 - Normative claims must not masquerade as empirical claims.
 - Each major question must imply a source strategy.
-- The project must have boundaries tight enough to write a chapter, not only a conversation.
+- The project must have boundaries tight enough to write a chapter, not a conversation topic.

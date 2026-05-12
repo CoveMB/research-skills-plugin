@@ -1,6 +1,6 @@
-# Research Book Quality Standard
+# Research book quality standard
 
-The skills in this plugin are designed around the following scholarly standard.
+The skills in this plugin use this research standard.
 
 ## Claim discipline
 
@@ -14,7 +14,7 @@ Match source type to claim type:
 - Factual claims need verifiable primary or secondary support.
 - Causal claims need stronger evidence than analogy.
 - Field-specific claims need sources accepted by the relevant field, not generic support.
-- Normative claims need argument, not only citation.
+- Normative claims need argument rather than citation alone.
 
 ## Citation discipline
 

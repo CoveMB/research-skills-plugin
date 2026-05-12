@@ -18,7 +18,7 @@ Use claim-evidence-ledger on this chapter draft.
 
 ## Too many skills appear
 
-Install only the highest-impact core set as direct skills, or use the plugin and invoke the specific skill explicitly.
+Install only the core set as direct skills, or use the plugin and invoke the specific skill explicitly.
 
 ## The agent invents citations
 

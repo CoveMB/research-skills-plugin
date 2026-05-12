@@ -1,0 +1,742 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://scholarly-research-book.local/shared/contracts/book/book_artifact.schema.json",
+  "title": "Research Book Artifact",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "artifact_type",
+    "project_title"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "book-artifact-v1"
+    },
+    "artifact_type": {
+      "enum": [
+        "book_research_agenda",
+        "source_discovery_log",
+        "literature_map",
+        "thesis_tree",
+        "chapter_brief",
+        "claim_evidence_ledger",
+        "continuity_review",
+        "book_proposal"
+      ]
+    },
+    "project_title": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "created_at": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "central_research_question": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "subquestions": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "provisional_thesis": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "contribution_claim": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "scope_boundaries": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "in_scope",
+        "out_of_scope"
+      ],
+      "properties": {
+        "in_scope": {
+          "$ref": "#/$defs/non_empty_strings"
+        },
+        "out_of_scope": {
+          "$ref": "#/$defs/non_empty_strings"
+        }
+      }
+    },
+    "evidence_plan": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "risks_and_mitigation": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "search_families": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "query_bank": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/query_row"
+      }
+    },
+    "priority_venues": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "inclusion_criteria": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "exclusion_criteria": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "citation_chaining_plan": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "source_targets": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "opposing_literature_targets": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "search_log": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/search_log_row"
+      }
+    },
+    "field_overview": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "fields_and_subfields": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "schools_of_thought": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "major_debates": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "consensus_controversy_map": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "development_map": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "gaps_in_literature": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "thesis_implications": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "sources_still_needed": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "main_thesis": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "thesis_variants": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bold",
+        "moderate",
+        "conservative",
+        "public_facing",
+        "research"
+      ],
+      "properties": {
+        "bold": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "moderate": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "conservative": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "public_facing": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "research": {
+          "$ref": "#/$defs/non_empty_string"
+        }
+      }
+    },
+    "thesis_claims": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/thesis_claim"
+      }
+    },
+    "hidden_assumptions": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "chapter_argument_sequence": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "weak_links": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "chapter_title": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "chapter_purpose": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "central_question": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "chapter_thesis": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "key_concepts": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "section_outline": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/chapter_section"
+      }
+    },
+    "counterarguments_to_include": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "opening_options": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "ending_bridge": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "research_still_needed": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "revision_risks": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "claims": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/claim_evidence_row"
+      }
+    },
+    "high_risk_claims": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "source_priorities": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "global_thesis": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "chapter_function_map": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/chapter_function"
+      }
+    },
+    "repetition_map": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "concept_tracking": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/concept_tracking"
+      }
+    },
+    "contradictions_or_tensions": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "tone_and_audience_consistency": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "suggested_restructuring": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "priority_revision_list": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "title_options": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "premise": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "core_thesis": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "contribution_to_field": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "audience": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "source_base": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "chapter_summaries": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/chapter_summary"
+      }
+    },
+    "comparable_titles": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/comparable_title"
+      }
+    },
+    "author_positioning": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "status_and_timeline": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "sample_material_plan": {
+      "$ref": "#/$defs/non_empty_string"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "artifact_type": {
+            "const": "book_research_agenda"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "central_research_question",
+          "subquestions",
+          "provisional_thesis",
+          "contribution_claim",
+          "scope_boundaries",
+          "evidence_plan",
+          "risks_and_mitigation"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "artifact_type": {
+            "const": "source_discovery_log"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "search_families",
+          "query_bank",
+          "priority_venues",
+          "inclusion_criteria",
+          "exclusion_criteria",
+          "citation_chaining_plan",
+          "source_targets",
+          "opposing_literature_targets",
+          "search_log"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "artifact_type": {
+            "const": "literature_map"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "field_overview",
+          "fields_and_subfields",
+          "schools_of_thought",
+          "major_debates",
+          "consensus_controversy_map",
+          "development_map",
+          "gaps_in_literature",
+          "thesis_implications",
+          "sources_still_needed"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "artifact_type": {
+            "const": "thesis_tree"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "main_thesis",
+          "thesis_variants",
+          "thesis_claims",
+          "hidden_assumptions",
+          "chapter_argument_sequence",
+          "weak_links"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "artifact_type": {
+            "const": "chapter_brief"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "chapter_title",
+          "chapter_purpose",
+          "central_question",
+          "chapter_thesis",
+          "key_concepts",
+          "section_outline",
+          "counterarguments_to_include",
+          "opening_options",
+          "ending_bridge",
+          "research_still_needed",
+          "revision_risks"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "artifact_type": {
+            "const": "claim_evidence_ledger"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "claims",
+          "high_risk_claims",
+          "source_priorities"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "artifact_type": {
+            "const": "continuity_review"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "global_thesis",
+          "chapter_function_map",
+          "repetition_map",
+          "concept_tracking",
+          "contradictions_or_tensions",
+          "tone_and_audience_consistency",
+          "suggested_restructuring",
+          "priority_revision_list"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "artifact_type": {
+            "const": "book_proposal"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "title_options",
+          "premise",
+          "core_thesis",
+          "contribution_to_field",
+          "audience",
+          "source_base",
+          "chapter_summaries",
+          "comparable_titles",
+          "author_positioning",
+          "status_and_timeline",
+          "sample_material_plan"
+        ]
+      }
+    }
+  ],
+  "$defs": {
+    "non_empty_string": {
+      "type": "string",
+      "minLength": 1
+    },
+    "non_empty_strings": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/non_empty_string"
+      }
+    },
+    "query_row": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "purpose",
+        "query",
+        "venue",
+        "notes"
+      ],
+      "properties": {
+        "purpose": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "query": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "venue": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "notes": {
+          "$ref": "#/$defs/non_empty_string"
+        }
+      }
+    },
+    "search_log_row": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "date",
+        "venue",
+        "query",
+        "filters",
+        "useful_results",
+        "notes"
+      ],
+      "properties": {
+        "date": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "venue": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "query": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "filters": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "useful_results": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "notes": {
+          "$ref": "#/$defs/non_empty_string"
+        }
+      }
+    },
+    "thesis_claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim",
+        "warrant",
+        "evidence_needed",
+        "counterargument",
+        "dependency",
+        "chapter"
+      ],
+      "properties": {
+        "claim": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "warrant": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "evidence_needed": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "counterargument": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "dependency": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "chapter": {
+          "$ref": "#/$defs/non_empty_string"
+        }
+      }
+    },
+    "chapter_section": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "section",
+        "function",
+        "key_claim",
+        "evidence_needed"
+      ],
+      "properties": {
+        "section": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "function": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "key_claim": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "evidence_needed": {
+          "$ref": "#/$defs/non_empty_strings"
+        }
+      }
+    },
+    "claim_evidence_row": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim",
+        "claim_type",
+        "evidence_status",
+        "current_support",
+        "evidence_needed",
+        "risk",
+        "safer_wording"
+      ],
+      "properties": {
+        "claim": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "claim_type": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "evidence_status": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "current_support": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "evidence_needed": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "risk": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "safer_wording": {
+          "$ref": "#/$defs/non_empty_string"
+        }
+      }
+    },
+    "chapter_function": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "chapter",
+        "function",
+        "status"
+      ],
+      "properties": {
+        "chapter": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "function": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "status": {
+          "$ref": "#/$defs/non_empty_string"
+        }
+      }
+    },
+    "concept_tracking": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "concept",
+        "first_introduced",
+        "defined",
+        "later_use",
+        "continuity_issue"
+      ],
+      "properties": {
+        "concept": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "first_introduced": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "defined": {
+          "type": "boolean"
+        },
+        "later_use": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "continuity_issue": {
+          "$ref": "#/$defs/non_empty_string"
+        }
+      }
+    },
+    "chapter_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "chapter",
+        "summary",
+        "evidence_base"
+      ],
+      "properties": {
+        "chapter": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "summary": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "evidence_base": {
+          "$ref": "#/$defs/non_empty_string"
+        }
+      }
+    },
+    "comparable_title": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "verification_status"
+      ],
+      "properties": {
+        "title": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "verification_status": {
+          "enum": [
+            "verified",
+            "unverified",
+            "needed"
+          ]
+        },
+        "source_pointer": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "positioning_note": {
+          "$ref": "#/$defs/non_empty_string"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "verification_status": {
+                "const": "verified"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "source_pointer"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

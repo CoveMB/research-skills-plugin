@@ -1,6 +1,6 @@
 interface:
-  display_name: "Scholarly Research Agenda"
-  short_description: "Turn a broad scholarly book idea into precise research questions, scope boundaries, contribution claims, key terms, evidence needs, and an initial research agenda. Use before sourc"
+  display_name: "Research Agenda"
+  short_description: "Turn a broad research book idea into precise research questions, scope boundaries, contribution claims, key terms, evidence needs, and an initial research agenda. Use before source gathering or outlining."
   default_prompt: "Use scholarly-research-agenda to turn this book idea into research questions, scope, and an evidence plan."
 policy:
   allow_implicit_invocation: true

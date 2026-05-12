@@ -1,0 +1,39 @@
+{
+  "schema_version": "book-artifact-v1",
+  "artifact_type": "chapter_brief",
+  "project_title": "Fixture Research Book",
+  "created_at": "2026-05-12",
+  "chapter_title": "Chapter 1: The Problem",
+  "chapter_purpose": "Define the central problem and establish why it matters to the book argument.",
+  "central_question": "What does this chapter need the reader to understand before the thesis can advance?",
+  "chapter_thesis": "The first chapter should turn a broad concern into a bounded research problem.",
+  "key_concepts": [
+    "Central problem",
+    "Scope boundary"
+  ],
+  "section_outline": [
+    {
+      "section": "Opening problem",
+      "function": "Introduce the object of study.",
+      "key_claim": "The opening claim is currently plausible but needs source support.",
+      "evidence_needed": [
+        "Source dossier",
+        "Claim-evidence ledger row"
+      ]
+    }
+  ],
+  "counterarguments_to_include": [
+    "The problem may be narrower than the introduction implies."
+  ],
+  "opening_options": [
+    "Start with a concrete source example.",
+    "Start with the conceptual puzzle."
+  ],
+  "ending_bridge": "The chapter should end by showing why the next chapter must map the literature.",
+  "research_still_needed": [
+    "Source support for the opening claim"
+  ],
+  "revision_risks": [
+    "The chapter may summarize too much before making its own claim."
+  ]
+}

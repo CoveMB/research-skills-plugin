@@ -1,10 +1,10 @@
 ---
 name: chapter-architecture
-description: Design scholarly nonfiction chapters with purpose, central question, main claim, concept definitions, evidence placement, counterarguments, transitions, and revision priorities.
+description: Design research nonfiction chapters with purpose, central question, main claim, concept definitions, evidence placement, counterarguments, transitions, and revision priorities.
 license: MIT
 metadata:
   version: "1.0.0"
-  category: scholarly-book-writing
+  category: research-book-writing
 ---
 # Chapter Architecture
 
@@ -14,7 +14,7 @@ Turn research, notes, or a chapter idea into a coherent chapter architecture. A 
 
 ## When to use
 
-Use when the user is planning, restructuring, or diagnosing a chapter in a scholarly nonfiction manuscript.
+Use when the user is planning, restructuring, or diagnosing a chapter in a research nonfiction manuscript.
 
 ## Workflow
 
@@ -53,7 +53,7 @@ Use this pattern unless another pattern fits better:
 
 ### 4. Place evidence deliberately
 
-Assign evidence to claims, not just sections. Mark where citations, examples, figures, or primary-source excerpts are needed.
+Assign evidence to claims rather than sections alone. Mark where citations, examples, figures, or primary-source excerpts are needed.
 
 ### 5. Add reader guidance
 
@@ -106,4 +106,3 @@ Common risks:
 - Every section must have a function and claim.
 - Include counterargument or complication where appropriate.
 - Endings should synthesize, not merely stop.
-

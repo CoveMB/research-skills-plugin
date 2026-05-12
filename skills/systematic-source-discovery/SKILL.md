@@ -1,16 +1,16 @@
 ---
 name: systematic-source-discovery
-description: Design rigorous scholarly source-discovery strategies, keyword sets, database searches, citation-chaining plans, primary-source targets, and search logs for research books and literature reviews.
+description: Design rigorous research source-discovery strategies, keyword sets, database searches, citation-chaining plans, primary-source targets, and search logs for research books and literature reviews.
 license: MIT
 metadata:
   version: "1.0.0"
-  category: scholarly-book-writing
+  category: research-book-writing
 ---
 # Systematic Source Discovery
 
 ## Purpose
 
-Create a repeatable source-discovery strategy for scholarly nonfiction: search terms, databases, primary-source targets, citation chaining, inclusion/exclusion rules, and a search log.
+Create a repeatable source-discovery strategy for research nonfiction: search terms, databases, primary-source targets, citation chaining, inclusion/exclusion rules, and a search log.
 
 ## When to use
 
@@ -109,7 +109,7 @@ Record every search query, venue, date, filters, number of useful hits, and note
 
 ## Quality checks
 
-- Include opposing terms, not only terms that support the user's thesis.
+- Include opposing terms as well as terms that support the user's thesis.
 - Include primary-source targets where appropriate.
 - Distinguish places to search from sources already verified.
 - Avoid overreliance on search-engine snippets.

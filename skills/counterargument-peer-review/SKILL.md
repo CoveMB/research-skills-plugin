@@ -1,16 +1,16 @@
 ---
 name: counterargument-peer-review
-description: Simulate rigorous scholarly peer review by generating strong objections, rival explanations, missing literatures, positional blind spots, and thesis revisions.
+description: Simulate rigorous research peer review by generating strong objections, rival explanations, missing literatures, positional blind spots, and thesis revisions.
 license: MIT
 metadata:
   version: "1.0.0"
-  category: scholarly-book-writing
+  category: research-book-writing
 ---
 # Counterargument Peer Review
 
 ## Purpose
 
-Stress-test a scholarly argument. The goal is not negativity; it is to make the book harder to dismiss.
+Stress-test a research argument. The goal is not negativity; it is to make the book harder to dismiss.
 
 ## When to use
 
@@ -102,7 +102,7 @@ For each objection, suggest ways to:
 
 ## Quality checks
 
-- Include objections that would come from experts, not only casual readers.
+- Include objections that would come from experts as well as casual readers.
 - Do not protect the user's favorite thesis.
 - Do not replace critique with generic warnings.
 - Always offer constructive fixes.

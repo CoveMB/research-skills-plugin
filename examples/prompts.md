@@ -3,7 +3,7 @@
 ## Build the full research workflow
 
 ```text
-Use scholarly-book-orchestrator. My book argues that [thesis]. Build a full research, writing, and verification workflow.
+Use research-book-orchestrator. My book argues that [thesis]. Build a full research, writing, and verification workflow.
 ```
 
 ## Turn a broad idea into research questions

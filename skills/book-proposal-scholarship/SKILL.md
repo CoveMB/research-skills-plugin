@@ -1,16 +1,16 @@
 ---
 name: book-proposal-scholarship
-description: Develop a serious scholarly nonfiction book proposal with thesis, contribution, audience, market/field positioning, chapter summaries, comparable titles, and sample-material plan.
+description: Develop a serious research nonfiction book proposal with thesis, contribution, audience, market/field positioning, chapter summaries, comparable titles, and sample-material plan.
 license: MIT
 metadata:
   version: "1.0.0"
-  category: scholarly-book-writing
+  category: research-book-writing
 ---
 # Book Proposal Scholarship
 
 ## Purpose
 
-Create a serious scholarly nonfiction book proposal suitable for academic presses, serious trade presses, agents, or grant/fellowship applications.
+Create a serious research nonfiction book proposal suitable for academic presses, serious trade presses, agents, or grant/fellowship applications.
 
 ## When to use
 
@@ -69,7 +69,7 @@ Recommend missing research, proposal materials, and sample chapter priorities.
 ## Output format
 
 ```markdown
-# Scholarly Book Proposal Draft
+# Research Book Proposal Draft
 
 ## Working title options
 
@@ -106,4 +106,3 @@ Recommend missing research, proposal materials, and sample chapter priorities.
 - Do not invent comparable titles or market data.
 - Academic proposal style should be specific about contribution and source base.
 - Trade proposal style should be specific about reader need and narrative hook.
-

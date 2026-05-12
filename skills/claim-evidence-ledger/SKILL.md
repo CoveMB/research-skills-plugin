@@ -1,16 +1,16 @@
 ---
 name: claim-evidence-ledger
-description: Extract major claims from a scholarly draft and classify claim type, evidence status, citation need, confidence, overclaiming risk, and safer wording.
+description: Extract major claims from a research draft and classify claim type, evidence status, citation need, confidence, overclaiming risk, and safer wording.
 license: MIT
 metadata:
   version: "1.0.0"
-  category: scholarly-book-writing
+  category: research-book-writing
 ---
 # Claim Evidence Ledger
 
 ## Purpose
 
-Turn a draft, outline, or argument into an auditable ledger of claims. This is one of the main safeguards against unsupported scholarly writing.
+Turn a draft, outline, or argument into an auditable ledger of claims. This is one of the main safeguards against unsupported research writing.
 
 ## When to use
 
@@ -62,7 +62,7 @@ If sources are provided, match each claim to source support. If no sources are p
 
 ### 4. Rewrite overclaims
 
-Offer safer scholarly wording that preserves the argument while reducing unsupported certainty.
+Offer safer research wording that preserves the argument while reducing unsupported certainty.
 
 ### 5. Identify missing evidence
 

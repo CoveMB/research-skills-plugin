@@ -1,16 +1,16 @@
 ---
 name: case-study-integration
-description: Select, compare, and integrate case studies into scholarly arguments while avoiding cherry-picking, weak analogy, anecdotal overreach, and unsupported generalization.
+description: Select, compare, and integrate case studies into research arguments while avoiding cherry-picking, weak analogy, anecdotal overreach, and unsupported generalization.
 license: MIT
 metadata:
   version: "1.0.0"
-  category: scholarly-book-writing
+  category: research-book-writing
 ---
 # Case Study Integration
 
 ## Purpose
 
-Help a scholarly book use case studies responsibly. Cases can illustrate, test, complicate, or generate theory, but they should not be treated as proof of universal claims unless the research design supports it.
+Help a research book use case studies responsibly. Cases can illustrate, test, complicate, or generate theory, but they should not be treated as proof of universal claims unless the research design supports it.
 
 ## When to use
 

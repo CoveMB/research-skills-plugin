@@ -1,7 +1,7 @@
 {
-  "name": "local-scholarly-plugins",
+  "name": "local-research-plugins",
   "interface": {
-    "displayName": "Local Scholarly Plugins"
+    "displayName": "Local Research Plugins"
   },
   "plugins": [
     {

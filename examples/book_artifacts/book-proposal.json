@@ -1,0 +1,35 @@
+{
+  "schema_version": "book-artifact-v1",
+  "artifact_type": "book_proposal",
+  "project_title": "Fixture Research Book",
+  "created_at": "2026-05-12",
+  "title_options": [
+    "Working Title",
+    "Alternative Working Title"
+  ],
+  "premise": "The book turns an unsettled research problem into a readable, evidence-led argument.",
+  "core_thesis": "The book offers a bounded synthesis rather than a final answer.",
+  "contribution_to_field": "The project clarifies how competing explanations can be staged across chapters.",
+  "audience": "Research readers and serious general readers interested in the problem.",
+  "source_base": [
+    "Peer-reviewed sources",
+    "Primary or source materials where relevant"
+  ],
+  "chapter_summaries": [
+    {
+      "chapter": "Chapter 1",
+      "summary": "Defines the central problem and establishes scope.",
+      "evidence_base": "Source dossier still needed."
+    }
+  ],
+  "comparable_titles": [
+    {
+      "title": "Comparable title to verify",
+      "verification_status": "needed",
+      "positioning_note": "Placeholder for a verified comparable, not a bibliographic claim."
+    }
+  ],
+  "author_positioning": "Author credentials and relevant experience should be stated without overclaiming.",
+  "status_and_timeline": "Proposal stage; sample chapter and source dossier pending.",
+  "sample_material_plan": "Use the strongest chapter brief as the sample chapter plan."
+}

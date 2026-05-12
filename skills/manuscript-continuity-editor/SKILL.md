@@ -4,13 +4,13 @@ description: Review multiple chapters or a whole manuscript for thesis coherence
 license: MIT
 metadata:
   version: "1.0.0"
-  category: scholarly-book-writing
+  category: research-book-writing
 ---
 # Manuscript Continuity Editor
 
 ## Purpose
 
-Evaluate coherence across a long scholarly nonfiction manuscript: argument progression, conceptual continuity, repetition, contradictions, tone, structure, and chapter dependencies.
+Evaluate coherence across a long research nonfiction manuscript: argument progression, conceptual continuity, repetition, contradictions, tone, structure, and chapter dependencies.
 
 ## When to use
 
@@ -84,4 +84,3 @@ Rank fixes by impact.
 - Identify structural issues even if the writing is polished.
 - Preserve useful recurring motifs while cutting accidental repetition.
 - Flag missing transitions between major argument stages.
-

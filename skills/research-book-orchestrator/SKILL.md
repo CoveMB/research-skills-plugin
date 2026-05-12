@@ -1,22 +1,24 @@
 ---
-name: scholarly-book-orchestrator
-description: Coordinate a full scholarly nonfiction or research book workflow. Use for project planning, routing tasks across research agenda, source discovery, literature review, argument design, chapter work, evidence ledgers, citation audits, and manuscript revision.
+name: research-book-orchestrator
+description: Coordinate a full research nonfiction or research book workflow. Use for project planning, routing tasks across research agenda, source discovery, literature review, argument design, chapter work, evidence ledgers, citation audits, and manuscript revision.
 license: MIT
 metadata:
   version: "1.0.0"
-  category: scholarly-book-writing
+  category: research-book-writing
 ---
-# Scholarly Book Orchestrator
+# Research Book Orchestrator
 
 ## Purpose
 
 Coordinate a serious research-book workflow from idea to manuscript. This skill does not replace the specialized skills. It decides which skill should be used next, sequences the work, and keeps the project grounded in scholarly standards.
 
+Use `docs/ARCHITECTURE.md` as the stage map and `MODE_REGISTRY.md` as the route registry when the user asks for a full workflow, mode choice, or package-level orchestration.
+
 ## Use this skill when
 
 - The user has a broad book idea and needs a complete workflow.
 - The user is unsure whether to start with sources, outline, argument, chapters, or citation audit.
-- The task spans multiple phases of a scholarly nonfiction manuscript.
+- The task spans multiple phases of a research nonfiction manuscript.
 - The project involves academic standards, evidence management, citations, literature review, or peer-review style critique.
 
 ## Do not use this skill when
@@ -40,7 +42,7 @@ Use these routes:
 | Thesis tree, warrants, argument sequence | `argument-architecture` |
 | Strong objections and rival explanations | `counterargument-peer-review` |
 | Chapter design and section flow | `chapter-architecture` |
-| Style, clarity, scholarly readability | `scholarly-prose-editor` |
+| Style, clarity, research readability | `scholarly-prose-editor` |
 | Citation verification and quote/page audit | `citation-integrity-auditor` |
 | Whole-manuscript coherence | `manuscript-continuity-editor` |
 | Case studies and real-world examples | `case-study-integration` |
@@ -90,6 +92,17 @@ Recommend a sequence of 3–6 skills. For each, explain:
 
 Create a plan with deliverables. Prefer concrete artifacts: research agenda, search log, literature map, thesis tree, chapter brief, claim ledger, citation audit, continuity memo.
 
+When the user requests machine-readable artifacts, use `shared/contracts/book/book_artifact.schema.json`. The supported artifact types are:
+
+- `book_research_agenda`
+- `source_discovery_log`
+- `literature_map`
+- `thesis_tree`
+- `chapter_brief`
+- `claim_evidence_ledger`
+- `continuity_review`
+- `book_proposal`
+
 ### 5. Enforce scholarly quality gates
 
 At each transition, check:
@@ -104,7 +117,7 @@ At each transition, check:
 ## Output format
 
 ```markdown
-# Scholarly Book Workflow Plan
+# Research Book Workflow Plan
 
 ## Project diagnosis
 

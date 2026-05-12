@@ -1,10 +1,10 @@
 ---
 name: literature-review-mapper
-description: Map a scholarly literature into schools of thought, debates, consensus, intellectual genealogy, methods, gaps, and how each cluster supports or challenges a book thesis.
+description: Map a research literature into schools of thought, debates, consensus, intellectual genealogy, methods, gaps, and how each cluster supports or challenges a book thesis.
 license: MIT
 metadata:
   version: "1.0.0"
-  category: scholarly-book-writing
+  category: research-book-writing
 ---
 # Literature Review Mapper
 
@@ -14,7 +14,7 @@ Create an intellectual map of a research field. The goal is not to summarize sou
 
 ## When to use
 
-Use when the user has a topic, source list, annotations, or scattered notes and needs a literature review structure for a scholarly book or serious nonfiction project.
+Use when the user has a topic, source list, annotations, or scattered notes and needs a literature review structure for a research book or serious nonfiction project.
 
 ## Workflow
 
@@ -85,7 +85,7 @@ Gaps can be empirical, theoretical, contextual, methodological, geographic, conc
 ## Quality checks
 
 - Do not flatten disagreement into a single consensus.
-- Identify methods, not only conclusions.
+- Identify methods as well as conclusions.
 - Include canonical and recent works where available.
 - Distinguish a gap in the user's reading from a gap in the field.
 - Flag areas that require a specialist review.

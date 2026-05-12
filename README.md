@@ -1,18 +1,20 @@
-# Scholarly Research Book Skills Plugin
+# Research book skills plugin
 
 Version: 1.0.0
 
-A local Agent Skills / Codex plugin for serious scholarly nonfiction and research book writing. It bundles 15 focused `SKILL.md` workflows for research agenda design, systematic source discovery, literature review mapping, source auditing, argument architecture, chapter structure, prose editing, citation integrity, manuscript continuity, case-study integration, and book proposal development.
+A local Agent Skills / Codex plugin for serious research nonfiction and research book writing. It bundles 15 focused `SKILL.md` workflows: research agenda design, systematic source discovery, literature review mapping, source auditing, argument architecture, chapter structure, prose editing, citation integrity, manuscript continuity, case-study integration, and book proposal development.
+
+The package now follows a staged book workflow with architecture docs, a mode registry, an artifact contract, examples, and validation scripts.
 
 ## What this is
 
-This is a **plugin package** with this structure:
+This plugin has this structure:
 
 ```text
 scholarly-research-book-plugin/
   .codex-plugin/plugin.json
   skills/
-    scholarly-book-orchestrator/SKILL.md
+    research-book-orchestrator/SKILL.md
     scholarly-research-agenda/SKILL.md
     ...
   docs/
@@ -20,7 +22,7 @@ scholarly-research-book-plugin/
   scripts/
 ```
 
-The plugin is designed for Codex-compatible local plugin installation and for any agent environment that supports the open `SKILL.md` folder convention.
+It works as a local plugin and as a portable collection of `SKILL.md` folders.
 
 ## Fast install for Codex local plugin use
 
@@ -50,7 +52,13 @@ See `docs/INSTALLATION.md` for:
 
 ## Skills included
 
-See `docs/SKILL_INDEX.md` for the complete skill list and suggested use cases.
+See `docs/SKILL_INDEX.md` for the skill list and use cases.
+
+## Architecture and modes
+
+- `docs/ARCHITECTURE.md` describes the stage flow, skill graph, quality gates, artifact levels, and package structure.
+- `MODE_REGISTRY.md` lists modes and outputs.
+- `shared/contracts/book/book_artifact.schema.json` defines the JSON artifact contract used by examples under `examples/book_artifacts/`.
 
 ## Recommended first workflow
 
@@ -66,7 +74,7 @@ See `docs/SKILL_INDEX.md` for the complete skill list and suggested use cases.
 
 ## Quality standard
 
-This plugin is designed to make the agent more rigorous, not merely faster. It repeatedly asks:
+This plugin is meant to make the agent more rigorous. It repeatedly asks:
 
 - What kind of claim is this?
 - What source type can support it?
@@ -78,6 +86,8 @@ This plugin is designed to make the agent more rigorous, not merely faster. It r
 
 ```bash
 python3 scripts/validate_plugin.py .
+python3 scripts/check_book_artifact_contract.py --path .
+python3 scripts/test_check_book_artifact_contract.py
 ```
 
 ## License

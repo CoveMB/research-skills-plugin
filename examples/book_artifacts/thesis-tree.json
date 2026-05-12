@@ -1,0 +1,36 @@
+{
+  "schema_version": "book-artifact-v1",
+  "artifact_type": "thesis_tree",
+  "project_title": "Fixture Research Book",
+  "created_at": "2026-05-12",
+  "main_thesis": "The book argues that the central problem becomes clearer when evidence, concepts, and counterarguments are staged separately.",
+  "thesis_variants": {
+    "bold": "The existing debate cannot be understood without this staged account.",
+    "moderate": "The staged account clarifies several tensions in the debate.",
+    "conservative": "The staged account is a useful organizing framework.",
+    "public_facing": "The book shows why the familiar story is incomplete.",
+    "research": "The book offers a bounded synthesis of competing explanations."
+  },
+  "thesis_claims": [
+    {
+      "claim": "The introduction must establish the problem before advancing the thesis.",
+      "warrant": "Readers need a shared object of inquiry before evaluating claims.",
+      "evidence_needed": "Published debate overview and source examples.",
+      "counterargument": "A stronger narrative opening might make the problem vivid first.",
+      "dependency": "important",
+      "chapter": "Introduction"
+    }
+  ],
+  "hidden_assumptions": [
+    "The audience accepts research evidence standards.",
+    "The chapter order can shape reader interpretation."
+  ],
+  "chapter_argument_sequence": [
+    "Define the problem.",
+    "Map the debate.",
+    "Advance and test the thesis."
+  ],
+  "weak_links": [
+    "The synthesis needs sources that disagree with the thesis."
+  ]
+}

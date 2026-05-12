@@ -1,16 +1,16 @@
 ---
 name: annotated-bibliography-builder
-description: Create scholarly annotated bibliographies that summarize argument, method, evidence, relevance, limitations, key terms, and chapter placement for research book sources.
+description: Create research-grade annotated bibliographies that summarize argument, method, evidence, relevance, limitations, key terms, and chapter placement for research book sources.
 license: MIT
 metadata:
   version: "1.0.0"
-  category: scholarly-book-writing
+  category: research-book-writing
 ---
 # Annotated Bibliography Builder
 
 ## Purpose
 
-Produce high-quality scholarly annotations that help a book author remember what each source argues, how it argues, why it matters, and how it can be used.
+Produce high-quality research annotations that help a book author remember what each source argues, how it argues, why it matters, and how it can be used.
 
 ## When to use
 
@@ -74,4 +74,4 @@ Recommend book chapter or section placement.
 - Do not cite a source as read if only an abstract or excerpt was provided.
 - Mark all missing citation details.
 - Distinguish source argument from user's interpretation.
-- Include how the source might challenge the book, not only how it helps.
+- Include how the source might challenge the book as well as how it helps.

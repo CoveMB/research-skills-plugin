@@ -1,4 +1,4 @@
-# Scholarly Book Workflow Plan
+# Research Book Workflow Plan
 
 ## Project diagnosis
 

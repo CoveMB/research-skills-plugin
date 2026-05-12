@@ -1,16 +1,16 @@
 ---
 name: methodology-source-auditor
-description: Evaluate source credibility, methodology, evidence quality, bias, generalizability, and what each source can or cannot support in a scholarly manuscript.
+description: Evaluate source credibility, methodology, evidence quality, bias, generalizability, and what each source can or cannot support in a research manuscript.
 license: MIT
 metadata:
   version: "1.0.0"
-  category: scholarly-book-writing
+  category: research-book-writing
 ---
 # Methodology Source Auditor
 
 ## Purpose
 
-Assess whether sources are credible enough for a scholarly book and identify what claims each source can legitimately support.
+Assess whether sources are credible enough for a research book and identify what claims each source can legitimately support.
 
 ## When to use
 
