@@ -25,7 +25,10 @@ Use this file when you already have a sense of the work needed and want the righ
 | `chapter-architecture` | Chapter Architecture | Design research nonfiction chapters with purpose, central question, main claim, concept definitions, evidence placement, counterarguments, transitions, and revision priorities. |
 | `scholarly-prose-editor` | Research Prose Editor | Edit research nonfiction prose for clarity, precision, structure, rhythm, readability, and authorial voice while preserving nuance and avoiding formulaic style. |
 | `citation-integrity-auditor` | Citation Integrity Auditor | Audit research drafts for citation accuracy, unsupported claims, quote integrity, page-number needs, fabricated-reference risk, source-claim mismatch, and bibliography problems. |
+| `figure-table-integrity-auditor` | Figure Table Integrity Auditor | Audit figures, tables, charts, screenshots, captions, axes, data provenance, duplicate visual risk, rights, and visual/table claim support. |
+| `scholarly-integrity-gate` | Scholarly Integrity Gate | Audit research workflows and AI-assisted artifacts for hallucinated evidence, methodology fabrication, implementation bugs, shortcut reliance, frame-lock, human checkpoints, and override decisions. |
 | `rights-privacy-release-auditor` | Rights Privacy Release Auditor | Audit notes, research artifacts, manuscript exports, proposal materials, and shared files for privacy, copyright, quotation, license, secret, credential, local metadata, and release risks before external sharing. |
+| `ai-human-workflow-log` | AI Human Workflow Log | Record AI/human workflow decisions, tool use, affected sections, human checkpoints, override reasons, verification responsibilities, and AI-use disclosure notes. |
 | `manuscript-continuity-editor` | Manuscript Continuity Editor | Review multiple chapters or a whole manuscript for thesis coherence, repetition, contradictions, concept tracking, tone consistency, chapter order, and revision priorities. |
 | `case-study-integration` | Case Study Integration | Select, compare, and integrate case studies into research arguments while avoiding cherry-picking, weak analogy, anecdotal overreach, and unsupported generalization. |
 | `book-proposal-scholarship` | Book Proposal Scholarship | Develop a research nonfiction book proposal with thesis, contribution, audience, market/field positioning, chapter summaries, comparable titles, and sample-material plan. |
@@ -55,8 +58,10 @@ For a research book with scholarly standards, start with:
 9. `claim-traceability-graph`
 10. `counterargument-peer-review`
 11. `citation-integrity-auditor`
+12. `figure-table-integrity-auditor`
+13. `scholarly-integrity-gate`
 
-These catch the common failures: vague scope, weak sources, missing literature context, unsupported claims, one-sided argument, and citation errors.
+These catch the common failures: vague scope, weak sources, missing literature context, unsupported claims, one-sided argument, citation errors, visual/table evidence problems, and AI research workflow integrity failures.
 
 ## Automatic selection policy
 
@@ -76,9 +81,10 @@ Use these once chapters exist. Start with one accessibility entry point only if 
 2. `chapter-architecture`
 3. `scholarly-prose-editor`
 4. `manuscript-continuity-editor`
-5. `rights-privacy-release-auditor`
-6. `book-proposal-scholarship`
-7. `book-comps-verifier`
+5. `ai-human-workflow-log`
+6. `rights-privacy-release-auditor`
+7. `book-proposal-scholarship`
+8. `book-comps-verifier`
 
 ## Case and evidence set
 
@@ -90,3 +96,5 @@ Use these when examples and source quality matter:
 4. `annotation-to-source-note`
 5. `extraction-table-builder`
 6. `discovery-runner-deduper`
+7. `figure-table-integrity-auditor`
+8. `scholarly-integrity-gate`

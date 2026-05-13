@@ -1,0 +1,24 @@
+{
+  "schema_version": "book-artifact-v1",
+  "artifact_type": "extraction_table",
+  "project_title": "Fixture Research Book",
+  "created_at": "2026-05-12",
+  "source_basis": "Fixture extraction table; no source comparison performed.",
+  "what_i_can_verify": [
+    "The artifact follows the shared book artifact schema."
+  ],
+  "what_remains_uncertain": [
+    "Extraction status depends on actual source notes."
+  ],
+  "user_verification_needed": [
+    "Verify extracted points against the source notes before synthesis."
+  ],
+  "extraction_rows": [
+    {
+      "source": "Fixture source",
+      "extracted_point": "The source may support a limited contextual claim.",
+      "evidence_type": "contextual",
+      "status": "verification_unavailable"
+    }
+  ]
+}

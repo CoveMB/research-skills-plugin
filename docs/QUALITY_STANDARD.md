@@ -36,6 +36,18 @@ Never invent citations, page numbers, quotes, DOIs, or bibliographic metadata. I
 
 A claim should trace to a source note, citekey, locator, or repair task. A nearby citation is not proof that the source supports the claim.
 
+## Figure and table discipline
+
+Figures, tables, charts, screenshots, and image panels need data provenance, caption/axis checks, duplicate visual review, and rights status before they support factual, empirical, comparative, or quantitative claims.
+
+## AI/human workflow discipline
+
+AI-assisted research, generated synthesis, automated extraction, or computed results need an integrity gate before manuscript reliance. Human checkpoints should record decisions, override reasons, unresolved risks, affected sections, and disclosure notes when external sharing or submission is likely.
+
+## Evaluation discipline
+
+High-risk routing behavior should have prompt fixtures that state the expected route, required output markers, and forbidden claims. Store reusable fixtures under `examples/evals/` so future skill changes can be checked against real failure modes instead of only structural tests.
+
 ## Counterargument discipline
 
 Every major thesis should survive at least one peer-review style critique that includes rival explanations and missing literatures.

@@ -28,6 +28,7 @@ Use before sending notes, artifacts, manuscript exports, proposal materials, sou
 - The user needs citation-source fit checked; use `citation-integrity-auditor`.
 - The user needs prose edited; use `scholarly-prose-editor`.
 - The user asks for legal advice rather than a writing and release risk audit.
+- The user only needs AI-use disclosure or human checkpoint records; use `ai-human-workflow-log`.
 
 ## Inputs expected
 
@@ -39,6 +40,10 @@ Use before sending notes, artifacts, manuscript exports, proposal materials, sou
 ## Source basis and AI limits
 
 Follow `docs/SOURCE_LIMITS.md`: state the source access level, separate source basis from interpretation, include What I can verify, What remains uncertain, and User verification needed. Do not invent citations or source support.
+
+## Machine-readable artifacts
+
+When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: rights_privacy_release_audit`. If the output is normal Markdown, do not force the JSON contract.
 
 ## Files/folders it may read
 
@@ -68,6 +73,8 @@ Record intended audience, destination, public or private status, file types, and
 ### 2. Scan for risk categories
 
 Check for secrets, tokens, credentials, private personal notes, sensitive data, excessive copied source text, direct quotes without locators, publisher text in public artifacts, AI-generated claims presented as evidence, license mismatch risk, and local bibliography or source metadata that should stay private.
+
+For AI-assisted materials, check whether an AI-use disclosure record exists. Route missing tool use, affected sections, human verification, or venue-specific disclosure notes to `ai-human-workflow-log` before external release when disclosure is likely required.
 
 ### 3. Classify severity
 
@@ -106,6 +113,8 @@ Use ready to share, share after listed fixes, hold until reviewed, or do not rel
 ## License and vendored-material check
 
 ## AI-evidence and source-metadata check
+
+## AI-use disclosure check
 
 ## Release verdict
 

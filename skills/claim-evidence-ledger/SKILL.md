@@ -110,6 +110,8 @@ If sources are provided, match each claim to source support. If no sources are p
 
 For each claim, record source basis, confidence, and whether a page, timestamp, section, archive locator, dataset variable, or other locator is needed.
 
+For empirical, quantitative, computational, or table/figure-backed claims, record analysis provenance: dataset, transformation, script or notebook, run log, output table/figure pointer, and any missing reproducibility material.
+
 ### 4. Rewrite overclaims
 
 Offer safer research wording that preserves the argument while reducing unsupported certainty.
@@ -131,7 +133,10 @@ Recommend source types, not fake sources.
 
 ## User verification needed
 
-| # | Claim | Type | Source basis | Evidence status | Current support | Evidence needed | Locator needed | Confidence | Risk | Safer wording |
+| # | Claim | Type | Source basis | Evidence status | Current support | Evidence needed | Locator status | Confidence | Risk | Safer wording |
+
+## Analysis provenance
+| Claim | Dataset | Transformation | Script or notebook | Run log | Output pointer | Gap |
 
 ## High-risk claims needing attention
 

@@ -48,6 +48,10 @@ Follow `docs/SOURCE_LIMITS.md`: state the source access level, separate source b
 
 Treat spelling and grammar cleanup as surface repair. If a correction could change a claim, keep the original wording visible and mark the ambiguity.
 
+## Compact mode
+
+Use compact mode when the user asks for low reading load, minimal correction, or fast prose repair. Compact mode should use short chunks, stable table labels when a table is needed, the revised passage, one source-basis line, changed phrases only when review is needed, and one evidence or ambiguity note only when relevant.
+
 ## Files/folders it may read
 
 - Bundled skill instructions, metadata, and assets if available (including, but not limited to, `SKILL.md`, `README.md`, `assets/`, `references/`, and `agents/openai.yaml` in this project or equivalent files in another project).
@@ -140,6 +144,22 @@ If the repaired prose reveals a concrete scholarly risk, suggest one next skill:
 ## User verification needed
 
 ## Suggested next step
+```
+
+Compact mode:
+
+```markdown
+# Prose repair
+
+Source basis: [one line]
+
+[Revised passage]
+
+Ambiguity: [only if meaning could change]
+
+Review: [meaning-preserving notes or "No meaning-changing edits"]
+
+Next action: [one line, only if needed]
 ```
 
 Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless one specialist skill reduces a named scholarly risk.

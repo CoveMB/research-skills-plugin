@@ -35,9 +35,12 @@ flowchart TD
     Evidence[8. Claim-evidence ledger]
     Trace[8.1 Claim traceability]
     Citation[9. Citation integrity audit]
+    Figure[9.1 Figure/table integrity]
+    Integrity[9.2 Scholarly integrity gate]
     Continuity[10. Manuscript continuity]
     Proposal[11. Book proposal]
     Comps[11.1 Comps verification]
+    Workflow[11.2 AI/human workflow log]
     Release[12. Release audit]
     End([Book-ready artifacts])
 
@@ -69,14 +72,17 @@ flowchart TD
     Draft --> Evidence
     Evidence --> Trace
     Trace --> Citation
-    Citation --> Continuity
+    Citation --> Figure
+    Figure --> Integrity
+    Integrity --> Continuity
     Continuity --> Proposal
     Proposal --> Comps
-    Comps --> Release
+    Comps --> Workflow
+    Workflow --> Release
     Release --> End
 
     classDef gate fill:#fff4e6,stroke:#d48806,stroke-width:2px
-    class Access,Dictation,Reading,Repair,Agenda,Discovery,Dedupe,Notes,Literature,Argument,Review,Chapter,Evidence,Trace,Citation,Continuity,Proposal,Comps,Release gate
+    class Access,Dictation,Reading,Repair,Agenda,Discovery,Dedupe,Notes,Literature,Argument,Review,Chapter,Evidence,Trace,Citation,Figure,Integrity,Continuity,Proposal,Comps,Workflow,Release gate
 ```
 
 You can enter the workflow at any stage. The research intent router chooses the smallest useful skill first. The orchestrator handles broader multi-stage workflow planning.
@@ -103,9 +109,12 @@ You can enter the workflow at any stage. The research intent router chooses the 
 | 8. Evidence audit | `claim-evidence-ledger` | Claim-Evidence Ledger | High-risk claims flagged before citation polish |
 | 8.1. Claim traceability | `claim-traceability-graph` | Claim Traceability Graph | Claims trace to source notes, citekeys, locators, or repair tasks |
 | 9. Citation audit | `citation-integrity-auditor` | Citation Integrity Audit | Source-claim fit checked; missing locators flagged |
+| 9.1. Figure/table integrity | `figure-table-integrity-auditor` | Figure Table Integrity Audit | Captions, axes, data provenance, duplicate visual risk, rights, and claim support are checked |
+| 9.2. Scholarly integrity gate | `scholarly-integrity-gate` | Scholarly Integrity Audit | AI research failure modes, shortcut reliance, frame-lock, and human checkpoints are cleared, held, or overridden |
 | 10. Continuity | `manuscript-continuity-editor` | Continuity Review | Concepts, thesis, tone, and repetition tracked across chapters |
 | 11. Proposal | `book-proposal-scholarship` | Research Book Proposal | Comparable titles and positioning claims marked by verification status |
 | 11.1. Comparable-title verification | `book-comps-verifier` | Comparable Title Verification | Comps, publication details, and positioning claims are checked before submission |
+| 11.2. AI/human workflow log | `ai-human-workflow-log` | AI Human Workflow Log | Tool use, affected sections, human decisions, override reasons, and disclosure notes are recorded |
 | 12. Release audit | `rights-privacy-release-auditor` | Rights Privacy Release Audit | Privacy, copyright, quote, license, credential, and local metadata risks are checked before sharing |
 
 ## Skill dependency graph
@@ -134,6 +143,9 @@ graph TD
     E[claim-evidence-ledger]
     G[claim-traceability-graph]
     Q[citation-integrity-auditor]
+    F[figure-table-integrity-auditor]
+    I[scholarly-integrity-gate]
+    H[ai-human-workflow-log]
     Y[rights-privacy-release-auditor]
     N[manuscript-continuity-editor]
     W[scholarly-prose-editor]
@@ -163,6 +175,9 @@ graph TD
     O --> E
     O --> G
     O --> Q
+    O --> F
+    O --> I
+    O --> H
     O --> Y
     O --> N
     O --> X
@@ -182,10 +197,13 @@ graph TD
     C --> E
     E --> G
     G --> Q
-    Q --> N
+    Q --> F
+    F --> I
+    I --> N
     N --> X
     X --> V
-    X --> Y
+    X --> H
+    H --> Y
     A --- Contract
     S --- Contract
     L --- Contract
@@ -229,8 +247,11 @@ JSON artifacts must use `schema_version: "book-artifact-v1"` and one artifact ty
 | Evidence gate | Claims stronger than evidence | Prevents overclaiming |
 | Traceability gate | Claims do not connect to source notes, citekeys, locators, or repair tasks | Prevents orphan claims |
 | Citation gate | Citation near a claim but not verified as support | Prevents source-claim mismatch |
+| Figure/table gate | Captions, axes, data provenance, duplicate visuals, rights, or visual claim support are unclear | Prevents polished visuals and tables from acting as unsupported evidence |
+| Scholarly integrity gate | AI-assisted workflow, generated synthesis, automated extraction, or computed result lacks provenance or human checkpoint | Prevents implementation bugs, hallucinated evidence, methodology fabrication, shortcut reliance, and frame-lock from entering manuscripts |
 | Continuity gate | Contradictions, repetition, or concept drift across chapters | Prevents manuscript-level incoherence |
 | Proposal gate | Unverified comparable titles or overstated positioning | Prevents fabricated market claims |
+| AI/human workflow gate | AI tool use, affected sections, human decisions, disclosure basis, or override reasons are missing before external sharing | Prevents opaque AI/human collaboration and unsupported disclosure claims |
 | Release gate | Private notes, copied source text, missing quote locators, license problems, or credentials appear in shared artifacts | Prevents avoidable release risk |
 
 ## Package structure

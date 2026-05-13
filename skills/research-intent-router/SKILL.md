@@ -32,7 +32,7 @@ MODE_REGISTRY.md is canonical for mode names and aliases.
 | Mode | Default action | Lookup rule | Failure behavior |
 |---|---|---|---|
 | normal mode | Light routing first: classify the request and choose the smallest useful skill. | Use the Normal mode lookup gate. | State what remains unverified and recommend the light next step. |
-| deep mode | Deep mode always attempts deep lookup for scholarly research tasks after routing. | Use the Deep mode lookup policy and deep lookup bounds. | Report blockers, missing tools, missing source access, and verification limits. |
+| deep mode | Deep mode always attempts deep lookup for scholarly research tasks after routing and after forming a concrete lookup target object. | Use the Deep mode lookup policy and deep lookup bounds. | Report blockers, missing tools, missing source access, and verification limits. |
 
 Mode persistence:
 
@@ -56,12 +56,20 @@ Normal mode lookup gate:
 
 Deep mode lookup policy:
 
-- treat scholarly research intent itself as sufficient reason to attempt deep lookup
+- treat scholarly research intent itself as sufficient reason to attempt deep lookup after a lookup target object exists
 - route first, then attempt the safest lookup path available
 - report blockers, unavailable tools, missing source access, and verification limits
 - never treat failed or unavailable lookup as verified evidence
+- do not run open-ended deep lookup when the request lacks a concrete target
 
 ## Deep lookup bounds
+
+Create a lookup target object before searching:
+
+- question: the research, source, citation, or verification question being checked
+- source type: candidate sources, source metadata, full text, quote/page support, current fact, or field context
+- verification need: source existence, source-claim fit, metadata, quote/page support, methodology context, or current fact
+- stop condition: candidate cap reached, two passes completed, full text needed, source metadata cannot be verified, or no concrete scholarly risk is reduced
 
 Lookup order:
 
@@ -81,6 +89,7 @@ Stop conditions:
 - source metadata cannot be verified
 - full text or page images are needed for quote/page claims
 - additional searching would not reduce a concrete scholarly risk
+- lookup target object cannot be stated without guessing
 
 ## Inputs expected
 
@@ -153,13 +162,13 @@ Classify intent, artifact stage, source access level, and risk level.
 
 ### 3. Choose the smallest useful route
 
-Choose one skill when possible. Use a 2-4 skill sequence only when the task genuinely crosses stages.
+Choose one skill when possible. Use a 2-4 skill sequence only when the task genuinely crosses stages. Route workflow-integrity, AI-use disclosure, or figure/table evidence risks to the matching specialist only when those risks are concrete.
 
 ### 4. Apply research mode
 
 In normal mode, allow deep lookup only when the request meets the deep-work gate. Otherwise, recommend the light next step and explain what remains unverified.
 
-In deep mode, route first, then attempt deep lookup using the safest available source path. If no lookup path or source access is available, mark the result unverified and ask for sources or permission to search when needed.
+In deep mode, route first, create a lookup target object, then attempt deep lookup using the safest available source path. If no lookup path, source access, or concrete lookup target is available, mark the result unverified and ask for sources or permission to search when needed.
 
 ### 5. State limits
 
@@ -213,6 +222,7 @@ Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.m
 - Producing confident synthesis from no corpus.
 - Over-routing to many skills and slowing the user's research.
 - Generic skill promotion or premature citation audit.
+- Running open-ended deep lookup without a lookup target object.
 
 ## Suggested next step
 

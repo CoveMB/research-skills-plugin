@@ -30,6 +30,9 @@ Use `docs/ROUTING_MATRIX.md` for canonical skill-routing choices.
 | `claim-ledger` | `claim-evidence-ledger` | Claim-Evidence Ledger | High | "audit claims", "evidence status", "overclaiming" |
 | `claim-traceability` | `claim-traceability-graph` | Claim Traceability Graph | High | "trace claims", "evidence chain", "orphan claims", "locators" |
 | `citation-audit` | `citation-integrity-auditor` | Citation Integrity Audit | High | "check citations", "unsupported claims", "quote verification" |
+| `figure-table-audit` | `figure-table-integrity-auditor` | Figure Table Integrity Audit | High | "figure audit", "table audit", "caption", "axis", "data provenance", "duplicate visual" |
+| `integrity-gate` | `scholarly-integrity-gate` | Scholarly Integrity Audit | Very High | "integrity gate", "AI research failure", "methodology fabrication", "implementation bug", "frame-lock" |
+| `ai-human-log` | `ai-human-workflow-log` | AI Human Workflow Log | High | "AI-use disclosure", "human checkpoint", "tool use", "override reason" |
 | `release-audit` | `rights-privacy-release-auditor` | Rights Privacy Release Audit | High | "release audit", "share externally", "privacy", "copyright", "license" |
 | `continuity-audit` | `manuscript-continuity-editor` | Continuity Review | High | "whole manuscript", "concept drift", "contradictions", "repetition" |
 | `proposal` | `book-proposal-scholarship` | Research Book Proposal | High | "book proposal", "press proposal", "comparable titles" |

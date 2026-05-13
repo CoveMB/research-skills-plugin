@@ -2,7 +2,7 @@
 
 Version: 1.0.0
 
-Research Book Skills is a local skills plugin for people writing scholarly nonfiction, research monographs, long-form essays, or book proposals. It helps turn loose research work into concrete artifacts: low-load research notes, dictation notes, reading triage, meaning-preserving prose repair, a research agenda, source discovery log, source notes, extraction tables, literature map, thesis tree, chapter brief, claim ledger, claim traceability graph, citation audit, release audit, continuity review, comparable-title check, and proposal.
+Research Book Skills is a local skills plugin for people writing scholarly nonfiction, research monographs, long-form essays, or book proposals. It helps turn loose research work into concrete artifacts: low-load research notes, dictation notes, reading triage, meaning-preserving prose repair, a research agenda, source discovery log, source notes, extraction tables, literature map, thesis tree, chapter brief, claim ledger, claim traceability graph, citation audit, figure/table integrity audit, scholarly integrity gate, AI/human workflow log, release audit, continuity review, comparable-title check, and proposal.
 
 The package assumes a person is still doing the research. It can sort, pressure-test, and clean up the work, but it will not treat model memory as source verification. It keeps asking practical scholarly questions: what kind of claim is this, what evidence can support it, where is the argument too strong, and what would an expert reader challenge?
 
@@ -80,6 +80,20 @@ For citation problems:
 Use citation-integrity-auditor. Check whether the citations in this draft support the claims they are attached to.
 ```
 
+For figure, table, or AI workflow integrity:
+
+```text
+Use figure-table-integrity-auditor. Check these figures and tables for data provenance, caption accuracy, axis issues, and duplicate visual risk.
+```
+
+```text
+Use scholarly-integrity-gate. Check this AI-assisted analysis for hallucinated evidence, methodology fabrication, shortcut reliance, frame-lock, and human checkpoint gaps.
+```
+
+```text
+Use ai-human-workflow-log. Record tool use, affected sections, human decisions, verification responsibilities, and AI-use disclosure notes for this project.
+```
+
 For source notes:
 
 ```text
@@ -112,6 +126,9 @@ Typical jobs:
 - audit claims for evidence strength, citation needs, and overstatement
 - trace claims to source notes, citekeys, locators, and repair actions
 - check citation/source fit without inventing page numbers or fake references
+- audit figures and tables for data provenance, captions, axes, duplicate visual risk, and claim support
+- run an integrity gate before AI-assisted analyses or generated syntheses support manuscript claims
+- record AI/human workflow decisions, affected sections, verification responsibilities, overrides, and disclosure notes
 - audit release packets for privacy, copyright, quote, license, and local metadata risks
 - verify comparable titles before proposal submission
 - keep chapters consistent across concepts, tone, thesis, and structure
@@ -127,7 +144,7 @@ Use [`docs/SKILL_INDEX.md`](docs/SKILL_INDEX.md) for the full skill list and [`d
 - mixed or unclear accessibility bottleneck: start with `dyslexia-research-companion`
 - unclear request: start with `research-intent-router`
 - whole-project planning: use `research-book-orchestrator`
-- source, note, extraction, argument, chapter, claim, citation, release, continuity, and proposal work: choose the narrow specialist in the skill index
+- source, note, extraction, argument, chapter, claim, citation, figure/table, integrity, AI/human log, release, continuity, and proposal work: choose the narrow specialist in the skill index
 
 Every skill folder has its own `README.md` with example requests, useful inputs, expected outputs, and common failure modes.
 
@@ -141,7 +158,7 @@ The common route modes are `accessibility-companion`, `dictation-notes`, `readin
 
 Normal mode is the default. It classifies the task and chooses the smallest useful skill before doing any deep lookup. It escalates only when source finding, source existence, quote/page verification, current facts, or high-risk claims make lookup necessary.
 
-Deep mode always attempts lookup after routing, but it still has limits. If lookup tools, source access, or full text are unavailable, the result stays marked as unverified.
+Deep mode always attempts lookup after routing and after forming a concrete lookup target object. If lookup tools, source access, full text, or a concrete target are unavailable, the result stays marked as unverified.
 
 Use these prompts:
 
@@ -163,6 +180,15 @@ The plugin includes a shared book artifact schema at [`shared/contracts/book/boo
 - `thesis-tree.json`
 - `chapter-brief.json`
 - `claim-evidence-ledger.json`
+- `source-note.json`
+- `extraction-table.json`
+- `claim-traceability-graph.json`
+- `citation-integrity-audit.json`
+- `figure-table-integrity-audit.json`
+- `scholarly-integrity-audit.json`
+- `ai-human-workflow-log.json`
+- `rights-privacy-release-audit.json`
+- `comps-verification.json`
 - `continuity-review.json`
 - `book-proposal.json`
 

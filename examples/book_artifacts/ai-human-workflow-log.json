@@ -1,0 +1,26 @@
+{
+  "schema_version": "book-artifact-v1",
+  "artifact_type": "ai_human_workflow_log",
+  "project_title": "Fixture Research Book",
+  "created_at": "2026-05-12",
+  "source_basis": "Fixture workflow log; no actual tool history reviewed.",
+  "what_i_can_verify": [
+    "The artifact follows the shared book artifact schema."
+  ],
+  "what_remains_uncertain": [
+    "Actual tool use and human decisions require project workflow records."
+  ],
+  "user_verification_needed": [
+    "Verify each AI-assisted step and human checkpoint before external disclosure."
+  ],
+  "workflow_decisions": [
+    {
+      "checkpoint": "Generated synthesis review",
+      "human_decision": "Hold for source verification.",
+      "rationale": "Source support is not yet visible.",
+      "unresolved_risk": "Generated synthesis may include unsupported claims.",
+      "override_reason": "No override recorded.",
+      "next_stage": "Citation and source audit before drafting."
+    }
+  ]
+}

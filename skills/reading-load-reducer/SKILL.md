@@ -48,6 +48,10 @@ Follow `docs/SOURCE_LIMITS.md`: state the source access level, separate source b
 
 If only titles, abstracts, or snippets are available, mark triage and skip risk as provisional.
 
+## Compact mode
+
+Use compact mode when the user asks for low reading load, time-boxed triage, or a fast skim/read/skip decision. Compact mode should use short chunks, stable table labels, one source-basis line, one triage table, one ambiguity or uncertainty note only when needed, and the first reading action.
+
 ## Files/folders it may read
 
 - Bundled skill instructions, metadata, and assets if available (including, but not limited to, `SKILL.md`, `README.md`, `assets/`, `references/`, and `agents/openai.yaml` in this project or equivalent files in another project).
@@ -136,6 +140,20 @@ Suggest a short sequence that starts with the highest-return reading and names w
 ## User verification needed
 
 ## Suggested next step
+```
+
+Compact mode:
+
+```markdown
+# Reading triage
+
+Source basis: [one line]
+
+| Item | Decision | Why | First extraction target |
+
+Uncertainty: [only if access is thin or meaning is unclear]
+
+Next action: [first reading action]
 ```
 
 Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless one specialist skill reduces a named scholarly risk.

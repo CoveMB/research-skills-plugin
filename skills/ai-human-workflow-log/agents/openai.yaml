@@ -1,0 +1,6 @@
+interface:
+  display_name: "AI Human Workflow Log"
+  short_description: "Record AI/human research workflow decisions, human checkpoints, tool use, override reasons, unresolved risks, verification responsibilities, and AI-use disclosure notes for scholarly manuscripts, book projects, proposals, or release packets."
+  default_prompt: "Use ai-human-workflow-log to record AI assistance, human checkpoints, override reasons, affected sections, verification responsibilities, and disclosure notes."
+policy:
+  allow_implicit_invocation: true

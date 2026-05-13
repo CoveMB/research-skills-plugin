@@ -27,7 +27,10 @@ Accessibility entry rule: use `dictation-to-research-notes`, `reading-load-reduc
 | Chapter outline, section sequence, chapter thesis, evidence placement, transitions, chapter function | `chapter-architecture` |
 | Research prose clarity, precision, structure, rhythm, compression, readability, or voice | `scholarly-prose-editor` |
 | Citation accuracy, unsupported claims, quotes, page numbers, bibliography mismatch, source-claim fit | `citation-integrity-auditor` |
+| Figures, tables, charts, captions, axes, screenshots, visual evidence, data provenance, duplicate visual risk, or table/figure claim support | `figure-table-integrity-auditor` |
+| Integrity gate, AI research failure modes, hallucinated evidence, methodology fabrication, implementation bug, shortcut reliance, frame-lock, or human checkpoint review | `scholarly-integrity-gate` |
 | External sharing, release audit, privacy risk, copyright risk, quotation risk, license mismatch, secrets, credentials, or local metadata risk | `rights-privacy-release-auditor` |
+| AI-use disclosure, human decision log, tool use record, override reason, affected sections, or human verification record | `ai-human-workflow-log` |
 | Multiple chapters, whole manuscript, contradictions, repetition, concept drift, thesis drift, chapter order | `manuscript-continuity-editor` |
 | Case selection, examples, analogies, comparison, counter-cases, cherry-picking risk | `case-study-integration` |
 | Book proposal, pitch, contribution, audience, comparable titles, press positioning, chapter summaries | `book-proposal-scholarship` |
@@ -54,11 +57,14 @@ Use this table only for the optional final `## Suggested next step` section. It 
 | Claim ledger or cited draft with unclear evidence chain | `claim-traceability-graph` | Treating nearby citations as proof |
 | Source credibility or source-claim fit concern | `methodology-source-auditor` | Prose editing that hides evidence-quality problems |
 | Cited draft, direct quotes, page numbers, bibliography entries, or cited claims | `citation-integrity-auditor` | Citation audit when only a broad topic, uncited notes, or model knowledge exists |
+| Figure/table carries a factual, empirical, comparative, quantitative, rights, or visual-evidence claim | `figure-table-integrity-auditor` | Treating polished visuals as verified evidence |
+| AI-assisted analysis, generated synthesis, automated extraction, or computed result is about to support manuscript claims | `scholarly-integrity-gate` | Advancing without checking hallucinated evidence, methodology fabrication, shortcut reliance, frame-lock, or human checkpoints |
 | Thesis or argument structure issue | `argument-architecture` | Prose editing before claim dependencies and warrants are clear |
 | One-sided or brittle argument | `counterargument-peer-review` | Citation audit when the stronger risk is missing objections or rival explanations |
 | Chapter sequence or chapter function issue | `chapter-architecture` | Prose editing before section purpose, evidence placement, and transitions are clear |
 | Evidence fixed but prose unclear | `scholarly-prose-editor` | Evidence audit when the remaining risk is readability or precision |
 | Proposal comps are unverified or stale | `book-comps-verifier` | Sending proposal positioning with unchecked publication details |
+| AI-assisted work is headed to collaborators, reviewers, presses, committees, or public release | `ai-human-workflow-log` | External sharing without tool use, affected sections, human verification, and override reasons recorded |
 | Artifact is about to be shared outside the project | `rights-privacy-release-auditor` | Sharing notes or exports before privacy, quote, license, and copied-text risks are checked |
 | No unresolved scholarly risk remains | No suggestion | Any skill promotion |
 

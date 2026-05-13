@@ -49,6 +49,10 @@ Use when the user has a draft with citations, footnotes, bibliography, quoted ma
 
 Follow `docs/SOURCE_LIMITS.md`: state the source access level, separate source basis from interpretation, include What I can verify, What remains uncertain, and User verification needed. Do not invent citations or source support.
 
+## Machine-readable artifacts
+
+When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: citation_integrity_audit`. If the output is normal Markdown, do not force the JSON contract.
+
 ## Audit categories
 
 Label each issue as:
@@ -71,6 +75,17 @@ Use distinct verification statuses:
 - verification failed: available source does not support the claim or quote
 - verification partial: source is relevant but locator, context, or exact wording is missing
 - verification passed: source content and locator support the claim
+
+## Metadata verification ladder
+
+Use this metadata verification ladder before calling a reference real or bibliographically sound:
+
+1. DOI or stable identifier match from a source such as Crossref, publisher page, OpenAlex, Semantic Scholar, library catalogue, or repository record.
+2. normalized title match with author-year and venue agreement.
+3. fuzzy title match only when differences are explainable, such as punctuation, subtitle, transliteration, or edition variation.
+4. Bibliography-only match remains unverified unless an authoritative record or full text is available.
+
+Flag identifier hijack risk when the DOI, URL, title, author, year, or venue points to a different work than the manuscript claims. Do not repair metadata from memory.
 
 ## Files/folders it may read
 
@@ -102,6 +117,10 @@ Prioritize factual, causal, quantitative, field-specific, and controversial clai
 For each claim, identify the citation meant to support it. If no citation is present, flag it.
 
 Flag the citation-proximity fallacy: a nearby citation does not prove the specific claim unless the source content actually supports it.
+
+### 2.1. Verify citation metadata when needed
+
+Apply the metadata verification ladder when fabricated-reference risk, DOI risk, bibliography mismatch, or source identity is central to the request.
 
 ### 3. Assess source strength
 
@@ -141,6 +160,9 @@ Offer safer wording, stronger source types, or citation placement changes.
 ## Quotation audit
 
 ## Bibliography issues
+
+## Metadata verification ladder results
+| Reference | DOI / identifier | Title match | Author-year match | Venue match | Status | Repair task |
 
 ## High-priority repairs
 

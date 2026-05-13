@@ -137,6 +137,12 @@ Output artifacts:
 
 Contract artifact type: `claim_evidence_ledger`.
 
+## 7.1. Figure/table and integrity sprint
+
+Use `figure-table-integrity-auditor` when tables, charts, figures, screenshots, maps, or image panels carry claims. It should check caption and axis accuracy, data provenance, duplicate visual risk, rights, and repair actions.
+
+Use `scholarly-integrity-gate` before AI-assisted analyses, generated syntheses, automated extraction, computed results, or high-stakes evidence artifacts support manuscript claims. It should produce CLEAR, SUSPECTED, INSUFFICIENT EVIDENCE, or OVERRIDDEN verdicts and name any human checkpoint needed.
+
 ## 8. Whole manuscript sprint
 
 Use `manuscript-continuity-editor` after several chapters exist.
@@ -154,6 +160,8 @@ Use `book-comps-verifier` for comparable titles, audience claims, market claims,
 Contract artifact type: `book_proposal`.
 
 ## 10. Release sprint
+
+Use `ai-human-workflow-log` when AI-assisted work is headed to collaborators, reviewers, presses, committees, or public release. It should record tool use, affected sections, human verification, human decisions, override reasons, and AI-use disclosure notes.
 
 Use `rights-privacy-release-auditor` before sharing notes, source packets, proposal materials, manuscript exports, or research artifacts outside the project. It should report release blockers and required fixes. It should not delete, redact, rewrite, publish, or send files unless the user asks.
 

@@ -25,6 +25,8 @@ This file is the shared operating policy for skill READMEs. Individual READMEs s
 - Generic prose or structure that hides weak evidence or weak reasoning.
 - Overstated claims, missing counterarguments, or unclear source basis.
 - Overcorrected text that changes the author's intended claim.
+- AI-assisted workflow steps used without a human checkpoint, disclosure basis, or integrity gate when they support manuscript claims.
+- Figures, tables, or charts treated as evidence without data provenance, caption/axis checks, or duplicate visual review.
 
 ## Files/folders it may read
 

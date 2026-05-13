@@ -153,7 +153,7 @@ class TestPluginStructure(unittest.TestCase):
             for heading in REQUIRED_SKILL_HEADINGS:
                 if heading not in text:
                     missing.append(f"{skill_dir.name}: {heading}")
-        self.assertEqual(missing, [])
+        self.assertEqual(missing, {})
 
     def test_each_skill_readme_documents_operational_boundaries(self) -> None:
         missing: list[str] = []
@@ -162,7 +162,7 @@ class TestPluginStructure(unittest.TestCase):
             for heading in REQUIRED_README_HEADINGS:
                 if heading not in text:
                     missing.append(f"{skill_dir.name}: {heading}")
-        self.assertEqual(missing, [])
+        self.assertEqual(missing, {})
 
     def test_skill_readmes_defer_common_operational_boundaries_to_shared_doc(self) -> None:
         shared_doc = ROOT / "docs" / "SKILL_OPERATIONAL_BOUNDARIES.md"
@@ -204,7 +204,7 @@ class TestPluginStructure(unittest.TestCase):
         for skill_dir in self.skill_dirs():
             text = skill_markdown(skill_dir)
             missing.extend(missing_labeled_phrases(skill_dir.name, text, required_phrases))
-        self.assertEqual(missing, [])
+        self.assertEqual(missing, {})
 
     def test_agent_short_descriptions_track_skill_descriptions(self) -> None:
         stale_metadata: list[str] = []
@@ -709,6 +709,229 @@ class TestPluginStructure(unittest.TestCase):
         self.assertLessEqual(architecture.count("Router -->"), 3)
         self.assertLessEqual(architecture.count("T -->"), 3)
         self.assertIn("Specialists", architecture)
+
+    def test_integrity_gate_skill_and_routing_are_documented(self) -> None:
+        skill_name = "scholarly-integrity-gate"
+        skill_text = read_text(SKILLS_DIR / skill_name / "SKILL.md")
+        required_skill_phrases = [
+            "CLEAR",
+            "SUSPECTED",
+            "INSUFFICIENT EVIDENCE",
+            "OVERRIDDEN",
+            "implementation bug",
+            "methodology fabrication",
+            "shortcut reliance",
+            "frame-lock",
+            "human checkpoint",
+        ]
+        self.assertEqual(missing_phrases(skill_text, required_skill_phrases), [])
+
+        required_docs = [
+            ROOT / "docs" / "ARCHITECTURE.md",
+            ROOT / "docs" / "ROUTING_MATRIX.md",
+            ROOT / "docs" / "SKILL_INDEX.md",
+            ROOT / "MODE_REGISTRY.md",
+        ]
+        missing = [
+            str(path.relative_to(ROOT))
+            for path in required_docs
+            if skill_name not in read_text(path)
+        ]
+        self.assertEqual(missing, [])
+
+    def test_ai_human_workflow_log_records_decisions_and_disclosures(self) -> None:
+        skill_name = "ai-human-workflow-log"
+        skill_text = read_text(SKILLS_DIR / skill_name / "SKILL.md")
+        required_phrases = [
+            "human decision",
+            "override reason",
+            "AI-use disclosure",
+            "tool use",
+            "affected sections",
+            "human verification",
+            "venue-specific disclosure",
+        ]
+        self.assertEqual(missing_phrases(skill_text, required_phrases), [])
+
+        release_audit = read_text(SKILLS_DIR / "rights-privacy-release-auditor" / "SKILL.md")
+        self.assertIn("ai-human-workflow-log", release_audit)
+        self.assertIn("AI-use disclosure", release_audit)
+
+    def test_citation_auditor_documents_metadata_verification_ladder(self) -> None:
+        citation_audit = read_text(SKILLS_DIR / "citation-integrity-auditor" / "SKILL.md")
+        required_phrases = [
+            "metadata verification ladder",
+            "DOI",
+            "Crossref",
+            "OpenAlex",
+            "Semantic Scholar",
+            "normalized title",
+            "identifier hijack",
+            "fuzzy title",
+        ]
+        self.assertEqual(missing_phrases(citation_audit, required_phrases), [])
+
+    def test_source_discovery_supports_systematic_review_protocol_mode(self) -> None:
+        source_discovery = read_text(SKILLS_DIR / "systematic-source-discovery" / "SKILL.md")
+        search_guide = read_text(
+            SKILLS_DIR / "systematic-source-discovery" / "references" / "search-strategy-guide.md"
+        )
+        required_phrases = [
+            "systematic review mode",
+            "PRISMA",
+            "protocol snapshot",
+            "screening counts",
+            "exclusion reasons",
+        ]
+        self.assertEqual(missing_phrases(source_discovery + search_guide, required_phrases), [])
+
+    def test_artifact_contract_covers_audit_and_workflow_artifacts(self) -> None:
+        schema = read_json(ROOT / "shared" / "contracts" / "book" / "book_artifact.schema.json")
+        artifact_types = schema["properties"]["artifact_type"]["enum"]
+        required_artifact_types = [
+            "source_note",
+            "extraction_table",
+            "claim_traceability_graph",
+            "citation_integrity_audit",
+            "rights_privacy_release_audit",
+            "comps_verification",
+            "scholarly_integrity_audit",
+            "ai_human_workflow_log",
+            "figure_table_integrity_audit",
+        ]
+        missing = [artifact_type for artifact_type in required_artifact_types if artifact_type not in artifact_types]
+        self.assertEqual(missing, [])
+
+    def test_contract_uses_controlled_status_vocabularies(self) -> None:
+        schema = read_json(ROOT / "shared" / "contracts" / "book" / "book_artifact.schema.json")
+        defs = schema.get("$defs", {})
+        required_defs = [
+            "claim_type",
+            "evidence_status",
+            "verification_status",
+            "locator_status",
+            "risk_level",
+            "confidence_level",
+            "integrity_verdict",
+        ]
+        missing_defs = [definition for definition in required_defs if definition not in defs]
+        self.assertEqual(missing_defs, [])
+
+        claim_row = defs["claim_evidence_row"]["properties"]
+        self.assertEqual(claim_row["claim_type"]["$ref"], "#/$defs/claim_type")
+        self.assertEqual(claim_row["evidence_status"]["$ref"], "#/$defs/evidence_status")
+        self.assertEqual(claim_row["risk"]["$ref"], "#/$defs/risk_level")
+        self.assertEqual(claim_row["confidence"]["$ref"], "#/$defs/confidence_level")
+
+    def test_empirical_provenance_and_figure_table_integrity_are_documented(self) -> None:
+        claim_ledger = read_text(SKILLS_DIR / "claim-evidence-ledger" / "SKILL.md")
+        figure_audit = read_text(SKILLS_DIR / "figure-table-integrity-auditor" / "SKILL.md")
+        required_phrases = [
+            "analysis provenance",
+            "dataset",
+            "script or notebook",
+            "run log",
+            "caption",
+            "axis",
+            "duplicate visual",
+            "data provenance",
+        ]
+        self.assertEqual(missing_phrases(claim_ledger + figure_audit, required_phrases), [])
+
+    def test_methodology_auditor_has_method_family_references(self) -> None:
+        methodology = read_text(SKILLS_DIR / "methodology-source-auditor" / "SKILL.md")
+        required_phrases = [
+            "method-family references",
+            "qualitative",
+            "historical",
+            "legal",
+            "computational",
+            "survey",
+            "observational",
+            "experimental",
+            "systematic review",
+        ]
+        self.assertEqual(missing_phrases(methodology, required_phrases), [])
+
+    def test_router_deep_mode_requires_lookup_target_object(self) -> None:
+        router = read_text(SKILLS_DIR / "research-intent-router" / "SKILL.md")
+        required_phrases = [
+            "lookup target object",
+            "verification need",
+            "source type",
+            "stop condition",
+            "do not run open-ended deep lookup",
+        ]
+        self.assertEqual(missing_phrases(router, required_phrases), [])
+
+    def test_accessibility_skills_support_compact_mode(self) -> None:
+        accessibility_skills = [
+            "dictation-to-research-notes",
+            "dyslexia-friendly-prose-editor",
+            "dyslexia-research-companion",
+            "reading-load-reducer",
+        ]
+        required_phrases = [
+            "compact mode",
+            "short chunks",
+            "stable table labels",
+            "Source basis: [one line]",
+            "only if",
+            "Next action",
+        ]
+        missing = {}
+        for skill_name in accessibility_skills:
+            skill_text = read_text(SKILLS_DIR / skill_name / "SKILL.md")
+            missing_for_skill = missing_phrases(skill_text, required_phrases)
+            if missing_for_skill:
+                missing[skill_name] = missing_for_skill
+        self.assertEqual(missing, [])
+
+    def test_source_limits_document_external_tool_confidentiality_boundary(self) -> None:
+        source_limits = read_text(ROOT / "docs" / "SOURCE_LIMITS.md")
+        required_phrases = [
+            "external tool boundary",
+            "unpublished manuscript",
+            "user consent",
+            "search terms",
+            "sensitive material",
+        ]
+        self.assertEqual(missing_phrases(source_limits, required_phrases), [])
+
+    def test_behavior_eval_fixtures_cover_high_risk_skill_boundaries(self) -> None:
+        fixture_path = ROOT / "examples" / "evals" / "research-skill-behavior-fixtures.json"
+        fixtures = read_json(fixture_path)
+        self.assertIsInstance(fixtures.get("fixtures"), list)
+        self.assertGreaterEqual(len(fixtures["fixtures"]), 8)
+
+        required_keys = {
+            "id",
+            "prompt",
+            "expected_route",
+            "risk_covered",
+            "required_output_markers",
+            "forbidden_claims",
+        }
+        missing_keys = [
+            f"{fixture.get('id', '<missing id>')}: {key}"
+            for fixture in fixtures["fixtures"]
+            for key in required_keys
+            if key not in fixture
+        ]
+        self.assertEqual(missing_keys, [])
+
+        required_risks = {
+            "premature citation audit",
+            "hallucinated citation metadata",
+            "open-ended deep lookup",
+            "systematic review provenance",
+            "AI-use disclosure",
+            "figure table provenance",
+            "accessibility overload",
+            "external tool confidentiality",
+        }
+        covered_risks = {fixture["risk_covered"] for fixture in fixtures["fixtures"]}
+        self.assertEqual(sorted(required_risks - covered_risks), [])
 
 
 if __name__ == "__main__":

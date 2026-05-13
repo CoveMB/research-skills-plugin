@@ -19,7 +19,7 @@ Use `docs/ARCHITECTURE.md` as the stage map and `MODE_REGISTRY.md` as the route 
 - The user has a broad book idea and needs a complete workflow.
 - The user is unsure whether to start with accessibility triage, sources, outline, argument, chapters, or citation audit.
 - The task spans multiple phases of a research nonfiction manuscript, source trail, proposal, or release packet.
-- The project involves academic standards, evidence management, citations, literature review, or peer-review style critique.
+- The project involves academic standards, evidence management, citations, figures/tables, AI-assisted workflow integrity, literature review, or peer-review style critique.
 
 ## Inputs expected
 
@@ -95,8 +95,9 @@ Classify the project into one or more phases:
 - Phase F: chapter architecture
 - Phase G: drafting and style
 - Phase H: evidence, traceability, and citation audit
+- Phase H1: figure/table integrity and scholarly integrity gate
 - Phase I: whole-manuscript continuity
-- Phase J: proposal, comparable titles, and release review
+- Phase J: proposal, comparable titles, AI/human workflow log, and release review
 
 ### 2. Identify missing inputs
 
@@ -114,6 +115,7 @@ Block or qualify forward movement when:
 - literature map is one-sided or based on a narrow corpus
 - thesis claims lack evidence status
 - citation or quotation verification is unavailable
+- figures, tables, generated syntheses, or automated analyses lack provenance or human checkpoint status
 - existing prose needs meaning-preserving surface repair before broader revision
 
 ### 4. Choose next skill sequence
@@ -137,6 +139,15 @@ When the user requests machine-readable artifacts, use `shared/contracts/book/bo
 - `thesis_tree`
 - `chapter_brief`
 - `claim_evidence_ledger`
+- `source_note`
+- `extraction_table`
+- `claim_traceability_graph`
+- `citation_integrity_audit`
+- `figure_table_integrity_audit`
+- `scholarly_integrity_audit`
+- `ai_human_workflow_log`
+- `rights_privacy_release_audit`
+- `comps_verification`
 - `continuity_review`
 - `book_proposal`
 
@@ -150,6 +161,8 @@ At each transition, check:
 - Are influential opposing viewpoints represented?
 - Are causal claims supported by stronger evidence than analogy?
 - Are speculative claims labeled as speculative?
+- Do figures/tables have data provenance, caption/axis checks, and rights status where needed?
+- Do AI-assisted workflow steps have human checkpoints, override reasons, and disclosure notes where needed?
 
 ## Output format
 
@@ -187,6 +200,7 @@ At each transition, check:
 - Using case studies as proof when they are only illustrations.
 - Ignoring literatures that would challenge the user's preferred thesis.
 - Producing a confident synthesis without source verification.
+- Letting generated analysis, figures, or tables support manuscript claims without provenance and integrity checks.
 
 ## Quality checks
 

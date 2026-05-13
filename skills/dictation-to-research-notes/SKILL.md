@@ -46,6 +46,10 @@ Follow `docs/SOURCE_LIMITS.md`: state the source access level, separate source b
 
 Treat transcription cleanup as surface repair. If a transcript error can change the claim, mark it as an ambiguity instead of guessing.
 
+## Compact mode
+
+Use compact mode when the user asks for low reading load, when the transcript is short, or when a full report would add friction. Compact mode should use short chunks, stable table labels, one source-basis line, one cleaned note table, one ambiguity block only if needed, and one next action.
+
 ## Files/folders it may read
 
 - Bundled skill instructions, metadata, and assets if available (including, but not limited to, `SKILL.md`, `README.md`, `assets/`, `references/`, and `agents/openai.yaml` in this project or equivalent files in another project).
@@ -141,6 +145,20 @@ If the cleaned notes reveal a clear next step, suggest one specialist skill:
 ## User verification needed
 
 ## Suggested next step
+```
+
+Compact mode:
+
+```markdown
+# Dictation notes
+
+Source basis: [one line]
+
+| Note | Type | Evidence needed | Ambiguity | Next action |
+
+Ambiguity: [only if meaning could change]
+
+Next action: [one line]
 ```
 
 Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless one specialist skill reduces a named scholarly risk.

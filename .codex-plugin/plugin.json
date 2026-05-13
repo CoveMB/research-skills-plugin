@@ -19,6 +19,9 @@
     "source-notes",
     "extraction-tables",
     "claim-traceability",
+    "figure-table-integrity",
+    "scholarly-integrity",
+    "ai-human-workflow",
     "release-audit",
     "comparable-titles",
     "artifact-contract",
@@ -32,8 +35,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Research Book Skills",
-    "shortDescription": "Accessibility support, dictation notes, reading triage, prose repair, research routing, and source, argument, citation, release, and proposal workflows for scholarly nonfiction.",
-    "longDescription": "A local plugin with focused Agent Skills for planning, researching, drafting, auditing, and revising scholarly nonfiction or a research book. Includes accessibility support for rough notes, dictation, reading load, and meaning-preserving prose repair, lightweight research-intent routing, staged architecture docs, a mode registry, book artifact contracts, source discovery, source notes, extraction tables, literature review mapping, claim-evidence ledgers, claim traceability, counterargument review, citation integrity checks, release audits, comp verification, and book proposal support.",
+    "shortDescription": "Accessibility support, research routing, source, argument, citation, figure/table, integrity, release, and proposal workflows for scholarly nonfiction.",
+    "longDescription": "A local plugin with focused Agent Skills for planning, researching, drafting, auditing, and revising scholarly nonfiction or a research book. Includes accessibility support for rough notes, dictation, reading load, and meaning-preserving prose repair, lightweight research-intent routing, staged architecture docs, a mode registry, book artifact contracts, source discovery, source notes, extraction tables, literature review mapping, claim-evidence ledgers, claim traceability, counterargument review, citation integrity checks, figure/table integrity checks, scholarly integrity gates, AI/human workflow logs, release audits, comp verification, and book proposal support.",
     "developerName": "Generated local package",
     "category": "Productivity",
     "capabilities": [
@@ -54,6 +57,9 @@
       "Use annotation-to-source-note to turn my highlights into source-bound notes with locator gaps marked.",
       "Use extraction-table-builder to build a source matrix before synthesis.",
       "Use rights-privacy-release-auditor to check this packet before external sharing.",
+      "Use figure-table-integrity-auditor to audit figures, tables, captions, axes, data provenance, and duplicate visual risk.",
+      "Use scholarly-integrity-gate to check AI-assisted research workflows for hallucinated evidence, methodology fabrication, shortcut reliance, frame-lock, and human checkpoint gaps.",
+      "Use ai-human-workflow-log to record tool use, affected sections, human decisions, override reasons, and AI-use disclosure notes.",
       "Audit this chapter with the claim-evidence ledger and citation-integrity auditor.",
       "Map this literature into schools of thought, debates, gaps, and a chapter strategy.",
       "Create JSON book artifacts that follow the book artifact contract."

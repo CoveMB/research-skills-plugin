@@ -20,8 +20,21 @@
       "evidence_status": "needs_stronger_evidence",
       "current_support": "Narrative plausibility only.",
       "evidence_needed": "Source support that can sustain a causal claim.",
+      "locator_status": "needed",
+      "confidence": "low",
       "risk": "high",
       "safer_wording": "The chapter can present this as a possible pathway pending stronger evidence."
+    }
+  ],
+  "analysis_provenance": [
+    {
+      "claim": "The chapter makes a causal claim that currently exceeds the evidence provided.",
+      "dataset": "No dataset supplied.",
+      "transformation": "No transformation supplied.",
+      "script_or_notebook": "No script or notebook supplied.",
+      "run_log": "No run log supplied.",
+      "output_pointer": "No table or figure supplied.",
+      "gap": "Analysis provenance is unavailable in this fixture."
     }
   ],
   "high_risk_claims": [

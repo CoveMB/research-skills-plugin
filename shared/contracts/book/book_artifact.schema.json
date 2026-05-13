@@ -25,6 +25,15 @@
         "thesis_tree",
         "chapter_brief",
         "claim_evidence_ledger",
+        "source_note",
+        "extraction_table",
+        "claim_traceability_graph",
+        "citation_integrity_audit",
+        "rights_privacy_release_audit",
+        "comps_verification",
+        "scholarly_integrity_audit",
+        "ai_human_workflow_log",
+        "figure_table_integrity_audit",
         "continuity_review",
         "book_proposal"
       ]
@@ -236,8 +245,77 @@
     "high_risk_claims": {
       "$ref": "#/$defs/non_empty_strings"
     },
+    "analysis_provenance": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/analysis_provenance_row"
+      }
+    },
     "source_priorities": {
       "$ref": "#/$defs/non_empty_strings"
+    },
+    "source_notes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/source_note_row"
+      }
+    },
+    "extraction_rows": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/extraction_row"
+      }
+    },
+    "traceability_links": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/traceability_link"
+      }
+    },
+    "citation_audit_rows": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/citation_audit_row"
+      }
+    },
+    "release_issues": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/release_issue"
+      }
+    },
+    "comps_verification_rows": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/comps_verification_row"
+      }
+    },
+    "integrity_checks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/integrity_check"
+      }
+    },
+    "workflow_decisions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/workflow_decision"
+      }
+    },
+    "figure_table_checks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/figure_table_check"
+      }
     },
     "global_thesis": {
       "$ref": "#/$defs/non_empty_string"
@@ -462,6 +540,159 @@
         ],
         "properties": {
           "artifact_type": {
+            "const": "source_note"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "source_notes"
+        ]
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "artifact_type"
+        ],
+        "properties": {
+          "artifact_type": {
+            "const": "extraction_table"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "extraction_rows"
+        ]
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "artifact_type"
+        ],
+        "properties": {
+          "artifact_type": {
+            "const": "claim_traceability_graph"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "traceability_links"
+        ]
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "artifact_type"
+        ],
+        "properties": {
+          "artifact_type": {
+            "const": "citation_integrity_audit"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "citation_audit_rows"
+        ]
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "artifact_type"
+        ],
+        "properties": {
+          "artifact_type": {
+            "const": "rights_privacy_release_audit"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "release_issues"
+        ]
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "artifact_type"
+        ],
+        "properties": {
+          "artifact_type": {
+            "const": "comps_verification"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "comps_verification_rows"
+        ]
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "artifact_type"
+        ],
+        "properties": {
+          "artifact_type": {
+            "const": "scholarly_integrity_audit"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "integrity_checks"
+        ]
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "artifact_type"
+        ],
+        "properties": {
+          "artifact_type": {
+            "const": "ai_human_workflow_log"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "workflow_decisions"
+        ]
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "artifact_type"
+        ],
+        "properties": {
+          "artifact_type": {
+            "const": "figure_table_integrity_audit"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "figure_table_checks"
+        ]
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "artifact_type"
+        ],
+        "properties": {
+          "artifact_type": {
             "const": "continuity_review"
           }
         }
@@ -518,6 +749,77 @@
       "items": {
         "$ref": "#/$defs/non_empty_string"
       }
+    },
+    "claim_type": {
+      "enum": [
+        "empirical",
+        "factual_documentary",
+        "causal",
+        "comparative",
+        "conceptual",
+        "theoretical",
+        "normative",
+        "field_specific",
+        "predictive_speculative",
+        "anecdotal_illustrative",
+        "interpretive"
+      ]
+    },
+    "evidence_status": {
+      "enum": [
+        "directly_supported",
+        "plausibly_supported_citation_needed",
+        "needs_stronger_evidence",
+        "overstated_relative_to_evidence",
+        "speculative_label_needed",
+        "unsupported_in_provided_material",
+        "contradicted_or_contested",
+        "normative_needs_argument",
+        "definition_needs_grounding"
+      ]
+    },
+    "verification_status": {
+      "enum": [
+        "verified",
+        "unverified",
+        "needed",
+        "verification_unavailable",
+        "verification_failed",
+        "verification_partial",
+        "verification_passed"
+      ]
+    },
+    "locator_status": {
+      "enum": [
+        "not_needed",
+        "needed",
+        "provided",
+        "missing",
+        "unverified"
+      ]
+    },
+    "risk_level": {
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ]
+    },
+    "confidence_level": {
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    "integrity_verdict": {
+      "enum": [
+        "CLEAR",
+        "SUSPECTED",
+        "INSUFFICIENT EVIDENCE",
+        "OVERRIDDEN"
+      ]
     },
     "query_row": {
       "type": "object",
@@ -641,6 +943,8 @@
         "evidence_status",
         "current_support",
         "evidence_needed",
+        "locator_status",
+        "confidence",
         "risk",
         "safer_wording"
       ],
@@ -649,10 +953,10 @@
           "$ref": "#/$defs/non_empty_string"
         },
         "claim_type": {
-          "$ref": "#/$defs/non_empty_string"
+          "$ref": "#/$defs/claim_type"
         },
         "evidence_status": {
-          "$ref": "#/$defs/non_empty_string"
+          "$ref": "#/$defs/evidence_status"
         },
         "current_support": {
           "$ref": "#/$defs/non_empty_string"
@@ -660,10 +964,312 @@
         "evidence_needed": {
           "$ref": "#/$defs/non_empty_string"
         },
+        "locator_status": {
+          "$ref": "#/$defs/locator_status"
+        },
+        "confidence": {
+          "$ref": "#/$defs/confidence_level"
+        },
         "risk": {
-          "$ref": "#/$defs/non_empty_string"
+          "$ref": "#/$defs/risk_level"
         },
         "safer_wording": {
+          "$ref": "#/$defs/non_empty_string"
+        }
+      }
+    },
+    "analysis_provenance_row": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim",
+        "dataset",
+        "transformation",
+        "script_or_notebook",
+        "run_log",
+        "output_pointer",
+        "gap"
+      ],
+      "properties": {
+        "claim": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "dataset": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "transformation": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "script_or_notebook": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "run_log": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "output_pointer": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "gap": {
+          "$ref": "#/$defs/non_empty_string"
+        }
+      }
+    },
+    "source_note_row": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "note",
+        "type",
+        "locator_status",
+        "verification_status"
+      ],
+      "properties": {
+        "note": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "type": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "locator_status": {
+          "$ref": "#/$defs/locator_status"
+        },
+        "verification_status": {
+          "$ref": "#/$defs/verification_status"
+        }
+      }
+    },
+    "extraction_row": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "extracted_point",
+        "evidence_type",
+        "status"
+      ],
+      "properties": {
+        "source": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "extracted_point": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "evidence_type": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "status": {
+          "$ref": "#/$defs/verification_status"
+        }
+      }
+    },
+    "traceability_link": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim_id",
+        "claim",
+        "source_pointer",
+        "locator_status",
+        "verification_status",
+        "repair_action"
+      ],
+      "properties": {
+        "claim_id": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "claim": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "source_pointer": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "locator_status": {
+          "$ref": "#/$defs/locator_status"
+        },
+        "verification_status": {
+          "$ref": "#/$defs/verification_status"
+        },
+        "repair_action": {
+          "$ref": "#/$defs/non_empty_string"
+        }
+      }
+    },
+    "citation_audit_row": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim",
+        "current_citation",
+        "verification_status",
+        "issue_type",
+        "risk",
+        "repair_action"
+      ],
+      "properties": {
+        "claim": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "current_citation": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "verification_status": {
+          "$ref": "#/$defs/verification_status"
+        },
+        "issue_type": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "risk": {
+          "$ref": "#/$defs/risk_level"
+        },
+        "repair_action": {
+          "$ref": "#/$defs/non_empty_string"
+        }
+      }
+    },
+    "release_issue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "risk",
+        "artifact_pointer",
+        "issue",
+        "required_fix",
+        "release_impact"
+      ],
+      "properties": {
+        "risk": {
+          "$ref": "#/$defs/risk_level"
+        },
+        "artifact_pointer": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "issue": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "required_fix": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "release_impact": {
+          "$ref": "#/$defs/non_empty_string"
+        }
+      }
+    },
+    "comps_verification_row": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "verification_status",
+        "mismatch_risk",
+        "repair_task"
+      ],
+      "properties": {
+        "title": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "verification_status": {
+          "$ref": "#/$defs/verification_status"
+        },
+        "mismatch_risk": {
+          "$ref": "#/$defs/risk_level"
+        },
+        "repair_task": {
+          "$ref": "#/$defs/non_empty_string"
+        }
+      }
+    },
+    "integrity_check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "check",
+        "verdict",
+        "evidence_visible",
+        "risk",
+        "required_repair"
+      ],
+      "properties": {
+        "check": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "verdict": {
+          "$ref": "#/$defs/integrity_verdict"
+        },
+        "evidence_visible": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "risk": {
+          "$ref": "#/$defs/risk_level"
+        },
+        "required_repair": {
+          "$ref": "#/$defs/non_empty_string"
+        }
+      }
+    },
+    "workflow_decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "checkpoint",
+        "human_decision",
+        "rationale",
+        "unresolved_risk",
+        "override_reason",
+        "next_stage"
+      ],
+      "properties": {
+        "checkpoint": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "human_decision": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "rationale": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "unresolved_risk": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "override_reason": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "next_stage": {
+          "$ref": "#/$defs/non_empty_string"
+        }
+      }
+    },
+    "figure_table_check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "object",
+        "claim_supported",
+        "data_provenance",
+        "caption_axis_status",
+        "duplicate_visual_risk",
+        "verification_status",
+        "repair_action"
+      ],
+      "properties": {
+        "object": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "claim_supported": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "data_provenance": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "caption_axis_status": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "duplicate_visual_risk": {
+          "$ref": "#/$defs/risk_level"
+        },
+        "verification_status": {
+          "$ref": "#/$defs/verification_status"
+        },
+        "repair_action": {
           "$ref": "#/$defs/non_empty_string"
         }
       }
@@ -748,11 +1354,7 @@
           "$ref": "#/$defs/non_empty_string"
         },
         "verification_status": {
-          "enum": [
-            "verified",
-            "unverified",
-            "needed"
-          ]
+          "$ref": "#/$defs/verification_status"
         },
         "source_pointer": {
           "$ref": "#/$defs/non_empty_string"

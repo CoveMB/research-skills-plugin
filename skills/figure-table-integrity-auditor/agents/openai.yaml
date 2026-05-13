@@ -1,0 +1,6 @@
+interface:
+  display_name: "Figure Table Integrity Auditor"
+  short_description: "Audit scholarly figures, tables, charts, captions, screenshots, extracted results, image panels, and visual evidence for data provenance, axis and caption accuracy, duplicate visual risk, source licensing, manipulation, and claim support limits."
+  default_prompt: "Use figure-table-integrity-auditor to audit these figures, tables, charts, captions, and visual evidence for provenance, accuracy, rights, and claim-support risks."
+policy:
+  allow_implicit_invocation: true

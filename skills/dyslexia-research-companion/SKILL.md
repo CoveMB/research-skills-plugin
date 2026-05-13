@@ -49,6 +49,10 @@ Follow `docs/SOURCE_LIMITS.md`: state the source access level, separate source b
 
 Treat spelling and grammar cleanup as surface repair. If a typo can change the claim, mark it as an ambiguity instead of guessing.
 
+## Compact mode
+
+Use compact mode by default when the user's main bottleneck is reading load or mixed accessibility friction. Compact mode should use short chunks, stable table labels, one source-basis line, one low-load table, one ambiguity block only if meaning changes are possible, and one next action.
+
 ## Files/folders it may read
 
 - Bundled skill instructions, metadata, and assets if available (including, but not limited to, `SKILL.md`, `README.md`, `assets/`, `references/`, and `agents/openai.yaml` in this project or equivalent files in another project).
@@ -158,6 +162,20 @@ Use the shortest format that satisfies the request. Default:
 ## User verification needed
 
 ## Suggested next step
+```
+
+Compact mode:
+
+```markdown
+# Low-load research triage
+
+Source basis: [one line]
+
+| Item | Meaning | Evidence need | Next action |
+
+Ambiguity: [only if meaning could change]
+
+Next action: [one line]
 ```
 
 Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless one specialist skill reduces a named scholarly risk.

@@ -20,6 +20,15 @@ State the source access level before making research claims:
 - If full text, page images, database access, or lookup tools are unavailable, mark the result unverified instead of filling gaps.
 - When cleaning rough notes, dictation, or typo-heavy input, treat spelling repair as surface cleanup. If a wording issue can change the claim, mark it as ambiguous instead of guessing.
 
+## External tool boundary
+
+This external tool boundary applies before web lookup, database lookup, API calls, or any other external service use.
+
+- Treat unpublished manuscript text, private notes, interview material, sensitive material, and nonpublic source packets as confidential.
+- Use external lookup tools with search terms, citations, identifiers, or short non-sensitive summaries when that is enough.
+- Do not submit unpublished manuscript passages, private source packets, or sensitive material to external tools without user consent.
+- If external lookup would require sensitive material, ask for consent or request a safer query form.
+
 ## Output requirements
 
 Every research output should identify:

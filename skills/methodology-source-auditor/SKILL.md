@@ -52,6 +52,21 @@ Assess each source by:
 - generalizability
 - relation to opposing evidence
 
+## Method-family references
+
+Use method-family references only when the source's method matters to the claim. Keep the SKILL body concise and load or request field-specific guidance when needed. Useful families include qualitative, historical, legal, computational, survey, observational, experimental, systematic review, dataset, and mixed-methods work.
+
+For each family, ask method-specific questions:
+
+- qualitative: sampling, coding, positionality, triangulation, and transferability
+- historical: archive basis, source survival, chronology, and presentism risk
+- legal: jurisdiction, authority level, date, procedural posture, and doctrinal fit
+- computational: dataset provenance, model/code availability, evaluation, leakage, and reproducibility
+- survey: sampling frame, instrument, response rate, weighting, and construct validity
+- observational: confounding, selection, measurement, and causal limits
+- experimental: randomization, controls, power, attrition, and ecological validity
+- systematic review: protocol, search coverage, screening, exclusion reasons, and synthesis method
+
 ## Source basis and AI limits
 
 Follow `docs/SOURCE_LIMITS.md`: state the source access level, separate source basis from interpretation, include What I can verify, What remains uncertain, and User verification needed. Do not invent citations or source support.
@@ -97,6 +112,8 @@ Use categories:
 ### 2. Identify method and evidence
 
 For each source, identify its design, evidence base, interpretive framework, and limitations. Use field-specific method names only if they are provided or verifiable.
+
+Use method-family references when a source's method affects what claims it can support.
 
 ### 3. Determine supportable claims
 

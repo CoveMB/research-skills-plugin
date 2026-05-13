@@ -57,6 +57,20 @@ Follow `docs/SOURCE_LIMITS.md`: state the source access level, separate source b
 
 When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: source_discovery_log`. If the output is normal Markdown, do not force the JSON contract.
 
+## Systematic review mode
+
+Use systematic review mode only when the user requests a systematic review, scoping review, evidence review, PRISMA-style search record, reproducible database search, or protocol-grade literature discovery. Do not impose it on ordinary book research.
+
+When active, add:
+
+- protocol snapshot: review question, scope, databases, dates, filters, inclusion/exclusion rules, and reviewer assumptions
+- exact search strings by venue, with date searched and filter settings
+- screening counts: records found, records deduped, records screened, included, excluded, and full-text unavailable
+- exclusion reasons tied to criteria, not vague judgment
+- PRISMA flow fields where the user needs reporting-grade documentation
+
+For compact guidance and query design reminders, read `references/search-strategy-guide.md`.
+
 ## Files/folders it may read
 
 - Bundled skill instructions, metadata, and assets if available (including, but not limited to, `SKILL.md`, `README.md`, `assets/`, `references/`, and `agents/openai.yaml` in this project or equivalent files in another project).
@@ -131,6 +145,10 @@ For foundational sources:
 
 Record every search query, venue, date, filters, number of useful hits, and notes.
 
+### 7. Add protocol-grade fields when requested
+
+If systematic review mode is active, include the protocol snapshot, screening counts, and exclusion reasons. Keep planned searches separate from completed searches.
+
 ## Output format
 
 ```markdown
@@ -165,6 +183,16 @@ Record every search query, venue, date, filters, number of useful hits, and note
 
 ## Search log template
 | Date | Venue | Query | Filters | Useful results | Notes |
+
+## Systematic review mode fields, if requested
+
+## Protocol snapshot
+
+## Screening counts
+| Stage | Count | Basis |
+
+## Exclusion reasons
+| Record or cluster | Exclusion criterion | Reason | Reviewer note |
 
 ## Limits / failure risks
 

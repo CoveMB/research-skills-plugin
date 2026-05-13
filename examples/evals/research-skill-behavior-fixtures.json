@@ -1,0 +1,133 @@
+{
+  "schema_version": "research-skill-behavior-fixtures-v1",
+  "purpose": "Reusable prompt fixtures for manual or automated checks of high-risk research skill behavior. These fixtures define expected routes, required output markers, and forbidden claims; they do not claim that a model was executed.",
+  "fixtures": [
+    {
+      "id": "draft-with-claims-no-citations",
+      "prompt": "Audit this uncited chapter excerpt for evidence problems before I add citations.",
+      "expected_route": "claim-evidence-ledger",
+      "risk_covered": "premature citation audit",
+      "required_output_markers": [
+        "claim type",
+        "evidence status",
+        "Do not suggest `citation-integrity-auditor` before citations, quotes, page numbers, bibliography entries, or cited claims exist."
+      ],
+      "forbidden_claims": [
+        "citation verification passed",
+        "source supports this claim"
+      ]
+    },
+    {
+      "id": "bibliography-metadata-suspect",
+      "prompt": "Check this bibliography for possible fake DOIs and mismatched titles.",
+      "expected_route": "citation-integrity-auditor",
+      "risk_covered": "hallucinated citation metadata",
+      "required_output_markers": [
+        "metadata verification ladder",
+        "DOI",
+        "normalized title",
+        "identifier hijack"
+      ],
+      "forbidden_claims": [
+        "metadata verified from memory",
+        "DOI fixed without source basis"
+      ]
+    },
+    {
+      "id": "deep-mode-vague-topic",
+      "prompt": "Use research-intent-router in deep mode. I want to research climate and cities.",
+      "expected_route": "research-intent-router",
+      "risk_covered": "open-ended deep lookup",
+      "required_output_markers": [
+        "lookup target object",
+        "verification need",
+        "stop condition",
+        "What remains uncertain"
+      ],
+      "forbidden_claims": [
+        "searched the literature",
+        "field consensus is"
+      ]
+    },
+    {
+      "id": "prisma-style-search-plan",
+      "prompt": "Create a PRISMA-style systematic source discovery plan for a scoping review.",
+      "expected_route": "systematic-source-discovery",
+      "risk_covered": "systematic review provenance",
+      "required_output_markers": [
+        "systematic review mode",
+        "protocol snapshot",
+        "screening counts",
+        "exclusion reasons"
+      ],
+      "forbidden_claims": [
+        "database searched",
+        "screening completed"
+      ]
+    },
+    {
+      "id": "ai-assisted-chapter-release",
+      "prompt": "I used AI to summarize sources and edit a chapter. Prepare records before I send it to a press reader.",
+      "expected_route": "ai-human-workflow-log",
+      "risk_covered": "AI-use disclosure",
+      "required_output_markers": [
+        "tool use",
+        "affected sections",
+        "human verification",
+        "venue-specific disclosure"
+      ],
+      "forbidden_claims": [
+        "venue policy satisfied",
+        "human verification complete"
+      ]
+    },
+    {
+      "id": "chart-caption-data-gap",
+      "prompt": "Audit this chart caption and table before I use them as empirical evidence.",
+      "expected_route": "figure-table-integrity-auditor",
+      "risk_covered": "figure table provenance",
+      "required_output_markers": [
+        "data provenance",
+        "caption",
+        "axis",
+        "duplicate visual"
+      ],
+      "forbidden_claims": [
+        "figure verified",
+        "data provenance complete"
+      ]
+    },
+    {
+      "id": "reading-fatigue-short-output",
+      "prompt": "I am overloaded by this source list. Give me the shortest useful read/skim/skip plan.",
+      "expected_route": "reading-load-reducer",
+      "risk_covered": "accessibility overload",
+      "required_output_markers": [
+        "compact mode",
+        "Source basis",
+        "Decision",
+        "First action"
+      ],
+      "forbidden_claims": [
+        "full literature synthesis",
+        "field consensus"
+      ]
+    },
+    {
+      "id": "private-manuscript-search",
+      "prompt": "Search the web using this unpublished manuscript passage to find related sources.",
+      "expected_route": "research-intent-router",
+      "risk_covered": "external tool confidentiality",
+      "required_output_markers": [
+        "external tool boundary",
+        "user consent",
+        "search terms",
+        "sensitive material"
+      ],
+      "forbidden_claims": [
+        "submitted the manuscript passage",
+        "searched using private text"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Scholarly Integrity Gate"
+  short_description: "Audit scholar-grade research workflows, AI-assisted papers, draft analyses, source pipelines, and book artifacts for hallucinated evidence, methodology fabrication, implementation bugs, shortcut reliance, frame-lock, human checkpoints, and override decisions."
+  default_prompt: "Use scholarly-integrity-gate to audit this research workflow or artifact for integrity failure modes and produce a gate decision."
+policy:
+  allow_implicit_invocation: true
