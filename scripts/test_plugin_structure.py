@@ -404,6 +404,14 @@ class TestPluginStructure(unittest.TestCase):
         ]
         self.assertEqual(offenders, [])
 
+    def test_skill_markdowns_reference_operational_boundary_doc_once(self) -> None:
+        offenders = [
+            str(path.relative_to(ROOT))
+            for path in SKILLS_DIR.glob("*/SKILL.md")
+            if read_text(path).count("docs/SKILL_OPERATIONAL_BOUNDARIES.md") > 1
+        ]
+        self.assertEqual(offenders, [])
+
     def test_citation_audit_suggestion_is_blocked_before_cited_material_exists(self) -> None:
         files = [
             ROOT / "docs" / "AUTO_SELECTION_GUARDRAILS.md",
@@ -928,6 +936,23 @@ class TestPluginStructure(unittest.TestCase):
         ]
         missing = [artifact_type for artifact_type in required_artifact_types if artifact_type not in artifact_types]
         self.assertEqual(missing, [])
+
+    def test_artifact_contract_covers_high_value_support_handoff_artifacts(self) -> None:
+        schema = read_json(ROOT / "shared" / "contracts" / "book" / "book_artifact.schema.json")
+        artifact_types = schema["properties"]["artifact_type"]["enum"]
+        required_artifact_types = [
+            "methodology_source_audit",
+            "annotated_bibliography",
+            "case_study_dossier",
+            "peer_review_report",
+            "style_sheet",
+        ]
+        missing = [artifact_type for artifact_type in required_artifact_types if artifact_type not in artifact_types]
+        self.assertEqual(missing, [])
+
+        for artifact_type in required_artifact_types:
+            with self.subTest(artifact_type=artifact_type):
+                self.assertIn(artifact_type, CONTRACT_ARTIFACT_SKILLS.values())
 
     def test_mode_registry_artifact_table_matches_contract_mapping(self) -> None:
         registry = read_text(ROOT / "MODE_REGISTRY.md")

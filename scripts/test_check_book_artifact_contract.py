@@ -186,6 +186,113 @@ def valid_source_discovery_log() -> dict:
     }
 
 
+def valid_methodology_source_audit() -> dict:
+    return {
+        "schema_version": "book-artifact-v1",
+        "artifact_type": "methodology_source_audit",
+        "project_title": "Fixture Book",
+        "source_audit_rows": [
+            {
+                "source": "Fixture source",
+                "source_type": "peer-reviewed empirical article",
+                "method_evidence": "Abstract only; methods unavailable.",
+                "credibility": "contextual",
+                "bias_risk": "medium",
+                "can_support": "Topic relevance only.",
+                "cannot_support": "Strong causal or generalizable claim.",
+                "use_recommendation": "Request method details before relying on it.",
+            }
+        ],
+    }
+
+
+def valid_annotated_bibliography() -> dict:
+    return {
+        "schema_version": "book-artifact-v1",
+        "artifact_type": "annotated_bibliography",
+        "project_title": "Fixture Book",
+        "bibliography_annotations": [
+            {
+                "source": "Fixture source",
+                "annotation_basis": "Citation and abstract only.",
+                "source_type": "article",
+                "main_argument": "Fixture-level argument summary.",
+                "method_evidence": "Method not visible in this fixture.",
+                "best_use": "Background orientation.",
+                "limitations": "Cannot infer full argument from the fixture.",
+                "chapter_placement": "Chapter 1",
+                "citation_details_needed": "Verify metadata before citing.",
+            }
+        ],
+    }
+
+
+def valid_case_study_dossier() -> dict:
+    return {
+        "schema_version": "book-artifact-v1",
+        "artifact_type": "case_study_dossier",
+        "project_title": "Fixture Book",
+        "claim_needing_case": "The chapter needs a bounded illustrative case.",
+        "case_selection_logic": "Fixture case selected to test schema shape only.",
+        "case_dossiers": [
+            {
+                "case": "Fixture case",
+                "function": "illustrative example",
+                "supports": "Shows how a claim might be introduced.",
+                "challenges": "Does not establish generality.",
+                "source_base": "Fixture notes only.",
+                "selection_risk": "Cherry-picking risk unresolved.",
+                "generalization_limit": "Do not generalize beyond fixture scope.",
+                "chapter_use": "Use as placeholder only.",
+            }
+        ],
+        "counter_cases": ["Add a real counter-case before handoff."],
+        "safer_case_claims": ["This case can illustrate, not prove, the claim."],
+    }
+
+
+def valid_peer_review_report() -> dict:
+    return {
+        "schema_version": "book-artifact-v1",
+        "artifact_type": "peer_review_report",
+        "project_title": "Fixture Book",
+        "charitable_restatement": "The fixture thesis is strongest when narrowly framed.",
+        "review_objections": [
+            {
+                "objection": "The evidence base is too thin.",
+                "source_of_challenge": "Methodological scope",
+                "severity": "high",
+                "why_it_matters": "The claim may overreach the visible evidence.",
+                "falsifying_evidence": "A stronger source base could undermine the objection.",
+                "revision_strategy": "Narrow the claim and add evidence.",
+            }
+        ],
+        "rival_explanations": ["Alternative mechanism not yet ruled out."],
+        "missing_literatures": ["Relevant specialist literature not checked."],
+        "claims_to_narrow": ["Narrow broad causal phrasing."],
+        "revision_priorities": ["Resolve high-severity objection first."],
+    }
+
+
+def valid_style_sheet() -> dict:
+    return {
+        "schema_version": "book-artifact-v1",
+        "artifact_type": "style_sheet",
+        "project_title": "Fixture Book",
+        "style_rules": [
+            {
+                "rule": "Preserve uncertainty where evidence is incomplete.",
+                "reason": "The style sheet must not polish weak evidence into certainty.",
+                "example": "Use 'suggests' rather than 'proves' for fixture claims.",
+            }
+        ],
+        "voice_constraints": ["Keep authorial voice concise and precise."],
+        "terms_to_preserve": ["fixture term"],
+        "claim_language_guidance": ["Mark new factual claims for verification."],
+        "new_factual_claims_policy": "No new factual claims without user approval and verification.",
+    }
+
+
 def write_valid_coverage_examples(root: Path, *, skip: set[str] | None = None) -> None:
     skipped = skip or set()
     examples = {
@@ -193,6 +300,11 @@ def write_valid_coverage_examples(root: Path, *, skip: set[str] | None = None) -
         "chapter_brief": ("chapter-brief.json", valid_chapter_brief()),
         "book_proposal": ("book-proposal.json", valid_book_proposal()),
         "source_discovery_log": ("source-discovery-log.json", valid_source_discovery_log()),
+        "methodology_source_audit": ("methodology-source-audit.json", valid_methodology_source_audit()),
+        "annotated_bibliography": ("annotated-bibliography.json", valid_annotated_bibliography()),
+        "case_study_dossier": ("case-study-dossier.json", valid_case_study_dossier()),
+        "peer_review_report": ("peer-review-report.json", valid_peer_review_report()),
+        "style_sheet": ("style-sheet.json", valid_style_sheet()),
     }
     for artifact_type, (name, payload) in examples.items():
         if artifact_type not in skipped:
@@ -431,6 +543,33 @@ class TestBookArtifactContract(unittest.TestCase):
             self.assertEqual(result.returncode, 1)
             self.assertIn("not allowed for artifact_type 'book_proposal'", result.stdout)
             self.assertIn("claims", result.stdout)
+
+    def test_artifact_boundaries_derive_optional_fields_from_schema_conditionals(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_schema(root)
+            schema_path = root / "shared" / "contracts" / "book" / "book_artifact.schema.json"
+            schema = json.loads(schema_path.read_text(encoding="utf-8"))
+            schema["properties"]["optional_protocol_note"] = {"type": "string", "minLength": 1}
+            for branch in schema["allOf"]:
+                artifact_type = branch["if"]["properties"]["artifact_type"]["const"]
+                if artifact_type == "source_discovery_log":
+                    branch["then"]["properties"] = {
+                        "optional_protocol_note": {"type": "string", "minLength": 1}
+                    }
+            schema_path.write_text(json.dumps(schema), encoding="utf-8")
+            write_valid_coverage_examples(root, skip={"source_discovery_log"})
+            payload = valid_source_discovery_log()
+            payload["optional_protocol_note"] = "Optional field declared by the schema branch."
+            write_example(root, "source-discovery-log.json", payload)
+
+            result = run_checker(root)
+
+            self.assertEqual(
+                result.returncode,
+                0,
+                msg=f"stdout={result.stdout!r} stderr={result.stderr!r}",
+            )
 
 
 if __name__ == "__main__":

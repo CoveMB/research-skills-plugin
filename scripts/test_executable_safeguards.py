@@ -320,6 +320,28 @@ class TestExecutableSafeguards(unittest.TestCase):
         self.assertEqual(sample["name"], installer.MARKETPLACE_NAME)
         self.assertEqual(sample["interface"]["displayName"], "Local Personal Plugins")
 
+    def test_marketplace_helpers_normalize_and_replace_entries(self) -> None:
+        installer = load_module("install_codex_plugin.py")
+
+        normalized = installer.normalize_marketplace_data({"plugins": "not a list"})
+        entry = installer.marketplace_entry("sample-plugin", "./.codex/plugins/sample-plugin")
+        updated = installer.replace_marketplace_entry(
+            {
+                **normalized,
+                "plugins": [
+                    {"name": "other-plugin"},
+                    {"name": "sample-plugin", "source": {"path": "old"}},
+                ],
+            },
+            entry,
+        )
+
+        self.assertEqual(normalized["name"], installer.MARKETPLACE_NAME)
+        self.assertEqual(normalized["interface"]["displayName"], "Local Personal Plugins")
+        self.assertEqual(normalized["plugins"], [])
+        self.assertEqual([plugin["name"] for plugin in updated["plugins"]], ["other-plugin", "sample-plugin"])
+        self.assertEqual(updated["plugins"][-1]["source"]["path"], "./.codex/plugins/sample-plugin")
+
     def test_plugin_utils_parse_nested_metadata_yaml(self) -> None:
         plugin_utils = load_module("plugin_utils.py")
 
@@ -343,6 +365,27 @@ class TestExecutableSafeguards(unittest.TestCase):
             plugin_utils.nested_mapping(metadata, "policy")["allow_implicit_invocation"],
             True,
         )
+
+    def test_plugin_utils_parse_markdown_frontmatter(self) -> None:
+        plugin_utils = load_module("plugin_utils.py")
+
+        metadata = plugin_utils.parse_markdown_frontmatter(
+            "\n".join(
+                [
+                    "---",
+                    "name: sample-skill",
+                    "description: Sample skill for validation.",
+                    "metadata:",
+                    '  version: "1.0.0"',
+                    "---",
+                    "# Sample Skill",
+                    "",
+                ]
+            )
+        )
+
+        self.assertEqual(metadata["name"], "sample-skill")
+        self.assertEqual(metadata["metadata"]["version"], "1.0.0")
 
     def test_plugin_utils_reports_malformed_json_location(self) -> None:
         plugin_utils = load_module("plugin_utils.py")
@@ -380,6 +423,20 @@ class TestExecutableSafeguards(unittest.TestCase):
             "claim_evidence_ledger",
         )
 
+    def test_plugin_utils_exposes_shared_skill_policy_snippets(self) -> None:
+        plugin_utils = load_module("plugin_utils.py")
+
+        self.assertIn("docs/SOURCE_LIMITS.md", plugin_utils.SOURCE_LIMITS_POLICY_SENTENCE)
+        self.assertIn("Suggested next step", plugin_utils.SUGGESTED_NEXT_STEP_POLICY_SENTENCE)
+        self.assertIn("source_basis", plugin_utils.PROVENANCE_FIELDS)
+        self.assertIn("Use `skill-name` to [specific next action].", plugin_utils.SUGGESTED_NEXT_STEP_TEMPLATE_PHRASES)
+        self.assertEqual(
+            plugin_utils.machine_readable_artifact_sentence("chapter_brief"),
+            "When the user explicitly asks for JSON or a contract artifact, use "
+            "`shared/contracts/book/book_artifact.schema.json` with `artifact_type: chapter_brief`. "
+            "If the output is normal Markdown, do not force the JSON contract.",
+        )
+
     def test_plugin_utils_exposes_shared_agent_policy(self) -> None:
         plugin_utils = load_module("plugin_utils.py")
 
@@ -395,11 +452,15 @@ class TestExecutableSafeguards(unittest.TestCase):
     def test_artifact_boundary_rules_are_shared(self) -> None:
         plugin_utils = load_module("plugin_utils.py")
         checker = load_module("check_book_artifact_contract.py")
+        schema = json.loads((ROOT / "shared" / "contracts" / "book" / "book_artifact.schema.json").read_text(encoding="utf-8"))
 
         self.assertEqual(checker.COMMON_ARTIFACT_FIELDS, plugin_utils.COMMON_ARTIFACT_FIELDS)
-        self.assertEqual(checker.ARTIFACT_ALLOWED_FIELDS, plugin_utils.ARTIFACT_TYPE_FIELDS)
+        self.assertIn(
+            "analysis_provenance",
+            checker.artifact_type_field_boundaries(schema)["claim_evidence_ledger"],
+        )
         self.assertEqual(
-            set(plugin_utils.ARTIFACT_TYPE_FIELDS),
+            set(checker.artifact_type_field_boundaries(schema)),
             set(plugin_utils.CONTRACT_ARTIFACT_SKILLS.values()),
         )
 
@@ -425,9 +486,19 @@ class TestExecutableSafeguards(unittest.TestCase):
 
     def test_validate_script_uses_unittest_discovery(self) -> None:
         text = (ROOT / "validate.sh").read_text(encoding="utf-8")
-        self.assertIn("-m unittest discover", text)
-        self.assertIn("check_research_behavior_fixtures.py", text)
-        self.assertIn("--outputs-dir examples/evals/outputs", text)
+        self.assertIn("run_package_checks.py", text)
+        self.assertIn("--scope full", text)
+
+    def test_full_validation_runner_checks_source_candidates(self) -> None:
+        text = (SCRIPTS_DIR / "run_package_checks.py").read_text(encoding="utf-8")
+        self.assertIn("check_source_candidates.py", text)
+        self.assertIn("examples/evals/source-candidates.json", text)
+
+    def test_installer_uses_shared_validation_runner(self) -> None:
+        text = (SCRIPTS_DIR / "install_codex_plugin.py").read_text(encoding="utf-8")
+        self.assertIn("run_package_checks.py", text)
+        self.assertIn("--scope", text)
+        self.assertIn("install", text)
 
     def test_validation_workflow_runs_validate_script(self) -> None:
         workflow_path = ROOT / ".github" / "workflows" / "validate.yml"
@@ -493,10 +564,22 @@ class TestExecutableSafeguards(unittest.TestCase):
                 "Summarize local research behavior fixture coverage and captured outputs.",
                 "--outputs-dir",
             ],
+            "research_behavior_eval_harness.py": [
+                "Build a deterministic research behavior evaluation harness report.",
+                "--fixtures",
+                "--format",
+                "--quiet",
+            ],
             "check_citation_metadata.py": [
                 "Check local citation metadata exports without private text.",
                 "--input",
                 "--allow-network",
+            ],
+            "check_source_candidates.py": [
+                "Check local source candidate exports",
+                "duplicate clusters",
+                "--input",
+                "--quiet",
             ],
             "package_plugin.py": [
                 "Package this plugin directory as a zip.",
@@ -505,6 +588,10 @@ class TestExecutableSafeguards(unittest.TestCase):
             "install_codex_plugin.py": [
                 "Install Research Book Skills Plugin locally.",
                 "--dry-run",
+            ],
+            "run_package_checks.py": [
+                "Run package validation checks.",
+                "--scope",
             ],
         }
 

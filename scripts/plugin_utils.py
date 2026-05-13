@@ -78,8 +78,11 @@ CONTRACT_ARTIFACT_SKILLS = {
     "systematic-source-discovery": "source_discovery_log",
     "annotation-to-source-note": "source_note",
     "extraction-table-builder": "extraction_table",
+    "annotated-bibliography-builder": "annotated_bibliography",
+    "methodology-source-auditor": "methodology_source_audit",
     "literature-review-mapper": "literature_map",
     "argument-architecture": "thesis_tree",
+    "counterargument-peer-review": "peer_review_report",
     "chapter-architecture": "chapter_brief",
     "claim-evidence-ledger": "claim_evidence_ledger",
     "claim-traceability-graph": "claim_traceability_graph",
@@ -89,7 +92,9 @@ CONTRACT_ARTIFACT_SKILLS = {
     "scholarly-integrity-gate": "scholarly_integrity_audit",
     "ai-human-workflow-log": "ai_human_workflow_log",
     "figure-table-integrity-auditor": "figure_table_integrity_audit",
+    "case-study-integration": "case_study_dossier",
     "manuscript-continuity-editor": "continuity_review",
+    "scholarly-prose-editor": "style_sheet",
     "book-proposal-scholarship": "book_proposal",
 }
 COMMON_ARTIFACT_FIELDS = {
@@ -165,13 +170,30 @@ ARTIFACT_TYPE_FIELDS = {
     },
     "source_note": {"source_notes"},
     "extraction_table": {"extraction_rows"},
+    "annotated_bibliography": {"bibliography_annotations"},
+    "methodology_source_audit": {"source_audit_rows"},
     "claim_traceability_graph": {"traceability_links"},
+    "peer_review_report": {
+        "charitable_restatement",
+        "review_objections",
+        "rival_explanations",
+        "missing_literatures",
+        "claims_to_narrow",
+        "revision_priorities",
+    },
     "citation_integrity_audit": {"citation_audit_rows"},
     "rights_privacy_release_audit": {"release_issues"},
     "comps_verification": {"comps_verification_rows"},
     "scholarly_integrity_audit": {"integrity_checks"},
     "ai_human_workflow_log": {"workflow_decisions"},
     "figure_table_integrity_audit": {"figure_table_checks"},
+    "case_study_dossier": {
+        "claim_needing_case",
+        "case_selection_logic",
+        "case_dossiers",
+        "counter_cases",
+        "safer_case_claims",
+    },
     "continuity_review": {
         "global_thesis",
         "chapter_function_map",
@@ -181,6 +203,13 @@ ARTIFACT_TYPE_FIELDS = {
         "tone_and_audience_consistency",
         "suggested_restructuring",
         "priority_revision_list",
+    },
+    "style_sheet": {
+        "style_rules",
+        "voice_constraints",
+        "terms_to_preserve",
+        "claim_language_guidance",
+        "new_factual_claims_policy",
     },
     "book_proposal": {
         "title_options",
@@ -255,6 +284,19 @@ def parse_simple_yaml_mapping(text: str) -> dict[str, Any]:
         if indent == 2 and current_section and isinstance(data.get(current_section), dict):
             data[current_section][key] = parsed_value
     return data
+
+
+def parse_markdown_frontmatter(text: str) -> dict[str, Any]:
+    lines = text.splitlines()
+    if not lines or lines[0].strip() != "---":
+        raise ValueError("missing opening YAML frontmatter delimiter")
+
+    frontmatter_lines: list[str] = []
+    for line in lines[1:]:
+        if line.strip() == "---":
+            return parse_simple_yaml_mapping("\n".join(frontmatter_lines))
+        frontmatter_lines.append(line)
+    raise ValueError("missing closing YAML frontmatter delimiter")
 
 
 def parse_yaml_scalar(value: str) -> Any:

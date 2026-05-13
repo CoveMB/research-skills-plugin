@@ -10,6 +10,7 @@ from tempfile import TemporaryDirectory
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from check_citation_metadata import (
+    METADATA_PAIR_SPECS,
     crossref_work_url,
     evaluate_records,
     metadata_lookup_consent_errors,
@@ -35,6 +36,13 @@ def matching_record() -> dict[str, str]:
 
 
 class TestCitationMetadataChecks(unittest.TestCase):
+    def test_metadata_pair_specs_drive_output_statuses(self) -> None:
+        status_keys = [spec.status_key for spec in METADATA_PAIR_SPECS]
+        results = evaluate_records([matching_record()])
+
+        self.assertEqual(status_keys, ["doi_status", "title_status", "author_year_status", "venue_status"])
+        self.assertTrue(all(status_key in results[0] for status_key in status_keys))
+
     def test_matching_metadata_is_low_risk(self) -> None:
         results = evaluate_records([matching_record()])
 

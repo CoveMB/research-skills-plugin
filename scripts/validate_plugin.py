@@ -22,6 +22,7 @@ from plugin_utils import (
     MIN_SHARED_DESCRIPTION_TERMS,
     nested_mapping,
     nested_string,
+    parse_markdown_frontmatter,
     parse_simple_yaml_mapping,
     REQUIRED_AGENT_POLICY,
     significant_description_terms,
@@ -50,31 +51,6 @@ LOCAL_REFERENCE_ROOT_FILES = {
     "validate.sh",
 }
 REFERENCE_FILE_SUFFIXES = {".md", ".yaml", ".yml"}
-def parse_frontmatter(path: Path) -> dict[str, str]:
-    text = path.read_text(encoding="utf-8")
-    lines = text.splitlines()
-    if not lines or lines[0].strip() != "---":
-        raise ValueError("missing opening YAML frontmatter delimiter")
-    data: dict[str, str] = {}
-    current_section = ""
-    for line in lines[1:]:
-        if line.strip() == "---":
-            return data
-        if not line.strip() or line.startswith("  "):
-            if line.startswith("  ") and current_section and ":" in line:
-                key, value = line.split(":", 1)
-                data[f"{current_section}.{key.strip()}"] = value.strip().strip('"').strip("'")
-            continue
-        if ":" in line:
-            key, value = line.split(":", 1)
-            normalized_key = key.strip()
-            normalized_value = value.strip().strip('"').strip("'")
-            if normalized_value:
-                data[normalized_key] = normalized_value
-                current_section = ""
-            else:
-                current_section = normalized_key
-    raise ValueError("missing closing YAML frontmatter delimiter")
 
 
 def is_external_reference(reference: str) -> bool:
@@ -309,19 +285,19 @@ def validate_skill_dir(
         errors.append(f"{skill_name}: missing README.md")
 
     try:
-        frontmatter = parse_frontmatter(skill_path)
+        frontmatter = parse_markdown_frontmatter(skill_path.read_text(encoding="utf-8"))
     except Exception as exc:
         return skill_name, "", [*errors, f"{skill_name}: frontmatter error: {exc}"]
 
-    name = frontmatter.get("name", "")
-    description = frontmatter.get("description", "")
+    name = nested_string(frontmatter, "name")
+    description = nested_string(frontmatter, "description")
     if not name:
         errors.append(f"{skill_name}: missing name")
     if not description:
         errors.append(f"{skill_name}: missing description")
     if len(description) > 1024:
         errors.append(f"{skill_name}: description exceeds 1024 characters")
-    metadata_version = frontmatter.get("metadata.version", "")
+    metadata_version = nested_string(nested_mapping(frontmatter, "metadata"), "version")
     if metadata_version and expected_version and metadata_version != expected_version:
         errors.append(
             f"{skill_name}: metadata.version {metadata_version!r} must match plugin version "

@@ -17,16 +17,14 @@ import subprocess
 import sys
 from datetime import datetime
 from pathlib import Path
-from typing import NamedTuple
+from typing import Any, NamedTuple
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from plugin_utils import copy_package_tree, load_plugin_manifest, plugin_manifest_path, plugin_name
 
 MARKETPLACE_NAME = "local-personal-plugins"
-VALIDATION_SCRIPTS = [
-    "validate_plugin.py",
-    "check_book_artifact_contract.py",
-]
+MARKETPLACE_DISPLAY_NAME = "Local Personal Plugins"
+VALIDATION_RUNNER = Path(__file__).resolve().parent / "run_package_checks.py"
 
 
 class InstallPlan(NamedTuple):
@@ -45,23 +43,18 @@ def plugin_root_from_script() -> Path:
     return Path(__file__).resolve().parents[1]
 
 
-def run_script(script: Path, root: Path) -> None:
-    command = [sys.executable, str(script)]
-    if script.name == "check_book_artifact_contract.py":
-        command.extend(["--path", str(root)])
-    else:
-        command.append(str(root))
-    result = subprocess.run(command, text=True, capture_output=True)
-    if result.returncode != 0:
-        print(result.stdout)
-        print(result.stderr, file=sys.stderr)
-        raise SystemExit(result.returncode)
-    print(result.stdout.strip())
-
-
 def run_validation(root: Path) -> None:
-    for script_name in VALIDATION_SCRIPTS:
-        run_script(root / "scripts" / script_name, root)
+    result = subprocess.run(
+        [sys.executable, str(VALIDATION_RUNNER), "--scope", "install", "--root", str(root)],
+        text=True,
+        capture_output=True,
+    )
+    if result.stdout:
+        print(result.stdout, end="" if result.stdout.endswith("\n") else "\n")
+    if result.stderr:
+        print(result.stderr, file=sys.stderr, end="" if result.stderr.endswith("\n") else "\n")
+    if result.returncode != 0:
+        raise SystemExit(result.returncode)
 
 
 def build_install_plan(
@@ -93,13 +86,58 @@ def build_install_plan(
     )
 
 
+def default_marketplace_data() -> dict[str, Any]:
+    return {
+        "name": MARKETPLACE_NAME,
+        "interface": {"displayName": MARKETPLACE_DISPLAY_NAME},
+        "plugins": [],
+    }
+
+
+def normalize_marketplace_data(data: object) -> dict[str, Any]:
+    if not isinstance(data, dict):
+        return default_marketplace_data()
+
+    normalized = dict(data)
+    if not isinstance(normalized.get("name"), str) or not normalized["name"]:
+        normalized["name"] = MARKETPLACE_NAME
+
+    interface = normalized.get("interface")
+    interface_data = dict(interface) if isinstance(interface, dict) else {}
+    if not isinstance(interface_data.get("displayName"), str) or not interface_data["displayName"]:
+        interface_data["displayName"] = MARKETPLACE_DISPLAY_NAME
+    normalized["interface"] = interface_data
+
+    plugins = normalized.get("plugins")
+    normalized["plugins"] = [
+        plugin for plugin in plugins if isinstance(plugin, dict)
+    ] if isinstance(plugins, list) else []
+    return normalized
+
+
+def marketplace_entry(plugin_name_value: str, plugin_source_path: str) -> dict[str, Any]:
+    return {
+        "name": plugin_name_value,
+        "source": {"source": "local", "path": plugin_source_path},
+        "policy": {"installation": "AVAILABLE", "authentication": "ON_INSTALL"},
+        "category": "Productivity",
+    }
+
+
+def replace_marketplace_entry(data: object, entry: dict[str, Any]) -> dict[str, Any]:
+    normalized = normalize_marketplace_data(data)
+    plugins = [
+        plugin for plugin in normalized["plugins"] if plugin.get("name") != entry.get("name")
+    ]
+    return {
+        **normalized,
+        "plugins": [*plugins, entry],
+    }
+
+
 def load_json(path: Path, dry_run: bool) -> dict:
     if not path.exists():
-        return {
-            "name": MARKETPLACE_NAME,
-            "interface": {"displayName": "Local Personal Plugins"},
-            "plugins": [],
-        }
+        return default_marketplace_data()
     try:
         return json.loads(path.read_text(encoding="utf-8"))
     except Exception:
@@ -110,27 +148,14 @@ def load_json(path: Path, dry_run: bool) -> dict:
         else:
             shutil.copy2(path, backup)
             print(f"Existing marketplace JSON could not be parsed; backed up to {backup}")
-        return {
-            "name": MARKETPLACE_NAME,
-            "interface": {"displayName": "Local Personal Plugins"},
-            "plugins": [],
-        }
+        return default_marketplace_data()
 
 
 def update_marketplace(path: Path, plugin_name_value: str, plugin_source_path: str, dry_run: bool) -> None:
-    data = load_json(path, dry_run)
-    data.setdefault("name", MARKETPLACE_NAME)
-    data.setdefault("interface", {"displayName": "Local Personal Plugins"})
-    data.setdefault("plugins", [])
-    entry = {
-        "name": plugin_name_value,
-        "source": {"source": "local", "path": plugin_source_path},
-        "policy": {"installation": "AVAILABLE", "authentication": "ON_INSTALL"},
-        "category": "Productivity",
-    }
-    plugins = [p for p in data["plugins"] if p.get("name") != plugin_name_value]
-    plugins.append(entry)
-    data["plugins"] = plugins
+    data = replace_marketplace_entry(
+        load_json(path, dry_run),
+        marketplace_entry(plugin_name_value, plugin_source_path),
+    )
     if dry_run:
         print(f"Would write marketplace: {path}")
         print(json.dumps(data, indent=2))

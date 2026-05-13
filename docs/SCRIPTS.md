@@ -19,11 +19,14 @@ These requirements apply only when you run the scripts. If you copy or upload sk
 | Preview local install | `./install.sh --dry-run` | Validates the package and prints the install plan without copying files or writing marketplace JSON. |
 | Install locally on macOS or Linux | `./install.sh` | Validates the package, copies it to the local plugin directory, and updates the personal marketplace file. |
 | Install locally on Windows | `.\install.ps1` | Same installer flow through PowerShell. |
-| Run the full package check | `./validate.sh` | Runs plugin validation, artifact contract validation, and the unit test suite. |
+| Run the full package check | `./validate.sh` | Runs the shared full validation suite through `scripts/run_package_checks.py`. |
+| Run shared package checks directly | `python3 scripts/run_package_checks.py --scope full --root .` | Runs either the full validation suite or the smaller install preflight with `--scope install`. |
 | Validate plugin structure | `python3 scripts/validate_plugin.py .` | Checks the manifest, skill folders, skill frontmatter, skill README files, agent metadata, duplicate prompts, and local docs links. |
 | Validate book artifacts | `python3 scripts/check_book_artifact_contract.py --path .` | Checks the shared book artifact schema, artifact-specific field boundaries, optional handoff passport shape, and every JSON example under `examples/book_artifacts/`. |
 | Check behavior fixtures | `python3 scripts/check_research_behavior_fixtures.py --fixtures examples/evals/research-skill-behavior-fixtures.json` | Checks high-risk behavior fixture shape; add `--outputs-dir path/to/outputs` to check captured local outputs. |
 | Summarize behavior calibration | `python3 scripts/summarize_research_behavior_evals.py --fixtures examples/evals/research-skill-behavior-fixtures.json --outputs-dir examples/evals/outputs` | Reports fixture coverage, route coverage, compact-output coverage, and captured-output validation status. |
+| Build behavior harness report | `python3 scripts/research_behavior_eval_harness.py --fixtures examples/evals/research-skill-behavior-fixtures.json --outputs-dir examples/evals/outputs` | Produces a deterministic JSON report; add `--format markdown` for a manual or live-run capture runbook. |
+| Check source candidates | `python3 scripts/check_source_candidates.py --input path/to/source-candidates.json` | Parses local JSON or CSV candidate exports, clusters duplicates, and gates completed-search claims without network access. |
 | Check citation metadata | `python3 scripts/check_citation_metadata.py --input path/to/public-metadata.json` | Compares local public metadata fields for DOI, normalized title, author-year, and venue mismatch risk. Default mode uses no network. |
 | Run unit tests | `python3 -m unittest discover -s scripts -p 'test_*.py'` | Runs the script and package policy tests. |
 | Package a zip | `python3 scripts/package_plugin.py --root .` | Writes a versioned zip in the current directory unless `--out` is supplied. |
@@ -37,6 +40,8 @@ These requirements apply only when you run the scripts. If you copy or upload sk
 The installer backs up an existing marketplace file before rewriting it. If the existing marketplace JSON cannot be parsed, it writes a timestamped backup and creates a fresh marketplace file.
 
 ### Validator
+
+`scripts/run_package_checks.py` is the shared validation runner. `--scope install` runs the pre-install checks used by the local installer. `--scope full` runs plugin validation, artifact contract validation, behavior fixture validation, the behavior harness, and the unit test suite.
 
 `scripts/validate_plugin.py` validates the package shape. It does not write files. It reports all validation errors it finds before exiting with status 1.
 
@@ -61,6 +66,12 @@ Use this script after changing `shared/contracts/book/book_artifact.schema.json`
 The checker is deterministic and no-network. It does not run a model or verify source truth; it only checks local fixture documents and local captured outputs.
 
 `scripts/summarize_research_behavior_evals.py` writes a local JSON calibration report for the same fixture set. It reports fixture count, expected-route coverage, covered risks, compact fixture count, captured-output presence, and captured-output validation errors. This is a local benchmark report only: it does not run a model, verify source truth, or certify scholarly correctness.
+
+`scripts/research_behavior_eval_harness.py` builds on the same deterministic checks and adds a per-fixture runbook. The JSON format is useful for automation; `--format markdown` prints the prompt, expected route, required markers, forbidden claims, output file name, manual/live capture expectations, and explicit limits for each fixture. Use `--quiet` when only the validation exit code matters. This harness does not run a model or call external services. It is meant to make manual or future live-run captures auditable while keeping the default package validation no-network and reproducible.
+
+### Source candidate checker
+
+`scripts/check_source_candidates.py` parses local JSON or CSV candidate exports into normalized candidate records and duplicate clusters. It dedupes by DOI or stable identifier first, then by normalized title as a review-needed cluster. It also rejects private text fields and flags records that claim a completed search without `search_venue`, `query`, and `date_searched`. Default mode is deterministic and no-network; use `--quiet` when only the validation exit code matters.
 
 ### Citation metadata checker
 

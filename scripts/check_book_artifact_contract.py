@@ -9,7 +9,6 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from plugin_utils import (
-    ARTIFACT_TYPE_FIELDS as ARTIFACT_ALLOWED_FIELDS,
     COMMON_ARTIFACT_FIELDS,
     load_json_object_result,
 )
@@ -289,21 +288,55 @@ def validate_examples(schema: dict[str, Any], files: list[Path]) -> list[str]:
         assert payload is not None
         for validation_error in validate_value(schema, schema, payload, []):
             errors.append(f"{path}: {validation_error}")
-        for boundary_error in validate_artifact_boundaries(payload):
+        for boundary_error in validate_artifact_boundaries(schema, payload):
             errors.append(f"{path}: {boundary_error}")
     return errors
 
 
-def allowed_fields_for_artifact_type(artifact_type: str) -> set[str]:
-    return COMMON_ARTIFACT_FIELDS | ARTIFACT_ALLOWED_FIELDS.get(artifact_type, set())
+def required_fields(subschema: dict[str, Any]) -> set[str]:
+    required = subschema.get("required")
+    return {field for field in required if isinstance(field, str)} if isinstance(required, list) else set()
 
 
-def validate_artifact_field_boundaries(payload: dict[str, Any]) -> list[str]:
+def property_fields(subschema: dict[str, Any]) -> set[str]:
+    properties = subschema.get("properties")
+    return {field for field in properties if isinstance(field, str)} if isinstance(properties, dict) else set()
+
+
+def conditional_artifact_type(branch: dict[str, Any]) -> str:
+    condition = branch.get("if")
+    if not isinstance(condition, dict):
+        return ""
+    artifact_type = const_property_conditions(condition).get("artifact_type")
+    return artifact_type if isinstance(artifact_type, str) else ""
+
+
+def artifact_type_field_boundaries(schema: dict[str, Any]) -> dict[str, set[str]]:
+    branches = schema.get("allOf")
+    if not isinstance(branches, list):
+        return {}
+    boundaries: dict[str, set[str]] = {}
+    for branch in branches:
+        if not isinstance(branch, dict):
+            continue
+        artifact_type = conditional_artifact_type(branch)
+        then_schema = branch.get("then")
+        if not artifact_type or not isinstance(then_schema, dict):
+            continue
+        boundaries[artifact_type] = required_fields(then_schema) | property_fields(then_schema)
+    return boundaries
+
+
+def allowed_fields_for_artifact_type(schema: dict[str, Any], artifact_type: str) -> set[str]:
+    return COMMON_ARTIFACT_FIELDS | artifact_type_field_boundaries(schema).get(artifact_type, set())
+
+
+def validate_artifact_field_boundaries(schema: dict[str, Any], payload: dict[str, Any]) -> list[str]:
     artifact_type = payload.get("artifact_type")
-    if not isinstance(artifact_type, str) or artifact_type not in ARTIFACT_ALLOWED_FIELDS:
+    if not isinstance(artifact_type, str) or artifact_type not in artifact_type_field_boundaries(schema):
         return []
 
-    allowed_fields = allowed_fields_for_artifact_type(artifact_type)
+    allowed_fields = allowed_fields_for_artifact_type(schema, artifact_type)
     return [
         f"field {key!r} is not allowed for artifact_type {artifact_type!r}"
         for key in sorted(payload)
@@ -311,8 +344,8 @@ def validate_artifact_field_boundaries(payload: dict[str, Any]) -> list[str]:
     ]
 
 
-def validate_artifact_boundaries(payload: dict[str, Any]) -> list[str]:
-    return validate_artifact_field_boundaries(payload)
+def validate_artifact_boundaries(schema: dict[str, Any], payload: dict[str, Any]) -> list[str]:
+    return validate_artifact_field_boundaries(schema, payload)
 
 
 def schema_artifact_types(schema: dict[str, Any]) -> set[str]:

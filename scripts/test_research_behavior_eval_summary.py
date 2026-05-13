@@ -9,6 +9,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from research_behavior_reports import output_summary
 from summarize_research_behavior_evals import build_calibration_report
 
 
@@ -40,6 +41,21 @@ def fixture_document() -> dict[str, object]:
 
 
 class TestResearchBehaviorEvalSummary(unittest.TestCase):
+    def test_shared_output_summary_reports_present_missing_and_errors(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            outputs_dir = root / "outputs"
+            outputs_dir.mkdir()
+            fixtures = fixture_document()["fixtures"]
+            (outputs_dir / "route-one.md").write_text("## Source basis\n", encoding="utf-8")
+
+            summary = output_summary(outputs_dir, fixtures)
+
+            self.assertTrue(summary["checked"])
+            self.assertEqual(summary["present"], ["route-one"])
+            self.assertEqual(summary["missing"], ["route-two"])
+            self.assertEqual(summary["validation_errors"], ["route-two: missing output file route-two.md"])
+
     def test_report_counts_routes_risks_and_captured_outputs(self) -> None:
         with TemporaryDirectory() as temporary_directory:
             root = Path(temporary_directory)

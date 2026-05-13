@@ -13,7 +13,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable, NamedTuple
 
 
 PRIVATE_FIELDS = {
@@ -33,6 +33,14 @@ DOI_RE = re.compile(r"^10\.\d{4,9}/\S+$", re.IGNORECASE)
 LOOKUP_PROVIDERS = {"none", "crossref"}
 CROSSREF_WORKS_ENDPOINT = "https://api.crossref.org/v1/works/"
 CROSSREF_USER_AGENT = "scholarly-research-book-plugin/1.0 (public metadata lookup)"
+
+
+class MetadataPairSpec(NamedTuple):
+    claimed_key: str
+    authoritative_key: str
+    status_key: str
+    mismatch_note: str
+    comparator: Callable[[str, str], str]
 
 
 def read_json_records(path: Path) -> list[dict[str, Any]]:
@@ -119,6 +127,10 @@ def normalize_title(value: str) -> str:
     return " ".join(without_punctuation.lower().split())
 
 
+def normalize_lower_words(value: str) -> str:
+    return " ".join(value.lower().split())
+
+
 def compare_pair(claimed: str, authoritative: str, *, normalizer) -> str:
     if not claimed and not authoritative:
         return "not_provided"
@@ -137,14 +149,38 @@ def doi_status(claimed_doi: str, authoritative_doi: str) -> str:
     return compare_pair(claimed, authoritative, normalizer=lambda value: value)
 
 
+METADATA_PAIR_SPECS = (
+    MetadataPairSpec("claimed_doi", "authoritative_doi", "doi_status", "DOI mismatch", doi_status),
+    MetadataPairSpec(
+        "claimed_title",
+        "authoritative_title",
+        "title_status",
+        "title mismatch",
+        lambda claimed, authoritative: compare_pair(claimed, authoritative, normalizer=normalize_title),
+    ),
+    MetadataPairSpec(
+        "claimed_author_year",
+        "authoritative_author_year",
+        "author_year_status",
+        "author-year mismatch",
+        lambda claimed, authoritative: compare_pair(claimed, authoritative, normalizer=normalize_lower_words),
+    ),
+    MetadataPairSpec(
+        "claimed_venue",
+        "authoritative_venue",
+        "venue_status",
+        "venue mismatch",
+        lambda claimed, authoritative: compare_pair(claimed, authoritative, normalizer=normalize_title),
+    ),
+)
+
+
 def mismatch_notes(statuses: dict[str, str]) -> list[str]:
-    labels = {
-        "doi_status": "DOI mismatch",
-        "title_status": "title mismatch",
-        "author_year_status": "author-year mismatch",
-        "venue_status": "venue mismatch",
-    }
-    return [label for key, label in labels.items() if statuses[key] == "mismatch"]
+    return [
+        spec.mismatch_note
+        for spec in METADATA_PAIR_SPECS
+        if statuses[spec.status_key] == "mismatch"
+    ]
 
 
 def status_and_risk(statuses: dict[str, str]) -> tuple[str, str]:
@@ -162,22 +198,11 @@ def status_and_risk(statuses: dict[str, str]) -> tuple[str, str]:
 
 def evaluate_record(record: dict[str, Any], index: int) -> dict[str, Any]:
     statuses = {
-        "doi_status": doi_status(text_value(record, "claimed_doi"), text_value(record, "authoritative_doi")),
-        "title_status": compare_pair(
-            text_value(record, "claimed_title"),
-            text_value(record, "authoritative_title"),
-            normalizer=normalize_title,
-        ),
-        "author_year_status": compare_pair(
-            text_value(record, "claimed_author_year"),
-            text_value(record, "authoritative_author_year"),
-            normalizer=lambda value: " ".join(value.lower().split()),
-        ),
-        "venue_status": compare_pair(
-            text_value(record, "claimed_venue"),
-            text_value(record, "authoritative_venue"),
-            normalizer=normalize_title,
-        ),
+        spec.status_key: spec.comparator(
+            text_value(record, spec.claimed_key),
+            text_value(record, spec.authoritative_key),
+        )
+        for spec in METADATA_PAIR_SPECS
     }
     status, risk = status_and_risk(statuses)
     notes = mismatch_notes(statuses)

@@ -27,14 +27,19 @@
         "claim_evidence_ledger",
         "source_note",
         "extraction_table",
+        "annotated_bibliography",
+        "methodology_source_audit",
         "claim_traceability_graph",
+        "peer_review_report",
         "citation_integrity_audit",
         "rights_privacy_release_audit",
         "comps_verification",
         "scholarly_integrity_audit",
         "ai_human_workflow_log",
         "figure_table_integrity_audit",
+        "case_study_dossier",
         "continuity_review",
+        "style_sheet",
         "book_proposal"
       ]
     },
@@ -274,12 +279,48 @@
         "$ref": "#/$defs/extraction_row"
       }
     },
+    "bibliography_annotations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/bibliography_annotation"
+      }
+    },
+    "source_audit_rows": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/source_audit_row"
+      }
+    },
     "traceability_links": {
       "type": "array",
       "minItems": 1,
       "items": {
         "$ref": "#/$defs/traceability_link"
       }
+    },
+    "charitable_restatement": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "review_objections": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/review_objection"
+      }
+    },
+    "rival_explanations": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "missing_literatures": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "claims_to_narrow": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "revision_priorities": {
+      "$ref": "#/$defs/non_empty_strings"
     },
     "citation_audit_rows": {
       "type": "array",
@@ -323,6 +364,25 @@
         "$ref": "#/$defs/figure_table_check"
       }
     },
+    "claim_needing_case": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "case_selection_logic": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "case_dossiers": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/case_dossier"
+      }
+    },
+    "counter_cases": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "safer_case_claims": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
     "global_thesis": {
       "$ref": "#/$defs/non_empty_string"
     },
@@ -354,6 +414,25 @@
     },
     "priority_revision_list": {
       "$ref": "#/$defs/non_empty_strings"
+    },
+    "style_rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/style_rule"
+      }
+    },
+    "voice_constraints": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "terms_to_preserve": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "claim_language_guidance": {
+      "$ref": "#/$defs/non_empty_strings"
+    },
+    "new_factual_claims_policy": {
+      "$ref": "#/$defs/non_empty_string"
     },
     "title_options": {
       "$ref": "#/$defs/non_empty_strings"
@@ -433,6 +512,11 @@
         }
       },
       "then": {
+        "properties": {
+          "systematic_review": {
+            "$ref": "#/$defs/systematic_review_record"
+          }
+        },
         "required": [
           "search_families",
           "query_bank",
@@ -532,6 +616,14 @@
         }
       },
       "then": {
+        "properties": {
+          "analysis_provenance": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/analysis_provenance_row"
+            }
+          }
+        },
         "required": [
           "claims",
           "high_risk_claims",

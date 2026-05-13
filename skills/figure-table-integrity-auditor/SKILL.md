@@ -54,7 +54,7 @@ When the user explicitly asks for JSON or a contract artifact, use `shared/contr
 ## Files/folders it may read
 
 - Shared operational boundary doc: `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
-- Shared policy docs, especially `docs/SOURCE_LIMITS.md`, `docs/AUTO_SELECTION_GUARDRAILS.md`, and `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
+- Shared policy docs, especially `docs/SOURCE_LIMITS.md` and `docs/AUTO_SELECTION_GUARDRAILS.md`.
 - User-provided figures, tables, captions, data files, extracted rows, notebooks, source images, licenses, manuscript sections, and project files explicitly named in the request.
 
 ## Files/folders it may write

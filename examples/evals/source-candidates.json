@@ -1,0 +1,41 @@
+{
+  "schema_version": "source-candidate-fixture-v1",
+  "purpose": "Synthetic fixture records for deterministic source-candidate parsing and deduping checks. These are not real citations or verified sources.",
+  "records": [
+    {
+      "candidate_id": "fixture-candidate-a",
+      "title": "Fixture Candidate on Research Workflows",
+      "authors": "Example Author",
+      "year": "2026",
+      "venue": "Fixture Export",
+      "doi": "10.0000/fixture-workflow",
+      "source_export": "fixture-search",
+      "search_status": "completed",
+      "search_venue": "Fixture Database",
+      "query": "\"fixture workflow\"",
+      "date_searched": "2026-05-13"
+    },
+    {
+      "candidate_id": "fixture-candidate-b",
+      "title": "Fixture Candidate on Research Workflows",
+      "authors": "Example Author",
+      "year": "2026",
+      "venue": "Fixture Export",
+      "doi": "https://doi.org/10.0000/fixture-workflow",
+      "source_export": "fixture-search",
+      "search_status": "completed",
+      "search_venue": "Fixture Database",
+      "query": "\"fixture workflow\"",
+      "date_searched": "2026-05-13"
+    },
+    {
+      "candidate_id": "fixture-candidate-c",
+      "title": "Distinct Fixture Candidate",
+      "authors": "Different Author",
+      "year": "2025",
+      "venue": "Fixture Export",
+      "openalex_id": "W000000001",
+      "search_status": "planned"
+    }
+  ]
+}
