@@ -78,7 +78,7 @@ def write_minimal_plugin(root: Path, *, skill_body: str | None = None) -> None:
                 '  display_name: "Sample Skill"',
                 f'  short_description: "{skill_description}"',
                 '  default_prompt: "Use sample-skill."',
-                *load_module("plugin_utils.py").agent_policy_yaml_lines(),
+                *load_module("plugin_utils.py").agent_policy_yaml_lines("sample-skill"),
                 "",
             ]
         ),
@@ -444,9 +444,29 @@ class TestExecutableSafeguards(unittest.TestCase):
             plugin_utils.REQUIRED_AGENT_POLICY["task_type"],
             "research-book-skill",
         )
+        self.assertEqual(
+            plugin_utils.agent_policy_fields("citation-integrity-auditor")["external_lookup_allowed"],
+            "conditional",
+        )
+        self.assertEqual(
+            plugin_utils.agent_policy_fields("research-book-orchestrator")["external_lookup_allowed"],
+            "route-only",
+        )
+        self.assertEqual(
+            plugin_utils.agent_policy_fields("chapter-architecture")["external_lookup_allowed"],
+            "none",
+        )
         self.assertIn(
             '  confidentiality_gate: "required-before-external-lookup"',
-            plugin_utils.agent_policy_yaml_lines(),
+            plugin_utils.agent_policy_yaml_lines("citation-integrity-auditor"),
+        )
+        self.assertIn(
+            '  allowed_external_payloads: "public-identifiers-search-terms-and-nonsensitive-short-summaries"',
+            plugin_utils.agent_policy_yaml_lines("citation-integrity-auditor"),
+        )
+        self.assertIn(
+            "  lookup_consent_required: true",
+            plugin_utils.agent_policy_yaml_lines("citation-integrity-auditor"),
         )
 
     def test_artifact_boundary_rules_are_shared(self) -> None:
@@ -686,6 +706,28 @@ class TestExecutableSafeguards(unittest.TestCase):
             self.assertEqual(result.returncode, 1)
             self.assertIn("broken local reference", result.stdout)
 
+    def test_validator_shared_reference_checker_reports_missing_and_escaped_paths(self) -> None:
+        validator = load_module("validate_plugin.py")
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory).resolve()
+            source_path = root / "README.md"
+            source_path.write_text("Sample", encoding="utf-8")
+
+            errors = validator.broken_references_from_values(
+                root,
+                source_path,
+                "README.md",
+                ["docs/missing.md", "../outside.md"],
+            )
+
+            self.assertEqual(
+                errors,
+                [
+                    "README.md: broken local reference: docs/missing.md",
+                    "README.md: local reference escapes plugin root: ../outside.md",
+                ],
+            )
+
     def test_validator_rejects_missing_manifest_asset_references(self) -> None:
         with TemporaryDirectory() as temporary_directory:
             root = Path(temporary_directory)
@@ -789,6 +831,38 @@ class TestExecutableSafeguards(unittest.TestCase):
             self.assertIn("policy.data_access_level", result.stdout)
             self.assertIn("policy.external_lookup_allowed", result.stdout)
             self.assertIn("policy.confidentiality_gate", result.stdout)
+            self.assertIn("policy.allowed_external_payloads", result.stdout)
+            self.assertIn("policy.lookup_consent_required", result.stdout)
+            self.assertIn("policy.private_payloads_external", result.stdout)
+            self.assertIn("policy.artifact_sensitivity", result.stdout)
+
+    def test_validator_rejects_wrong_skill_specific_lookup_policy(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_minimal_plugin(root)
+            policy_lines = load_module("plugin_utils.py").agent_policy_yaml_lines("citation-integrity-auditor")
+            (root / "skills" / "sample-skill" / "agents" / "openai.yaml").write_text(
+                "\n".join(
+                    [
+                        "interface:",
+                        '  display_name: "Sample Skill"',
+                        (
+                            '  short_description: "Sample skill validates metadata display routing '
+                            'coverage evidence workflow planning audit chapter argument continuity."'
+                        ),
+                        '  default_prompt: "Use sample-skill."',
+                        *policy_lines,
+                        "",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            result = run_script("validate_plugin.py", str(root))
+
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("policy.external_lookup_allowed must be 'none'", result.stdout)
+            self.assertIn("policy.allowed_external_payloads", result.stdout)
 
     def test_validator_rejects_skill_metadata_version_drift(self) -> None:
         with TemporaryDirectory() as temporary_directory:

@@ -40,6 +40,10 @@ Use when the user needs examples, cases, comparative examples, narrative dossier
 
 Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
+## Machine-readable artifacts
+
+When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: case_study_dossier`. If the output is normal Markdown, do not force the JSON contract.
+
 ## Case functions
 
 Classify each case as:

@@ -6,5 +6,9 @@ policy:
   allow_implicit_invocation: true
   task_type: "research-book-skill"
   data_access_level: "user-provided-or-public-metadata"
-  external_lookup_allowed: "conditional"
   confidentiality_gate: "required-before-external-lookup"
+  lookup_consent_required: true
+  private_payloads_external: "requires-explicit-consent"
+  artifact_sensitivity: "research-work-product"
+  external_lookup_allowed: "route-only"
+  allowed_external_payloads: "routing-targets-and-nonsensitive-summary-only"

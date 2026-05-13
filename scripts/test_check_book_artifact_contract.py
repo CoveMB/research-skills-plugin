@@ -38,6 +38,11 @@ def write_schema(root: Path) -> None:
                             "chapter_brief",
                             "book_proposal",
                             "source_discovery_log",
+                            "methodology_source_audit",
+                            "annotated_bibliography",
+                            "case_study_dossier",
+                            "peer_review_report",
+                            "style_sheet",
                         ]
                     },
                     "project_title": {"type": "string", "minLength": 1},
@@ -102,6 +107,125 @@ def write_schema(root: Path) -> None:
                             },
                         },
                     },
+                    "source_audit_rows": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "required": ["source", "source_type", "method_evidence", "credibility", "bias_risk", "can_support", "cannot_support", "use_recommendation"],
+                            "properties": {
+                                "source": {"type": "string", "minLength": 1},
+                                "source_type": {"type": "string", "minLength": 1},
+                                "method_evidence": {"type": "string", "minLength": 1},
+                                "credibility": {"type": "string", "minLength": 1},
+                                "bias_risk": {"enum": ["low", "medium", "high", "critical"]},
+                                "can_support": {"type": "string", "minLength": 1},
+                                "cannot_support": {"type": "string", "minLength": 1},
+                                "use_recommendation": {"type": "string", "minLength": 1},
+                            },
+                        },
+                    },
+                    "bibliography_annotations": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "required": ["source", "annotation_basis", "source_type", "main_argument", "method_evidence", "best_use", "limitations", "chapter_placement", "citation_details_needed"],
+                            "properties": {
+                                "source": {"type": "string", "minLength": 1},
+                                "annotation_basis": {"type": "string", "minLength": 1},
+                                "source_type": {"type": "string", "minLength": 1},
+                                "main_argument": {"type": "string", "minLength": 1},
+                                "method_evidence": {"type": "string", "minLength": 1},
+                                "best_use": {"type": "string", "minLength": 1},
+                                "limitations": {"type": "string", "minLength": 1},
+                                "chapter_placement": {"type": "string", "minLength": 1},
+                                "citation_details_needed": {"type": "string", "minLength": 1},
+                            },
+                        },
+                    },
+                    "claim_needing_case": {"type": "string", "minLength": 1},
+                    "case_selection_logic": {"type": "string", "minLength": 1},
+                    "case_dossiers": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "required": ["case", "function", "supports", "challenges", "source_base", "selection_risk", "generalization_limit", "chapter_use"],
+                            "properties": {
+                                "case": {"type": "string", "minLength": 1},
+                                "function": {"type": "string", "minLength": 1},
+                                "supports": {"type": "string", "minLength": 1},
+                                "challenges": {"type": "string", "minLength": 1},
+                                "source_base": {"type": "string", "minLength": 1},
+                                "selection_risk": {"type": "string", "minLength": 1},
+                                "generalization_limit": {"type": "string", "minLength": 1},
+                                "chapter_use": {"type": "string", "minLength": 1},
+                            },
+                        },
+                    },
+                    "counter_cases": {
+                        "type": "array",
+                        "items": {"type": "string", "minLength": 1},
+                    },
+                    "safer_case_claims": {
+                        "type": "array",
+                        "items": {"type": "string", "minLength": 1},
+                    },
+                    "charitable_restatement": {"type": "string", "minLength": 1},
+                    "review_objections": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "required": ["objection", "source_of_challenge", "severity", "why_it_matters", "falsifying_evidence", "revision_strategy"],
+                            "properties": {
+                                "objection": {"type": "string", "minLength": 1},
+                                "source_of_challenge": {"type": "string", "minLength": 1},
+                                "severity": {"enum": ["low", "medium", "high", "critical"]},
+                                "why_it_matters": {"type": "string", "minLength": 1},
+                                "falsifying_evidence": {"type": "string", "minLength": 1},
+                                "revision_strategy": {"type": "string", "minLength": 1},
+                            },
+                        },
+                    },
+                    "rival_explanations": {
+                        "type": "array",
+                        "items": {"type": "string", "minLength": 1},
+                    },
+                    "missing_literatures": {
+                        "type": "array",
+                        "items": {"type": "string", "minLength": 1},
+                    },
+                    "claims_to_narrow": {
+                        "type": "array",
+                        "items": {"type": "string", "minLength": 1},
+                    },
+                    "revision_priorities": {
+                        "type": "array",
+                        "items": {"type": "string", "minLength": 1},
+                    },
+                    "style_rules": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "required": ["rule", "reason", "example"],
+                            "properties": {
+                                "rule": {"type": "string", "minLength": 1},
+                                "reason": {"type": "string", "minLength": 1},
+                                "example": {"type": "string", "minLength": 1},
+                            },
+                        },
+                    },
+                    "voice_constraints": {
+                        "type": "array",
+                        "items": {"type": "string", "minLength": 1},
+                    },
+                    "terms_to_preserve": {
+                        "type": "array",
+                        "items": {"type": "string", "minLength": 1},
+                    },
+                    "claim_language_guidance": {
+                        "type": "array",
+                        "items": {"type": "string", "minLength": 1},
+                    },
+                    "new_factual_claims_policy": {"type": "string", "minLength": 1},
                 },
                 "allOf": [
                     {
@@ -115,6 +239,26 @@ def write_schema(root: Path) -> None:
                     {
                         "if": {"properties": {"artifact_type": {"const": "book_proposal"}}},
                         "then": {"required": ["comparable_titles"]},
+                    },
+                    {
+                        "if": {"properties": {"artifact_type": {"const": "methodology_source_audit"}}},
+                        "then": {"required": ["source_audit_rows"]},
+                    },
+                    {
+                        "if": {"properties": {"artifact_type": {"const": "annotated_bibliography"}}},
+                        "then": {"required": ["bibliography_annotations"]},
+                    },
+                    {
+                        "if": {"properties": {"artifact_type": {"const": "case_study_dossier"}}},
+                        "then": {"required": ["claim_needing_case", "case_selection_logic", "case_dossiers", "counter_cases", "safer_case_claims"]},
+                    },
+                    {
+                        "if": {"properties": {"artifact_type": {"const": "peer_review_report"}}},
+                        "then": {"required": ["charitable_restatement", "review_objections", "rival_explanations", "missing_literatures", "claims_to_narrow", "revision_priorities"]},
+                    },
+                    {
+                        "if": {"properties": {"artifact_type": {"const": "style_sheet"}}},
+                        "then": {"required": ["style_rules", "voice_constraints", "terms_to_preserve", "claim_language_guidance", "new_factual_claims_policy"]},
                     },
                 ],
             }

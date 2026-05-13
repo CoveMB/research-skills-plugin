@@ -41,6 +41,18 @@ This file is the shared operating policy for skill READMEs. Individual READMEs s
 - User-provided drafts, notes, sources, artifacts, or project files explicitly named in the request.
 - Shared project documentation when it is needed for workflow, quality, or artifact compatibility.
 
+## Agent policy metadata
+
+Each `agents/openai.yaml` policy block is generated from shared validator policy, not hand-maintained prose.
+
+Allowed `external_lookup_allowed` values are `conditional`, `route-only`, and `none`.
+
+- `external_lookup_allowed: conditional` means the skill may perform lookup only when its deep-work gate, source limits, tool availability, and user consent allow it.
+- `external_lookup_allowed: route-only` means the skill may route to a lookup-capable skill, but should not perform external lookup itself.
+- `external_lookup_allowed: none` means the skill should not use external lookup unless the user explicitly switches to an appropriate lookup-capable skill.
+- `allowed_external_payloads` states the safest payload class for external tools.
+- `lookup_consent_required` and `private_payloads_external` preserve the rule that private text, notes, source packets, sensitive material, and unpublished manuscript passages require explicit consent before external submission.
+
 ## Files/folders it may write
 
 - None by default.

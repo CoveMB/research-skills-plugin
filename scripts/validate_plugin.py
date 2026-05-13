@@ -18,13 +18,13 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from plugin_utils import (
+    agent_policy_fields,
     load_json_object_result,
     MIN_SHARED_DESCRIPTION_TERMS,
     nested_mapping,
     nested_string,
     parse_markdown_frontmatter,
     parse_simple_yaml_mapping,
-    REQUIRED_AGENT_POLICY,
     significant_description_terms,
 )
 
@@ -95,10 +95,8 @@ def clean_reference(reference: str) -> str:
     return reference.strip().split("#", 1)[0]
 
 
-def broken_local_references(root: Path, path: Path) -> list[str]:
+def broken_references_from_values(root: Path, path: Path, label: str, references: list[str]) -> list[str]:
     errors: list[str] = []
-    text = path.read_text(encoding="utf-8")
-    references = [*MARKDOWN_LINK_RE.findall(text), *BACKTICK_REFERENCE_RE.findall(text)]
     for reference in references:
         normalized = clean_reference(reference)
         if not is_path_like_reference(normalized):
@@ -108,11 +106,17 @@ def broken_local_references(root: Path, path: Path) -> list[str]:
             reference_candidates(root, path, normalized),
         )
         if escaped:
-            errors.append(f"{path.name}: local reference escapes plugin root: {normalized}")
+            errors.append(f"{label}: local reference escapes plugin root: {normalized}")
             continue
         if not exists:
-            errors.append(f"{path.name}: broken local reference: {normalized}")
+            errors.append(f"{label}: broken local reference: {normalized}")
     return errors
+
+
+def broken_local_references(root: Path, path: Path) -> list[str]:
+    text = path.read_text(encoding="utf-8")
+    references = [*MARKDOWN_LINK_RE.findall(text), *BACKTICK_REFERENCE_RE.findall(text)]
+    return broken_references_from_values(root, path, path.name, references)
 
 
 def string_values(value: Any) -> list[str]:
@@ -126,21 +130,7 @@ def string_values(value: Any) -> list[str]:
 
 
 def broken_manifest_references(root: Path, manifest_path: Path, manifest: dict[str, Any]) -> list[str]:
-    errors: list[str] = []
-    for reference in string_values(manifest):
-        normalized = clean_reference(reference)
-        if not is_path_like_reference(normalized):
-            continue
-        exists, escaped = reference_exists_inside_root(
-            root,
-            reference_candidates(root, manifest_path, normalized),
-        )
-        if escaped:
-            errors.append(f"plugin.json: local reference escapes plugin root: {normalized}")
-            continue
-        if not exists:
-            errors.append(f"plugin.json: broken local reference: {normalized}")
-    return errors
+    return broken_references_from_values(root, manifest_path, "plugin.json", string_values(manifest))
 
 
 def broken_yaml_references(root: Path, path: Path) -> list[str]:
@@ -148,21 +138,7 @@ def broken_yaml_references(root: Path, path: Path) -> list[str]:
         data = parse_simple_yaml_mapping(path.read_text(encoding="utf-8"))
     except Exception:
         return []
-    errors: list[str] = []
-    for reference in string_values(data):
-        normalized = clean_reference(reference)
-        if not is_path_like_reference(normalized):
-            continue
-        exists, escaped = reference_exists_inside_root(
-            root,
-            reference_candidates(root, path, normalized),
-        )
-        if escaped:
-            errors.append(f"{path.name}: local reference escapes plugin root: {normalized}")
-            continue
-        if not exists:
-            errors.append(f"{path.name}: broken local reference: {normalized}")
-    return errors
+    return broken_references_from_values(root, path, path.name, string_values(data))
 
 
 def broken_reference_file_errors(root: Path, path: Path) -> list[str]:
@@ -249,8 +225,8 @@ def validate_agent_metadata(
         errors.append(
             f"{skill_name}: agents/openai.yaml policy.allow_implicit_invocation must be boolean"
         )
-    for field_name, expected_value in REQUIRED_AGENT_POLICY.items():
-        value = nested_string(policy, field_name)
+    for field_name, expected_value in agent_policy_fields(skill_name).items():
+        value = policy.get(field_name)
         if value != expected_value:
             errors.append(
                 f"{skill_name}: agents/openai.yaml policy.{field_name} must be {expected_value!r}"

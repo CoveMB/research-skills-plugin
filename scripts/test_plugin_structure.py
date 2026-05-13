@@ -12,8 +12,19 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from plugin_utils import (
+    AGENT_LOOKUP_POLICY_VALUES,
     CONTRACT_ARTIFACT_SKILLS,
+    DIRECT_LOOKUP_SKILLS,
     MIN_SHARED_DESCRIPTION_TERMS,
+    PROVENANCE_FIELDS,
+    ROUTE_ONLY_LOOKUP_SKILLS,
+    SOURCE_LIMITS_POLICY_SENTENCE,
+    SUGGESTED_NEXT_STEP_POLICY_SENTENCE,
+    SUGGESTED_NEXT_STEP_TEMPLATE_PHRASES,
+    agent_policy_fields,
+    machine_readable_artifact_sentence,
+    nested_mapping,
+    parse_simple_yaml_mapping,
     significant_description_terms,
 )
 
@@ -38,18 +49,6 @@ REQUIRED_README_HEADINGS = [
     "## Files/folders it may write",
     "## What it must not do",
     "## Best next steps",
-]
-SUGGESTED_NEXT_STEP_TEMPLATE_PHRASES = [
-    "Use `skill-name` to [specific next action].",
-    "Why this helps scholarship: [named risk reduced].",
-    "Use only if: [condition].",
-    "Skip if: [reason it would add noise now].",
-]
-PROVENANCE_FIELDS = [
-    "source_basis",
-    "what_i_can_verify",
-    "what_remains_uncertain",
-    "user_verification_needed",
 ]
 SELECTED_COMPACT_OUTPUT_SKILLS = [
     "research-intent-router",
@@ -273,6 +272,45 @@ class TestPluginStructure(unittest.TestCase):
                 stale_metadata.append(f"{skill_dir.name}: {len(shared_terms)} shared terms")
         self.assertEqual(stale_metadata, [])
 
+    def test_agent_policy_metadata_matches_shared_skill_profiles(self) -> None:
+        mismatches: list[str] = []
+        profiles: set[str] = set()
+        for skill_dir in self.skill_dirs():
+            metadata = parse_simple_yaml_mapping(read_text(skill_dir / "agents" / "openai.yaml"))
+            policy = nested_mapping(metadata, "policy")
+            expected_policy = agent_policy_fields(skill_dir.name)
+            profiles.add(str(expected_policy["external_lookup_allowed"]))
+            for field_name, expected_value in expected_policy.items():
+                if policy.get(field_name) != expected_value:
+                    mismatches.append(
+                        f"{skill_dir.name}: policy.{field_name} expected {expected_value!r} "
+                        f"got {policy.get(field_name)!r}"
+                    )
+
+        self.assertEqual(mismatches, [])
+        self.assertTrue(AGENT_LOOKUP_POLICY_VALUES.issubset(profiles))
+
+    def test_agent_lookup_profile_sets_reference_existing_skills(self) -> None:
+        skill_names = {skill_dir.name for skill_dir in self.skill_dirs()}
+        configured_skills = DIRECT_LOOKUP_SKILLS | ROUTE_ONLY_LOOKUP_SKILLS
+
+        self.assertEqual(sorted(configured_skills - skill_names), [])
+        self.assertEqual(sorted(DIRECT_LOOKUP_SKILLS & ROUTE_ONLY_LOOKUP_SKILLS), [])
+
+    def test_operational_boundaries_document_agent_policy_metadata(self) -> None:
+        boundaries = read_text(ROOT / "docs" / "SKILL_OPERATIONAL_BOUNDARIES.md")
+        required_phrases = [
+            "## Agent policy metadata",
+            "`external_lookup_allowed`",
+            "`conditional`",
+            "`route-only`",
+            "`none`",
+            "`allowed_external_payloads`",
+            "`lookup_consent_required`",
+            "`private_payloads_external`",
+        ]
+        self.assertEqual(missing_phrases(boundaries, required_phrases), [])
+
     def test_shared_source_limits_are_documented_and_referenced(self) -> None:
         source_limits_path = ROOT / "docs" / "SOURCE_LIMITS.md"
         self.assertTrue(source_limits_path.is_file())
@@ -287,7 +325,7 @@ class TestPluginStructure(unittest.TestCase):
         missing_references = [
             skill_dir.name
             for skill_dir in self.skill_dirs()
-            if "docs/SOURCE_LIMITS.md" not in skill_markdown(skill_dir)
+            if SOURCE_LIMITS_POLICY_SENTENCE not in skill_markdown(skill_dir)
         ]
         self.assertEqual(missing_references, [])
 
@@ -372,7 +410,11 @@ class TestPluginStructure(unittest.TestCase):
         for skill_dir in self.skill_dirs():
             text = skill_markdown(skill_dir)
             if "## Suggested next step" in text:
-                missing.extend(missing_labeled_phrases(skill_dir.name, text, required_phrases))
+                missing.extend(missing_labeled_phrases(
+                    skill_dir.name,
+                    text,
+                    [SUGGESTED_NEXT_STEP_POLICY_SENTENCE, *required_phrases],
+                ))
         self.assertEqual(missing, [])
 
     def test_suggested_next_step_template_lives_only_in_shared_policy(self) -> None:
@@ -683,8 +725,7 @@ class TestPluginStructure(unittest.TestCase):
                 text,
                 [
                     "## Machine-readable artifacts",
-                    "shared/contracts/book/book_artifact.schema.json",
-                    f"`artifact_type: {artifact_type}`",
+                    machine_readable_artifact_sentence(artifact_type),
                 ],
             ))
         self.assertEqual(missing, [])

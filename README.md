@@ -194,14 +194,19 @@ The plugin includes a shared book artifact schema at [`shared/contracts/book/boo
 - `claim-evidence-ledger.json`
 - `source-note.json`
 - `extraction-table.json`
+- `annotated-bibliography.json`
+- `methodology-source-audit.json`
 - `claim-traceability-graph.json`
+- `peer-review-report.json`
 - `citation-integrity-audit.json`
 - `figure-table-integrity-audit.json`
+- `case-study-dossier.json`
 - `scholarly-integrity-audit.json`
 - `ai-human-workflow-log.json`
 - `rights-privacy-release-audit.json`
 - `comps-verification.json`
 - `continuity-review.json`
+- `style-sheet.json`
 - `book-proposal.json`
 
 These artifacts are useful when a project needs to stay coherent across sessions, tools, or chapter drafts.

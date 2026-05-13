@@ -14,6 +14,7 @@ from check_citation_metadata import (
     crossref_work_url,
     evaluate_records,
     metadata_lookup_consent_errors,
+    public_identifier_status,
     private_field_errors,
 )
 
@@ -32,6 +33,16 @@ def matching_record() -> dict[str, str]:
         "authoritative_author_year": "Fixture 2026",
         "claimed_venue": "Fixture Venue",
         "authoritative_venue": "Fixture Venue",
+        "claimed_isbn": "978-0-306-40615-7",
+        "authoritative_isbn": "9780306406157",
+        "claimed_arxiv_id": "2604.05018",
+        "authoritative_arxiv_id": "arXiv:2604.05018v1",
+        "claimed_pmid": "12345678",
+        "authoritative_pmid": "PMID:12345678",
+        "claimed_oclc": "ocm12345678",
+        "authoritative_oclc": "12345678",
+        "claimed_lccn": "2002022641",
+        "authoritative_lccn": " 2002022641 ",
     }
 
 
@@ -40,7 +51,20 @@ class TestCitationMetadataChecks(unittest.TestCase):
         status_keys = [spec.status_key for spec in METADATA_PAIR_SPECS]
         results = evaluate_records([matching_record()])
 
-        self.assertEqual(status_keys, ["doi_status", "title_status", "author_year_status", "venue_status"])
+        self.assertEqual(
+            status_keys,
+            [
+                "doi_status",
+                "isbn_status",
+                "arxiv_id_status",
+                "pmid_status",
+                "oclc_status",
+                "lccn_status",
+                "title_status",
+                "author_year_status",
+                "venue_status",
+            ],
+        )
         self.assertTrue(all(status_key in results[0] for status_key in status_keys))
 
     def test_matching_metadata_is_low_risk(self) -> None:
@@ -49,7 +73,78 @@ class TestCitationMetadataChecks(unittest.TestCase):
         self.assertEqual(results[0]["status"], "metadata_match")
         self.assertEqual(results[0]["risk"], "low")
         self.assertEqual(results[0]["doi_status"], "match")
+        self.assertEqual(results[0]["isbn_status"], "match")
+        self.assertEqual(results[0]["arxiv_id_status"], "match")
+        self.assertEqual(results[0]["pmid_status"], "match")
+        self.assertEqual(results[0]["oclc_status"], "match")
+        self.assertEqual(results[0]["lccn_status"], "match")
         self.assertEqual(results[0]["title_status"], "match")
+
+    def test_absent_optional_identifiers_do_not_downgrade_complete_core_metadata(self) -> None:
+        record = {
+            key: value
+            for key, value in matching_record().items()
+            if key
+            not in {
+                "claimed_isbn",
+                "authoritative_isbn",
+                "claimed_arxiv_id",
+                "authoritative_arxiv_id",
+                "claimed_pmid",
+                "authoritative_pmid",
+                "claimed_oclc",
+                "authoritative_oclc",
+                "claimed_lccn",
+                "authoritative_lccn",
+            }
+        }
+
+        results = evaluate_records([record])
+
+        self.assertEqual(results[0]["status"], "metadata_match")
+        self.assertEqual(results[0]["risk"], "low")
+        self.assertEqual(results[0]["isbn_status"], "not_provided")
+
+    def test_public_identifier_mismatch_is_reported(self) -> None:
+        record = matching_record()
+        record["authoritative_isbn"] = "9780306406164"
+
+        results = evaluate_records([record])
+
+        self.assertEqual(results[0]["isbn_status"], "mismatch")
+        self.assertEqual(results[0]["status"], "metadata_mismatch")
+        self.assertEqual(results[0]["risk"], "medium")
+        self.assertIn("ISBN mismatch", results[0]["notes"])
+
+    def test_public_identifier_format_warnings_are_reported(self) -> None:
+        record = matching_record()
+        record["claimed_isbn"] = "9780306406158"
+        record["claimed_arxiv_id"] = "not arxiv"
+        record["claimed_pmid"] = "PMID:abc"
+        record["claimed_oclc"] = "oclc:abc"
+        record["claimed_lccn"] = "bad/lccn"
+
+        results = evaluate_records([record])
+
+        self.assertEqual(results[0]["isbn_status"], "format_warning")
+        self.assertEqual(results[0]["arxiv_id_status"], "format_warning")
+        self.assertEqual(results[0]["pmid_status"], "format_warning")
+        self.assertEqual(results[0]["oclc_status"], "format_warning")
+        self.assertEqual(results[0]["lccn_status"], "format_warning")
+        self.assertEqual(results[0]["status"], "metadata_format_warning")
+        self.assertIn("ISBN format warning", results[0]["notes"])
+        self.assertIn("arXiv ID format warning", results[0]["notes"])
+        self.assertIn("PMID format warning", results[0]["notes"])
+        self.assertIn("OCLC format warning", results[0]["notes"])
+        self.assertIn("LCCN format warning", results[0]["notes"])
+
+    def test_public_identifier_status_normalizes_known_public_prefixes(self) -> None:
+        self.assertEqual(public_identifier_status("isbn", "ISBN 978-0-306-40615-7", "9780306406157"), "match")
+        self.assertEqual(public_identifier_status("arxiv_id", "arXiv:2604.05018v1", "2604.05018"), "match")
+        self.assertEqual(public_identifier_status("pmid", "PMID:12345678", "12345678"), "match")
+        self.assertEqual(public_identifier_status("oclc", "ocm12345678", "12345678"), "match")
+        self.assertEqual(public_identifier_status("lccn", " 2002022641 ", "2002022641"), "match")
+        self.assertEqual(public_identifier_status("isbn", "ISBN unknown", ""), "format_warning")
 
     def test_identifier_and_title_mismatch_flags_hijack_risk(self) -> None:
         record = matching_record()

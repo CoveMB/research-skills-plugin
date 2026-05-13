@@ -82,6 +82,10 @@ For each family, ask method-specific questions:
 
 Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
+## Machine-readable artifacts
+
+When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: methodology_source_audit`. If the output is normal Markdown, do not force the JSON contract.
+
 ## Compact output
 
 Use compact output when the user asks for low reading load, source-use triage, or the strongest/weakest sources only. Compact output should keep source basis and method visibility limits clear, show what each source can and cannot support, and end with one next action.

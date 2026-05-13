@@ -141,14 +141,19 @@ When the user requests machine-readable artifacts, use `shared/contracts/book/bo
 - `claim_evidence_ledger`
 - `source_note`
 - `extraction_table`
+- `annotated_bibliography`
+- `methodology_source_audit`
 - `claim_traceability_graph`
+- `peer_review_report`
 - `citation_integrity_audit`
 - `figure_table_integrity_audit`
+- `case_study_dossier`
 - `scholarly_integrity_audit`
 - `ai_human_workflow_log`
 - `rights_privacy_release_audit`
 - `comps_verification`
 - `continuity_review`
+- `style_sheet`
 - `book_proposal`
 
 ### 6. Enforce scholarly quality gates

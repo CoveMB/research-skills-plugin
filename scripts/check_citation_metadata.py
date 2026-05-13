@@ -30,6 +30,11 @@ PRIVATE_FIELDS = {
     "source text",
 }
 DOI_RE = re.compile(r"^10\.\d{4,9}/\S+$", re.IGNORECASE)
+ARXIV_NEW_RE = re.compile(r"^\d{4}\.\d{4,5}$")
+ARXIV_OLD_RE = re.compile(r"^[a-z-]+(?:\.[a-z]{2})?/\d{7}$")
+PMID_RE = re.compile(r"^\d{1,9}$")
+OCLC_RE = re.compile(r"^\d+$")
+LCCN_RE = re.compile(r"^[a-z]{0,3}\d{6,10}$")
 LOOKUP_PROVIDERS = {"none", "crossref"}
 CROSSREF_WORKS_ENDPOINT = "https://api.crossref.org/v1/works/"
 CROSSREF_USER_AGENT = "scholarly-research-book-plugin/1.0 (public metadata lookup)"
@@ -149,8 +154,127 @@ def doi_status(claimed_doi: str, authoritative_doi: str) -> str:
     return compare_pair(claimed, authoritative, normalizer=lambda value: value)
 
 
+def normalize_isbn(value: str) -> str:
+    normalized = value.strip().lower()
+    normalized = re.sub(r"^isbn(?:-1[03])?:?", "", normalized).strip()
+    return "".join(character for character in normalized if character.isdigit() or character == "x").upper()
+
+
+def isbn10_is_valid(value: str) -> bool:
+    if len(value) != 10 or not value[:9].isdigit() or not (value[9].isdigit() or value[9] == "X"):
+        return False
+    digits = [10 if character == "X" else int(character) for character in value]
+    return sum((10 - index) * digit for index, digit in enumerate(digits)) % 11 == 0
+
+
+def isbn13_is_valid(value: str) -> bool:
+    if len(value) != 13 or not value.isdigit():
+        return False
+    total = sum((1 if index % 2 == 0 else 3) * int(digit) for index, digit in enumerate(value))
+    return total % 10 == 0
+
+
+def isbn_is_valid(value: str) -> bool:
+    return isbn10_is_valid(value) or isbn13_is_valid(value)
+
+
+def normalize_arxiv_id(value: str) -> str:
+    normalized = value.strip().lower()
+    for prefix in ["https://arxiv.org/abs/", "http://arxiv.org/abs/", "arxiv:"]:
+        if normalized.startswith(prefix):
+            normalized = normalized[len(prefix):]
+            break
+    return re.sub(r"v\d+$", "", normalized)
+
+
+def arxiv_id_is_valid(value: str) -> bool:
+    return bool(ARXIV_NEW_RE.match(value) or ARXIV_OLD_RE.match(value))
+
+
+def normalize_pmid(value: str) -> str:
+    normalized = value.strip().lower()
+    if normalized.startswith("pmid:"):
+        normalized = normalized[len("pmid:"):]
+    return normalized.strip().replace(" ", "")
+
+
+def normalize_oclc(value: str) -> str:
+    normalized = value.strip().lower()
+    for prefix in ["oclc:", "oclc", "ocm", "ocn", "on"]:
+        if normalized.startswith(prefix):
+            normalized = normalized[len(prefix):]
+            break
+    return normalized.strip().replace(" ", "")
+
+
+def normalize_lccn(value: str) -> str:
+    normalized = value.strip().lower()
+    if normalized.startswith("lccn:"):
+        normalized = normalized[len("lccn:"):]
+    return "".join(character for character in normalized if character.isalnum())
+
+
+PUBLIC_IDENTIFIER_SPECS = {
+    "isbn": (normalize_isbn, isbn_is_valid),
+    "arxiv_id": (normalize_arxiv_id, arxiv_id_is_valid),
+    "pmid": (normalize_pmid, lambda value: bool(PMID_RE.match(value))),
+    "oclc": (normalize_oclc, lambda value: bool(OCLC_RE.match(value))),
+    "lccn": (normalize_lccn, lambda value: bool(LCCN_RE.match(value))),
+}
+
+
+def public_identifier_status(identifier_name: str, claimed: str, authoritative: str) -> str:
+    normalizer, validator = PUBLIC_IDENTIFIER_SPECS[identifier_name]
+    normalized_claimed = normalizer(claimed)
+    normalized_authoritative = normalizer(authoritative)
+    if claimed.strip() and not normalized_claimed:
+        return "format_warning"
+    if authoritative.strip() and not normalized_authoritative:
+        return "format_warning"
+    if normalized_claimed and not validator(normalized_claimed):
+        return "format_warning"
+    if normalized_authoritative and not validator(normalized_authoritative):
+        return "format_warning"
+    return compare_pair(normalized_claimed, normalized_authoritative, normalizer=lambda value: value)
+
+
 METADATA_PAIR_SPECS = (
     MetadataPairSpec("claimed_doi", "authoritative_doi", "doi_status", "DOI mismatch", doi_status),
+    MetadataPairSpec(
+        "claimed_isbn",
+        "authoritative_isbn",
+        "isbn_status",
+        "ISBN mismatch",
+        lambda claimed, authoritative: public_identifier_status("isbn", claimed, authoritative),
+    ),
+    MetadataPairSpec(
+        "claimed_arxiv_id",
+        "authoritative_arxiv_id",
+        "arxiv_id_status",
+        "arXiv ID mismatch",
+        lambda claimed, authoritative: public_identifier_status("arxiv_id", claimed, authoritative),
+    ),
+    MetadataPairSpec(
+        "claimed_pmid",
+        "authoritative_pmid",
+        "pmid_status",
+        "PMID mismatch",
+        lambda claimed, authoritative: public_identifier_status("pmid", claimed, authoritative),
+    ),
+    MetadataPairSpec(
+        "claimed_oclc",
+        "authoritative_oclc",
+        "oclc_status",
+        "OCLC mismatch",
+        lambda claimed, authoritative: public_identifier_status("oclc", claimed, authoritative),
+    ),
+    MetadataPairSpec(
+        "claimed_lccn",
+        "authoritative_lccn",
+        "lccn_status",
+        "LCCN mismatch",
+        lambda claimed, authoritative: public_identifier_status("lccn", claimed, authoritative),
+    ),
     MetadataPairSpec(
         "claimed_title",
         "authoritative_title",
@@ -173,6 +297,21 @@ METADATA_PAIR_SPECS = (
         lambda claimed, authoritative: compare_pair(claimed, authoritative, normalizer=normalize_title),
     ),
 )
+FORMAT_WARNING_NOTES = {
+    "doi_status": "DOI format warning",
+    "isbn_status": "ISBN format warning",
+    "arxiv_id_status": "arXiv ID format warning",
+    "pmid_status": "PMID format warning",
+    "oclc_status": "OCLC format warning",
+    "lccn_status": "LCCN format warning",
+}
+OPTIONAL_IDENTIFIER_STATUS_KEYS = {
+    "isbn_status",
+    "arxiv_id_status",
+    "pmid_status",
+    "oclc_status",
+    "lccn_status",
+}
 
 
 def mismatch_notes(statuses: dict[str, str]) -> list[str]:
@@ -191,7 +330,19 @@ def status_and_risk(statuses: dict[str, str]) -> tuple[str, str]:
         return "metadata_mismatch", "medium"
     if "format_warning" in statuses.values():
         return "metadata_format_warning", "medium"
-    if any(status in {"not_provided", "unchecked"} for status in statuses.values()):
+    required_statuses = [
+        status
+        for status_key, status in statuses.items()
+        if status_key not in OPTIONAL_IDENTIFIER_STATUS_KEYS
+    ]
+    optional_statuses = [
+        status
+        for status_key, status in statuses.items()
+        if status_key in OPTIONAL_IDENTIFIER_STATUS_KEYS
+    ]
+    if any(status in {"not_provided", "unchecked"} for status in required_statuses):
+        return "metadata_partly_unchecked", "medium"
+    if any(status == "unchecked" for status in optional_statuses):
         return "metadata_partly_unchecked", "medium"
     return "metadata_match", "low"
 
@@ -206,8 +357,11 @@ def evaluate_record(record: dict[str, Any], index: int) -> dict[str, Any]:
     }
     status, risk = status_and_risk(statuses)
     notes = mismatch_notes(statuses)
-    if "format_warning" in statuses.values():
-        notes.append("DOI format warning")
+    notes.extend(
+        note
+        for status_key, note in FORMAT_WARNING_NOTES.items()
+        if statuses.get(status_key) == "format_warning"
+    )
     if status == "metadata_partly_unchecked":
         notes.append("metadata pair missing or unchecked")
     return {

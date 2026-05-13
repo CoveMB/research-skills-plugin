@@ -672,6 +672,40 @@
         ],
         "properties": {
           "artifact_type": {
+            "const": "annotated_bibliography"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "bibliography_annotations"
+        ]
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "artifact_type"
+        ],
+        "properties": {
+          "artifact_type": {
+            "const": "methodology_source_audit"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "source_audit_rows"
+        ]
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "artifact_type"
+        ],
+        "properties": {
+          "artifact_type": {
             "const": "claim_traceability_graph"
           }
         }
@@ -679,6 +713,28 @@
       "then": {
         "required": [
           "traceability_links"
+        ]
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "artifact_type"
+        ],
+        "properties": {
+          "artifact_type": {
+            "const": "peer_review_report"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "charitable_restatement",
+          "review_objections",
+          "rival_explanations",
+          "missing_literatures",
+          "claims_to_narrow",
+          "revision_priorities"
         ]
       }
     },
@@ -791,6 +847,27 @@
         ],
         "properties": {
           "artifact_type": {
+            "const": "case_study_dossier"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "claim_needing_case",
+          "case_selection_logic",
+          "case_dossiers",
+          "counter_cases",
+          "safer_case_claims"
+        ]
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "artifact_type"
+        ],
+        "properties": {
+          "artifact_type": {
             "const": "continuity_review"
           }
         }
@@ -805,6 +882,27 @@
           "tone_and_audience_consistency",
           "suggested_restructuring",
           "priority_revision_list"
+        ]
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "artifact_type"
+        ],
+        "properties": {
+          "artifact_type": {
+            "const": "style_sheet"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "style_rules",
+          "voice_constraints",
+          "terms_to_preserve",
+          "claim_language_guidance",
+          "new_factual_claims_policy"
         ]
       }
     },
@@ -1372,6 +1470,90 @@
         }
       }
     },
+    "bibliography_annotation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "annotation_basis",
+        "source_type",
+        "main_argument",
+        "method_evidence",
+        "best_use",
+        "limitations",
+        "chapter_placement",
+        "citation_details_needed"
+      ],
+      "properties": {
+        "source": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "annotation_basis": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "source_type": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "main_argument": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "method_evidence": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "best_use": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "limitations": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "chapter_placement": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "citation_details_needed": {
+          "$ref": "#/$defs/non_empty_string"
+        }
+      }
+    },
+    "source_audit_row": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "source_type",
+        "method_evidence",
+        "credibility",
+        "bias_risk",
+        "can_support",
+        "cannot_support",
+        "use_recommendation"
+      ],
+      "properties": {
+        "source": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "source_type": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "method_evidence": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "credibility": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "bias_risk": {
+          "$ref": "#/$defs/risk_level"
+        },
+        "can_support": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "cannot_support": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "use_recommendation": {
+          "$ref": "#/$defs/non_empty_string"
+        }
+      }
+    },
     "traceability_link": {
       "type": "object",
       "additionalProperties": false,
@@ -1400,6 +1582,38 @@
           "$ref": "#/$defs/verification_status"
         },
         "repair_action": {
+          "$ref": "#/$defs/non_empty_string"
+        }
+      }
+    },
+    "review_objection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "objection",
+        "source_of_challenge",
+        "severity",
+        "why_it_matters",
+        "falsifying_evidence",
+        "revision_strategy"
+      ],
+      "properties": {
+        "objection": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "source_of_challenge": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "severity": {
+          "$ref": "#/$defs/risk_level"
+        },
+        "why_it_matters": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "falsifying_evidence": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "revision_strategy": {
           "$ref": "#/$defs/non_empty_string"
         }
       }
@@ -1584,6 +1798,46 @@
         }
       }
     },
+    "case_dossier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case",
+        "function",
+        "supports",
+        "challenges",
+        "source_base",
+        "selection_risk",
+        "generalization_limit",
+        "chapter_use"
+      ],
+      "properties": {
+        "case": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "function": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "supports": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "challenges": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "source_base": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "selection_risk": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "generalization_limit": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "chapter_use": {
+          "$ref": "#/$defs/non_empty_string"
+        }
+      }
+    },
     "chapter_function": {
       "type": "object",
       "additionalProperties": false,
@@ -1628,6 +1882,26 @@
           "$ref": "#/$defs/non_empty_string"
         },
         "continuity_issue": {
+          "$ref": "#/$defs/non_empty_string"
+        }
+      }
+    },
+    "style_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rule",
+        "reason",
+        "example"
+      ],
+      "properties": {
+        "rule": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "reason": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "example": {
           "$ref": "#/$defs/non_empty_string"
         }
       }

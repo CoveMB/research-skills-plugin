@@ -70,9 +70,66 @@ MIN_SHARED_DESCRIPTION_TERMS = 8
 REQUIRED_AGENT_POLICY = {
     "task_type": "research-book-skill",
     "data_access_level": "user-provided-or-public-metadata",
-    "external_lookup_allowed": "conditional",
     "confidentiality_gate": "required-before-external-lookup",
+    "lookup_consent_required": True,
+    "private_payloads_external": "requires-explicit-consent",
+    "artifact_sensitivity": "research-work-product",
 }
+AGENT_LOOKUP_POLICY_VALUES = {"conditional", "route-only", "none"}
+LOOKUP_PAYLOAD_BOUNDARIES = {
+    "conditional": "public-identifiers-search-terms-and-nonsensitive-short-summaries",
+    "route-only": "routing-targets-and-nonsensitive-summary-only",
+    "none": "none-without-user-directed-skill-switch",
+}
+DIRECT_LOOKUP_SKILLS = {
+    "annotated-bibliography-builder",
+    "annotation-to-source-note",
+    "book-comps-verifier",
+    "book-proposal-scholarship",
+    "citation-integrity-auditor",
+    "claim-traceability-graph",
+    "counterargument-peer-review",
+    "discovery-runner-deduper",
+    "extraction-table-builder",
+    "figure-table-integrity-auditor",
+    "literature-review-mapper",
+    "methodology-source-auditor",
+    "reading-load-reducer",
+    "research-intent-router",
+    "rights-privacy-release-auditor",
+    "scholarly-integrity-gate",
+    "systematic-source-discovery",
+}
+ROUTE_ONLY_LOOKUP_SKILLS = {
+    "claim-evidence-ledger",
+    "dictation-to-research-notes",
+    "dyslexia-friendly-prose-editor",
+    "dyslexia-research-companion",
+    "research-book-orchestrator",
+    "scholarly-prose-editor",
+    "scholarly-research-agenda",
+}
+SOURCE_LIMITS_POLICY_SENTENCE = (
+    "Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, "
+    "What I can verify, What remains uncertain, and User verification needed visible. "
+    "Do not invent citations or source support."
+)
+SUGGESTED_NEXT_STEP_POLICY_SENTENCE = (
+    "Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.md`; "
+    "it may be omitted unless a follow-on skill reduces a named scholarly risk."
+)
+SUGGESTED_NEXT_STEP_TEMPLATE_PHRASES = [
+    "Use `skill-name` to [specific next action].",
+    "Why this helps scholarship: [named risk reduced].",
+    "Use only if: [condition].",
+    "Skip if: [reason it would add noise now].",
+]
+PROVENANCE_FIELDS = [
+    "source_basis",
+    "what_i_can_verify",
+    "what_remains_uncertain",
+    "user_verification_needed",
+]
 CONTRACT_ARTIFACT_SKILLS = {
     "scholarly-research-agenda": "book_research_agenda",
     "systematic-source-discovery": "source_discovery_log",
@@ -108,131 +165,53 @@ COMMON_ARTIFACT_FIELDS = {
     "user_verification_needed",
     "process_passport",
 }
-ARTIFACT_TYPE_FIELDS = {
-    "book_research_agenda": {
-        "central_research_question",
-        "subquestions",
-        "provisional_thesis",
-        "contribution_claim",
-        "scope_boundaries",
-        "evidence_plan",
-        "risks_and_mitigation",
-    },
-    "source_discovery_log": {
-        "search_families",
-        "query_bank",
-        "priority_venues",
-        "inclusion_criteria",
-        "exclusion_criteria",
-        "citation_chaining_plan",
-        "source_targets",
-        "opposing_literature_targets",
-        "search_log",
-        "systematic_review",
-    },
-    "literature_map": {
-        "field_overview",
-        "fields_and_subfields",
-        "schools_of_thought",
-        "major_debates",
-        "consensus_controversy_map",
-        "development_map",
-        "gaps_in_literature",
-        "thesis_implications",
-        "sources_still_needed",
-    },
-    "thesis_tree": {
-        "main_thesis",
-        "thesis_variants",
-        "thesis_claims",
-        "hidden_assumptions",
-        "chapter_argument_sequence",
-        "weak_links",
-    },
-    "chapter_brief": {
-        "chapter_title",
-        "chapter_purpose",
-        "central_question",
-        "chapter_thesis",
-        "key_concepts",
-        "section_outline",
-        "counterarguments_to_include",
-        "opening_options",
-        "ending_bridge",
-        "research_still_needed",
-        "revision_risks",
-    },
-    "claim_evidence_ledger": {
-        "claims",
-        "high_risk_claims",
-        "analysis_provenance",
-        "source_priorities",
-    },
-    "source_note": {"source_notes"},
-    "extraction_table": {"extraction_rows"},
-    "annotated_bibliography": {"bibliography_annotations"},
-    "methodology_source_audit": {"source_audit_rows"},
-    "claim_traceability_graph": {"traceability_links"},
-    "peer_review_report": {
-        "charitable_restatement",
-        "review_objections",
-        "rival_explanations",
-        "missing_literatures",
-        "claims_to_narrow",
-        "revision_priorities",
-    },
-    "citation_integrity_audit": {"citation_audit_rows"},
-    "rights_privacy_release_audit": {"release_issues"},
-    "comps_verification": {"comps_verification_rows"},
-    "scholarly_integrity_audit": {"integrity_checks"},
-    "ai_human_workflow_log": {"workflow_decisions"},
-    "figure_table_integrity_audit": {"figure_table_checks"},
-    "case_study_dossier": {
-        "claim_needing_case",
-        "case_selection_logic",
-        "case_dossiers",
-        "counter_cases",
-        "safer_case_claims",
-    },
-    "continuity_review": {
-        "global_thesis",
-        "chapter_function_map",
-        "repetition_map",
-        "concept_tracking",
-        "contradictions_or_tensions",
-        "tone_and_audience_consistency",
-        "suggested_restructuring",
-        "priority_revision_list",
-    },
-    "style_sheet": {
-        "style_rules",
-        "voice_constraints",
-        "terms_to_preserve",
-        "claim_language_guidance",
-        "new_factual_claims_policy",
-    },
-    "book_proposal": {
-        "title_options",
-        "premise",
-        "core_thesis",
-        "contribution_to_field",
-        "audience",
-        "source_base",
-        "chapter_summaries",
-        "comparable_titles",
-        "author_positioning",
-        "status_and_timeline",
-        "sample_material_plan",
-    },
-}
 
 
-def agent_policy_yaml_lines(*, allow_implicit_invocation: bool = True) -> list[str]:
+def agent_lookup_policy(skill_name: str) -> str:
+    if skill_name in DIRECT_LOOKUP_SKILLS:
+        return "conditional"
+    if skill_name in ROUTE_ONLY_LOOKUP_SKILLS:
+        return "route-only"
+    return "none"
+
+
+def agent_policy_fields(skill_name: str = "") -> dict[str, Any]:
+    lookup_policy = agent_lookup_policy(skill_name)
+    return {
+        **REQUIRED_AGENT_POLICY,
+        "external_lookup_allowed": lookup_policy,
+        "allowed_external_payloads": LOOKUP_PAYLOAD_BOUNDARIES[lookup_policy],
+    }
+
+
+def yaml_policy_value(value: Any) -> str:
+    if isinstance(value, bool):
+        return str(value).lower()
+    return f'"{value}"'
+
+
+def agent_policy_yaml_lines(
+    skill_name: str = "",
+    *,
+    allow_implicit_invocation: bool = True,
+) -> list[str]:
     return [
         "policy:",
         f"  allow_implicit_invocation: {str(allow_implicit_invocation).lower()}",
-        *(f'  {field_name}: "{value}"' for field_name, value in REQUIRED_AGENT_POLICY.items()),
+        *(
+            f"  {field_name}: {yaml_policy_value(value)}"
+            for field_name, value in agent_policy_fields(skill_name).items()
+        ),
     ]
+
+
+def machine_readable_artifact_sentence(artifact_type: str) -> str:
+    return (
+        "When the user explicitly asks for JSON or a contract artifact, use "
+        "`shared/contracts/book/book_artifact.schema.json` with "
+        f"`artifact_type: {artifact_type}`. If the output is normal Markdown, "
+        "do not force the JSON contract."
+    )
 
 
 def load_json_object(path: Path) -> dict[str, Any]:

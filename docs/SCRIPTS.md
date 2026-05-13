@@ -27,7 +27,7 @@ These requirements apply only when you run the scripts. If you copy or upload sk
 | Summarize behavior calibration | `python3 scripts/summarize_research_behavior_evals.py --fixtures examples/evals/research-skill-behavior-fixtures.json --outputs-dir examples/evals/outputs` | Reports fixture coverage, route coverage, compact-output coverage, and captured-output validation status. |
 | Build behavior harness report | `python3 scripts/research_behavior_eval_harness.py --fixtures examples/evals/research-skill-behavior-fixtures.json --outputs-dir examples/evals/outputs` | Produces a deterministic JSON report; add `--format markdown` for a manual or live-run capture runbook. |
 | Check source candidates | `python3 scripts/check_source_candidates.py --input path/to/source-candidates.json` | Parses local JSON or CSV candidate exports, clusters duplicates, and gates completed-search claims without network access. |
-| Check citation metadata | `python3 scripts/check_citation_metadata.py --input path/to/public-metadata.json` | Compares local public metadata fields for DOI, normalized title, author-year, and venue mismatch risk. Default mode uses no network. |
+| Check citation metadata | `python3 scripts/check_citation_metadata.py --input path/to/public-metadata.json` | Compares local public metadata fields for DOI, ISBN, arXiv ID, PMID, OCLC, LCCN, normalized title, author-year, and venue mismatch risk. Default mode uses no network. |
 | Run unit tests | `python3 -m unittest discover -s scripts -p 'test_*.py'` | Runs the script and package policy tests. |
 | Package a zip | `python3 scripts/package_plugin.py --root .` | Writes a versioned zip in the current directory unless `--out` is supplied. |
 
@@ -51,6 +51,7 @@ The validator checks:
 - each skill folder has `SKILL.md`, `README.md`, and `agents/openai.yaml`.
 - each skill name is lowercase kebab-case and matches its folder.
 - skill descriptions and agent metadata are present and stay aligned.
+- agent policy metadata matches the shared per-skill lookup and privacy profile.
 - local Markdown links and path references resolve inside the package.
 
 ### Book artifact contract checker
@@ -75,7 +76,7 @@ The checker is deterministic and no-network. It does not run a model or verify s
 
 ### Citation metadata checker
 
-`scripts/check_citation_metadata.py` compares local JSON or CSV metadata exports. It checks DOI format and exact normalized matches for DOI, title, author-year, and venue, then flags mismatch or identifier-hijack risk.
+`scripts/check_citation_metadata.py` compares local JSON or CSV metadata exports. It checks format and exact normalized matches for public identifiers (`claimed_doi`/`authoritative_doi`, `claimed_isbn`/`authoritative_isbn`, `claimed_arxiv_id`/`authoritative_arxiv_id`, `claimed_pmid`/`authoritative_pmid`, `claimed_oclc`/`authoritative_oclc`, and `claimed_lccn`/`authoritative_lccn`) plus normalized title, author-year, and venue, then flags mismatch or identifier-hijack risk.
 
 Default mode is deterministic and no-network. It rejects private fields such as `full_text`, `excerpt`, `abstract`, `notes`, `source_text`, and `private_notes`; pass public citation metadata only.
 

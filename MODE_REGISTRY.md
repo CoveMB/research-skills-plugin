@@ -69,8 +69,11 @@ Use `research-route-deep` for deep mode. Deep mode always attempts lookup after 
 | `source_discovery_log` | `source-discovery` |
 | `source_note` | `source-note` |
 | `extraction_table` | `extraction-table` |
+| `annotated_bibliography` | `annotated-bibliography` |
+| `methodology_source_audit` | `source-audit` |
 | `literature_map` | `literature-map` |
 | `thesis_tree` | `argument-architecture` |
+| `peer_review_report` | `counterargument-review` |
 | `chapter_brief` | `chapter-architecture` |
 | `claim_evidence_ledger` | `claim-ledger` |
 | `claim_traceability_graph` | `claim-traceability` |
@@ -80,7 +83,9 @@ Use `research-route-deep` for deep mode. Deep mode always attempts lookup after 
 | `scholarly_integrity_audit` | `integrity-gate` |
 | `ai_human_workflow_log` | `ai-human-log` |
 | `figure_table_integrity_audit` | `figure-table-audit` |
+| `case_study_dossier` | `case-study` |
 | `continuity_review` | `continuity-audit` |
+| `style_sheet` | `prose-edit` |
 | `book_proposal` | `proposal` |
 
 ## Oversight levels
