@@ -4,3 +4,7 @@ interface:
   default_prompt: "Use systematic-source-discovery to create a search strategy and source log for my book topic."
 policy:
   allow_implicit_invocation: true
+  task_type: "research-book-skill"
+  data_access_level: "user-provided-or-public-metadata"
+  external_lookup_allowed: "conditional"
+  confidentiality_gate: "required-before-external-lookup"

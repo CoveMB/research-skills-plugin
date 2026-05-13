@@ -122,8 +122,6 @@ Confirm whether the edit introduced any new factual claims. The default should b
 
 ## Limits / failure risks
 
-## Suggested next step
-
 ```
 
 Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless one skill reduces a named scholarly risk.

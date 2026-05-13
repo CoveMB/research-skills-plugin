@@ -48,9 +48,9 @@ Follow `docs/SOURCE_LIMITS.md`: state the source access level, separate source b
 
 If only titles, abstracts, or snippets are available, mark triage and skip risk as provisional.
 
-## Compact mode
+## Compact output
 
-Use compact mode when the user asks for low reading load, time-boxed triage, or a fast skim/read/skip decision. Compact mode should use short chunks, stable table labels, one source-basis line, one triage table, one ambiguity or uncertainty note only when needed, and the first reading action.
+Use compact output when the user asks for low reading load, time-boxed triage, or a fast skim/read/skip decision. Compact output should use short chunks, stable table labels, one source-basis line, one triage table, one ambiguity or uncertainty note only when needed, and the first reading action.
 
 ## Files/folders it may read
 
@@ -88,6 +88,8 @@ For each item or excerpt, mark access level:
 - unclear
 
 ### 3. Triage the material
+
+Before assigning `skip`, apply the access rule: title-only, citation-only, snippet-only, or unclear-access items default to `park` unless the supplied metadata makes them clearly off-scope for the current project. State the uncertainty rather than treating unread material as irrelevant.
 
 Classify each item:
 
@@ -139,17 +141,17 @@ Suggest a short sequence that starts with the highest-return reading and names w
 
 ## User verification needed
 
-## Suggested next step
 ```
 
-Compact mode:
+Compact output:
 
 ```markdown
 # Reading triage
 
 Source basis: [one line]
+How to use this result: TRIAGE ONLY - Use this only to prioritize reading; do not treat it as literature synthesis or source verification.
 
-| Item | Decision | Why | First extraction target |
+| Item | Access level | Decision | Why | First extraction target | Skip/park risk |
 
 Uncertainty: [only if access is thin or meaning is unclear]
 
@@ -157,6 +159,8 @@ Next action: [first reading action]
 ```
 
 Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless one specialist skill reduces a named scholarly risk.
+
+Use `Close-reading targets`, `Skim targets`, and `Park or skip` only when those sections add value beyond the triage table and reading plan. Omit them in compact output unless the user asks.
 
 ## Quality checks
 

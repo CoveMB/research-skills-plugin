@@ -9,6 +9,10 @@ This file is the shared operating policy for skill READMEs. Individual READMEs s
 3. Produce the stated output format and keep verified facts, interpretation, speculation, and recommendation separate.
 4. End with verification gaps. Add a risk-gated follow-up only when it is useful and does not add avoidable reading load.
 5. For accessibility work, follow `docs/ROUTING_MATRIX.md`: use the smallest clear accessibility skill first, and use `dyslexia-research-companion` only for mixed or unclear bottlenecks.
+6. For compact output in accessibility work, use one source-basis line, one table or revised passage, ambiguity only when it could change meaning, and one next action. Compact output is an output shape, not a route mode.
+7. For compact output in routing, audit, gate, or verifier work, keep the source basis, main route or verdict, decision-changing gaps, and one next action visible.
+8. For compact output, include `How to use this result: [status] - [full sentence]` with `TRIAGE ONLY`, `BLOCKER SUMMARY`, or `LIMITED GATE DECISION`.
+9. Escalate from compact output to full review before the result supports manuscript claims, external release, legal/privacy decisions, citation verification, method credibility, or final submission.
 
 ## Quality checks
 
@@ -17,6 +21,9 @@ This file is the shared operating policy for skill READMEs. Individual READMEs s
 - Uncertainty, limits, and user verification needs must be visible.
 - Output should preserve scholarly caution without becoming vague.
 - If the request involves rough notes, dictation, spelling ambiguity, or reading fatigue, preserve meaning and keep the output easy to scan.
+- Compact output must reduce reading load without hiding uncertainty, verification gaps, blocker status, or meaning-changing ambiguity.
+- Compact output must make reliance limits explicit enough that the user knows whether it is triage, blocker summary, or limited gate decision.
+- Compact output status explanations must be full sentences, not shorthand labels alone.
 
 ## Failure modes
 

@@ -49,9 +49,9 @@ Follow `docs/SOURCE_LIMITS.md`: state the source access level, separate source b
 
 Treat spelling and grammar cleanup as surface repair. If a typo can change the claim, mark it as an ambiguity instead of guessing.
 
-## Compact mode
+## Compact output
 
-Use compact mode by default when the user's main bottleneck is reading load or mixed accessibility friction. Compact mode should use short chunks, stable table labels, one source-basis line, one low-load table, one ambiguity block only if meaning changes are possible, and one next action.
+Use compact output by default when the user's main bottleneck is reading load or mixed accessibility friction. Compact output should use short chunks, stable table labels, one source-basis line, one low-load table, one ambiguity block only if meaning changes are possible, and one next action.
 
 ## Files/folders it may read
 
@@ -75,15 +75,17 @@ Use compact mode by default when the user's main bottleneck is reading load or m
 
 ## Procedure
 
-### 1. State the work mode
+### 1. State the work path
 
-Choose one mode and keep the output shaped for low reading load:
+Choose one work path and keep the output shaped for low reading load:
 
-- routing mode: choose the smallest specialist skill for the next step
-- mixed capture mode: rough ideas plus other accessibility bottlenecks into structured notes, or route to `dictation-to-research-notes`
-- mixed reading triage mode: dense material plus other accessibility bottlenecks into skim/read/skip decisions, or route to `reading-load-reducer`
-- claim mode: messy thought into claims, assumptions, and evidence needs
-- mixed prose bridge mode: rough wording plus other accessibility bottlenecks into clean wording without new claims, or route to `dyslexia-friendly-prose-editor`
+- routing path: choose the smallest specialist skill for the next step
+- mixed capture path: rough ideas plus other accessibility bottlenecks into structured notes, or route to `dictation-to-research-notes`
+- mixed reading triage path: dense material plus other accessibility bottlenecks into skim/read/skip decisions, or route to `reading-load-reducer`
+- claim path: messy thought into claims, assumptions, and evidence needs
+- mixed prose bridge path: rough wording plus other accessibility bottlenecks into clean wording without new claims, or route to `dyslexia-friendly-prose-editor`
+
+If one smaller accessibility skill clearly owns the request, stop after the route recommendation or use that skill directly when the user asked for action. Do not normalize, clean, or reinterpret material inside this companion just because the input is available.
 
 ### 2. Normalize without erasing ambiguity
 
@@ -141,11 +143,11 @@ If one specialist skill clearly reduces a concrete risk, recommend or use it acc
 Use the shortest format that satisfies the request. Default:
 
 ```markdown
-# Dyslexia research companion
+# Low-load research support
 
 ## Source basis
 
-## Work mode
+## Work path
 
 ## Cleaned core idea
 
@@ -161,17 +163,29 @@ Use the shortest format that satisfies the request. Default:
 
 ## User verification needed
 
-## Suggested next step
 ```
 
-Compact mode:
+Routing-only output:
+
+```markdown
+# Accessibility route
+
+Source basis: [one line]
+
+| Bottleneck | Best skill | Why this owner | First action |
+
+Ambiguity: [only if the route could change]
+```
+
+Compact output:
 
 ```markdown
 # Low-load research triage
 
 Source basis: [one line]
+How to use this result: TRIAGE ONLY - Use this only to choose a low-load next step; do not treat it as scholarly clearance.
 
-| Item | Meaning | Evidence need | Next action |
+| Item | Meaning | Evidence need |
 
 Ambiguity: [only if meaning could change]
 

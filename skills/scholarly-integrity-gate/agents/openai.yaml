@@ -4,3 +4,7 @@ interface:
   default_prompt: "Use scholarly-integrity-gate to audit this research workflow or artifact for integrity failure modes and produce a gate decision."
 policy:
   allow_implicit_invocation: true
+  task_type: "research-book-skill"
+  data_access_level: "user-provided-or-public-metadata"
+  external_lookup_allowed: "conditional"
+  confidentiality_gate: "required-before-external-lookup"

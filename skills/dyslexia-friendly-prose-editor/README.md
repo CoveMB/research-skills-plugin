@@ -4,7 +4,7 @@
 
 Use this skill to repair spelling, grammar, sentence boundaries, punctuation, and readability in existing scholarly prose while preserving meaning and authorial voice.
 
-It is accessibility-focused: it fixes text friction without turning the passage into generic prose or hiding evidence gaps.
+It is accessibility-focused: it fixes text friction without turning the passage into generic prose, hiding evidence gaps, or implying citation, evidence, or release clearance.
 
 ## When to use it
 
@@ -34,7 +34,7 @@ Use dyslexia-friendly-prose-editor. Repair this typo-heavy paragraph and list an
 
 ## Typical output
 
-Expect a revised passage, meaning-preserved note, new-claims check, changed-phrase review when useful, ambiguous corrections table, evidence flags, and one optional risk-gated next step.
+Expect a revised passage, meaning-preserved note, new-claims check, changed-phrase review when useful, ambiguous corrections table, evidence flags, and one optional risk-gated next step. Ask for compact output when you want one source-basis line, the revised passage, only meaning-changing ambiguity, and one next action. Compact output should include `How to use this result: TRIAGE ONLY - Use this only as meaning-preserving prose repair; do not treat it as evidence, citation, or release clearance.` It changes output shape, not route selection or evidence requirements.
 
 ## Procedure
 

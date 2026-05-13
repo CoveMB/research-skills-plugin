@@ -4,3 +4,7 @@ interface:
   default_prompt: "Use research-intent-router in normal mode to classify this research request, choose the smallest useful skill route, and decide whether deep source lookup is needed."
 policy:
   allow_implicit_invocation: true
+  task_type: "research-book-skill"
+  data_access_level: "user-provided-or-public-metadata"
+  external_lookup_allowed: "conditional"
+  confidentiality_gate: "required-before-external-lookup"

@@ -67,10 +67,19 @@ Use `research-route-deep` for deep mode. Deep mode always attempts lookup after 
 |---|---|
 | `book_research_agenda` | `agenda` |
 | `source_discovery_log` | `source-discovery` |
+| `source_note` | `source-note` |
+| `extraction_table` | `extraction-table` |
 | `literature_map` | `literature-map` |
 | `thesis_tree` | `argument-architecture` |
 | `chapter_brief` | `chapter-architecture` |
 | `claim_evidence_ledger` | `claim-ledger` |
+| `claim_traceability_graph` | `claim-traceability` |
+| `citation_integrity_audit` | `citation-audit` |
+| `rights_privacy_release_audit` | `release-audit` |
+| `comps_verification` | `comps-verification` |
+| `scholarly_integrity_audit` | `integrity-gate` |
+| `ai_human_workflow_log` | `ai-human-log` |
+| `figure_table_integrity_audit` | `figure-table-audit` |
 | `continuity_review` | `continuity-audit` |
 | `book_proposal` | `proposal` |
 

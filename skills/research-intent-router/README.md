@@ -25,6 +25,10 @@ Use the smallest accessibility skill first when text friction blocks the user's 
 - Any available source access: full text, excerpt, citation only, or no source material.
 - The user's goal: plan, discover, map, audit, draft, revise, verify, or propose.
 
+## Typical output
+
+Expect a routing recommendation with source basis, active research mode, classification, lookup decision, verification gaps, and one risk-gated next step when useful. Ask for compact output when you want one source-basis line, the best route, lookup-needed status, remaining verification gap, and one next action. Compact output should include `How to use this result: TRIAGE ONLY - Use this only to choose the next review step; do not treat it as source verification.` It changes output shape, not route selection or evidence requirements.
+
 ## Procedure
 
 Follow the shared procedure in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.

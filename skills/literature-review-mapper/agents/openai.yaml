@@ -4,3 +4,7 @@ interface:
   default_prompt: "Use literature-review-mapper to organize these sources into schools of thought, debates, and research gaps."
 policy:
   allow_implicit_invocation: true
+  task_type: "research-book-skill"
+  data_access_level: "user-provided-or-public-metadata"
+  external_lookup_allowed: "conditional"
+  confidentiality_gate: "required-before-external-lookup"

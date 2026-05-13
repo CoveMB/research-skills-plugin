@@ -76,6 +76,10 @@ def write_minimal_plugin(root: Path, *, skill_body: str | None = None) -> None:
                 '  default_prompt: "Use sample-skill."',
                 "policy:",
                 "  allow_implicit_invocation: true",
+                '  task_type: "research-book-skill"',
+                '  data_access_level: "user-provided-or-public-metadata"',
+                '  external_lookup_allowed: "conditional"',
+                '  confidentiality_gate: "required-before-external-lookup"',
                 "",
             ]
         ),
@@ -416,6 +420,14 @@ class TestExecutableSafeguards(unittest.TestCase):
                 "Validate book artifact schema and shipped examples.",
                 "--path",
             ],
+            "check_research_behavior_fixtures.py": [
+                "Check research behavior fixture documents and captured local outputs.",
+                "--fixtures",
+            ],
+            "check_citation_metadata.py": [
+                "Check local citation metadata exports without network lookup or private text.",
+                "--input",
+            ],
             "package_plugin.py": [
                 "Package this plugin directory as a zip.",
                 "--out",
@@ -594,6 +606,32 @@ class TestExecutableSafeguards(unittest.TestCase):
 
             self.assertEqual(result.returncode, 1)
             self.assertIn("policy.allow_implicit_invocation must be boolean", result.stdout)
+
+    def test_validator_requires_source_privacy_policy_metadata(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_minimal_plugin(root)
+            (root / "skills" / "sample-skill" / "agents" / "openai.yaml").write_text(
+                "\n".join(
+                    [
+                        "interface:",
+                        '  display_name: "Sample Skill"',
+                        '  short_description: "Sample skill for validation."',
+                        '  default_prompt: "Use sample-skill."',
+                        "policy:",
+                        "  allow_implicit_invocation: true",
+                        "",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            result = run_script("validate_plugin.py", str(root))
+
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("policy.data_access_level", result.stdout)
+            self.assertIn("policy.external_lookup_allowed", result.stdout)
+            self.assertIn("policy.confidentiality_gate", result.stdout)
 
     def test_validator_rejects_stale_agent_display_name(self) -> None:
         with TemporaryDirectory() as temporary_directory:

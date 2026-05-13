@@ -6,6 +6,8 @@ Use this skill to protect a research draft from citation problems. It checks whe
 
 It does not pretend to verify sources it cannot see. If source text is unavailable, it marks verification as unavailable and states what would be needed.
 
+For public metadata exports, the optional local helper `python3 scripts/check_citation_metadata.py --input path/to/public-metadata.json` can compare DOI, normalized title, author-year, and venue fields without network lookup. Do not pass manuscript text, excerpts, abstracts, or private notes to that helper.
+
 ## When to use it
 
 Use it after a draft has citations, footnotes, bibliography entries, paraphrases, or quoted material. It is most useful after the claim-evidence ledger, because the ledger identifies what needs support and the citation audit checks whether the support is actually there.
@@ -36,7 +38,7 @@ Review this bibliography and flag missing details, possible fabricated reference
 
 ## Typical output
 
-Expect a citation integrity audit with summary verdict, claim-level audit, quotation audit, bibliography issues, high-priority repairs, claims safe as interpretation or argument, severity labels, and a risk-gated follow-up when it is useful.
+Expect a citation integrity audit with summary verdict, claim-level audit, quotation audit, bibliography issues, high-priority repairs, claims safe as interpretation or argument, severity labels, and a risk-gated follow-up when it is useful. Ask for compact output when you want critical and major citation blockers first, with source access limits still visible. Compact output should include `How to use this result: BLOCKER SUMMARY - This lists visible citation blockers only; no blocker listed does not mean citation clearance.` It changes output shape, not route selection or evidence requirements.
 
 ## Procedure
 

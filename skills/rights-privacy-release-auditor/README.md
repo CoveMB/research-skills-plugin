@@ -35,7 +35,7 @@ Give me a release verdict for these manuscript exports without rewriting them.
 
 ## Typical output
 
-Expect an issue table with severity, file or artifact pointer, risk, required fix, and release impact, plus a release verdict.
+Expect an issue table with severity, file or artifact pointer, risk, required fix, and release impact, plus a release verdict. Ask for compact output when you want only release blockers and one send/hold next action. Compact output should include `How to use this result: BLOCKER SUMMARY - This lists visible release blockers only; do not treat it as legal clearance or permission to publish.` It changes output shape, not route selection or evidence requirements.
 
 ## Procedure
 

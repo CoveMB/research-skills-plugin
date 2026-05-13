@@ -49,6 +49,10 @@ Use when the user has a draft with citations, footnotes, bibliography, quoted ma
 
 Follow `docs/SOURCE_LIMITS.md`: state the source access level, separate source basis from interpretation, include What I can verify, What remains uncertain, and User verification needed. Do not invent citations or source support.
 
+## Compact output
+
+Use compact output when the user asks for low reading load, blocker-first citation review, or the most urgent repairs only. Compact output should keep source basis and verification limits visible, show critical and major issues first, and include only moderate or minor issues when they change release or revision decisions.
+
 ## Machine-readable artifacts
 
 When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: citation_integrity_audit`. If the output is normal Markdown, do not force the JSON contract.
@@ -86,6 +90,8 @@ Use this metadata verification ladder before calling a reference real or bibliog
 4. Bibliography-only match remains unverified unless an authoritative record or full text is available.
 
 Flag identifier hijack risk when the DOI, URL, title, author, year, or venue points to a different work than the manuscript claims. Do not repair metadata from memory.
+
+Optional local helper: `python3 scripts/check_citation_metadata.py --input path/to/public-metadata.json` compares user-provided public metadata fields only. It is deterministic and no-network; it rejects private fields such as `full_text`, `excerpt`, `abstract`, `notes`, or `private_notes`.
 
 ## Files/folders it may read
 
@@ -170,8 +176,20 @@ Offer safer wording, stronger source types, or citation placement changes.
 
 ## Limits / failure risks
 
-## Suggested next step
+```
 
+Compact output:
+
+```markdown
+# Citation blockers
+
+Source basis: [one line]
+How to use this result: BLOCKER SUMMARY - This lists visible citation blockers only; no blocker listed does not mean citation clearance.
+
+| Claim or reference | Verification status | Severity | Required fix |
+
+Ambiguity: [only if source access or locator status could change the verdict]
+Next action: [one action]
 ```
 
 Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless one skill reduces a named scholarly risk.

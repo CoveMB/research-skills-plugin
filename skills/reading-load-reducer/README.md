@@ -34,7 +34,7 @@ Use reading-load-reducer. Reduce this source list to a reading plan without pret
 
 ## Typical output
 
-Expect a triage table, reading plan, close-reading targets, skim targets, park/skip list, verification gaps, and one optional risk-gated next step.
+Expect a triage table, reading plan, verification gaps, and one optional risk-gated next step. Close-reading targets, skim targets, and park/skip lists should appear only when they add value beyond the triage table. Ask for compact output when you want one source-basis line, one triage table, uncertainty only when needed, and one next action. Compact output should include `How to use this result: TRIAGE ONLY - Use this only to prioritize reading; do not treat it as literature synthesis or source verification.` It changes output shape, not route selection or evidence requirements.
 
 ## Procedure
 

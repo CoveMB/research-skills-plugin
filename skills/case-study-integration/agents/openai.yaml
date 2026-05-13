@@ -4,3 +4,7 @@ interface:
   default_prompt: "Use case-study-integration to choose and integrate case studies for this chapter without overclaiming."
 policy:
   allow_implicit_invocation: true
+  task_type: "research-book-skill"
+  data_access_level: "user-provided-or-public-metadata"
+  external_lookup_allowed: "conditional"
+  confidentiality_gate: "required-before-external-lookup"

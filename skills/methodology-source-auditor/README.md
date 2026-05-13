@@ -35,7 +35,7 @@ Classify these sources as core evidence, context, counterpoint, or not suitable 
 
 ## Typical output
 
-The output usually includes a source audit table with type, method, credibility, bias risk, supportable claims, unsupported claims, and use recommendation. It also lists high-risk sources, missing stronger evidence, recommended upgrades, and a risk-gated follow-up when it is useful.
+The output usually includes a source audit table with type, method, credibility, bias risk, supportable claims, unsupported claims, and use recommendation. It also lists high-risk sources, missing stronger evidence, recommended upgrades, and a risk-gated follow-up when it is useful. Ask for compact output when you want source-use triage focused on what each source can and cannot support. Compact output should include `How to use this result: TRIAGE ONLY - Use this only for provisional source-use triage; do not treat it as method or evidence verification when access is limited.` It changes output shape, not route selection or evidence requirements.
 
 ## Procedure
 

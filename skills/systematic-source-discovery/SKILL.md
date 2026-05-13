@@ -69,7 +69,7 @@ When active, add:
 - exclusion reasons tied to criteria, not vague judgment
 - PRISMA flow fields where the user needs reporting-grade documentation
 
-For compact guidance and query design reminders, read `references/search-strategy-guide.md`.
+For concise guidance and query design reminders, read `references/search-strategy-guide.md`.
 
 ## Files/folders it may read
 
@@ -195,8 +195,6 @@ If systematic review mode is active, include the protocol snapshot, screening co
 | Record or cluster | Exclusion criterion | Reason | Reviewer note |
 
 ## Limits / failure risks
-
-## Suggested next step
 
 ```
 

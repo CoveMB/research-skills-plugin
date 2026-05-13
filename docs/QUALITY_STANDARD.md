@@ -24,6 +24,10 @@ Keep summary, paraphrase, direct quotation, and interpretation separate. Direct 
 
 When spelling, dictation, rough fragments, dense material, or reading fatigue shape the task, reduce text load before adding scholarly complexity. Preserve the author's meaning, mark only ambiguities that affect claims or evidence, and prefer short tables with one next action. Use specific accessibility skills for clear bottlenecks: spoken input, reading triage, or prose repair.
 
+Compact output is an output shape, not a route mode. When requested, use one source-basis line, one table or revised passage, ambiguity only when it could change meaning, and one next action. In routing, audit, gate, or verifier work, compact output must keep the main route or verdict, decision-changing gaps, and one next action visible.
+
+Every compact result must include `How to use this result: [status] - [full sentence]`. Use `TRIAGE ONLY` when the result only helps choose the next step, `BLOCKER SUMMARY` when it lists visible blockers without clearing the work, and `LIMITED GATE DECISION` when it gives a constrained proceed/hold/repair decision from visible evidence and stated limits. These statuses are compact-output-only; full reports should keep the fuller source-basis, verification, uncertainty, and user-check sections. Escalate from compact output to full review before the result supports manuscript claims, external release, legal/privacy decisions, citation verification, method credibility, or final submission.
+
 ## Extraction discipline
 
 Do not synthesize before extraction is even enough to compare sources. Empty fields are better than guessed fields.
@@ -43,6 +47,8 @@ Figures, tables, charts, screenshots, and image panels need data provenance, cap
 ## AI/human workflow discipline
 
 AI-assisted research, generated synthesis, automated extraction, or computed results need an integrity gate before manuscript reliance. Human checkpoints should record decisions, override reasons, unresolved risks, affected sections, and disclosure notes when external sharing or submission is likely.
+
+Use an optional `process_passport` in machine-readable artifacts when a result will be handed to another skill, reviewer, or submission workflow. It should name the stage, inputs, tool use, gate status, human checkpoints, and handoff limits without turning fixture or partial work into verified scholarship.
 
 ## Evaluation discipline
 

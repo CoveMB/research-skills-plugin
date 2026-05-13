@@ -4,3 +4,7 @@ interface:
   default_prompt: "Use extraction-table-builder to turn these source notes into an extraction table and source matrix without synthesizing beyond the material."
 policy:
   allow_implicit_invocation: true
+  task_type: "research-book-skill"
+  data_access_level: "user-provided-or-public-metadata"
+  external_lookup_allowed: "conditional"
+  confidentiality_gate: "required-before-external-lookup"

@@ -2,6 +2,12 @@
 
 Use this playbook when you know the project stage and need the next concrete artifact. For the staged architecture, see `docs/ARCHITECTURE.md`. For route names and outputs, see `MODE_REGISTRY.md`.
 
+## Compact output option
+
+Add "use compact output" when the user needs the main route or verdict, blockers, decision-changing gaps, and one next action without the full report. Treat compact output as output shape, not a route mode.
+
+Compact output should include `How to use this result` so the result is clearly triage, blocker summary, or limited gate decision. The line should keep the short status and add a full sentence explaining the reliance limit. Use these statuses only for compact output; full reports should keep their fuller verification sections. Escalate from compact output to full review before using it for manuscript claims, external release, legal/privacy decisions, citation verification, method credibility, or final submission.
+
 ## 0. Choose the smallest accessibility entry point
 
 Prompt:
@@ -16,6 +22,8 @@ Use the smallest accessibility skill before routing when text friction makes the
 - `reading-load-reducer` for dense material or source-volume triage
 - `dyslexia-friendly-prose-editor` for existing prose needing meaning-preserving repair
 - `dyslexia-research-companion` when the bottleneck is mixed, unclear, or explicitly requested as a wrapper
+
+Add "use compact output" when the user needs one table or revised passage, ambiguity only when it matters, and one next action instead of a fuller report. `dyslexia-research-companion` may use that shape by default for mixed reading load or accessibility friction. Treat it as output shape, not a route mode.
 
 For mixed cases:
 

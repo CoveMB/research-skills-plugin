@@ -41,6 +41,10 @@ Use before sending notes, artifacts, manuscript exports, proposal materials, sou
 
 Follow `docs/SOURCE_LIMITS.md`: state the source access level, separate source basis from interpretation, include What I can verify, What remains uncertain, and User verification needed. Do not invent citations or source support.
 
+## Compact output
+
+Use compact output when the user asks for low reading load, release blockers, or a quick send/hold decision. Compact output should minimize sensitive repetition, keep source basis and legal uncertainty visible, list critical and major release blockers first, and end with one next action.
+
 ## Machine-readable artifacts
 
 When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: rights_privacy_release_audit`. If the output is normal Markdown, do not force the JSON contract.
@@ -120,7 +124,21 @@ Use ready to share, share after listed fixes, hold until reviewed, or do not rel
 
 ## Limits / failure risks
 
-## Suggested next step
+```
+
+Compact output:
+
+```markdown
+# Release blockers
+
+Source basis: [one line]
+How to use this result: BLOCKER SUMMARY - This lists visible release blockers only; do not treat it as legal clearance or permission to publish.
+Release verdict: [ready / share after fixes / hold / do not release]
+Legal/permission uncertainty: [none visible / unresolved rights, consent, license, or legal-review need]
+
+| Severity | Artifact pointer | Risk | Required fix | Release impact |
+
+Next action: [one action]
 ```
 
 Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless one skill reduces a named scholarly risk.

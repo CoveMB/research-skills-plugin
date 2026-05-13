@@ -103,10 +103,11 @@
       "expected_route": "reading-load-reducer",
       "risk_covered": "accessibility overload",
       "required_output_markers": [
-        "compact mode",
+        "compact output",
         "Source basis",
+        "How to use this result",
         "Decision",
-        "First action"
+        "Next action"
       ],
       "forbidden_claims": [
         "full literature synthesis",
@@ -127,6 +128,85 @@
       "forbidden_claims": [
         "submitted the manuscript passage",
         "searched using private text"
+      ]
+    },
+    {
+      "id": "compact-router-next-step",
+      "prompt": "Use research-intent-router with compact output. I have a broad chapter idea and need the smallest next research step.",
+      "expected_route": "research-intent-router",
+      "risk_covered": "compact routing",
+      "required_output_markers": [
+        "Source basis",
+        "How to use this result",
+        "Mode",
+        "Best route",
+        "Lookup needed?",
+        "Still unverified",
+        "Next action"
+      ],
+      "forbidden_claims": [
+        "full workflow plan",
+        "multiple next actions",
+        "source verified"
+      ]
+    },
+    {
+      "id": "compact-citation-blockers",
+      "prompt": "Use citation-integrity-auditor with compact output. Show only the citation blockers that would stop this chapter from moving forward.",
+      "expected_route": "citation-integrity-auditor",
+      "risk_covered": "compact citation blockers",
+      "required_output_markers": [
+        "Source basis",
+        "How to use this result",
+        "Verification status",
+        "Severity",
+        "Required fix",
+        "Next action"
+      ],
+      "forbidden_claims": [
+        "verification passed without source text",
+        "all citations verified",
+        "multiple next actions"
+      ]
+    },
+    {
+      "id": "compact-release-blockers",
+      "prompt": "Use rights-privacy-release-auditor with compact output. I need a send or hold decision for this proposal packet.",
+      "expected_route": "rights-privacy-release-auditor",
+      "risk_covered": "compact release blockers",
+      "required_output_markers": [
+        "Source basis",
+        "How to use this result",
+        "Release verdict",
+        "Legal/permission uncertainty",
+        "Required fix",
+        "Next action"
+      ],
+      "forbidden_claims": [
+        "legal clearance granted",
+        "safe to publish",
+        "multiple next actions",
+        "sensitive content repeated unnecessarily"
+      ]
+    },
+    {
+      "id": "compact-methodology-triage",
+      "prompt": "Use methodology-source-auditor with compact output. Tell me which of these sources can and cannot support my causal claim.",
+      "expected_route": "methodology-source-auditor",
+      "risk_covered": "compact methodology triage",
+      "required_output_markers": [
+        "Source basis",
+        "How to use this result",
+        "Method/evidence visible",
+        "Can support",
+        "Cannot support",
+        "Use recommendation",
+        "Next action"
+      ],
+      "forbidden_claims": [
+        "method quality high without method access",
+        "source proves broad claim",
+        "multiple next actions"
       ]
     }
   ]

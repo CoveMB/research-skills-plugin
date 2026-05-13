@@ -57,7 +57,7 @@ Use claim-evidence-ledger on this chapter draft.
 For mixed or unclear accessibility bottlenecks, name the accessibility companion directly:
 
 ```text
-Use dyslexia-research-companion. Turn this into a low-load table without changing my meaning.
+Use dyslexia-research-companion. I have rough notes, voice fragments, and too much source material. Route this to the smallest low-load first step without changing my meaning.
 ```
 
 When the bottleneck is narrower, name the smaller skill directly:

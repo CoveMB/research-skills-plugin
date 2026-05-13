@@ -1,0 +1,124 @@
+{
+  "schema_version": "book-artifact-v1",
+  "artifact_type": "source_discovery_log",
+  "project_title": "Fixture Research Book",
+  "created_at": "2026-05-13",
+  "source_basis": "Fixture systematic-review example; no live database search or source verification performed.",
+  "what_i_can_verify": [
+    "The artifact can represent systematic-review protocol, screening, exclusion, and flow fields."
+  ],
+  "what_remains_uncertain": [
+    "All counts, search strings, and source metadata require actual project search execution."
+  ],
+  "user_verification_needed": [
+    "Replace fixture values with a real protocol and executed search log before using this in scholarship."
+  ],
+  "process_passport": {
+    "stage": "Fixture systematic source-discovery handoff",
+    "artifact_inputs": [
+      "Fixture prompt",
+      "Fixture protocol fields"
+    ],
+    "tool_use_summary": [
+      "No external tools or databases were queried."
+    ],
+    "gate_status": [
+      "Not ready for scholarship until a real search protocol and execution log replace fixture values."
+    ],
+    "human_checkpoints": [
+      "Human reviewer must approve scope, databases, filters, and inclusion/exclusion rules before execution."
+    ],
+    "handoff_notes": "Use this passport as a fixture for chained artifact validation, not as evidence of completed search work."
+  },
+  "search_families": [
+    "Core concept terms",
+    "Method terms"
+  ],
+  "query_bank": [
+    {
+      "purpose": "Fixture systematic-search query family",
+      "query": "\"fixture concept\" AND \"fixture method\"",
+      "venue": "Subject database",
+      "notes": "Synthetic fixture query; not an executed search."
+    }
+  ],
+  "priority_venues": [
+    "Subject databases selected for the project"
+  ],
+  "inclusion_criteria": [
+    "Directly addresses the review question",
+    "Reports source basis or method transparently"
+  ],
+  "exclusion_criteria": [
+    "Not relevant to the review question",
+    "No accessible method or source basis"
+  ],
+  "citation_chaining_plan": [
+    "Backward-chain included studies after screening."
+  ],
+  "source_targets": [
+    "Project-specific studies selected by the protocol"
+  ],
+  "opposing_literature_targets": [
+    "Sources that challenge the expected review pattern"
+  ],
+  "search_log": [
+    {
+      "date": "2026-05-13",
+      "venue": "Subject database",
+      "query": "\"fixture concept\" AND \"fixture method\"",
+      "filters": "Fixture filters only",
+      "useful_results": 0,
+      "notes": "Fixture entry; no actual search claimed."
+    }
+  ],
+  "systematic_review": {
+    "protocol_snapshot": {
+      "review_question": "Fixture review question for schema validation.",
+      "scope": "Fixture scope only; not a scholarly protocol.",
+      "databases": [
+        "Subject database"
+      ],
+      "date_range": "Fixture date range",
+      "filters": [
+        "Fixture filters only"
+      ],
+      "inclusion_exclusion_rules": [
+        "Include fixture records matching the fixture question.",
+        "Exclude fixture records outside the fixture scope."
+      ],
+      "reviewer_assumptions": [
+        "Counts and searches are placeholders for contract validation."
+      ]
+    },
+    "screening_counts": {
+      "records_found": 0,
+      "records_deduplicated": 0,
+      "records_screened": 0,
+      "full_text_assessed": 0,
+      "included": 0,
+      "excluded": 0,
+      "full_text_unavailable": 0
+    },
+    "exclusion_reasons": [
+      {
+        "reason": "Fixture exclusion reason",
+        "count": 0,
+        "notes": "No records screened in this fixture."
+      }
+    ],
+    "prisma_flow": [
+      "Fixture identification: 0 records.",
+      "Fixture screening: 0 records screened.",
+      "Fixture inclusion: 0 records included."
+    ],
+    "exact_search_strings": [
+      {
+        "venue": "Subject database",
+        "query": "\"fixture concept\" AND \"fixture method\"",
+        "date": "2026-05-13",
+        "filters": "Fixture filters only"
+      }
+    ]
+  }
+}

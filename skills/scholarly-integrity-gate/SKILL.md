@@ -45,6 +45,10 @@ Use this before relying on generated research claims, generated reviews, automat
 
 Follow `docs/SOURCE_LIMITS.md`: state the source access level, separate source basis from interpretation, include What I can verify, What remains uncertain, and User verification needed. Do not invent citations or source support.
 
+## Compact output
+
+Use compact output when the user asks for low reading load, a quick gate decision, or blockers only. Compact output should keep the gate decision, source basis, verification gaps, and required human checkpoint visible. Include CLEAR checks only when they justify a pass; otherwise focus on SUSPECTED, INSUFFICIENT EVIDENCE, and OVERRIDDEN items.
+
 ## Machine-readable artifacts
 
 When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: scholarly_integrity_audit`. If the output is normal Markdown, do not force the JSON contract.
@@ -130,7 +134,20 @@ Recommend one repair owner only when useful: citation audit, methodology audit, 
 
 ## Limits / failure risks
 
-## Suggested next step
+```
+
+Compact output:
+
+```markdown
+# Integrity gate
+
+Source basis: [one line]
+How to use this result: LIMITED GATE DECISION - Use this as a proceed/hold/repair decision based only on visible evidence, provenance, and named human checkpoints.
+Gate decision: [pass / pass with conditions / hold / escalate]
+
+| Check | Verdict | Blocker or evidence gap | Required repair | Human checkpoint |
+
+Next action: [one action]
 ```
 
 Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless one skill reduces a named scholarly risk.

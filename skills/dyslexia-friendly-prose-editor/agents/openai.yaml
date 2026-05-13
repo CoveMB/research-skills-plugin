@@ -1,6 +1,10 @@
 interface:
-  display_name: "Dyslexia-Friendly Prose Editor"
-  short_description: "Repair spelling, grammar, sentence boundaries, punctuation, and readability in scholarly prose for dyslexic or dysorthographic authors while preserving meaning, authorial voice, uncertainty, evidence limits, and a compact change summary."
+  display_name: "Accessible Prose Repair"
+  short_description: "Repair spelling, grammar, sentence boundaries, punctuation, and readability in existing scholarly prose for dyslexic or dysorthographic authors while preserving meaning, authorial voice, uncertainty, evidence limits, and a brief change summary."
   default_prompt: "Use dyslexia-friendly-prose-editor to repair spelling, grammar, punctuation, and sentence boundaries in this passage without changing my meaning or hiding evidence gaps."
 policy:
   allow_implicit_invocation: true
+  task_type: "research-book-skill"
+  data_access_level: "user-provided-or-public-metadata"
+  external_lookup_allowed: "conditional"
+  confidentiality_gate: "required-before-external-lookup"

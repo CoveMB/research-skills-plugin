@@ -4,3 +4,7 @@ interface:
   default_prompt: "Use argument-architecture to build a thesis tree and chapter-level argument map for my book."
 policy:
   allow_implicit_invocation: true
+  task_type: "research-book-skill"
+  data_access_level: "user-provided-or-public-metadata"
+  external_lookup_allowed: "conditional"
+  confidentiality_gate: "required-before-external-lookup"

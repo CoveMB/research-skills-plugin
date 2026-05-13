@@ -171,8 +171,6 @@ Assess whether the project is answerable at book scale. Check scope size, likely
 
 ## Limits / failure risks
 
-## Suggested next step
-
 ```
 
 Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless one skill reduces a named scholarly risk.

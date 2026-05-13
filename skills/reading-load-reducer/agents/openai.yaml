@@ -4,3 +4,7 @@ interface:
   default_prompt: "Use reading-load-reducer to triage this dense material into read closely, skim, park, or skip, with evidence-use limits and next actions."
 policy:
   allow_implicit_invocation: true
+  task_type: "research-book-skill"
+  data_access_level: "user-provided-or-public-metadata"
+  external_lookup_allowed: "conditional"
+  confidentiality_gate: "required-before-external-lookup"

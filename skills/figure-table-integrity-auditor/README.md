@@ -28,7 +28,7 @@ Check whether these tables and screenshots are safe to use as evidence.
 
 ## Typical output
 
-Expect a figure/table audit table, provenance gaps, caption and axis issues, duplicate visual risks, rights/release risks, verdicts, repair actions, and a risk-gated next step when useful.
+Expect a figure/table audit table, provenance gaps, caption and axis issues, duplicate visual risks, rights/release risks, verdicts, repair actions, and a risk-gated next step when useful. Ask for compact output when you want only the visual/table blockers that change manuscript, citation, or release action. Compact output should include `How to use this result: BLOCKER SUMMARY - This lists visible figure/table blockers only; do not treat it as full data, rights, or claim clearance.` It changes output shape, not route selection or evidence requirements.
 
 ## Procedure
 

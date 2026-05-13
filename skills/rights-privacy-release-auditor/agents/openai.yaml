@@ -4,3 +4,7 @@ interface:
   default_prompt: "Use rights-privacy-release-auditor to audit these materials for privacy, copyright, quotation, license, credential, and release risks."
 policy:
   allow_implicit_invocation: true
+  task_type: "research-book-skill"
+  data_access_level: "user-provided-or-public-metadata"
+  external_lookup_allowed: "conditional"
+  confidentiality_gate: "required-before-external-lookup"

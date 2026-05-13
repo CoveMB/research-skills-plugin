@@ -51,6 +51,21 @@ PROVENANCE_FIELDS = [
     "what_remains_uncertain",
     "user_verification_needed",
 ]
+SELECTED_COMPACT_OUTPUT_SKILLS = [
+    "research-intent-router",
+    "claim-evidence-ledger",
+    "citation-integrity-auditor",
+    "scholarly-integrity-gate",
+    "rights-privacy-release-auditor",
+    "figure-table-integrity-auditor",
+    "book-comps-verifier",
+    "methodology-source-auditor",
+]
+COMPACT_RESULT_USE_STATUSES = [
+    "TRIAGE ONLY",
+    "BLOCKER SUMMARY",
+    "LIMITED GATE DECISION",
+]
 
 
 @cache
@@ -104,6 +119,21 @@ def missing_labeled_phrases(label: str, text: str, phrases: list[str]) -> list[s
     return [f"{label}: {phrase}" for phrase in missing_phrases(text, phrases)]
 
 
+def markdown_table_rows_after_heading(markdown_text: str, heading: str) -> list[list[str]]:
+    section_match = re.search(
+        rf"^{re.escape(heading)}\n\n(?P<table>(?:\|.*\|\n)+)",
+        markdown_text,
+        re.MULTILINE,
+    )
+    if not section_match:
+        return []
+
+    rows = []
+    for row in section_match.group("table").strip().splitlines()[2:]:
+        rows.append([cell.strip() for cell in row.strip("|").split("|")])
+    return rows
+
+
 def schema_conditionals(schema_node: object) -> list[dict]:
     conditionals: list[dict] = []
     if isinstance(schema_node, dict):
@@ -146,6 +176,14 @@ class TestPluginStructure(unittest.TestCase):
         ]
         self.assertEqual(stale_references, [])
 
+    def test_compact_output_does_not_use_old_mode_name(self) -> None:
+        stale_references = [
+            str(path.relative_to(ROOT))
+            for path, text in read_text_files()
+            if "compact mode" in text or "Compact mode" in text
+        ]
+        self.assertEqual(stale_references, [])
+
     def test_each_skill_has_operational_sections(self) -> None:
         missing: list[str] = []
         for skill_dir in self.skill_dirs():
@@ -153,7 +191,7 @@ class TestPluginStructure(unittest.TestCase):
             for heading in REQUIRED_SKILL_HEADINGS:
                 if heading not in text:
                     missing.append(f"{skill_dir.name}: {heading}")
-        self.assertEqual(missing, {})
+        self.assertEqual(missing, [])
 
     def test_each_skill_readme_documents_operational_boundaries(self) -> None:
         missing: list[str] = []
@@ -162,7 +200,7 @@ class TestPluginStructure(unittest.TestCase):
             for heading in REQUIRED_README_HEADINGS:
                 if heading not in text:
                     missing.append(f"{skill_dir.name}: {heading}")
-        self.assertEqual(missing, {})
+        self.assertEqual(missing, [])
 
     def test_skill_readmes_defer_common_operational_boundaries_to_shared_doc(self) -> None:
         shared_doc = ROOT / "docs" / "SKILL_OPERATIONAL_BOUNDARIES.md"
@@ -204,7 +242,7 @@ class TestPluginStructure(unittest.TestCase):
         for skill_dir in self.skill_dirs():
             text = skill_markdown(skill_dir)
             missing.extend(missing_labeled_phrases(skill_dir.name, text, required_phrases))
-        self.assertEqual(missing, {})
+        self.assertEqual(missing, [])
 
     def test_agent_short_descriptions_track_skill_descriptions(self) -> None:
         stale_metadata: list[str] = []
@@ -299,6 +337,19 @@ class TestPluginStructure(unittest.TestCase):
         self.assertIn("## Suggested next step", output_section)
         self.assertIn("optional", output_section)
         self.assertIn("docs/AUTO_SELECTION_GUARDRAILS.md", output_section)
+
+    def test_output_templates_do_not_force_suggested_next_step_heading(self) -> None:
+        offenders = {}
+        for skill_dir in self.skill_dirs():
+            templates = re.findall(r"```markdown\n(.*?)\n```", skill_markdown(skill_dir), re.DOTALL)
+            forced_templates = [
+                template_index
+                for template_index, template in enumerate(templates, start=1)
+                if "## Suggested next step" in template
+            ]
+            if forced_templates:
+                offenders[skill_dir.name] = forced_templates
+        self.assertEqual(offenders, {})
 
     def test_suggested_next_step_wording_requires_named_risk(self) -> None:
         missing: list[str] = []
@@ -768,6 +819,10 @@ class TestPluginStructure(unittest.TestCase):
             "normalized title",
             "identifier hijack",
             "fuzzy title",
+            "scripts/check_citation_metadata.py",
+            "no-network",
+            "full_text",
+            "abstract",
         ]
         self.assertEqual(missing_phrases(citation_audit, required_phrases), [])
 
@@ -785,6 +840,37 @@ class TestPluginStructure(unittest.TestCase):
         ]
         self.assertEqual(missing_phrases(source_discovery + search_guide, required_phrases), [])
 
+    def test_source_discovery_contract_supports_systematic_review_fields(self) -> None:
+        schema = read_json(ROOT / "shared" / "contracts" / "book" / "book_artifact.schema.json")
+        properties = schema["properties"]
+        definitions = schema["$defs"]
+        required_definitions = [
+            "systematic_review_record",
+            "systematic_review_protocol_snapshot",
+            "systematic_review_screening_counts",
+            "systematic_review_exclusion_reason",
+            "systematic_review_search_string",
+        ]
+
+        self.assertIn("systematic_review", properties)
+        missing_definitions = [
+            definition
+            for definition in required_definitions
+            if definition not in definitions
+        ]
+        self.assertEqual(missing_definitions, [])
+
+        systematic_review = definitions["systematic_review_record"]
+        required_fields = systematic_review["required"]
+        for field in [
+            "protocol_snapshot",
+            "screening_counts",
+            "exclusion_reasons",
+            "prisma_flow",
+            "exact_search_strings",
+        ]:
+            self.assertIn(field, required_fields)
+
     def test_artifact_contract_covers_audit_and_workflow_artifacts(self) -> None:
         schema = read_json(ROOT / "shared" / "contracts" / "book" / "book_artifact.schema.json")
         artifact_types = schema["properties"]["artifact_type"]["enum"]
@@ -801,6 +887,34 @@ class TestPluginStructure(unittest.TestCase):
         ]
         missing = [artifact_type for artifact_type in required_artifact_types if artifact_type not in artifact_types]
         self.assertEqual(missing, [])
+
+    def test_mode_registry_artifact_table_matches_contract_mapping(self) -> None:
+        registry = read_text(ROOT / "MODE_REGISTRY.md")
+        artifact_rows = markdown_table_rows_after_heading(registry, "## Artifact types")
+        registry_artifact_types = {
+            row[0].strip("`")
+            for row in artifact_rows
+            if len(row) >= 2
+        }
+        expected_artifact_types = set(CONTRACT_ARTIFACT_SKILLS.values())
+        self.assertEqual(registry_artifact_types, expected_artifact_types)
+
+    def test_artifact_contract_supports_optional_process_passport(self) -> None:
+        schema = read_json(ROOT / "shared" / "contracts" / "book" / "book_artifact.schema.json")
+        self.assertIn("process_passport", schema["properties"])
+        self.assertNotIn("process_passport", schema["required"])
+
+        passport = schema["$defs"]["process_passport"]
+        required_fields = passport["required"]
+        for field in [
+            "stage",
+            "artifact_inputs",
+            "tool_use_summary",
+            "gate_status",
+            "human_checkpoints",
+            "handoff_notes",
+        ]:
+            self.assertIn(field, required_fields)
 
     def test_contract_uses_controlled_status_vocabularies(self) -> None:
         schema = read_json(ROOT / "shared" / "contracts" / "book" / "book_artifact.schema.json")
@@ -864,7 +978,7 @@ class TestPluginStructure(unittest.TestCase):
         ]
         self.assertEqual(missing_phrases(router, required_phrases), [])
 
-    def test_accessibility_skills_support_compact_mode(self) -> None:
+    def test_accessibility_skills_support_compact_output(self) -> None:
         accessibility_skills = [
             "dictation-to-research-notes",
             "dyslexia-friendly-prose-editor",
@@ -872,19 +986,179 @@ class TestPluginStructure(unittest.TestCase):
             "reading-load-reducer",
         ]
         required_phrases = [
-            "compact mode",
+            "compact output",
             "short chunks",
             "stable table labels",
             "Source basis: [one line]",
             "only if",
             "Next action",
         ]
+        per_skill_required_phrases = {
+            "reading-load-reducer": ["Access level", "Skip/park risk"],
+        }
         missing = {}
         for skill_name in accessibility_skills:
             skill_text = read_text(SKILLS_DIR / skill_name / "SKILL.md")
-            missing_for_skill = missing_phrases(skill_text, required_phrases)
+            skill_required_phrases = required_phrases + per_skill_required_phrases.get(skill_name, [])
+            missing_for_skill = missing_phrases(skill_text, skill_required_phrases)
             if missing_for_skill:
                 missing[skill_name] = missing_for_skill
+        self.assertEqual(missing, {})
+
+    def test_accessibility_agent_metadata_preserves_discoverability_terms(self) -> None:
+        required_aliases = {
+            "dyslexia-research-companion": ["dyslexic", "dysorthographic"],
+            "dyslexia-friendly-prose-editor": ["dyslexic", "dysorthographic"],
+        }
+        missing = {}
+        for skill_name, aliases in required_aliases.items():
+            metadata_text = read_text(SKILLS_DIR / skill_name / "agents" / "openai.yaml")
+            short_description = metadata_field(metadata_text, "short_description").lower()
+            missing_aliases = [
+                alias
+                for alias in aliases
+                if alias not in short_description
+            ]
+            if missing_aliases:
+                missing[skill_name] = missing_aliases
+        self.assertEqual(missing, {})
+
+    def test_selected_routing_and_audit_skills_support_compact_output(self) -> None:
+        required_phrases = [
+            "## Compact output",
+            "Compact output:",
+            "Source basis: [one line]",
+            "Next action",
+        ]
+        per_skill_required_phrases = {
+            "book-comps-verifier": ["Verification needed", "Fit or mismatch"],
+            "citation-integrity-auditor": ["Verification status", "Severity", "Required fix"],
+            "claim-evidence-ledger": ["Evidence status", "Risk"],
+            "figure-table-integrity-auditor": ["Blocker or gap", "Required repair", "Needed files"],
+            "methodology-source-auditor": ["Method/evidence visible", "Can support", "Cannot support"],
+            "research-intent-router": ["Best route", "Lookup needed?", "Still unverified"],
+            "rights-privacy-release-auditor": ["Legal/permission uncertainty", "Release verdict"],
+            "scholarly-integrity-gate": ["Gate decision", "Human checkpoint", "Verdict"],
+        }
+        missing = {}
+        for skill_name in SELECTED_COMPACT_OUTPUT_SKILLS:
+            skill_text = read_text(SKILLS_DIR / skill_name / "SKILL.md")
+            readme_text = read_text(SKILLS_DIR / skill_name / "README.md")
+            skill_required_phrases = required_phrases + per_skill_required_phrases.get(skill_name, [])
+            missing_for_skill = missing_phrases(skill_text, skill_required_phrases)
+            missing_for_readme = missing_phrases(readme_text, ["compact output"])
+            if missing_for_skill or missing_for_readme:
+                missing[skill_name] = {
+                    "skill": missing_for_skill,
+                    "readme": missing_for_readme,
+                }
+        self.assertEqual(missing, {})
+
+    def test_skill_index_lists_selected_compact_output_skills(self) -> None:
+        skill_index = read_text(ROOT / "docs" / "SKILL_INDEX.md")
+        compact_section = skill_index.split("## Compact output support", 1)[1].split("## Core research workflow", 1)[0]
+        documented_skills = re.findall(r"^- `([^`]+)`", compact_section, re.MULTILINE)
+        self.assertEqual(documented_skills, SELECTED_COMPACT_OUTPUT_SKILLS)
+
+    def test_compact_output_readmes_describe_output_shape(self) -> None:
+        missing = {}
+        for skill_dir in self.skill_dirs():
+            skill_text = skill_markdown(skill_dir)
+            if "## Compact output" not in skill_text:
+                continue
+            readme_text = skill_readme(skill_dir)
+            missing_for_readme = missing_phrases(readme_text, ["output shape", "How to use this result"])
+            if missing_for_readme:
+                missing[skill_dir.name] = missing_for_readme
+        self.assertEqual(missing, {})
+
+    def test_compact_output_templates_use_one_global_next_action(self) -> None:
+        violations = {}
+        for skill_dir in self.skill_dirs():
+            skill_text = skill_markdown(skill_dir)
+            compact_templates = re.findall(r"Compact output:\n\n```markdown\n(.*?)\n```", skill_text, re.DOTALL)
+            for template_index, compact_template in enumerate(compact_templates, start=1):
+                table_next_action_lines = [
+                    line
+                    for line in compact_template.splitlines()
+                    if line.startswith("|") and "Next action" in line
+                ]
+                global_next_action_count = compact_template.count("Next action:")
+                optional_next_action_lines = [
+                    line
+                    for line in compact_template.splitlines()
+                    if line.startswith("Next action:") and "only if" in line
+                ]
+                if table_next_action_lines or global_next_action_count != 1:
+                    violations[f"{skill_dir.name}#{template_index}"] = {
+                        "table_next_action_lines": table_next_action_lines,
+                        "global_next_action_count": global_next_action_count,
+                    }
+                elif optional_next_action_lines:
+                    violations[f"{skill_dir.name}#{template_index}"] = {
+                        "optional_next_action_lines": optional_next_action_lines,
+                    }
+        self.assertEqual(violations, {})
+
+    def test_compact_output_templates_state_result_use(self) -> None:
+        violations = {}
+        allowed_statuses = "|".join(re.escape(status) for status in COMPACT_RESULT_USE_STATUSES)
+        result_use_pattern = re.compile(
+            rf"^How to use this result: ({allowed_statuses}) - [A-Z][^.?!]+[.?!]$",
+            re.MULTILINE,
+        )
+        for skill_dir in self.skill_dirs():
+            skill_text = skill_markdown(skill_dir)
+            compact_templates = re.findall(r"Compact output:\n\n```markdown\n(.*?)\n```", skill_text, re.DOTALL)
+            for template_index, compact_template in enumerate(compact_templates, start=1):
+                matches = result_use_pattern.findall(compact_template)
+                if len(matches) != 1:
+                    violations[f"{skill_dir.name}#{template_index}"] = matches
+        self.assertEqual(violations, {})
+
+    def test_compact_output_docs_define_result_use_and_escalation(self) -> None:
+        docs = {
+            ROOT / "README.md": [
+                "How to use this result",
+                "Use this only to choose the next step; do not treat it as verified scholarship.",
+                "This lists visible blockers only; no blocker listed does not mean the work is cleared.",
+                "This is a proceed/hold/repair decision based only on visible evidence and stated limits.",
+                "These statuses appear only in compact output.",
+                "Escalate from compact output to full review",
+            ],
+            ROOT / "docs" / "QUALITY_STANDARD.md": [
+                "How to use this result",
+                "compact-output-only",
+                "TRIAGE ONLY",
+                "BLOCKER SUMMARY",
+                "LIMITED GATE DECISION",
+                "Escalate from compact output to full review",
+            ],
+            ROOT / "docs" / "SKILL_INDEX.md": [
+                "How to use this result",
+                "compact-output-only",
+                "TRIAGE ONLY",
+                "BLOCKER SUMMARY",
+                "LIMITED GATE DECISION",
+            ],
+            ROOT / "docs" / "SKILL_OPERATIONAL_BOUNDARIES.md": [
+                "How to use this result",
+                "TRIAGE ONLY",
+                "BLOCKER SUMMARY",
+                "LIMITED GATE DECISION",
+                "Escalate from compact output to full review",
+            ],
+            ROOT / "docs" / "WORKFLOW_PLAYBOOK.md": [
+                "How to use this result",
+                "Use these statuses only for compact output",
+                "Escalate from compact output to full review",
+            ],
+        }
+        missing = [
+            f"{path.relative_to(ROOT)}: {phrase}"
+            for path, required_phrases in docs.items()
+            for phrase in missing_phrases(read_text(path), required_phrases)
+        ]
         self.assertEqual(missing, [])
 
     def test_source_limits_document_external_tool_confidentiality_boundary(self) -> None:
@@ -920,6 +1194,17 @@ class TestPluginStructure(unittest.TestCase):
         ]
         self.assertEqual(missing_keys, [])
 
+        compact_fixture_missing_result_use = [
+            fixture["id"]
+            for fixture in fixtures["fixtures"]
+            if (
+                str(fixture["risk_covered"]).startswith("compact ")
+                or fixture["risk_covered"] == "accessibility overload"
+            )
+            and "How to use this result" not in fixture["required_output_markers"]
+        ]
+        self.assertEqual(compact_fixture_missing_result_use, [])
+
         required_risks = {
             "premature citation audit",
             "hallucinated citation metadata",
@@ -929,6 +1214,10 @@ class TestPluginStructure(unittest.TestCase):
             "figure table provenance",
             "accessibility overload",
             "external tool confidentiality",
+            "compact citation blockers",
+            "compact methodology triage",
+            "compact release blockers",
+            "compact routing",
         }
         covered_risks = {fixture["risk_covered"] for fixture in fixtures["fixtures"]}
         self.assertEqual(sorted(required_risks - covered_risks), [])

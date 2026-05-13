@@ -27,6 +27,12 @@ from plugin_utils import (
 )
 
 NAME_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+REQUIRED_AGENT_POLICY_STRINGS = {
+    "task_type": "research-book-skill",
+    "data_access_level": "user-provided-or-public-metadata",
+    "external_lookup_allowed": "conditional",
+    "confidentiality_gate": "required-before-external-lookup",
+}
 MARKDOWN_LINK_RE = re.compile(r"\[[^\]]+\]\(([^)#]+)(?:#[^)]+)?\)")
 BACKTICK_REFERENCE_RE = re.compile(r"`([^`\n]+)`")
 LOCAL_REFERENCE_PREFIXES = (
@@ -262,6 +268,12 @@ def validate_agent_metadata(
         errors.append(
             f"{skill_name}: agents/openai.yaml policy.allow_implicit_invocation must be boolean"
         )
+    for field_name, expected_value in REQUIRED_AGENT_POLICY_STRINGS.items():
+        value = nested_string(policy, field_name)
+        if value != expected_value:
+            errors.append(
+                f"{skill_name}: agents/openai.yaml policy.{field_name} must be {expected_value!r}"
+            )
     if short_description and skill_description:
         shared_terms = significant_description_terms(short_description) & significant_description_terms(
             skill_description

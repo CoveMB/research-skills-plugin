@@ -35,7 +35,7 @@ Flag stale, mismatched, fabricated, or unverified comps in this proposal section
 
 ## Typical output
 
-Expect a comparable-title verification table, positioning notes, source basis, stale or mismatched comp flags, audience and market claim checks, and missing verification tasks.
+Expect a comparable-title verification table, positioning notes, source basis, stale or mismatched comp flags, audience and market claim checks, and missing verification tasks. Ask for compact output when you want only comps or positioning claims whose status changes the proposal decision. Compact output should include `How to use this result: TRIAGE ONLY - Use this only for visible comp-fit triage; do not treat it as market or proposal clearance.` It changes output shape, not route selection or evidence requirements.
 
 ## Procedure
 

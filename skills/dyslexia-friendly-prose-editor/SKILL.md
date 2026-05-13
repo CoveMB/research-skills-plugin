@@ -1,6 +1,6 @@
 ---
 name: dyslexia-friendly-prose-editor
-description: Repair spelling, grammar, sentence boundaries, punctuation, paragraph breaks, and local readability in existing scholarly prose for dyslexic or dysorthographic authors while preserving meaning, authorial voice, uncertainty, evidence limits, and a compact change summary.
+description: Repair spelling, grammar, sentence boundaries, punctuation, paragraph breaks, and local readability in existing scholarly prose for dyslexic or dysorthographic authors while preserving meaning, authorial voice, uncertainty, evidence limits, and a brief change summary.
 license: MIT
 metadata:
   version: "1.0.0"
@@ -10,7 +10,7 @@ metadata:
 
 ## Purpose
 
-Make existing scholarly prose easier to read and submit without changing the author's argument.
+Make existing scholarly prose easier to read, review, and use without changing the author's argument.
 
 This skill focuses on meaning-preserving repair: spelling, grammar, sentence boundaries, punctuation, paragraph breaks, and readability. It keeps uncertainty and evidence gaps visible.
 
@@ -23,7 +23,7 @@ Use this instead of `scholarly-prose-editor` when accessibility, spelling, or or
 ## Automatic selection guidance
 
 - High-signal triggers: spelling repair, grammar cleanup, dyslexia-friendly edit, dysorthographic edit, sentence boundaries, punctuation repair, typo-heavy prose, meaning-preserving edit, or correction log.
-- Light-route behavior: revise only the supplied prose, preserve meaning, and provide a compact change summary.
+- Light-route behavior: revise only the supplied prose, preserve meaning, and provide a brief change summary.
 - Deep-work gate: route to claim audit or citation audit only when the edit exposes evidence gaps, overclaiming, citations, quotes, or locators needing verification.
 - Noise and slowdown guard: do not turn a surface repair into a style rewrite, chapter restructure, source search, or literature synthesis.
 
@@ -48,9 +48,9 @@ Follow `docs/SOURCE_LIMITS.md`: state the source access level, separate source b
 
 Treat spelling and grammar cleanup as surface repair. If a correction could change a claim, keep the original wording visible and mark the ambiguity.
 
-## Compact mode
+## Compact output
 
-Use compact mode when the user asks for low reading load, minimal correction, or fast prose repair. Compact mode should use short chunks, stable table labels when a table is needed, the revised passage, one source-basis line, changed phrases only when review is needed, and one evidence or ambiguity note only when relevant.
+Use compact output when the user asks for low reading load, minimal correction, or fast prose repair. Compact output should use short chunks, stable table labels when a table is needed, the revised passage, one source-basis line, changed phrases only when review is needed, and one evidence or ambiguity note only when relevant.
 
 ## Files/folders it may read
 
@@ -117,7 +117,7 @@ If the repaired prose reveals a concrete scholarly risk, suggest one next skill:
 ## Output format
 
 ```markdown
-# Dyslexia-friendly prose edit
+# Prose edit
 
 ## Source basis
 
@@ -143,15 +143,15 @@ If the repaired prose reveals a concrete scholarly risk, suggest one next skill:
 
 ## User verification needed
 
-## Suggested next step
 ```
 
-Compact mode:
+Compact output:
 
 ```markdown
 # Prose repair
 
 Source basis: [one line]
+How to use this result: TRIAGE ONLY - Use this only as meaning-preserving prose repair; do not treat it as evidence, citation, or release clearance.
 
 [Revised passage]
 
@@ -159,7 +159,7 @@ Ambiguity: [only if meaning could change]
 
 Review: [meaning-preserving notes or "No meaning-changing edits"]
 
-Next action: [one line, only if needed]
+Next action: [one action]
 ```
 
 Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless one specialist skill reduces a named scholarly risk.
@@ -169,7 +169,7 @@ Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.m
 - Meaning, argument, and uncertainty are preserved.
 - Spelling and grammar repairs do not create new claims.
 - Ambiguous corrections are visible.
-- Output includes a compact change summary.
+- Output includes a brief change summary.
 - No citations, page numbers, source claims, or field consensus are invented.
 
 ## Failure modes

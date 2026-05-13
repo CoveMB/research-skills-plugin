@@ -4,3 +4,7 @@ interface:
   default_prompt: "Use the research-book-orchestrator skill to turn my book idea into a staged research, writing, and audit plan."
 policy:
   allow_implicit_invocation: true
+  task_type: "research-book-skill"
+  data_access_level: "user-provided-or-public-metadata"
+  external_lookup_allowed: "conditional"
+  confidentiality_gate: "required-before-external-lookup"

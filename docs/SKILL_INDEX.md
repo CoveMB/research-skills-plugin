@@ -4,10 +4,10 @@ Use this file when you already have a sense of the work needed and want the righ
 
 | Skill folder | Display name | When to use |
 |---|---|---|
-| `dyslexia-research-companion` | Dyslexia Research Companion | Route mixed or unclear accessibility bottlenecks for dyslexic, dysorthographic, dictation-heavy, or reading-fatigued scholarly authors when no smaller accessibility skill clearly owns the task. |
+| `dyslexia-research-companion` | Low-Load Research Companion | Route mixed or unclear accessibility bottlenecks for dyslexic, dysorthographic, dictation-heavy, or reading-fatigued scholarly authors when no smaller accessibility skill clearly owns the task. |
 | `dictation-to-research-notes` | Dictation to Research Notes | Turn dictated research thoughts, voice transcripts, speech-to-text output, meeting notes, or rambling spoken fragments into structured scholarly notes, claims, questions, evidence needs, ambiguities, and next actions without changing meaning. |
 | `reading-load-reducer` | Reading Load Reducer | Reduce reading burden by turning dense articles, source excerpts, search results, bibliographies, chapter drafts, or long notes into skim-read-skip triage, close-reading targets, extraction priorities, evidence needs, and next actions. |
-| `dyslexia-friendly-prose-editor` | Dyslexia-Friendly Prose Editor | Repair spelling, grammar, sentence boundaries, punctuation, and readability in scholarly prose while preserving meaning, authorial voice, uncertainty, evidence limits, and a compact change summary. |
+| `dyslexia-friendly-prose-editor` | Accessible Prose Repair | Repair spelling, grammar, sentence boundaries, punctuation, and readability in scholarly prose while preserving meaning, authorial voice, uncertainty, evidence limits, and a brief change summary. |
 | `research-intent-router` | Research Intent Router | Auto-detect scholarly research intent, choose the smallest useful research-book skill, and gate deep source lookup so it only runs when it materially improves evidence quality. |
 | `research-book-orchestrator` | Research Book Orchestrator | Coordinate a full research nonfiction or research book workflow. Use for project planning, routing tasks across research agenda, source discovery, literature review, argument design, chapter work, evidence ledgers, citation audits, and manuscript revision. |
 | `scholarly-research-agenda` | Research Agenda | Turn a broad research book idea into precise research questions, scope boundaries, contribution claims, key terms, evidence needs, and an initial research agenda. Use before source gathering or outlining. |
@@ -42,6 +42,35 @@ Use one of these before the core research workflow only when text friction block
 2. `reading-load-reducer` when dense material or source volume is the first bottleneck
 3. `dyslexia-friendly-prose-editor` when existing prose needs meaning-preserving repair
 4. `dyslexia-research-companion` when the accessibility bottleneck is mixed or unclear
+
+Ask for compact output with accessibility entry points when the output should be one source-basis line, one table or revised passage, ambiguity only when it matters, and one next action. `dyslexia-research-companion` may use that shape by default when mixed reading load or accessibility friction is the main bottleneck. Compact output is not a route mode.
+
+## Compact output support
+
+Compact output is an output shape, not a route mode. It is supported by accessibility skills and selected routing, audit, gate, and verifier skills where a blocker-first table can reduce reading load without hiding source limits.
+
+Every compact result should include `How to use this result: [status] - [full sentence]`.
+
+| Status | User inference |
+|---|---|
+| `TRIAGE ONLY` | The output only helps choose the next step. |
+| `BLOCKER SUMMARY` | The output lists visible blockers without clearing the work. |
+| `LIMITED GATE DECISION` | The output gives a constrained proceed/hold/repair decision from visible evidence and stated limits. |
+
+These statuses are compact-output-only. Full reports should use the normal verification, uncertainty, and user-check sections instead of replacing them with a status line.
+
+Escalate from compact output to full review before relying on it for final scholarly, release, legal/privacy, citation, method, or submission decisions.
+
+Use compact output with:
+
+- `research-intent-router` for one route, lookup-needed status, and one next action
+- `claim-evidence-ledger` for decision-changing claim risks only
+- `citation-integrity-auditor` for critical and major citation blockers
+- `scholarly-integrity-gate` for gate decision, blockers, and human checkpoint
+- `rights-privacy-release-auditor` for release blockers and send/hold decision
+- `figure-table-integrity-auditor` for visual/table evidence blockers
+- `book-comps-verifier` for comps or positioning claims that change proposal decisions
+- `methodology-source-auditor` for source-use triage
 
 ## Core research workflow
 

@@ -4,3 +4,7 @@ interface:
   default_prompt: "Use dictation-to-research-notes to turn this voice transcript into cleaned scholarly notes, claims, evidence needs, ambiguities, and next actions without changing my meaning."
 policy:
   allow_implicit_invocation: true
+  task_type: "research-book-skill"
+  data_access_level: "user-provided-or-public-metadata"
+  external_lookup_allowed: "conditional"
+  confidentiality_gate: "required-before-external-lookup"

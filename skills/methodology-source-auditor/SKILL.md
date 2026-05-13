@@ -71,6 +71,10 @@ For each family, ask method-specific questions:
 
 Follow `docs/SOURCE_LIMITS.md`: state the source access level, separate source basis from interpretation, include What I can verify, What remains uncertain, and User verification needed. Do not invent citations or source support.
 
+## Compact output
+
+Use compact output when the user asks for low reading load, source-use triage, or the strongest/weakest sources only. Compact output should keep source basis and method visibility limits clear, show what each source can and cannot support, and end with one next action.
+
 ## Files/folders it may read
 
 - Bundled skill instructions, metadata, and assets if available (including, but not limited to, `SKILL.md`, `README.md`, `assets/`, `references/`, and `agents/openai.yaml` in this project or equivalent files in another project).
@@ -155,8 +159,19 @@ Decide whether to use as core evidence, contextual support, counterpoint, object
 
 ## Limits / failure risks
 
-## Suggested next step
+```
 
+Compact output:
+
+```markdown
+# Source-use triage
+
+Source basis: [one line]
+How to use this result: TRIAGE ONLY - Use this only for provisional source-use triage; do not treat it as method or evidence verification when access is limited.
+
+| Source | Method/evidence visible | Can support | Cannot support | Main risk | Use recommendation |
+
+Next action: [one action]
 ```
 
 Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless one skill reduces a named scholarly risk.

@@ -2,7 +2,7 @@
 
 Use this skill as an accessibility router and wrapper when several text-friction bottlenecks overlap and no smaller accessibility skill clearly owns the first pass.
 
-It turns mixed rough thoughts, typo-heavy notes, dictation fragments, dense source material, or unclear accessibility requests into a low-load route and, when needed, a compact structure. It preserves meaning, flags only ambiguities that matter, and keeps evidence gaps visible.
+It turns mixed rough thoughts, typo-heavy notes, dictation fragments, dense source material, or unclear accessibility requests into a low-load route and, when needed, a short structure. It preserves meaning, flags only ambiguities that matter, and keeps evidence gaps visible.
 
 ## What it does
 
@@ -39,7 +39,7 @@ Use dyslexia-research-companion. Turn these mixed fragments into a low-load rout
 
 ## Typical output
 
-Expect short sections, tables, and stable labels. The output usually includes cleaned core idea, claim/evidence/action table, important ambiguities, verification gaps, and one risk-gated next step when useful.
+Expect short sections, tables, and stable labels. The output usually includes cleaned core idea, claim/evidence/action table, important ambiguities, verification gaps, and one risk-gated next step when useful. When mixed reading load or accessibility friction is the main bottleneck, the skill may default to compact output: one source-basis line, one routing table or low-load action table, ambiguity only when it matters, and one next action. Compact output should include `How to use this result: TRIAGE ONLY - Use this only to choose a low-load next step; do not treat it as scholarly clearance.` It changes output shape, not route selection or evidence requirements.
 
 ## Boundaries
 

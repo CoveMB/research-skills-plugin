@@ -28,7 +28,7 @@ Check whether this generated analysis has hallucinated evidence, methodology fab
 
 ## Typical output
 
-Expect source basis, visible verification, integrity checks, verdicts, gate decision, override table, repair priorities, and a risk-gated next step when useful.
+Expect source basis, visible verification, integrity checks, verdicts, gate decision, override table, repair priorities, and a risk-gated next step when useful. Ask for compact output when you want the gate decision, blockers, required repair, human checkpoint, and one next action. Compact output should include `How to use this result: LIMITED GATE DECISION - Use this as a proceed/hold/repair decision based only on visible evidence, provenance, and named human checkpoints.` It changes output shape, not route selection or evidence requirements.
 
 ## Procedure
 

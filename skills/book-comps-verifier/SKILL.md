@@ -40,6 +40,10 @@ Use when the user is building or checking comparable titles, audience claims, ma
 
 Follow `docs/SOURCE_LIMITS.md`: state the source access level, separate source basis from interpretation, include What I can verify, What remains uncertain, and User verification needed. Do not invent citations or source support.
 
+## Compact output
+
+Use compact output when the user asks for low reading load, comp blockers, or a fast proposal-positioning check. Compact output should keep source basis and lookup needs visible, show only comps or claims whose status changes positioning, and end with one next action.
+
 ## Machine-readable artifacts
 
 When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: comps_verification`. If the output is normal Markdown, do not force the JSON contract.
@@ -111,7 +115,20 @@ Suggest replacement criteria, missing verification tasks, safer wording, or comp
 
 ## Limits / failure risks
 
-## Suggested next step
+```
+
+Compact output:
+
+```markdown
+# Comps check
+
+Source basis: [one line]
+How to use this result: TRIAGE ONLY - Use this only for visible comp-fit triage; do not treat it as market or proposal clearance.
+
+| Comp or claim | Status | Fit or mismatch | Verification needed |
+
+Ambiguity: [only if it could change proposal positioning]
+Next action: [one action]
 ```
 
 Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless one skill reduces a named scholarly risk.

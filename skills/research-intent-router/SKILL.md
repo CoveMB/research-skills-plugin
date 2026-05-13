@@ -128,6 +128,10 @@ Use `docs/ROUTING_MATRIX.md` as the canonical route table. If the request matche
 
 Follow `docs/SOURCE_LIMITS.md`: state the source access level, separate source basis from interpretation, include What I can verify, What remains uncertain, and User verification needed. Do not invent citations or source support.
 
+## Compact output
+
+Use compact output when the user asks for low reading load, fast routing, or the smallest next step. Compact output should preserve the active research mode, source basis, lookup decision, verification limits, and one next action. Use one routing table and include ambiguity only if it could change the selected skill or lookup decision.
+
 ## Files/folders it may read
 
 - Bundled skill instructions, metadata, and assets if available (including, but not limited to, `SKILL.md`, `README.md`, `assets/`, `references/`, and `agents/openai.yaml` in this project or equivalent files in another project).
@@ -198,8 +202,21 @@ This is a non-contract routing output unless the user explicitly asks for a book
 
 ## User verification needed
 
-## Suggested next step
+```
 
+Compact output:
+
+```markdown
+# Research route
+
+Source basis: [one line]
+How to use this result: TRIAGE ONLY - Use this only to choose the next review step; do not treat it as source verification.
+Mode: [normal mode or deep mode]
+
+| Best route | Why this skill | Lookup needed? | Still unverified |
+
+Ambiguity: [only if it could change route or lookup decision]
+Next action: [one action]
 ```
 
 Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless one skill reduces a named scholarly risk.

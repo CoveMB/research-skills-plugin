@@ -62,6 +62,18 @@ Use `dyslexia-research-companion` when the accessibility bottleneck is mixed or 
 Use dyslexia-research-companion. I have rough notes, dictation fragments, and too much source material. Choose the smallest low-load first step without changing my meaning.
 ```
 
+For accessibility skills, add "use compact output" when you want one source-basis line, one table or revised passage, ambiguity only when it could change meaning, and one next action. `dyslexia-research-companion` may use that shape by default when mixed reading load or accessibility friction is the main bottleneck. This changes the output shape, not which skill or route is selected.
+
+Selected routing, audit, gate, and verifier skills also support compact output for blocker-first decisions. Use it when you want the source basis, the main verdict or route, only decision-changing gaps, and one next action.
+
+Every compact result should include a `How to use this result` line with a short status and a full sentence explaining the reliance limit:
+
+- `TRIAGE ONLY`: Use this only to choose the next step; do not treat it as verified scholarship.
+- `BLOCKER SUMMARY`: This lists visible blockers only; no blocker listed does not mean the work is cleared.
+- `LIMITED GATE DECISION`: This is a proceed/hold/repair decision based only on visible evidence and stated limits.
+
+These statuses appear only in compact output. Escalate from compact output to full review before using the result for manuscript claims, external release, legal/privacy decisions, citation verification, method credibility, or final submission.
+
 For a full project plan:
 
 ```text

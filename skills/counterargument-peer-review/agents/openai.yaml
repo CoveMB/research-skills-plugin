@@ -4,3 +4,7 @@ interface:
   default_prompt: "Use counterargument-peer-review to challenge my thesis like a skeptical peer reviewer."
 policy:
   allow_implicit_invocation: true
+  task_type: "research-book-skill"
+  data_access_level: "user-provided-or-public-metadata"
+  external_lookup_allowed: "conditional"
+  confidentiality_gate: "required-before-external-lookup"

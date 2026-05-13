@@ -16,7 +16,7 @@ Use `reading-load-reducer` for dense source triage. Use `dyslexia-friendly-prose
 
 - Dictated text, transcript, voice-note dump, meeting note, or spoken fragment list.
 - Intended use: idea capture, chapter planning, claim drafting, source planning, or next-step triage.
-- Speaker labels, meeting context, interview/privacy constraints, terms that must stay unchanged, and any relevant chapter or project context.
+- Speaker labels, segment IDs or timecodes, transcript quality, meeting context, interview/privacy constraints, terms that must stay unchanged, and any relevant chapter or project context.
 
 ## Example requests
 
@@ -34,7 +34,7 @@ Use dictation-to-research-notes. Segment these rambling notes into idea units an
 
 ## Typical output
 
-Expect a cleaned note table with speaker/source or original-fragment anchors when useful, ambiguity table, source basis, verification gaps, and one optional risk-gated next step.
+Expect a cleaned note table with speaker/source, segment/timecode, or redacted original-fragment anchors when useful, ambiguity table, source basis, verification gaps, and one optional risk-gated next step. Ask for compact output when you want one source-basis line, one cleaned note table, ambiguity only when it matters, and one next action. Compact output should include `How to use this result: TRIAGE ONLY - Use this only as cleaned notes from visible meaning; do not treat it as claim verification.` It changes output shape, not route selection or evidence requirements.
 
 ## Procedure
 

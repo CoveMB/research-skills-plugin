@@ -71,6 +71,10 @@ Use these labels:
 
 Follow `docs/SOURCE_LIMITS.md`: state the source access level, separate source basis from interpretation, include What I can verify, What remains uncertain, and User verification needed. Do not invent citations or source support.
 
+## Compact output
+
+Use compact output when the user asks for low reading load, blocker-first claim triage, or the riskiest claims only. Compact output should keep source basis and verification gaps visible, show only claims whose evidence status changes the next action, and end with one next action.
+
 ## Machine-readable artifacts
 
 When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: claim_evidence_ledger`. If the output is normal Markdown, do not force the JSON contract.
@@ -146,8 +150,20 @@ Recommend source types, not fake sources.
 
 ## Limits / failure risks
 
-## Suggested next step
+```
 
+Compact output:
+
+```markdown
+# Claim risk triage
+
+Source basis: [one line]
+How to use this result: TRIAGE ONLY - Use this only to spot visible claim risks; do not treat it as final evidence clearance.
+
+| Claim | Evidence status | Risk | Safer wording or evidence need |
+
+Ambiguity: [only if wording or evidence status could change]
+Next action: [one action]
 ```
 
 Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless one skill reduces a named scholarly risk.

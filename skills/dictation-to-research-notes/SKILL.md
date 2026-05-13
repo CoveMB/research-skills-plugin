@@ -38,7 +38,7 @@ Use this instead of `scholarly-prose-editor` when the input is not yet prose. Us
 
 - Dictated text, transcript, voice-note dump, meeting note, or spoken fragment list.
 - Intended use: idea capture, chapter planning, claim drafting, source planning, or next-step triage.
-- Optional constraints: speaker labels, source or meeting context, terms that must stay unchanged, target chapter, audience, source context, and whether to show a correction log.
+- Optional constraints: speaker labels, segment IDs or timecodes, transcript quality, meeting/interview/source context, terms that must stay unchanged, target chapter, audience, and whether to show a correction log.
 
 ## Source basis and AI limits
 
@@ -46,9 +46,9 @@ Follow `docs/SOURCE_LIMITS.md`: state the source access level, separate source b
 
 Treat transcription cleanup as surface repair. If a transcript error can change the claim, mark it as an ambiguity instead of guessing.
 
-## Compact mode
+## Compact output
 
-Use compact mode when the user asks for low reading load, when the transcript is short, or when a full report would add friction. Compact mode should use short chunks, stable table labels, one source-basis line, one cleaned note table, one ambiguity block only if needed, and one next action.
+Use compact output when the user asks for low reading load, when the transcript is short, or when a full report would add friction. Compact output should use short chunks, stable table labels, one source-basis line, one cleaned note table, one ambiguity block only if needed, and one next action.
 
 ## Files/folders it may read
 
@@ -76,7 +76,7 @@ Use compact mode when the user asks for low reading load, when the transcript is
 
 State whether the input appears to be a voice memo, transcript, meeting note, or rough spoken idea. State the intended output use if provided.
 
-If multiple speakers, interview participants, meeting attendees, or identifiable third parties appear, preserve speaker/source labels where useful and flag privacy review before external sharing.
+If multiple speakers, interview participants, meeting attendees, or identifiable third parties appear, preserve speaker/source labels where useful and flag privacy review before external sharing. State transcript quality when it affects confidence: clean transcript, noisy transcript, auto-caption, partial transcript, or unclear quality.
 
 ### 2. Segment into idea units
 
@@ -98,11 +98,14 @@ Repair obvious speech-to-text noise, punctuation, and sentence boundaries. Prese
 
 If a phrase has several plausible meanings, keep the original fragment and mark the ambiguity.
 
+When original fragments contain identifiable or private material, use redacted anchors, speaker roles, or segment/timecode references unless the exact wording is needed to verify meaning.
+
 ### 4. Build research notes
 
-Create a compact table with:
+Create a short table with:
 
 - speaker or source, when present
+- segment ID or timecode, when present
 - original fragment or transcript anchor, when it helps verify meaning
 - cleaned note
 - type
@@ -133,7 +136,7 @@ If the cleaned notes reveal a clear next step, suggest one specialist skill:
 ## Capture context
 
 ## Cleaned note table
-| # | Speaker/source | Original fragment | Cleaned note | Type | Argument role | Evidence needed | Ambiguity | Next action |
+| # | Speaker/source | Segment/timecode | Original fragment or redacted anchor | Cleaned note | Type | Argument role | Evidence needed | Ambiguity | Next action |
 
 ## Ambiguities that matter
 | Fragment | Possible meanings | Why it matters | Question |
@@ -144,17 +147,17 @@ If the cleaned notes reveal a clear next step, suggest one specialist skill:
 
 ## User verification needed
 
-## Suggested next step
 ```
 
-Compact mode:
+Compact output:
 
 ```markdown
 # Dictation notes
 
 Source basis: [one line]
+How to use this result: TRIAGE ONLY - Use this only as cleaned notes from visible meaning; do not treat it as claim verification.
 
-| Note | Type | Evidence needed | Ambiguity | Next action |
+| Note | Type | Evidence needed | Ambiguity |
 
 Ambiguity: [only if meaning could change]
 
@@ -166,7 +169,7 @@ Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.m
 ## Quality checks
 
 - Dictated meaning is preserved or ambiguity is explicitly flagged.
-- Speaker/source context and original fragments are retained when needed to verify meaning.
+- Speaker/source context, segment IDs, and original fragments or redacted anchors are retained when needed to verify meaning.
 - Filler is removed without losing uncertainty, emphasis, or sequence.
 - Claims, questions, examples, and evidence needs are separated.
 - Output is shorter and easier to scan than the transcript.

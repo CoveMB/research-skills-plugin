@@ -35,7 +35,7 @@ Rewrite the risky claims in safer language without weakening the argument too mu
 
 ## Typical output
 
-Expect a table with claim, claim type, evidence status, current support, evidence needed, risk, and safer wording. The output also lists high-risk claims, claims that can remain interpretive or normative, source priorities, and a risk-gated follow-up when it is useful.
+Expect a table with claim, claim type, evidence status, current support, evidence needed, risk, and safer wording. The output also lists high-risk claims, claims that can remain interpretive or normative, source priorities, and a risk-gated follow-up when it is useful. Ask for compact output when you want only the claims whose evidence status changes the next action. Compact output should include `How to use this result: TRIAGE ONLY - Use this only to spot visible claim risks; do not treat it as final evidence clearance.` It changes output shape, not route selection or evidence requirements.
 
 ## Procedure
 
