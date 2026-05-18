@@ -19,9 +19,11 @@
     "blocked reliance decision": "Reviewed output score 4 for blocked reliance decision: evaluator judgment is tied to the captured output and fixture rubric."
   },
   "evidence_notes": [
-    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+    "Reviewed output evidence includes required source anchor: AI-generated summaries"
   ],
   "answer_key_findings": [
-    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+    "Allowed support checked: The workflow can proceed only after human verification is recorded.",
+    "Rejected disallowed claim checked: Gate decision: pass",
+    "Required uncertainty checked: No human source verification record is present"
   ]
 }

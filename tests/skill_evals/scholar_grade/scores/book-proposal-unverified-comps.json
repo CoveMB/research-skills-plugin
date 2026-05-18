@@ -19,9 +19,11 @@
     "next verification step": "Reviewed output score 4 for next verification step: evaluator judgment is tied to the captured output and fixture rubric."
   },
   "evidence_notes": [
-    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+    "Reviewed output evidence includes required source anchor: politics of urban data systems"
   ],
   "answer_key_findings": [
-    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+    "Allowed support checked: The proposal language can be strengthened while marking comps and audience claims as provisional.",
+    "Rejected disallowed claim checked: market verified",
+    "Required uncertainty checked: Comparable-title metadata is not verified"
   ]
 }

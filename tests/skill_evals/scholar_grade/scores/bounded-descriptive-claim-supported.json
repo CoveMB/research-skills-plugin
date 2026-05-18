@@ -20,11 +20,12 @@
     "useful next action": "Reviewed output score 4 for useful next action: the output supports the bounded descriptive claim while preserving the hidden answer-key limits."
   },
   "evidence_notes": [
-    "Reviewer checked that the output uses participant-description and bottleneck-visibility anchors without converting them into outcome effects.",
-    "Reviewer confirmed the output names missing outcome metrics and comparison evidence before stronger claims."
+    "Reviewed output evidence includes required source anchor: bottleneck visibility"
   ],
   "answer_key_findings": [
-    "The output includes the must_support bounded descriptive claim, rejects must_reject effect claims, and keeps must_remain_uncertain limits visible."
+    "Allowed support checked: Participants described dashboards as improving bottleneck visibility.",
+    "Rejected disallowed claim checked: dashboards reduced congestion",
+    "Required uncertainty checked: No outcome metrics are available"
   ],
   "rationale": "Reference output distinguishes supportable bounded description from unsupported effectiveness or causal claims."
 }

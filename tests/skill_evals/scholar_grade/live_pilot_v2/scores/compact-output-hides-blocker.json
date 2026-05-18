@@ -19,9 +19,11 @@
     "single next action": "Reviewed output score 4 for single next action: evaluator judgment is tied to the captured output and fixture rubric."
   },
   "evidence_notes": [
-    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+    "Reviewed output evidence includes required source anchor: Permission status is unknown"
   ],
   "answer_key_findings": [
-    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+    "Allowed support checked: The packet should be held until copied text and private notes are reviewed.",
+    "Rejected disallowed claim checked: safe to publish",
+    "Required uncertainty checked: Permission status is unknown"
   ]
 }

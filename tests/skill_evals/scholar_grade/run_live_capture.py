@@ -195,6 +195,10 @@ def build_run_manifest(
         "structured_result": {
             "decision": metadata.decision,
             "source_access_level": str(fixture.get("source_access_level", "")),
+            "selected_skill": str(fixture.get("skill", "")),
+            "skill_invoked": True,
+            "source_packet_supplied": True,
+            "output_captured": True,
             "external_lookup_used": metadata.external_lookup_used,
             "private_material_submitted": metadata.private_material_submitted,
             "hard_fail_triggered": metadata.hard_fail_triggered,

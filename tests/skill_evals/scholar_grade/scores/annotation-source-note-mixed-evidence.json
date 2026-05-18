@@ -19,9 +19,11 @@
     "source-note usefulness": "Reviewed output score 4 for source-note usefulness: evaluator judgment is tied to the captured output and fixture rubric."
   },
   "evidence_notes": [
-    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+    "Reviewed output evidence includes required source anchor: Locator is missing"
   ],
   "answer_key_findings": [
-    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+    "Allowed support checked: The note can preserve visible source language while labeling unsupported interpretation separately.",
+    "Rejected disallowed claim checked: locator inferred",
+    "Required uncertainty checked: Locator is missing for at least one quote"
   ]
 }

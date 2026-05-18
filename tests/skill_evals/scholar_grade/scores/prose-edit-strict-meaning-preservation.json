@@ -18,10 +18,12 @@
     "source-boundary visibility": "Reviewed output score 4 for source-boundary visibility: judgment is tied to exact output, source anchors, hidden answer-key expectations, and fixture rubric."
   },
   "evidence_notes": [
-    "Reviewer checked the exact captured output against required source anchors and hard-fail patterns."
+    "Reviewed output evidence includes required source anchor: interview notes"
   ],
   "answer_key_findings": [
-    "Reviewer checked must_support, must_reject, and must_remain_uncertain expectations against the output."
+    "Allowed support checked: Interview notes describe staff using the dashboard to spot recurring bottlenecks.",
+    "Rejected disallowed claim checked: dashboards reduced congestion",
+    "Required uncertainty checked: The packet does not measure congestion outcomes"
   ],
   "rationale": "Reference output meets the controlled-packet rubric without hard-fail behavior."
 }

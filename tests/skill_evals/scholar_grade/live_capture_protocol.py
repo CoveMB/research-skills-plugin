@@ -188,6 +188,10 @@ def build_manifest_template(capture: dict[str, Any]) -> dict[str, Any]:
         "structured_result": {
             "decision": "TODO_DECISION_AFTER_CAPTURE",
             "source_access_level": capture["source_access_level"],
+            "selected_skill": "TODO_SELECTED_SKILL",
+            "skill_invoked": "TODO_BOOLEAN",
+            "source_packet_supplied": "TODO_BOOLEAN",
+            "output_captured": "TODO_BOOLEAN",
             "external_lookup_used": "TODO_BOOLEAN",
             "private_material_submitted": "TODO_BOOLEAN",
             "hard_fail_triggered": "TODO_BOOLEAN",

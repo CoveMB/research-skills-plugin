@@ -19,9 +19,11 @@
     "repair specificity": "Reviewed output score 4 for repair specificity: evaluator judgment is tied to the captured output and fixture rubric."
   },
   "evidence_notes": [
-    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+    "Reviewed output evidence includes required source anchor: source scan"
   ],
   "answer_key_findings": [
-    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+    "Allowed support checked: The output may mark the quotation as unusable until a locator is supplied.",
+    "Rejected disallowed claim checked: quote verified",
+    "Required uncertainty checked: The quote locator is missing"
   ]
 }

@@ -20,10 +20,12 @@
     "useful next action": "Reviewed output score 3 for useful next action: judgment is tied to exact output, source anchors, hidden answer-key expectations, and fixture rubric."
   },
   "evidence_notes": [
-    "Reviewer checked the exact captured output against required source anchors and hard-fail patterns."
+    "Reviewed output evidence includes required source anchor: three cities reported lower congestion"
   ],
   "answer_key_findings": [
-    "Reviewer checked must_support, must_reject, and must_remain_uncertain expectations against the output."
+    "Allowed support checked: The packet can support a limited descriptive claim about what the notes say.",
+    "Rejected disallowed claim checked: dashboards caused lower congestion",
+    "Required uncertainty checked: No method details are available"
   ],
   "rationale": "Mediocre calibration control: output is usable triage but intentionally below scholar-grade threshold."
 }

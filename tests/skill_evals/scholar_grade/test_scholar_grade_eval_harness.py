@@ -253,8 +253,11 @@ def score(
             dimension: f"{dimension} meets the controlled-packet rubric."
             for dimension in dimension_scores
         },
-        "evidence_notes": ["The reviewed output names the controlled packet and preserves the source limitation."],
-        "answer_key_findings": ["The reviewed output rejects must_reject claims and keeps required uncertainties visible."],
+        "evidence_notes": ["The reviewed output names the controlled packet source anchor."],
+        "answer_key_findings": [
+            "The reviewed output rejects the disallowed claim: The notes prove the causal claim.",
+            "The reviewed output keeps the required uncertainty visible: No method details are available.",
+        ],
         "rationale": "Fixture output meets the controlled-packet rubric without hard-fail behavior.",
     }
 
@@ -1482,6 +1485,70 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
                 errors,
             )
 
+    def test_run_manifest_live_capture_requirement_rejects_missing_manual_provenance(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            skill_text = "skill text"
+            source_packet_text = "\n".join(
+                [
+                    "# Synthetic source packet",
+                    "",
+                    "Source basis: controlled notes only.",
+                    "Visible method details: none.",
+                ]
+            )
+            output_text = "\n".join(
+                [
+                    "Source basis: controlled packet.",
+                    "Claim/evidence fit: descriptive support only.",
+                    "Expected decision: Cannot support.",
+                    "No method details are available.",
+                    "Next action: inspect method details before relying on the claim.",
+                ]
+            )
+            write_source_packet(root)
+            write_skill_file(root, text=skill_text)
+            fixture_path = write_fixture_file(root, fixture_document(fixture()))
+            outputs_dir = root / "outputs"
+            outputs_dir.mkdir()
+            (outputs_dir / "unsupported-causal-claim.md").write_text(output_text, encoding="utf-8")
+            live_manifest = manifest(
+                output_text=output_text,
+                source_packet_text=source_packet_text,
+                skill_text=skill_text,
+            )
+            live_manifest["capture_mode"] = "manual-live-capture"
+            live_manifest["interface"] = "codex-cli"
+            live_manifest["model"] = "gpt-5.4"
+            live_manifest["operator"] = "human-reviewer"
+            manifests_dir = write_manifest_file(root, live_manifest)
+            write_prompt_file(root)
+
+            errors = validate_scholar_grade_run_manifests(
+                fixture_path,
+                outputs_dir,
+                manifests_dir,
+                root,
+                require_live_captures=True,
+            )
+
+            self.assertIn(
+                "unsupported-causal-claim: structured_result.selected_skill must match fixture skill 'methodology-source-auditor' when live captures are required",
+                errors,
+            )
+            self.assertIn(
+                "unsupported-causal-claim: structured_result.skill_invoked must be true when live captures are required",
+                errors,
+            )
+            self.assertIn(
+                "unsupported-causal-claim: structured_result.source_packet_supplied must be true when live captures are required",
+                errors,
+            )
+            self.assertIn(
+                "unsupported-causal-claim: structured_result.output_captured must be true when live captures are required",
+                errors,
+            )
+
     def test_run_manifest_live_capture_requirement_accepts_manual_live_capture(self) -> None:
         with TemporaryDirectory() as temporary_directory:
             root = Path(temporary_directory)
@@ -1518,6 +1585,10 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
             live_manifest["interface"] = "codex-cli"
             live_manifest["model"] = "gpt-5.4"
             live_manifest["operator"] = "human-reviewer"
+            live_manifest["structured_result"]["selected_skill"] = "methodology-source-auditor"
+            live_manifest["structured_result"]["skill_invoked"] = True
+            live_manifest["structured_result"]["source_packet_supplied"] = True
+            live_manifest["structured_result"]["output_captured"] = True
             manifests_dir = write_manifest_file(root, live_manifest)
             write_prompt_file(root)
 
@@ -1850,6 +1921,35 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
 
             self.assertIn("unsupported-causal-claim: score missing key 'evidence_notes'", errors)
             self.assertIn("unsupported-causal-claim: score missing key 'answer_key_findings'", errors)
+
+    def test_review_score_rejects_generic_notes_without_case_specific_evidence(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_source_packet(root)
+            fixture_path = write_fixture_file(root, fixture_document(fixture()))
+            generic_score = score()
+            generic_score["evidence_notes"] = [
+                "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+            ]
+            generic_score["answer_key_findings"] = [
+                "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+            ]
+            scores_dir = write_score_file(root, generic_score)
+
+            errors = validate_scholar_grade_review_scores(fixture_path, scores_dir)
+
+            self.assertIn(
+                "unsupported-causal-claim: score evidence_notes must mention at least one required_source_anchors item",
+                errors,
+            )
+            self.assertIn(
+                "unsupported-causal-claim: score answer_key_findings must mention at least one disallowed_claims item",
+                errors,
+            )
+            self.assertIn(
+                "unsupported-causal-claim: score answer_key_findings must mention at least one required_uncertainties item",
+                errors,
+            )
 
     def test_review_score_rejects_missing_dimension_low_average_and_hard_fail(self) -> None:
         with TemporaryDirectory() as temporary_directory:

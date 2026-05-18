@@ -22,7 +22,11 @@
     "hard_fail_triggered": false,
     "next_action_count": 1,
     "private_material_submitted": false,
-    "source_access_level": "controlled-packet"
+    "source_access_level": "controlled-packet",
+    "selected_skill": "claim-traceability-graph",
+    "skill_invoked": true,
+    "source_packet_supplied": true,
+    "output_captured": true
   },
   "tool_permissions": "local-only"
 }

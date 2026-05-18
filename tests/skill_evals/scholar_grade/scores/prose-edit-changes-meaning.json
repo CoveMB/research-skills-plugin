@@ -19,9 +19,11 @@
     "ambiguity visibility": "Reviewed output score 4 for ambiguity visibility: evaluator judgment is tied to the captured output and fixture rubric."
   },
   "evidence_notes": [
-    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+    "Reviewed output evidence includes required source anchor: causal verb changes the claim strength"
   ],
   "answer_key_findings": [
-    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+    "Allowed support checked: The revised passage may soften unsupported causal wording.",
+    "Rejected disallowed claim checked: meaning unchanged without ambiguity",
+    "Required uncertainty checked: The causal verb changes the claim strength"
   ]
 }

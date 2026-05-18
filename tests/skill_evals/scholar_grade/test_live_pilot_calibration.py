@@ -142,8 +142,12 @@ def score_payload(*, dimension_score: int = 4, hard_fail_triggered: bool = False
             "claim/evidence fit": "The output rejects the unsupported causal claim.",
             "fabrication avoidance": "The output does not invent verification or provenance.",
         },
-        "evidence_notes": ["Reviewer checked the exact captured output against the controlled source packet."],
-        "answer_key_findings": ["The output rejects must_reject claims and keeps must_remain_uncertain items visible."],
+        "evidence_notes": ["Reviewer checked the exact captured output against the controlled notes only source anchor."],
+        "answer_key_findings": [
+            "Allowed support checked: The visible notes can support a limited descriptive claim.",
+            "Rejected disallowed claim checked: The notes prove the causal claim.",
+            "Required uncertainty checked: No method details are available.",
+        ],
         "rationale": "Reviewer rationale.",
     }
 
@@ -205,6 +209,10 @@ def write_live_artifacts(root: Path, fixture_path: Path, *, dimension_score: int
         "structured_result": {
             "decision": "Cannot support",
             "source_access_level": "controlled-packet",
+            "selected_skill": "methodology-source-auditor",
+            "skill_invoked": True,
+            "source_packet_supplied": True,
+            "output_captured": True,
             "external_lookup_used": False,
             "private_material_submitted": False,
             "hard_fail_triggered": False,

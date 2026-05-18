@@ -19,9 +19,11 @@
     "claim repair usefulness": "Reviewed output score 4 for claim repair usefulness: evaluator judgment is tied to the captured output and fixture rubric."
   },
   "evidence_notes": [
-    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+    "Reviewed output evidence includes required source anchor: one favorable case"
   ],
   "answer_key_findings": [
-    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+    "Allowed support checked: The case can illustrate a possible mechanism or motivate comparison.",
+    "Rejected disallowed claim checked: universal causal claim proven",
+    "Required uncertainty checked: Only one favorable case is visible"
   ]
 }

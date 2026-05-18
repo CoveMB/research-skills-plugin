@@ -8,14 +8,14 @@ Scholar-grade evaluation applies when a skill routes, plans, audits, edits, summ
 
 The local harness is deterministic and no-network. It validates fixture shape and captured outputs. It does not run a model, certify source truth, or replace human review.
 
-Default validation may use `deterministic-reference` manifests to prove fixture and grader integrity. To validate actual skill behavior, run the harness with `--require-live-captures`; that mode requires every manifest to record `manual-live-capture` or `automated-live-capture`, a real model identifier, and a live capture interface.
+Default validation may use `deterministic-reference` manifests to prove fixture and grader integrity. To validate actual skill behavior, run the harness with `--require-live-captures`; that mode requires every manifest to record `manual-live-capture` or `automated-live-capture`, a real model identifier, a live capture interface, and manual-capture provenance showing the selected skill, skill invocation, source-packet supply, and output capture. The live-capture gate is intentionally stricter than CI and is expected to fail against shipped deterministic references until real live captures are recorded for every selected fixture.
 
 ## Pass conditions
 
 An output is scholar-grade only when all of these are visible:
 
 - Correct route or skill use for the smallest useful task.
-- Route trace evidence showing the selected skill, capture flags, and prompt/output hashes.
+- Route or manual-capture provenance showing the selected skill, capture flags, and prompt/output hashes.
 - Source basis and source access level.
 - Claim/evidence fit, including claim type when relevant.
 - The positive claim boundary the output may safely support.
@@ -126,7 +126,7 @@ For live or manual captures, record outside the output in `tests/skill_evals/sch
 - tool permissions
 - network permissions
 - whether external lookup was permitted
-- structured result fields: decision, source access level, external lookup used, private material submitted, hard fail triggered, and next action count
+- structured result fields: decision, source access level, selected skill, skill invoked, source packet supplied, output captured, external lookup used, private material submitted, hard fail triggered, and next action count
 
 Manifest metadata must not retain `TODO_*` template placeholders. Replace interface, model, operator, tool-permission, and network-permission placeholders with actual capture values before running the harness. Manifest dates must be real calendar dates in `YYYY-MM-DD` form.
 
@@ -147,8 +147,8 @@ Every scholar-grade fixture must also have `tests/skill_evals/scholar_grade/scor
 - reviewed output SHA-256
 - one numeric score from 0 to 5 for every fixture `rubric_dimensions` entry
 - one written rationale for every scored rubric dimension
-- evidence notes tying the score to the captured output
-- answer-key findings tying the score to `must_support`, `must_reject`, and `must_remain_uncertain`
+- evidence notes tying the score to captured output details, including at least one required source anchor
+- answer-key findings tying the score to `must_support`, `must_reject`, and `must_remain_uncertain` with case-specific claim or uncertainty text
 - rationale
 
 Reviewer, overall rationale, and per-dimension rationale fields must not retain `TODO_*` template placeholders. Review dates must be real calendar dates in `YYYY-MM-DD` form.
@@ -196,7 +196,7 @@ Validate fixture schema, captured outputs, and run manifests:
 python3 tests/skill_evals/scholar_grade/scholar_grade_eval_harness.py --fixtures tests/skill_evals/scholar_grade/fixtures.json --outputs-dir tests/skill_evals/scholar_grade/outputs --manifests-dir tests/skill_evals/scholar_grade/manifests --scores-dir tests/skill_evals/scholar_grade/scores --quiet
 ```
 
-Validate live/manual skill captures rather than reference fixtures:
+Validate live/manual skill captures rather than reference fixtures. This should fail for shipped deterministic-reference manifests and pass only after the selected manifests, outputs, and scores are recorded from real live captures:
 
 ```bash
 python3 tests/skill_evals/scholar_grade/scholar_grade_eval_harness.py --fixtures tests/skill_evals/scholar_grade/fixtures.json --outputs-dir tests/skill_evals/scholar_grade/outputs --manifests-dir tests/skill_evals/scholar_grade/manifests --scores-dir tests/skill_evals/scholar_grade/scores --require-live-captures --quiet

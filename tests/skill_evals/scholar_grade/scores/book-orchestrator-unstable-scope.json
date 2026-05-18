@@ -19,9 +19,11 @@
     "first-step specificity": "Reviewed output score 4 for first-step specificity: evaluator judgment is tied to the captured output and fixture rubric."
   },
   "evidence_notes": [
-    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+    "Reviewed output evidence includes required source anchor: research question is not stable"
   ],
   "answer_key_findings": [
-    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+    "Allowed support checked: The orchestrator can propose a bounded sequence and first gate.",
+    "Rejected disallowed claim checked: workflow complete",
+    "Required uncertainty checked: The research question is not stable"
   ]
 }

@@ -153,6 +153,11 @@ STRUCTURED_RESULT_BOOLEAN_KEYS = {
     "private_material_submitted",
     "hard_fail_triggered",
 }
+MANUAL_LIVE_STRUCTURED_RESULT_BOOLEAN_KEYS = {
+    "skill_invoked",
+    "source_packet_supplied",
+    "output_captured",
+}
 REQUIRED_SCORE_KEYS = {
     "schema_version",
     "fixture_id",
@@ -1157,7 +1162,32 @@ def manifest_hash_errors(
     return errors
 
 
-def structured_result_errors(fixture: dict[str, Any], manifest_document: dict[str, Any]) -> list[str]:
+def manual_live_structured_result_provenance_errors(
+    fixture: dict[str, Any],
+    manifest_document: dict[str, Any],
+    structured_result: dict[str, Any],
+    require_live_captures: bool,
+) -> list[str]:
+    if not require_live_captures or manifest_document.get("capture_mode") != "manual-live-capture":
+        return []
+
+    identifier = fixture_identifier(fixture)
+    errors: list[str] = []
+    if structured_result.get("selected_skill") != fixture.get("skill"):
+        errors.append(
+            f"{identifier}: structured_result.selected_skill must match fixture skill {fixture.get('skill')!r} when live captures are required"
+        )
+    for key in sorted(MANUAL_LIVE_STRUCTURED_RESULT_BOOLEAN_KEYS):
+        if structured_result.get(key) is not True:
+            errors.append(f"{identifier}: structured_result.{key} must be true when live captures are required")
+    return errors
+
+
+def structured_result_errors(
+    fixture: dict[str, Any],
+    manifest_document: dict[str, Any],
+    require_live_captures: bool,
+) -> list[str]:
     identifier = fixture_identifier(fixture)
     structured_result = manifest_document.get("structured_result")
     if not isinstance(structured_result, dict):
@@ -1190,6 +1220,14 @@ def structured_result_errors(fixture: dict[str, Any], manifest_document: dict[st
         errors.append(f"{identifier}: structured_result.hard_fail_triggered must be false")
     if structured_result.get("next_action_count") != 1:
         errors.append(f"{identifier}: structured_result.next_action_count must be 1")
+    errors.extend(
+        manual_live_structured_result_provenance_errors(
+            fixture,
+            manifest_document,
+            structured_result,
+            require_live_captures,
+        )
+    )
     return errors
 
 
@@ -1219,7 +1257,7 @@ def validate_run_manifest_for_fixture(
         *live_capture_requirement_errors(fixture, manifest_document, require_live_captures),
         *automated_trace_errors(root, fixture, manifest_document),
         *manifest_hash_errors(fixture_path, outputs_dir, manifests_dir, root, fixture, manifest_document),
-        *structured_result_errors(fixture, manifest_document),
+        *structured_result_errors(fixture, manifest_document, require_live_captures),
     ]
 
 
@@ -1370,10 +1408,51 @@ def score_evidence_list_errors(
     ]
 
 
+def score_text_for_key(score_document: dict[str, Any], key: str) -> str:
+    return "\n".join(string_list(score_document.get(key)))
+
+
+def answer_key_field_mentioned(text: str, fixture: dict[str, Any], key: str, value: str) -> bool:
+    if key == "required_uncertainties":
+        return contains_phrase_or_alias(text, value, alias_values(fixture, "required_uncertainty_aliases", value))
+    if key == "allowed_claims":
+        return contains_phrase_or_alias(text, value, alias_values(fixture, "allowed_claim_aliases", value))
+    return normalized_contains(text, value)
+
+
+def fixture_field_has_score_mention(
+    fixture: dict[str, Any],
+    score_document: dict[str, Any],
+    score_key: str,
+    fixture_key: str,
+) -> bool:
+    values = string_list(fixture.get(fixture_key))
+    if not values:
+        return True
+    score_text = score_text_for_key(score_document, score_key)
+    return any(answer_key_field_mentioned(score_text, fixture, fixture_key, value) for value in values)
+
+
+def case_specific_score_note_errors(fixture: dict[str, Any], score_document: dict[str, Any]) -> list[str]:
+    identifier = fixture_identifier(fixture)
+    checks = [
+        ("evidence_notes", "required_source_anchors"),
+        ("answer_key_findings", "allowed_claims"),
+        ("answer_key_findings", "disallowed_claims"),
+        ("answer_key_findings", "required_uncertainties"),
+    ]
+    return [
+        f"{identifier}: score {score_key} must mention at least one {fixture_key} item"
+        for score_key, fixture_key in checks
+        if not fixture_field_has_score_mention(fixture, score_document, score_key, fixture_key)
+    ]
+
+
 def score_evidence_errors(fixture: dict[str, Any], score_document: dict[str, Any]) -> list[str]:
     return [
         *score_evidence_list_errors(fixture, score_document, "evidence_notes"),
         *score_evidence_list_errors(fixture, score_document, "answer_key_findings"),
+        *case_specific_score_note_errors(fixture, score_document),
     ]
 
 

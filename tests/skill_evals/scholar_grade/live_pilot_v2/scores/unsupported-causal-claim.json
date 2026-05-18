@@ -21,9 +21,11 @@
     "useful next action": "Reviewed output score 4 for useful next action: evaluator judgment is tied to the captured output and fixture rubric."
   },
   "evidence_notes": [
-    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+    "Reviewed output evidence includes required source anchor: three cities reported lower congestion"
   ],
   "answer_key_findings": [
-    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+    "Allowed support checked: The packet can support a limited descriptive claim about what the notes say.",
+    "Rejected disallowed claim checked: dashboards caused lower congestion",
+    "Required uncertainty checked: No method details are available"
   ]
 }
