@@ -145,6 +145,10 @@ If the repaired prose reveals a concrete scholarly risk, suggest one next skill:
 
 ```
 
+## Failure-mode output boundaries
+
+When handling evidence-sensitive prose repair, use stable labels that keep meaning and claim strength visible: Source basis, Revised passage, Meaning-preserving changes, Ambiguity, What remains uncertain, and Next action. If rough wording strengthens a claim beyond the evidence, state Repair wording without changing claim strength. Make the causal-strength risk visible with The causal verb changes the claim strength and keep the safe boundary The revised passage may soften unsupported causal wording.
+
 Compact output:
 
 ```markdown

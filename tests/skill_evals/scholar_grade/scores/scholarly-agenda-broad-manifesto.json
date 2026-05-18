@@ -2,13 +2,26 @@
   "date": "2026-05-13",
   "dimension_scores": {
     "agenda scoping": 4,
+    "question formation": 4,
     "evidence-plan specificity": 4,
-    "premature-source restraint": 4,
-    "question formation": 4
+    "premature-source restraint": 4
   },
   "fixture_id": "scholarly-agenda-broad-manifesto",
   "hard_fail_triggered": false,
   "rationale": "Reference output meets the controlled-packet rubric at the required scholar-grade threshold without hard-fail behavior.",
   "reviewer": "fixture-reviewer",
-  "schema_version": "scholar-grade-review-score-v1"
+  "schema_version": "scholar-grade-review-score-v1",
+  "reviewed_output_sha256": "4f7756bd4216c5c659048ed85f42c6cf20cc813be3d95c4d35b640137a378456",
+  "dimension_rationales": {
+    "agenda scoping": "Reviewed output score 4 for agenda scoping: evaluator judgment is tied to the captured output and fixture rubric.",
+    "question formation": "Reviewed output score 4 for question formation: evaluator judgment is tied to the captured output and fixture rubric.",
+    "evidence-plan specificity": "Reviewed output score 4 for evidence-plan specificity: evaluator judgment is tied to the captured output and fixture rubric.",
+    "premature-source restraint": "Reviewed output score 4 for premature-source restraint: evaluator judgment is tied to the captured output and fixture rubric."
+  },
+  "evidence_notes": [
+    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+  ],
+  "answer_key_findings": [
+    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+  ]
 }

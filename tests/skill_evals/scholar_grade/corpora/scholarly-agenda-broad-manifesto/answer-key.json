@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "scholarly-agenda-broad-manifesto",
+  "must_support": [
+    "The agenda can define candidate questions, scope boundaries, and evidence needs."
+  ],
+  "must_reject": [
+    "sources found",
+    "field consensus",
+    "research question verified"
+  ],
+  "must_remain_uncertain": [
+    "The topic is too broad for source discovery",
+    "The evidence base is not defined"
+  ]
+}

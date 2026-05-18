@@ -1,0 +1,10 @@
+{
+  "fixture_id": "scholarly-prose-evidence-sensitive-edit",
+  "output_captured": true,
+  "output_sha256": "9d3796e79dbba09b743df22bc9400a0234d15b6ef003000fb3e387fd48d87a72",
+  "prompt_sha256": "53f19a24c9b5e7ac8f26c52153aa4aa955302998ea0fe61e76e727c874cc85dd",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "scholarly-prose-editor",
+  "skill_invoked": true
+}

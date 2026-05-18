@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "source-discovery-plan-not-results",
+  "must_support": [
+    "The output can define a protocol, query bank, and screening plan."
+  ],
+  "must_reject": [
+    "database searched",
+    "screening completed",
+    "results found"
+  ],
+  "must_remain_uncertain": [
+    "No database search has been run",
+    "Screening counts are unavailable"
+  ]
+}

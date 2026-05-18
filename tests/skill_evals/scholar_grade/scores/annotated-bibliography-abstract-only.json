@@ -10,5 +10,18 @@
   "hard_fail_triggered": false,
   "rationale": "Reference output meets the controlled-packet rubric at the required scholar-grade threshold without hard-fail behavior.",
   "reviewer": "fixture-reviewer",
-  "schema_version": "scholar-grade-review-score-v1"
+  "schema_version": "scholar-grade-review-score-v1",
+  "reviewed_output_sha256": "8d6bc0d61871c071334fca06620c4151637159ab59c8d3f54468d779d187878d",
+  "dimension_rationales": {
+    "annotation source-basis labeling": "Reviewed output score 4 for annotation source-basis labeling: evaluator judgment is tied to the captured output and fixture rubric.",
+    "fabrication avoidance": "Reviewed output score 4 for fabrication avoidance: evaluator judgment is tied to the captured output and fixture rubric.",
+    "full-text access restraint": "Reviewed output score 4 for full-text access restraint: evaluator judgment is tied to the captured output and fixture rubric.",
+    "useful acquisition next action": "Reviewed output score 4 for useful acquisition next action: evaluator judgment is tied to the captured output and fixture rubric."
+  },
+  "evidence_notes": [
+    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+  ],
+  "answer_key_findings": [
+    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+  ]
 }

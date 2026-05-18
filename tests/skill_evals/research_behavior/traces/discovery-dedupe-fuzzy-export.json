@@ -1,0 +1,10 @@
+{
+  "fixture_id": "discovery-dedupe-fuzzy-export",
+  "output_captured": true,
+  "output_sha256": "a321f6efee1988f07d658c91a3774e0e170795e116b4529525698db5fe9792d7",
+  "prompt_sha256": "7a7129f3b511296bf7a8625055b1bcfff8f0f176be089d0e4688573d0e8fd218",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "discovery-runner-deduper",
+  "skill_invoked": true
+}

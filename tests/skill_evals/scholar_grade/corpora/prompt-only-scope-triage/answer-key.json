@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "prompt-only-scope-triage",
+  "must_support": [
+    "The prompt can support only a planning and scoping next step."
+  ],
+  "must_reject": [
+    "source verified",
+    "field consensus established",
+    "claims can be cited"
+  ],
+  "must_remain_uncertain": [
+    "No sources are available",
+    "No claims can be verified"
+  ]
+}

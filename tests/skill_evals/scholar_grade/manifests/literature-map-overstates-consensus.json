@@ -9,6 +9,7 @@
   "operator": "fixture-author",
   "output_file": "literature-map-overstates-consensus.md",
   "output_sha256": "e58c65f470da437e6c191fa7c686f6c5eb04434704b281e09502c448bb8398d7",
+  "prompt_packet_sha256": "2b47095b05393fb763adecc87fb494ec29ad1825e2057196f723123ad5f28b94",
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "literature-review-mapper",
   "skill_file": "skills/literature-review-mapper/SKILL.md",

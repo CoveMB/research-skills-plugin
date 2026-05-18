@@ -130,6 +130,10 @@ Recommend one repair owner only when a concrete unresolved risk remains.
 
 ```
 
+## Failure-mode output boundaries
+
+When handling missing AI-use provenance, use stable labels that keep the audit actionable: Source basis, affected sections, human verification gap, override reason, disclosure note, and Next action. If verification records are missing, state Record verification gaps before release. Keep uncertainty explicit with No human verification record is visible, and include: The log can identify missing verification and disclosure records.
+
 Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless a follow-on skill reduces a named scholarly risk.
 
 ## Quality checks

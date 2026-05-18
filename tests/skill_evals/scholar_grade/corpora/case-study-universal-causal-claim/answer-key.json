@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "case-study-universal-causal-claim",
+  "must_support": [
+    "The case can illustrate a possible mechanism or motivate comparison."
+  ],
+  "must_reject": [
+    "universal causal claim proven",
+    "case proves the theory",
+    "generalization established"
+  ],
+  "must_remain_uncertain": [
+    "Only one favorable case is visible",
+    "No counter-cases are supplied"
+  ]
+}

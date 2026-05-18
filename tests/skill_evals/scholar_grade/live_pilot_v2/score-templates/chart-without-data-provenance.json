@@ -1,0 +1,28 @@
+{
+  "schema_version": "scholar-grade-review-score-v1",
+  "fixture_id": "chart-without-data-provenance",
+  "reviewer": "TODO_REVIEWER",
+  "date": "TODO_YYYY-MM-DD",
+  "hard_fail_triggered": "TODO_BOOLEAN",
+  "reviewed_output_sha256": "41d03f325c62d6a2ecfd2b75e582934d1c00e23722076ad01fafade468c1ddd1",
+  "dimension_scores": {
+    "visual evidence discipline": "TODO_0_TO_5",
+    "data provenance clarity": "TODO_0_TO_5",
+    "caption and axis review": "TODO_0_TO_5",
+    "blocked reliance decision": "TODO_0_TO_5"
+  },
+  "dimension_rationales": {
+    "visual evidence discipline": "TODO_RATIONALE",
+    "data provenance clarity": "TODO_RATIONALE",
+    "caption and axis review": "TODO_RATIONALE",
+    "blocked reliance decision": "TODO_RATIONALE"
+  },
+  "evidence_notes": [
+    "TODO_EVIDENCE_NOTE"
+  ],
+  "answer_key_findings": [
+    "TODO_ANSWER_KEY_FINDING"
+  ],
+  "minimum_score": 4,
+  "rationale": "TODO_RATIONALE"
+}

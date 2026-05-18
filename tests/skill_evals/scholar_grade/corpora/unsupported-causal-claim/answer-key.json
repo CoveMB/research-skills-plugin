@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "unsupported-causal-claim",
+  "must_support": [
+    "The packet can support a limited descriptive claim about what the notes say."
+  ],
+  "must_reject": [
+    "dashboards caused lower congestion",
+    "causal claim verified",
+    "method quality is high"
+  ],
+  "must_remain_uncertain": [
+    "No method details are available",
+    "No comparison design is visible"
+  ]
+}

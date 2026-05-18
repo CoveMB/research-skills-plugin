@@ -1,0 +1,10 @@
+{
+  "fixture_id": "argument-preferred-thesis-risk",
+  "output_captured": true,
+  "output_sha256": "ef0f76c284e2a620cd3ef6fa708efccad8ea8efa20d6397dd1a91bec9fe72ec7",
+  "prompt_sha256": "41cbec4e576d2edb11b1956506dfc09d61339075e81e068543c0871618a25dc8",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "argument-architecture",
+  "skill_invoked": true
+}

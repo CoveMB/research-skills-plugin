@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "dictation-ambiguous-term",
+  "must_support": [
+    "The output can segment notes into claim candidates, questions, and ambiguity flags."
+  ],
+  "must_reject": [
+    "ambiguity resolved",
+    "term verified",
+    "ready for citation audit"
+  ],
+  "must_remain_uncertain": [
+    "The transcript does not resolve the key term",
+    "The intended claim strength is unclear"
+  ]
+}

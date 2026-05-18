@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import sys
@@ -23,6 +24,22 @@ COMPACT_RESULT_MARKERS = [
     "Next action",
 ]
 FIXTURE_ID_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+REQUIRED_TRACE_KEYS = {
+    "schema_version",
+    "fixture_id",
+    "prompt_sha256",
+    "output_sha256",
+    "selected_skill",
+    "skill_invoked",
+    "prompt_supplied",
+    "output_captured",
+}
+REQUIRED_TRUE_TRACE_KEYS = {
+    "skill_invoked",
+    "prompt_supplied",
+    "output_captured",
+}
+TRACE_SCHEMA_VERSION = "research-behavior-route-trace-v2"
 
 
 def read_json_object(path: Path) -> dict[str, Any]:
@@ -30,6 +47,14 @@ def read_json_object(path: Path) -> dict[str, Any]:
     if not isinstance(payload, dict):
         raise ValueError(f"{path} root must be an object")
     return payload
+
+
+def sha256_text(text: str) -> str:
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def sha256_file(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def fixture_list(document: dict[str, Any]) -> list[dict[str, Any]]:
@@ -91,6 +116,12 @@ def invalid_fixture_lists(fixture: dict[str, Any]) -> list[str]:
     return errors
 
 
+def invalid_optional_boolean_errors(fixture: dict[str, Any]) -> list[str]:
+    if "should_trigger" not in fixture or isinstance(fixture.get("should_trigger"), bool):
+        return []
+    return [f"{fixture_identifier(fixture)}: should_trigger must be a boolean"]
+
+
 def duplicate_fixture_id_errors(fixtures: list[dict[str, Any]]) -> list[str]:
     seen: set[str] = set()
     errors: list[str] = []
@@ -120,11 +151,21 @@ def validate_fixture_document(fixture_path: Path) -> list[str]:
         errors.extend(missing_fixture_keys(fixture))
         errors.extend(invalid_fixture_id_errors(fixture))
         errors.extend(invalid_fixture_lists(fixture))
+        errors.extend(invalid_optional_boolean_errors(fixture))
     return errors
 
 
 def output_path_for_fixture(outputs_dir: Path, fixture: dict[str, Any]) -> Path:
     return outputs_dir / output_filename_for_fixture(fixture)
+
+
+def trace_filename_for_fixture(fixture: dict[str, Any]) -> str:
+    identifier = fixture_identifier(fixture)
+    return f"{identifier}.json" if FIXTURE_ID_RE.match(identifier) else "invalid-fixture-id.json"
+
+
+def trace_path_for_fixture(traces_dir: Path, fixture: dict[str, Any]) -> Path:
+    return traces_dir / trace_filename_for_fixture(fixture)
 
 
 def required_marker_errors(fixture: dict[str, Any], output_text: str) -> list[str]:
@@ -194,6 +235,104 @@ def validate_fixture_outputs(fixture_path: Path, outputs_dir: Path) -> list[str]
     ]
 
 
+def trace_missing_key_errors(fixture: dict[str, Any], trace_document: dict[str, Any]) -> list[str]:
+    return [
+        f"{fixture_identifier(fixture)}: trace missing key {key!r}"
+        for key in sorted(REQUIRED_TRACE_KEYS)
+        if key not in trace_document
+    ]
+
+
+def trace_identity_errors(fixture: dict[str, Any], trace_document: dict[str, Any]) -> list[str]:
+    identifier = fixture_identifier(fixture)
+    expected_route = str(fixture.get("expected_route", ""))
+    expected_prompt_sha256 = sha256_text(str(fixture.get("prompt", "")))
+    checks = [
+        ("schema_version", TRACE_SCHEMA_VERSION, f"schema_version {TRACE_SCHEMA_VERSION!r}"),
+        ("fixture_id", identifier, f"fixture_id {identifier!r}"),
+        ("selected_skill", expected_route, f"selected_skill must match expected_route {expected_route!r}"),
+        ("prompt_sha256", expected_prompt_sha256, "prompt_sha256 does not match fixture prompt"),
+    ]
+    return [
+        f"{identifier}: trace {message}"
+        for key, expected_value, message in checks
+        if key in trace_document and trace_document.get(key) != expected_value
+    ]
+
+
+def trace_output_hash_errors(
+    outputs_dir: Path | None,
+    fixture: dict[str, Any],
+    trace_document: dict[str, Any],
+) -> list[str]:
+    if outputs_dir is None or "output_sha256" not in trace_document:
+        return []
+
+    output_path = output_path_for_fixture(outputs_dir, fixture)
+    if not output_path.exists():
+        return [
+            f"{fixture_identifier(fixture)}: cannot validate trace output_sha256 without output file {output_path.name}"
+        ]
+    if trace_document.get("output_sha256") != sha256_file(output_path):
+        return [f"{fixture_identifier(fixture)}: trace output_sha256 does not match captured output"]
+    return []
+
+
+def trace_boolean_errors(fixture: dict[str, Any], trace_document: dict[str, Any]) -> list[str]:
+    errors = [
+        f"{fixture_identifier(fixture)}: trace {key} must be true"
+        for key in sorted(REQUIRED_TRUE_TRACE_KEYS - {"skill_invoked"})
+        if trace_document.get(key) is not True
+    ]
+    should_trigger = fixture.get("should_trigger", True)
+    if should_trigger is False:
+        if trace_document.get("skill_invoked") is not False:
+            errors.append(f"{fixture_identifier(fixture)}: trace skill_invoked must be false")
+    elif trace_document.get("skill_invoked") is not True:
+        errors.append(f"{fixture_identifier(fixture)}: trace skill_invoked must be true")
+    return errors
+
+
+def validate_trace_for_fixture(
+    traces_dir: Path,
+    fixture: dict[str, Any],
+    outputs_dir: Path | None = None,
+) -> list[str]:
+    identifier_errors = invalid_fixture_id_errors(fixture)
+    if identifier_errors:
+        return identifier_errors
+    trace_path = trace_path_for_fixture(traces_dir, fixture)
+    if not trace_path.exists():
+        return [f"{fixture_identifier(fixture)}: missing trace file {trace_path.name}"]
+    try:
+        trace_document = read_json_object(trace_path)
+    except (OSError, ValueError, json.JSONDecodeError) as error:
+        return [f"{fixture_identifier(fixture)}: trace {error}"]
+    return [
+        *trace_missing_key_errors(fixture, trace_document),
+        *trace_identity_errors(fixture, trace_document),
+        *trace_output_hash_errors(outputs_dir, fixture, trace_document),
+        *trace_boolean_errors(fixture, trace_document),
+    ]
+
+
+def validate_fixture_traces(
+    fixture_path: Path,
+    traces_dir: Path,
+    outputs_dir: Path | None = None,
+) -> list[str]:
+    document_errors = validate_fixture_document(fixture_path)
+    if document_errors:
+        return document_errors
+
+    document = read_json_object(fixture_path)
+    return [
+        error
+        for fixture in fixture_list(document)
+        for error in validate_trace_for_fixture(traces_dir, fixture, outputs_dir)
+    ]
+
+
 def parse_args(argv: list[str]) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--fixtures", type=Path, required=True, help="Fixture JSON file to check.")
@@ -202,16 +341,21 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
         type=Path,
         help="Directory containing one captured output markdown file per fixture id.",
     )
+    parser.add_argument(
+        "--traces-dir",
+        type=Path,
+        help="Directory containing one route trace JSON file per fixture id.",
+    )
     return parser.parse_args(argv)
 
 
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv or sys.argv[1:])
-    errors = (
-        validate_fixture_outputs(args.fixtures, args.outputs_dir)
-        if args.outputs_dir
-        else validate_fixture_document(args.fixtures)
-    )
+    errors = validate_fixture_document(args.fixtures)
+    if not errors and args.outputs_dir:
+        errors.extend(validate_fixture_outputs(args.fixtures, args.outputs_dir))
+    if not errors and args.traces_dir:
+        errors.extend(validate_fixture_traces(args.fixtures, args.traces_dir, args.outputs_dir))
     if errors:
         print("Research behavior fixture check failed:")
         for error in errors:

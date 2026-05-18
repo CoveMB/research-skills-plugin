@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "extraction-table-uneven-source-notes",
+  "must_support": [
+    "The table can preserve unknown cells instead of synthesizing across gaps."
+  ],
+  "must_reject": [
+    "consensus established",
+    "missing fields inferred",
+    "complete extraction"
+  ],
+  "must_remain_uncertain": [
+    "Method field is missing for one source",
+    "Sample field is missing for one source"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "book-comps-stale-mismatch",
+  "must_support": [
+    "The comp list can be triaged for verification and mismatch risk."
+  ],
+  "must_reject": [
+    "comps verified",
+    "market claim confirmed",
+    "source confirms all comps"
+  ],
+  "must_remain_uncertain": [
+    "Current metadata source is absent",
+    "Audience fit is unverified"
+  ]
+}

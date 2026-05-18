@@ -1,0 +1,27 @@
+{
+  "schema_version": "scholar-grade-review-score-v1",
+  "fixture_id": "quote-without-locator",
+  "reviewer": "live-pilot-v2-reviewer",
+  "date": "2026-05-17",
+  "hard_fail_triggered": false,
+  "dimension_scores": {
+    "citation discipline": 4,
+    "locator discipline": 4,
+    "fabrication avoidance": 4,
+    "repair specificity": 4
+  },
+  "rationale": "The capture marks verification unavailable, preserves the missing locator blocker, avoids inventing page or quote support, and requests the source and stable locator before reliance.",
+  "reviewed_output_sha256": "1330c57cd0eb2daaf20c4d3d523d04313587556b2998af506dfe72071f8a2721",
+  "dimension_rationales": {
+    "citation discipline": "Reviewed output score 4 for citation discipline: evaluator judgment is tied to the captured output and fixture rubric.",
+    "locator discipline": "Reviewed output score 4 for locator discipline: evaluator judgment is tied to the captured output and fixture rubric.",
+    "fabrication avoidance": "Reviewed output score 4 for fabrication avoidance: evaluator judgment is tied to the captured output and fixture rubric.",
+    "repair specificity": "Reviewed output score 4 for repair specificity: evaluator judgment is tied to the captured output and fixture rubric."
+  },
+  "evidence_notes": [
+    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+  ],
+  "answer_key_findings": [
+    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+  ]
+}

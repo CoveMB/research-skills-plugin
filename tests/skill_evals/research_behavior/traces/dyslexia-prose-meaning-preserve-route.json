@@ -1,0 +1,10 @@
+{
+  "fixture_id": "dyslexia-prose-meaning-preserve-route",
+  "output_captured": true,
+  "output_sha256": "d3d8608ea665597c54746466d034777920e65f1359747531fcee5b0d112b6661",
+  "prompt_sha256": "39d3404c42d6b7559dbc9c47e888512546400a29ec67e9a9bfc5a928e453b516",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "dyslexia-friendly-prose-editor",
+  "skill_invoked": true
+}

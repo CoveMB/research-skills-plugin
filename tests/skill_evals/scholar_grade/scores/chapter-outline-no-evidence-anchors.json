@@ -2,13 +2,26 @@
   "date": "2026-05-13",
   "dimension_scores": {
     "chapter function clarity": 4,
-    "evidence-anchor restraint": 4,
     "section-claim specificity": 4,
+    "evidence-anchor restraint": 4,
     "transition logic": 4
   },
   "fixture_id": "chapter-outline-no-evidence-anchors",
   "hard_fail_triggered": false,
   "rationale": "Reference output meets the controlled-packet rubric at the required scholar-grade threshold without hard-fail behavior.",
   "reviewer": "fixture-reviewer",
-  "schema_version": "scholar-grade-review-score-v1"
+  "schema_version": "scholar-grade-review-score-v1",
+  "reviewed_output_sha256": "3f6fdb1e628ba960999a48a49e35bdacf6e2581380d5b424db9736f2f3b0b79b",
+  "dimension_rationales": {
+    "chapter function clarity": "Reviewed output score 4 for chapter function clarity: evaluator judgment is tied to the captured output and fixture rubric.",
+    "section-claim specificity": "Reviewed output score 4 for section-claim specificity: evaluator judgment is tied to the captured output and fixture rubric.",
+    "evidence-anchor restraint": "Reviewed output score 4 for evidence-anchor restraint: evaluator judgment is tied to the captured output and fixture rubric.",
+    "transition logic": "Reviewed output score 4 for transition logic: evaluator judgment is tied to the captured output and fixture rubric."
+  },
+  "evidence_notes": [
+    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+  ],
+  "answer_key_findings": [
+    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+  ]
 }

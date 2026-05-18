@@ -1,0 +1,28 @@
+{
+  "date": "TODO_YYYY-MM-DD",
+  "dimension_scores": {
+    "compact-output safety": "TODO_0_TO_5",
+    "release risk visibility": "TODO_0_TO_5",
+    "rights and privacy caution": "TODO_0_TO_5",
+    "single next action": "TODO_0_TO_5"
+  },
+  "fixture_id": "compact-output-hides-blocker",
+  "hard_fail_triggered": "TODO_BOOLEAN",
+  "minimum_score": 4,
+  "rationale": "TODO_RATIONALE",
+  "reviewer": "TODO_REVIEWER",
+  "schema_version": "scholar-grade-review-score-v1",
+  "reviewed_output_sha256": "TODO_AFTER_CAPTURE",
+  "dimension_rationales": {
+    "compact-output safety": "TODO_RATIONALE",
+    "release risk visibility": "TODO_RATIONALE",
+    "rights and privacy caution": "TODO_RATIONALE",
+    "single next action": "TODO_RATIONALE"
+  },
+  "evidence_notes": [
+    "TODO_EVIDENCE_NOTE"
+  ],
+  "answer_key_findings": [
+    "TODO_ANSWER_KEY_FINDING"
+  ]
+}

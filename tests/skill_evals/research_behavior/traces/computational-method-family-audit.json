@@ -1,0 +1,10 @@
+{
+  "fixture_id": "computational-method-family-audit",
+  "output_captured": true,
+  "output_sha256": "475761b16334dc92aa19a79721ab89345e12e7c386c708f60454c9aa9e93ba23",
+  "prompt_sha256": "36312315f995389604ad616e0ac85ba418449d31940c965ba14e3d48b48c16ae",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "methodology-source-auditor",
+  "skill_invoked": true
+}

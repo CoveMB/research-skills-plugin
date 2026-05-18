@@ -1,0 +1,10 @@
+{
+  "fixture_id": "draft-with-claims-no-citations",
+  "output_captured": true,
+  "output_sha256": "850876c8891ce77b6493fd5fc6391a0618784ed3b04bc85044cb8fb8fe8b9d60",
+  "prompt_sha256": "f48c66df02a153a52512f074b0fda753f008c15cd0495765a1a5520e6db7e80b",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "claim-evidence-ledger",
+  "skill_invoked": true
+}

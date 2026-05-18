@@ -1,0 +1,10 @@
+{
+  "fixture_id": "compact-citation-blockers",
+  "output_captured": true,
+  "output_sha256": "b20f0071371c9d7feafdd0ca07d7610d8ce51cdb739d987b964bcca1f21de01c",
+  "prompt_sha256": "91182dd3a506a748eee5c37702f57716dc87eaa4a6e44f1c7712e34a255717f4",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "citation-integrity-auditor",
+  "skill_invoked": true
+}

@@ -9,6 +9,7 @@
   "operator": "fixture-author",
   "output_file": "manuscript-continuity-concept-drift.md",
   "output_sha256": "6486cb2221d62a1ed89d66b32bcbde14328ea75f685afa78976ef8835c69d127",
+  "prompt_packet_sha256": "264a66cc9c64cbdd9b1d3c4e3b2a441a1b43b050a16677fffb7075aca3d747f6",
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "manuscript-continuity-editor",
   "skill_file": "skills/manuscript-continuity-editor/SKILL.md",

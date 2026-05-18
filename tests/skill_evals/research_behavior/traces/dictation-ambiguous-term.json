@@ -1,0 +1,10 @@
+{
+  "fixture_id": "dictation-ambiguous-term",
+  "output_captured": true,
+  "output_sha256": "ed887242d7612b32130d810e4e75fe14f6c5ab1874552f322a4fef9f762a234e",
+  "prompt_sha256": "5cc26e10a4dfbe9442f9123a3a2996c48cec14486498da93be71135f2beed536",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "dictation-to-research-notes",
+  "skill_invoked": true
+}

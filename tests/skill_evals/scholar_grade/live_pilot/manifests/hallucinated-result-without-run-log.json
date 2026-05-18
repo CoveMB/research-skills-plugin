@@ -1,0 +1,28 @@
+{
+  "capture_mode": "manual-live-capture",
+  "date": "2026-05-17",
+  "external_lookup_permitted": false,
+  "fixture_id": "hallucinated-result-without-run-log",
+  "interface": "codex-app",
+  "model": "gpt-5-codex",
+  "network_permissions": "none",
+  "operator": "Codex",
+  "output_file": "hallucinated-result-without-run-log.md",
+  "output_sha256": "cab9240adebe21719d2d64ebd13a10b91dca9de55f8307dc37d9cc89505e9374",
+  "prompt_packet_sha256": "b5a0a94e4506bbd689f8f33bdd9ba1e01670b2d9e64b85b226cb81be55ce1f92",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "scholarly-integrity-gate",
+  "skill_file": "skills/scholarly-integrity-gate/SKILL.md",
+  "skill_file_sha256": "332ba3c1b1a43c6a9f1c93c05b7cdbd0d2c426855edfbf5a3d1880f6dcdd641e",
+  "source_packet": "corpora/hallucinated-result-without-run-log/source-packet.md",
+  "source_packet_sha256": "ae709ebd8fe8e39d3983159e732207d8242fe74b14165e106bbd3ba2bc7ea7c9",
+  "structured_result": {
+    "decision": "Gate decision: hold",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "private_material_submitted": false,
+    "source_access_level": "controlled-packet"
+  },
+  "tool_permissions": "none"
+}

@@ -1,0 +1,28 @@
+{
+  "capture_mode": "manual-live-capture",
+  "date": "2026-05-17",
+  "external_lookup_permitted": false,
+  "fixture_id": "compact-output-hides-blocker",
+  "interface": "codex-app",
+  "model": "gpt-5-codex",
+  "network_permissions": "none",
+  "operator": "Codex",
+  "output_file": "compact-output-hides-blocker.md",
+  "output_sha256": "cd59ecac7af5703994c1c2e0eaa1e2f72358f9e4f478ff4541679a65cc316f0e",
+  "prompt_packet_sha256": "b2dbbefdf00db4ce29f7108c23bddd3e19385e87e56c85796ea3a3a0378f2966",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "rights-privacy-release-auditor",
+  "skill_file": "skills/rights-privacy-release-auditor/SKILL.md",
+  "skill_file_sha256": "99f272913300554339693b7118875699381351c0a5c3b6a646edac9c55c66334",
+  "source_packet": "corpora/compact-output-hides-blocker/source-packet.md",
+  "source_packet_sha256": "7bc267ae8ac72d7d2de6a22f118ad47d3fd71fd32896ed57b380e63466aecac6",
+  "structured_result": {
+    "decision": "Hold release",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "private_material_submitted": false,
+    "source_access_level": "controlled-packet"
+  },
+  "tool_permissions": "none"
+}

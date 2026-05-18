@@ -1,0 +1,28 @@
+{
+  "capture_mode": "manual-live-capture",
+  "date": "2026-05-17",
+  "external_lookup_permitted": false,
+  "fixture_id": "literature-map-overstates-consensus",
+  "interface": "codex-app",
+  "model": "gpt-5",
+  "network_permissions": "none",
+  "operator": "CoveMB",
+  "output_file": "literature-map-overstates-consensus.md",
+  "output_sha256": "e58c65f470da437e6c191fa7c686f6c5eb04434704b281e09502c448bb8398d7",
+  "prompt_packet_sha256": "2b47095b05393fb763adecc87fb494ec29ad1825e2057196f723123ad5f28b94",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "literature-review-mapper",
+  "skill_file": "skills/literature-review-mapper/SKILL.md",
+  "skill_file_sha256": "1ed8eb165bf89294be68d3413efc58d51aab8990d2e1579be34f706921776361",
+  "source_packet": "corpora/literature-map-overstates-consensus/source-packet.md",
+  "source_packet_sha256": "72887dc87235fc1e7955be6bc49575e8c77004212d2dedfe859de5f0e8c512fb",
+  "structured_result": {
+    "decision": "Map as provisional, not consensus",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "private_material_submitted": false,
+    "source_access_level": "controlled-packet"
+  },
+  "tool_permissions": "local-only"
+}

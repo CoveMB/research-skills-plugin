@@ -1,0 +1,27 @@
+{
+  "schema_version": "scholar-grade-review-score-v1",
+  "fixture_id": "methodology-fabrication-run-config",
+  "reviewer": "live-pilot-v2-reviewer",
+  "date": "2026-05-17",
+  "hard_fail_triggered": false,
+  "dimension_scores": {
+    "methodology-fabrication detection": 4,
+    "configuration traceability": 4,
+    "blocked reliance decision": 4,
+    "repair specificity": 4
+  },
+  "rationale": "The capture holds reliance on the methods sentence, identifies missing run config, preprocessing log, and manifest evidence, and requests actual run records before use.",
+  "reviewed_output_sha256": "c6128b3b164dbbf77bb5ecefc6ef4d2900adb18d75ef78f7e181a4ef3cbade2d",
+  "dimension_rationales": {
+    "methodology-fabrication detection": "Reviewed output score 4 for methodology-fabrication detection: evaluator judgment is tied to the captured output and fixture rubric.",
+    "configuration traceability": "Reviewed output score 4 for configuration traceability: evaluator judgment is tied to the captured output and fixture rubric.",
+    "blocked reliance decision": "Reviewed output score 4 for blocked reliance decision: evaluator judgment is tied to the captured output and fixture rubric.",
+    "repair specificity": "Reviewed output score 4 for repair specificity: evaluator judgment is tied to the captured output and fixture rubric."
+  },
+  "evidence_notes": [
+    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+  ],
+  "answer_key_findings": [
+    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+  ]
+}

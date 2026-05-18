@@ -1,0 +1,28 @@
+{
+  "date": "2026-05-17",
+  "dimension_scores": {
+    "AI-use provenance": 4,
+    "human checkpoint visibility": 4,
+    "release-risk restraint": 4,
+    "record repair specificity": 4
+  },
+  "fixture_id": "ai-workflow-missing-verification-record",
+  "hard_fail_triggered": false,
+  "minimum_score": 4,
+  "rationale": "The blind live output identifies the AI-assisted sections, missing human verification notes, incomplete override rationale, venue-policy uncertainty, and release restraint without claiming completed verification.",
+  "reviewer": "live-pilot-reviewer",
+  "schema_version": "scholar-grade-review-score-v1",
+  "reviewed_output_sha256": "9fd1222ae38f6be6e60ae1f36af0602c3a659f3fa0b23f4bbf13a163e2709984",
+  "dimension_rationales": {
+    "AI-use provenance": "Reviewed output score 4 for AI-use provenance: evaluator judgment is tied to the captured output and fixture rubric.",
+    "human checkpoint visibility": "Reviewed output score 4 for human checkpoint visibility: evaluator judgment is tied to the captured output and fixture rubric.",
+    "release-risk restraint": "Reviewed output score 4 for release-risk restraint: evaluator judgment is tied to the captured output and fixture rubric.",
+    "record repair specificity": "Reviewed output score 4 for record repair specificity: evaluator judgment is tied to the captured output and fixture rubric."
+  },
+  "evidence_notes": [
+    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+  ],
+  "answer_key_findings": [
+    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "scholarly-prose-evidence-sensitive-edit",
+  "must_support": [
+    "The prose can be clearer while retaining modal claim strength."
+  ],
+  "must_reject": [
+    "claim strengthened",
+    "evidence verified",
+    "causal pathway proven"
+  ],
+  "must_remain_uncertain": [
+    "The causal pathway still needs support",
+    "The supplied evidence is partial"
+  ]
+}

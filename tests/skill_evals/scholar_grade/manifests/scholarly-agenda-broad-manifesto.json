@@ -9,6 +9,7 @@
   "operator": "fixture-author",
   "output_file": "scholarly-agenda-broad-manifesto.md",
   "output_sha256": "4f7756bd4216c5c659048ed85f42c6cf20cc813be3d95c4d35b640137a378456",
+  "prompt_packet_sha256": "eee5e4fa64367c54c2c4980a58acf69792786e9bf96397fa9bbdfb0c27774337",
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "scholarly-research-agenda",
   "skill_file": "skills/scholarly-research-agenda/SKILL.md",

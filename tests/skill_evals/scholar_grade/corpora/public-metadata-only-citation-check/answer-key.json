@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "public-metadata-only-citation-check",
+  "must_support": [
+    "Public identifiers can be queued for metadata verification without submitting private draft text."
+  ],
+  "must_reject": [
+    "draft text submitted",
+    "full text verified",
+    "metadata verified from memory"
+  ],
+  "must_remain_uncertain": [
+    "No draft text was inspected",
+    "No source full text is available"
+  ]
+}

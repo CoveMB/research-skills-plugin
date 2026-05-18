@@ -1,0 +1,28 @@
+{
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "fixture_id": "prose-edit-strict-meaning-preservation",
+  "skill": "dyslexia-friendly-prose-editor",
+  "capture_mode": "deterministic-reference",
+  "interface": "local-fixture",
+  "model": "not-run",
+  "date": "2026-05-17",
+  "operator": "fixture-author",
+  "source_packet": "corpora/prose-edit-strict-meaning-preservation/source-packet.md",
+  "source_packet_sha256": "bac864a0d5f2d3bd0437c5ecadc07295693550700a809b64258965cec6581253",
+  "prompt_packet_sha256": "65ebb6fa7c9b2c25b056ae23af1fa47e26c3a18b1f8dc05cb878a2bcea6c9c58",
+  "skill_file": "skills/dyslexia-friendly-prose-editor/SKILL.md",
+  "skill_file_sha256": "23dac6836101103a4379a71eb8acee39db9fbd02ed62ad00cb963579165a2cc1",
+  "output_file": "prose-edit-strict-meaning-preservation.md",
+  "output_sha256": "7d86e38f0fc7e24c6291f8cfc96944ec855c2707b2e5beb1d4a3713be611d3e5",
+  "tool_permissions": "none",
+  "network_permissions": "none",
+  "external_lookup_permitted": false,
+  "structured_result": {
+    "decision": "Preserve bounded descriptive meaning",
+    "source_access_level": "controlled-packet",
+    "external_lookup_used": false,
+    "private_material_submitted": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1
+  }
+}

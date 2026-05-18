@@ -176,6 +176,10 @@ Decide whether to use as core evidence, contextual support, counterpoint, object
 
 ```
 
+## Failure-mode output boundaries
+
+When handling high-risk claim/support checks, use stable labels that keep source limits visible: Source basis, Claim/evidence fit, Method/evidence visible, What remains uncertain, and Next action. If the source cannot support the target claim, state Cannot support and name missing design elements such as No comparison design is visible. When only the packet supports a descriptive boundary, include: The packet can support a limited descriptive claim about what the notes say.
+
 Compact output:
 
 ```markdown

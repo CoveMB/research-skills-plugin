@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "compact-output-hides-blocker",
+  "must_support": [
+    "The packet should be held until copied text and private notes are reviewed."
+  ],
+  "must_reject": [
+    "safe to publish",
+    "legal clearance granted",
+    "send now"
+  ],
+  "must_remain_uncertain": [
+    "Permission status is unknown",
+    "Private notes may be present"
+  ]
+}

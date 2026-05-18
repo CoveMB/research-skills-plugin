@@ -9,6 +9,7 @@
   "operator": "fixture-author",
   "output_file": "claim-ledger-mixed-claim-types.md",
   "output_sha256": "84334513dad71ef29b1bc3084fe582d516cbb7edeb50f33aced4515856a76dee",
+  "prompt_packet_sha256": "1606c7c5f20b2d50311573950b5c64dad56a4aff461eee2af313f7d308d0eec6",
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "claim-evidence-ledger",
   "skill_file": "skills/claim-evidence-ledger/SKILL.md",

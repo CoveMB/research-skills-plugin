@@ -9,6 +9,7 @@
   "operator": "fixture-author",
   "output_file": "annotation-source-note-mixed-evidence.md",
   "output_sha256": "c5316016128d0004a76bf96f4f3b5a5f4e1ee470409ceb9e1f88170a4087c7dd",
+  "prompt_packet_sha256": "13eac41e5950cb0957e70ec4f12324bf23a291e2412b2526f9695a0470acb7a0",
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "annotation-to-source-note",
   "skill_file": "skills/annotation-to-source-note/SKILL.md",

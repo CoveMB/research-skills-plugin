@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import subprocess
 import sys
 import unittest
@@ -13,6 +14,7 @@ from check_research_behavior_fixtures import (
     output_path_for_fixture,
     validate_fixture_document,
     validate_fixture_outputs,
+    validate_fixture_traces,
 )
 
 
@@ -33,11 +35,14 @@ def fixture(
     required_markers: list[str] | None = None,
     forbidden_claims: list[str] | None = None,
     risk_covered: str = "compact routing",
+    should_trigger: bool = True,
+    expected_route: str = "research-intent-router",
 ) -> dict:
     return {
         "id": fixture_id,
         "prompt": "Fixture prompt.",
-        "expected_route": "research-intent-router",
+        "expected_route": expected_route,
+        "should_trigger": should_trigger,
         "risk_covered": risk_covered,
         "required_output_markers": required_markers
         or ["Source basis", "How to use this result", "Next action"],
@@ -49,6 +54,41 @@ def write_fixture_file(root: Path, document: dict) -> Path:
     fixture_path = root / "fixtures.json"
     fixture_path.write_text(json.dumps(document), encoding="utf-8")
     return fixture_path
+
+
+def write_trace_file(traces_dir: Path, fixture_id: str, payload: dict) -> None:
+    traces_dir.mkdir()
+    (traces_dir / f"{fixture_id}.json").write_text(json.dumps(payload), encoding="utf-8")
+
+
+def sha256_text(text: str) -> str:
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def route_trace(fixture_id: str = "compact-routing", selected_skill: str = "research-intent-router") -> dict:
+    return {
+        "schema_version": "research-behavior-route-trace-v2",
+        "fixture_id": fixture_id,
+        "selected_skill": selected_skill,
+        "prompt_sha256": sha256_text("Fixture prompt."),
+        "output_sha256": sha256_text(""),
+        "skill_invoked": True,
+        "prompt_supplied": True,
+        "output_captured": True,
+    }
+
+
+def negative_route_trace(fixture_id: str = "adjacent-negative-control") -> dict:
+    return {
+        "schema_version": "research-behavior-route-trace-v2",
+        "fixture_id": fixture_id,
+        "selected_skill": "none",
+        "prompt_sha256": sha256_text("Fixture prompt."),
+        "output_sha256": sha256_text(""),
+        "skill_invoked": False,
+        "prompt_supplied": True,
+        "output_captured": True,
+    }
 
 
 class TestResearchBehaviorFixtures(unittest.TestCase):
@@ -70,6 +110,139 @@ class TestResearchBehaviorFixtures(unittest.TestCase):
 
             self.assertEqual(validate_fixture_document(fixture_path), [])
             self.assertEqual(validate_fixture_outputs(fixture_path, outputs_dir), [])
+
+    def test_valid_route_trace_with_output_hash_passes(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            fixture_path = write_fixture_file(root, fixture_document(fixture()))
+            outputs_dir = root / "outputs"
+            traces_dir = root / "traces"
+            output_text = "Selected skill: research-intent-router.\nSource basis: user prompt only.\n"
+            outputs_dir.mkdir()
+            (outputs_dir / "compact-routing.md").write_text(output_text, encoding="utf-8")
+            write_trace_file(
+                traces_dir,
+                "compact-routing",
+                {
+                    **route_trace(),
+                    "output_sha256": sha256_text(output_text),
+                },
+            )
+
+            self.assertEqual(validate_fixture_traces(fixture_path, traces_dir, outputs_dir), [])
+
+    def test_valid_route_trace_passes(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            fixture_path = write_fixture_file(root, fixture_document(fixture()))
+            traces_dir = root / "traces"
+            write_trace_file(traces_dir, "compact-routing", route_trace())
+
+            self.assertEqual(validate_fixture_traces(fixture_path, traces_dir), [])
+
+    def test_negative_control_route_trace_passes_when_skill_does_not_trigger(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            negative_fixture = fixture(
+                fixture_id="adjacent-negative-control",
+                expected_route="none",
+                should_trigger=False,
+                risk_covered="negative trigger control",
+            )
+            fixture_path = write_fixture_file(root, fixture_document(negative_fixture))
+            traces_dir = root / "traces"
+            write_trace_file(traces_dir, "adjacent-negative-control", negative_route_trace())
+
+            self.assertEqual(validate_fixture_traces(fixture_path, traces_dir), [])
+
+    def test_negative_control_route_trace_rejects_accidental_skill_invocation(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            negative_fixture = fixture(
+                fixture_id="adjacent-negative-control",
+                expected_route="none",
+                should_trigger=False,
+                risk_covered="negative trigger control",
+            )
+            fixture_path = write_fixture_file(root, fixture_document(negative_fixture))
+            traces_dir = root / "traces"
+            write_trace_file(
+                traces_dir,
+                "adjacent-negative-control",
+                {**negative_route_trace(), "selected_skill": "citation-integrity-auditor", "skill_invoked": True},
+            )
+
+            errors = validate_fixture_traces(fixture_path, traces_dir)
+
+            self.assertIn("adjacent-negative-control: trace skill_invoked must be false", errors)
+            self.assertIn(
+                "adjacent-negative-control: trace selected_skill must match expected_route 'none'",
+                errors,
+            )
+
+    def test_route_trace_rejects_prompt_hash_mismatch(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            fixture_path = write_fixture_file(root, fixture_document(fixture()))
+            traces_dir = root / "traces"
+            write_trace_file(traces_dir, "compact-routing", {**route_trace(), "prompt_sha256": sha256_text("stale prompt")})
+
+            errors = validate_fixture_traces(fixture_path, traces_dir)
+
+            self.assertIn("compact-routing: trace prompt_sha256 does not match fixture prompt", errors)
+
+    def test_route_trace_rejects_output_hash_mismatch_when_outputs_checked(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            fixture_path = write_fixture_file(root, fixture_document(fixture()))
+            outputs_dir = root / "outputs"
+            traces_dir = root / "traces"
+            outputs_dir.mkdir()
+            (outputs_dir / "compact-routing.md").write_text(
+                "Selected skill: research-intent-router.\nSource basis: user prompt only.\n",
+                encoding="utf-8",
+            )
+            write_trace_file(traces_dir, "compact-routing", route_trace())
+
+            errors = validate_fixture_traces(fixture_path, traces_dir, outputs_dir)
+
+            self.assertIn("compact-routing: trace output_sha256 does not match captured output", errors)
+
+    def test_route_trace_rejects_wrong_selected_skill(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            fixture_path = write_fixture_file(root, fixture_document(fixture()))
+            traces_dir = root / "traces"
+            write_trace_file(traces_dir, "compact-routing", route_trace(selected_skill="citation-integrity-auditor"))
+
+            errors = validate_fixture_traces(fixture_path, traces_dir)
+
+            self.assertIn(
+                "compact-routing: trace selected_skill must match expected_route 'research-intent-router'",
+                errors,
+            )
+
+    def test_route_trace_requires_skill_invocation_and_capture_flags(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            fixture_path = write_fixture_file(root, fixture_document(fixture()))
+            traces_dir = root / "traces"
+            write_trace_file(
+                traces_dir,
+                "compact-routing",
+                {
+                    **route_trace(),
+                    "skill_invoked": False,
+                    "prompt_supplied": False,
+                    "output_captured": False,
+                },
+            )
+
+            errors = validate_fixture_traces(fixture_path, traces_dir)
+
+            self.assertIn("compact-routing: trace skill_invoked must be true", errors)
+            self.assertIn("compact-routing: trace prompt_supplied must be true", errors)
+            self.assertIn("compact-routing: trace output_captured must be true", errors)
 
     def test_missing_required_marker_fails(self) -> None:
         with TemporaryDirectory() as temporary_directory:

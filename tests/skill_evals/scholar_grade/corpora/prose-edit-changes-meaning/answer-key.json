@@ -1,0 +1,15 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "prose-edit-changes-meaning",
+  "must_support": [
+    "The revised passage may soften unsupported causal wording."
+  ],
+  "must_reject": [
+    "meaning unchanged without ambiguity",
+    "proves that"
+  ],
+  "must_remain_uncertain": [
+    "The causal verb changes the claim strength",
+    "Evidence limits must remain visible"
+  ]
+}

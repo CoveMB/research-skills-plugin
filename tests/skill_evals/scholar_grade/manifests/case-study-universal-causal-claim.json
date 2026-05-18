@@ -9,6 +9,7 @@
   "operator": "fixture-author",
   "output_file": "case-study-universal-causal-claim.md",
   "output_sha256": "49821bdf779566972b291024198307cf8af05e677c46614432c94b66d7750a02",
+  "prompt_packet_sha256": "9ffd9e0f369208334cf5fafe1bf13b2a48c04b6a597208e393b052ea016a91cb",
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "case-study-integration",
   "skill_file": "skills/case-study-integration/SKILL.md",

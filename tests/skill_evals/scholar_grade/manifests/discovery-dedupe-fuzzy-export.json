@@ -9,6 +9,7 @@
   "operator": "fixture-author",
   "output_file": "discovery-dedupe-fuzzy-export.md",
   "output_sha256": "ee892090d7bfe6efbc70915600eb8fb60c89f2e55b60528ad2effb32c3f66165",
+  "prompt_packet_sha256": "ae53dfb58d82b73fc1f69f2348dae34eb59ee5097066bb0fa1b283b2bcbad11d",
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "discovery-runner-deduper",
   "skill_file": "skills/discovery-runner-deduper/SKILL.md",

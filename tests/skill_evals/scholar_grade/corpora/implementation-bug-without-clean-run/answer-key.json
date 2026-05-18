@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "implementation-bug-without-clean-run",
+  "must_support": [
+    "The table is not reliable for manuscript claims until a clean run is produced."
+  ],
+  "must_reject": [
+    "result verified",
+    "safe to rely on the table",
+    "warnings are harmless"
+  ],
+  "must_remain_uncertain": [
+    "The computation did not complete cleanly",
+    "The table may reflect a failed or partial run"
+  ]
+}

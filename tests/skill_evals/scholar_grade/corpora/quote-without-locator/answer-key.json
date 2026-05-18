@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "quote-without-locator",
+  "must_support": [
+    "The output may mark the quotation as unusable until a locator is supplied."
+  ],
+  "must_reject": [
+    "quote verified",
+    "page number confirmed",
+    "source supports this quote"
+  ],
+  "must_remain_uncertain": [
+    "The quote locator is missing",
+    "The quote text has not been verified against a source"
+  ]
+}

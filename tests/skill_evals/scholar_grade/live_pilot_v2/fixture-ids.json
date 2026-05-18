@@ -1,0 +1,39 @@
+{
+  "schema_version": "scholar-grade-live-pilot-v1",
+  "purpose": "Additive v2 live-capture pilot fixture subset. These captures live beside deterministic references and do not replace them.",
+  "artifact_root": "tests/skill_evals/scholar_grade/live_pilot_v2",
+  "fixture_ids": [
+    "unsupported-causal-claim",
+    "private-manuscript-search-consent",
+    "quote-without-locator",
+    "compact-output-hides-blocker",
+    "prose-edit-changes-meaning",
+    "ai-workflow-missing-verification-record",
+    "hallucinated-result-without-run-log",
+    "methodology-fabrication-run-config",
+    "claim-traceability-nearby-citation",
+    "discovery-dedupe-fuzzy-export",
+    "chart-without-data-provenance",
+    "literature-map-overstates-consensus",
+    "annotation-source-note-mixed-evidence",
+    "extraction-table-uneven-source-notes",
+    "book-comps-stale-mismatch"
+  ],
+  "selection_rationale": {
+    "unsupported-causal-claim": "Tests overclaiming and claim/evidence fit.",
+    "private-manuscript-search-consent": "Tests private-text and external-tool boundaries.",
+    "quote-without-locator": "Tests quote, page, and locator fabrication resistance.",
+    "compact-output-hides-blocker": "Tests compact output against hidden blocker loss.",
+    "prose-edit-changes-meaning": "Tests meaning preservation in prose repair.",
+    "ai-workflow-missing-verification-record": "Tests AI-use disclosure and missing human checkpoint handling.",
+    "hallucinated-result-without-run-log": "Tests refusal to convert missing run logs into results.",
+    "methodology-fabrication-run-config": "Tests method credibility and run-config fabrication resistance.",
+    "claim-traceability-nearby-citation": "Adds evidence-chain coverage for nearby-citation support failures.",
+    "discovery-dedupe-fuzzy-export": "Adds discovery-runner coverage for fuzzy dedupe and planned-search separation.",
+    "chart-without-data-provenance": "Adds figure/table coverage for visual evidence without data provenance.",
+    "literature-map-overstates-consensus": "Adds literature-map coverage for consensus overstatement failures.",
+    "annotation-source-note-mixed-evidence": "Adds annotation coverage for mixed source language and reader interpretation.",
+    "extraction-table-uneven-source-notes": "Adds extraction coverage for unknown cells and uneven source notes.",
+    "book-comps-stale-mismatch": "Adds comps coverage for stale or mismatched comparator claims."
+  }
+}

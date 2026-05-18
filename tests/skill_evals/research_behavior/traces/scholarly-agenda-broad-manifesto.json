@@ -1,0 +1,10 @@
+{
+  "fixture_id": "scholarly-agenda-broad-manifesto",
+  "output_captured": true,
+  "output_sha256": "7a40c138fc31d2a699c139b7f61d8b212c105f05d143866b63bb3dfdd9cdffbb",
+  "prompt_sha256": "42ef0173821a9820fea907829176e25cae8958addec1917c8ae63864eadd2e60",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "scholarly-research-agenda",
+  "skill_invoked": true
+}

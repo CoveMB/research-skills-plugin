@@ -9,6 +9,7 @@
   "operator": "fixture-author",
   "output_file": "reading-load-abstract-only.md",
   "output_sha256": "f9a35838701179f5917eca19e9dbb5d2be9a203d73f89c2cd34563e49fc6b1f9",
+  "prompt_packet_sha256": "d23324591046198f408d49b70fb66224527eaec430fd5088b1cafc41fb905164",
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "reading-load-reducer",
   "skill_file": "skills/reading-load-reducer/SKILL.md",

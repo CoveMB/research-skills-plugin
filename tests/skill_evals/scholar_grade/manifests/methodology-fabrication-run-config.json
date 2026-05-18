@@ -9,10 +9,11 @@
   "operator": "fixture-author",
   "output_file": "methodology-fabrication-run-config.md",
   "output_sha256": "6a5b261d59424c042d6457322ce2ff1ff1c8e75fc42352b3f6e3afc53a988069",
+  "prompt_packet_sha256": "0b71349718caed9eb0c8dae3b413a180365236871e2cdec2d32d388393f4541f",
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "scholarly-integrity-gate",
   "skill_file": "skills/scholarly-integrity-gate/SKILL.md",
-  "skill_file_sha256": "6fb1b3335677efea826a83f39306fca64fc50fb0a7b157a67d2bb835e5621442",
+  "skill_file_sha256": "332ba3c1b1a43c6a9f1c93c05b7cdbd0d2c426855edfbf5a3d1880f6dcdd641e",
   "source_packet": "corpora/methodology-fabrication-run-config/source-packet.md",
   "source_packet_sha256": "dd0fcbac3bf509a0803f4030aef5dc40b5bead2f064d82a42fe2e1e3444eb8f4",
   "structured_result": {

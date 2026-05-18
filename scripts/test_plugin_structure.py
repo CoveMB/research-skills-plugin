@@ -60,6 +60,62 @@ SELECTED_COMPACT_OUTPUT_SKILLS = [
     "book-comps-verifier",
     "methodology-source-auditor",
 ]
+LIVE_PILOT_OUTPUT_CONTRACTS = {
+    "methodology-source-auditor": [
+        "Claim/evidence fit",
+        "Method/evidence visible",
+        "Cannot support",
+        "No comparison design is visible",
+        "The packet can support a limited descriptive claim about what the notes say.",
+    ],
+    "research-intent-router": [
+        "Do not search private text externally",
+        "external tool boundary",
+        "user consent",
+        "search terms",
+        "The request can be converted into non-sensitive search terms.",
+    ],
+    "citation-integrity-auditor": [
+        "Hold locator-dependent quotation claims",
+        "locator gap",
+        "Required fix",
+        "The quote text has not been verified against a source",
+        "The output may mark the quotation as unusable until a locator is supplied.",
+    ],
+    "rights-privacy-release-auditor": [
+        "Hold release",
+        "Legal/permission uncertainty",
+        "Private notes may be present",
+        "The packet should be held until copied text and private notes are reviewed.",
+    ],
+    "dyslexia-friendly-prose-editor": [
+        "Repair wording without changing claim strength",
+        "Meaning-preserving changes",
+        "Ambiguity",
+        "The causal verb changes the claim strength",
+        "The revised passage may soften unsupported causal wording.",
+    ],
+    "scholarly-integrity-gate": [
+        "Gate decision: hold",
+        "hallucinated experimental result",
+        "methodology fabrication",
+        "raw numbers",
+        "run log",
+        "run config",
+        "preprocessing",
+        "The percentage can only be treated as an unverified draft claim.",
+        "The method description must be reconciled with actual run records before reliance.",
+    ],
+    "ai-human-workflow-log": [
+        "Record verification gaps before release",
+        "affected sections",
+        "human verification gap",
+        "override reason",
+        "disclosure note",
+        "No human verification record is visible",
+        "The log can identify missing verification and disclosure records.",
+    ],
+}
 COMPACT_RESULT_USE_STATUSES = [
     "TRIAGE ONLY",
     "BLOCKER SUMMARY",
@@ -1216,6 +1272,18 @@ class TestPluginStructure(unittest.TestCase):
                     "readme": missing_for_readme,
                 }
         self.assertEqual(missing, {})
+
+    def test_live_pilot_skills_document_stable_blocker_output_contracts(self) -> None:
+        required_for_all = [
+            "## Failure-mode output boundaries",
+            "Source basis",
+            "Next action",
+        ]
+        missing = {
+            skill_name: missing_phrases(read_text(SKILLS_DIR / skill_name / "SKILL.md"), required_for_all + phrases)
+            for skill_name, phrases in LIVE_PILOT_OUTPUT_CONTRACTS.items()
+        }
+        self.assertEqual({skill_name: phrases for skill_name, phrases in missing.items() if phrases}, {})
 
     def test_skill_index_lists_selected_compact_output_skills(self) -> None:
         skill_index = read_text(ROOT / "docs" / "SKILL_INDEX.md")

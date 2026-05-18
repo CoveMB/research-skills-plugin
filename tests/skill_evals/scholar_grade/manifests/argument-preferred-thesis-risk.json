@@ -9,6 +9,7 @@
   "operator": "fixture-author",
   "output_file": "argument-preferred-thesis-risk.md",
   "output_sha256": "87045ad9661f8e56e787e52250c8743c3adca518cf7dc5663d11c8e424caa5cc",
+  "prompt_packet_sha256": "a7bc94017ffaf74cc08fa951deccc3b94f9c32d311ef8a549a163b1a37715e9f",
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "argument-architecture",
   "skill_file": "skills/argument-architecture/SKILL.md",

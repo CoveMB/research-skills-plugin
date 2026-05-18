@@ -1,0 +1,10 @@
+{
+  "fixture_id": "counterargument-brittle-thesis",
+  "output_captured": true,
+  "output_sha256": "eead9307e65852593bfa1e164c4a23cec2404d71e6c46ee97b6967c8bdf5b820",
+  "prompt_sha256": "42344be298d1526e115525e7aec411d347e6266721e766c551456423209e3e2d",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "counterargument-peer-review",
+  "skill_invoked": true
+}

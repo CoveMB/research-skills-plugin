@@ -1,0 +1,28 @@
+{
+  "capture_mode": "manual-live-capture",
+  "date": "2026-05-17",
+  "external_lookup_permitted": false,
+  "fixture_id": "ai-workflow-missing-verification-record",
+  "interface": "codex-app",
+  "model": "gpt-5-codex",
+  "network_permissions": "none",
+  "operator": "Codex",
+  "output_file": "ai-workflow-missing-verification-record.md",
+  "output_sha256": "9fd1222ae38f6be6e60ae1f36af0602c3a659f3fa0b23f4bbf13a163e2709984",
+  "prompt_packet_sha256": "5eaa9494bde4353bbf6c5165aba6fdbde107f86fdaafac56ef1d81bed5516ff6",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "ai-human-workflow-log",
+  "skill_file": "skills/ai-human-workflow-log/SKILL.md",
+  "skill_file_sha256": "e06ef3cd20b5ccebcf435b1ec54d87441e53e12bc9972a1ad4d3b3014b9c3d5f",
+  "source_packet": "corpora/ai-workflow-missing-verification-record/source-packet.md",
+  "source_packet_sha256": "6b973af7c19f1bdb3abf3e248dd0dcbe173e41f8aea0d46bd5f2088eab625400",
+  "structured_result": {
+    "decision": "Record verification gaps before release",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "private_material_submitted": false,
+    "source_access_level": "controlled-packet"
+  },
+  "tool_permissions": "none"
+}

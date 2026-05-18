@@ -9,10 +9,11 @@
   "operator": "fixture-author",
   "output_file": "ai-summary-no-human-checkpoint.md",
   "output_sha256": "ca97e865c333b53befa9652e4c64d2a9d40afbced234dc2bef07584f4873a239",
+  "prompt_packet_sha256": "3f6ea74b80d97ccb82930c37866f9d8d04057cf0ffc0a88a370e3724c520f820",
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "scholarly-integrity-gate",
   "skill_file": "skills/scholarly-integrity-gate/SKILL.md",
-  "skill_file_sha256": "6fb1b3335677efea826a83f39306fca64fc50fb0a7b157a67d2bb835e5621442",
+  "skill_file_sha256": "332ba3c1b1a43c6a9f1c93c05b7cdbd0d2c426855edfbf5a3d1880f6dcdd641e",
   "source_packet": "corpora/ai-summary-no-human-checkpoint/source-packet.md",
   "source_packet_sha256": "31f16f950095297963016c9cf85d3dcf3003b157f1be5d0e70fdb0a5f37634a1",
   "structured_result": {

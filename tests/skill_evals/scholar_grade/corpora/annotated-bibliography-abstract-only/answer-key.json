@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "annotated-bibliography-abstract-only",
+  "must_support": [
+    "The annotations may describe only the visible abstract, title metadata, or supplied excerpt."
+  ],
+  "must_reject": [
+    "method inferred from title",
+    "argument verified",
+    "full-text reviewed"
+  ],
+  "must_remain_uncertain": [
+    "Full text is unavailable for at least one source",
+    "Method and argument cannot be inferred from title metadata"
+  ]
+}

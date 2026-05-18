@@ -1,14 +1,27 @@
 {
   "date": "2026-05-13",
   "dimension_scores": {
+    "search-log provenance": 4,
     "dedupe restraint": 4,
     "fuzzy-match uncertainty": 4,
-    "screening-readiness": 4,
-    "search-log provenance": 4
+    "screening-readiness": 4
   },
   "fixture_id": "discovery-dedupe-fuzzy-export",
   "hard_fail_triggered": false,
   "rationale": "Reference output meets the controlled-packet rubric at the required scholar-grade threshold without hard-fail behavior.",
   "reviewer": "fixture-reviewer",
-  "schema_version": "scholar-grade-review-score-v1"
+  "schema_version": "scholar-grade-review-score-v1",
+  "reviewed_output_sha256": "ee892090d7bfe6efbc70915600eb8fb60c89f2e55b60528ad2effb32c3f66165",
+  "dimension_rationales": {
+    "search-log provenance": "Reviewed output score 4 for search-log provenance: evaluator judgment is tied to the captured output and fixture rubric.",
+    "dedupe restraint": "Reviewed output score 4 for dedupe restraint: evaluator judgment is tied to the captured output and fixture rubric.",
+    "fuzzy-match uncertainty": "Reviewed output score 4 for fuzzy-match uncertainty: evaluator judgment is tied to the captured output and fixture rubric.",
+    "screening-readiness": "Reviewed output score 4 for screening-readiness: evaluator judgment is tied to the captured output and fixture rubric."
+  },
+  "evidence_notes": [
+    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+  ],
+  "answer_key_findings": [
+    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+  ]
 }

@@ -1,8 +1,8 @@
 {
   "date": "2026-05-13",
   "dimension_scores": {
-    "counterargument quality": 4,
     "frame-lock detection": 4,
+    "counterargument quality": 4,
     "opposing-literature search need": 4,
     "repair specificity": 4
   },
@@ -10,5 +10,18 @@
   "hard_fail_triggered": false,
   "rationale": "Reference output meets the controlled-packet rubric at the required scholar-grade threshold without hard-fail behavior.",
   "reviewer": "fixture-reviewer",
-  "schema_version": "scholar-grade-review-score-v1"
+  "schema_version": "scholar-grade-review-score-v1",
+  "reviewed_output_sha256": "a79ed167f0e01faf51bb3b6779ebae9a9c0d03f6e2ee2c97bfb5c8b286c8eded",
+  "dimension_rationales": {
+    "frame-lock detection": "Reviewed output score 4 for frame-lock detection: evaluator judgment is tied to the captured output and fixture rubric.",
+    "counterargument quality": "Reviewed output score 4 for counterargument quality: evaluator judgment is tied to the captured output and fixture rubric.",
+    "opposing-literature search need": "Reviewed output score 4 for opposing-literature search need: evaluator judgment is tied to the captured output and fixture rubric.",
+    "repair specificity": "Reviewed output score 4 for repair specificity: evaluator judgment is tied to the captured output and fixture rubric."
+  },
+  "evidence_notes": [
+    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+  ],
+  "answer_key_findings": [
+    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+  ]
 }

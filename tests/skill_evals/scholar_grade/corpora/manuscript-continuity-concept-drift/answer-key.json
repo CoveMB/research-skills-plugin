@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "manuscript-continuity-concept-drift",
+  "must_support": [
+    "The output can flag drift visible in supplied summaries."
+  ],
+  "must_reject": [
+    "full manuscript verified",
+    "missing chapters inspected",
+    "continuity fixed"
+  ],
+  "must_remain_uncertain": [
+    "Only chapter summaries are visible",
+    "Missing chapters cannot be inspected"
+  ]
+}

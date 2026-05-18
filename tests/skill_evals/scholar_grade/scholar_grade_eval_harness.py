@@ -36,16 +36,19 @@ REQUIRED_FIXTURE_KEYS = {
     "resource_basis",
     "expected_decision",
     "required_output_markers",
+    "required_source_anchors",
     "required_uncertainties",
     "allowed_claims",
     "disallowed_claims",
     "hard_fail_patterns",
     "rubric_dimensions",
+    "score_anchors",
     "minimum_score",
     "human_review_required",
 }
 NON_EMPTY_STRING_LIST_KEYS = {
     "required_output_markers",
+    "required_source_anchors",
     "required_uncertainties",
     "disallowed_claims",
     "hard_fail_patterns",
@@ -53,7 +56,11 @@ NON_EMPTY_STRING_LIST_KEYS = {
     "resource_basis",
 }
 STRING_LIST_KEYS = NON_EMPTY_STRING_LIST_KEYS | {"allowed_claims"}
-OPTIONAL_STRING_LIST_KEYS = {"semantic_fail_patterns"}
+OPTIONAL_STRING_LIST_KEYS = {"required_source_anchors", "semantic_fail_patterns"}
+OPTIONAL_ALIAS_MAP_KEYS = {
+    "required_uncertainty_aliases": "required_uncertainties",
+    "allowed_claim_aliases": "allowed_claims",
+}
 VALID_SOURCE_ACCESS_LEVELS = {
     "controlled-packet",
     "prompt-only",
@@ -95,6 +102,7 @@ REQUIRED_MANIFEST_KEYS = {
     "operator",
     "source_packet",
     "source_packet_sha256",
+    "prompt_packet_sha256",
     "skill_file",
     "skill_file_sha256",
     "output_file",
@@ -151,9 +159,22 @@ REQUIRED_SCORE_KEYS = {
     "reviewer",
     "date",
     "hard_fail_triggered",
+    "reviewed_output_sha256",
     "dimension_scores",
+    "dimension_rationales",
+    "evidence_notes",
+    "answer_key_findings",
     "rationale",
 }
+ANSWER_KEY_SCHEMA_VERSION = "scholar-grade-answer-key-v1"
+REQUIRED_ANSWER_KEY_KEYS = {
+    "schema_version",
+    "fixture_id",
+    "must_support",
+    "must_reject",
+    "must_remain_uncertain",
+}
+REQUIRED_SCORE_ANCHOR_LEVELS = {"3", "4", "5"}
 REQUIRED_TRACE_BOOLEAN_KEYS = {
     "skill_invoked",
     "source_packet_supplied",
@@ -184,6 +205,20 @@ NEGATED_PHRASE_PREFIX_RE = re.compile(
     r"\b(no|not|never|without|cannot|can't|do not|does not|did not)\s+$",
     flags=re.IGNORECASE,
 )
+CLAIM_REJECTION_CONTEXT_RE = re.compile(
+    r"\b("
+    r"cannot\s+support|can't\s+support|can\s+not\s+support|"
+    r"does\s+not\s+(?:show|support|establish|verify)|"
+    r"do\s+not\s+(?:use|claim|treat|rely)|"
+    r"should\s+not\s+(?:use|claim|treat|rely)|"
+    r"must\s+not\s+(?:use|claim|treat|rely)|"
+    r"not\s+(?:supported|verified|established|evidenced)|"
+    r"avoid\s+wording\s+(?:such\s+as|like)|"
+    r"unsupported|unverified|insufficient\s+evidence|no\s+evidence"
+    r")\b",
+    flags=re.IGNORECASE,
+)
+CLAIM_CONTEXT_PREFIX_CHARS = 180
 
 LIMITS = [
     "This harness does not run a model or call external services.",
@@ -268,7 +303,69 @@ def invalid_string_list_errors(fixture: dict[str, Any]) -> list[str]:
         strings = string_list(value)
         if not isinstance(value, list) or len(strings) != len(value):
             errors.append(f"{fixture_identifier(fixture)}: {key} must be a string list")
+    for alias_key, canonical_key in sorted(OPTIONAL_ALIAS_MAP_KEYS.items()):
+        errors.extend(invalid_alias_map_errors(fixture, alias_key, canonical_key))
     return errors
+
+
+def invalid_alias_map_errors(fixture: dict[str, Any], alias_key: str, canonical_key: str) -> list[str]:
+    if alias_key not in fixture:
+        return []
+    aliases = fixture.get(alias_key)
+    identifier = fixture_identifier(fixture)
+    if not isinstance(aliases, dict):
+        return [f"{identifier}: {alias_key} must be an object mapping canonical strings to string lists"]
+
+    errors: list[str] = []
+    canonical_values = set(string_list(fixture.get(canonical_key)))
+    for canonical_value, alias_values in aliases.items():
+        if not isinstance(canonical_value, str) or canonical_value not in canonical_values:
+            errors.append(f"{identifier}: {alias_key} key {canonical_value!r} must match {canonical_key}")
+        if (
+            not isinstance(alias_values, list)
+            or not alias_values
+            or len(string_list(alias_values)) != len(alias_values)
+        ):
+            errors.append(f"{identifier}: {alias_key} values must be string lists")
+    return errors
+
+
+def score_anchor_errors(fixture: dict[str, Any]) -> list[str]:
+    if "score_anchors" not in fixture:
+        return []
+
+    identifier = fixture_identifier(fixture)
+    score_anchors = fixture.get("score_anchors")
+    if not isinstance(score_anchors, dict):
+        return [f"{identifier}: score_anchors must be an object mapping rubric_dimensions to anchor objects"]
+
+    errors: list[str] = []
+    expected_dimensions = rubric_dimension_set(fixture)
+    actual_dimensions = {dimension for dimension in score_anchors if isinstance(dimension, str)}
+    if actual_dimensions != expected_dimensions:
+        errors.append(f"{identifier}: score_anchors keys must match rubric_dimensions")
+
+    for dimension, anchors in score_anchors.items():
+        if not isinstance(dimension, str) or dimension not in expected_dimensions:
+            continue
+        if not has_required_score_anchors(anchors):
+            errors.append(
+                f"{identifier}: score_anchors for {dimension!r} must include non-empty anchors for 3, 4, and 5"
+            )
+    return errors
+
+
+def has_required_score_anchors(anchors: Any) -> bool:
+    if not isinstance(anchors, dict):
+        return False
+    return all(
+        isinstance(anchors.get(level), str) and anchors.get(level).strip()
+        for level in REQUIRED_SCORE_ANCHOR_LEVELS
+    )
+
+
+def rubric_dimension_set(fixture: dict[str, Any]) -> set[str]:
+    return set(string_list(fixture.get("rubric_dimensions")))
 
 
 def duplicate_fixture_id_errors(fixtures: list[dict[str, Any]]) -> list[str]:
@@ -318,20 +415,77 @@ def source_packet_answer_key_path(fixture_path: Path, fixture: dict[str, Any]) -
     return source_packet_path(fixture_path, fixture) / "answer-key.md"
 
 
+def source_packet_answer_key_json_path(fixture_path: Path, fixture: dict[str, Any]) -> Path:
+    return source_packet_path(fixture_path, fixture) / "answer-key.json"
+
+
+def answer_key_string_list_errors(
+    fixture: dict[str, Any],
+    answer_key_document: dict[str, Any],
+    answer_key_field: str,
+    fixture_field: str,
+) -> list[str]:
+    identifier = fixture_identifier(fixture)
+    value = answer_key_document.get(answer_key_field)
+    if not isinstance(value, list) or len(string_list(value)) != len(value):
+        return [f"{identifier}: answer-key.json {answer_key_field} must be a string list"]
+    if string_list(value) != string_list(fixture.get(fixture_field)):
+        return [f"{identifier}: answer-key.json {answer_key_field} must match fixture {fixture_field}"]
+    return []
+
+
+def structured_answer_key_errors(fixture_path: Path, fixture: dict[str, Any]) -> list[str]:
+    identifier = fixture_identifier(fixture)
+    answer_key = source_packet_answer_key_json_path(fixture_path, fixture)
+    if not answer_key.exists():
+        return [f"{identifier}: source_packet must contain hidden answer-key.json"]
+    try:
+        answer_key_document = read_json_object(answer_key)
+    except (OSError, ValueError, json.JSONDecodeError) as error:
+        return [f"{identifier}: answer-key.json {error}"]
+
+    errors = [
+        f"{identifier}: answer-key.json missing key {key!r}"
+        for key in sorted(REQUIRED_ANSWER_KEY_KEYS)
+        if key not in answer_key_document
+    ]
+    if errors:
+        return errors
+
+    if answer_key_document.get("schema_version") != ANSWER_KEY_SCHEMA_VERSION:
+        errors.append(f"{identifier}: answer-key.json schema_version must be {ANSWER_KEY_SCHEMA_VERSION}")
+    if answer_key_document.get("fixture_id") != identifier:
+        errors.append(f"{identifier}: answer-key.json fixture_id must match fixture id {identifier!r}")
+    errors.extend(answer_key_string_list_errors(fixture, answer_key_document, "must_support", "allowed_claims"))
+    errors.extend(answer_key_string_list_errors(fixture, answer_key_document, "must_reject", "disallowed_claims"))
+    errors.extend(
+        answer_key_string_list_errors(
+            fixture,
+            answer_key_document,
+            "must_remain_uncertain",
+            "required_uncertainties",
+        )
+    )
+    return errors
+
+
 def source_packet_answer_key_errors(fixture_path: Path, fixture: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
     packet_document = source_packet_document_path(fixture_path, fixture)
     if not packet_document.exists():
         return [f"{fixture_identifier(fixture)}: source_packet must contain source-packet.md"]
     answer_key = source_packet_answer_key_path(fixture_path, fixture)
     if not answer_key.exists():
-        return [f"{fixture_identifier(fixture)}: source_packet must contain hidden answer-key.md"]
+        errors.append(f"{fixture_identifier(fixture)}: source_packet must contain hidden answer-key.md")
     packet_text = packet_document.read_text(encoding="utf-8")
     if "## Ground truth for evaluation" in packet_text:
-        return [f"{fixture_identifier(fixture)}: source-packet.md must not expose hidden answer key"]
-    answer_key_text = answer_key.read_text(encoding="utf-8")
-    if "## Ground truth for evaluation" not in answer_key_text:
-        return [f"{fixture_identifier(fixture)}: answer-key.md must contain '## Ground truth for evaluation'"]
-    return []
+        errors.append(f"{fixture_identifier(fixture)}: source-packet.md must not expose hidden answer key")
+    if answer_key.exists():
+        answer_key_text = answer_key.read_text(encoding="utf-8")
+        if "## Ground truth for evaluation" not in answer_key_text:
+            errors.append(f"{fixture_identifier(fixture)}: answer-key.md must contain '## Ground truth for evaluation'")
+    errors.extend(structured_answer_key_errors(fixture_path, fixture))
+    return errors
 
 
 def source_packet_errors(fixture_path: Path, fixture: dict[str, Any]) -> list[str]:
@@ -463,11 +617,7 @@ def regex_pattern_match_errors(
 ) -> list[str]:
     errors: list[str] = []
     for pattern in string_list(fixture.get(fixture_key)):
-        try:
-            matches = re.search(pattern, output_text, flags=re.IGNORECASE) is not None
-        except re.error:
-            matches = False
-        if matches:
+        if regex_has_asserted_match(pattern, output_text):
             errors.append(f"{fixture_identifier(fixture)}: matches {label} pattern {pattern!r}")
     return errors
 
@@ -491,6 +641,7 @@ def validate_scholar_grade_fixture_document(fixture_path: Path) -> list[str]:
         errors.extend(missing_fixture_keys(fixture))
         errors.extend(invalid_fixture_id_errors(fixture))
         errors.extend(invalid_string_list_errors(fixture))
+        errors.extend(score_anchor_errors(fixture))
         errors.extend(invalid_source_access_errors(fixture))
         errors.extend(invalid_score_errors(fixture))
         errors.extend(invalid_boolean_errors(fixture))
@@ -515,11 +666,19 @@ def required_marker_errors(fixture: dict[str, Any], output_text: str) -> list[st
     ]
 
 
+def required_source_anchor_errors(fixture: dict[str, Any], output_text: str) -> list[str]:
+    return [
+        f"{fixture_identifier(fixture)}: missing required source anchor {anchor!r}"
+        for anchor in string_list(fixture.get("required_source_anchors"))
+        if not normalized_contains(output_text, anchor)
+    ]
+
+
 def required_uncertainty_errors(fixture: dict[str, Any], output_text: str) -> list[str]:
     return [
         f"{fixture_identifier(fixture)}: missing required uncertainty {uncertainty!r}"
         for uncertainty in string_list(fixture.get("required_uncertainties"))
-        if not normalized_contains(output_text, uncertainty)
+        if not contains_phrase_or_alias(output_text, uncertainty, alias_values(fixture, "required_uncertainty_aliases", uncertainty))
     ]
 
 
@@ -527,7 +686,7 @@ def disallowed_claim_errors(fixture: dict[str, Any], output_text: str) -> list[s
     return [
         f"{fixture_identifier(fixture)}: contains disallowed claim {claim!r}"
         for claim in string_list(fixture.get("disallowed_claims"))
-        if normalized_contains(output_text, claim)
+        if contains_asserted_phrase(output_text, claim)
     ]
 
 
@@ -535,7 +694,7 @@ def allowed_claim_boundary_errors(fixture: dict[str, Any], output_text: str) -> 
     return [
         f"{fixture_identifier(fixture)}: missing allowed claim boundary {claim!r}"
         for claim in string_list(fixture.get("allowed_claims"))
-        if not normalized_contains(output_text, claim)
+        if not contains_phrase_or_alias(output_text, claim, alias_values(fixture, "allowed_claim_aliases", claim))
     ]
 
 
@@ -551,14 +710,14 @@ def global_hard_fail_pattern_errors(fixture: dict[str, Any], output_text: str) -
     return [
         f"{fixture_identifier(fixture)}: matches global hard fail pattern {pattern!r}"
         for pattern in GLOBAL_HARD_FAIL_PATTERNS
-        if contains_unnegated_phrase(output_text, pattern)
+        if contains_asserted_phrase(output_text, pattern)
     ]
 
 
 def private_external_submission_errors(fixture: dict[str, Any], output_text: str) -> list[str]:
     if fixture.get("source_access_level") != "private-no-external":
         return []
-    if PRIVATE_EXTERNAL_SUBMISSION_RE.search(output_text):
+    if regex_has_asserted_match(PRIVATE_EXTERNAL_SUBMISSION_RE.pattern, output_text):
         return [f"{fixture_identifier(fixture)}: private-no-external output claims external submission or search"]
     return []
 
@@ -571,18 +730,160 @@ def hidden_evaluation_material_errors(fixture: dict[str, Any], output_text: str)
     ]
 
 
-def contains_unnegated_phrase(text: str, phrase: str) -> bool:
-    folded_text = text.casefold()
-    folded_phrase = phrase.casefold()
-    start = 0
-    while True:
-        index = folded_text.find(folded_phrase, start)
-        if index == -1:
-            return False
-        prefix = folded_text[max(0, index - 32):index]
-        if not NEGATED_PHRASE_PREFIX_RE.search(prefix):
-            return True
-        start = index + len(folded_phrase)
+def phrase_spans(text: str, phrase: str) -> list[tuple[int, int]]:
+    if not phrase:
+        return []
+    pattern = re.compile(re.escape(phrase), flags=re.IGNORECASE)
+    return [(match.start(), match.end()) for match in pattern.finditer(text)]
+
+
+def alias_values(fixture: dict[str, Any], alias_key: str, canonical_phrase: str) -> list[str]:
+    aliases = fixture.get(alias_key)
+    if not isinstance(aliases, dict):
+        return []
+    return string_list(aliases.get(canonical_phrase))
+
+
+def contains_phrase_or_alias(text: str, phrase: str, aliases: list[str]) -> bool:
+    return any(normalized_contains(text, candidate) for candidate in [phrase, *aliases])
+
+
+def rejection_context_prefix(text: str, start: int) -> str:
+    line_start = text.rfind("\n", 0, start) + 1
+    prefix = text[line_start:start]
+    previous_line = previous_nonempty_line(text, line_start)
+    if previous_line is not None:
+        _previous_start, previous_text = previous_line
+        current_prefix = prefix.lstrip()
+        previous_text = previous_text.strip()
+        if current_prefix.startswith((">", "-", "*")) or previous_text.endswith(":"):
+            prefix = f"{previous_text}\n{prefix}"
+    return prefix[-CLAIM_CONTEXT_PREFIX_CHARS:]
+
+
+def is_rejection_context(text: str, start: int) -> bool:
+    prefix = rejection_context_prefix(text, start)
+    return (
+        NEGATED_PHRASE_PREFIX_RE.search(prefix) is not None
+        or CLAIM_REJECTION_CONTEXT_RE.search(prefix) is not None
+        or is_markdown_table_rejection_context(text, start)
+    )
+
+
+def line_bounds_for_offset(text: str, offset: int) -> tuple[int, int]:
+    line_start = text.rfind("\n", 0, offset) + 1
+    line_end = text.find("\n", offset)
+    if line_end == -1:
+        line_end = len(text)
+    return line_start, line_end
+
+
+def previous_nonempty_line(text: str, before_offset: int) -> tuple[int, str] | None:
+    cursor = before_offset - 1
+    while cursor >= 0:
+        line_start = text.rfind("\n", 0, cursor + 1) + 1
+        line = text[line_start: cursor + 1]
+        if line.strip():
+            return line_start, line
+        cursor = line_start - 2
+    return None
+
+
+def is_markdown_table_line(line: str) -> bool:
+    stripped_line = line.strip()
+    return stripped_line.startswith("|") and stripped_line.endswith("|") and stripped_line.count("|") >= 2
+
+
+def markdown_table_cells(line: str, line_start: int = 0) -> list[tuple[str, int, int]]:
+    pipe_positions = [index for index, character in enumerate(line) if character == "|"]
+    if len(pipe_positions) < 2:
+        return []
+    return [
+        (
+            line[pipe_positions[index] + 1: pipe_positions[index + 1]].strip(),
+            line_start + pipe_positions[index] + 1,
+            line_start + pipe_positions[index + 1],
+        )
+        for index in range(len(pipe_positions) - 1)
+    ]
+
+
+def is_markdown_table_separator(line: str) -> bool:
+    cells = [cell for cell, _start, _end in markdown_table_cells(line)]
+    return bool(cells) and all(re.fullmatch(r":?-{3,}:?", cell.strip()) is not None for cell in cells)
+
+
+def table_header_line_before(text: str, line_start: int) -> str | None:
+    cursor = line_start
+    for _ in range(20):
+        previous = previous_nonempty_line(text, cursor)
+        if previous is None:
+            return None
+        previous_start, previous_line = previous
+        if not is_markdown_table_line(previous_line):
+            return None
+        if is_markdown_table_separator(previous_line):
+            header = previous_nonempty_line(text, previous_start)
+            if header is None:
+                return None
+            _header_start, header_line = header
+            return header_line if is_markdown_table_line(header_line) else None
+        cursor = previous_start
+    return None
+
+
+def cell_index_for_offset(cells: list[tuple[str, int, int]], offset: int) -> int | None:
+    for index, (_cell, start, end) in enumerate(cells):
+        if start <= offset <= end:
+            return index
+    return None
+
+
+def is_markdown_table_rejection_context(text: str, start: int) -> bool:
+    line_start, line_end = line_bounds_for_offset(text, start)
+    line = text[line_start:line_end]
+    if not is_markdown_table_line(line):
+        return False
+    cell_index = cell_index_for_offset(markdown_table_cells(line, line_start), start)
+    if cell_index is None:
+        return False
+    header_line = table_header_line_before(text, line_start)
+    if header_line is None:
+        return False
+    header_cells = markdown_table_cells(header_line)
+    if cell_index >= len(header_cells):
+        return False
+    header_cell, _start, _end = header_cells[cell_index]
+    return CLAIM_REJECTION_CONTEXT_RE.search(header_cell) is not None
+
+
+def markdown_table_match_crosses_cells(text: str, start: int, end: int) -> bool:
+    line_start, line_end = line_bounds_for_offset(text, start)
+    if end > line_end:
+        return False
+    line = text[line_start:line_end]
+    if not is_markdown_table_line(line):
+        return False
+    cells = markdown_table_cells(line, line_start)
+    start_cell_index = cell_index_for_offset(cells, start)
+    end_cell_index = cell_index_for_offset(cells, max(start, end - 1))
+    return start_cell_index is not None and end_cell_index is not None and start_cell_index != end_cell_index
+
+
+def contains_asserted_phrase(text: str, phrase: str) -> bool:
+    return any(not is_rejection_context(text, start) for start, _end in phrase_spans(text, phrase))
+
+
+def regex_has_asserted_match(pattern: str, text: str) -> bool:
+    try:
+        compiled_pattern = re.compile(pattern, flags=re.IGNORECASE)
+    except re.error:
+        return False
+    return any(
+        not markdown_table_match_crosses_cells(text, match.start(), match.end())
+        and not is_rejection_context(text, match.start())
+        for match in compiled_pattern.finditer(text)
+    )
 
 
 def validate_output_for_fixture(outputs_dir: Path, fixture: dict[str, Any]) -> list[str]:
@@ -598,6 +899,7 @@ def validate_output_for_fixture(outputs_dir: Path, fixture: dict[str, Any]) -> l
     return [
         *expected_decision_errors(fixture, output_text),
         *required_marker_errors(fixture, output_text),
+        *required_source_anchor_errors(fixture, output_text),
         *required_uncertainty_errors(fixture, output_text),
         *allowed_claim_boundary_errors(fixture, output_text),
         *disallowed_claim_errors(fixture, output_text),
@@ -822,6 +1124,7 @@ def live_capture_requirement_errors(
 def manifest_hash_errors(
     fixture_path: Path,
     outputs_dir: Path,
+    manifests_dir: Path,
     root: Path,
     fixture: dict[str, Any],
     manifest_document: dict[str, Any],
@@ -843,6 +1146,14 @@ def manifest_hash_errors(
         expected_hash = sha256_file(path)
         if manifest_document.get(key) != expected_hash:
             errors.append(f"{identifier}: manifest {key} does not match {label}")
+    prompt_packet_sha256 = manifest_document.get("prompt_packet_sha256")
+    if not isinstance(prompt_packet_sha256, str) or SHA256_RE.match(prompt_packet_sha256) is None:
+        errors.append(f"{identifier}: manifest prompt_packet_sha256 must be a sha256 hex digest")
+    prompt_packet = manifests_dir.parent / "prompts" / f"{identifier}.md"
+    if not prompt_packet.exists():
+        errors.append(f"{identifier}: manifest referenced prompt packet does not exist")
+    elif prompt_packet_sha256 != sha256_file(prompt_packet):
+        errors.append(f"{identifier}: manifest prompt_packet_sha256 does not match prompt packet")
     return errors
 
 
@@ -907,7 +1218,7 @@ def validate_run_manifest_for_fixture(
         *manifest_capture_metadata_errors(fixture, manifest_document),
         *live_capture_requirement_errors(fixture, manifest_document, require_live_captures),
         *automated_trace_errors(root, fixture, manifest_document),
-        *manifest_hash_errors(fixture_path, outputs_dir, root, fixture, manifest_document),
+        *manifest_hash_errors(fixture_path, outputs_dir, manifests_dir, root, fixture, manifest_document),
         *structured_result_errors(fixture, manifest_document),
     ]
 
@@ -977,6 +1288,9 @@ def score_metadata_errors(fixture: dict[str, Any], score_document: dict[str, Any
         errors.append(f"{identifier}: score date must be a real YYYY-MM-DD date")
     if score_document.get("hard_fail_triggered") is not False:
         errors.append(f"{identifier}: score hard_fail_triggered must be false")
+    reviewed_output_sha256 = score_document.get("reviewed_output_sha256")
+    if not isinstance(reviewed_output_sha256, str) or SHA256_RE.match(reviewed_output_sha256) is None:
+        errors.append(f"{identifier}: score reviewed_output_sha256 must be a sha256 hex digest")
     return errors
 
 
@@ -987,7 +1301,7 @@ def score_dimension_errors(fixture: dict[str, Any], score_document: dict[str, An
         return [f"{identifier}: score dimension_scores must be an object"]
 
     errors: list[str] = []
-    expected_dimensions = set(string_list(fixture.get("rubric_dimensions")))
+    expected_dimensions = rubric_dimension_set(fixture)
     actual_dimensions = {key for key in dimension_scores if isinstance(key, str)}
     if actual_dimensions != expected_dimensions:
         errors.append(f"{identifier}: score dimensions must match fixture rubric_dimensions")
@@ -1017,7 +1331,75 @@ def score_dimension_errors(fixture: dict[str, Any], score_document: dict[str, An
     return errors
 
 
-def validate_review_score_for_fixture(scores_dir: Path, fixture: dict[str, Any]) -> list[str]:
+def score_dimension_rationale_errors(fixture: dict[str, Any], score_document: dict[str, Any]) -> list[str]:
+    identifier = fixture_identifier(fixture)
+    dimension_rationales = score_document.get("dimension_rationales")
+    if not isinstance(dimension_rationales, dict):
+        return [f"{identifier}: score dimension_rationales must be an object"]
+
+    errors: list[str] = []
+    expected_dimensions = rubric_dimension_set(fixture)
+    actual_dimensions = {dimension for dimension in dimension_rationales if isinstance(dimension, str)}
+    if actual_dimensions != expected_dimensions:
+        errors.append(f"{identifier}: score dimension_rationales must match fixture rubric_dimensions")
+
+    for dimension, rationale in dimension_rationales.items():
+        if not isinstance(dimension, str):
+            continue
+        if not isinstance(rationale, str) or not rationale.strip():
+            errors.append(f"{identifier}: score dimension_rationales for {dimension!r} must be a non-empty string")
+            continue
+        if TODO_PLACEHOLDER_RE.match(rationale.strip()):
+            errors.append(f"{identifier}: score dimension_rationales for {dimension!r} must not be a TODO placeholder")
+    return errors
+
+
+def score_evidence_list_errors(
+    fixture: dict[str, Any],
+    score_document: dict[str, Any],
+    key: str,
+) -> list[str]:
+    identifier = fixture_identifier(fixture)
+    value = score_document.get(key)
+    if not isinstance(value, list) or not value or len(string_list(value)) != len(value):
+        return [f"{identifier}: score {key} must be a non-empty string list"]
+    return [
+        f"{identifier}: score {key} must not contain TODO placeholders"
+        for item in value
+        if TODO_PLACEHOLDER_RE.match(item.strip())
+    ]
+
+
+def score_evidence_errors(fixture: dict[str, Any], score_document: dict[str, Any]) -> list[str]:
+    return [
+        *score_evidence_list_errors(fixture, score_document, "evidence_notes"),
+        *score_evidence_list_errors(fixture, score_document, "answer_key_findings"),
+    ]
+
+
+def score_output_hash_errors(
+    outputs_dir: Path | None,
+    fixture: dict[str, Any],
+    score_document: dict[str, Any],
+) -> list[str]:
+    if outputs_dir is None:
+        return []
+
+    identifier = fixture_identifier(fixture)
+    output_path = output_path_for_fixture(outputs_dir, fixture)
+    if not output_path.exists():
+        return [f"{identifier}: cannot validate score reviewed_output_sha256 without output file {output_path.name}"]
+    expected_hash = sha256_file(output_path)
+    if score_document.get("reviewed_output_sha256") != expected_hash:
+        return [f"{identifier}: score reviewed_output_sha256 does not match output file"]
+    return []
+
+
+def validate_review_score_for_fixture(
+    scores_dir: Path,
+    fixture: dict[str, Any],
+    outputs_dir: Path | None = None,
+) -> list[str]:
     score_path = score_path_for_fixture(scores_dir, fixture)
     identifier = fixture_identifier(fixture)
     if not score_path.exists():
@@ -1030,10 +1412,17 @@ def validate_review_score_for_fixture(scores_dir: Path, fixture: dict[str, Any])
         *score_missing_key_errors(fixture, score_document),
         *score_metadata_errors(fixture, score_document),
         *score_dimension_errors(fixture, score_document),
+        *score_dimension_rationale_errors(fixture, score_document),
+        *score_evidence_errors(fixture, score_document),
+        *score_output_hash_errors(outputs_dir, fixture, score_document),
     ]
 
 
-def validate_scholar_grade_review_scores(fixture_path: Path, scores_dir: Path) -> list[str]:
+def validate_scholar_grade_review_scores(
+    fixture_path: Path,
+    scores_dir: Path,
+    outputs_dir: Path | None = None,
+) -> list[str]:
     document_errors = validate_scholar_grade_fixture_document(fixture_path)
     if document_errors:
         return document_errors
@@ -1042,7 +1431,7 @@ def validate_scholar_grade_review_scores(fixture_path: Path, scores_dir: Path) -
     return [
         error
         for fixture in fixture_list(document)
-        for error in validate_review_score_for_fixture(scores_dir, fixture)
+        for error in validate_review_score_for_fixture(scores_dir, fixture, outputs_dir)
     ]
 
 
@@ -1209,15 +1598,23 @@ def missing_score_identifiers(scores_dir: Path, fixtures: list[dict[str, Any]]) 
     ]
 
 
-def score_validation_errors(scores_dir: Path, fixtures: list[dict[str, Any]]) -> list[str]:
+def score_validation_errors(
+    scores_dir: Path,
+    fixtures: list[dict[str, Any]],
+    outputs_dir: Path | None,
+) -> list[str]:
     return [
         error
         for fixture in fixtures
-        for error in validate_review_score_for_fixture(scores_dir, fixture)
+        for error in validate_review_score_for_fixture(scores_dir, fixture, outputs_dir)
     ]
 
 
-def score_summary(scores_dir: Path | None, fixtures: list[dict[str, Any]]) -> dict[str, Any]:
+def score_summary(
+    scores_dir: Path | None,
+    fixtures: list[dict[str, Any]],
+    outputs_dir: Path | None,
+) -> dict[str, Any]:
     if scores_dir is None:
         return {
             "checked": False,
@@ -1230,8 +1627,25 @@ def score_summary(scores_dir: Path | None, fixtures: list[dict[str, Any]]) -> di
         "directory": str(scores_dir),
         "present": present_score_identifiers(scores_dir, fixtures),
         "missing": missing_score_identifiers(scores_dir, fixtures),
-        "validation_errors": score_validation_errors(scores_dir, fixtures),
+        "validation_errors": score_validation_errors(scores_dir, fixtures, outputs_dir),
     }
+
+
+def score_anchor_entries(fixture: dict[str, Any]) -> list[str]:
+    score_anchors = fixture.get("score_anchors")
+    if not isinstance(score_anchors, dict):
+        return []
+
+    entries: list[str] = []
+    for dimension in string_list(fixture.get("rubric_dimensions")):
+        dimension_anchors = score_anchors.get(dimension)
+        if not isinstance(dimension_anchors, dict):
+            continue
+        for level in sorted(REQUIRED_SCORE_ANCHOR_LEVELS, key=int):
+            anchor = dimension_anchors.get(level)
+            if isinstance(anchor, str) and anchor.strip():
+                entries.append(f"{dimension} {level}: {anchor.strip()}")
+    return entries
 
 
 def fixture_case_report(fixture: dict[str, Any], outputs_dir: Path | None) -> dict[str, Any]:
@@ -1245,12 +1659,14 @@ def fixture_case_report(fixture: dict[str, Any], outputs_dir: Path | None) -> di
         "resource_basis": string_list(fixture.get("resource_basis")),
         "expected_decision": str(fixture.get("expected_decision", "")),
         "required_output_markers": string_list(fixture.get("required_output_markers")),
+        "required_source_anchors": string_list(fixture.get("required_source_anchors")),
         "required_uncertainties": string_list(fixture.get("required_uncertainties")),
         "allowed_claims": string_list(fixture.get("allowed_claims")),
         "disallowed_claims": string_list(fixture.get("disallowed_claims")),
         "hard_fail_patterns": string_list(fixture.get("hard_fail_patterns")),
         "semantic_fail_patterns": string_list(fixture.get("semantic_fail_patterns")),
         "rubric_dimensions": string_list(fixture.get("rubric_dimensions")),
+        "score_anchors": score_anchor_entries(fixture),
         "minimum_score": fixture.get("minimum_score"),
         "human_review_required": bool(fixture.get("human_review_required")),
         "output_file": output_filename_for_fixture(fixture),
@@ -1289,7 +1705,7 @@ def build_scholar_grade_report(
         },
         "outputs": output_summary(outputs_dir, fixtures),
         "manifests": manifest_summary(fixture_path, outputs_dir, manifests_dir, root, fixtures, require_live_captures),
-        "scores": score_summary(scores_dir, fixtures),
+        "scores": score_summary(scores_dir, fixtures, outputs_dir),
         "limits": LIMITS,
         "manual_review_expectations": MANUAL_REVIEW_EXPECTATIONS,
         "cases": [fixture_case_report(fixture, outputs_dir) for fixture in fixtures],
@@ -1364,12 +1780,14 @@ def format_markdown_scorecard(report: dict[str, Any]) -> str:
                 f"- Resource basis: {inline_code_list(case['resource_basis'])}",
                 f"- Expected decision: `{case['expected_decision']}`",
                 f"- Required markers: {inline_code_list(case['required_output_markers'])}",
+                f"- Required source anchors: {inline_code_list(case['required_source_anchors'])}",
                 f"- Required uncertainties: {inline_code_list(case['required_uncertainties'])}",
                 f"- Allowed claims: {inline_code_list(case['allowed_claims'])}",
                 f"- Disallowed claims: {inline_code_list(case['disallowed_claims'])}",
                 f"- Hard-fail patterns: {inline_code_list(case['hard_fail_patterns'])}",
                 f"- Semantic fail patterns: {inline_code_list(case['semantic_fail_patterns'])}",
                 f"- Rubric dimensions: {inline_code_list(case['rubric_dimensions'])}",
+                f"- Score anchors: {inline_code_list(case['score_anchors'])}",
                 f"- Minimum score: `{case['minimum_score']}`",
                 f"- Human review required: `{str(case['human_review_required']).lower()}`",
                 f"- Validation errors: {inline_code_list(case['validation_errors'])}",

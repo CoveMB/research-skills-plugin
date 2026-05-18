@@ -9,6 +9,7 @@
   "operator": "fixture-author",
   "output_file": "chapter-outline-no-evidence-anchors.md",
   "output_sha256": "3f6fdb1e628ba960999a48a49e35bdacf6e2581380d5b424db9736f2f3b0b79b",
+  "prompt_packet_sha256": "2f3f51527644bf16a16eb0f791634b7ba0f96da5a83d1daf2457d4d1a6d35e8f",
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "chapter-architecture",
   "skill_file": "skills/chapter-architecture/SKILL.md",

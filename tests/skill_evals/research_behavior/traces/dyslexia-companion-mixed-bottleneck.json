@@ -1,0 +1,10 @@
+{
+  "fixture_id": "dyslexia-companion-mixed-bottleneck",
+  "output_captured": true,
+  "output_sha256": "2f97d6b5ae62f8061e6fcbfe33371f0231f16afe7f16c6110c57d1f857cc210b",
+  "prompt_sha256": "02c84604568dcf8b29b40368a2824f00e370b0febdca7276ded000a56376c1e6",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "dyslexia-research-companion",
+  "skill_invoked": true
+}

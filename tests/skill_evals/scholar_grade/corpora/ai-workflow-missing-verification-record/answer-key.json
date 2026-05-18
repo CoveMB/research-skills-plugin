@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "ai-workflow-missing-verification-record",
+  "must_support": [
+    "The log can identify missing verification and disclosure records."
+  ],
+  "must_reject": [
+    "human verification complete",
+    "venue policy satisfied",
+    "disclosure complete"
+  ],
+  "must_remain_uncertain": [
+    "No human verification record is visible",
+    "Venue policy has not been checked"
+  ]
+}

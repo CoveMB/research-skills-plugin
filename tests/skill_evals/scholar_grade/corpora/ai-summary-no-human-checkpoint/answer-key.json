@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "ai-summary-no-human-checkpoint",
+  "must_support": [
+    "The workflow can proceed only after human verification is recorded."
+  ],
+  "must_reject": [
+    "Gate decision: pass",
+    "human verification complete",
+    "evidence verified"
+  ],
+  "must_remain_uncertain": [
+    "No human source verification record is present",
+    "The summary may contain hallucinated evidence"
+  ]
+}

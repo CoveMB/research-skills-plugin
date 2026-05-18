@@ -1,0 +1,10 @@
+{
+  "fixture_id": "private-manuscript-search",
+  "output_captured": true,
+  "output_sha256": "2c9d1518162847ff57deaa8c738692fd06b5aa1682430a1a8b2df5201c8307d9",
+  "prompt_sha256": "c206a6d855546b652c01a6a42ab1c157004051c7f9848ca94a767d111847145d",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "research-intent-router",
+  "skill_invoked": true
+}

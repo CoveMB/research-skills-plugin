@@ -1,0 +1,28 @@
+{
+  "schema_version": "scholar-grade-review-score-v1",
+  "fixture_id": "literature-map-overstates-consensus",
+  "reviewer": "TODO_REVIEWER",
+  "date": "TODO_YYYY-MM-DD",
+  "hard_fail_triggered": "TODO_BOOLEAN",
+  "reviewed_output_sha256": "e58c65f470da437e6c191fa7c686f6c5eb04434704b281e09502c448bb8398d7",
+  "dimension_scores": {
+    "literature-map caution": "TODO_0_TO_5",
+    "consensus restraint": "TODO_0_TO_5",
+    "gap visibility": "TODO_0_TO_5",
+    "thesis-use limits": "TODO_0_TO_5"
+  },
+  "dimension_rationales": {
+    "literature-map caution": "TODO_RATIONALE",
+    "consensus restraint": "TODO_RATIONALE",
+    "gap visibility": "TODO_RATIONALE",
+    "thesis-use limits": "TODO_RATIONALE"
+  },
+  "evidence_notes": [
+    "TODO_EVIDENCE_NOTE"
+  ],
+  "answer_key_findings": [
+    "TODO_ANSWER_KEY_FINDING"
+  ],
+  "minimum_score": 4,
+  "rationale": "TODO_RATIONALE"
+}

@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "bounded-descriptive-claim-supported",
+  "must_support": [
+    "Participants described dashboards as improving bottleneck visibility."
+  ],
+  "must_reject": [
+    "dashboards reduced congestion",
+    "dashboards improved outcomes",
+    "the dashboard effect is verified"
+  ],
+  "must_remain_uncertain": [
+    "No outcome metrics are available",
+    "The packet supports participant descriptions, not measured effects"
+  ]
+}

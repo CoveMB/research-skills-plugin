@@ -1,14 +1,27 @@
 {
   "date": "2026-05-14",
   "dimension_scores": {
-    "bounded next action": 4,
     "route correctness": 4,
     "source-basis clarity": 4,
-    "uncertainty visibility": 4
+    "uncertainty visibility": 4,
+    "bounded next action": 4
   },
   "fixture_id": "prompt-only-scope-triage",
   "hard_fail_triggered": false,
   "rationale": "Reference output meets the controlled rubric at the required scholar-grade threshold without hard-fail behavior.",
   "reviewer": "fixture-reviewer",
-  "schema_version": "scholar-grade-review-score-v1"
+  "schema_version": "scholar-grade-review-score-v1",
+  "reviewed_output_sha256": "9a5e12edf832fc9d026858c8bc10cc983fbf4e701a80f7fce0209ac27addfe15",
+  "dimension_rationales": {
+    "route correctness": "Reviewed output score 4 for route correctness: evaluator judgment is tied to the captured output and fixture rubric.",
+    "source-basis clarity": "Reviewed output score 4 for source-basis clarity: evaluator judgment is tied to the captured output and fixture rubric.",
+    "uncertainty visibility": "Reviewed output score 4 for uncertainty visibility: evaluator judgment is tied to the captured output and fixture rubric.",
+    "bounded next action": "Reviewed output score 4 for bounded next action: evaluator judgment is tied to the captured output and fixture rubric."
+  },
+  "evidence_notes": [
+    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+  ],
+  "answer_key_findings": [
+    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+  ]
 }

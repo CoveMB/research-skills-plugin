@@ -1,0 +1,10 @@
+{
+  "fixture_id": "claim-traceability-nearby-citation",
+  "output_captured": true,
+  "output_sha256": "c494acac88861070ac2aa1834ac07dd450f4c80d3f748540ed9141b3fbb99218",
+  "prompt_sha256": "355f2e90aae7e0bdee03a8e831631603284494cecb47e43f5f141e51a9e05651",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "claim-traceability-graph",
+  "skill_invoked": true
+}

@@ -1,0 +1,10 @@
+{
+  "fixture_id": "compact-router-next-step",
+  "output_captured": true,
+  "output_sha256": "c45fc71a67cadec12f72af63ba7606559a734aef474eb3e8ae970ae89d73c0e1",
+  "prompt_sha256": "9eb0aa14871b30ee0a04f679d2b8b407c9e2bf0359ac8bdf3e6843a72caec672",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "research-intent-router",
+  "skill_invoked": true
+}

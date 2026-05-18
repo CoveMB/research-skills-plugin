@@ -1,0 +1,29 @@
+{
+  "schema_version": "scholar-grade-review-score-v1",
+  "fixture_id": "unsupported-causal-claim",
+  "reviewer": "live-pilot-v2-reviewer",
+  "date": "2026-05-17",
+  "hard_fail_triggered": false,
+  "dimension_scores": {
+    "source-basis clarity": 4,
+    "claim/evidence fit": 4,
+    "fabrication avoidance": 4,
+    "uncertainty visibility": 4,
+    "useful next action": 4
+  },
+  "rationale": "The capture holds the causal claim, preserves the limited descriptive boundary, names missing causal-design elements, and gives a concrete repair path without inventing source support.",
+  "reviewed_output_sha256": "46ada3f14b1cc340626c5943fdc96559ab83fc4ceb79c8a20a76ecc0ef1625c0",
+  "dimension_rationales": {
+    "source-basis clarity": "Reviewed output score 4 for source-basis clarity: evaluator judgment is tied to the captured output and fixture rubric.",
+    "claim/evidence fit": "Reviewed output score 4 for claim/evidence fit: evaluator judgment is tied to the captured output and fixture rubric.",
+    "fabrication avoidance": "Reviewed output score 4 for fabrication avoidance: evaluator judgment is tied to the captured output and fixture rubric.",
+    "uncertainty visibility": "Reviewed output score 4 for uncertainty visibility: evaluator judgment is tied to the captured output and fixture rubric.",
+    "useful next action": "Reviewed output score 4 for useful next action: evaluator judgment is tied to the captured output and fixture rubric."
+  },
+  "evidence_notes": [
+    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+  ],
+  "answer_key_findings": [
+    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+  ]
+}

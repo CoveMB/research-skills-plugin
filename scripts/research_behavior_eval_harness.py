@@ -14,29 +14,38 @@ from check_research_behavior_fixtures import (
     output_path_for_fixture,
     read_json_object,
     string_list,
+    trace_filename_for_fixture,
+    trace_path_for_fixture,
     validate_fixture_document,
     validate_output_for_fixture,
+    validate_trace_for_fixture,
 )
-from research_behavior_reports import fixture_summary, output_summary
+from research_behavior_reports import fixture_summary, output_summary, trace_summary
 
 
 MANUAL_OR_LIVE_RUN_EXPECTATIONS = [
     "Run each fixture prompt against the intended skill, model, or agent configuration.",
-    "Capture exactly one Markdown output per fixture id.",
+    "Capture exactly one Markdown output and one hash-linked route trace JSON per fixture id.",
     "Record the interface, model, date, operator, and any tool/network permissions outside the captured output.",
     "Do not submit private manuscripts, notes, source text, or unpublished data to external tools without explicit consent.",
     "Treat captured outputs as behavior samples, not as proof of source truth or scholarly correctness.",
 ]
 LIMITS = [
     "This harness does not run a model or call external services.",
-    "It checks fixture coverage, captured-output presence, required markers, forbidden claims, and compact-output boundaries.",
+    "It checks fixture coverage, captured-output presence, route-trace presence, selected skill evidence, trace hashes, required markers, forbidden claims, and compact-output boundaries.",
     "It does not verify source truth, citation accuracy, methodological validity, or scholarly correctness.",
 ]
 
 
-def fixture_case_report(fixture: dict[str, Any], outputs_dir: Path | None) -> dict[str, Any]:
+def fixture_case_report(
+    fixture: dict[str, Any],
+    outputs_dir: Path | None,
+    traces_dir: Path | None,
+) -> dict[str, Any]:
     output_path = output_path_for_fixture(outputs_dir, fixture) if outputs_dir else None
+    trace_path = trace_path_for_fixture(traces_dir, fixture) if traces_dir else None
     validation_errors = validate_output_for_fixture(outputs_dir, fixture) if outputs_dir else []
+    trace_validation_errors = validate_trace_for_fixture(traces_dir, fixture, outputs_dir) if traces_dir else []
     return {
         "id": fixture_identifier(fixture),
         "prompt": str(fixture.get("prompt", "")),
@@ -48,10 +57,18 @@ def fixture_case_report(fixture: dict[str, Any], outputs_dir: Path | None) -> di
         "output_path": str(output_path) if output_path else None,
         "captured_output_checked": bool(output_path and output_path.exists()),
         "validation_errors": validation_errors,
+        "trace_file": trace_filename_for_fixture(fixture),
+        "trace_path": str(trace_path) if trace_path else None,
+        "route_trace_checked": bool(trace_path and trace_path.exists()),
+        "trace_validation_errors": trace_validation_errors,
     }
 
 
-def build_harness_report(fixture_path: Path, outputs_dir: Path | None = None) -> dict[str, Any]:
+def build_harness_report(
+    fixture_path: Path,
+    outputs_dir: Path | None = None,
+    traces_dir: Path | None = None,
+) -> dict[str, Any]:
     document_errors = validate_fixture_document(fixture_path)
     document = read_json_object(fixture_path) if not document_errors else {"fixtures": []}
     fixtures = fixture_list(document)
@@ -61,15 +78,17 @@ def build_harness_report(fixture_path: Path, outputs_dir: Path | None = None) ->
         "source": {
             "fixtures": str(fixture_path),
             "outputs_dir": str(outputs_dir) if outputs_dir else None,
+            "traces_dir": str(traces_dir) if traces_dir else None,
         },
         "fixtures": {
             **fixture_summary(fixtures),
             "validation_errors": document_errors,
         },
         "outputs": output_summary(outputs_dir, fixtures),
+        "traces": trace_summary(traces_dir, fixtures, outputs_dir),
         "manual_or_live_run_expectations": MANUAL_OR_LIVE_RUN_EXPECTATIONS,
         "limits": LIMITS,
-        "cases": [fixture_case_report(fixture, outputs_dir) for fixture in fixtures],
+        "cases": [fixture_case_report(fixture, outputs_dir, traces_dir) for fixture in fixtures],
     }
 
 
@@ -109,6 +128,11 @@ def format_markdown_runbook(report: dict[str, Any]) -> str:
         f"- Present: {', '.join(report['outputs']['present']) or 'None'}",
         f"- Missing: {', '.join(report['outputs']['missing']) or 'None'}",
         "",
+        "## Route traces",
+        f"- Checked: {str(report['traces']['checked']).lower()}",
+        f"- Present: {', '.join(report['traces']['present']) or 'None'}",
+        f"- Missing: {', '.join(report['traces']['missing']) or 'None'}",
+        "",
         "## Fixture runbook",
     ]
     for case in report["cases"]:
@@ -119,9 +143,11 @@ def format_markdown_runbook(report: dict[str, Any]) -> str:
                 f"- Expected route: `{case['expected_route']}`",
                 f"- Risk covered: {case['risk_covered']}",
                 f"- Output file: `{case['output_file']}`",
+                f"- Route trace file: `{case['trace_file']}`",
                 f"- Required markers: {inline_code_list(case['required_output_markers'])}",
                 f"- Forbidden claims: {inline_code_list(case['forbidden_claims'])}",
                 f"- Validation errors: {inline_code_list(case['validation_errors'])}",
+                f"- Trace validation errors: {inline_code_list(case['trace_validation_errors'])}",
                 "",
                 "Prompt:",
                 *quote_markdown(case["prompt"]),
@@ -137,6 +163,11 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
         "--outputs-dir",
         type=Path,
         help="Optional directory containing one captured Markdown output per fixture id.",
+    )
+    parser.add_argument(
+        "--traces-dir",
+        type=Path,
+        help="Optional directory containing one route trace JSON file per fixture id.",
     )
     parser.add_argument(
         "--format",
@@ -155,7 +186,7 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv or sys.argv[1:])
     try:
-        report = build_harness_report(args.fixtures, args.outputs_dir)
+        report = build_harness_report(args.fixtures, args.outputs_dir, args.traces_dir)
     except (OSError, ValueError, json.JSONDecodeError) as error:
         print(json.dumps({"errors": [str(error)]}, indent=2))
         return 1
@@ -166,7 +197,11 @@ def main(argv: list[str] | None = None) -> int:
         else:
             print(json.dumps(report, indent=2))
 
-    has_errors = bool(report["fixtures"]["validation_errors"] or report["outputs"]["validation_errors"])
+    has_errors = bool(
+        report["fixtures"]["validation_errors"]
+        or report["outputs"]["validation_errors"]
+        or report["traces"]["validation_errors"]
+    )
     return 1 if has_errors else 0
 
 

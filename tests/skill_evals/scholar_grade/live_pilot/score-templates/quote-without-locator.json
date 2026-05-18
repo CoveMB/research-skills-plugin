@@ -1,0 +1,28 @@
+{
+  "date": "TODO_YYYY-MM-DD",
+  "dimension_scores": {
+    "citation discipline": "TODO_0_TO_5",
+    "fabrication avoidance": "TODO_0_TO_5",
+    "locator discipline": "TODO_0_TO_5",
+    "repair specificity": "TODO_0_TO_5"
+  },
+  "fixture_id": "quote-without-locator",
+  "hard_fail_triggered": "TODO_BOOLEAN",
+  "minimum_score": 4,
+  "rationale": "TODO_RATIONALE",
+  "reviewer": "TODO_REVIEWER",
+  "schema_version": "scholar-grade-review-score-v1",
+  "reviewed_output_sha256": "TODO_AFTER_CAPTURE",
+  "dimension_rationales": {
+    "citation discipline": "TODO_RATIONALE",
+    "fabrication avoidance": "TODO_RATIONALE",
+    "locator discipline": "TODO_RATIONALE",
+    "repair specificity": "TODO_RATIONALE"
+  },
+  "evidence_notes": [
+    "TODO_EVIDENCE_NOTE"
+  ],
+  "answer_key_findings": [
+    "TODO_ANSWER_KEY_FINDING"
+  ]
+}

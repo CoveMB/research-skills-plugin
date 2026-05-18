@@ -251,10 +251,10 @@ Skill behavior tests live under [`tests/skill_evals/`](tests/skill_evals/). They
 
 The suite has two layers:
 
-- `research_behavior`: deterministic routing and behavior fixtures that check selected-skill route evidence, required output markers, forbidden claims, and compact-output boundaries.
+- `research_behavior`: deterministic routing and behavior fixtures that check selected-skill route traces, prompt/output trace hashes, captured-output route evidence, required output markers, forbidden claims, and compact-output boundaries.
 - `scholar_grade`: stricter source-packet fixtures that test claim/evidence fit, allowed-claim boundaries, required uncertainties, hard-fail patterns, private-text boundaries, source-access modes, and resource-backed rubric coverage.
 
-The scholar-grade fixtures use synthetic controlled packets with separate hidden `answer-key.md` files. Only `source-packet.md` should be supplied during live or manual skill runs. The harness does not run a model or certify source truth; it validates captured outputs, checks semantic fail patterns for paraphrased overclaims, checks run manifests with source/output/skill hashes, enforces rubric score thresholds, enforces fixture coverage for every skill, and produces reviewer scorecards for human or future live-run review. `live_capture_protocol.py` can generate operator-facing prompt packets plus manifest, score, and trace templates for real skill captures without exposing hidden answer keys. CI includes deterministic checks through `./validate.sh`, which runs `scripts/run_package_checks.py --scope full`; recorded live captures can be checked separately with `python3 scripts/run_package_checks.py --scope live`.
+The scholar-grade fixtures use synthetic controlled packets with separate hidden `answer-key.md` files. Only `source-packet.md` should be supplied during live or manual skill runs. The harness does not run a model or certify source truth; it validates captured outputs, checks semantic fail patterns for paraphrased overclaims, checks run manifests with source/output/skill hashes, enforces rubric score thresholds, enforces fixture coverage for every skill, and produces reviewer scorecards for human or future live-run review. `live_capture_protocol.py` can generate operator-facing prompt packets plus manifest, score, and trace templates for real skill captures without exposing hidden answer keys. CI includes deterministic checks and the calibrated v2 pilot gate through `./validate.sh`, which runs `scripts/run_package_checks.py --scope full`; the original additive pilot can be reported with `python3 scripts/run_package_checks.py --scope live-pilot`, the current calibrated pilot can also be checked directly with `python3 scripts/run_package_checks.py --scope live-pilot-v2`, manual calibration reports use `python3 tests/skill_evals/scholar_grade/live_pilot_calibration.py --format markdown`, and full recorded live captures can be checked separately with `python3 scripts/run_package_checks.py --scope live`.
 
 ## Validate
 
@@ -269,10 +269,13 @@ Or run the checks one by one:
 ```bash
 python3 scripts/validate_plugin.py .
 python3 scripts/check_book_artifact_contract.py --path .
-python3 scripts/check_research_behavior_fixtures.py --fixtures tests/skill_evals/research_behavior/fixtures.json --outputs-dir tests/skill_evals/research_behavior/outputs
-python3 scripts/research_behavior_eval_harness.py --fixtures tests/skill_evals/research_behavior/fixtures.json --outputs-dir tests/skill_evals/research_behavior/outputs --quiet
+python3 scripts/check_research_behavior_fixtures.py --fixtures tests/skill_evals/research_behavior/fixtures.json --outputs-dir tests/skill_evals/research_behavior/outputs --traces-dir tests/skill_evals/research_behavior/traces
+python3 scripts/research_behavior_eval_harness.py --fixtures tests/skill_evals/research_behavior/fixtures.json --outputs-dir tests/skill_evals/research_behavior/outputs --traces-dir tests/skill_evals/research_behavior/traces --quiet
+python3 scripts/summarize_research_behavior_evals.py --fixtures tests/skill_evals/research_behavior/fixtures.json --outputs-dir tests/skill_evals/research_behavior/outputs --traces-dir tests/skill_evals/research_behavior/traces
 python3 tests/skill_evals/scholar_grade/scholar_grade_eval_harness.py --fixtures tests/skill_evals/scholar_grade/fixtures.json --outputs-dir tests/skill_evals/scholar_grade/outputs --manifests-dir tests/skill_evals/scholar_grade/manifests --scores-dir tests/skill_evals/scholar_grade/scores --quiet
 python3 tests/skill_evals/scholar_grade/live_capture_protocol.py --fixtures tests/skill_evals/scholar_grade/fixtures.json --root . --check
+python3 tests/skill_evals/scholar_grade/live_pilot_calibration.py --quiet
+python3 tests/skill_evals/scholar_grade/live_pilot_calibration.py --pilot-plan tests/skill_evals/scholar_grade/live_pilot_v2/fixture-ids.json --live-root tests/skill_evals/scholar_grade/live_pilot_v2 --strict --quiet
 python3 scripts/check_source_candidates.py --input tests/skill_evals/source-candidates.json --quiet
 python3 -m unittest discover -s scripts -p 'test_*.py'
 python3 -m unittest discover -s tests -p 'test_*.py'

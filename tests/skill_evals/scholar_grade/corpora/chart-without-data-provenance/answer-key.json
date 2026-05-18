@@ -1,0 +1,15 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "chart-without-data-provenance",
+  "must_support": [
+    "The chart can be treated as a draft visual pending data provenance."
+  ],
+  "must_reject": [
+    "data provenance complete",
+    "figure verified"
+  ],
+  "must_remain_uncertain": [
+    "The underlying dataset is missing",
+    "Data provenance is incomplete"
+  ]
+}

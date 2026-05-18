@@ -1,0 +1,10 @@
+{
+  "fixture_id": "book-orchestrator-unstable-scope",
+  "output_captured": true,
+  "output_sha256": "872cca81d187a034b1c9aae2415436a3466e8539a2a8023a27d90891913496ce",
+  "prompt_sha256": "bfa30991a7d36215d3461a3952c450f0b1a2d2f1707cf6d45549e53c1f46606a",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "research-book-orchestrator",
+  "skill_invoked": true
+}

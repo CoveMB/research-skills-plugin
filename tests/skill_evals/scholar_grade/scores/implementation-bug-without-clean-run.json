@@ -1,14 +1,27 @@
 {
   "date": "2026-05-13",
   "dimension_scores": {
-    "blocked reliance decision": 4,
     "implementation-bug detection": 4,
-    "repair specificity": 4,
-    "run-log provenance": 4
+    "run-log provenance": 4,
+    "blocked reliance decision": 4,
+    "repair specificity": 4
   },
   "fixture_id": "implementation-bug-without-clean-run",
   "hard_fail_triggered": false,
   "rationale": "Reference output meets the controlled-packet rubric at the required scholar-grade threshold without hard-fail behavior.",
   "reviewer": "fixture-reviewer",
-  "schema_version": "scholar-grade-review-score-v1"
+  "schema_version": "scholar-grade-review-score-v1",
+  "reviewed_output_sha256": "a45ca73c8fdb25074753de1e604b63833a336c5f059ae12d1b0ba1631e6f697c",
+  "dimension_rationales": {
+    "implementation-bug detection": "Reviewed output score 4 for implementation-bug detection: evaluator judgment is tied to the captured output and fixture rubric.",
+    "run-log provenance": "Reviewed output score 4 for run-log provenance: evaluator judgment is tied to the captured output and fixture rubric.",
+    "blocked reliance decision": "Reviewed output score 4 for blocked reliance decision: evaluator judgment is tied to the captured output and fixture rubric.",
+    "repair specificity": "Reviewed output score 4 for repair specificity: evaluator judgment is tied to the captured output and fixture rubric."
+  },
+  "evidence_notes": [
+    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+  ],
+  "answer_key_findings": [
+    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+  ]
 }

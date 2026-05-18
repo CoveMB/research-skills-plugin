@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "methodology-fabrication-run-config",
+  "must_support": [
+    "The method description must be reconciled with actual run records before reliance."
+  ],
+  "must_reject": [
+    "methods verified",
+    "run config confirms",
+    "preprocessing was performed"
+  ],
+  "must_remain_uncertain": [
+    "The Methods details are not traceable to a run config",
+    "The preprocessing step is not evidenced"
+  ]
+}

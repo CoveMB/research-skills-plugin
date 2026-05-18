@@ -1,0 +1,10 @@
+{
+  "fixture_id": "annotation-source-note-mixed-evidence",
+  "output_captured": true,
+  "output_sha256": "7f5b4e9529598c4d9fdd0b73512aedb7f58d58534e02d58d860438c1a1279983",
+  "prompt_sha256": "030fb994719f6d245f14f6713abc29fdd79ce32d7d8a96b59e2604b1f6e6f709",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "annotation-to-source-note",
+  "skill_invoked": true
+}

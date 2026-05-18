@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "reading-load-abstract-only",
+  "must_support": [
+    "The packet can support reading-priority decisions."
+  ],
+  "must_reject": [
+    "field consensus",
+    "literature synthesis complete",
+    "study findings verified"
+  ],
+  "must_remain_uncertain": [
+    "Full text is not available",
+    "Abstract-only packets cannot support synthesis"
+  ]
+}

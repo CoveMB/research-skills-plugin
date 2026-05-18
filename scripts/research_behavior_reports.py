@@ -9,7 +9,9 @@ from check_research_behavior_fixtures import (
     fixture_identifier,
     is_compact_fixture,
     output_path_for_fixture,
+    trace_path_for_fixture,
     validate_output_for_fixture,
+    validate_trace_for_fixture,
 )
 
 
@@ -42,6 +44,34 @@ def output_validation_errors(outputs_dir: Path, fixtures: list[dict[str, Any]]) 
         error
         for fixture in fixtures
         for error in validate_output_for_fixture(outputs_dir, fixture)
+    ]
+
+
+def present_trace_identifiers(traces_dir: Path, fixtures: list[dict[str, Any]]) -> list[str]:
+    return [
+        fixture_identifier(fixture)
+        for fixture in fixtures
+        if trace_path_for_fixture(traces_dir, fixture).exists()
+    ]
+
+
+def missing_trace_identifiers(traces_dir: Path, fixtures: list[dict[str, Any]]) -> list[str]:
+    return [
+        fixture_identifier(fixture)
+        for fixture in fixtures
+        if not trace_path_for_fixture(traces_dir, fixture).exists()
+    ]
+
+
+def trace_validation_errors(
+    traces_dir: Path,
+    fixtures: list[dict[str, Any]],
+    outputs_dir: Path | None = None,
+) -> list[str]:
+    return [
+        error
+        for fixture in fixtures
+        for error in validate_trace_for_fixture(traces_dir, fixture, outputs_dir)
     ]
 
 
@@ -82,4 +112,26 @@ def output_summary(outputs_dir: Path | None, fixtures: list[dict[str, Any]]) -> 
         "present": present_output_identifiers(outputs_dir, fixtures),
         "missing": missing_output_identifiers(outputs_dir, fixtures),
         "validation_errors": output_validation_errors(outputs_dir, fixtures),
+    }
+
+
+def trace_summary(
+    traces_dir: Path | None,
+    fixtures: list[dict[str, Any]],
+    outputs_dir: Path | None = None,
+) -> dict[str, Any]:
+    if traces_dir is None:
+        return {
+            "checked": False,
+            "present": [],
+            "missing": [],
+            "validation_errors": [],
+        }
+
+    return {
+        "checked": True,
+        "directory": str(traces_dir),
+        "present": present_trace_identifiers(traces_dir, fixtures),
+        "missing": missing_trace_identifiers(traces_dir, fixtures),
+        "validation_errors": trace_validation_errors(traces_dir, fixtures, outputs_dir),
     }

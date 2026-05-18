@@ -148,12 +148,14 @@ class TestRunLiveCapture(unittest.TestCase):
             prompt_path = output_root / "prompts" / "unsupported-causal-claim.md"
             score_template_path = output_root / "score-templates" / "unsupported-causal-claim.json"
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            score_template = json.loads(score_template_path.read_text(encoding="utf-8"))
             prompt_packet = prompt_path.read_text(encoding="utf-8")
 
             self.assertEqual(output_path.read_text(encoding="utf-8"), captured_output.read_text(encoding="utf-8"))
             self.assertEqual(manifest["capture_mode"], "manual-live-capture")
             self.assertEqual(manifest["model"], "gpt-test-scholar")
             self.assertEqual(manifest["output_sha256"], sha256_file(output_path))
+            self.assertEqual(score_template["reviewed_output_sha256"], sha256_file(output_path))
             self.assertEqual(manifest["source_packet"], "corpora/unsupported-causal-claim/source-packet.md")
             self.assertEqual(manifest["structured_result"]["decision"], "Cannot support")
             self.assertNotIn("trace_file", manifest)

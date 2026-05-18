@@ -1,0 +1,10 @@
+{
+  "fixture_id": "extraction-table-uneven-source-notes",
+  "output_captured": true,
+  "output_sha256": "9567ea51222ca9bab49373155d4bdede48c684ecc0ed7bb92cbd77be565aab6f",
+  "prompt_sha256": "9fb5f9e3575d632168f28c0625a727b40b39008643495f3fd7bb82b5b31bbe9a",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "extraction-table-builder",
+  "skill_invoked": true
+}

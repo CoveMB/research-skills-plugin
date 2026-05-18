@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "frame-lock-preferred-thesis",
+  "must_support": [
+    "The packet can support a hypothesis-generation step, not a defensible literature position."
+  ],
+  "must_reject": [
+    "thesis is confirmed",
+    "opposing literature ruled out",
+    "no rival explanations"
+  ],
+  "must_remain_uncertain": [
+    "No opposing-literature search is visible",
+    "The corpus only tests the preferred thesis"
+  ]
+}

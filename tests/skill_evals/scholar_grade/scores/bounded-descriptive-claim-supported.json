@@ -1,0 +1,30 @@
+{
+  "schema_version": "scholar-grade-review-score-v1",
+  "fixture_id": "bounded-descriptive-claim-supported",
+  "reviewer": "fixture-reviewer",
+  "date": "2026-05-17",
+  "hard_fail_triggered": false,
+  "reviewed_output_sha256": "ebe985a05f112bfb56358e890e9884083e408d488665eef2001f21c0e0cb4972",
+  "dimension_scores": {
+    "supportability discrimination": 4,
+    "source-anchor use": 4,
+    "overclaim avoidance": 4,
+    "uncertainty visibility": 4,
+    "useful next action": 4
+  },
+  "dimension_rationales": {
+    "supportability discrimination": "Reviewed output score 4 for supportability discrimination: the output supports the bounded descriptive claim while preserving the hidden answer-key limits.",
+    "source-anchor use": "Reviewed output score 4 for source-anchor use: the output supports the bounded descriptive claim while preserving the hidden answer-key limits.",
+    "overclaim avoidance": "Reviewed output score 4 for overclaim avoidance: the output supports the bounded descriptive claim while preserving the hidden answer-key limits.",
+    "uncertainty visibility": "Reviewed output score 4 for uncertainty visibility: the output supports the bounded descriptive claim while preserving the hidden answer-key limits.",
+    "useful next action": "Reviewed output score 4 for useful next action: the output supports the bounded descriptive claim while preserving the hidden answer-key limits."
+  },
+  "evidence_notes": [
+    "Reviewer checked that the output uses participant-description and bottleneck-visibility anchors without converting them into outcome effects.",
+    "Reviewer confirmed the output names missing outcome metrics and comparison evidence before stronger claims."
+  ],
+  "answer_key_findings": [
+    "The output includes the must_support bounded descriptive claim, rejects must_reject effect claims, and keeps must_remain_uncertain limits visible."
+  ],
+  "rationale": "Reference output distinguishes supportable bounded description from unsupported effectiveness or causal claims."
+}

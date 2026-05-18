@@ -1,0 +1,28 @@
+{
+  "date": "TODO_YYYY-MM-DD",
+  "dimension_scores": {
+    "hallucinated-result detection": "TODO_0_TO_5",
+    "numeric provenance": "TODO_0_TO_5",
+    "repair specificity": "TODO_0_TO_5",
+    "uncertainty visibility": "TODO_0_TO_5"
+  },
+  "fixture_id": "hallucinated-result-without-run-log",
+  "hard_fail_triggered": "TODO_BOOLEAN",
+  "minimum_score": 4,
+  "rationale": "TODO_RATIONALE",
+  "reviewer": "TODO_REVIEWER",
+  "schema_version": "scholar-grade-review-score-v1",
+  "reviewed_output_sha256": "TODO_AFTER_CAPTURE",
+  "dimension_rationales": {
+    "hallucinated-result detection": "TODO_RATIONALE",
+    "numeric provenance": "TODO_RATIONALE",
+    "repair specificity": "TODO_RATIONALE",
+    "uncertainty visibility": "TODO_RATIONALE"
+  },
+  "evidence_notes": [
+    "TODO_EVIDENCE_NOTE"
+  ],
+  "answer_key_findings": [
+    "TODO_ANSWER_KEY_FINDING"
+  ]
+}

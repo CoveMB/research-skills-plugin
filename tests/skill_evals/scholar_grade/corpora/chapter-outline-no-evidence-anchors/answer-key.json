@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "chapter-outline-no-evidence-anchors",
+  "must_support": [
+    "The outline can be converted into a claim-and-function map pending evidence anchors."
+  ],
+  "must_reject": [
+    "chapter ready",
+    "evidence anchors complete",
+    "section claims verified"
+  ],
+  "must_remain_uncertain": [
+    "Evidence anchors are missing",
+    "Section purposes are topic labels only"
+  ]
+}

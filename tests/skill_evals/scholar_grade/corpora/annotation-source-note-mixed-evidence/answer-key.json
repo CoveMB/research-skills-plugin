@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "annotation-source-note-mixed-evidence",
+  "must_support": [
+    "The note can preserve visible source language while labeling unsupported interpretation separately."
+  ],
+  "must_reject": [
+    "locator inferred",
+    "quote verified",
+    "page confirmed"
+  ],
+  "must_remain_uncertain": [
+    "Locator is missing for at least one quote",
+    "Reader interpretation is not source evidence"
+  ]
+}

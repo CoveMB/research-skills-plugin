@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "prose-edit-strict-meaning-preservation",
+  "must_support": [
+    "Interview notes describe staff using the dashboard to spot recurring bottlenecks."
+  ],
+  "must_reject": [
+    "dashboards reduced congestion",
+    "meaning was softened without source need",
+    "congestion outcomes improved"
+  ],
+  "must_remain_uncertain": [
+    "The packet does not measure congestion outcomes",
+    "Only the interview-note description is supportable"
+  ]
+}

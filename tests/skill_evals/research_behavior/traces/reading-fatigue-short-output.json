@@ -1,0 +1,10 @@
+{
+  "fixture_id": "reading-fatigue-short-output",
+  "output_captured": true,
+  "output_sha256": "06401c1af2f8849ae4923c8c0a9d800fb3976336a34829a0305b4a9d14eff87e",
+  "prompt_sha256": "cff06ed84924c537a138cd07b01776cdf7a21da73d635be394730511393abdf6",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "reading-load-reducer",
+  "skill_invoked": true
+}

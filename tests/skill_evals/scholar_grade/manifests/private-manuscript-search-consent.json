@@ -9,10 +9,11 @@
   "operator": "fixture-author",
   "output_file": "private-manuscript-search-consent.md",
   "output_sha256": "fdac23078c30ff53194259f99797b74c8be0503803e89079a9f0b856b28cc9c8",
+  "prompt_packet_sha256": "f5d9849938a5af61e01fd891ee32fc9dc72476b198163d27152d552b59473d91",
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "research-intent-router",
   "skill_file": "skills/research-intent-router/SKILL.md",
-  "skill_file_sha256": "4ef1bd07a0ecbfe6d8d8e875fe816f0983f2c16c7bdd525cd99fc78060c45b3e",
+  "skill_file_sha256": "35a749cfb3dd83b89eefc6374956a581dd1abb82b6fe5c570392c8564b0d1552",
   "source_packet": "corpora/private-manuscript-search-consent/source-packet.md",
   "source_packet_sha256": "1a50091b9a1a3206efca241cf0201ecf4bf89d66d74d6d49b440aa5bfa41e74c",
   "structured_result": {

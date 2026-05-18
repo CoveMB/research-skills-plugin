@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "claim-ledger-mixed-claim-types",
+  "must_support": [
+    "The ledger can classify claims and identify evidence needs."
+  ],
+  "must_reject": [
+    "citation verification passed",
+    "source supports every claim",
+    "all claims evidenced"
+  ],
+  "must_remain_uncertain": [
+    "Some claims have no supplied evidence",
+    "Normative claims need warrant clarity"
+  ]
+}

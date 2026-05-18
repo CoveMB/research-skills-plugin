@@ -553,6 +553,13 @@ class TestExecutableSafeguards(unittest.TestCase):
         self.assertIn("check_source_candidates.py", text)
         self.assertIn("tests/skill_evals/source-candidates.json", text)
 
+    def test_full_validation_runner_checks_research_behavior_route_traces(self) -> None:
+        text = (SCRIPTS_DIR / "run_package_checks.py").read_text(encoding="utf-8")
+
+        self.assertIn("summarize_research_behavior_evals.py", text)
+        self.assertIn("--traces-dir", text)
+        self.assertIn("tests/skill_evals/research_behavior/traces", text)
+
     def test_skill_evaluation_assets_live_under_tests(self) -> None:
         expected_paths = [
             ROOT / "tests" / "skill_evals" / "README.md",
@@ -581,6 +588,58 @@ class TestExecutableSafeguards(unittest.TestCase):
 
         self.assertIn('"live"', text)
         self.assertIn("--require-live-captures", text)
+
+    def test_validation_runner_exposes_additive_live_pilot_scope(self) -> None:
+        text = (SCRIPTS_DIR / "run_package_checks.py").read_text(encoding="utf-8")
+
+        self.assertIn('"live-pilot"', text)
+        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_calibration.py", text)
+        self.assertIn("tests/skill_evals/scholar_grade/live_pilot/fixture-ids.json", text)
+        self.assertIn("tests/skill_evals/scholar_grade/live_pilot", text)
+        self.assertIn("markdown", text)
+
+    def test_validation_runner_exposes_additive_live_pilot_v2_scope(self) -> None:
+        text = (SCRIPTS_DIR / "run_package_checks.py").read_text(encoding="utf-8")
+
+        self.assertIn('"live-pilot-v2"', text)
+        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v2/outputs", text)
+        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v2/manifests", text)
+        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v2/scores", text)
+        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v2/fixture-ids.json", text)
+
+    def test_full_validation_runner_checks_live_pilot_calibration_report(self) -> None:
+        text = (SCRIPTS_DIR / "run_package_checks.py").read_text(encoding="utf-8")
+
+        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_calibration.py", text)
+        self.assertIn("--quiet", text)
+
+    def test_full_validation_runner_enforces_calibrated_live_pilot_v2(self) -> None:
+        module = load_module("run_package_checks.py")
+        full_check_text = "\n".join(" ".join(check) for check in module.checks_for_scope("full"))
+
+        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v2/fixture-ids.json", full_check_text)
+        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v2", full_check_text)
+        self.assertIn("--strict", full_check_text)
+
+    def test_live_pilot_plan_matches_validation_runner_fixture_ids(self) -> None:
+        plan_path = ROOT / "tests" / "skill_evals" / "scholar_grade" / "live_pilot" / "fixture-ids.json"
+        plan = json.loads(plan_path.read_text(encoding="utf-8"))
+        text = (SCRIPTS_DIR / "run_package_checks.py").read_text(encoding="utf-8")
+
+        self.assertEqual(plan["schema_version"], "scholar-grade-live-pilot-v1")
+        self.assertEqual(plan["artifact_root"], "tests/skill_evals/scholar_grade/live_pilot")
+        for fixture_id in plan["fixture_ids"]:
+            self.assertIn(f'"{fixture_id}"', text)
+
+    def test_live_pilot_v2_plan_matches_validation_runner_fixture_ids(self) -> None:
+        plan_path = ROOT / "tests" / "skill_evals" / "scholar_grade" / "live_pilot_v2" / "fixture-ids.json"
+        plan = json.loads(plan_path.read_text(encoding="utf-8"))
+        text = (SCRIPTS_DIR / "run_package_checks.py").read_text(encoding="utf-8")
+
+        self.assertEqual(plan["schema_version"], "scholar-grade-live-pilot-v1")
+        self.assertEqual(plan["artifact_root"], "tests/skill_evals/scholar_grade/live_pilot_v2")
+        for fixture_id in plan["fixture_ids"]:
+            self.assertIn(f'"{fixture_id}"', text)
 
     def test_readme_describes_skill_evaluation_strategy(self) -> None:
         text = (ROOT / "README.md").read_text(encoding="utf-8")
@@ -656,8 +715,9 @@ class TestExecutableSafeguards(unittest.TestCase):
                 "--fixtures",
             ],
             "summarize_research_behavior_evals.py": [
-                "Summarize local research behavior fixture coverage and captured outputs.",
+                "Summarize local research behavior fixture coverage, outputs, and traces.",
                 "--outputs-dir",
+                "--traces-dir",
             ],
             "research_behavior_eval_harness.py": [
                 "Build a deterministic research behavior evaluation harness report.",

@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "discovery-dedupe-fuzzy-export",
+  "must_support": [
+    "The export can be clustered by exact identifiers and flagged fuzzy matches."
+  ],
+  "must_reject": [
+    "metadata completed from memory",
+    "planned search completed",
+    "duplicates resolved automatically"
+  ],
+  "must_remain_uncertain": [
+    "One search is planned but not run",
+    "Fuzzy title matches need human confirmation"
+  ]
+}

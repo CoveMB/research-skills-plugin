@@ -1,0 +1,10 @@
+{
+  "fixture_id": "prisma-style-search-plan",
+  "output_captured": true,
+  "output_sha256": "bb45c354fafee959627fd58379ef0916772133690398957503db097e25ee3fe5",
+  "prompt_sha256": "3bb9ca8dfafb4a8dd134747d3dc8b769776d3b8c2ba021c3927aa8a3c10eea7f",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "systematic-source-discovery",
+  "skill_invoked": true
+}

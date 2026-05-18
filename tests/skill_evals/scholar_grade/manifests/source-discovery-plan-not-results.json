@@ -9,6 +9,7 @@
   "operator": "fixture-author",
   "output_file": "source-discovery-plan-not-results.md",
   "output_sha256": "3b2a12e8a4245ee90f612283398eacaacd8ef1a75d702bfbab4fe68b005cdaed",
+  "prompt_packet_sha256": "6527b53e85068a50da21bed6c6245323037a81c839e9ddfd4f488c4e4c346f91",
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "systematic-source-discovery",
   "skill_file": "skills/systematic-source-discovery/SKILL.md",

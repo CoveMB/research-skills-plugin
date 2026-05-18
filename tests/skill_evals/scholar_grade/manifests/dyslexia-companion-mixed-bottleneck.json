@@ -9,6 +9,7 @@
   "operator": "fixture-author",
   "output_file": "dyslexia-companion-mixed-bottleneck.md",
   "output_sha256": "132347478714ea648ea6ed72b3d79e56edd00d2e035370866ee13eb2467c6146",
+  "prompt_packet_sha256": "24049b5bcf4b2023e92841d3e2bed1b52e709492680044440d73c8e0cfde8500",
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "dyslexia-research-companion",
   "skill_file": "skills/dyslexia-research-companion/SKILL.md",

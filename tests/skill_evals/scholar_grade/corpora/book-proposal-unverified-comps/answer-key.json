@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "book-proposal-unverified-comps",
+  "must_support": [
+    "The proposal language can be strengthened while marking comps and audience claims as provisional."
+  ],
+  "must_reject": [
+    "market verified",
+    "comps confirmed",
+    "press fit proven"
+  ],
+  "must_remain_uncertain": [
+    "Comparable-title metadata is not verified",
+    "Audience claim basis is not supplied"
+  ]
+}

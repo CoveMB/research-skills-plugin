@@ -9,10 +9,11 @@
   "operator": "fixture-author",
   "output_file": "public-metadata-only-citation-check.md",
   "output_sha256": "9791c99320088fb99062f5c1c754657daa691adb9d5eb5cfc9fd03577db0ee24",
+  "prompt_packet_sha256": "0aa86810d100cdeaff023ef0f9866e4c8a6335a673d74955f85b10501e8b3082",
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "citation-integrity-auditor",
   "skill_file": "skills/citation-integrity-auditor/SKILL.md",
-  "skill_file_sha256": "206bf1e108f12b8a67f53adf5cec4f25d83e636141e0eca6e7444a1745866384",
+  "skill_file_sha256": "0c4c7f36634f196d8979615e24f20894ca02dd99c930bb377ba3ee902fb57f2d",
   "source_packet": "corpora/public-metadata-only-citation-check/source-packet.md",
   "source_packet_sha256": "fd986e28c8fe93b1c9598ef88d3411ecb74b86b54af0d1f17bf8d769bcc78365",
   "structured_result": {

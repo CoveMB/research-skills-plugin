@@ -38,8 +38,29 @@ def string_list(value: Any) -> list[str]:
     return [item for item in value if isinstance(item, str)]
 
 
+def selected_fixture_ids(fixture_ids: list[str] | None) -> set[str] | None:
+    if not fixture_ids:
+        return None
+    return {fixture_id for fixture_id in fixture_ids if fixture_id}
+
+
+def select_fixtures(document: dict[str, Any], fixture_ids: list[str] | None) -> tuple[list[dict[str, Any]], list[str]]:
+    fixtures = fixture_list(document)
+    requested = selected_fixture_ids(fixture_ids)
+    if requested is None:
+        return fixtures, []
+    selected = [fixture for fixture in fixtures if fixture_identifier(fixture) in requested]
+    found = {fixture_identifier(fixture) for fixture in selected}
+    missing = sorted(requested - found)
+    return selected, [f"unknown fixture id: {fixture_id}" for fixture_id in missing]
+
+
 def sha256_file(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def sha256_text(text: str) -> str:
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
 def source_packet_path(fixture_path: Path, fixture: dict[str, Any]) -> Path:
@@ -86,16 +107,24 @@ def capture_from_fixture(fixture_path: Path, root: Path, fixture: dict[str, Any]
     }
 
 
-def build_capture_plan(fixture_path: Path, root: Path = ROOT) -> dict[str, Any]:
+def build_capture_plan(
+    fixture_path: Path,
+    root: Path = ROOT,
+    fixture_ids: list[str] | None = None,
+) -> dict[str, Any]:
     document = read_json_object(fixture_path)
+    fixtures, selection_errors = select_fixtures(document, fixture_ids)
+    if selection_errors:
+        raise ValueError("; ".join(selection_errors))
     captures = [
         capture_from_fixture(fixture_path, root, fixture)
-        for fixture in fixture_list(document)
+        for fixture in fixtures
     ]
     return {
         "schema_version": "scholar-grade-live-capture-plan-v1",
         "purpose": "Operator-facing plan for live or manual skill captures. Hidden answer keys and expected decisions are intentionally excluded.",
         "fixtures": str(fixture_path),
+        "fixture_ids": [fixture_identifier(fixture) for fixture in fixtures],
         "capture_count": len(captures),
         "operator_rules": [
             "Provide only the rendered prompt packet and visible source-packet.md material to the skill.",
@@ -146,6 +175,7 @@ def build_manifest_template(capture: dict[str, Any]) -> dict[str, Any]:
         "operator": "TODO_OPERATOR",
         "source_packet": capture["source_packet"],
         "source_packet_sha256": capture["source_packet_sha256"],
+        "prompt_packet_sha256": sha256_text(render_prompt_packet(capture)),
         "skill_file": capture["skill_file"],
         "skill_file_sha256": capture["skill_file_sha256"],
         "output_file": capture["output_file"],
@@ -166,17 +196,24 @@ def build_manifest_template(capture: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def build_score_template(capture: dict[str, Any]) -> dict[str, Any]:
+def build_score_template(capture: dict[str, Any], reviewed_output_sha256: str = "TODO_AFTER_CAPTURE") -> dict[str, Any]:
     return {
         "schema_version": "scholar-grade-review-score-v1",
         "fixture_id": capture["fixture_id"],
         "reviewer": "TODO_REVIEWER",
         "date": "TODO_YYYY-MM-DD",
         "hard_fail_triggered": "TODO_BOOLEAN",
+        "reviewed_output_sha256": reviewed_output_sha256,
         "dimension_scores": {
             dimension: "TODO_0_TO_5"
             for dimension in capture["rubric_dimensions"]
         },
+        "dimension_rationales": {
+            dimension: "TODO_RATIONALE"
+            for dimension in capture["rubric_dimensions"]
+        },
+        "evidence_notes": ["TODO_EVIDENCE_NOTE"],
+        "answer_key_findings": ["TODO_ANSWER_KEY_FINDING"],
         "minimum_score": capture["minimum_score"],
         "rationale": "TODO_RATIONALE",
     }
@@ -214,8 +251,13 @@ def write_text(path: Path, text: str) -> None:
     path.write_text(text, encoding="utf-8")
 
 
-def write_capture_protocol(fixture_path: Path, output_dir: Path, root: Path = ROOT) -> dict[str, Any]:
-    plan = build_capture_plan(fixture_path, root)
+def write_capture_protocol(
+    fixture_path: Path,
+    output_dir: Path,
+    root: Path = ROOT,
+    fixture_ids: list[str] | None = None,
+) -> dict[str, Any]:
+    plan = build_capture_plan(fixture_path, root, fixture_ids)
     write_json(output_dir / "capture-plan.json", plan)
     write_text(output_dir / "README.md", render_protocol_readme(plan))
     for capture in plan["captures"]:
@@ -297,11 +339,17 @@ def hidden_value_leakage_errors(fixture: dict[str, Any], capture: dict[str, Any]
     return errors
 
 
-def validate_capture_plan(fixture_path: Path, root: Path = ROOT) -> list[str]:
+def validate_capture_plan(
+    fixture_path: Path,
+    root: Path = ROOT,
+    fixture_ids: list[str] | None = None,
+) -> list[str]:
     try:
         document = read_json_object(fixture_path)
-        fixtures = fixture_list(document)
-        plan = build_capture_plan(fixture_path, root)
+        fixtures, selection_errors = select_fixtures(document, fixture_ids)
+        if selection_errors:
+            return selection_errors
+        plan = build_capture_plan(fixture_path, root, fixture_ids)
     except (OSError, ValueError, json.JSONDecodeError) as error:
         return [str(error)]
     errors: list[str] = []
@@ -316,6 +364,7 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     parser.add_argument("--fixtures", type=Path, required=True, help="Scholar-grade fixture JSON file.")
     parser.add_argument("--root", type=Path, default=ROOT, help="Repository root used for skill-file hashes.")
     parser.add_argument("--out-dir", type=Path, help="Directory where capture protocol files should be written.")
+    parser.add_argument("--fixture-id", action="append", help="Limit protocol generation to one fixture id. Repeat for a pilot subset.")
     parser.add_argument("--check", action="store_true", help="Validate the protocol without writing files.")
     return parser.parse_args(argv)
 
@@ -323,7 +372,7 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv or sys.argv[1:])
     root = args.root.resolve()
-    errors = validate_capture_plan(args.fixtures, root)
+    errors = validate_capture_plan(args.fixtures, root, args.fixture_id)
     if errors:
         print("Live capture protocol check failed:")
         for error in errors:
@@ -335,7 +384,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.out_dir is None:
         print("--out-dir is required unless --check is used")
         return 2
-    write_capture_protocol(args.fixtures, args.out_dir, root)
+    write_capture_protocol(args.fixtures, args.out_dir, root, args.fixture_id)
     print(f"Wrote live capture protocol to {args.out_dir}")
     return 0
 

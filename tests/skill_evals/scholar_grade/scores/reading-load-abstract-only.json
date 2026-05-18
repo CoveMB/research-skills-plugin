@@ -2,13 +2,26 @@
   "date": "2026-05-13",
   "dimension_scores": {
     "accessibility triage": 4,
-    "reading-priority usefulness": 4,
     "source-access restraint": 4,
+    "reading-priority usefulness": 4,
     "synthesis prevention": 4
   },
   "fixture_id": "reading-load-abstract-only",
   "hard_fail_triggered": false,
   "rationale": "Reference output meets the controlled-packet rubric at the required scholar-grade threshold without hard-fail behavior.",
   "reviewer": "fixture-reviewer",
-  "schema_version": "scholar-grade-review-score-v1"
+  "schema_version": "scholar-grade-review-score-v1",
+  "reviewed_output_sha256": "f9a35838701179f5917eca19e9dbb5d2be9a203d73f89c2cd34563e49fc6b1f9",
+  "dimension_rationales": {
+    "accessibility triage": "Reviewed output score 4 for accessibility triage: evaluator judgment is tied to the captured output and fixture rubric.",
+    "source-access restraint": "Reviewed output score 4 for source-access restraint: evaluator judgment is tied to the captured output and fixture rubric.",
+    "reading-priority usefulness": "Reviewed output score 4 for reading-priority usefulness: evaluator judgment is tied to the captured output and fixture rubric.",
+    "synthesis prevention": "Reviewed output score 4 for synthesis prevention: evaluator judgment is tied to the captured output and fixture rubric."
+  },
+  "evidence_notes": [
+    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+  ],
+  "answer_key_findings": [
+    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+  ]
 }

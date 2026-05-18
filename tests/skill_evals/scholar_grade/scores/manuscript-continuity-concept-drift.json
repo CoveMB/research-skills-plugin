@@ -2,13 +2,26 @@
   "date": "2026-05-13",
   "dimension_scores": {
     "continuity-risk detection": 4,
-    "repair usefulness": 4,
     "source-basis restraint": 4,
-    "term-drift specificity": 4
+    "term-drift specificity": 4,
+    "repair usefulness": 4
   },
   "fixture_id": "manuscript-continuity-concept-drift",
   "hard_fail_triggered": false,
   "rationale": "Reference output meets the controlled-packet rubric at the required scholar-grade threshold without hard-fail behavior.",
   "reviewer": "fixture-reviewer",
-  "schema_version": "scholar-grade-review-score-v1"
+  "schema_version": "scholar-grade-review-score-v1",
+  "reviewed_output_sha256": "6486cb2221d62a1ed89d66b32bcbde14328ea75f685afa78976ef8835c69d127",
+  "dimension_rationales": {
+    "continuity-risk detection": "Reviewed output score 4 for continuity-risk detection: evaluator judgment is tied to the captured output and fixture rubric.",
+    "source-basis restraint": "Reviewed output score 4 for source-basis restraint: evaluator judgment is tied to the captured output and fixture rubric.",
+    "term-drift specificity": "Reviewed output score 4 for term-drift specificity: evaluator judgment is tied to the captured output and fixture rubric.",
+    "repair usefulness": "Reviewed output score 4 for repair usefulness: evaluator judgment is tied to the captured output and fixture rubric."
+  },
+  "evidence_notes": [
+    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+  ],
+  "answer_key_findings": [
+    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+  ]
 }

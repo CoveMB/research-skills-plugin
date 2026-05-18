@@ -9,6 +9,7 @@
   "operator": "fixture-author",
   "output_file": "book-comps-stale-mismatch.md",
   "output_sha256": "24ab46b6eca5f6a135b556060b4234cd3a877f5fc2b75b0e5f7721e557a19cee",
+  "prompt_packet_sha256": "1546fb987988f528d13857496724ab83671bb71d076c79b3a6d8a46006d41116",
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "book-comps-verifier",
   "skill_file": "skills/book-comps-verifier/SKILL.md",

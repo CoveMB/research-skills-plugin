@@ -1,0 +1,28 @@
+{
+  "schema_version": "scholar-grade-review-score-v1",
+  "fixture_id": "claim-traceability-nearby-citation",
+  "reviewer": "TODO_REVIEWER",
+  "date": "TODO_YYYY-MM-DD",
+  "hard_fail_triggered": "TODO_BOOLEAN",
+  "reviewed_output_sha256": "2f724d92373382d3ea716613f04c809799abeb53ccf2595a2f3ce0f942da9ddf",
+  "dimension_scores": {
+    "trace-link discipline": "TODO_0_TO_5",
+    "claim narrowing": "TODO_0_TO_5",
+    "citation-proximity caution": "TODO_0_TO_5",
+    "repair action usefulness": "TODO_0_TO_5"
+  },
+  "dimension_rationales": {
+    "trace-link discipline": "TODO_RATIONALE",
+    "claim narrowing": "TODO_RATIONALE",
+    "citation-proximity caution": "TODO_RATIONALE",
+    "repair action usefulness": "TODO_RATIONALE"
+  },
+  "evidence_notes": [
+    "TODO_EVIDENCE_NOTE"
+  ],
+  "answer_key_findings": [
+    "TODO_ANSWER_KEY_FINDING"
+  ],
+  "minimum_score": 4,
+  "rationale": "TODO_RATIONALE"
+}

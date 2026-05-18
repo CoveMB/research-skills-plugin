@@ -9,6 +9,7 @@
   "operator": "fixture-author",
   "output_file": "book-orchestrator-unstable-scope.md",
   "output_sha256": "718fbd884ddb09b654336c3ec45f37886f1808a39fcd3f8295dd3e0c5bf5ef73",
+  "prompt_packet_sha256": "a669823c2b7b951ddd28b6f63d7e58bc89d399eac243f6c97bf20f7d44a1135f",
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "research-book-orchestrator",
   "skill_file": "skills/research-book-orchestrator/SKILL.md",

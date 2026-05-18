@@ -1,0 +1,10 @@
+{
+  "fixture_id": "ai-assisted-chapter-release",
+  "output_captured": true,
+  "output_sha256": "63f4b6058ec075c845ba9e5da1b53afb29807a2c5abedbaf074c79e5d79311c7",
+  "prompt_sha256": "bb6b74fc77739df5ac3e485c3a95815d439ee58b0899a21a29df1bd4c4d7d529",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "ai-human-workflow-log",
+  "skill_invoked": true
+}

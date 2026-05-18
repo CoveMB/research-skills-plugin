@@ -10,5 +10,18 @@
   "hard_fail_triggered": false,
   "rationale": "Reference output meets the controlled-packet rubric at the required scholar-grade threshold without hard-fail behavior.",
   "reviewer": "fixture-reviewer",
-  "schema_version": "scholar-grade-review-score-v1"
+  "schema_version": "scholar-grade-review-score-v1",
+  "reviewed_output_sha256": "44e2e2048a8a508f01098986192cb4d14bb0b4dcd5f61cead959d7880a05df84",
+  "dimension_rationales": {
+    "compact-output safety": "Reviewed output score 4 for compact-output safety: evaluator judgment is tied to the captured output and fixture rubric.",
+    "release risk visibility": "Reviewed output score 4 for release risk visibility: evaluator judgment is tied to the captured output and fixture rubric.",
+    "rights and privacy caution": "Reviewed output score 4 for rights and privacy caution: evaluator judgment is tied to the captured output and fixture rubric.",
+    "single next action": "Reviewed output score 4 for single next action: evaluator judgment is tied to the captured output and fixture rubric."
+  },
+  "evidence_notes": [
+    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+  ],
+  "answer_key_findings": [
+    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+  ]
 }

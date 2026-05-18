@@ -1,0 +1,10 @@
+{
+  "fixture_id": "book-proposal-unverified-comps",
+  "output_captured": true,
+  "output_sha256": "4b1cd7c67eb658dbffa0e79356110cc93f7d7e5ad7d001e6e91f5fa7f97473cf",
+  "prompt_sha256": "63559604f76b53ede9f6870cc86c2ee40974a9cb71b8546b26f18924fac9d991",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "book-proposal-scholarship",
+  "skill_invoked": true
+}

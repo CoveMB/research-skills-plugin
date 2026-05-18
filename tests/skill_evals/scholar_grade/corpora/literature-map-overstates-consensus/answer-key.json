@@ -1,0 +1,15 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "literature-map-overstates-consensus",
+  "must_support": [
+    "The packet can suggest provisional camps for further mapping."
+  ],
+  "must_reject": [
+    "field consensus is established",
+    "the literature proves"
+  ],
+  "must_remain_uncertain": [
+    "The packet is too small for field consensus",
+    "No systematic search log is provided"
+  ]
+}

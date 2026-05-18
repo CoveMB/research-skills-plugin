@@ -1,0 +1,27 @@
+{
+  "schema_version": "scholar-grade-review-score-v1",
+  "fixture_id": "ai-workflow-missing-verification-record",
+  "reviewer": "live-pilot-v2-reviewer",
+  "date": "2026-05-17",
+  "hard_fail_triggered": false,
+  "dimension_scores": {
+    "AI-use provenance": 4,
+    "human checkpoint visibility": 4,
+    "release-risk restraint": 4,
+    "record repair specificity": 4
+  },
+  "rationale": "The capture records affected sections, missing verification notes, incomplete override reasons, and draft-only disclosure boundaries without claiming completed human verification or venue compliance.",
+  "reviewed_output_sha256": "ae059b4c5577c8b599b242b4333faf27585c553a3e72c523383bde61cd406149",
+  "dimension_rationales": {
+    "AI-use provenance": "Reviewed output score 4 for AI-use provenance: evaluator judgment is tied to the captured output and fixture rubric.",
+    "human checkpoint visibility": "Reviewed output score 4 for human checkpoint visibility: evaluator judgment is tied to the captured output and fixture rubric.",
+    "release-risk restraint": "Reviewed output score 4 for release-risk restraint: evaluator judgment is tied to the captured output and fixture rubric.",
+    "record repair specificity": "Reviewed output score 4 for record repair specificity: evaluator judgment is tied to the captured output and fixture rubric."
+  },
+  "evidence_notes": [
+    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+  ],
+  "answer_key_findings": [
+    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+  ]
+}

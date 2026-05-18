@@ -159,6 +159,10 @@ Recommend one repair owner only when useful: citation audit, methodology audit, 
 
 ```
 
+## Failure-mode output boundaries
+
+When handling result-bearing or methods-bearing blocker cases, use stable labels that keep integrity limits visible: Source basis, Gate decision: hold, What remains uncertain, User verification needed, Required repair, and Next action. Name the failure mode plainly, such as hallucinated experimental result or methodology fabrication. For missing result provenance, mention raw numbers, run log, and must hold, and include: The percentage can only be treated as an unverified draft claim. For methods provenance gaps, mention run config, preprocessing, and must hold, and include: The method description must be reconciled with actual run records before reliance.
+
 Compact output:
 
 ```markdown

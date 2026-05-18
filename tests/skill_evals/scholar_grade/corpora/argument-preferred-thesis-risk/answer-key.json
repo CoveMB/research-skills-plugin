@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "argument-preferred-thesis-risk",
+  "must_support": [
+    "The packet can support an argument map and dependency-risk list."
+  ],
+  "must_reject": [
+    "thesis proven",
+    "all dependencies secured",
+    "rival explanation ruled out"
+  ],
+  "must_remain_uncertain": [
+    "Participation warrant is not evidenced",
+    "Rival explanation has not been tested"
+  ]
+}

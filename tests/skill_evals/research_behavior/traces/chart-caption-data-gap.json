@@ -1,0 +1,10 @@
+{
+  "fixture_id": "chart-caption-data-gap",
+  "output_captured": true,
+  "output_sha256": "38cbc985f27777deda85ca6879bae3f0c52ae88f1874eaa4b88a8f251675eefe",
+  "prompt_sha256": "bb8d0d7171038a91b23b1ef9966430724a3214804b5f61d00e39c9943fe896bf",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "figure-table-integrity-auditor",
+  "skill_invoked": true
+}

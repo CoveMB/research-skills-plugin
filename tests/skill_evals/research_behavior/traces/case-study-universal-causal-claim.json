@@ -1,0 +1,10 @@
+{
+  "fixture_id": "case-study-universal-causal-claim",
+  "output_captured": true,
+  "output_sha256": "aac4eefe9b75ae39fffac81c5396b5c365d472cb9e76d094cbe6f9b757f6e629",
+  "prompt_sha256": "02f621f149cc8eb3716c65db5cf5d3ff46d675ce82eb7fcfce7e4f7939b059dc",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "case-study-integration",
+  "skill_invoked": true
+}

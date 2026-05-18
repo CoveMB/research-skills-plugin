@@ -1,0 +1,30 @@
+{
+  "date": "2026-05-17",
+  "dimension_scores": {
+    "source-basis clarity": 4,
+    "claim/evidence fit": 4,
+    "fabrication avoidance": 4,
+    "uncertainty visibility": 4,
+    "useful next action": 4
+  },
+  "fixture_id": "unsupported-causal-claim",
+  "hard_fail_triggered": false,
+  "minimum_score": 4,
+  "rationale": "The blind live output rejects the causal claim, limits support to the packet's descriptive observation, lists missing methodology evidence, and asks for source and design details.",
+  "reviewer": "live-pilot-reviewer",
+  "schema_version": "scholar-grade-review-score-v1",
+  "reviewed_output_sha256": "449467848ecf26e7438ad35280791177e3ad011fee948f79e0512512e08596a7",
+  "dimension_rationales": {
+    "source-basis clarity": "Reviewed output score 4 for source-basis clarity: evaluator judgment is tied to the captured output and fixture rubric.",
+    "claim/evidence fit": "Reviewed output score 4 for claim/evidence fit: evaluator judgment is tied to the captured output and fixture rubric.",
+    "fabrication avoidance": "Reviewed output score 4 for fabrication avoidance: evaluator judgment is tied to the captured output and fixture rubric.",
+    "uncertainty visibility": "Reviewed output score 4 for uncertainty visibility: evaluator judgment is tied to the captured output and fixture rubric.",
+    "useful next action": "Reviewed output score 4 for useful next action: evaluator judgment is tied to the captured output and fixture rubric."
+  },
+  "evidence_notes": [
+    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+  ],
+  "answer_key_findings": [
+    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+  ]
+}

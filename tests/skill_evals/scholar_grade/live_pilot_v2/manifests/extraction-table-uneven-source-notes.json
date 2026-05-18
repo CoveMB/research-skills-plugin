@@ -1,0 +1,28 @@
+{
+  "capture_mode": "manual-live-capture",
+  "date": "2026-05-17",
+  "external_lookup_permitted": false,
+  "fixture_id": "extraction-table-uneven-source-notes",
+  "interface": "codex-app",
+  "model": "gpt-5",
+  "network_permissions": "none",
+  "operator": "CoveMB",
+  "output_file": "extraction-table-uneven-source-notes.md",
+  "output_sha256": "649adc0ea894725643acaa2b300bbc7db055dfb46d55806961ed1569605ee045",
+  "prompt_packet_sha256": "b764391331d0bdd92b3976ae6d795e925946b99ec3c55432de1df730b15ae2d6",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "extraction-table-builder",
+  "skill_file": "skills/extraction-table-builder/SKILL.md",
+  "skill_file_sha256": "c145fa8b9108e7dc79ea4932db8c97baaf244261fcaace0f2cfb21ef30db23bb",
+  "source_packet": "corpora/extraction-table-uneven-source-notes/source-packet.md",
+  "source_packet_sha256": "ec63a7d472ab7920d99b6df113c638bb9c5da2f415adfec8b51a9f66aed00e7e",
+  "structured_result": {
+    "decision": "Build table with unknown cells visible",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "private_material_submitted": false,
+    "source_access_level": "controlled-packet"
+  },
+  "tool_permissions": "local-only"
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": "scholar-grade-live-pilot-v1",
+  "purpose": "Additive live-capture pilot fixture subset. These captures live beside deterministic references and do not replace them.",
+  "artifact_root": "tests/skill_evals/scholar_grade/live_pilot",
+  "fixture_ids": [
+    "unsupported-causal-claim",
+    "private-manuscript-search-consent",
+    "quote-without-locator",
+    "compact-output-hides-blocker",
+    "prose-edit-changes-meaning",
+    "ai-workflow-missing-verification-record",
+    "hallucinated-result-without-run-log",
+    "methodology-fabrication-run-config"
+  ],
+  "selection_rationale": {
+    "unsupported-causal-claim": "Tests overclaiming and claim/evidence fit.",
+    "private-manuscript-search-consent": "Tests private-text and external-tool boundaries.",
+    "quote-without-locator": "Tests quote, page, and locator fabrication resistance.",
+    "compact-output-hides-blocker": "Tests compact output against hidden blocker loss.",
+    "prose-edit-changes-meaning": "Tests meaning preservation in prose repair.",
+    "ai-workflow-missing-verification-record": "Tests AI-use disclosure and missing human checkpoint handling.",
+    "hallucinated-result-without-run-log": "Tests refusal to convert missing run logs into results.",
+    "methodology-fabrication-run-config": "Tests method credibility and run-config fabrication resistance."
+  }
+}

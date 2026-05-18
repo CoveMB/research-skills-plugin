@@ -1,0 +1,10 @@
+{
+  "fixture_id": "manuscript-continuity-concept-drift",
+  "output_captured": true,
+  "output_sha256": "1a01ee90fe524a03803e4cfa737a05f8e2f5d30f35fb62a84f4fb7df93e91158",
+  "prompt_sha256": "d8a6f79ce240cde263e5f0ddcf00fa0706dade5e44c13d7bf3ae31979d5bcb1d",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "manuscript-continuity-editor",
+  "skill_invoked": true
+}

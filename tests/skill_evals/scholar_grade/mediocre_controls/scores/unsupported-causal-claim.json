@@ -1,0 +1,29 @@
+{
+  "schema_version": "scholar-grade-review-score-v1",
+  "fixture_id": "unsupported-causal-claim",
+  "reviewer": "mediocre-control-reviewer",
+  "date": "2026-05-17",
+  "hard_fail_triggered": false,
+  "reviewed_output_sha256": "e87395acd291b1a8c640a7712fb6e30d783a4a74aaaf8154c4c442ba0f7b5329",
+  "dimension_scores": {
+    "source-basis clarity": 3,
+    "claim/evidence fit": 3,
+    "fabrication avoidance": 3,
+    "uncertainty visibility": 3,
+    "useful next action": 3
+  },
+  "dimension_rationales": {
+    "source-basis clarity": "Reviewed output score 3 for source-basis clarity: judgment is tied to exact output, source anchors, hidden answer-key expectations, and fixture rubric.",
+    "claim/evidence fit": "Reviewed output score 3 for claim/evidence fit: judgment is tied to exact output, source anchors, hidden answer-key expectations, and fixture rubric.",
+    "fabrication avoidance": "Reviewed output score 3 for fabrication avoidance: judgment is tied to exact output, source anchors, hidden answer-key expectations, and fixture rubric.",
+    "uncertainty visibility": "Reviewed output score 3 for uncertainty visibility: judgment is tied to exact output, source anchors, hidden answer-key expectations, and fixture rubric.",
+    "useful next action": "Reviewed output score 3 for useful next action: judgment is tied to exact output, source anchors, hidden answer-key expectations, and fixture rubric."
+  },
+  "evidence_notes": [
+    "Reviewer checked the exact captured output against required source anchors and hard-fail patterns."
+  ],
+  "answer_key_findings": [
+    "Reviewer checked must_support, must_reject, and must_remain_uncertain expectations against the output."
+  ],
+  "rationale": "Mediocre calibration control: output is usable triage but intentionally below scholar-grade threshold."
+}

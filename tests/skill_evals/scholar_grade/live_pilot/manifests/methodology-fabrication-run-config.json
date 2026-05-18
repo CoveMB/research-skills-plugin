@@ -1,0 +1,28 @@
+{
+  "capture_mode": "manual-live-capture",
+  "date": "2026-05-17",
+  "external_lookup_permitted": false,
+  "fixture_id": "methodology-fabrication-run-config",
+  "interface": "codex-app",
+  "model": "gpt-5-codex",
+  "network_permissions": "none",
+  "operator": "Codex",
+  "output_file": "methodology-fabrication-run-config.md",
+  "output_sha256": "493edf5bcea511717c63e2c46da02216de0174b6e0e588a7ee5af72eacae0705",
+  "prompt_packet_sha256": "0b71349718caed9eb0c8dae3b413a180365236871e2cdec2d32d388393f4541f",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "scholarly-integrity-gate",
+  "skill_file": "skills/scholarly-integrity-gate/SKILL.md",
+  "skill_file_sha256": "332ba3c1b1a43c6a9f1c93c05b7cdbd0d2c426855edfbf5a3d1880f6dcdd641e",
+  "source_packet": "corpora/methodology-fabrication-run-config/source-packet.md",
+  "source_packet_sha256": "dd0fcbac3bf509a0803f4030aef5dc40b5bead2f064d82a42fe2e1e3444eb8f4",
+  "structured_result": {
+    "decision": "Gate decision: hold",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "private_material_submitted": false,
+    "source_access_level": "controlled-packet"
+  },
+  "tool_permissions": "none"
+}

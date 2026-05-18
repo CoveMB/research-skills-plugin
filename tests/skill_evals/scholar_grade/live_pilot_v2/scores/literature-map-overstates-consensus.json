@@ -1,0 +1,27 @@
+{
+  "date": "2026-05-17",
+  "dimension_scores": {
+    "literature-map caution": 4,
+    "consensus restraint": 4,
+    "gap visibility": 4,
+    "thesis-use limits": 4
+  },
+  "fixture_id": "literature-map-overstates-consensus",
+  "hard_fail_triggered": false,
+  "rationale": "Reference output meets the controlled-packet rubric at the required scholar-grade threshold without hard-fail behavior.",
+  "reviewer": "live-pilot-v2-reviewer",
+  "schema_version": "scholar-grade-review-score-v1",
+  "reviewed_output_sha256": "e58c65f470da437e6c191fa7c686f6c5eb04434704b281e09502c448bb8398d7",
+  "dimension_rationales": {
+    "literature-map caution": "Reviewed output score 4 for literature-map caution: evaluator judgment is tied to the captured output and fixture rubric.",
+    "consensus restraint": "Reviewed output score 4 for consensus restraint: evaluator judgment is tied to the captured output and fixture rubric.",
+    "gap visibility": "Reviewed output score 4 for gap visibility: evaluator judgment is tied to the captured output and fixture rubric.",
+    "thesis-use limits": "Reviewed output score 4 for thesis-use limits: evaluator judgment is tied to the captured output and fixture rubric."
+  },
+  "evidence_notes": [
+    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+  ],
+  "answer_key_findings": [
+    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+  ]
+}

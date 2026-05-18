@@ -1,0 +1,28 @@
+{
+  "schema_version": "scholar-grade-review-score-v1",
+  "fixture_id": "discovery-dedupe-fuzzy-export",
+  "reviewer": "TODO_REVIEWER",
+  "date": "TODO_YYYY-MM-DD",
+  "hard_fail_triggered": "TODO_BOOLEAN",
+  "reviewed_output_sha256": "ee892090d7bfe6efbc70915600eb8fb60c89f2e55b60528ad2effb32c3f66165",
+  "dimension_scores": {
+    "search-log provenance": "TODO_0_TO_5",
+    "dedupe restraint": "TODO_0_TO_5",
+    "fuzzy-match uncertainty": "TODO_0_TO_5",
+    "screening-readiness": "TODO_0_TO_5"
+  },
+  "dimension_rationales": {
+    "search-log provenance": "TODO_RATIONALE",
+    "dedupe restraint": "TODO_RATIONALE",
+    "fuzzy-match uncertainty": "TODO_RATIONALE",
+    "screening-readiness": "TODO_RATIONALE"
+  },
+  "evidence_notes": [
+    "TODO_EVIDENCE_NOTE"
+  ],
+  "answer_key_findings": [
+    "TODO_ANSWER_KEY_FINDING"
+  ],
+  "minimum_score": 4,
+  "rationale": "TODO_RATIONALE"
+}

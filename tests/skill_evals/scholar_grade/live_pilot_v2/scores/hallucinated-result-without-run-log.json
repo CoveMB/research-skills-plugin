@@ -1,0 +1,27 @@
+{
+  "schema_version": "scholar-grade-review-score-v1",
+  "fixture_id": "hallucinated-result-without-run-log",
+  "reviewer": "live-pilot-v2-reviewer",
+  "date": "2026-05-17",
+  "hard_fail_triggered": false,
+  "dimension_scores": {
+    "hallucinated-result detection": 4,
+    "numeric provenance": 4,
+    "uncertainty visibility": 4,
+    "repair specificity": 4
+  },
+  "rationale": "The capture holds the 12% result as unverified, names missing raw numbers and run records, and requires recomputation from provenance before manuscript reliance.",
+  "reviewed_output_sha256": "04d9afd00675ef7b6e513acd660771dd28694cf3ea9c349eb614ade2ae447bce",
+  "dimension_rationales": {
+    "hallucinated-result detection": "Reviewed output score 4 for hallucinated-result detection: evaluator judgment is tied to the captured output and fixture rubric.",
+    "numeric provenance": "Reviewed output score 4 for numeric provenance: evaluator judgment is tied to the captured output and fixture rubric.",
+    "uncertainty visibility": "Reviewed output score 4 for uncertainty visibility: evaluator judgment is tied to the captured output and fixture rubric.",
+    "repair specificity": "Reviewed output score 4 for repair specificity: evaluator judgment is tied to the captured output and fixture rubric."
+  },
+  "evidence_notes": [
+    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+  ],
+  "answer_key_findings": [
+    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+  ]
+}

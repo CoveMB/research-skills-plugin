@@ -14,6 +14,7 @@ from scholar_grade_eval_harness import (
     build_scholar_grade_report,
     format_markdown_scorecard,
     read_json_object,
+    string_list,
     validate_scholar_grade_fixture_document,
     validate_scholar_grade_outputs,
     validate_scholar_grade_review_scores,
@@ -35,8 +36,16 @@ def fixture(
     source_packet: str = "corpora/unsupported-causal-claim",
     hard_fail_patterns: list[str] | None = None,
     allowed_claims: list[str] | None = None,
+    required_source_anchors: list[str] | None = None,
+    score_anchors: dict[str, dict[str, str]] | None = None,
 ) -> dict[str, object]:
-    return {
+    rubric_dimensions = [
+        "source-basis clarity",
+        "claim/evidence fit",
+        "fabrication avoidance",
+        "uncertainty visibility",
+    ]
+    payload: dict[str, object] = {
         "id": fixture_id,
         "skill": "methodology-source-auditor",
         "prompt": "Can these notes support my causal claim?",
@@ -45,19 +54,25 @@ def fixture(
         "resource_basis": ["ai-research-failure-modes", "claude-skill-best-practices"],
         "expected_decision": "Cannot support",
         "required_output_markers": ["Source basis", "Claim/evidence fit", "Next action"],
+        "required_source_anchors": required_source_anchors or ["controlled packet"],
         "required_uncertainties": ["No method details are available"],
         "allowed_claims": allowed_claims or [],
         "disallowed_claims": ["The notes prove the causal claim."],
         "hard_fail_patterns": hard_fail_patterns or ["(?i)causal claim (is )?verified"],
-        "rubric_dimensions": [
-            "source-basis clarity",
-            "claim/evidence fit",
-            "fabrication avoidance",
-            "uncertainty visibility",
-        ],
+        "rubric_dimensions": rubric_dimensions,
+        "score_anchors": score_anchors
+        or {
+            dimension: {
+                "3": f"Adequate {dimension}.",
+                "4": f"Strong {dimension}.",
+                "5": f"Exemplary {dimension}.",
+            }
+            for dimension in rubric_dimensions
+        },
         "minimum_score": 4,
         "human_review_required": True,
     }
+    return payload
 
 
 def fixture_document(*fixtures: dict[str, object]) -> dict[str, object]:
@@ -88,7 +103,15 @@ def write_resource_registry(root: Path, resources: list[dict[str, object]]) -> P
     return registry_path
 
 
-def write_source_packet(root: Path, packet: str = "corpora/unsupported-causal-claim") -> None:
+def write_source_packet(
+    root: Path,
+    packet: str = "corpora/unsupported-causal-claim",
+    *,
+    include_answer_key_json: bool = True,
+    must_support: list[str] | None = None,
+    must_reject: list[str] | None = None,
+    must_remain_uncertain: list[str] | None = None,
+) -> None:
     packet_path = root / packet
     packet_path.mkdir(parents=True)
     (packet_path / "source-packet.md").write_text(
@@ -111,6 +134,26 @@ def write_source_packet(root: Path, packet: str = "corpora/unsupported-causal-cl
                 "",
                 "- Causal support is unavailable.",
             ]
+        ),
+        encoding="utf-8",
+    )
+    if not include_answer_key_json:
+        return
+    if must_support is None:
+        must_support = []
+    if must_reject is None:
+        must_reject = ["The notes prove the causal claim."]
+    if must_remain_uncertain is None:
+        must_remain_uncertain = ["No method details are available"]
+    (packet_path / "answer-key.json").write_text(
+        json.dumps(
+            {
+                "schema_version": "scholar-grade-answer-key-v1",
+                "fixture_id": Path(packet).name,
+                "must_support": must_support,
+                "must_reject": must_reject,
+                "must_remain_uncertain": must_remain_uncertain,
+            }
         ),
         encoding="utf-8",
     )
@@ -141,6 +184,7 @@ def manifest(
         "operator": "fixture-author",
         "source_packet": "corpora/unsupported-causal-claim/source-packet.md",
         "source_packet_sha256": sha256_text(source_packet_text),
+        "prompt_packet_sha256": sha256_text("prompt packet"),
         "skill_file": f"skills/{skill}/SKILL.md",
         "skill_file_sha256": sha256_text(skill_text),
         "output_file": f"{fixture_id}.md",
@@ -167,6 +211,14 @@ def write_manifest_file(root: Path, payload: dict[str, object]) -> Path:
     return manifests_dir
 
 
+def write_prompt_file(root: Path, fixture_id: str = "unsupported-causal-claim", text: str = "prompt packet") -> Path:
+    prompts_dir = root / "prompts"
+    prompts_dir.mkdir(exist_ok=True)
+    prompt_path = prompts_dir / f"{fixture_id}.md"
+    prompt_path.write_text(text, encoding="utf-8")
+    return prompts_dir
+
+
 def write_trace_file(root: Path, fixture_id: str, payload: dict[str, object]) -> str:
     trace_path = root / "traces" / f"{fixture_id}.json"
     trace_path.parent.mkdir()
@@ -179,20 +231,30 @@ def score(
     fixture_id: str = "unsupported-causal-claim",
     dimensions: dict[str, int] | None = None,
     hard_fail_triggered: bool = False,
+    reviewed_output_sha256: str | None = None,
+    dimension_rationales: dict[str, str] | None = None,
 ) -> dict[str, object]:
+    dimension_scores = dimensions or {
+        "source-basis clarity": 4,
+        "claim/evidence fit": 4,
+        "fabrication avoidance": 4,
+        "uncertainty visibility": 4,
+    }
     return {
         "schema_version": "scholar-grade-review-score-v1",
         "fixture_id": fixture_id,
         "reviewer": "fixture-reviewer",
         "date": "2026-05-13",
         "hard_fail_triggered": hard_fail_triggered,
-        "dimension_scores": dimensions
+        "reviewed_output_sha256": reviewed_output_sha256 or sha256_text("reviewed output"),
+        "dimension_scores": dimension_scores,
+        "dimension_rationales": dimension_rationales
         or {
-            "source-basis clarity": 4,
-            "claim/evidence fit": 4,
-            "fabrication avoidance": 4,
-            "uncertainty visibility": 4,
+            dimension: f"{dimension} meets the controlled-packet rubric."
+            for dimension in dimension_scores
         },
+        "evidence_notes": ["The reviewed output names the controlled packet and preserves the source limitation."],
+        "answer_key_findings": ["The reviewed output rejects must_reject claims and keeps required uncertainties visible."],
         "rationale": "Fixture output meets the controlled-packet rubric without hard-fail behavior.",
     }
 
@@ -213,7 +275,7 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
             fixture_path = write_fixture_file(
                 root,
                 fixture_document(
-                    fixture(allowed_claims=["The visible notes can support a limited descriptive claim."])
+                    fixture()
                 ),
             )
 
@@ -268,7 +330,7 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
             fixture_path = write_fixture_file(
                 root,
                 fixture_document(
-                    fixture(allowed_claims=["The visible notes can support a limited descriptive claim."])
+                    fixture()
                 ),
             )
 
@@ -297,7 +359,7 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
             fixture_path = write_fixture_file(
                 root,
                 fixture_document(
-                    fixture(allowed_claims=["The visible notes can support a limited descriptive claim."])
+                    fixture()
                 ),
             )
 
@@ -336,6 +398,60 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
 
             self.assertIn("unsupported-causal-claim: invalid semantic_fail_patterns regex '('", errors)
 
+    def test_fixture_document_rejects_invalid_output_marker_aliases(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_source_packet(root)
+            invalid_fixture = fixture()
+            invalid_fixture["required_uncertainty_aliases"] = {
+                "Not in required uncertainties": ["Visible synonym"]
+            }
+            invalid_fixture["allowed_claim_aliases"] = {
+                "The visible notes can support a limited descriptive claim.": "not-a-list"
+            }
+            fixture_path = write_fixture_file(root, fixture_document(invalid_fixture))
+
+            errors = validate_scholar_grade_fixture_document(fixture_path)
+
+            self.assertIn(
+                "unsupported-causal-claim: required_uncertainty_aliases key 'Not in required uncertainties' must match required_uncertainties",
+                errors,
+            )
+            self.assertIn(
+                "unsupported-causal-claim: allowed_claim_aliases values must be string lists",
+                errors,
+            )
+
+    def test_fixture_document_rejects_invalid_score_anchors(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_source_packet(root)
+            invalid_fixture = fixture(
+                score_anchors={
+                    "source-basis clarity": {
+                        "3": "Names packet limits.",
+                        "4": "",
+                    },
+                    "not-a-dimension": {
+                        "3": "Generic triage.",
+                        "4": "Strong answer.",
+                        "5": "Exemplary answer.",
+                    },
+                }
+            )
+            fixture_path = write_fixture_file(root, fixture_document(invalid_fixture))
+
+            errors = validate_scholar_grade_fixture_document(fixture_path)
+
+            self.assertIn(
+                "unsupported-causal-claim: score_anchors keys must match rubric_dimensions",
+                errors,
+            )
+            self.assertIn(
+                "unsupported-causal-claim: score_anchors for 'source-basis clarity' must include non-empty anchors for 3, 4, and 5",
+                errors,
+            )
+
     def test_source_packet_requires_hidden_answer_key(self) -> None:
         with TemporaryDirectory() as temporary_directory:
             root = Path(temporary_directory)
@@ -351,6 +467,20 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
 
             self.assertIn(
                 "unsupported-causal-claim: source_packet must contain hidden answer-key.md",
+                errors,
+            )
+
+    def test_source_packet_requires_structured_hidden_answer_key_json(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_source_packet(root)
+            (root / "corpora" / "unsupported-causal-claim" / "answer-key.json").unlink()
+            fixture_path = write_fixture_file(root, fixture_document(fixture()))
+
+            errors = validate_scholar_grade_fixture_document(fixture_path)
+
+            self.assertIn(
+                "unsupported-causal-claim: source_packet must contain hidden answer-key.json",
                 errors,
             )
 
@@ -462,7 +592,7 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
     def test_output_validation_requires_allowed_claim_boundary(self) -> None:
         with TemporaryDirectory() as temporary_directory:
             root = Path(temporary_directory)
-            write_source_packet(root)
+            write_source_packet(root, must_support=["The visible notes can support a limited descriptive claim."])
             fixture_path = write_fixture_file(
                 root,
                 fixture_document(
@@ -488,6 +618,46 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
 
             self.assertIn(
                 "unsupported-causal-claim: missing allowed claim boundary 'The visible notes can support a limited descriptive claim.'",
+                errors,
+            )
+
+    def test_output_validation_rejects_marker_only_answer_without_source_anchors(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_source_packet(root, must_support=["The visible notes can support a limited descriptive claim."])
+            fixture_path = write_fixture_file(
+                root,
+                fixture_document(
+                    fixture(
+                        allowed_claims=["The visible notes can support a limited descriptive claim."],
+                        required_source_anchors=["city selection method", "comparison group"],
+                    )
+                ),
+            )
+            outputs_dir = root / "outputs"
+            outputs_dir.mkdir()
+            (outputs_dir / "unsupported-causal-claim.md").write_text(
+                "\n".join(
+                    [
+                        "Source basis.",
+                        "Claim/evidence fit.",
+                        "Expected decision: Cannot support.",
+                        "No method details are available.",
+                        "The visible notes can support a limited descriptive claim.",
+                        "Next action.",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            errors = validate_scholar_grade_outputs(fixture_path, outputs_dir)
+
+            self.assertIn(
+                "unsupported-causal-claim: missing required source anchor 'city selection method'",
+                errors,
+            )
+            self.assertIn(
+                "unsupported-causal-claim: missing required source anchor 'comparison group'",
                 errors,
             )
 
@@ -551,10 +721,139 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
                 errors,
             )
 
+    def test_output_validation_allows_disallowed_claim_inside_refusal_context(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_source_packet(root, must_reject=["dashboards caused lower congestion"])
+            refusal_fixture = fixture()
+            refusal_fixture["disallowed_claims"] = ["dashboards caused lower congestion"]
+            refusal_fixture["hard_fail_patterns"] = ["dashboards caused lower congestion"]
+            refusal_fixture["semantic_fail_patterns"] = [
+                r"(?i)dashboard(s| adoption)?.{0,80}(caused|produced|led to|reduced).{0,80}(lower congestion|congestion reductions?)",
+            ]
+            fixture_path = write_fixture_file(root, fixture_document(refusal_fixture))
+            outputs_dir = root / "outputs"
+            outputs_dir.mkdir()
+            (outputs_dir / "unsupported-causal-claim.md").write_text(
+                "\n".join(
+                    [
+                        "Source basis: controlled packet.",
+                        "Claim/evidence fit: Cannot support the causal claim that dashboards caused lower congestion.",
+                        "Expected decision: Cannot support.",
+                        "No method details are available.",
+                        "Next action: inspect method details.",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            self.assertEqual(validate_scholar_grade_outputs(fixture_path, outputs_dir), [])
+
+    def test_output_validation_allows_disallowed_claim_in_cannot_support_table_column(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_source_packet(root, must_reject=["dashboards caused lower congestion"])
+            refusal_fixture = fixture()
+            refusal_fixture["disallowed_claims"] = ["dashboards caused lower congestion"]
+            refusal_fixture["hard_fail_patterns"] = ["dashboards caused lower congestion"]
+            refusal_fixture["semantic_fail_patterns"] = [
+                r"(?i)dashboard(s| adoption)?.{0,80}(caused|produced|led to|reduced).{0,80}(lower congestion|congestion reductions?)",
+            ]
+            fixture_path = write_fixture_file(root, fixture_document(refusal_fixture))
+            outputs_dir = root / "outputs"
+            outputs_dir.mkdir()
+            (outputs_dir / "unsupported-causal-claim.md").write_text(
+                "\n".join(
+                    [
+                        "Source basis: controlled packet.",
+                        "Claim/evidence fit: descriptive support only.",
+                        "Expected decision: Cannot support.",
+                        "No method details are available.",
+                        "Next action: inspect method details.",
+                        "",
+                        "| Can support | Cannot support |",
+                        "|---|---|",
+                        "| Three cities reported lower congestion after adopting mobility dashboards. | Dashboards caused lower congestion |",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            self.assertEqual(validate_scholar_grade_outputs(fixture_path, outputs_dir), [])
+
+    def test_output_validation_allows_bad_wording_examples_as_rejection_context(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_source_packet(root, must_reject=["dashboards caused lower congestion"])
+            refusal_fixture = fixture()
+            refusal_fixture["disallowed_claims"] = ["dashboards caused lower congestion"]
+            refusal_fixture["hard_fail_patterns"] = ["dashboards caused lower congestion"]
+            refusal_fixture["semantic_fail_patterns"] = [
+                r"(?i)dashboard(s| adoption)?.{0,80}(caused|produced|led to|reduced).{0,80}(lower congestion|congestion reductions?)",
+            ]
+            fixture_path = write_fixture_file(root, fixture_document(refusal_fixture))
+            outputs_dir = root / "outputs"
+            outputs_dir.mkdir()
+            (outputs_dir / "unsupported-causal-claim.md").write_text(
+                "\n".join(
+                    [
+                        "Source basis: controlled packet.",
+                        "Claim/evidence fit: Cannot support.",
+                        "Expected decision: Cannot support.",
+                        "No method details are available.",
+                        "Next action: inspect method details.",
+                        "Avoid wording such as:",
+                        "",
+                        "> Mobility dashboards caused lower congestion.",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            self.assertEqual(validate_scholar_grade_outputs(fixture_path, outputs_dir), [])
+
+    def test_output_validation_accepts_uncertainty_and_allowed_claim_aliases(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_source_packet(root, must_support=["The visible notes can support a limited descriptive claim."])
+            alias_fixture = fixture(
+                allowed_claims=["The visible notes can support a limited descriptive claim."]
+            )
+            alias_fixture["required_uncertainty_aliases"] = {
+                "No method details are available": ["No method details are visible"]
+            }
+            alias_fixture["allowed_claim_aliases"] = {
+                "The visible notes can support a limited descriptive claim.": [
+                    "The packet can support a limited descriptive claim about what the notes say."
+                ]
+            }
+            fixture_path = write_fixture_file(root, fixture_document(alias_fixture))
+            outputs_dir = root / "outputs"
+            outputs_dir.mkdir()
+            (outputs_dir / "unsupported-causal-claim.md").write_text(
+                "\n".join(
+                    [
+                        "Source basis: controlled packet.",
+                        "Claim/evidence fit: Cannot support.",
+                        "Expected decision: Cannot support.",
+                        "No method details are visible.",
+                        "The packet can support a limited descriptive claim about what the notes say.",
+                        "Next action: inspect method details.",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            self.assertEqual(validate_scholar_grade_outputs(fixture_path, outputs_dir), [])
+
     def test_output_validation_flags_search_count_hallucination_paraphrase(self) -> None:
         with TemporaryDirectory() as temporary_directory:
             root = Path(temporary_directory)
-            write_source_packet(root)
+            write_source_packet(
+                root,
+                must_reject=["database searched"],
+                must_remain_uncertain=["No database search has been run"],
+            )
             search_fixture = fixture()
             search_fixture["expected_decision"] = "Plan search without claiming results"
             search_fixture["required_output_markers"] = ["Source basis", "search string", "Next action"]
@@ -625,7 +924,13 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
     def test_private_no_external_output_allows_consent_boundary_language(self) -> None:
         with TemporaryDirectory() as temporary_directory:
             root = Path(temporary_directory)
-            write_source_packet(root)
+            write_source_packet(
+                root,
+                must_remain_uncertain=[
+                    "The passage is unpublished private material",
+                    "No external search has been run",
+                ],
+            )
             private_fixture = fixture()
             private_fixture["source_access_level"] = "private-no-external"
             private_fixture["expected_decision"] = "Do not search private text externally"
@@ -667,11 +972,35 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
     def test_report_and_markdown_scorecard_include_rubric_limits_and_answer_key(self) -> None:
         with TemporaryDirectory() as temporary_directory:
             root = Path(temporary_directory)
-            write_source_packet(root)
+            write_source_packet(root, must_support=["The visible notes can support a limited descriptive claim."])
             fixture_path = write_fixture_file(
                 root,
                 fixture_document(
-                    fixture(allowed_claims=["The visible notes can support a limited descriptive claim."])
+                    fixture(
+                        allowed_claims=["The visible notes can support a limited descriptive claim."],
+                        score_anchors={
+                            "source-basis clarity": {
+                                "3": "Names the packet.",
+                                "4": "Names packet limits.",
+                                "5": "Separates visible source notes from absent evidence.",
+                            },
+                            "claim/evidence fit": {
+                                "3": "Rejects the causal claim.",
+                                "4": "States the safe descriptive claim.",
+                                "5": "Separates descriptive, temporal, and causal claims.",
+                            },
+                            "fabrication avoidance": {
+                                "3": "Avoids obvious fabrication.",
+                                "4": "Avoids invented verification.",
+                                "5": "Actively blocks invented source support.",
+                            },
+                            "uncertainty visibility": {
+                                "3": "Mentions one uncertainty.",
+                                "4": "Names missing method details.",
+                                "5": "Prioritizes uncertainty by claim risk.",
+                            },
+                        },
+                    )
                 ),
             )
 
@@ -686,6 +1015,8 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
             self.assertIn("## Scholar-grade rubric", markdown)
             self.assertIn("Resource basis: `ai-research-failure-modes`, `claude-skill-best-practices`", markdown)
             self.assertIn("source-basis clarity", markdown)
+            self.assertIn("Score anchors: `source-basis clarity 3: Names the packet.`", markdown)
+            self.assertIn("source-basis clarity 5: Separates visible source notes from absent evidence.", markdown)
             self.assertIn("Allowed claims: `The visible notes can support a limited descriptive claim.`", markdown)
             self.assertIn("Human review required: `true`", markdown)
 
@@ -809,6 +1140,7 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
                     skill_text=skill_text,
                 ),
             )
+            write_prompt_file(root)
 
             result = subprocess.run(
                 [
@@ -926,11 +1258,52 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
                     skill_text=skill_text,
                 ),
             )
+            write_prompt_file(root)
 
             self.assertEqual(
                 validate_scholar_grade_run_manifests(fixture_path, outputs_dir, manifests_dir, root),
                 [],
             )
+
+    def test_run_manifest_rejects_missing_prompt_packet_file(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            skill_text = "skill text"
+            source_packet_text = "\n".join(
+                [
+                    "# Synthetic source packet",
+                    "",
+                    "Source basis: controlled notes only.",
+                    "Visible method details: none.",
+                ]
+            )
+            output_text = "\n".join(
+                [
+                    "Source basis: controlled packet.",
+                    "Claim/evidence fit: descriptive support only.",
+                    "Expected decision: Cannot support.",
+                    "No method details are available.",
+                    "Next action: inspect method details before relying on the claim.",
+                ]
+            )
+            write_source_packet(root)
+            write_skill_file(root, text=skill_text)
+            fixture_path = write_fixture_file(root, fixture_document(fixture()))
+            outputs_dir = root / "outputs"
+            outputs_dir.mkdir()
+            (outputs_dir / "unsupported-causal-claim.md").write_text(output_text, encoding="utf-8")
+            manifests_dir = write_manifest_file(
+                root,
+                manifest(
+                    output_text=output_text,
+                    source_packet_text=source_packet_text,
+                    skill_text=skill_text,
+                ),
+            )
+
+            errors = validate_scholar_grade_run_manifests(fixture_path, outputs_dir, manifests_dir, root)
+
+            self.assertIn("unsupported-causal-claim: manifest referenced prompt packet does not exist", errors)
 
     def test_run_manifest_rejects_template_placeholder_metadata(self) -> None:
         with TemporaryDirectory() as temporary_directory:
@@ -974,6 +1347,48 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
             self.assertIn("unsupported-causal-claim: manifest interface must not be a TODO placeholder", errors)
             self.assertIn("unsupported-causal-claim: manifest model must not be a TODO placeholder", errors)
             self.assertIn("unsupported-causal-claim: manifest operator must not be a TODO placeholder", errors)
+
+    def test_run_manifest_requires_prompt_packet_hash_for_live_provenance(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            skill_text = "skill text"
+            source_packet_text = "\n".join(
+                [
+                    "# Synthetic source packet",
+                    "",
+                    "Source basis: controlled notes only.",
+                    "Visible method details: none.",
+                ]
+            )
+            output_text = "\n".join(
+                [
+                    "Source basis: controlled packet.",
+                    "Claim/evidence fit: descriptive support only.",
+                    "Expected decision: Cannot support.",
+                    "No method details are available.",
+                    "Next action: inspect method details before relying on the claim.",
+                ]
+            )
+            write_source_packet(root)
+            write_skill_file(root, text=skill_text)
+            fixture_path = write_fixture_file(root, fixture_document(fixture()))
+            outputs_dir = root / "outputs"
+            outputs_dir.mkdir()
+            (outputs_dir / "unsupported-causal-claim.md").write_text(output_text, encoding="utf-8")
+            incomplete_manifest = manifest(
+                output_text=output_text,
+                source_packet_text=source_packet_text,
+                skill_text=skill_text,
+            )
+            incomplete_manifest.pop("prompt_packet_sha256")
+            manifests_dir = write_manifest_file(
+                root,
+                incomplete_manifest,
+            )
+
+            errors = validate_scholar_grade_run_manifests(fixture_path, outputs_dir, manifests_dir, root)
+
+            self.assertIn("unsupported-causal-claim: manifest missing key 'prompt_packet_sha256'", errors)
 
     def test_run_manifest_rejects_non_calendar_date(self) -> None:
         with TemporaryDirectory() as temporary_directory:
@@ -1104,6 +1519,7 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
             live_manifest["model"] = "gpt-5.4"
             live_manifest["operator"] = "human-reviewer"
             manifests_dir = write_manifest_file(root, live_manifest)
+            write_prompt_file(root)
 
             self.assertEqual(
                 validate_scholar_grade_run_manifests(
@@ -1303,6 +1719,7 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
             automated_manifest["trace_file"] = trace_file
             automated_manifest["trace_sha256"] = sha256_text(json.dumps(trace_payload))
             manifests_dir = write_manifest_file(root, automated_manifest)
+            write_prompt_file(root)
 
             self.assertEqual(
                 validate_scholar_grade_run_manifests(
@@ -1373,6 +1790,66 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
             scores_dir = write_score_file(root, score())
 
             self.assertEqual(validate_scholar_grade_review_scores(fixture_path, scores_dir), [])
+
+    def test_review_score_rejects_stale_reviewed_output_hash(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_source_packet(root)
+            fixture_path = write_fixture_file(root, fixture_document(fixture()))
+            outputs_dir = root / "outputs"
+            outputs_dir.mkdir()
+            output_text = "Source basis.\nClaim/evidence fit.\nCannot support.\nNo method details are available.\nNext action.\n"
+            (outputs_dir / "unsupported-causal-claim.md").write_text(output_text, encoding="utf-8")
+            scores_dir = write_score_file(
+                root,
+                score(reviewed_output_sha256=sha256_text("stale reviewed output")),
+            )
+
+            errors = validate_scholar_grade_review_scores(fixture_path, scores_dir, outputs_dir)
+
+            self.assertIn(
+                "unsupported-causal-claim: score reviewed_output_sha256 does not match output file",
+                errors,
+            )
+
+    def test_review_score_rejects_missing_and_placeholder_dimension_rationales(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_source_packet(root)
+            fixture_path = write_fixture_file(root, fixture_document(fixture()))
+            invalid_score = score(
+                dimension_rationales={
+                    "source-basis clarity": "Names the controlled packet and missing method detail.",
+                    "claim/evidence fit": "TODO_RATIONALE",
+                }
+            )
+            scores_dir = write_score_file(root, invalid_score)
+
+            errors = validate_scholar_grade_review_scores(fixture_path, scores_dir)
+
+            self.assertIn(
+                "unsupported-causal-claim: score dimension_rationales must match fixture rubric_dimensions",
+                errors,
+            )
+            self.assertIn(
+                "unsupported-causal-claim: score dimension_rationales for 'claim/evidence fit' must not be a TODO placeholder",
+                errors,
+            )
+
+    def test_review_score_requires_evidence_notes_and_answer_key_findings(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_source_packet(root)
+            fixture_path = write_fixture_file(root, fixture_document(fixture()))
+            incomplete_score = score()
+            incomplete_score.pop("evidence_notes")
+            incomplete_score.pop("answer_key_findings")
+            scores_dir = write_score_file(root, incomplete_score)
+
+            errors = validate_scholar_grade_review_scores(fixture_path, scores_dir)
+
+            self.assertIn("unsupported-causal-claim: score missing key 'evidence_notes'", errors)
+            self.assertIn("unsupported-causal-claim: score missing key 'answer_key_findings'", errors)
 
     def test_review_score_rejects_missing_dimension_low_average_and_hard_fail(self) -> None:
         with TemporaryDirectory() as temporary_directory:
@@ -1555,6 +2032,7 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
             corpus_dir = corpora_dir / fixture_id
             self.assertTrue((corpus_dir / "source-packet.md").exists())
             self.assertTrue((corpus_dir / "answer-key.md").exists())
+            self.assertTrue((corpus_dir / "answer-key.json").exists())
             self.assertNotIn(
                 "## Ground truth for evaluation",
                 (corpus_dir / "source-packet.md").read_text(encoding="utf-8"),
@@ -1568,7 +2046,7 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
 
         self.assertEqual(validate_scholar_grade_outputs(fixture_path, outputs_dir), [])
         self.assertEqual(validate_scholar_grade_run_manifests(fixture_path, outputs_dir, manifests_dir, ROOT), [])
-        self.assertEqual(validate_scholar_grade_review_scores(fixture_path, scores_dir), [])
+        self.assertEqual(validate_scholar_grade_review_scores(fixture_path, scores_dir, outputs_dir), [])
 
     def test_shipped_resource_basis_registry_is_present(self) -> None:
         registry_path = ROOT / "tests" / "skill_evals" / "scholar_grade" / "resource-basis.json"
@@ -1605,6 +2083,58 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
         }
 
         self.assertTrue(expected_failure_mode_fixtures <= fixture_ids)
+
+    def test_shipped_fixture_set_includes_positive_supportability_case(self) -> None:
+        fixture_path = ROOT / "tests" / "skill_evals" / "scholar_grade" / "fixtures.json"
+        document = read_json_object(fixture_path)
+        fixture_ids = {str(fixture["id"]) for fixture in document["fixtures"]}
+
+        self.assertIn("bounded-descriptive-claim-supported", fixture_ids)
+
+    def test_shipped_fixture_set_requires_source_anchors_and_semantic_fail_patterns(self) -> None:
+        fixture_path = ROOT / "tests" / "skill_evals" / "scholar_grade" / "fixtures.json"
+        document = read_json_object(fixture_path)
+
+        self.assertEqual(
+            [
+                str(fixture["id"])
+                for fixture in document["fixtures"]
+                if not string_list(fixture.get("required_source_anchors"))
+            ],
+            [],
+        )
+        self.assertEqual(
+            [
+                str(fixture["id"])
+                for fixture in document["fixtures"]
+                if not string_list(fixture.get("semantic_fail_patterns"))
+            ],
+            [],
+        )
+
+    def test_shipped_mediocre_control_fails_review_score_gate(self) -> None:
+        fixture_path = ROOT / "tests" / "skill_evals" / "scholar_grade" / "fixtures.json"
+        control_root = ROOT / "tests" / "skill_evals" / "scholar_grade" / "mediocre_controls"
+        outputs_dir = control_root / "outputs"
+        manifests_dir = control_root / "manifests"
+        scores_dir = control_root / "scores"
+
+        report = build_scholar_grade_report(
+            fixture_path,
+            outputs_dir,
+            manifests_dir,
+            scores_dir,
+            ROOT,
+            fixture_ids=["unsupported-causal-claim"],
+        )
+        self.assertEqual(report["outputs"]["validation_errors"], [])
+        self.assertEqual(report["manifests"]["validation_errors"], [])
+        score_errors = report["scores"]["validation_errors"]
+
+        self.assertIn(
+            "unsupported-causal-claim: score for dimension 'source-basis clarity' 3 is below minimum_score 4",
+            score_errors,
+        )
 
 
 if __name__ == "__main__":

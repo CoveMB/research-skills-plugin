@@ -9,6 +9,7 @@
   "operator": "fixture-author",
   "output_file": "book-proposal-unverified-comps.md",
   "output_sha256": "fd9b39bb1e74f7b10dd4f15577711234c3819835e69171e3f3070b32c96648c1",
+  "prompt_packet_sha256": "1de60255eb6d8eb11a99ad49f11a1719839f66e2df6b8f2033121ac88c0813a8",
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "book-proposal-scholarship",
   "skill_file": "skills/book-proposal-scholarship/SKILL.md",

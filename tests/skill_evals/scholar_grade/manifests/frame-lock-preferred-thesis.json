@@ -9,6 +9,7 @@
   "operator": "fixture-author",
   "output_file": "frame-lock-preferred-thesis.md",
   "output_sha256": "a79ed167f0e01faf51bb3b6779ebae9a9c0d03f6e2ee2c97bfb5c8b286c8eded",
+  "prompt_packet_sha256": "0f1686b3744fde70802fe41eb6c281a5038e4ccfb9207267a82afc49daa23c5f",
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "counterargument-peer-review",
   "skill_file": "skills/counterargument-peer-review/SKILL.md",

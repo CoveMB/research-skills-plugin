@@ -1,0 +1,10 @@
+{
+  "fixture_id": "computed-result-missing-run-log",
+  "output_captured": true,
+  "output_sha256": "f5cca91c99b1c27a02961deec8bd6d995a36ac3f72481564a43a2786dea18c99",
+  "prompt_sha256": "8bc3178979a86ba06e08650886ec098e1138ced09b6cd8597f9cdf7b49f99489",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "scholarly-integrity-gate",
+  "skill_invoked": true
+}

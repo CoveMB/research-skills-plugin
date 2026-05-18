@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "book-orchestrator-unstable-scope",
+  "must_support": [
+    "The orchestrator can propose a bounded sequence and first gate."
+  ],
+  "must_reject": [
+    "workflow complete",
+    "all skills executed",
+    "release ready"
+  ],
+  "must_remain_uncertain": [
+    "The research question is not stable",
+    "The corpus and release risks are not yet separated"
+  ]
+}

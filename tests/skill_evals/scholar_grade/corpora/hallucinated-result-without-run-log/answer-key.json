@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "hallucinated-result-without-run-log",
+  "must_support": [
+    "The percentage can only be treated as an unverified draft claim."
+  ],
+  "must_reject": [
+    "12% improvement verified",
+    "raw numbers support the result",
+    "experiment result confirmed"
+  ],
+  "must_remain_uncertain": [
+    "No raw numbers are available",
+    "No saved run log is available"
+  ]
+}

@@ -204,6 +204,10 @@ This is a non-contract routing output unless the user explicitly asks for a book
 
 ```
 
+## Failure-mode output boundaries
+
+When handling private-no-external routing, use stable labels that keep consent and tool boundaries visible: Source basis, external tool boundary, user consent, search terms, and Next action. If unpublished private text would need external lookup, state Do not search private text externally. If a safe route exists, include: The request can be converted into non-sensitive search terms.
+
 Compact output:
 
 ```markdown

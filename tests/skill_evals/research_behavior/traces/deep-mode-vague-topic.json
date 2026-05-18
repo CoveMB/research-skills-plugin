@@ -1,0 +1,10 @@
+{
+  "fixture_id": "deep-mode-vague-topic",
+  "output_captured": true,
+  "output_sha256": "af2397a84900afeb8e3a701e65f8dd9197b529aab4d9375b07e005926842764a",
+  "prompt_sha256": "4b475fc4e7d0f38667ae9ecdebe947586b154d34d5d2e7e26ee20f284c4fa4be",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "research-intent-router",
+  "skill_invoked": true
+}

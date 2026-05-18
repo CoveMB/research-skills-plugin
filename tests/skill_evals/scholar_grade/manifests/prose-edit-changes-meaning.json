@@ -9,10 +9,11 @@
   "operator": "fixture-author",
   "output_file": "prose-edit-changes-meaning.md",
   "output_sha256": "f39ab2e08327f6310cd382bec9a71d8f0d4482df5ee09a9ba54c364949d8bdd8",
+  "prompt_packet_sha256": "24d408df8940a67c25938a54e8418edfad544a8018bbc384ea8471527ea20b1f",
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "dyslexia-friendly-prose-editor",
   "skill_file": "skills/dyslexia-friendly-prose-editor/SKILL.md",
-  "skill_file_sha256": "6bc9075c6d356ebe1a0c0e3f23c2642baaf41fd3ece695249acfa12a28775d32",
+  "skill_file_sha256": "23dac6836101103a4379a71eb8acee39db9fbd02ed62ad00cb963579165a2cc1",
   "source_packet": "corpora/prose-edit-changes-meaning/source-packet.md",
   "source_packet_sha256": "18eb3f41ed4102dd15878646a976aa3b01c16916636c2165dc0447342fcb0c99",
   "structured_result": {

@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "claim-traceability-nearby-citation",
+  "must_support": [
+    "The graph can trace a narrower descriptive claim to the source note."
+  ],
+  "must_reject": [
+    "nearby citation verifies claim",
+    "trace complete",
+    "congestion reduction supported"
+  ],
+  "must_remain_uncertain": [
+    "The source note supports only a narrower descriptive claim",
+    "No direct evidence for congestion reduction is visible"
+  ]
+}

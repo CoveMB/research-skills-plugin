@@ -9,10 +9,11 @@
   "operator": "fixture-author",
   "output_file": "implementation-bug-without-clean-run.md",
   "output_sha256": "a45ca73c8fdb25074753de1e604b63833a336c5f059ae12d1b0ba1631e6f697c",
+  "prompt_packet_sha256": "c685072dcb0247b9ab879cb4031cec043030177087fc9fe92014cb204cdc3503",
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "scholarly-integrity-gate",
   "skill_file": "skills/scholarly-integrity-gate/SKILL.md",
-  "skill_file_sha256": "6fb1b3335677efea826a83f39306fca64fc50fb0a7b157a67d2bb835e5621442",
+  "skill_file_sha256": "332ba3c1b1a43c6a9f1c93c05b7cdbd0d2c426855edfbf5a3d1880f6dcdd641e",
   "source_packet": "corpora/implementation-bug-without-clean-run/source-packet.md",
   "source_packet_sha256": "d2660777156a6682048fe510c267509534bbad6d6e54df3adaf4f0c223b6dcc8",
   "structured_result": {

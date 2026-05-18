@@ -9,6 +9,7 @@
   "operator": "fixture-author",
   "output_file": "chart-without-data-provenance.md",
   "output_sha256": "41d03f325c62d6a2ecfd2b75e582934d1c00e23722076ad01fafade468c1ddd1",
+  "prompt_packet_sha256": "997e43cc4d58aca94887d1fbb46e8b702003bbf0ed427c1beeceb1ace98123c7",
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "figure-table-integrity-auditor",
   "skill_file": "skills/figure-table-integrity-auditor/SKILL.md",

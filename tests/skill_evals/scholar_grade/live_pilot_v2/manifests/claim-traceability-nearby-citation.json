@@ -1,0 +1,28 @@
+{
+  "capture_mode": "manual-live-capture",
+  "date": "2026-05-17",
+  "external_lookup_permitted": false,
+  "fixture_id": "claim-traceability-nearby-citation",
+  "interface": "codex-app",
+  "model": "gpt-5",
+  "network_permissions": "none",
+  "operator": "CoveMB",
+  "output_file": "claim-traceability-nearby-citation.md",
+  "output_sha256": "2f724d92373382d3ea716613f04c809799abeb53ccf2595a2f3ce0f942da9ddf",
+  "prompt_packet_sha256": "c3a8c285865c4c590f849b8530185a8f3d545b4779a0f848583ec5e5e7786d00",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "claim-traceability-graph",
+  "skill_file": "skills/claim-traceability-graph/SKILL.md",
+  "skill_file_sha256": "a44a3edadab84b3e11d10a7218682b017b296efa106c10129592f64f7cf50b34",
+  "source_packet": "corpora/claim-traceability-nearby-citation/source-packet.md",
+  "source_packet_sha256": "3b68463e04244981ad58c8c85e693e83844919f74c0b834bef82a87c50b82eb8",
+  "structured_result": {
+    "decision": "Nearby citation does not establish support",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "private_material_submitted": false,
+    "source_access_level": "controlled-packet"
+  },
+  "tool_permissions": "local-only"
+}

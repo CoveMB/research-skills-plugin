@@ -180,6 +180,10 @@ Offer safer wording, stronger source types, or citation placement changes.
 
 ```
 
+## Failure-mode output boundaries
+
+When handling direct quotes, page numbers, or locator-dependent claims, use stable labels that keep the citation risk visible: Source basis, Verification status, locator gap, Required fix, and Next action. If a quote lacks source text or locator support, state Hold locator-dependent quotation claims. Include the uncertainty The quote text has not been verified against a source and the boundary The output may mark the quotation as unusable until a locator is supplied.
+
 Compact output:
 
 ```markdown

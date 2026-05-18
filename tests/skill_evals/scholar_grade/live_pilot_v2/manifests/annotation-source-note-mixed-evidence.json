@@ -1,0 +1,28 @@
+{
+  "capture_mode": "manual-live-capture",
+  "date": "2026-05-17",
+  "external_lookup_permitted": false,
+  "fixture_id": "annotation-source-note-mixed-evidence",
+  "interface": "codex-app",
+  "model": "gpt-5",
+  "network_permissions": "none",
+  "operator": "CoveMB",
+  "output_file": "annotation-source-note-mixed-evidence.md",
+  "output_sha256": "c5316016128d0004a76bf96f4f3b5a5f4e1ee470409ceb9e1f88170a4087c7dd",
+  "prompt_packet_sha256": "13eac41e5950cb0957e70ec4f12324bf23a291e2412b2526f9695a0470acb7a0",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "annotation-to-source-note",
+  "skill_file": "skills/annotation-to-source-note/SKILL.md",
+  "skill_file_sha256": "8ff761ba41fd60364ce98a31a0a8ada562ab3e91f3dd48215af4c44538775528",
+  "source_packet": "corpora/annotation-source-note-mixed-evidence/source-packet.md",
+  "source_packet_sha256": "06109b55a3c53df058e06a800e09d69ff87a3cb0b73c2802cc2af9f46fcf5d02",
+  "structured_result": {
+    "decision": "Separate source language from reader interpretation",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "private_material_submitted": false,
+    "source_access_level": "controlled-packet"
+  },
+  "tool_permissions": "local-only"
+}

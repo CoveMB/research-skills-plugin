@@ -126,6 +126,10 @@ Use ready to share, share after listed fixes, hold until reviewed, or do not rel
 
 ```
 
+## Failure-mode output boundaries
+
+When handling release-blocker cases, use stable labels that keep rights and privacy limits visible: Source basis, How to use this result, Release verdict, Legal/permission uncertainty, Required fix, and Next action. If rights, copied text, comments, metadata, consent, or permissions are unresolved, state Hold release. Keep uncertainties explicit, including Private notes may be present, and include: The packet should be held until copied text and private notes are reviewed.
+
 Compact output:
 
 ```markdown

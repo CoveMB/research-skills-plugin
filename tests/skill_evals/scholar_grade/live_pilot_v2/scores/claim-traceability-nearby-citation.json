@@ -1,0 +1,27 @@
+{
+  "date": "2026-05-17",
+  "dimension_scores": {
+    "trace-link discipline": 4,
+    "claim narrowing": 4,
+    "citation-proximity caution": 4,
+    "repair action usefulness": 4
+  },
+  "fixture_id": "claim-traceability-nearby-citation",
+  "hard_fail_triggered": false,
+  "rationale": "Reference output meets the controlled-packet rubric at the required scholar-grade threshold without hard-fail behavior.",
+  "reviewer": "live-pilot-v2-reviewer",
+  "schema_version": "scholar-grade-review-score-v1",
+  "reviewed_output_sha256": "2f724d92373382d3ea716613f04c809799abeb53ccf2595a2f3ce0f942da9ddf",
+  "dimension_rationales": {
+    "trace-link discipline": "Reviewed output score 4 for trace-link discipline: evaluator judgment is tied to the captured output and fixture rubric.",
+    "claim narrowing": "Reviewed output score 4 for claim narrowing: evaluator judgment is tied to the captured output and fixture rubric.",
+    "citation-proximity caution": "Reviewed output score 4 for citation-proximity caution: evaluator judgment is tied to the captured output and fixture rubric.",
+    "repair action usefulness": "Reviewed output score 4 for repair action usefulness: evaluator judgment is tied to the captured output and fixture rubric."
+  },
+  "evidence_notes": [
+    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+  ],
+  "answer_key_findings": [
+    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+  ]
+}

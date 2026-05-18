@@ -9,6 +9,7 @@
   "operator": "fixture-author",
   "output_file": "annotated-bibliography-abstract-only.md",
   "output_sha256": "8d6bc0d61871c071334fca06620c4151637159ab59c8d3f54468d779d187878d",
+  "prompt_packet_sha256": "1670deccf2816faab91477f91ee6facf63f377f1211af04d54f62173e3442acd",
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "annotated-bibliography-builder",
   "skill_file": "skills/annotated-bibliography-builder/SKILL.md",

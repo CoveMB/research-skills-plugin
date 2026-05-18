@@ -1,14 +1,27 @@
 {
   "date": "2026-05-13",
   "dimension_scores": {
-    "accessible next action": 4,
+    "dictation cleanup": 4,
     "ambiguity preservation": 4,
     "claim/question separation": 4,
-    "dictation cleanup": 4
+    "accessible next action": 4
   },
   "fixture_id": "dictation-ambiguous-term",
   "hard_fail_triggered": false,
   "rationale": "Reference output meets the controlled-packet rubric at the required scholar-grade threshold without hard-fail behavior.",
   "reviewer": "fixture-reviewer",
-  "schema_version": "scholar-grade-review-score-v1"
+  "schema_version": "scholar-grade-review-score-v1",
+  "reviewed_output_sha256": "d748a7e24c8a2041c04a570b12f00f5ee112f1a0e31304f0dae745d0124a8fde",
+  "dimension_rationales": {
+    "dictation cleanup": "Reviewed output score 4 for dictation cleanup: evaluator judgment is tied to the captured output and fixture rubric.",
+    "ambiguity preservation": "Reviewed output score 4 for ambiguity preservation: evaluator judgment is tied to the captured output and fixture rubric.",
+    "claim/question separation": "Reviewed output score 4 for claim/question separation: evaluator judgment is tied to the captured output and fixture rubric.",
+    "accessible next action": "Reviewed output score 4 for accessible next action: evaluator judgment is tied to the captured output and fixture rubric."
+  },
+  "evidence_notes": [
+    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+  ],
+  "answer_key_findings": [
+    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+  ]
 }

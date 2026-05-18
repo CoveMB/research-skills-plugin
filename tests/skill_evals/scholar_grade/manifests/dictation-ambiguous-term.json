@@ -9,6 +9,7 @@
   "operator": "fixture-author",
   "output_file": "dictation-ambiguous-term.md",
   "output_sha256": "d748a7e24c8a2041c04a570b12f00f5ee112f1a0e31304f0dae745d0124a8fde",
+  "prompt_packet_sha256": "aac86e6db41d7f4f734ea835177663f3adbd4c4b20a3e9a8e365821eece5caaf",
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "dictation-to-research-notes",
   "skill_file": "skills/dictation-to-research-notes/SKILL.md",

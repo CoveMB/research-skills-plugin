@@ -1,0 +1,27 @@
+{
+  "date": "2026-05-17",
+  "dimension_scores": {
+    "quote/paraphrase separation": 4,
+    "interpretation boundary": 4,
+    "locator discipline": 4,
+    "source-note usefulness": 4
+  },
+  "fixture_id": "annotation-source-note-mixed-evidence",
+  "hard_fail_triggered": false,
+  "rationale": "Reference output meets the controlled-packet rubric at the required scholar-grade threshold without hard-fail behavior.",
+  "reviewer": "live-pilot-v2-reviewer",
+  "schema_version": "scholar-grade-review-score-v1",
+  "reviewed_output_sha256": "c5316016128d0004a76bf96f4f3b5a5f4e1ee470409ceb9e1f88170a4087c7dd",
+  "dimension_rationales": {
+    "quote/paraphrase separation": "Reviewed output score 4 for quote/paraphrase separation: evaluator judgment is tied to the captured output and fixture rubric.",
+    "interpretation boundary": "Reviewed output score 4 for interpretation boundary: evaluator judgment is tied to the captured output and fixture rubric.",
+    "locator discipline": "Reviewed output score 4 for locator discipline: evaluator judgment is tied to the captured output and fixture rubric.",
+    "source-note usefulness": "Reviewed output score 4 for source-note usefulness: evaluator judgment is tied to the captured output and fixture rubric."
+  },
+  "evidence_notes": [
+    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+  ],
+  "answer_key_findings": [
+    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+  ]
+}

@@ -13,6 +13,7 @@ from live_capture_protocol import (
     build_manifest_template,
     build_score_template,
     render_prompt_packet,
+    select_fixtures,
     validate_capture_plan,
     write_capture_protocol,
 )
@@ -38,6 +39,16 @@ def fixture() -> dict[str, object]:
     }
 
 
+def reading_fixture() -> dict[str, object]:
+    return {
+        **fixture(),
+        "id": "reading-load-abstract-only",
+        "skill": "reading-load-reducer",
+        "prompt": "Tell me what to skim first.",
+        "source_packet": "corpora/reading-load-abstract-only",
+    }
+
+
 def write_fixture_environment(root: Path) -> Path:
     fixture_path = root / "fixtures.json"
     fixture_path.write_text(
@@ -45,38 +56,39 @@ def write_fixture_environment(root: Path) -> Path:
             {
                 "schema_version": "scholar-grade-eval-fixtures-v1",
                 "purpose": "test fixtures",
-                "fixtures": [fixture()],
+                "fixtures": [fixture(), reading_fixture()],
             }
         ),
         encoding="utf-8",
     )
-    corpus_dir = root / "corpora" / "unsupported-causal-claim"
-    corpus_dir.mkdir(parents=True)
-    (corpus_dir / "source-packet.md").write_text(
-        "\n".join(
-            [
-                "# Synthetic source packet",
-                "",
-                "Visible method details: none.",
-            ]
-        ),
-        encoding="utf-8",
-    )
-    (corpus_dir / "answer-key.md").write_text(
-        "\n".join(
-            [
-                "# Hidden answer key",
-                "",
-                "## Ground truth for evaluation",
-                "",
-                "- Causal support is unavailable.",
-            ]
-        ),
-        encoding="utf-8",
-    )
-    skill_dir = root / "skills" / "methodology-source-auditor"
-    skill_dir.mkdir(parents=True)
-    (skill_dir / "SKILL.md").write_text("skill text", encoding="utf-8")
+    for test_fixture in [fixture(), reading_fixture()]:
+        corpus_dir = root / str(test_fixture["source_packet"])
+        corpus_dir.mkdir(parents=True)
+        (corpus_dir / "source-packet.md").write_text(
+            "\n".join(
+                [
+                    "# Synthetic source packet",
+                    "",
+                    "Visible method details: none.",
+                ]
+            ),
+            encoding="utf-8",
+        )
+        (corpus_dir / "answer-key.md").write_text(
+            "\n".join(
+                [
+                    "# Hidden answer key",
+                    "",
+                    "## Ground truth for evaluation",
+                    "",
+                    "- Causal support is unavailable.",
+                ]
+            ),
+            encoding="utf-8",
+        )
+        skill_dir = root / "skills" / str(test_fixture["skill"])
+        skill_dir.mkdir(parents=True)
+        (skill_dir / "SKILL.md").write_text("skill text", encoding="utf-8")
     return fixture_path
 
 
@@ -95,6 +107,28 @@ class TestLiveCaptureProtocol(unittest.TestCase):
             self.assertNotIn("answer-key.md", prompt_packet)
             self.assertNotIn("Ground truth for evaluation", prompt_packet)
             self.assertNotIn("Cannot support", prompt_packet)
+
+    def test_capture_plan_can_target_live_pilot_fixture_subset(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            fixture_path = write_fixture_environment(root)
+
+            plan = build_capture_plan(fixture_path, root, ["reading-load-abstract-only"])
+
+            self.assertEqual(plan["capture_count"], 1)
+            self.assertEqual(plan["captures"][0]["fixture_id"], "reading-load-abstract-only")
+            self.assertEqual(plan["fixture_ids"], ["reading-load-abstract-only"])
+
+    def test_select_fixtures_reports_unknown_live_pilot_id(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            fixture_path = write_fixture_environment(root)
+            document = json.loads(fixture_path.read_text(encoding="utf-8"))
+
+            selected, errors = select_fixtures(document, ["missing-fixture"])
+
+            self.assertEqual(selected, [])
+            self.assertEqual(errors, ["unknown fixture id: missing-fixture"])
 
     def test_validate_capture_plan_rejects_fixture_specific_hidden_value_leakage(self) -> None:
         with TemporaryDirectory() as temporary_directory:
@@ -166,6 +200,14 @@ class TestLiveCaptureProtocol(unittest.TestCase):
 
             self.assertEqual(score["schema_version"], "scholar-grade-review-score-v1")
             self.assertEqual(score["hard_fail_triggered"], "TODO_BOOLEAN")
+            self.assertEqual(score["reviewed_output_sha256"], "TODO_AFTER_CAPTURE")
+            self.assertEqual(
+                score["dimension_rationales"],
+                {
+                    "source-basis clarity": "TODO_RATIONALE",
+                    "claim/evidence fit": "TODO_RATIONALE",
+                },
+            )
             self.assertEqual(
                 score["dimension_scores"],
                 {
@@ -180,7 +222,7 @@ class TestLiveCaptureProtocol(unittest.TestCase):
             fixture_path = write_fixture_environment(root)
             output_dir = root / "live-capture"
 
-            write_capture_protocol(fixture_path, output_dir, root)
+            write_capture_protocol(fixture_path, output_dir, root, ["unsupported-causal-claim"])
 
             trace_template_path = output_dir / "trace-templates" / "unsupported-causal-claim.json"
             trace_template = json.loads(trace_template_path.read_text(encoding="utf-8"))
@@ -195,6 +237,7 @@ class TestLiveCaptureProtocol(unittest.TestCase):
             self.assertEqual(trace_template["output_captured"], "TODO_BOOLEAN")
             self.assertIn("trace-templates", readme)
             self.assertIn("trace_sha256", readme)
+            self.assertFalse((output_dir / "trace-templates" / "reading-load-abstract-only.json").exists())
 
     def test_write_capture_protocol_creates_prompt_manifest_and_score_templates(self) -> None:
         with TemporaryDirectory() as temporary_directory:

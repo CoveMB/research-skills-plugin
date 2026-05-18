@@ -1,0 +1,10 @@
+{
+  "fixture_id": "annotated-bibliography-abstract-only",
+  "output_captured": true,
+  "output_sha256": "bbf5f99431500eb5e37473886e2a51f9a19eee30d487245bdf1dad3bbc6d5968",
+  "prompt_sha256": "5cca763311f4002c59bc8a487f6e54dbaaf38e84173a54013ce0539ee4310ce2",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "annotated-bibliography-builder",
+  "skill_invoked": true
+}

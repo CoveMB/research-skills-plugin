@@ -1,0 +1,27 @@
+{
+  "schema_version": "scholar-grade-review-score-v1",
+  "fixture_id": "prose-edit-strict-meaning-preservation",
+  "reviewer": "fixture-reviewer",
+  "date": "2026-05-17",
+  "hard_fail_triggered": false,
+  "reviewed_output_sha256": "7d86e38f0fc7e24c6291f8cfc96944ec855c2707b2e5beb1d4a3713be611d3e5",
+  "dimension_scores": {
+    "meaning preservation": 4,
+    "claim-strength preservation": 4,
+    "accessibility": 4,
+    "source-boundary visibility": 4
+  },
+  "dimension_rationales": {
+    "meaning preservation": "Reviewed output score 4 for meaning preservation: judgment is tied to exact output, source anchors, hidden answer-key expectations, and fixture rubric.",
+    "claim-strength preservation": "Reviewed output score 4 for claim-strength preservation: judgment is tied to exact output, source anchors, hidden answer-key expectations, and fixture rubric.",
+    "accessibility": "Reviewed output score 4 for accessibility: judgment is tied to exact output, source anchors, hidden answer-key expectations, and fixture rubric.",
+    "source-boundary visibility": "Reviewed output score 4 for source-boundary visibility: judgment is tied to exact output, source anchors, hidden answer-key expectations, and fixture rubric."
+  },
+  "evidence_notes": [
+    "Reviewer checked the exact captured output against required source anchors and hard-fail patterns."
+  ],
+  "answer_key_findings": [
+    "Reviewer checked must_support, must_reject, and must_remain_uncertain expectations against the output."
+  ],
+  "rationale": "Reference output meets the controlled-packet rubric without hard-fail behavior."
+}

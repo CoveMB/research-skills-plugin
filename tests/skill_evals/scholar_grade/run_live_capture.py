@@ -168,6 +168,7 @@ def build_run_manifest(
     capture: dict[str, Any],
     metadata: CaptureMetadata,
     output_sha256: str,
+    prompt_packet_sha256: str,
     trace_sha256: str | None,
     trace_file: str | None,
 ) -> dict[str, Any]:
@@ -183,6 +184,7 @@ def build_run_manifest(
         "operator": metadata.operator,
         "source_packet": source_packet_manifest_path(fixture),
         "source_packet_sha256": capture["source_packet_sha256"],
+        "prompt_packet_sha256": prompt_packet_sha256,
         "skill_file": skill_manifest_path(fixture),
         "skill_file_sha256": capture["skill_file_sha256"],
         "output_file": output_file_name(fixture_id),
@@ -276,9 +278,11 @@ def record_live_capture(
     written: list[Path] = []
     write_text(paths["prompt_packet"], render_prompt_packet(capture))
     written.append(paths["prompt_packet"])
+    prompt_packet_sha256 = sha256_file(paths["prompt_packet"])
     write_text(paths["output"], captured_output.read_text(encoding="utf-8"))
     written.append(paths["output"])
-    write_json(paths["score_template"], build_score_template(capture))
+    output_sha256 = sha256_file(paths["output"])
+    write_json(paths["score_template"], build_score_template(capture, output_sha256))
     written.append(paths["score_template"])
 
     trace_sha256: str | None = None
@@ -292,7 +296,8 @@ def record_live_capture(
         fixture=fixture,
         capture=capture,
         metadata=metadata,
-        output_sha256=sha256_file(paths["output"]),
+        output_sha256=output_sha256,
+        prompt_packet_sha256=prompt_packet_sha256,
         trace_sha256=trace_sha256,
         trace_file=trace_file,
     )

@@ -9,6 +9,7 @@
   "operator": "fixture-author",
   "output_file": "extraction-table-uneven-source-notes.md",
   "output_sha256": "649adc0ea894725643acaa2b300bbc7db055dfb46d55806961ed1569605ee045",
+  "prompt_packet_sha256": "b764391331d0bdd92b3976ae6d795e925946b99ec3c55432de1df730b15ae2d6",
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "extraction-table-builder",
   "skill_file": "skills/extraction-table-builder/SKILL.md",

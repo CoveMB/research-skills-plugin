@@ -1,0 +1,10 @@
+{
+  "fixture_id": "compact-release-blockers",
+  "output_captured": true,
+  "output_sha256": "23f0d5e03ada7e2ae337d607b8084252b5bfae7a5fd8441051eb7e20bb2e72b2",
+  "prompt_sha256": "064c8ef32e0b0dbb096ee7f92771bbf52b4d66f05ac0cd3e8fff6d8b1af9baf6",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "rights-privacy-release-auditor",
+  "skill_invoked": true
+}

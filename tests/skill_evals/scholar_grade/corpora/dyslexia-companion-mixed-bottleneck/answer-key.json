@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "dyslexia-companion-mixed-bottleneck",
+  "must_support": [
+    "The companion can choose the smallest accessible next step."
+  ],
+  "must_reject": [
+    "full synthesis",
+    "all bottlenecks resolved",
+    "claim ready"
+  ],
+  "must_remain_uncertain": [
+    "The main bottleneck is mixed",
+    "The intended scholarly claim is not stable"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "fixture_id": "compact-methodology-triage",
+  "output_captured": true,
+  "output_sha256": "8d44061ab39c5505b890de9f49b070f9f883f5a6a98e5fe827555a549654cf55",
+  "prompt_sha256": "02639002957b2295125fb72e28a513bd0acd5eb0867f72b3ca7b9c488186ed83",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "methodology-source-auditor",
+  "skill_invoked": true
+}

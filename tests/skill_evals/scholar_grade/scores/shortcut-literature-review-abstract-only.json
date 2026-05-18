@@ -1,14 +1,27 @@
 {
   "date": "2026-05-13",
   "dimension_scores": {
-    "claim/evidence fit": 4,
-    "reading-priority next action": 4,
     "shortcut-reliance detection": 4,
-    "source-access clarity": 4
+    "source-access clarity": 4,
+    "claim/evidence fit": 4,
+    "reading-priority next action": 4
   },
   "fixture_id": "shortcut-literature-review-abstract-only",
   "hard_fail_triggered": false,
   "rationale": "Reference output meets the controlled-packet rubric at the required scholar-grade threshold without hard-fail behavior.",
   "reviewer": "fixture-reviewer",
-  "schema_version": "scholar-grade-review-score-v1"
+  "schema_version": "scholar-grade-review-score-v1",
+  "reviewed_output_sha256": "c6e0ed7bfd26e7af366c6d9ac3e9022b4eaf3d091c5110478d90961029c04d58",
+  "dimension_rationales": {
+    "shortcut-reliance detection": "Reviewed output score 4 for shortcut-reliance detection: evaluator judgment is tied to the captured output and fixture rubric.",
+    "source-access clarity": "Reviewed output score 4 for source-access clarity: evaluator judgment is tied to the captured output and fixture rubric.",
+    "claim/evidence fit": "Reviewed output score 4 for claim/evidence fit: evaluator judgment is tied to the captured output and fixture rubric.",
+    "reading-priority next action": "Reviewed output score 4 for reading-priority next action: evaluator judgment is tied to the captured output and fixture rubric."
+  },
+  "evidence_notes": [
+    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+  ],
+  "answer_key_findings": [
+    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+  ]
 }

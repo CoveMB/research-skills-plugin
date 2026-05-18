@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "metadata-lookup-consented-identifiers",
+  "must_support": [
+    "External lookup is permitted only for public citation identifiers."
+  ],
+  "must_reject": [
+    "private notes submitted",
+    "draft text submitted",
+    "metadata verified before lookup log"
+  ],
+  "must_remain_uncertain": [
+    "Private notes and draft text are outside the lookup payload",
+    "Lookup results must be recorded before metadata can be treated as verified"
+  ]
+}

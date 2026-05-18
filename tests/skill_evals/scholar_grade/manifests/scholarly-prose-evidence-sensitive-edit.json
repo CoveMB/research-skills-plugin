@@ -9,6 +9,7 @@
   "operator": "fixture-author",
   "output_file": "scholarly-prose-evidence-sensitive-edit.md",
   "output_sha256": "89ce161bebd6d63394d11b8974f553c4684c60b1911674a05dbdea89d8165d14",
+  "prompt_packet_sha256": "3fd2a3e675c0b81bb6f9e528836eb4f7a922c38cda1feca9d499b93e73dd9295",
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "scholarly-prose-editor",
   "skill_file": "skills/scholarly-prose-editor/SKILL.md",

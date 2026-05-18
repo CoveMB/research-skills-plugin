@@ -1,0 +1,10 @@
+{
+  "fixture_id": "literature-map-consensus-risk",
+  "output_captured": true,
+  "output_sha256": "ca9d439bbb98a5d8cd132ae33b5052b03ac23b2e98e266caf9548cd86d33ae93",
+  "prompt_sha256": "0eda75c0681c0f636e40808b12ef617037fd7c90442a1de0d7db829fcbf3939d",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "literature-review-mapper",
+  "skill_invoked": true
+}

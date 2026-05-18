@@ -2,13 +2,26 @@
   "date": "2026-05-13",
   "dimension_scores": {
     "accessibility routing": 4,
-    "ambiguity preservation": 4,
     "scope restraint": 4,
+    "ambiguity preservation": 4,
     "single next action": 4
   },
   "fixture_id": "dyslexia-companion-mixed-bottleneck",
   "hard_fail_triggered": false,
   "rationale": "Reference output meets the controlled-packet rubric at the required scholar-grade threshold without hard-fail behavior.",
   "reviewer": "fixture-reviewer",
-  "schema_version": "scholar-grade-review-score-v1"
+  "schema_version": "scholar-grade-review-score-v1",
+  "reviewed_output_sha256": "132347478714ea648ea6ed72b3d79e56edd00d2e035370866ee13eb2467c6146",
+  "dimension_rationales": {
+    "accessibility routing": "Reviewed output score 4 for accessibility routing: evaluator judgment is tied to the captured output and fixture rubric.",
+    "scope restraint": "Reviewed output score 4 for scope restraint: evaluator judgment is tied to the captured output and fixture rubric.",
+    "ambiguity preservation": "Reviewed output score 4 for ambiguity preservation: evaluator judgment is tied to the captured output and fixture rubric.",
+    "single next action": "Reviewed output score 4 for single next action: evaluator judgment is tied to the captured output and fixture rubric."
+  },
+  "evidence_notes": [
+    "Reviewed output was checked against the captured response, source packet limits, and rubric dimensions."
+  ],
+  "answer_key_findings": [
+    "Reviewed output was checked against answer-key support, rejection, and uncertainty requirements."
+  ]
 }
