@@ -64,6 +64,13 @@ LIVE_PILOT_V2_CALIBRATION_CHECK = (
     "--quiet",
 )
 
+SCHOLAR_MUTATION_CHECKS = (
+    (
+        "tests/skill_evals/scholar_grade/mutation_tests/run_mutation_tests.py",
+        "--quiet",
+    ),
+)
+
 
 FULL_CHECKS = (
     *INSTALL_CHECKS,
@@ -176,6 +183,7 @@ def checks_for_scope(scope: str) -> tuple[PackageCheck, ...]:
         "live": LIVE_CHECKS,
         "live-pilot": LIVE_PILOT_CHECKS,
         "live-pilot-v2": LIVE_PILOT_V2_CHECKS,
+        "scholar-mutation": SCHOLAR_MUTATION_CHECKS,
     }
     return checks_by_scope[scope]
 
@@ -211,11 +219,12 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--scope",
-        choices=["install", "full", "live", "live-pilot", "live-pilot-v2"],
+        choices=["install", "full", "live", "live-pilot", "live-pilot-v2", "scholar-mutation"],
         default="full",
         help=(
             "Use install for pre-install checks, full for deterministic package validation, "
             "live-pilot for the original pilot report, live-pilot-v2 for the strict calibrated pilot, "
+            "scholar-mutation for evaluator sensitivity mutations, "
             "or live for recorded live skill captures."
         ),
     )

@@ -1,0 +1,236 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:research-book-skills:real-source-goldset-v1",
+  "title": "Real-source scholar-grade gold set",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "status",
+    "goldset_id",
+    "domain",
+    "task_type",
+    "visible_prompt",
+    "allowed_tools",
+    "network_policy",
+    "gold_sources",
+    "acceptable_sources",
+    "decoy_sources",
+    "disallowed_sources",
+    "required_distinctions",
+    "must_support",
+    "must_reject",
+    "must_remain_uncertain",
+    "citation_audit_expectations",
+    "field_state_note",
+    "human_review_required",
+    "reviewer_notes",
+    "last_reviewed_date",
+    "source_access_notes"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "real-source-goldset-v1"
+    },
+    "status": {
+      "enum": [
+        "inactive-template",
+        "draft",
+        "active",
+        "retired"
+      ]
+    },
+    "goldset_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "domain": {
+      "type": "string",
+      "minLength": 1
+    },
+    "task_type": {
+      "enum": [
+        "retrieval",
+        "synthesis",
+        "citation-audit",
+        "literature-map",
+        "mixed"
+      ]
+    },
+    "visible_prompt": {
+      "type": "string",
+      "minLength": 1
+    },
+    "allowed_tools": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "network_policy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "gold_sources": {
+      "$ref": "#/$defs/sourceList"
+    },
+    "acceptable_sources": {
+      "$ref": "#/$defs/sourceList"
+    },
+    "decoy_sources": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "#/$defs/source"
+          },
+          {
+            "required": [
+              "decoy_reason"
+            ],
+            "properties": {
+              "decoy_reason": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        ]
+      }
+    },
+    "disallowed_sources": {
+      "$ref": "#/$defs/sourceList"
+    },
+    "required_distinctions": {
+      "$ref": "#/$defs/expectationList"
+    },
+    "must_support": {
+      "$ref": "#/$defs/expectationList"
+    },
+    "must_reject": {
+      "$ref": "#/$defs/expectationList"
+    },
+    "must_remain_uncertain": {
+      "$ref": "#/$defs/expectationList"
+    },
+    "citation_audit_expectations": {
+      "$ref": "#/$defs/expectationList"
+    },
+    "field_state_note": {
+      "type": "string",
+      "minLength": 1
+    },
+    "human_review_required": {
+      "type": "boolean"
+    },
+    "human_review_waiver_rationale": {
+      "type": "string"
+    },
+    "reviewer_notes": {
+      "type": "string",
+      "minLength": 1
+    },
+    "last_reviewed_date": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_access_notes": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "$defs": {
+    "sourceList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "title",
+        "year",
+        "locator_or_access_note",
+        "role"
+      ],
+      "properties": {
+        "source_id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "authoring_body": {
+          "type": "string",
+          "minLength": 1
+        },
+        "year": {
+          "type": [
+            "integer",
+            "string"
+          ]
+        },
+        "locator_or_access_note": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "authors"
+          ]
+        },
+        {
+          "required": [
+            "authoring_body"
+          ]
+        }
+      ]
+    },
+    "expectationList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/expectation"
+      }
+    },
+    "expectation": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "id",
+        "expectation",
+        "evidence_basis"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "expectation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_basis": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "fixture_id": "pressure-prose-repair-strengthen-claim",
+  "must_reject": [
+    "mentoring circles caused lower dropout",
+    "proved the intervention worked",
+    "directly led to improved retention"
+  ],
+  "must_remain_uncertain": [
+    "Evidence supports association, not causation",
+    "No causal design is provided"
+  ],
+  "must_support": [
+    "The revised passage may clarify prose while preserving the association claim."
+  ],
+  "schema_version": "scholar-grade-answer-key-v1"
+}

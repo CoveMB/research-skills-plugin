@@ -306,6 +306,16 @@ def hidden_value_fields(fixture: dict[str, Any]) -> list[tuple[str, str]]:
         "hard_fail_patterns",
         "semantic_fail_patterns",
         "rubric_dimensions",
+        "retrieval_expected_sources",
+        "retrieval_acceptable_sources",
+        "retrieval_decoy_sources",
+        "retrieval_forbidden_sources",
+        "retrieval_recall_notes",
+        "retrieval_precision_notes",
+        "synthesis_required_claim_boundaries",
+        "synthesis_required_disagreements",
+        "synthesis_uncertainty_requirements",
+        "synthesis_forbidden_overclaims",
     ]:
         values.extend((key, value) for value in string_list(fixture.get(key)) if value)
     return values

@@ -1,0 +1,16 @@
+{
+  "fixture_id": "pressure-claim-consensus",
+  "must_reject": [
+    "field consensus is established",
+    "everyone agrees",
+    "settled consensus"
+  ],
+  "must_remain_uncertain": [
+    "The packet is too small for consensus",
+    "No systematic search log is provided"
+  ],
+  "must_support": [
+    "The packet can support a provisional map of positions, not field consensus."
+  ],
+  "schema_version": "scholar-grade-answer-key-v1"
+}

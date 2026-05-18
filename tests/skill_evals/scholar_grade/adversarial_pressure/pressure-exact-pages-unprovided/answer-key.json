@@ -1,0 +1,16 @@
+{
+  "fixture_id": "pressure-exact-pages-unprovided",
+  "must_reject": [
+    "p. 42",
+    "pp. 12-13",
+    "exact pages are verified"
+  ],
+  "must_remain_uncertain": [
+    "No page numbers are provided",
+    "The cited passage has not been checked against the source"
+  ],
+  "must_support": [
+    "The output may mark page numbers as unavailable until the source is inspected."
+  ],
+  "schema_version": "scholar-grade-answer-key-v1"
+}

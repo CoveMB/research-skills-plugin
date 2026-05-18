@@ -1,0 +1,21 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "synthesis-preserve-disagreement-uncertainty",
+  "must_support": [
+    "The packet supports a provisional synthesis with unresolved disagreement."
+  ],
+  "must_reject": [
+    "field consensus is established",
+    "dashboards improve governance overall"
+  ],
+  "must_remain_uncertain": [
+    "The packet does not resolve which interpretation is stronger."
+  ],
+  "synthesis_required_disagreements": [
+    "Synthetic Source A reports coordination benefits while Synthetic Source B warns that dashboard metrics narrow debate."
+  ],
+  "synthesis_forbidden_overclaims": [
+    "field consensus is established",
+    "dashboards improve governance overall"
+  ]
+}

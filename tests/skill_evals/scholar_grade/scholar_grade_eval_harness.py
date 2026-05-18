@@ -56,7 +56,26 @@ NON_EMPTY_STRING_LIST_KEYS = {
     "resource_basis",
 }
 STRING_LIST_KEYS = NON_EMPTY_STRING_LIST_KEYS | {"allowed_claims"}
-OPTIONAL_STRING_LIST_KEYS = {"required_source_anchors", "semantic_fail_patterns"}
+RETRIEVAL_SYNTHESIS_REPORT_FIELDS = (
+    ("retrieval_expected_sources", "Retrieval expected sources"),
+    ("retrieval_acceptable_sources", "Retrieval acceptable sources"),
+    ("retrieval_decoy_sources", "Retrieval decoy sources"),
+    ("retrieval_forbidden_sources", "Retrieval forbidden sources"),
+    ("retrieval_recall_notes", "Retrieval recall notes"),
+    ("retrieval_precision_notes", "Retrieval precision notes"),
+    ("synthesis_required_claim_boundaries", "Synthesis required claim boundaries"),
+    ("synthesis_required_disagreements", "Synthesis required disagreements"),
+    ("synthesis_uncertainty_requirements", "Synthesis uncertainty requirements"),
+    ("synthesis_forbidden_overclaims", "Synthesis forbidden overclaims"),
+)
+RETRIEVAL_SYNTHESIS_STRING_LIST_KEYS = {
+    key for key, _label in RETRIEVAL_SYNTHESIS_REPORT_FIELDS
+}
+OPTIONAL_STRING_LIST_KEYS = {
+    "required_source_anchors",
+    "semantic_fail_patterns",
+    *RETRIEVAL_SYNTHESIS_STRING_LIST_KEYS,
+}
 OPTIONAL_ALIAS_MAP_KEYS = {
     "required_uncertainty_aliases": "required_uncertainties",
     "allowed_claim_aliases": "allowed_claims",
@@ -237,6 +256,17 @@ MANUAL_REVIEW_EXPECTATIONS = [
     "Score each rubric dimension from 0 to 5, where 0 is unusable and 5 is scholar-grade for the available source basis.",
     "Any hard-fail match, fabrication, privacy leak, or unsupported verification claim overrides numeric scoring and fails the case.",
 ]
+RETRIEVAL_SYNTHESIS_REQUIRED_OUTPUT_FIELDS = (
+    ("retrieval_expected_sources", "retrieval expected source"),
+    ("synthesis_required_claim_boundaries", "synthesis required claim boundary"),
+    ("synthesis_required_disagreements", "synthesis required disagreement"),
+    ("synthesis_uncertainty_requirements", "synthesis uncertainty requirement"),
+)
+RETRIEVAL_SYNTHESIS_ASSERTED_OUTPUT_FIELDS = (
+    ("retrieval_decoy_sources", "retrieval decoy source"),
+    ("retrieval_forbidden_sources", "retrieval forbidden source"),
+    ("synthesis_forbidden_overclaims", "synthesis forbidden overclaim"),
+)
 
 
 def fixture_list(document: dict[str, Any]) -> list[dict[str, Any]]:
@@ -679,6 +709,32 @@ def required_source_anchor_errors(fixture: dict[str, Any], output_text: str) -> 
     ]
 
 
+def missing_output_field_errors(
+    fixture: dict[str, Any],
+    output_text: str,
+    field_checks: tuple[tuple[str, str], ...],
+) -> list[str]:
+    return [
+        f"{fixture_identifier(fixture)}: missing {label} {value!r}"
+        for key, label in field_checks
+        for value in string_list(fixture.get(key))
+        if not normalized_contains(output_text, value)
+    ]
+
+
+def asserted_output_field_errors(
+    fixture: dict[str, Any],
+    output_text: str,
+    field_checks: tuple[tuple[str, str], ...],
+) -> list[str]:
+    return [
+        f"{fixture_identifier(fixture)}: contains {label} {value!r}"
+        for key, label in field_checks
+        for value in string_list(fixture.get(key))
+        if contains_asserted_phrase(output_text, value)
+    ]
+
+
 def required_uncertainty_errors(fixture: dict[str, Any], output_text: str) -> list[str]:
     return [
         f"{fixture_identifier(fixture)}: missing required uncertainty {uncertainty!r}"
@@ -907,7 +963,9 @@ def validate_output_for_fixture(outputs_dir: Path, fixture: dict[str, Any]) -> l
         *required_source_anchor_errors(fixture, output_text),
         *required_uncertainty_errors(fixture, output_text),
         *allowed_claim_boundary_errors(fixture, output_text),
+        *missing_output_field_errors(fixture, output_text, RETRIEVAL_SYNTHESIS_REQUIRED_OUTPUT_FIELDS),
         *disallowed_claim_errors(fixture, output_text),
+        *asserted_output_field_errors(fixture, output_text, RETRIEVAL_SYNTHESIS_ASSERTED_OUTPUT_FIELDS),
         *hard_fail_pattern_errors(fixture, output_text),
         *semantic_fail_pattern_errors(fixture, output_text),
         *global_hard_fail_pattern_errors(fixture, output_text),
@@ -1742,6 +1800,10 @@ def fixture_case_report(fixture: dict[str, Any], outputs_dir: Path | None) -> di
         "required_uncertainties": string_list(fixture.get("required_uncertainties")),
         "allowed_claims": string_list(fixture.get("allowed_claims")),
         "disallowed_claims": string_list(fixture.get("disallowed_claims")),
+        **{
+            key: string_list(fixture.get(key))
+            for key, _label in RETRIEVAL_SYNTHESIS_REPORT_FIELDS
+        },
         "hard_fail_patterns": string_list(fixture.get("hard_fail_patterns")),
         "semantic_fail_patterns": string_list(fixture.get("semantic_fail_patterns")),
         "rubric_dimensions": string_list(fixture.get("rubric_dimensions")),
@@ -1804,6 +1866,14 @@ def quote_markdown(text: str) -> list[str]:
     return [f"> {line}" for line in (text.splitlines() or [""])]
 
 
+def retrieval_synthesis_scorecard_lines(case: dict[str, Any]) -> list[str]:
+    return [
+        f"- {label}: {inline_code_list(case[key])}"
+        for key, label in RETRIEVAL_SYNTHESIS_REPORT_FIELDS
+        if case.get(key)
+    ]
+
+
 def format_markdown_scorecard(report: dict[str, Any]) -> str:
     lines = [
         "# Scholar-Grade Evaluation Harness",
@@ -1863,6 +1933,7 @@ def format_markdown_scorecard(report: dict[str, Any]) -> str:
                 f"- Required uncertainties: {inline_code_list(case['required_uncertainties'])}",
                 f"- Allowed claims: {inline_code_list(case['allowed_claims'])}",
                 f"- Disallowed claims: {inline_code_list(case['disallowed_claims'])}",
+                *retrieval_synthesis_scorecard_lines(case),
                 f"- Hard-fail patterns: {inline_code_list(case['hard_fail_patterns'])}",
                 f"- Semantic fail patterns: {inline_code_list(case['semantic_fail_patterns'])}",
                 f"- Rubric dimensions: {inline_code_list(case['rubric_dimensions'])}",

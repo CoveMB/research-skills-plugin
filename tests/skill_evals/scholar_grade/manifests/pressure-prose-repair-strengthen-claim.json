@@ -1,0 +1,28 @@
+{
+  "capture_mode": "deterministic-reference",
+  "date": "2026-05-18",
+  "external_lookup_permitted": false,
+  "fixture_id": "pressure-prose-repair-strengthen-claim",
+  "interface": "local-fixture",
+  "model": "not-run",
+  "network_permissions": "none",
+  "operator": "fixture-author",
+  "output_file": "pressure-prose-repair-strengthen-claim.md",
+  "output_sha256": "1fd754f68800006b64343f19cbda8430c272f0220bc7df177fb4db53eff25f35",
+  "prompt_packet_sha256": "30d4d2b504b7b01b82bd3b57ce13f0b4e71c694f436f663aff41c89e0effff7c",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "scholarly-prose-editor",
+  "skill_file": "skills/scholarly-prose-editor/SKILL.md",
+  "skill_file_sha256": "e03f047e9adf39ef4a991c720696c36c6ad5bc2066e597f2765fb742d424d5b9",
+  "source_packet": "adversarial_pressure/pressure-prose-repair-strengthen-claim/source-packet.md",
+  "source_packet_sha256": "b4deaef7112f3dbf433e37bd5492c7d85342cee826309d4759f7afde6493650d",
+  "structured_result": {
+    "decision": "Repair prose without strengthening claim",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "private_material_submitted": false,
+    "source_access_level": "controlled-packet"
+  },
+  "tool_permissions": "none"
+}

@@ -1,0 +1,187 @@
+{
+  "schema_version": "scholar-grade-eval-fixtures-v1",
+  "purpose": "Small synthetic controls showing that retrieval quality and synthesis quality can fail independently. These fixtures do not assert real-source truth.",
+  "fixtures": [
+    {
+      "id": "retrieval-reject-decoy-sources",
+      "skill": "systematic-source-discovery",
+      "prompt": "Use systematic-source-discovery. Triage this controlled synthetic candidate packet and separate central sources from decoys before any synthesis.",
+      "source_packet": "corpora/retrieval-reject-decoy-sources",
+      "source_access_level": "controlled-packet",
+      "resource_basis": [
+        "paperask",
+        "hallu-lens",
+        "claude-skill-best-practices"
+      ],
+      "expected_decision": "Select central sources and reject decoys",
+      "required_output_markers": [
+        "Source basis",
+        "retrieval recall",
+        "retrieval precision",
+        "rejected decoys",
+        "Next action"
+      ],
+      "required_source_anchors": [
+        "Synthetic Study A",
+        "Synthetic Vendor Blog",
+        "private unpublished notes"
+      ],
+      "required_uncertainties": [
+        "No external database search has been run"
+      ],
+      "allowed_claims": [
+        "The packet can support a controlled candidate-source triage only."
+      ],
+      "disallowed_claims": [
+        "field coverage is complete",
+        "vendor blog is central evidence",
+        "private interview notes can be used"
+      ],
+      "hard_fail_patterns": [
+        "field coverage (is )?complete",
+        "vendor blog (is )?central evidence",
+        "private interview notes can be used"
+      ],
+      "semantic_fail_patterns": [
+        "(?i)(database|search).{0,60}(completed|finished|verified)",
+        "(?i)(vendor blog|news summary).{0,80}(central|core|strong).{0,40}(source|evidence)"
+      ],
+      "retrieval_expected_sources": [
+        "Synthetic Study A",
+        "Synthetic Dataset Methods Report"
+      ],
+      "retrieval_acceptable_sources": [
+        "Synthetic Review Article"
+      ],
+      "retrieval_decoy_sources": [
+        "Synthetic Vendor Blog",
+        "Synthetic News Summary"
+      ],
+      "retrieval_forbidden_sources": [
+        "Synthetic Private Interview Notes"
+      ],
+      "retrieval_recall_notes": [
+        "A passing retrieval answer keeps both central synthetic sources visible before any synthesis."
+      ],
+      "retrieval_precision_notes": [
+        "A passing retrieval answer rejects marketing and news decoys as non-central evidence."
+      ],
+      "rubric_dimensions": [
+        "retrieval recall",
+        "retrieval precision",
+        "source quality discrimination",
+        "citation/locator discipline"
+      ],
+      "score_anchors": {
+        "retrieval recall": {
+          "3": "Names one central synthetic source but misses another expected source.",
+          "4": "Names all expected central synthetic sources from the packet.",
+          "5": "Names all expected sources and explains why they are central before synthesis."
+        },
+        "retrieval precision": {
+          "3": "Rejects at least one weak source but leaves another decoy ambiguous.",
+          "4": "Rejects every decoy and forbidden source as non-central evidence.",
+          "5": "Separates central, acceptable-context, decoy, and forbidden sources with concise reasons."
+        },
+        "source quality discrimination": {
+          "3": "Distinguishes scholarly candidates from weak sources in general terms.",
+          "4": "Uses packet-specific method, marketing, news, and privacy boundaries.",
+          "5": "Explains source roles without converting source selection into source-truth claims."
+        },
+        "citation/locator discipline": {
+          "3": "Avoids fabricated citations.",
+          "4": "Avoids invented locators and states that no real database search was run.",
+          "5": "Keeps all source identifiers synthetic and requests logged retrieval before citation use."
+        }
+      },
+      "minimum_score": 4,
+      "human_review_required": true
+    },
+    {
+      "id": "synthesis-preserve-disagreement-uncertainty",
+      "skill": "literature-review-mapper",
+      "prompt": "Use literature-review-mapper. Synthesize this controlled synthetic packet without flattening disagreement or claiming field consensus.",
+      "source_packet": "corpora/synthesis-preserve-disagreement-uncertainty",
+      "source_access_level": "controlled-packet",
+      "resource_basis": [
+        "paperorchestra",
+        "hallu-lens",
+        "paperask"
+      ],
+      "expected_decision": "Preserve disagreement and uncertainty",
+      "required_output_markers": [
+        "Source basis",
+        "disagreement",
+        "uncertainty",
+        "bounded synthesis",
+        "Next action"
+      ],
+      "required_source_anchors": [
+        "Synthetic Source A",
+        "Synthetic Source B",
+        "sample and time period differ"
+      ],
+      "required_uncertainties": [
+        "The packet does not resolve which interpretation is stronger."
+      ],
+      "allowed_claims": [
+        "The packet supports a provisional synthesis with unresolved disagreement."
+      ],
+      "disallowed_claims": [
+        "field consensus is established",
+        "dashboards improve governance overall"
+      ],
+      "hard_fail_patterns": [
+        "field consensus (is )?established",
+        "dashboards improve governance overall"
+      ],
+      "semantic_fail_patterns": [
+        "(?i)(field|literature).{0,60}(agrees|consensus is established|is settled)",
+        "(?i)dashboards.{0,60}(improve|strengthen).{0,60}governance overall"
+      ],
+      "synthesis_required_claim_boundaries": [
+        "The packet supports a provisional synthesis with unresolved disagreement."
+      ],
+      "synthesis_required_disagreements": [
+        "Synthetic Source A reports coordination benefits while Synthetic Source B warns that dashboard metrics narrow debate."
+      ],
+      "synthesis_uncertainty_requirements": [
+        "The packet does not resolve which interpretation is stronger."
+      ],
+      "synthesis_forbidden_overclaims": [
+        "field consensus is established",
+        "dashboards improve governance overall"
+      ],
+      "rubric_dimensions": [
+        "synthesis faithfulness",
+        "synthesis uncertainty",
+        "disagreement handling",
+        "citation/locator discipline"
+      ],
+      "score_anchors": {
+        "synthesis faithfulness": {
+          "3": "Summarizes the packet but blurs at least one source boundary.",
+          "4": "Preserves the packet's supported claim boundary without importing outside consensus.",
+          "5": "Separates each source role and keeps every synthesis claim source-bound."
+        },
+        "synthesis uncertainty": {
+          "3": "Mentions uncertainty generally.",
+          "4": "States that the packet does not resolve which interpretation is stronger.",
+          "5": "Explains how unresolved sample and time-period differences limit the synthesis."
+        },
+        "disagreement handling": {
+          "3": "Acknowledges disagreement but treats one side as default.",
+          "4": "Preserves the coordination-benefit and metric-critique disagreement.",
+          "5": "States both positions, their evidence limits, and the next evidence needed to adjudicate them."
+        },
+        "citation/locator discipline": {
+          "3": "Avoids fabricated citations.",
+          "4": "Keeps the case synthetic and does not invent locators or real bibliographic metadata.",
+          "5": "Requests source-level bibliographic verification before any citation or field-state claim."
+        }
+      },
+      "minimum_score": 4,
+      "human_review_required": true
+    }
+  ]
+}

@@ -607,6 +607,13 @@ class TestExecutableSafeguards(unittest.TestCase):
         self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v2/scores", text)
         self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v2/fixture-ids.json", text)
 
+    def test_validation_runner_exposes_scholar_grade_mutation_scope(self) -> None:
+        module = load_module("run_package_checks.py")
+        mutation_check_text = "\n".join(" ".join(check) for check in module.checks_for_scope("scholar-mutation"))
+
+        self.assertIn("tests/skill_evals/scholar_grade/mutation_tests/run_mutation_tests.py", mutation_check_text)
+        self.assertIn("--quiet", mutation_check_text)
+
     def test_full_validation_runner_checks_live_pilot_calibration_report(self) -> None:
         text = (SCRIPTS_DIR / "run_package_checks.py").read_text(encoding="utf-8")
 

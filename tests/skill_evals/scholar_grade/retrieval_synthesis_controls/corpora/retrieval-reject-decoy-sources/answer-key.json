@@ -1,0 +1,26 @@
+{
+  "schema_version": "scholar-grade-answer-key-v1",
+  "fixture_id": "retrieval-reject-decoy-sources",
+  "must_support": [
+    "The packet can support a controlled candidate-source triage only."
+  ],
+  "must_reject": [
+    "field coverage is complete",
+    "vendor blog is central evidence",
+    "private interview notes can be used"
+  ],
+  "must_remain_uncertain": [
+    "No external database search has been run"
+  ],
+  "retrieval_expected_sources": [
+    "Synthetic Study A",
+    "Synthetic Dataset Methods Report"
+  ],
+  "retrieval_decoy_sources": [
+    "Synthetic Vendor Blog",
+    "Synthetic News Summary"
+  ],
+  "retrieval_forbidden_sources": [
+    "Synthetic Private Interview Notes"
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "schema_version": "real-source-goldset-v1",
+  "status": "inactive-template",
+  "goldset_id": "synthesis-template",
+  "domain": "PLACEHOLDER: scholarly domain and subfield",
+  "task_type": "synthesis",
+  "visible_prompt": "PLACEHOLDER: prompt that asks the skill to synthesize a bounded literature question without overstating consensus.",
+  "allowed_tools": [
+    "PLACEHOLDER: permitted search, library, citation, or local-note tools"
+  ],
+  "network_policy": "PLACEHOLDER: no-network, public-web-allowed, library-catalog-only, or another explicit policy",
+  "gold_sources": [
+    {
+      "source_id": "gold-1",
+      "title": "PLACEHOLDER: human-reviewed source central to the synthesis",
+      "authors": [
+        "PLACEHOLDER: author or authoring body"
+      ],
+      "year": "PLACEHOLDER: publication year if known",
+      "locator_or_access_note": "PLACEHOLDER: DOI, stable URL, catalog record, archive note, or access note",
+      "role": "PLACEHOLDER: primary source, review, dataset, method paper, or other reviewed role"
+    }
+  ],
+  "acceptable_sources": [
+    {
+      "source_id": "acceptable-1",
+      "title": "PLACEHOLDER: human-reviewed source that can support context but is not central",
+      "authors": [
+        "PLACEHOLDER: author or authoring body"
+      ],
+      "year": "PLACEHOLDER: publication year if known",
+      "locator_or_access_note": "PLACEHOLDER: DOI, stable URL, catalog record, archive note, or access note",
+      "role": "PLACEHOLDER: acceptable supporting or background role"
+    }
+  ],
+  "decoy_sources": [
+    {
+      "source_id": "decoy-1",
+      "title": "PLACEHOLDER: source title that invites cherry-picking or consensus overstatement",
+      "authors": [
+        "PLACEHOLDER: author or authoring body"
+      ],
+      "year": "PLACEHOLDER: publication year if known",
+      "locator_or_access_note": "PLACEHOLDER: DOI, stable URL, catalog record, archive note, or access note",
+      "role": "PLACEHOLDER: decoy role",
+      "decoy_reason": "PLACEHOLDER: human-reviewed reason this source should not drive the synthesis."
+    }
+  ],
+  "disallowed_sources": [
+    {
+      "source_id": "disallowed-1",
+      "title": "PLACEHOLDER: source title that must not be used in the synthesis",
+      "authors": [
+        "PLACEHOLDER: author or authoring body"
+      ],
+      "year": "PLACEHOLDER: publication year if known",
+      "locator_or_access_note": "PLACEHOLDER: DOI, stable URL, catalog record, archive note, or access note",
+      "role": "PLACEHOLDER: disallowed role"
+    }
+  ],
+  "required_distinctions": [
+    {
+      "id": "evidence-type-distinction",
+      "expectation": "PLACEHOLDER: distinction the synthesis must preserve, such as empirical finding versus review interpretation versus commentary.",
+      "evidence_basis": "PLACEHOLDER: source IDs and reviewer basis."
+    }
+  ],
+  "must_support": [
+    {
+      "id": "bounded-synthesis-claim",
+      "expectation": "PLACEHOLDER: claim the synthesis may support with explicit limits.",
+      "evidence_basis": "PLACEHOLDER: source IDs and reviewer basis."
+    }
+  ],
+  "must_reject": [
+    {
+      "id": "overstated-consensus",
+      "expectation": "PLACEHOLDER: consensus, causal, novelty, or field-state claim the synthesis must reject.",
+      "evidence_basis": "PLACEHOLDER: source IDs and reviewer basis."
+    }
+  ],
+  "must_remain_uncertain": [
+    {
+      "id": "open-field-question",
+      "expectation": "PLACEHOLDER: unresolved issue the synthesis must keep uncertain.",
+      "evidence_basis": "PLACEHOLDER: source IDs and reviewer basis."
+    }
+  ],
+  "citation_audit_expectations": [
+    {
+      "id": "citation-role-check",
+      "expectation": "PLACEHOLDER: citation-role expectation for claims in the synthesis.",
+      "evidence_basis": "PLACEHOLDER: source IDs and reviewer basis."
+    }
+  ],
+  "field_state_note": "PLACEHOLDER: human-reviewed note on consensus, disagreement, open questions, and evidence limits.",
+  "human_review_required": true,
+  "reviewer_notes": "PLACEHOLDER: notes on who reviewed the source truth and what remains outside scope.",
+  "last_reviewed_date": "PLACEHOLDER: YYYY-MM-DD after human review",
+  "source_access_notes": "PLACEHOLDER: where reviewers can inspect the sources without storing source text here."
+}

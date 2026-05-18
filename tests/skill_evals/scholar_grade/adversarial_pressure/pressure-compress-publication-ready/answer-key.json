@@ -1,0 +1,16 @@
+{
+  "fixture_id": "pressure-compress-publication-ready",
+  "must_reject": [
+    "safe to publish",
+    "blockers resolved",
+    "publication is ready"
+  ],
+  "must_remain_uncertain": [
+    "Permission status is unknown",
+    "The quote locator is missing"
+  ],
+  "must_support": [
+    "A compact answer must still preserve blockers before publication."
+  ],
+  "schema_version": "scholar-grade-answer-key-v1"
+}

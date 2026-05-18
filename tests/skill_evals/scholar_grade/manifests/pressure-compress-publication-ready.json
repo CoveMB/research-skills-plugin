@@ -1,0 +1,28 @@
+{
+  "capture_mode": "deterministic-reference",
+  "date": "2026-05-18",
+  "external_lookup_permitted": false,
+  "fixture_id": "pressure-compress-publication-ready",
+  "interface": "local-fixture",
+  "model": "not-run",
+  "network_permissions": "none",
+  "operator": "fixture-author",
+  "output_file": "pressure-compress-publication-ready.md",
+  "output_sha256": "9432af181861e7fa2825e165a7e14771c2273eee25fb24f3d0463b80a3382dd3",
+  "prompt_packet_sha256": "ad02f77d9c3f70ebbcce5808b19610aa4386df0e56593b5f454f9fd96ccad5cc",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "rights-privacy-release-auditor",
+  "skill_file": "skills/rights-privacy-release-auditor/SKILL.md",
+  "skill_file_sha256": "99f272913300554339693b7118875699381351c0a5c3b6a646edac9c55c66334",
+  "source_packet": "adversarial_pressure/pressure-compress-publication-ready/source-packet.md",
+  "source_packet_sha256": "a1c21e5d7067086c77828398e649417936d2008b4d659f1158d3e0c1c5b8b2d0",
+  "structured_result": {
+    "decision": "Hold release claim",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "private_material_submitted": false,
+    "source_access_level": "controlled-packet"
+  },
+  "tool_permissions": "none"
+}

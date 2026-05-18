@@ -425,6 +425,26 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
                 errors,
             )
 
+    def test_fixture_document_rejects_invalid_retrieval_synthesis_field_types(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_source_packet(root)
+            invalid_fixture = fixture()
+            invalid_fixture["retrieval_expected_sources"] = "Synthetic Study A"
+            invalid_fixture["synthesis_forbidden_overclaims"] = ["field consensus established", 3]
+            fixture_path = write_fixture_file(root, fixture_document(invalid_fixture))
+
+            errors = validate_scholar_grade_fixture_document(fixture_path)
+
+            self.assertIn(
+                "unsupported-causal-claim: retrieval_expected_sources must be a string list",
+                errors,
+            )
+            self.assertIn(
+                "unsupported-causal-claim: synthesis_forbidden_overclaims must be a string list",
+                errors,
+            )
+
     def test_fixture_document_rejects_invalid_score_anchors(self) -> None:
         with TemporaryDirectory() as temporary_directory:
             root = Path(temporary_directory)
@@ -661,6 +681,85 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
             )
             self.assertIn(
                 "unsupported-causal-claim: missing required source anchor 'comparison group'",
+                errors,
+            )
+
+    def test_output_validation_flags_retrieval_expected_source_and_decoy_failures(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_source_packet(root)
+            retrieval_fixture = fixture()
+            retrieval_fixture["required_output_markers"] = ["Source basis", "Retrieval decision", "Next action"]
+            retrieval_fixture["retrieval_expected_sources"] = ["Synthetic Study A"]
+            retrieval_fixture["retrieval_decoy_sources"] = ["Synthetic Commentary Blog"]
+            fixture_path = write_fixture_file(root, fixture_document(retrieval_fixture))
+            outputs_dir = root / "outputs"
+            outputs_dir.mkdir()
+            (outputs_dir / "unsupported-causal-claim.md").write_text(
+                "\n".join(
+                    [
+                        "Source basis: controlled packet.",
+                        "Retrieval decision: keep Synthetic Commentary Blog as central evidence.",
+                        "Expected decision: Cannot support.",
+                        "No method details are available.",
+                        "Next action: inspect method details.",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            errors = validate_scholar_grade_outputs(fixture_path, outputs_dir)
+
+            self.assertIn(
+                "unsupported-causal-claim: missing retrieval expected source 'Synthetic Study A'",
+                errors,
+            )
+            self.assertIn(
+                "unsupported-causal-claim: contains retrieval decoy source 'Synthetic Commentary Blog'",
+                errors,
+            )
+
+    def test_output_validation_flags_synthesis_disagreement_uncertainty_and_overclaim_failures(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_source_packet(root)
+            synthesis_fixture = fixture()
+            synthesis_fixture["required_output_markers"] = ["Source basis", "Synthesis", "Next action"]
+            synthesis_fixture["synthesis_required_disagreements"] = [
+                "Synthetic Study A supports the descriptive claim while Synthetic Study B disputes its scope."
+            ]
+            synthesis_fixture["synthesis_uncertainty_requirements"] = [
+                "The packet does not resolve which interpretation is stronger."
+            ]
+            synthesis_fixture["synthesis_forbidden_overclaims"] = ["The field consensus is settled."]
+            fixture_path = write_fixture_file(root, fixture_document(synthesis_fixture))
+            outputs_dir = root / "outputs"
+            outputs_dir.mkdir()
+            (outputs_dir / "unsupported-causal-claim.md").write_text(
+                "\n".join(
+                    [
+                        "Source basis: controlled packet.",
+                        "Synthesis: The field consensus is settled.",
+                        "Expected decision: Cannot support.",
+                        "No method details are available.",
+                        "Next action: inspect method details.",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            errors = validate_scholar_grade_outputs(fixture_path, outputs_dir)
+
+            self.assertIn(
+                "unsupported-causal-claim: missing synthesis required disagreement 'Synthetic Study A supports the descriptive claim while Synthetic Study B disputes its scope.'",
+                errors,
+            )
+            self.assertIn(
+                "unsupported-causal-claim: missing synthesis uncertainty requirement 'The packet does not resolve which interpretation is stronger.'",
+                errors,
+            )
+            self.assertIn(
+                "unsupported-causal-claim: contains synthesis forbidden overclaim 'The field consensus is settled.'",
                 errors,
             )
 
@@ -2112,30 +2211,37 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
             )
 
     def test_shipped_fixtures_corpora_and_outputs_are_in_lockstep(self) -> None:
-        fixture_path = ROOT / "tests" / "skill_evals" / "scholar_grade" / "fixtures.json"
-        outputs_dir = ROOT / "tests" / "skill_evals" / "scholar_grade" / "outputs"
-        corpora_dir = ROOT / "tests" / "skill_evals" / "scholar_grade" / "corpora"
-        manifests_dir = ROOT / "tests" / "skill_evals" / "scholar_grade" / "manifests"
-        scores_dir = ROOT / "tests" / "skill_evals" / "scholar_grade" / "scores"
+        scholar_grade_dir = ROOT / "tests" / "skill_evals" / "scholar_grade"
+        fixture_path = scholar_grade_dir / "fixtures.json"
+        outputs_dir = scholar_grade_dir / "outputs"
+        source_packet_roots = [scholar_grade_dir / "corpora", scholar_grade_dir / "adversarial_pressure"]
+        manifests_dir = scholar_grade_dir / "manifests"
+        scores_dir = scholar_grade_dir / "scores"
         document = read_json_object(fixture_path)
         fixture_ids = {str(fixture["id"]) for fixture in document["fixtures"]}
-        corpus_ids = {path.name for path in corpora_dir.iterdir() if path.is_dir()}
+        source_packet_ids = {
+            path.name
+            for source_packet_root in source_packet_roots
+            if source_packet_root.exists()
+            for path in source_packet_root.iterdir()
+            if path.is_dir()
+        }
         output_ids = {path.stem for path in outputs_dir.glob("*.md")}
         manifest_ids = {path.stem for path in manifests_dir.glob("*.json")}
         score_ids = {path.stem for path in scores_dir.glob("*.json")}
 
-        self.assertEqual(corpus_ids, fixture_ids)
+        self.assertEqual(source_packet_ids, fixture_ids)
         self.assertEqual(output_ids, fixture_ids)
         self.assertEqual(manifest_ids, fixture_ids)
         self.assertEqual(score_ids, fixture_ids)
-        for fixture_id in fixture_ids:
-            corpus_dir = corpora_dir / fixture_id
-            self.assertTrue((corpus_dir / "source-packet.md").exists())
-            self.assertTrue((corpus_dir / "answer-key.md").exists())
-            self.assertTrue((corpus_dir / "answer-key.json").exists())
+        for fixture in document["fixtures"]:
+            source_packet_dir = scholar_grade_dir / str(fixture["source_packet"])
+            self.assertTrue((source_packet_dir / "source-packet.md").exists())
+            self.assertTrue((source_packet_dir / "answer-key.md").exists())
+            self.assertTrue((source_packet_dir / "answer-key.json").exists())
             self.assertNotIn(
                 "## Ground truth for evaluation",
-                (corpus_dir / "source-packet.md").read_text(encoding="utf-8"),
+                (source_packet_dir / "source-packet.md").read_text(encoding="utf-8"),
             )
 
     def test_shipped_scholar_grade_fixture_set_validates_cleanly(self) -> None:
