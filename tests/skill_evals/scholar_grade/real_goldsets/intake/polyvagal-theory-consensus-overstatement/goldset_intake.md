@@ -16,13 +16,17 @@ Narrow research or evaluation question:
 - Focus areas: autonomic nervous system regulation, vagal tone, social
   engagement, trauma responses, and therapeutic applications.
 - Human narrowing still required: executed search record, actual source corpus,
-  source-access boundaries, and reviewer appraisal before fixture authoring.
+  source-access records for each selected source, and reviewer appraisal before
+  fixture authoring.
 
 Scholarly failure mode being tested:
 
 - Field uncertainty collapsed into an overstated consensus claim.
 - Related risks: cherry-picking, source-type confusion, decoy source accepted,
   and inaccurate synthesis.
+- Related inverse failure mode: critique overreach, where serious criticism of
+  specific Polyvagal Theory mechanisms is inflated into the claim that the whole
+  theory is useless, fully disproven, or clinically irrelevant.
 - The output must avoid both presenting Polyvagal theory as settled neuroscience
   and dismissing the whole theory as useless or disproven.
 
@@ -72,11 +76,22 @@ Search boundaries:
   critiques, responses, reviews, and empirical tests.
 - Do not exclude older physiology or anatomy papers when directly relevant to
   evaluating the theory's mechanisms.
-- Language scope:
+- Language scope: primary inclusion language is English. Include non-English
+  sources only when directly relevant, metadata is recoverable, and
+  classification does not depend on unsupported machine translation. German
+  critique sources may be included. Japanese overview sources may be included
+  only as clinical or background context if reliable metadata or an English
+  abstract is available.
 - Discipline or venue scope: clinical psychology, trauma therapy, affective
   neuroscience, autonomic physiology, psychophysiology, attachment, and
   behavioral science.
-- Access limits:
+- Access limits: paywalled scholarly sources may be included if title,
+  authorship, journal, year, DOI, and abstract or record metadata are
+  recoverable from reliable scholarly records. Use full-text claims only when
+  full text is accessible. If only metadata or abstract is available, classify
+  conservatively and do not extract fine-grained claims from unavailable full
+  text. Exclude or quarantine sources whose DOI, authorship, title, year, or
+  claim summary cannot be reconciled.
 
 First-pass discovery queries:
 
@@ -274,16 +289,18 @@ Exclusion criteria:
 Discovery notes:
 
 - Search plan and first-pass exact queries supplied by human intake. Actual
-  searches, search dates, reviewer identity, candidate source list, and
-  unresolved access gaps still need to be recorded.
+  searches, search dates, reviewer identity, final source-selection rationale,
+  and unresolved access gaps still need to be recorded.
 - Discovery material supplied so far:
   - ChatGPT Deep Research synthesis pasted by human reviewer. Treat as an
     unverified synthesis aid only; temporary citation handles in that output are
     not recoverable source metadata.
   - Elicit CSV at
     `/Users/CoveMB/Downloads/Elicit - Polyvagal Theory evidence and critiques.csv`,
-    inspected as a 13-row candidate source export. Treat Elicit classifications
-    as provisional until a human reviewer verifies metadata and source content.
+    inspected as a 13-row contaminated discovery export. It must never be
+    treated as source truth. Treat raw Elicit titles, authors, years, DOIs,
+    classifications, and claim summaries as untrusted discovery hints until a
+    human reviewer verifies the source record and source content.
 - The search goal is not to collect only supportive or only critical papers. The
   gold set must include foundational/supportive sources, serious critiques,
   empirical tests, reviews, clinical-application papers, and adjacent autonomic
@@ -292,69 +309,127 @@ Discovery notes:
 - Do not treat broad evidence for autonomic regulation, HRV, vagal tone, stress
   physiology, or social safety as direct confirmation of Polyvagal Theory unless
   the paper directly supports the specific claim being evaluated.
-- Metadata drift to resolve before appraisal:
-  - The Elicit export lists `10.36131/cnfioritieditore20250301` for both a
-    Grossman/Taylor row and a Stephen W. Porges row with the same title. Verify
-    authorship, title, and DOI from publisher records.
-  - The Elicit row titled `FUNDAMENTAL CHALLENGES AND LIKELY REFUTATIONS OF THE
-    FIVE BASIC PREMISES OF THE POLYVAGAL THEORY` appears to conflict with its
-    exported claim summary. Verify title, authorship, and classification before
-    assigning source role.
-  - Porges response papers and Grossman critique papers mentioned in the pasted
-    synthesis need recoverable metadata before they can be used as source
-    evidence.
+- Metadata corrections supplied by human intake before appraisal:
+  - Replace the contaminated Grossman/Taylor row carrying DOI
+    `10.36131/cnfioritieditore20250301` with the 2007 Biological Psychology
+    RSA-methodology review, DOI `10.1016/j.biopsycho.2005.11.014`.
+  - Keep Porges 2025 Clinical Neuropsychiatry with DOI
+    `10.36131/cnfioritieditore20250301` as author-side review/defense, not
+    independent validation. Cite by DOI. Do not rely on page range until
+    reconciled, because public/publisher metadata appears inconsistent.
+  - Split the contaminated Hanazawa/Grossman row into Grossman 2023 Biological
+    Psychology critique, DOI `10.1016/j.biopsycho.2023.108589`, and Hanazawa
+    2022 Brain and Nerve clinical overview, DOI `10.11477/mf.1416202169`.
+  - Deduplicate the 2026 Grossman critique rows into one multi-author expert
+    critique/commentary record, DOI `10.36131/cnfioritieditore20260110`. Use
+    pages 100-112 for the Grossman et al. 2026 article. The 169-184 page range
+    refers to the Porges 2025 article named inside the critique title.
+  - Add the Porges 2026 response/rebuttal, DOI
+    `10.36131/cnfioritieditore20260111`.
+  - Correct the Porges 2025 Frontiers row to Stephen W. Porges as sole listed
+    author unless a separate source record supports J. Kolacz as coauthor.
+  - Add Grossman 2024 Biological Psychology as a separate RSA-methodology source,
+    DOI `10.1016/j.biopsycho.2023.108739`.
+- Quarantine rule before appraisal: any Elicit row whose title, DOI, authors,
+  year, and claim summary do not all refer to the same source must be kept out
+  of the candidate role pool until the source record is corrected or discarded.
 
 ## 3. Candidate Sources
 
-Candidate gold sources:
+Candidate author-side theory-position sources:
+
+These are candidates for source appraisal, not gold-set truth. Do not treat
+author-side defenses, supportive empirical papers, or theory-position papers as
+`gold_sources` until a human reviewer verifies what each source supports and
+does not support.
 
 - Source ID: `candidate-porges-2025-current-status`
   - Title: `Polyvagal Theory: Current Status, Clinical Applications, and Future Directions`
   - Authors or authoring body: Stephen W. Porges
   - Year if known: 2025
-  - Locator or access note: DOI `10.36131/cnfioritieditore20250301` from Elicit
-    export; verify because the CSV contains a metadata conflict for this DOI.
-  - Provisional role: foundational/supportive or author-side defense candidate
+  - Locator or access note: DOI `10.36131/cnfioritieditore20250301`. Cite by
+    DOI. Do not rely on page range until reconciled, because public/publisher
+    metadata appears inconsistent.
+  - Provisional role: author-side review/defense candidate, not independent
+    validation
+  - Use as: author-side statement of current theory and clinical framing.
+  - Do not use as: independent validation or field consensus.
   - Why it may be central: candidate statement of current theory, clinical
     applications, RSA, social engagement, and responses to critiques.
   - Appraisal status: not appraised
-- Source ID: `candidate-porges-kolacz-2025-journey`
+- Source ID: `candidate-porges-2025-journey`
   - Title: `Polyvagal theory: a journey from physiological observation to neural innervation and clinical insight`
-  - Authors or authoring body: S. Porges; J. Kolacz
+  - Authors or authoring body: Stephen W. Porges
   - Year if known: 2025
-  - Locator or access note: DOI `10.3389/fnbeh.2025.1659083` from Elicit export
-  - Provisional role: foundational/supportive or theory-articulation candidate
+  - Locator or access note: Frontiers in Behavioral Neuroscience, 19, Article
+    1659083. DOI `10.3389/fnbeh.2025.1659083`.
+  - Provisional role: author-side theory-articulation or clinical-insight
+    candidate
+  - Use as: author-side theory articulation and clinical-insight framing.
+  - Do not use as: independent adjudication of contested claims.
   - Why it may be central: candidate source for the theory's internal logic
     around vagus-heart-face linkage, social engagement, and clinical insight.
   - Appraisal status: not appraised
+- Source ID: `candidate-porges-2026-response`
+  - Title: `When a Critique Becomes Untenable: A Scholarly Response to Grossman et al.'s Evaluation of Polyvagal Theory`
+  - Authors or authoring body: S. W. Porges
+  - Year if known: 2026
+  - Locator or access note: Clinical Neuropsychiatry, 23(1), 113-128. DOI
+    `10.36131/cnfioritieditore20260111`.
+  - Provisional role: author response/rebuttal candidate
+  - Use as: author response/rebuttal and clarification of PVT scope.
+  - Do not use as: independent validation of the theory.
+  - Why it may be central: candidate source for Porges's rebuttal and
+    clarifications in response to the multi-author critique.
+  - Appraisal status: not appraised
+
+Candidate supportive/theory-adjacent empirical sources:
+
+These are candidates for source appraisal, not gold-set truth. Supportive or
+theory-adjacent empirical sources must not be treated as validation of the full
+theory unless a human reviewer verifies the specific claim.
+
 - Source ID: `candidate-austin-riniolo-porges-2007-bpd`
   - Title: `Borderline personality disorder and emotion regulation: Insights from the Polyvagal Theory`
-  - Authors or authoring body: M. Austin; T. C. Riniolo; S. Porges
+  - Authors or authoring body: M. A. Austin; T. C. Riniolo; S. W. Porges
   - Year if known: 2007
-  - Locator or access note: DOI `10.1016/j.bandc.2006.05.007` from Elicit export
-  - Provisional role: supportive empirical candidate
+  - Locator or access note: Brain and Cognition, 65(1), 69-76. DOI
+    `10.1016/j.bandc.2006.05.007`.
+  - Provisional role: empirical supportive/suggestive candidate, not
+    whole-theory validation
+  - Use as: suggestive empirical evidence compatible with PVT.
+  - Do not use as: validation of Polyvagal Theory as a whole.
   - Why it may be central: candidate source for PVT-compatible emotion
     regulation and autonomic-state interpretation.
   - Appraisal status: not appraised
 - Source ID: `candidate-porges-riniolo-mcbride-campbell-2003-reptiles`
-  - Title: `Heart rate and respiration in reptiles: contrasts between a sit-and-wait predator and an intensive forager`
-  - Authors or authoring body: S. Porges; T. C. Riniolo; T. McBride; B. Campbell
+  - Title: `Heart rate and respiration in reptiles: Contrasts between a sit-and-wait predator and an intensive forager`
+  - Authors or authoring body: S. W. Porges; T. C. Riniolo; T. McBride; B.
+    Campbell
   - Year if known: 2003
-  - Locator or access note: DOI `10.1016/S0278-2626(03)00012-5` from Elicit export
-  - Provisional role: foundational/supportive comparative physiology candidate
+  - Locator or access note: Brain and Cognition, 52(1), 88-96. DOI
+    `10.1016/S0278-2626(03)00012-5`.
+  - Provisional role: author-side comparative empirical support candidate, not
+    independent adjudication
+  - Use as: author-side comparative/autonomic evidence.
+  - Do not use as: independent adjudication of PVT.
   - Why it may be central: candidate source for narrow observations used in
     evolutionary framing; not proof of the full theory without appraisal.
   - Appraisal status: not appraised
 
-Acceptable sources:
+Candidate adjacent/supportive sources pending appraisal:
 
 - Source ID: `candidate-obrien-2021-act-rsa`
   - Title: `Respiratory sinus arrhythmia predicts perceived therapy process of a group-based acceptance and commitment therapy intervention`
-  - Authors or authoring body: W. O'Brien; P. W. Goetz; A. T. O'Brien; H.
+  - Authors or authoring body: W. H. O'Brien; P. Goetz; A. T. O'Brien; H.
     McCarren; E. Delaney
   - Year if known: 2021
-  - Locator or access note: DOI `10.1521/bumc.2021.85.1.9` from Elicit export
-  - Provisional role: clinical-process or adjacent RSA candidate
+  - Locator or access note: Bulletin of the Menninger Clinic, 85(1), 9-22. DOI
+    `10.1521/BUMC.2021.85.1.9`.
+  - Provisional role: empirical clinical association / adjacent autonomic
+    evidence candidate
+  - Use as: clinical-adjacent RSA/autonomic association.
+  - Do not use as: Polyvagal-specific mechanistic validation.
   - Why it may be acceptable: candidate source for therapy-process association;
     not a direct validation of PVT mechanisms without appraisal.
   - Appraisal status: not appraised
@@ -362,86 +437,206 @@ Acceptable sources:
   - Title: `A Systematic Review of a Polyvagal Perspective on Embodied Contemplative Practices as Promoters of Cardiorespiratory Coupling and Traumatic Stress Recovery for PTSD and OCD: Research Methodologies and State of the Art`
   - Authors or authoring body: A. Poli; A. Gemignani; F. Soldani; M. Miccoli
   - Year if known: 2021
-  - Locator or access note: DOI `10.3390/ijerph182211778` from Elicit export
-  - Provisional role: clinical-application review candidate
+  - Locator or access note: International Journal of Environmental Research and
+    Public Health, 18(22), 11778. DOI `10.3390/ijerph182211778`.
+  - Provisional role: systematic review / preliminary clinical-adjacent
+    evidence candidate
+  - Use as: evidence that clinical-adjacent PVT-framed intervention literature
+    is limited or preliminary.
+  - Do not use as: strong validation of PVT.
   - Why it may be acceptable: candidate source for preliminary intervention
     literature and methodology limits.
   - Appraisal status: not appraised
 - Source ID: `candidate-tonhajzerova-2011-cardiac-vagal-control`
   - Title: `Cardiac Vagal Control in Depression and Attention Deficit/Hyperactivity Disorder`
-  - Authors or authoring body: I. Tonhajzerova; I. Ondrejka; Kamil Javorka; A.
+  - Authors or authoring body: I. Tonhajzerova; I. Ondrejka; K. Javorka; A.
     Calkovska; M. Javorka
   - Year if known: 2011
-  - Locator or access note: DOI `10.2478/v10201-011-0011-y` from Elicit export
-  - Provisional role: adjacent autonomic regulation background candidate
+  - Locator or access note: Acta Medica Martiniana, 11(Suppl. 1). DOI
+    `10.2478/v10201-011-0011-y`. Page range unresolved; cite by DOI.
+  - Provisional role: background autonomic/clinical review candidate
+  - Use as: background autonomic/clinical context.
+  - Do not use as: central PVT evidence.
   - Why it may be acceptable: candidate source for broad cardiac vagal control
     relevance; should not be used as proof of the full theory.
+  - Appraisal status: not appraised
+- Source ID: `candidate-hanazawa-2022-clinical-overview`
+  - Title: `[Polyvagal Theory and Its Clinical Potential: An Overview]`
+  - Authors or authoring body: H. Hanazawa
+  - Year if known: 2022
+  - Locator or access note: Brain and Nerve, 74(8), 1011-1016. DOI
+    `10.11477/mf.1416202169`.
+  - Provisional role: clinical overview / supportive-conceptual candidate
+  - Use as: clinical/background overview where metadata or English abstract
+    supports classification.
+  - Do not use as: central mechanistic evidence or independent validation.
+  - Why it may be acceptable: candidate source for clinical framing and
+    therapeutic potential, not independent mechanistic validation without
+    appraisal.
   - Appraisal status: not appraised
 
 Decoy sources:
 
-- Source ID: `candidate-grossman-taylor-2025-metadata-conflict`
-  - Title: `Polyvagal Theory: Current Status, Clinical Applications, and Future Directions`
-  - Authors or authoring body: P. Grossman; E. Taylor
-  - Year if known: 2025
-  - Locator or access note: DOI `10.36131/cnfioritieditore20250301` from Elicit
-    export; verify because this conflicts with another row's authorship.
-  - Provisional role: metadata-conflict decoy candidate until verified
-  - Suspected decoy reason: likely metadata drift or duplicate/incorrect author
-    attribution in export; do not use until publisher metadata is checked.
+Decoy policy:
+
+- Include a small set of popularized trauma-regulation pages as decoy sources
+  only. The candidate pool below contains five public-facing decoys plus one
+  optional product/intervention-marketing decoy; fixture authoring may select
+  the most useful 3-5.
+- These are not evidence sources. They test whether the skill can recognize
+  popularized, clinical-marketing, institute, training, or self-help language
+  and avoid treating it as scholarly support.
+- Do not count decoys toward evidence strength.
+- Do not use decoys to establish scientific consensus.
+- Use decoys only to identify overstatement risks and popularized claims.
+- Keep decoys separate from scholarly evidence in appraisal tables.
+- Exact URLs and access dates are recorded below from human intake; verify page
+  accessibility before fixture authoring.
+- Clearly label decoys as popularized, clinical-marketing, training, or
+  public-facing sources.
+
+- Source ID: `candidate-decoy-polyvagal-institute-what-is`
+  - Title: `What is Polyvagal Theory?`
+  - Authors or authoring body: Polyvagal Institute
+  - Year if known: not recorded
+  - Locator or access note:
+    `https://www.polyvagalinstitute.org/whatispolyvagaltheory`; accessed
+    2026-05-18.
+  - Provisional role: popularized/public-facing decoy candidate
+  - Suspected decoy reason: may identify popularized claims, but must not be
+    used as evidence for the theory.
   - Appraisal status: not appraised
-- Source ID: `candidate-hanazawa-2023-fundamental-challenges`
-  - Title: `FUNDAMENTAL CHALLENGES AND LIKELY REFUTATIONS OF THE FIVE BASIC PREMISES OF THE POLYVAGAL THEORY`
-  - Authors or authoring body: H. Hanazawa
-  - Year if known: 2023
-  - Locator or access note: DOI `10.1016/j.biopsycho.2023.108589` from Elicit export
-  - Provisional role: metadata/classification-conflict candidate
-  - Suspected decoy reason: exported title suggests critique, while exported
-    claim summary says the theory offers a useful clinical framework; verify
-    source metadata and classify after appraisal.
+- Source ID: `candidate-decoy-ifm-ptsd-polyvagal`
+  - Title: `Understanding PTSD From a Polyvagal Perspective`
+  - Authors or authoring body: The Institute for Functional Medicine; page by
+    C. Cart according to human-supplied search result
+  - Year if known: updated 2024
+  - Locator or access note:
+    `https://www.ifm.org/articles/understanding-ptsd-from-a-polyvagal-perspective`;
+    accessed 2026-05-18.
+  - Provisional role: popularized/clinical-marketing decoy candidate
+  - Suspected decoy reason: may identify trauma-regulation overstatement risks,
+    but must not be used as evidence for the theory.
   - Appraisal status: not appraised
-- Source ID: `candidate-popular-trauma-regulation-sources`
-  - Title: not yet supplied
-  - Authors or authoring body: not yet supplied
-  - Year if known: not yet supplied
-  - Locator or access note: to be collected only if needed to test popularized
-    overstatement
-  - Provisional role: popularized-claim decoy candidate
-  - Suspected decoy reason: therapy training pages, institute marketing,
-    coaching blogs, podcasts, YouTube, social media, and unsourced summaries may
-    identify overstatement risks but must not be evidence for the theory.
+- Source ID: `candidate-decoy-khiron-ladder`
+  - Title: `Polyvagal Theory: A Ladder of Nervous States`
+  - Authors or authoring body: Khiron Clinics
+  - Year if known: not recorded
+  - Locator or access note:
+    `https://khironclinics.com/blog/polyvagal-theory-a-ladder-of-nervous-states/`;
+    accessed 2026-05-18.
+  - Provisional role: popularized/clinical-marketing decoy candidate
+  - Suspected decoy reason: may identify simplified ladder framing, but must not
+    be used as evidence for the theory.
+  - Appraisal status: not appraised
+- Source ID: `candidate-decoy-positivepsychology-exercises`
+  - Title: `18 Polyvagal Theory & How to Use the Exercises in Therapy`
+  - Authors or authoring body: PositivePsychology.com
+  - Year if known: 2023; page updated status not fully verified
+  - Locator or access note: `https://positivepsychology.com/polyvagal-theory/`;
+    accessed 2026-05-18.
+  - Provisional role: popularized/public-facing decoy candidate
+  - Suspected decoy reason: may identify therapy-exercise overstatement risks,
+    but must not be used as evidence for the theory.
+  - Appraisal status: not appraised
+- Source ID: `candidate-decoy-rhythm-of-regulation-deb-dana`
+  - Title: `Rhythm of Regulation`
+  - Authors or authoring body: Deb Dana / Rhythm of Regulation
+  - Year if known: copyright 2024 on page
+  - Locator or access note: `https://www.rhythmofregulation.com/`; accessed
+    2026-05-18.
+  - Provisional role: popularized/clinical-training decoy candidate
+  - Suspected decoy reason: may identify popular clinical framing, but must not
+    be used as evidence for the theory.
+  - Appraisal status: not appraised
+- Source ID: `candidate-decoy-unyte-ssp-product`
+  - Title: `Safe and Sound Protocol (SSP): Attune. Re-tune. Connect`
+  - Authors or authoring body: Unyte / Integrated Listening
+  - Year if known: not recorded
+  - Locator or access note:
+    `https://integratedlistening.com/products/ssp-safe-sound-protocol/`;
+    accessed 2026-05-18.
+  - Provisional role: product/intervention-marketing decoy candidate
+  - Suspected decoy reason: may identify SSP evidence, product-marketing, and
+    mechanism-overstatement risks, but must not be used as evidence for SSP or
+    PVT.
   - Appraisal status: not appraised
 
 Disallowed sources:
 
-- Source ID: none supplied yet
-  - Title:
-  - Authors or authoring body:
-  - Year if known:
-  - Locator or access note:
-  - Provisional role:
-  - Suspected disallow reason:
-  - Appraisal status: not appraised
+- True disallowed sources: none identified yet. Policy: add a source here only
+  if it is fabricated, retracted, unrecoverable, inaccessible in a way that
+  prevents use, or otherwise unusable. Use the quarantine list for corrupted
+  Elicit rows whose title, authors, DOI, year, or claim summary conflict.
 
 Candidate critique and contestation sources:
 
+- Source ID: `candidate-grossman-taylor-2007-rsa`
+  - Title: `Toward understanding respiratory sinus arrhythmia: Relations to cardiac vagal tone, evolution and biobehavioral functions`
+  - Authors or authoring body: P. Grossman; E. W. Taylor
+  - Year if known: 2007
+  - Locator or access note: Biological Psychology, 74(2), 263-285. DOI
+    `10.1016/j.biopsycho.2005.11.014`.
+  - Provisional role: methodological critique / RSA measurement caveats
+    candidate
+  - Use as: RSA measurement caveats and methodological critique.
+  - Do not use as: blanket refutation of all autonomic-regulation findings.
+  - Why it may be central: candidate source for RSA interpretation limits,
+    cardiac vagal tone caveats, evolutionary framing, and overstatement risks.
+  - Appraisal status: not appraised
+- Source ID: `candidate-grossman-2023-five-premises`
+  - Title: `Fundamental challenges and likely refutations of the five basic premises of the polyvagal theory`
+  - Authors or authoring body: P. Grossman
+  - Year if known: 2023
+  - Locator or access note: Biological Psychology, 180, 108589. DOI
+    `10.1016/j.biopsycho.2023.108589`.
+  - Provisional role: major critique / actively contested candidate
+  - Use as: major critique of PVT premises.
+  - Do not use as: formal field-wide consensus or dismissal of all clinical
+    metaphors.
+  - Why it may be central: candidate source for critique of core PVT premises.
+  - Appraisal status: not appraised
+- Source ID: `candidate-grossman-2024-rsa`
+  - Title: `Respiratory sinus arrhythmia (RSA), vagal tone and biobehavioral integration: Beyond parasympathetic function`
+  - Authors or authoring body: P. Grossman
+  - Year if known: 2024
+  - Locator or access note: Biological Psychology, 186, 108739. DOI
+    `10.1016/j.biopsycho.2023.108739`.
+  - Provisional role: RSA methodology / measurement caveats candidate
+  - Use as: RSA/vagal-tone methodology and measurement-caveat source.
+  - Do not use as: direct adjudication of all PVT clinical claims.
+  - Why it may be central: candidate source for evaluating whether RSA can be
+    treated as vagal tone, safety, or a Polyvagal-specific biomarker.
+  - Appraisal status: not appraised
 - Source ID: `candidate-grossman-2026-untenable`
-  - Title: `Why The Polyvagal Theory Is Untenable`
-  - Authors or authoring body: P. Grossman; Elicit export also has a `P.
-    Grossman et al.` row with the same title and DOI.
+  - Title: `Why the Polyvagal Theory Is Untenable: An international expert evaluation of the polyvagal theory and commentary upon Porges, S.W. (2025). Polyvagal theory: current status, clinical applications, and future directions. Clin. Neuropsychiatry, 22(3), 169-184.`
+  - Authors or authoring body: P. Grossman; G. L. Ackland; A. M. Allen; G. G.
+    Berntson; L. C. Booth; G. M. Burghardt; J. Buron; V. Dinets; J. S. Doody;
+    M. Dutschmann; D. G. S. Farmer; J. P. Fisher; A. V. Gourine; M. J. Joyner;
+    J. M. Karemaker; S. S. Khalsa; E. G. Lakatta; C. A. C. Leite; V. G.
+    Macefield; B. H. Machado; R. M. McAllen; C. Menuet; D. Mendelowitz; D. J. A.
+    Moraes; W. Neuhuber; M. M. Ottaviani; D. J. Paterson; J. F. Paton; P. R.
+    Pellegrino; R. Ramchandra; J. Shanks; J. S. Schwaber; K. Shivkumar; K. M.
+    Spyer; E. W. Taylor; J. A. Taylor; T. Wang; S. T. Yao; I. H. Zucker
   - Year if known: 2026
-  - Locator or access note: DOI `10.36131/cnfioritieditore20260110` from Elicit
-    export; verify author list and whether duplicate rows should be merged.
-  - Provisional role: serious critique candidate
+  - Locator or access note: Clinical Neuropsychiatry, 23(1), 100-112. DOI
+    `10.36131/cnfioritieditore20260110`.
+  - Provisional role: multi-author expert critique/commentary candidate
+  - Use as: major critique of core PVT premises by physiology, evolution, and
+    autonomic experts.
+  - Do not overstate as: formal field-wide consensus process.
   - Why it may be central: candidate source for RSA, vagal tone, neuroanatomy,
     evolution, and vertebrate social behavior critiques.
   - Appraisal status: not appraised
 - Source ID: `candidate-doody-burghardt-dinets-2023-sociality`
   - Title: `The Evolution of Sociality and the Polyvagal Theory`
-  - Authors or authoring body: J. Doody; G. Burghardt; V. Dinets
+  - Authors or authoring body: J. S. Doody; G. M. Burghardt; V. Dinets
   - Year if known: 2023
-  - Locator or access note: DOI `10.1016/j.biopsycho.2023.108569` from Elicit export
-  - Provisional role: evolutionary critique candidate
+  - Locator or access note: Biological Psychology, 180, 108569. DOI
+    `10.1016/j.biopsycho.2023.108569`.
+  - Provisional role: evolutionary/sociality critique candidate
+  - Use as: critique of sociality/evolutionary assumptions.
+  - Do not use as: sole refutation of all PVT claims.
   - Why it may be central: candidate source for social-asocial dichotomy and
     evolutionary-claim appraisal.
   - Appraisal status: not appraised
@@ -449,30 +644,223 @@ Candidate critique and contestation sources:
   - Title: `»Polyvagal«: Die schöne Theorie und die hässlichen Fakten`
   - Authors or authoring body: D. Walz; P. Grossman
   - Year if known: 2024
-  - Locator or access note: DOI `10.30820/2364-1517-2024-2-163` from Elicit export
-  - Provisional role: critique candidate
+  - Locator or access note: Psychotherapie. DOI
+    `10.30820/2364-1517-2024-2-163`. Language: German.
+  - Provisional role: critique / clinical-facing commentary candidate, not
+    primary empirical evidence
+  - Use as: clinical-facing critique.
+  - Do not use as: primary empirical evidence.
   - Why it may be central: candidate source for physiological-foundation and
     clinical-overreach critiques.
   - Appraisal status: not appraised
 
-Candidate sources mentioned by the pasted synthesis but not yet represented as
-verified CSV rows:
+Candidate sources promoted from unresolved metadata recovery:
 
-- Porges 2026 response to Grossman et al. critique; recover publisher metadata
-  before using.
-- Grossman 2007, 2023, and 2024 RSA/vagal-tone critique literature; recover
-  exact metadata before using.
-- Neuhuber and Berthoud neuroanatomical critique; recover exact metadata before
-  using.
-- Taylor comparative physiology review and lungfish/cardiorespiratory
-  interaction literature; recover exact metadata before using.
-- Safe and Sound Protocol, Family Nurture Intervention, and other clinical or
-  acoustic intervention studies; recover exact metadata and appraise as
-  clinical-usefulness evidence, not mechanistic proof.
+- Source ID: `candidate-neuhuber-berthoud-2022-vagus-anatomy`
+  - Title: `Functional anatomy of the vagus system: How does the polyvagal theory comply?`
+  - Authors or authoring body: Winfried L. Neuhuber; Hans-Rudolf Berthoud
+  - Year if known: 2022
+  - Locator or access note: Biological Psychology, 174, Article 108425. DOI
+    `10.1016/j.biopsycho.2022.108425`. Publisher abstract/metadata
+    recoverable; full-text access may depend on subscription.
+  - Provisional role: neuroanatomical critique candidate
+  - Use as: critique of PVT's functional-anatomical and phylogenetic
+    assumptions, especially vagal nuclei, dorsal/ventral vagal mapping, and
+    anatomical substrate claims.
+  - Do not use as: blanket proof that all clinical or metaphorical uses of PVT
+    are invalid.
+  - Why it may be central: directly appraises whether PVT's neuroanatomical
+    assumptions comply with known vagus-system anatomy.
+  - Appraisal status: not appraised
+- Source ID: `candidate-neuhuber-berthoud-2023-corrigendum`
+  - Title: `Corrigendum to "Functional anatomy of the vagus system: How does the polyvagal theory comply?" [Biological Psychology 174 (2022) 108425]`
+  - Authors or authoring body: Winfried L. Neuhuber; Hans-Rudolf Berthoud
+  - Year if known: 2023
+  - Locator or access note: Biological Psychology corrigendum. DOI not fully
+    recovered from current pass; human-supplied record links the corrigendum to
+    DOI `10.1016/j.biopsycho.2022.108425`.
+  - Provisional role: correction/corrigendum record candidate
+  - Use as: metadata/correction companion to the 2022 neuroanatomy critique.
+  - Do not use as: independent evidence beyond the corrected details.
+  - Why it may be central: prevents reliance on corrected phrasing about DMX
+    cardiac neurons/conduction speed.
+  - Appraisal status: metadata partially recovered / not appraised
+- Source ID: `candidate-taylor-wang-leite-2022-cardiorespiratory-phylogeny`
+  - Title: `An overview of the phylogeny of cardiorespiratory control in vertebrates with some reflections on the 'Polyvagal Theory'`
+  - Authors or authoring body: Edwin W. Taylor; Tobias Wang; Cleo A. C. Leite
+  - Year if known: 2022
+  - Locator or access note: Biological Psychology, 172, Article 108382. DOI
+    `10.1016/j.biopsycho.2022.108382`. Open-access publisher page available
+    according to human intake.
+  - Provisional role: comparative physiology / evolutionary-mechanism critique
+    candidate
+  - Use as: evidence that cardiorespiratory interactions and RSA-like phenomena
+    are not uniquely mammalian and that broad vertebrate comparative physiology
+    complicates strong PVT evolutionary claims.
+  - Do not use as: full refutation of every PVT claim or clinical application.
+  - Why it may be central: directly addresses PVT's evolutionary and
+    RSA/cardiorespiratory assumptions.
+  - Appraisal status: not appraised
+- Source ID: `candidate-monteiro-taylor-sartori-cruz-rantin-leite-2018-lungfish`
+  - Title: `Cardiorespiratory interactions previously identified as mammalian are present in the primitive lungfish`
+  - Authors or authoring body: Diana A. Monteiro; Edwin W. Taylor; Marina R.
+    Sartori; Andre L. Cruz; Francisco T. Rantin; Cleo A. C. Leite
+  - Year if known: 2018
+  - Locator or access note: Science Advances, 4(2), Article eaaq0800. DOI
+    `10.1126/sciadv.aaq0800`. Open-access article available through PMC or
+    Science Advances according to human intake.
+  - Provisional role: comparative physiology / lungfish evidence candidate
+  - Use as: evidence that cardiorespiratory interactions previously framed as
+    mammalian are present in lungfish, weakening strong mammalian-uniqueness
+    interpretations.
+  - Do not use as: standalone appraisal of PVT as a whole.
+  - Why it may be central: provides direct comparative physiology evidence used
+    in the debate over PVT's evolutionary assumptions.
+  - Appraisal status: not appraised
+- Source ID: `candidate-porges-et-al-2014-listening-project-protocol`
+  - Title: `Reducing auditory hypersensitivities in autistic spectrum disorder: Preliminary findings evaluating the listening project protocol`
+  - Authors or authoring body: Stephen W. Porges; Olga V. Bazhenova; Elgiz Bal;
+    Nancy Carlson; Yevgeniya Sorokin; Keri J. Heilman; Edwin H. Cook; Gregory F.
+    Lewis
+  - Year if known: 2014
+  - Locator or access note: Frontiers in Pediatrics, 2, Article 80. DOI
+    `10.3389/fped.2014.00080`. Open access.
+  - Provisional role: precursor acoustic/listening intervention study candidate
+  - Use as: preliminary intervention evidence for the Listening Project
+    Protocol, a precursor to SSP.
+  - Do not use as: strong validation of SSP, PVT mechanisms, or broad clinical
+    efficacy.
+  - Why it may be central: often cited as early evidence for SSP-like acoustic
+    intervention claims.
+  - Appraisal status: not appraised
+- Source ID: `candidate-kawai-et-al-2023-ssp-adult-autism`
+  - Title: `Initial Outcomes of the Safe and Sound Protocol on Patients with Adult Autism Spectrum Disorder: Exploratory Pilot Study`
+  - Authors or authoring body: Hiroki Kawai; Makiko Kishimoto; Yuko Okahisa;
+    Shinji Sakamoto; Seishi Terada; Manabu Takaki
+  - Year if known: 2023
+  - Locator or access note: International Journal of Environmental Research and
+    Public Health, 20(6), Article 4862. DOI `10.3390/ijerph20064862`. Open
+    access.
+  - Provisional role: SSP exploratory pilot study candidate
+  - Use as: preliminary clinical/acoustic intervention evidence in adults with
+    ASD.
+  - Do not use as: strong efficacy evidence or PVT-specific mechanistic
+    validation.
+  - Why it may be central: directly studies SSP but has exploratory-pilot
+    limitations.
+  - Appraisal status: not appraised
+- Source ID: `candidate-heilman-et-al-2023-ssp-autism-single-arm`
+  - Title: `Effects of the Safe and Sound Protocol (SSP) on Sensory Processing, Digestive Function and Selective Eating in Children and Adults with Autism: A Prospective Single-Arm Study`
+  - Authors or authoring body: Keri J. Heilman; S. Heinrich; M. Achermann; E.
+    Nix; H. Kyuchukov
+  - Year if known: 2023
+  - Locator or access note: Journal on Developmental Disabilities, 28(1), 1-26.
+    DOI not recovered in this pass; publisher/OADD PDF available according to
+    human intake.
+  - Provisional role: SSP prospective single-arm study candidate
+  - Use as: preliminary clinical/acoustic intervention evidence.
+  - Do not use as: randomized evidence, strong causal evidence, or PVT-specific
+    mechanistic validation.
+  - Why it may be central: directly studies SSP in children/adults with autism
+    but is single-arm and requires caution.
+  - Appraisal status: metadata partially recovered / not appraised
+- Source ID: `candidate-porges-et-al-2019-fni-autonomic-regulation`
+  - Title: `Autonomic regulation of preterm infants is enhanced by Family Nurture Intervention`
+  - Authors or authoring body: Stephen W. Porges; Maria I. Davila; Gregory F.
+    Lewis; Jacek Kolacz; Stephanie Okonmah-Obazee; Amie A. Hane; Katie Y. Kwon;
+    Robert J. Ludwig; Michael M. Myers; Martha G. Welch
+  - Year if known: 2019
+  - Locator or access note: Developmental Psychobiology, 61(6), 942-952. DOI
+    `10.1002/dev.21841`. Publisher/metadata recoverable; full text may depend
+    on access.
+  - Provisional role: FNI autonomic-regulation RCT evidence candidate
+  - Use as: evidence that FNI was associated with enhanced autonomic
+    regulation/RSA-related outcomes in preterm infants.
+  - Do not use as: direct validation of the full Polyvagal Theory or of
+    PVT-specific mechanisms.
+  - Why it may be central: directly links FNI to autonomic regulation and
+    interprets findings partly through PVT.
+  - Appraisal status: not appraised
+- Source ID: `candidate-welch-et-al-2020-fni-follow-up`
+  - Title: `Family nurture intervention in the NICU increases autonomic regulation in mothers and children at 4-5 years of age: Follow-up results from a randomized controlled trial`
+  - Authors or authoring body: Martha G. Welch; Joseph L. Barone; Stephen W.
+    Porges; Amie A. Hane; Katie Y. Kwon; Robert J. Ludwig; Raymond I. Stark;
+    Amanda L. Surman; Jacek Kolacz; Michael M. Myers
+  - Year if known: 2020
+  - Locator or access note: PLOS ONE, 15(8), Article e0236930. DOI
+    `10.1371/journal.pone.0236930`. Open access.
+  - Provisional role: FNI follow-up autonomic-regulation evidence candidate
+  - Use as: follow-up clinical/autonomic evidence that FNI-NICU was associated
+    with higher RSA/autonomic regulation at 4-5 years in a returning subset.
+  - Do not use as: direct proof of PVT-specific mechanisms or broad
+    trauma-therapy validation.
+  - Why it may be central: relevant to co-regulation/autonomic regulation
+    claims, while requiring caution because follow-up included only about half
+    of the original participants.
+  - Appraisal status: not appraised
+- Source ID: `candidate-rajabalee-et-al-2022-computer-altered-music-fnd`
+  - Title: `Neuromodulation Using Computer-Altered Music to Treat a Ten-Year-Old Child Unresponsive to Standard Interventions for Functional Neurological Disorder`
+  - Authors or authoring body: Nadia Rajabalee; Kasia Kozlowska; Seung Yeon
+    Lee; Blanche Savage; Clare Hawkes; Daniella Siciliano; Stephen W. Porges;
+    Susannah Pick; Souraya Torbey
+  - Year if known: 2022
+  - Locator or access note: Harvard Review of Psychiatry, 30(5), 303-316. DOI
+    `10.1097/HRP.0000000000000341`.
+  - Provisional role: case report / acoustic neuromodulation candidate
+  - Use as: low-level clinical case evidence involving computer-altered
+    music/SSP-like intervention.
+  - Do not use as: generalizable evidence of SSP efficacy or PVT-specific
+    mechanism.
+  - Why it may be central: often cited in SSP evidence summaries, but
+    methodologically weak for causal/general claims.
+  - Appraisal status: not appraised
+- Source ID: `candidate-kishimoto-et-al-2023-ssp-children-autism`
+  - Title: `Effects of Safe and Sound Protocol System on Psychological and Physiological Functions of Children with Autism Spectrum Disorders: Preliminary Findings`
+  - Authors or authoring body: M. Kishimoto; Y. Sekido; H. Kawai; M. Takaki
+  - Year if known: 2023
+  - Locator or access note: Journal of Psychology & Psychotherapy, 13, Article
+    455. DOI not recovered in this pass.
+  - Provisional role: SSP preliminary pilot candidate / lower-confidence source
+  - Use as: possible preliminary SSP study in children with ASD, only after
+    journal/source-quality appraisal.
+  - Do not use as: strong evidence or central source unless quality is accepted
+    by reviewer.
+  - Why it may be central: directly studies SSP, but source quality and metadata
+    need extra review.
+  - Appraisal status: metadata partially recovered / not appraised
+
+Remaining unresolved metadata or blocked-source TODOs:
+
+- Confirm whether `candidate-heilman-et-al-2023-ssp-autism-single-arm` has a DOI.
+- Confirm whether `candidate-kishimoto-et-al-2023-ssp-children-autism` has a DOI
+  and complete journal-quality appraisal before using it centrally.
+- Recover stable metadata for the AJOT `Safe and Sound Protocol in Young
+  Children With Autism` abstract before adding it as a candidate record.
+- Do not add SSP, Rest & Restore, VoicePro, or similar studies mentioned only in
+  marketing summaries until stable scholarly metadata is recovered.
+- Full content appraisal remains required for every candidate source listed
+  above before any source can become appraised evidence.
+
+Quarantined or retired contaminated discovery rows:
+
+- Any raw Elicit row where title, authors, DOI, year, and claim summary do not
+  refer to the same source: do not use until corrected against reliable source
+  records.
+- Original Elicit Grossman/Taylor 2025 row carrying DOI
+  `10.36131/cnfioritieditore20250301`: retired as contaminated and replaced by
+  `candidate-grossman-taylor-2007-rsa`.
+- Original Elicit Hanazawa/Grossman 2023 row: retired as contaminated and split
+  into `candidate-grossman-2023-five-premises` and
+  `candidate-hanazawa-2022-clinical-overview`.
+- Any Grossman 2026 row with the wrong year, truncated author list, or
+  unsupported page range: retired until reconciled and represented by
+  `candidate-grossman-2026-untenable`.
+- Any Porges Frontiers row listing J. Kolacz as coauthor: retired unless a
+  reliable publisher record supports that authorship.
 
 ## 4. Expected Gold-Set Behavior
 
-Claims the output must support:
+Provisional claims the output is expected to support if confirmed by appraisal:
 
 - Claim: Polyvagal theory is influential and clinically popular.
   - Evidence basis to be supplied by human reviewer:
@@ -480,7 +868,7 @@ Claims the output must support:
   have broader support than the full theory.
   - Evidence basis to be supplied by human reviewer:
 
-Claims the output must reject:
+Provisional claims the output is expected to reject if confirmed by appraisal:
 
 - Claim: Polyvagal theory is settled neuroscience.
   - Evidence basis to be supplied by human reviewer:
@@ -489,7 +877,7 @@ Claims the output must reject:
 - Claim: Polyvagal theory is entirely useless, disproven, or irrelevant.
   - Evidence basis to be supplied by human reviewer:
 
-Claims that must remain uncertain:
+Provisional uncertainties the output should preserve if confirmed by appraisal:
 
 - Uncertainty: Which specific mechanistic and evolutionary claims remain
   contested, weakly supported, or outside the reviewed source basis.
@@ -521,8 +909,15 @@ Required distinctions:
 
 Citation-audit expectations:
 
-- Expectation:
-  - Evidence basis to be supplied by human reviewer:
+- Expectation: Every claim in the gold-standard answer must trace to one or more
+  appraised source records. Popularized decoys may be cited only as examples of
+  overstatement risk, never as evidence of scientific support. Author-side
+  defenses and critique papers must be labeled by source role. Adjacent
+  autonomic evidence must not be cited as proof of the full Polyvagal Theory
+  unless the reviewed source directly supports the specific claim. Claims about
+  consensus must be based on reviewed source appraisal, not source count,
+  citation count, popularity, or clinical uptake.
+  - Evidence basis: Pending source appraisal.
 
 ## 5. Review State
 
@@ -534,10 +929,22 @@ Reviewer uncertainty:
 
 - The target theory, domain, discovery databases, preferred source domains, date
   range, broad inclusion/exclusion criteria, and first-pass search strings are
-  now supplied. A third-party discovery synthesis and Elicit candidate export
-  have also been supplied. Exact executed search logs, verified source metadata,
-  reviewed source roles, evidence bases, decoy reasons, and source-access limits
-  have not been supplied yet.
+  now supplied. A third-party discovery synthesis and contaminated Elicit
+  discovery export have also been supplied. Search language and access
+  boundaries, selected candidate-source metadata corrections, popularized-decoy
+  candidates, and exact decoy URLs/access dates have been supplied by human
+  intake. Complete source metadata has been supplied for several candidate
+  records, including formerly unresolved Neuhuber/Berthoud, Taylor/lungfish,
+  Safe and Sound Protocol, Family Nurture Intervention, and selected
+  clinical/acoustic intervention candidates. Remaining unresolved items include
+  DOI recovery for Heilman et al. 2023 if one exists, DOI recovery and
+  source-quality appraisal for Kishimoto et al. 2023, stable metadata for the
+  AJOT Safe and Sound Protocol abstract before adding it, any SSP/Rest &
+  Restore/VoicePro studies currently known only from marketing summaries, and
+  any source still represented only through temporary synthesis handles. Exact
+  executed search logs, reviewed source appraisals, evidence bases,
+  source-access records for selected sources, and activation-ready reviewer
+  approval have not been supplied yet.
 
 Activation Decision:
 
@@ -547,6 +954,8 @@ Activation decision rationale:
 
 - The evaluation question, expected calibration, discovery strategy, and
   first-pass exact search strings are defined from human intake, and candidate
-  discovery material has been recorded. The fixture still lacks human-reviewed
-  source truth, verified metadata, executed search records, candidate source
-  appraisals, decoy reasons, and evidence bases.
+  discovery material has been recorded. Several metadata corrections, candidate
+  source records, and decoy candidates with URLs/access dates are now recorded
+  from human intake. The fixture still lacks human-reviewed source truth,
+  executed search records, complete candidate source appraisals, source-access
+  records for selected sources, and evidence bases.
