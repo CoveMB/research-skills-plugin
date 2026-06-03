@@ -11,7 +11,7 @@
   "source_packet_sha256": "71c443bb865b3a16336975167c467359a4b0c8ffd4fe1a5f89211d1811ce789d",
   "prompt_packet_sha256": "bd181d1078f8a577a9718ec8fa73ee11cf99cb96ac3c650389b278c890b152c0",
   "skill_file": "skills/methodology-source-auditor/SKILL.md",
-  "skill_file_sha256": "de648c5561cef42166bcc95662d3ff089417ed1598bbc0652bd1ea4fa2cab142",
+  "skill_file_sha256": "ecd81f880108966e975e022fc5e175a39f3fbcc8da0ee227db7f883a3738f45a",
   "output_file": "bounded-descriptive-claim-supported.md",
   "output_sha256": "ebe985a05f112bfb56358e890e9884083e408d488665eef2001f21c0e0cb4972",
   "tool_permissions": "none",

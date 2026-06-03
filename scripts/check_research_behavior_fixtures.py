@@ -62,6 +62,10 @@ OVERSTATEMENT_POLICY_FORBIDDEN_CLAIMS = [
     "no prior work exists",
     "absence of evidence proves",
 ]
+OPTIONAL_REGEX_LIST_KEYS = {
+    "required_output_patterns",
+    "forbidden_output_patterns",
+}
 FIXTURE_ID_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 REQUIRED_TRACE_KEYS = {
     "schema_version",
@@ -180,6 +184,24 @@ def invalid_optional_boolean_errors(fixture: dict[str, Any]) -> list[str]:
     return [f"{fixture_identifier(fixture)}: should_trigger must be a boolean"]
 
 
+def invalid_optional_regex_list_errors(fixture: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    for key in sorted(OPTIONAL_REGEX_LIST_KEYS):
+        if key not in fixture:
+            continue
+        value = fixture.get(key)
+        patterns = string_list(value)
+        if not isinstance(value, list) or len(patterns) != len(value):
+            errors.append(f"{fixture_identifier(fixture)}: {key} must be a string list when present")
+            continue
+        for pattern in patterns:
+            try:
+                re.compile(pattern)
+            except re.error:
+                errors.append(f"{fixture_identifier(fixture)}: invalid {key} regex {pattern!r}")
+    return errors
+
+
 def duplicate_fixture_id_errors(fixtures: list[dict[str, Any]]) -> list[str]:
     seen: set[str] = set()
     errors: list[str] = []
@@ -211,6 +233,7 @@ def validate_fixture_document(fixture_path: Path) -> list[str]:
         errors.extend(invalid_fixture_lists(fixture))
         errors.extend(missing_overstatement_policy_marker_errors(fixture))
         errors.extend(invalid_optional_boolean_errors(fixture))
+        errors.extend(invalid_optional_regex_list_errors(fixture))
     return errors
 
 
@@ -250,6 +273,22 @@ def forbidden_claim_errors(fixture: dict[str, Any], output_text: str) -> list[st
     ]
 
 
+def required_output_pattern_errors(fixture: dict[str, Any], output_text: str) -> list[str]:
+    return [
+        f"{fixture_identifier(fixture)}: missing required output pattern {pattern!r}"
+        for pattern in string_list(fixture.get("required_output_patterns"))
+        if re.search(pattern, output_text) is None
+    ]
+
+
+def forbidden_output_pattern_errors(fixture: dict[str, Any], output_text: str) -> list[str]:
+    return [
+        f"{fixture_identifier(fixture)}: matches forbidden output pattern {pattern!r}"
+        for pattern in string_list(fixture.get("forbidden_output_patterns"))
+        if re.search(pattern, output_text) is not None
+    ]
+
+
 def compact_marker_count_errors(fixture: dict[str, Any], output_text: str) -> list[str]:
     if not is_compact_fixture(fixture):
         return []
@@ -283,7 +322,9 @@ def validate_output_for_fixture(outputs_dir: Path, fixture: dict[str, Any]) -> l
     return [
         *selected_skill_route_errors(fixture, output_text),
         *required_marker_errors(fixture, output_text),
+        *required_output_pattern_errors(fixture, output_text),
         *forbidden_claim_errors(fixture, output_text),
+        *forbidden_output_pattern_errors(fixture, output_text),
         *compact_marker_count_errors(fixture, output_text),
     ]
 

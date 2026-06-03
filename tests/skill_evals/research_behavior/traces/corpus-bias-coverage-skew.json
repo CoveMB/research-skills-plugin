@@ -1,0 +1,10 @@
+{
+  "fixture_id": "corpus-bias-coverage-skew",
+  "output_captured": true,
+  "output_sha256": "422f882a77a270d2f29df0a12e4e3732566770391ecc363f9f29d937131e338c",
+  "prompt_sha256": "155e1b1d89ff81c66400de944cc5fcd7761e347463bab3cd50650a04bc248ff0",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "systematic-source-discovery",
+  "skill_invoked": true
+}

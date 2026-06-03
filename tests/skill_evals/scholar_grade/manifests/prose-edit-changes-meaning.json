@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "dyslexia-friendly-prose-editor",
   "skill_file": "skills/dyslexia-friendly-prose-editor/SKILL.md",
-  "skill_file_sha256": "bb31375592ef918686a7e14af240c5a30c4b2a603650bfef0f60a261cf96c3cb",
+  "skill_file_sha256": "b2748126784c90f7bad293fe33c5263c65ef9914caedb05018cf559d25ece98a",
   "source_packet": "corpora/prose-edit-changes-meaning/source-packet.md",
   "source_packet_sha256": "18eb3f41ed4102dd15878646a976aa3b01c16916636c2165dc0447342fcb0c99",
   "structured_result": {

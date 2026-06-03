@@ -52,6 +52,8 @@ Treat spelling and grammar cleanup as surface repair. If a correction could chan
 
 Use compact output when the user asks for low reading load, minimal correction, or fast prose repair. Compact output should use short chunks, stable table labels when a table is needed, the revised passage, one source-basis line, changed phrases only when review is needed, and one evidence or ambiguity note only when relevant.
 
+Compact repair must not remove caveats that affect claim strength, consent, responsibility, obligations, authorship, AI involvement, source support, method limits, or publication/release status.
+
 ## Files/folders it may read
 
 - Shared operational boundary doc: `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
@@ -71,6 +73,7 @@ Use compact output when the user asks for low reading load, minimal correction, 
 - Do not silently "fix" names, terms, citations, quotes, numbers, dates, diagnoses, policy language, or technical language when uncertain.
 - Do not add facts, examples, citations, promises, obligations, or source claims.
 - Do not shame or foreground the user's spelling difficulty.
+- Do not make a false premise smoother; preserve or flag the unsupported premise instead of rewriting it as settled.
 
 ## Procedure
 
@@ -116,6 +119,8 @@ If the repaired prose reveals a concrete scholarly risk, suggest one next skill:
 - rough idea structure still unclear: `dictation-to-research-notes` or `dyslexia-research-companion`
 
 For legal, medical, financial, workplace, or publication verification, state the need for appropriate source access, user confirmation, or expert review instead of treating the edit as clearance.
+
+For AI-use, source-support, currentness, causal, statistical, or method claims, preserve the existing uncertainty unless the user provides verification and explicitly asks for stronger wording.
 
 ## Output format
 

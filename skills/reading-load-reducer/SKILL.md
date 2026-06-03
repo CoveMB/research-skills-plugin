@@ -53,6 +53,8 @@ If only titles, abstracts, or snippets are available, mark triage and skip risk 
 
 Use compact output when the user asks for low reading load, time-boxed triage, or a fast skim/read/skip decision. Compact output should use short chunks, stable table labels, one source-basis line, one triage table, one ambiguity or uncertainty note only when needed, and the first reading action.
 
+Compression must not remove decision-critical caveats. Keep access level, provisional status, counterargument risk, currentness limits, and source-support gaps visible when they affect read/skim/park/skip decisions.
+
 ## Files/folders it may read
 
 - Shared operational boundary doc: `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
@@ -173,6 +175,7 @@ Use `Close-reading targets`, `Skim targets`, and `Park or skip` only when those 
 - Output reduces reading load rather than adding a new essay.
 - No citations, page numbers, source claims, or field consensus are invented.
 - Expert-review, source-access, and user-verification limits remain visible for high-stakes or publication-facing decisions.
+- Compact output preserves the caveat that would change the next reading decision.
 
 ## Failure modes
 
@@ -180,5 +183,6 @@ Use `Close-reading targets`, `Skim targets`, and `Park or skip` only when those 
 - A skim decision hides a source that could be a major counterargument.
 - Triage becomes unsupported literature synthesis.
 - The output is too long to reduce reading load.
+- The output is short but hides access limits, uncertainty, or counterargument risk.
 - Current project goal is ignored.
 - Triage wording implies legal, medical, financial, workplace, or publication clearance from unread or partial material.

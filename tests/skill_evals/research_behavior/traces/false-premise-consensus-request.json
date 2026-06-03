@@ -1,0 +1,10 @@
+{
+  "fixture_id": "false-premise-consensus-request",
+  "output_captured": true,
+  "output_sha256": "01ad7c7e79face5f0cd80b92c06792947d63bfd2184ac276a048a11b002f0a39",
+  "prompt_sha256": "e8124fd56c2749836003c8fe38c01ab5e8b48f8b3c9173238298bc1982811cb7",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "literature-review-mapper",
+  "skill_invoked": true
+}

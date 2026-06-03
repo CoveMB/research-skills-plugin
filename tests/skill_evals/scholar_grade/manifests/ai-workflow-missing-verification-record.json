@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "ai-human-workflow-log",
   "skill_file": "skills/ai-human-workflow-log/SKILL.md",
-  "skill_file_sha256": "e06ef3cd20b5ccebcf435b1ec54d87441e53e12bc9972a1ad4d3b3014b9c3d5f",
+  "skill_file_sha256": "12759693a0c72406b8d1c36f9f53db3cb15e7b4d2a7acbe717fc39a2cb23453c",
   "source_packet": "corpora/ai-workflow-missing-verification-record/source-packet.md",
   "source_packet_sha256": "6b973af7c19f1bdb3abf3e248dd0dcbe173e41f8aea0d46bd5f2088eab625400",
   "structured_result": {

@@ -1,0 +1,10 @@
+{
+  "fixture_id": "statistics-informal-meta-analysis",
+  "output_captured": true,
+  "output_sha256": "df54b2b87af99513484513b10aa403fd52baf7ab6ce7c30c351b1248114463a5",
+  "prompt_sha256": "8274fe45c10bd53ba05208c269551b3e7f01e4d4f9dc424c8e0d45d62e1d1d5b",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "methodology-source-auditor",
+  "skill_invoked": true
+}

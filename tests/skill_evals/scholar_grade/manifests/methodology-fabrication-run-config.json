@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "scholarly-integrity-gate",
   "skill_file": "skills/scholarly-integrity-gate/SKILL.md",
-  "skill_file_sha256": "332ba3c1b1a43c6a9f1c93c05b7cdbd0d2c426855edfbf5a3d1880f6dcdd641e",
+  "skill_file_sha256": "846ec8ed79b9ee13fec3c71dad6b17550aa95ce9fd18f158946868a7bd86ce55",
   "source_packet": "corpora/methodology-fabrication-run-config/source-packet.md",
   "source_packet_sha256": "dd0fcbac3bf509a0803f4030aef5dc40b5bead2f064d82a42fe2e1e3444eb8f4",
   "structured_result": {

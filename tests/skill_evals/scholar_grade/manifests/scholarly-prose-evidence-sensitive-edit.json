@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "scholarly-prose-editor",
   "skill_file": "skills/scholarly-prose-editor/SKILL.md",
-  "skill_file_sha256": "e03f047e9adf39ef4a991c720696c36c6ad5bc2066e597f2765fb742d424d5b9",
+  "skill_file_sha256": "fe2cb6e1df14bf7187e6fa80bd97d36ba0e209d0debf25f32e507cc8a621f215",
   "source_packet": "corpora/scholarly-prose-evidence-sensitive-edit/source-packet.md",
   "source_packet_sha256": "bd1a7ecc2df40565ed404b5547ad2027089f8d470471686f1b1393b647e2dc83",
   "structured_result": {

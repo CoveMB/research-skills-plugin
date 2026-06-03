@@ -49,6 +49,8 @@ Prefer a balanced mix of:
 6. Reputable journalism for recent events or narrative context.
 7. Persuasive or organizational material only with explicit perspective/context labeling.
 
+Do not let the hierarchy become a corpus-bias shortcut. Track languages, databases, open-access constraints, geography, discipline boundaries, famous-author anchoring, grey literature, and opposing-view search families when they could change discovery results.
+
 ## Source basis and AI limits
 
 Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
@@ -102,6 +104,8 @@ For concise guidance and query design reminders, read `references/search-strateg
 - Do not claim a venue was searched unless it was actually searched and logged.
 - Do not treat planned sources as verified sources.
 - Do not invent search results, hit counts, bibliographic metadata, or source availability.
+- Do not present a one-database, English-only, open-access, famous-author, or Global North search as representative unless that limit is intentional and labeled.
+- Do not treat retraction, correction, predatory, or questionable-source status as checked unless the check was actually performed or supplied.
 
 ## Procedure
 
@@ -121,10 +125,13 @@ Create search families:
 - opposing-view terms
 - case-study terms
 - author/theorist names
+- contrary or disconfirming terms that could surface rival explanations, failed replications, corrections, retractions, or critiques
 
 ### 2. Create Boolean search strings
 
 For each search family, generate combinations using AND, OR, quotes, and exclusions. Include both broad and narrow searches.
+
+For currentness-sensitive topics, add date-window rules and a current lookup checkpoint. For historical or archival topics, explain why currentness is less central and which source-status checks still matter.
 
 ### 3. Identify search venues
 
@@ -145,6 +152,8 @@ Do not claim that a database has been searched unless it actually has.
 ### 4. Build inclusion/exclusion rules
 
 Define what counts as relevant and what will be excluded. Include quality and date rules.
+
+Include source-status rules when relevant: how to handle retracted, corrected, predatory, questionable, duplicate, low-credibility, or non-scholarly sources without erasing them as possible objects of analysis.
 
 ### 5. Plan citation chaining
 

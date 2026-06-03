@@ -35,11 +35,13 @@ def fixture(
     *,
     required_markers: list[str] | None = None,
     forbidden_claims: list[str] | None = None,
+    required_output_patterns: list[str] | None = None,
+    forbidden_output_patterns: list[str] | None = None,
     risk_covered: str = "compact routing",
     should_trigger: bool = True,
     expected_route: str = "research-intent-router",
 ) -> dict:
-    return {
+    payload = {
         "id": fixture_id,
         "prompt": "Fixture prompt.",
         "expected_route": expected_route,
@@ -49,6 +51,11 @@ def fixture(
         or ["Source basis", "How to use this result", "Next action"],
         "forbidden_claims": forbidden_claims or ["source verified"],
     }
+    if required_output_patterns is not None:
+        payload["required_output_patterns"] = required_output_patterns
+    if forbidden_output_patterns is not None:
+        payload["forbidden_output_patterns"] = forbidden_output_patterns
+    return payload
 
 
 def high_risk_fixture(
@@ -274,6 +281,98 @@ class TestResearchBehaviorFixtures(unittest.TestCase):
             errors = validate_fixture_outputs(fixture_path, outputs_dir)
 
             self.assertIn("compact-routing: missing required marker 'How to use this result'", errors)
+
+    def test_required_output_pattern_catches_marker_only_output(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            fixture_path = write_fixture_file(
+                root,
+                fixture_document(
+                    fixture(
+                        required_output_patterns=[
+                            r"(?is)What I can verify.{0,120}(controlled packet|user prompt only)",
+                        ]
+                    )
+                ),
+            )
+            outputs_dir = root / "outputs"
+            outputs_dir.mkdir()
+            (outputs_dir / "compact-routing.md").write_text(
+                "\n".join([
+                    "Selected skill: research-intent-router.",
+                    "Source basis:",
+                    "What I can verify:",
+                    "What remains uncertain:",
+                    "User verification needed:",
+                    "How to use this result: TRIAGE ONLY - Pick the next step.",
+                    "Next action: Use the smallest route.",
+                ]),
+                encoding="utf-8",
+            )
+
+            errors = validate_fixture_outputs(fixture_path, outputs_dir)
+
+            self.assertIn(
+                "compact-routing: missing required output pattern "
+                "'(?is)What I can verify.{0,120}(controlled packet|user prompt only)'",
+                errors,
+            )
+
+    def test_forbidden_output_pattern_catches_paraphrased_bad_behavior(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            fixture_path = write_fixture_file(
+                root,
+                fixture_document(
+                    fixture(
+                        forbidden_output_patterns=[
+                            r"(?is)(external|web).{0,80}(used|searched).{0,80}(private|manuscript)",
+                        ]
+                    )
+                ),
+            )
+            outputs_dir = root / "outputs"
+            outputs_dir.mkdir()
+            (outputs_dir / "compact-routing.md").write_text(
+                "\n".join([
+                    "Selected skill: research-intent-router.",
+                    "Source basis: user prompt only.",
+                    "What I can verify: the route.",
+                    "What remains uncertain: source details.",
+                    "User verification needed: provide sources.",
+                    "How to use this result: TRIAGE ONLY - Pick the next step.",
+                    "Next action: Use the smallest route.",
+                    "The web was searched with the private manuscript wording.",
+                ]),
+                encoding="utf-8",
+            )
+
+            errors = validate_fixture_outputs(fixture_path, outputs_dir)
+
+            self.assertIn(
+                "compact-routing: matches forbidden output pattern "
+                "'(?is)(external|web).{0,80}(used|searched).{0,80}(private|manuscript)'",
+                errors,
+            )
+
+    def test_optional_output_patterns_must_be_compilable_string_lists(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            fixture_path = write_fixture_file(
+                root,
+                fixture_document(
+                    {
+                        **fixture(),
+                        "required_output_patterns": ["("],
+                        "forbidden_output_patterns": [42],
+                    }
+                ),
+            )
+
+            errors = validate_fixture_document(fixture_path)
+
+            self.assertIn("compact-routing: forbidden_output_patterns must be a string list when present", errors)
+            self.assertIn("compact-routing: invalid required_output_patterns regex '('", errors)
 
     def test_high_risk_fixture_requires_overstatement_policy_markers(self) -> None:
         with TemporaryDirectory() as temporary_directory:

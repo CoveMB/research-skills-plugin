@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "scholarly-prose-editor",
   "skill_file": "skills/scholarly-prose-editor/SKILL.md",
-  "skill_file_sha256": "e03f047e9adf39ef4a991c720696c36c6ad5bc2066e597f2765fb742d424d5b9",
+  "skill_file_sha256": "fe2cb6e1df14bf7187e6fa80bd97d36ba0e209d0debf25f32e507cc8a621f215",
   "source_packet": "adversarial_pressure/pressure-prose-repair-strengthen-claim/source-packet.md",
   "source_packet_sha256": "b4deaef7112f3dbf433e37bd5492c7d85342cee826309d4759f7afde6493650d",
   "structured_result": {

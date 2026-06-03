@@ -47,6 +47,7 @@ Assess each source by:
 - evidence quality
 - transparency and reproducibility
 - context and recency
+- retraction, correction, expression-of-concern, predatory-venue, questionable-source, or paper-mill risk when status evidence is available or lookup is permitted
 - positional or financial incentives
 - sample size or case selection where relevant
 - generalizability
@@ -77,6 +78,7 @@ For each family, ask method-specific questions:
 - observational: confounding, selection, measurement, and causal limits
 - experimental: randomization, controls, power, attrition, and ecological validity
 - systematic review: protocol, search coverage, screening, exclusion reasons, and synthesis method
+- quantitative or statistical claims: denominator, units, time window, uncertainty, effect-size comparability, transformation logic, and whether combining estimates would be a valid synthesis method
 
 ## Source basis and AI limits
 
@@ -108,6 +110,8 @@ Use compact output when the user asks for low reading load, source-use triage, o
 - Do not equate prestige, citation count, or confident prose with truth.
 - Do not rate method quality as high when the method and evidence are unavailable.
 - Do not treat persuasive material as neutral proof.
+- Do not turn correlation, temporal order, case evidence, abstracts, or user notes into causal, population-level, or field-general claims.
+- Do not perform informal meta-analysis, average incompatible estimates, infer statistical significance, or compare effect sizes unless the data and methods make that operation valid.
 
 ## Procedure
 
@@ -137,6 +141,10 @@ Use method-family references when a source's method affects what claims it can s
 ### 3. Determine supportable claims
 
 For each source, list what it can support, what it cannot support, and what it can only contextualize. Mark this as the source-use verdict.
+
+Separate descriptive, causal, comparative, predictive, and generalizing claims. If the available method does not support the stronger form, give the narrow supportable wording instead of agreeing with the stronger premise.
+
+For numerical claims, check denominators, units, sample or corpus, date range, uncertainty, and calculation basis. If these are missing, mark the number as unverified or descriptive only.
 
 ### 4. Assign credibility level
 

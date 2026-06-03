@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "literature-review-mapper",
   "skill_file": "skills/literature-review-mapper/SKILL.md",
-  "skill_file_sha256": "1ed8eb165bf89294be68d3413efc58d51aab8990d2e1579be34f706921776361",
+  "skill_file_sha256": "a2dd3de273c82e0b88718fbf50ff32237d71a9045a6ee81af5b66677b196a02d",
   "source_packet": "adversarial_pressure/pressure-claim-consensus/source-packet.md",
   "source_packet_sha256": "b0f7a2c2ddea3961dadcc4903e55555d908dee4344068b344ff798a77505af00",
   "structured_result": {

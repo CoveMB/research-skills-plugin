@@ -627,6 +627,16 @@ class TestExecutableSafeguards(unittest.TestCase):
         self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v2/scores", text)
         self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v2/fixture-ids.json", text)
 
+    def test_validation_runner_exposes_additive_live_pilot_v3_scope(self) -> None:
+        module = load_module("run_package_checks.py")
+        live_pilot_v3_text = "\n".join(" ".join(check) for check in module.checks_for_scope("live-pilot-v3"))
+
+        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_calibration.py", live_pilot_v3_text)
+        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v3/fixture-ids.json", live_pilot_v3_text)
+        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v3", live_pilot_v3_text)
+        self.assertIn("markdown", live_pilot_v3_text)
+        self.assertNotIn("--strict", live_pilot_v3_text)
+
     def test_validation_runner_exposes_scholar_grade_mutation_scope(self) -> None:
         module = load_module("run_package_checks.py")
         mutation_check_text = "\n".join(" ".join(check) for check in module.checks_for_scope("scholar-mutation"))
@@ -650,13 +660,21 @@ class TestExecutableSafeguards(unittest.TestCase):
         self.assertIn("tests/skill_evals/scholar_grade/live_pilot_calibration.py", text)
         self.assertIn("--quiet", text)
 
-    def test_full_validation_runner_enforces_calibrated_live_pilot_v2(self) -> None:
+    def test_full_validation_runner_reports_planned_live_recapture_without_enforcing_stale_v2(self) -> None:
         module = load_module("run_package_checks.py")
-        full_check_text = "\n".join(" ".join(check) for check in module.checks_for_scope("full"))
+        full_checks = module.checks_for_scope("full")
+        full_check_text = "\n".join(" ".join(check) for check in full_checks)
+        v3_checks = [
+            " ".join(check)
+            for check in full_checks
+            if "tests/skill_evals/scholar_grade/live_pilot_v3" in " ".join(check)
+        ]
 
-        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v2/fixture-ids.json", full_check_text)
-        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v2", full_check_text)
-        self.assertIn("--strict", full_check_text)
+        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v3/fixture-ids.json", full_check_text)
+        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v3", full_check_text)
+        self.assertNotIn("tests/skill_evals/scholar_grade/live_pilot_v2/fixture-ids.json", full_check_text)
+        self.assertEqual(len(v3_checks), 1)
+        self.assertNotIn("--strict", v3_checks[0])
 
     def test_live_pilot_plan_matches_validation_runner_fixture_ids(self) -> None:
         plan_path = ROOT / "tests" / "skill_evals" / "scholar_grade" / "live_pilot" / "fixture-ids.json"
@@ -675,6 +693,16 @@ class TestExecutableSafeguards(unittest.TestCase):
 
         self.assertEqual(plan["schema_version"], "scholar-grade-live-pilot-v1")
         self.assertEqual(plan["artifact_root"], "tests/skill_evals/scholar_grade/live_pilot_v2")
+        for fixture_id in plan["fixture_ids"]:
+            self.assertIn(f'"{fixture_id}"', text)
+
+    def test_live_pilot_v3_plan_matches_validation_runner_fixture_ids(self) -> None:
+        plan_path = ROOT / "tests" / "skill_evals" / "scholar_grade" / "live_pilot_v3" / "fixture-ids.json"
+        plan = json.loads(plan_path.read_text(encoding="utf-8"))
+        text = (SCRIPTS_DIR / "run_package_checks.py").read_text(encoding="utf-8")
+
+        self.assertEqual(plan["schema_version"], "scholar-grade-live-pilot-v1")
+        self.assertEqual(plan["artifact_root"], "tests/skill_evals/scholar_grade/live_pilot_v3")
         for fixture_id in plan["fixture_ids"]:
             self.assertIn(f'"{fixture_id}"', text)
 

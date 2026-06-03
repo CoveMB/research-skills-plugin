@@ -1,0 +1,10 @@
+{
+  "fixture_id": "goodhart-headings-empty-substance",
+  "output_captured": true,
+  "output_sha256": "2381a4b9666385f691fd7b1cc9994c4e6c2c0a9bff540d3dfe7d6bef6b4fb24d",
+  "prompt_sha256": "845533f6fc9a081411de7d227eaa542b6b63c836d6b264f428ab34f797740e0d",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "scholarly-integrity-gate",
+  "skill_invoked": true
+}

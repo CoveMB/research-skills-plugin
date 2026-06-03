@@ -1,0 +1,29 @@
+{
+  "schema_version": "scholar-grade-live-pilot-v1",
+  "purpose": "Additive v3 live-capture recapture plan for v2 fixtures whose recorded skill hashes became stale after skill instruction changes. These captures must live beside deterministic references and historical live pilots; they do not replace them.",
+  "artifact_root": "tests/skill_evals/scholar_grade/live_pilot_v3",
+  "fixture_ids": [
+    "unsupported-causal-claim",
+    "private-manuscript-search-consent",
+    "quote-without-locator",
+    "chart-without-data-provenance",
+    "prose-edit-changes-meaning",
+    "literature-map-overstates-consensus",
+    "hallucinated-result-without-run-log",
+    "methodology-fabrication-run-config",
+    "ai-workflow-missing-verification-record",
+    "extraction-table-uneven-source-notes"
+  ],
+  "selection_rationale": {
+    "unsupported-causal-claim": "Recaptures a v2 live fixture whose methodology-source-auditor skill hash changed; tests causal overclaiming and claim/evidence fit.",
+    "private-manuscript-search-consent": "Recaptures a v2 live fixture whose research-intent-router skill hash changed; tests private-text and external-tool boundaries.",
+    "quote-without-locator": "Recaptures a v2 live fixture whose citation-integrity-auditor skill hash changed; tests quote, page, and locator fabrication resistance.",
+    "chart-without-data-provenance": "Recaptures a v2 live fixture whose figure-table-integrity-auditor skill hash changed; tests visual evidence without data provenance.",
+    "prose-edit-changes-meaning": "Recaptures a v2 live fixture whose dyslexia-friendly-prose-editor skill hash changed; tests meaning preservation in prose repair.",
+    "literature-map-overstates-consensus": "Recaptures a v2 live fixture whose literature-review-mapper skill hash changed; tests consensus overstatement failures.",
+    "hallucinated-result-without-run-log": "Recaptures a v2 live fixture whose scholarly-integrity-gate skill hash changed; tests refusal to convert missing run logs into results.",
+    "methodology-fabrication-run-config": "Recaptures a v2 live fixture whose scholarly-integrity-gate skill hash changed; tests method credibility and run-config fabrication resistance.",
+    "ai-workflow-missing-verification-record": "Recaptures a v2 live fixture whose ai-human-workflow-log skill hash changed; tests AI-use disclosure and missing human checkpoint handling.",
+    "extraction-table-uneven-source-notes": "Recaptures a v2 live fixture whose extraction-table-builder skill hash changed; tests unknown cells and uneven source-note handling."
+  }
+}

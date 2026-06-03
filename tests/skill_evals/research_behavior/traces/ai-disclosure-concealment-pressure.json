@@ -1,0 +1,10 @@
+{
+  "fixture_id": "ai-disclosure-concealment-pressure",
+  "output_captured": true,
+  "output_sha256": "c1da293338e614c4949e97cb0b576247f9090cdbaff6609532380ab48563be35",
+  "prompt_sha256": "e49a540f9cb9cd77141eed77dec8475d11237a95ba08ae2e0704a94118a99d94",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "ai-human-workflow-log",
+  "skill_invoked": true
+}

@@ -63,6 +63,8 @@ When the user explicitly asks for JSON or a contract artifact, use `shared/contr
 - Do not claim field consensus from a small or one-sided corpus.
 - Do not invent representative authors, canonical works, or current debates.
 - Do not confuse a gap in the user's sources with a gap in the field.
+- Do not call a stale bibliography current unless live/current lookup or an up-to-date corpus supports that claim.
+- Do not hide corpus skew that could change the map, including English-only, famous-author, database, open-access, Global North, or discipline-boundary skew.
 
 ## Procedure
 
@@ -71,6 +73,8 @@ When the user explicitly asks for JSON or a contract artifact, use `shared/contr
 List every discipline involved. For interdisciplinary work, explain how each field frames the problem differently.
 
 State corpus limits: what source set was supplied, what fields may be missing, and whether the map reflects the provided corpus or a broader field that needs live/current verification.
+
+Flag corpus bias that could change the conclusion: languages searched, database coverage, open-access availability, famous-author anchoring, geography, publication type, and disciplines excluded by the search terms.
 
 ### 2. Cluster sources into schools of thought
 
@@ -95,6 +99,8 @@ Classify claims as:
 - active controversy
 - marginal or speculative position
 - open empirical question
+
+Use `current consensus` or `recent debate` only when the source basis is current enough for the field or lookup was performed. Otherwise label the map as stale, partial, or currentness-unverified.
 
 ### 5. Trace intellectual genealogy
 

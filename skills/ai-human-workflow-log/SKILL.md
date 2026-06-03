@@ -65,6 +65,8 @@ When the user explicitly asks for JSON or a contract artifact, use `shared/contr
 - Do not invent AI tool use, human approval, source verification, disclosure requirements, or override rationale.
 - Do not imply that disclosure language satisfies a venue policy unless the policy text was provided or verified.
 - Do not hide unresolved risks behind a vague statement that a human reviewed the work.
+- Do not conceal AI involvement or rewrite the record to make AI-assisted work appear fully human-authored.
+- Do not transfer responsibility to the tool; authors, researchers, or project owners remain responsible for claims, sources, rights, privacy, and submission decisions.
 
 ## Procedure
 
@@ -96,6 +98,8 @@ For each AI-assisted step, record:
 ### 4. Draft disclosure basis
 
 When a venue or press requires disclosure, create conservative disclosure notes that identify tool use, scope, affected sections, and human responsibility. Mark venue-specific disclosure as draft language unless policy text was supplied.
+
+If venue policy is missing or possibly currentness-sensitive, mark policy status as unverified or lookup needed instead of claiming compliance.
 
 ### 5. Route unresolved risk
 

@@ -1,0 +1,10 @@
+{
+  "fixture_id": "questionable-source-status-unchecked",
+  "output_captured": true,
+  "output_sha256": "606a49a12f237f4dd3278eea3f87caebe4f90b21ae8bf860800b63ddcf54f012",
+  "prompt_sha256": "6737cad42ed264579a47ac1254da5ba5b07ee6bd21b101e29175b093cf54286b",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "citation-integrity-auditor",
+  "skill_invoked": true
+}

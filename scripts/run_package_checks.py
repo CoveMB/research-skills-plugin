@@ -67,6 +67,25 @@ LIVE_PILOT_V2_CALIBRATION_CHECK = (
     "--quiet",
 )
 
+LIVE_PILOT_V3_CALIBRATION_CHECK = (
+    "tests/skill_evals/scholar_grade/live_pilot_calibration.py",
+    "--pilot-plan",
+    "tests/skill_evals/scholar_grade/live_pilot_v3/fixture-ids.json",
+    "--live-root",
+    "tests/skill_evals/scholar_grade/live_pilot_v3",
+    "--quiet",
+)
+
+LIVE_PILOT_V3_REPORT_CHECK = (
+    "tests/skill_evals/scholar_grade/live_pilot_calibration.py",
+    "--pilot-plan",
+    "tests/skill_evals/scholar_grade/live_pilot_v3/fixture-ids.json",
+    "--live-root",
+    "tests/skill_evals/scholar_grade/live_pilot_v3",
+    "--format",
+    "markdown",
+)
+
 SCHOLAR_MUTATION_CHECKS = (
     (
         "tests/skill_evals/scholar_grade/mutation_tests/run_mutation_tests.py",
@@ -136,7 +155,7 @@ FULL_CHECKS = (
         "--check",
     ),
     LIVE_PILOT_CALIBRATION_CHECK,
-    LIVE_PILOT_V2_CALIBRATION_CHECK,
+    LIVE_PILOT_V3_CALIBRATION_CHECK,
     *REAL_GOLDSET_CHECKS,
     (
         "scripts/check_source_candidates.py",
@@ -186,6 +205,10 @@ LIVE_PILOT_V2_CHECKS = (
     LIVE_PILOT_V2_CALIBRATION_CHECK,
 )
 
+LIVE_PILOT_V3_CHECKS = (
+    LIVE_PILOT_V3_REPORT_CHECK,
+)
+
 
 PackageCheck = tuple[str, ...]
 
@@ -198,6 +221,7 @@ def checks_for_scope(scope: str) -> tuple[PackageCheck, ...]:
         "live": LIVE_CHECKS,
         "live-pilot": LIVE_PILOT_CHECKS,
         "live-pilot-v2": LIVE_PILOT_V2_CHECKS,
+        "live-pilot-v3": LIVE_PILOT_V3_CHECKS,
         "scholar-mutation": SCHOLAR_MUTATION_CHECKS,
         "real-goldsets": REAL_GOLDSET_CHECKS,
     }
@@ -239,6 +263,7 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
             "live",
             "live-pilot",
             "live-pilot-v2",
+            "live-pilot-v3",
             "scholar-mutation",
             "real-goldsets",
         ],
@@ -247,6 +272,7 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
             "Use install for pre-install checks, full for source-checkout validation, "
             "package for validation that works from a packaged or installed copy without repo-only tests, "
             "live-pilot for the original pilot report, live-pilot-v2 for the strict calibrated pilot, "
+            "live-pilot-v3 for the planned recapture report, "
             "scholar-mutation for evaluator sensitivity mutations, "
             "real-goldsets for active real-source gold-set live-test readiness, "
             "or live for recorded live skill captures."

@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "methodology-source-auditor",
   "skill_file": "skills/methodology-source-auditor/SKILL.md",
-  "skill_file_sha256": "de648c5561cef42166bcc95662d3ff089417ed1598bbc0652bd1ea4fa2cab142",
+  "skill_file_sha256": "ecd81f880108966e975e022fc5e175a39f3fbcc8da0ee227db7f883a3738f45a",
   "source_packet": "corpora/shortcut-literature-review-abstract-only/source-packet.md",
   "source_packet_sha256": "ac1c85dd4f2742458e31bc7c43374015e4a5f8b9d5e079a647ded28cb6ac9f1f",
   "structured_result": {

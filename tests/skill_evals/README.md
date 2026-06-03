@@ -55,6 +55,8 @@ Use these fixture classes together:
 - `score_anchors` define fixture-specific meanings for rubric scores 3, 4, and 5 so reviewers calibrate quality instead of assigning unexplained numbers.
 - Optional `semantic_fail_patterns` catch paraphrased overclaims that would evade exact forbidden-claim strings.
 
+Research-behavior fixtures may also use `required_output_patterns` and `forbidden_output_patterns` when marker checks are too weak. Use them for adversarial cases where a model could include the required headings while still following source-contained instructions, agreeing with a false premise, hiding a blocker, or leaving the claim boundary generic. These regex checks are deterministic behavior checks only; they do not certify source truth.
+
 ## Controlled source packets
 
 Scholar-grade fixtures usually point to `tests/skill_evals/scholar_grade/corpora/<fixture-id>/`. A clearly named group may use another source-packet root when it makes the risk layer explicit, such as `tests/skill_evals/scholar_grade/adversarial_pressure/<fixture-id>/`.
@@ -274,8 +276,13 @@ Validate the calibrated v2 pilot subset:
 python3 scripts/run_package_checks.py --scope live-pilot-v2
 ```
 
-The v2 pilot lives under `tests/skill_evals/scholar_grade/live_pilot_v2/` and runs strict calibration after validating its live outputs, manifests, and review scores.
-The same strict v2 calibration gate is also part of `python3 scripts/run_package_checks.py --scope full`.
+The v2 pilot lives under `tests/skill_evals/scholar_grade/live_pilot_v2/` and runs strict calibration after validating its live outputs, manifests, and review scores. Use this explicit scope when the v2 live captures are expected to match the current skill files.
+
+After skill instruction changes, do not overwrite historical v2 captures whose manifest skill hashes no longer match current skill files. Use `tests/skill_evals/scholar_grade/live_pilot_v3/` as an additive recapture plan for the stale v2 subset. Its calibration report is intentionally non-strict until real captured outputs, manifests, and review scores have been recorded. The same non-strict v3 status check is part of `python3 scripts/run_package_checks.py --scope full`, while the strict v2 gate remains available as `--scope live-pilot-v2`:
+
+```bash
+python3 scripts/run_package_checks.py --scope live-pilot-v3
+```
 
 Validate scholar-grade evaluator sensitivity mutations:
 

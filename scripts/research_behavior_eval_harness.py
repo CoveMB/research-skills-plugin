@@ -33,7 +33,7 @@ MANUAL_OR_LIVE_RUN_EXPECTATIONS = [
 ]
 LIMITS = [
     "This harness does not run a model or call external services.",
-    "It checks fixture coverage, captured-output presence, route-trace presence, selected skill evidence, trace hashes, required markers, forbidden claims, and compact-output boundaries.",
+    "It checks fixture coverage, captured-output presence, route-trace presence, selected skill evidence, trace hashes, required markers, optional substantive output patterns, forbidden claims, optional forbidden output patterns, and compact-output boundaries.",
     "For high-risk research fixtures, it checks structural overstatement and uncertainty markers plus reusable forbidden overclaim phrases.",
     "It does not verify source truth, citation accuracy, methodological validity, or scholarly correctness.",
 ]
@@ -54,7 +54,9 @@ def fixture_case_report(
         "expected_route": str(fixture.get("expected_route", "")),
         "risk_covered": str(fixture.get("risk_covered", "")),
         "required_output_markers": string_list(fixture.get("required_output_markers")),
+        "required_output_patterns": string_list(fixture.get("required_output_patterns")),
         "forbidden_claims": forbidden_claims_for_fixture(fixture),
+        "forbidden_output_patterns": string_list(fixture.get("forbidden_output_patterns")),
         "output_file": f"{fixture_identifier(fixture)}.md",
         "output_path": str(output_path) if output_path else None,
         "captured_output_checked": bool(output_path and output_path.exists()),
@@ -147,7 +149,9 @@ def format_markdown_runbook(report: dict[str, Any]) -> str:
                 f"- Output file: `{case['output_file']}`",
                 f"- Route trace file: `{case['trace_file']}`",
                 f"- Required markers: {inline_code_list(case['required_output_markers'])}",
+                f"- Required output patterns: {inline_code_list(case['required_output_patterns'])}",
                 f"- Forbidden claims: {inline_code_list(case['forbidden_claims'])}",
+                f"- Forbidden output patterns: {inline_code_list(case['forbidden_output_patterns'])}",
                 f"- Validation errors: {inline_code_list(case['validation_errors'])}",
                 f"- Trace validation errors: {inline_code_list(case['trace_validation_errors'])}",
                 "",

@@ -74,6 +74,8 @@ When the user explicitly asks for JSON or a contract artifact, use `shared/contr
 - Do not add factual claims, citations, examples, or anecdotes unless requested and clearly marked for verification.
 - Do not polish weak evidence into false certainty.
 - Do not erase authorial voice or warranted uncertainty.
+- Do not compress away decision-critical caveats, disputed terms, source limits, or responsibility language.
+- Do not agree with a false premise in the user's requested wording; flag the premise and offer the strongest supportable revision.
 
 ## Procedure
 
@@ -138,6 +140,7 @@ Ask or infer one:
 - research edit: sharpen terms, claims, and logic
 - public-facing edit: make accessible to educated general readers
 - compression edit: reduce length without losing argument
+- caveat-preserving compression edit: reduce length while keeping uncertainty, source limits, method limits, and responsibility language intact
 - expansion edit: add transitions or explanation without adding unsupported facts
 - style-preserving edit: minimal changes, voice-first
 
@@ -148,6 +151,7 @@ Ask or infer one:
 - Avoid promotional or formulaic phrasing.
 - Keep specialized terms if they are necessary, but define them.
 - Preserve warranted hedging when evidence remains uncertain.
+- Preserve caveats that change claim strength, authorship responsibility, source status, method limits, or release/disclosure decisions.
 
 ## Failure modes
 
@@ -155,4 +159,5 @@ Ask or infer one:
 - Revision introduces new facts without evidence.
 - Hedging is removed where uncertainty is intellectually necessary.
 - Sentence-level polish hides structural or evidentiary problems.
+- Compression makes an unverified, stale, causal, statistical, or source-support claim sound settled.
 - Premature citation audit before citations, quotes, page numbers, bibliography entries, or cited claims exist.

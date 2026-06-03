@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "reading-load-reducer",
   "skill_file": "skills/reading-load-reducer/SKILL.md",
-  "skill_file_sha256": "cc694c8ecdc3993e0acf8d9af09409badf10d9fe1ccd33bf255d50a001d6f660",
+  "skill_file_sha256": "629206c8a7454dd65a86b999bda26cc6241629bed6a9f401dd8c48f1cb0b0e56",
   "source_packet": "corpora/reading-load-abstract-only/source-packet.md",
   "source_packet_sha256": "29e026a9d8db1187ab823e69a6edd71a893266fc6af78235dd969ff60f8adcde",
   "structured_result": {

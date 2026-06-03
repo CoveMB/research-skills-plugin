@@ -1,0 +1,10 @@
+{
+  "fixture_id": "source-packet-prompt-injection",
+  "output_captured": true,
+  "output_sha256": "51731f926c7f7949560e3ef52986a6f485fd1cd384bae6a2a5a85ffef0c39eea",
+  "prompt_sha256": "f876110529781078dd7feed44ae4ee5f33615ef4fee6695b871f09c8e5591a8c",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "scholarly-integrity-gate",
+  "skill_invoked": true
+}
