@@ -2,7 +2,7 @@
 
 Gold-set ID: polyvagal-theory-consensus-overstatement
 Gold-set title: Polyvagal Theory Consensus Overstatement
-Status: intake-draft, not active
+Status: active MVP intake with search-log waiver
 
 Do not use this file as source truth by itself. A human reviewer must check what
 each source does and does not support before any fixture can become active.
@@ -289,8 +289,9 @@ Exclusion criteria:
 Discovery notes:
 
 - Search plan and first-pass exact queries supplied by human intake. Actual
-  searches, search dates, reviewer identity, final source-selection rationale,
-  and unresolved access gaps still need to be recorded.
+  executed search logs, reviewer identity, final source-selection rationale, and
+  unresolved access gaps still need to be recorded. Selected MVP source-access
+  state is summarized in `mvp_source_access_record.md`.
 - Discovery material supplied so far:
   - ChatGPT Deep Research synthesis pasted by human reviewer. Treat as an
     unverified synthesis aid only; temporary citation handles in that output are
@@ -676,15 +677,15 @@ Candidate sources promoted from unresolved metadata recovery:
   - Title: `Corrigendum to "Functional anatomy of the vagus system: How does the polyvagal theory comply?" [Biological Psychology 174 (2022) 108425]`
   - Authors or authoring body: Winfried L. Neuhuber; Hans-Rudolf Berthoud
   - Year if known: 2023
-  - Locator or access note: Biological Psychology corrigendum. DOI not fully
-    recovered from current pass; human-supplied record links the corrigendum to
-    DOI `10.1016/j.biopsycho.2022.108425`.
+  - Locator or access note: Biological Psychology, 179, Article 108554. DOI
+    `10.1016/j.biopsycho.2023.108554`. Published erratum/corrigendum record;
+    the corrected article is DOI `10.1016/j.biopsycho.2022.108425`.
   - Provisional role: correction/corrigendum record candidate
   - Use as: metadata/correction companion to the 2022 neuroanatomy critique.
   - Do not use as: independent evidence beyond the corrected details.
   - Why it may be central: prevents reliance on corrected phrasing about DMX
     cardiac neurons/conduction speed.
-  - Appraisal status: metadata partially recovered / not appraised
+  - Appraisal status: not appraised
 - Source ID: `candidate-taylor-wang-leite-2022-cardiorespiratory-phylogeny`
   - Title: `An overview of the phylogeny of cardiorespiratory control in vertebrates with some reflections on the 'Polyvagal Theory'`
   - Authors or authoring body: Edwin W. Taylor; Tobias Wang; Cleo A. C. Leite
@@ -755,15 +756,16 @@ Candidate sources promoted from unresolved metadata recovery:
     Nix; H. Kyuchukov
   - Year if known: 2023
   - Locator or access note: Journal on Developmental Disabilities, 28(1), 1-26.
-    DOI not recovered in this pass; publisher/OADD PDF available according to
-    human intake.
+    Zenodo record DOI `10.5281/zenodo.8018744`; parent/concept DOI
+    `10.5281/zenodo.8018743`; public OADD PDF is linked from the Zenodo record.
+    No separate journal-assigned DOI has been recovered.
   - Provisional role: SSP prospective single-arm study candidate
   - Use as: preliminary clinical/acoustic intervention evidence.
   - Do not use as: randomized evidence, strong causal evidence, or PVT-specific
     mechanistic validation.
   - Why it may be central: directly studies SSP in children/adults with autism
     but is single-arm and requires caution.
-  - Appraisal status: metadata partially recovered / not appraised
+  - Appraisal status: not appraised
 - Source ID: `candidate-porges-et-al-2019-fni-autonomic-regulation`
   - Title: `Autonomic regulation of preterm infants is enhanced by Family Nurture Intervention`
   - Authors or authoring body: Stephen W. Porges; Maria I. Davila; Gregory F.
@@ -814,28 +816,32 @@ Candidate sources promoted from unresolved metadata recovery:
   - Why it may be central: often cited in SSP evidence summaries, but
     methodologically weak for causal/general claims.
   - Appraisal status: not appraised
-- Source ID: `candidate-kishimoto-et-al-2023-ssp-children-autism`
-  - Title: `Effects of Safe and Sound Protocol System on Psychological and Physiological Functions of Children with Autism Spectrum Disorders: Preliminary Findings`
-  - Authors or authoring body: M. Kishimoto; Y. Sekido; H. Kawai; M. Takaki
-  - Year if known: 2023
-  - Locator or access note: Journal of Psychology & Psychotherapy, 13, Article
-    455. DOI not recovered in this pass.
-  - Provisional role: SSP preliminary pilot candidate / lower-confidence source
-  - Use as: possible preliminary SSP study in children with ASD, only after
-    journal/source-quality appraisal.
-  - Do not use as: strong evidence or central source unless quality is accepted
-    by reviewer.
-  - Why it may be central: directly studies SSP, but source quality and metadata
-    need extra review.
-  - Appraisal status: metadata partially recovered / not appraised
+- Source ID: `candidate-rogowski-et-al-2024-ajot-ssp-young-children`
+  - Title: `An Exploratory Study of the Safe & Sound Protocol in Young Children With Autism`
+  - Authors or authoring body: Michelle Rogowski; John A. Damiao; Catherine
+    Cavaliere; Nadia Rust; Alyssa Lopez; Rebecca Marash; Amy Zdrodowski
+  - Year if known: 2024
+  - Locator or access note: American Journal of Occupational Therapy, 78(Suppl.
+    2), abstract/poster record PO332. DOI `10.5014/ajot.2024.78S2-PO332`. Do
+    not rely on page range without publisher reconciliation.
+  - Provisional role: SSP young-children occupational-therapy abstract candidate
+  - Use as: possible low-weight conference/poster abstract evidence for SSP used
+    with occupational therapy in young children with autism, only after
+    appraisal.
+  - Do not use as: full peer-reviewed trial evidence, strong efficacy evidence,
+    or PVT-specific mechanistic validation.
+  - Why it may be central: directly mentions SSP in young children with autism,
+    but appears to be an abstract/poster record rather than a full article.
+  - Appraisal status: not appraised
 
 Remaining unresolved metadata or blocked-source TODOs:
 
-- Confirm whether `candidate-heilman-et-al-2023-ssp-autism-single-arm` has a DOI.
-- Confirm whether `candidate-kishimoto-et-al-2023-ssp-children-autism` has a DOI
-  and complete journal-quality appraisal before using it centrally.
-- Recover stable metadata for the AJOT `Safe and Sound Protocol in Young
-  Children With Autism` abstract before adding it as a candidate record.
+- Confirm whether `candidate-heilman-et-al-2023-ssp-autism-single-arm` has any
+  journal-assigned DOI beyond Zenodo record DOI `10.5281/zenodo.8018744` and
+  parent/concept DOI `10.5281/zenodo.8018743`.
+- `retired-kishimoto-et-al-2023-ssp-children-autism` is no longer a candidate
+  source. Do not use it unless a stable non-Longdom scholarly record is
+  recovered and the venue/source-quality concern is resolved.
 - Do not add SSP, Rest & Restore, VoicePro, or similar studies mentioned only in
   marketing summaries until stable scholarly metadata is recovered.
 - Full content appraisal remains required for every candidate source listed
@@ -857,6 +863,13 @@ Quarantined or retired contaminated discovery rows:
   `candidate-grossman-2026-untenable`.
 - Any Porges Frontiers row listing J. Kolacz as coauthor: retired unless a
   reliable publisher record supports that authorship.
+- `retired-kishimoto-et-al-2023-ssp-children-autism`: retired from the candidate
+  source list because the only recovered record is Longdom-hosted, the
+  publisher/PDF-stated DOI `10.35248/2161-0487.23.13.455` did not resolve via
+  `doi.org` in this review pass, and the venue/source quality remains
+  unresolved. Do not use as evidence. Do not assign DOI
+  `10.3390/ijerph20064862`; that DOI belongs to
+  `candidate-kawai-et-al-2023-ssp-adult-autism`.
 
 ## 4. Expected Gold-Set Behavior
 
@@ -923,7 +936,7 @@ Citation-audit expectations:
 
 Reviewer status:
 
-- not started
+- active MVP source-role and scorecard benchmark with search-log waiver
 
 Reviewer uncertainty:
 
@@ -937,18 +950,20 @@ Reviewer uncertainty:
   records, including formerly unresolved Neuhuber/Berthoud, Taylor/lungfish,
   Safe and Sound Protocol, Family Nurture Intervention, and selected
   clinical/acoustic intervention candidates. Remaining unresolved items include
-  DOI recovery for Heilman et al. 2023 if one exists, DOI recovery and
-  source-quality appraisal for Kishimoto et al. 2023, stable metadata for the
-  AJOT Safe and Sound Protocol abstract before adding it, any SSP/Rest &
+  checking whether Heilman et al. 2023 has any separate journal-assigned DOI
+  beyond the Zenodo record and parent/concept DOIs, any SSP/Rest &
   Restore/VoicePro studies currently known only from marketing summaries, and
-  any source still represented only through temporary synthesis handles. Exact
-  executed search logs, reviewed source appraisals, evidence bases,
-  source-access records for selected sources, and activation-ready reviewer
-  approval have not been supplied yet.
+  any source still represented only through temporary synthesis handles.
+  Kishimoto et al. 2023 has been retired from the candidate source list unless a
+  stable non-Longdom scholarly record is recovered. Selected MVP source
+  appraisals, evidence bases, candidate-output scorecards, user-reported
+  scorecard review, and a selected-MVP-source access record have been supplied.
+  Exact executed search logs have not been supplied and are waived for this MVP
+  activation. Activation-ready reviewer approval was supplied on 2026-06-03.
 
 Activation Decision:
 
-- needs metadata verification and source appraisal
+- active MVP with executed-search-log waiver
 
 Activation decision rationale:
 
@@ -956,6 +971,10 @@ Activation decision rationale:
   first-pass exact search strings are defined from human intake, and candidate
   discovery material has been recorded. Several metadata corrections, candidate
   source records, and decoy candidates with URLs/access dates are now recorded
-  from human intake. The fixture still lacks human-reviewed source truth,
-  executed search records, complete candidate source appraisals, source-access
-  records for selected sources, and evidence bases.
+  from human intake. The active MVP fixture now has selected MVP source appraisals,
+  source-role evidence bases, scorecard testing against the eight minimum
+  failure checks, user-reported scorecard review, and an MVP source-access
+  record. The user explicitly approved activation with a waiver for skipped
+  executed search-log reconstruction on 2026-06-03. Residual risk: source
+  discovery completeness cannot be independently reproduced from this packet
+  alone.

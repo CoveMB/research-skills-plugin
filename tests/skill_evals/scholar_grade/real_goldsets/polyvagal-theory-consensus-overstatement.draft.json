@@ -1,0 +1,517 @@
+{
+  "schema_version": "real-source-goldset-v1",
+  "status": "active",
+  "goldset_id": "polyvagal-theory-consensus-overstatement",
+  "domain": "Clinical psychology, trauma therapy, affective neuroscience, autonomic physiology, and psychophysiology",
+  "task_type": "mixed",
+  "visible_prompt": "Can the skill avoid overstating consensus around Polyvagal Theory? Produce a bounded literature-map or synthesis that separates broad autonomic nervous system findings from Porges's specific Polyvagal Theory claims, clinical or therapeutic usefulness claims, popularized trauma-regulation claims, and contested or weakly supported physiological mechanisms.",
+  "allowed_tools": [
+    "PubMed / MEDLINE",
+    "APA PsycInfo",
+    "Scopus or Web of Science",
+    "Semantic Scholar",
+    "PubMed Central for source access when available",
+    "Google Scholar for supplementary citation chasing only",
+    "Local human-reviewed appraisal packet"
+  ],
+  "network_policy": "Use broad academic discovery sources rather than general web search. Public-facing web pages may be used only as decoys for overstatement-risk recognition, not as scholarly evidence.",
+  "gold_sources": [
+    {
+      "source_id": "candidate-grossman-2026-untenable",
+      "title": "Why the Polyvagal Theory Is Untenable: An international expert evaluation of the polyvagal theory and commentary upon Porges, S.W. (2025). Polyvagal theory: current status, clinical applications, and future directions. Clin. Neuropsychiatry, 22(3), 169-184.",
+      "authors": [
+        "P. Grossman",
+        "G. L. Ackland",
+        "A. M. Allen",
+        "G. G. Berntson",
+        "L. C. Booth",
+        "G. M. Burghardt",
+        "J. Buron",
+        "V. Dinets",
+        "J. S. Doody",
+        "M. Dutschmann",
+        "D. G. S. Farmer",
+        "J. P. Fisher",
+        "A. V. Gourine",
+        "M. J. Joyner",
+        "J. M. Karemaker",
+        "S. S. Khalsa",
+        "E. G. Lakatta",
+        "C. A. C. Leite",
+        "V. G. Macefield",
+        "B. H. Machado",
+        "R. M. McAllen",
+        "C. Menuet",
+        "D. Mendelowitz",
+        "D. J. A. Moraes",
+        "W. Neuhuber",
+        "M. M. Ottaviani",
+        "D. J. Paterson",
+        "J. F. Paton",
+        "P. R. Pellegrino",
+        "R. Ramchandra",
+        "J. Shanks",
+        "J. S. Schwaber",
+        "K. Shivkumar",
+        "K. M. Spyer",
+        "E. W. Taylor",
+        "J. A. Taylor",
+        "T. Wang",
+        "S. T. Yao",
+        "I. H. Zucker"
+      ],
+      "year": 2026,
+      "locator_or_access_note": "Clinical Neuropsychiatry, 23(1), 100-112. DOI 10.36131/cnfioritieditore20260110. The 169-184 page range belongs to the Porges 2025 article named inside the title, not to this article.",
+      "role": "Human-reviewed gold critique and commentary source; not a formal field-wide consensus process."
+    },
+    {
+      "source_id": "candidate-grossman-2023-five-premises",
+      "title": "Fundamental challenges and likely refutations of the five basic premises of the polyvagal theory",
+      "authors": [
+        "P. Grossman"
+      ],
+      "year": 2023,
+      "locator_or_access_note": "Biological Psychology, 180, Article 108589. DOI 10.1016/j.biopsycho.2023.108589.",
+      "role": "Human-reviewed gold critique source for core PVT physiological and evolutionary premises."
+    },
+    {
+      "source_id": "candidate-grossman-2024-rsa",
+      "title": "Respiratory sinus arrhythmia (RSA), vagal tone and biobehavioral integration: Beyond parasympathetic function",
+      "authors": [
+        "P. Grossman"
+      ],
+      "year": 2024,
+      "locator_or_access_note": "Biological Psychology, 186, Article 108739. DOI 10.1016/j.biopsycho.2023.108739.",
+      "role": "Human-reviewed gold RSA methodology and measurement-caveat source."
+    },
+    {
+      "source_id": "candidate-taylor-wang-leite-2022-cardiorespiratory-phylogeny",
+      "title": "An overview of the phylogeny of cardiorespiratory control in vertebrates with some reflections on the 'Polyvagal Theory'",
+      "authors": [
+        "Edwin W. Taylor",
+        "Tobias Wang",
+        "Cleo A. C. Leite"
+      ],
+      "year": 2022,
+      "locator_or_access_note": "Biological Psychology, 172, Article 108382. DOI 10.1016/j.biopsycho.2022.108382.",
+      "role": "Human-reviewed gold comparative physiology and evolutionary-mechanism critique source."
+    }
+  ],
+  "acceptable_sources": [
+    {
+      "source_id": "candidate-porges-2025-current-status",
+      "title": "Polyvagal Theory: Current Status, Clinical Applications, and Future Directions",
+      "authors": [
+        "Stephen W. Porges"
+      ],
+      "year": 2025,
+      "locator_or_access_note": "Clinical Neuropsychiatry. DOI 10.36131/cnfioritieditore20250301. Cite by DOI; do not rely on page range until reconciled because public or publisher metadata appears inconsistent.",
+      "role": "Human-reviewed acceptable author-side review and defense source; represents Porges's current framing, not independent validation."
+    },
+    {
+      "source_id": "candidate-porges-2025-journey",
+      "title": "Polyvagal theory: a journey from physiological observation to neural innervation and clinical insight",
+      "authors": [
+        "Stephen W. Porges"
+      ],
+      "year": 2025,
+      "locator_or_access_note": "Frontiers in Behavioral Neuroscience, 19, Article 1659083. DOI 10.3389/fnbeh.2025.1659083.",
+      "role": "Human-reviewed acceptable author-side theory articulation source; useful for current Porges framing but not independent adjudication."
+    },
+    {
+      "source_id": "candidate-porges-2026-response",
+      "title": "When a Critique Becomes Untenable: A Scholarly Response to Grossman et al.'s Evaluation of Polyvagal Theory",
+      "authors": [
+        "Stephen W. Porges"
+      ],
+      "year": 2026,
+      "locator_or_access_note": "Clinical Neuropsychiatry, 23(1), 113-128. DOI 10.36131/cnfioritieditore20260111.",
+      "role": "Human-reviewed acceptable author response and rebuttal source; represents Porges's clarifications, not independent validation."
+    },
+    {
+      "source_id": "candidate-poli-2021-contemplative-review",
+      "title": "A Systematic Review of a Polyvagal Perspective on Embodied Contemplative Practices as Promoters of Cardiorespiratory Coupling and Traumatic Stress Recovery for PTSD and OCD: Research Methodologies and State of the Art",
+      "authors": [
+        "A. Poli",
+        "A. Gemignani",
+        "F. Soldani",
+        "M. Miccoli"
+      ],
+      "year": 2021,
+      "locator_or_access_note": "International Journal of Environmental Research and Public Health, 18(22), Article 11778. DOI 10.3390/ijerph182211778.",
+      "role": "Human-reviewed acceptable clinical-adjacent systematic review source; useful for preliminary evidence limits, not strong PVT validation."
+    },
+    {
+      "source_id": "candidate-grossman-taylor-2007-rsa",
+      "title": "Toward understanding respiratory sinus arrhythmia: Relations to cardiac vagal tone, evolution and biobehavioral functions",
+      "authors": [
+        "P. Grossman",
+        "E. W. Taylor"
+      ],
+      "year": 2007,
+      "locator_or_access_note": "Biological Psychology, 74(2), 263-285. DOI 10.1016/j.biopsycho.2005.11.014. Full article access was unavailable in the current appraisal packet; use conservatively until full review.",
+      "role": "Draft acceptable RSA methodology source with access limits; candidate support for measurement caveats, not fine-grained gold evidence yet."
+    },
+    {
+      "source_id": "candidate-neuhuber-berthoud-2022-vagus-anatomy",
+      "title": "Functional anatomy of the vagus system: How does the polyvagal theory comply?",
+      "authors": [
+        "Winfried L. Neuhuber",
+        "Hans-Rudolf Berthoud"
+      ],
+      "year": 2022,
+      "locator_or_access_note": "Biological Psychology, 174, Article 108425. DOI 10.1016/j.biopsycho.2022.108425. Full article access was unavailable in the current appraisal packet; use conservatively until full review.",
+      "role": "Draft acceptable neuroanatomical critique locator with access limits; not fine-grained gold evidence yet."
+    }
+  ],
+  "decoy_sources": [
+    {
+      "source_id": "candidate-decoy-polyvagal-institute-what-is",
+      "title": "What is Polyvagal Theory?",
+      "authoring_body": "Polyvagal Institute",
+      "year": "not recorded",
+      "locator_or_access_note": "https://www.polyvagalinstitute.org/whatispolyvagaltheory; reviewed/accessed in appraisal packet on 2026-06-03.",
+      "role": "Human-reviewed popularized public-facing decoy source.",
+      "decoy_reason": "Institute/public-facing page that may identify popularized PVT framing and overstatement risks; must not be used as scholarly evidence or consensus support."
+    },
+    {
+      "source_id": "candidate-decoy-khiron-ladder",
+      "title": "Polyvagal Theory: A Ladder of Nervous States",
+      "authoring_body": "Khiron Clinics",
+      "year": "not recorded",
+      "locator_or_access_note": "https://khironclinics.com/blog/polyvagal-theory-a-ladder-of-nervous-states/; reviewed/accessed in appraisal packet on 2026-06-03.",
+      "role": "Human-reviewed popularized clinical-marketing decoy source.",
+      "decoy_reason": "Clinic/public-facing page that may identify simplified ladder, trauma, and dorsal-vagal shutdown overstatement risks; must not be used as scholarly evidence or consensus support."
+    }
+  ],
+  "disallowed_sources": [],
+  "required_distinctions": [
+    {
+      "id": "broad-autonomic-vs-pvt-specific",
+      "expectation": "The output must separate broad autonomic regulation, HRV, RSA, vagal physiology, and social-safety findings from Porges's specific Polyvagal Theory mechanisms and evolutionary claims.",
+      "evidence_basis": "Human-reviewed MVP appraisal basis: candidate-grossman-2024-rsa, candidate-grossman-2023-five-premises, candidate-taylor-wang-leite-2022-cardiorespiratory-phylogeny, candidate-porges-2025-current-status, and candidate-porges-2026-response."
+    },
+    {
+      "id": "author-side-vs-independent-adjudication",
+      "expectation": "The output must label Porges-authored theory papers and responses as author-side sources rather than independent validation, while also representing them fairly when describing current PVT formulations.",
+      "evidence_basis": "Human-reviewed MVP appraisal basis: candidate-porges-2025-current-status, candidate-porges-2025-journey, candidate-porges-2026-response, and candidate-grossman-2026-untenable."
+    },
+    {
+      "id": "clinical-usefulness-vs-mechanistic-validation",
+      "expectation": "The output must distinguish possible clinical usefulness, metaphorical value, uptake, or preliminary intervention evidence from validation of PVT-specific physiological mechanisms.",
+      "evidence_basis": "Human-reviewed MVP appraisal basis: candidate-poli-2021-contemplative-review, candidate-porges-2025-current-status, candidate-grossman-2026-untenable, and appraisal packet notes."
+    },
+    {
+      "id": "decoys-vs-scholarly-evidence",
+      "expectation": "The output must not treat public-facing institute, clinic, training, product, or self-help pages as scholarly evidence for consensus or mechanism validation.",
+      "evidence_basis": "Human-reviewed MVP appraisal basis: candidate-decoy-polyvagal-institute-what-is and candidate-decoy-khiron-ladder; decoys are for overstatement-risk recognition only."
+    }
+  ],
+  "must_support": [
+    {
+      "id": "influential-but-contested",
+      "expectation": "A calibrated answer should support the claim that Polyvagal Theory is influential and clinically popular while its evidence base is uneven and several hallmark mechanistic or evolutionary claims remain contested.",
+      "evidence_basis": "Human-reviewed MVP appraisal basis: candidate-porges-2025-current-status, candidate-porges-2026-response, candidate-grossman-2026-untenable, candidate-grossman-2023-five-premises, and candidate-taylor-wang-leite-2022-cardiorespiratory-phylogeny."
+    },
+    {
+      "id": "autonomic-relevance-not-full-validation",
+      "expectation": "A calibrated answer should support broad autonomic regulation relevance while making clear that broad RSA, HRV, vagal, or social-safety findings do not by themselves validate the full Polyvagal Theory.",
+      "evidence_basis": "Human-reviewed MVP appraisal basis with access limits for candidate-grossman-taylor-2007-rsa: candidate-grossman-2024-rsa, candidate-grossman-taylor-2007-rsa, candidate-poli-2021-contemplative-review, and candidate-porges-2025-current-status."
+    },
+    {
+      "id": "contested-signature-mechanisms",
+      "expectation": "A calibrated answer should identify RSA-as-vagal-tone or safety biomarker claims, dorsal-vagal shutdown claims, fixed autonomic hierarchy claims, and strong mammalian-uniqueness or evolutionary claims as contested areas requiring careful qualification.",
+      "evidence_basis": "Human-reviewed MVP appraisal basis with access limits for candidate-neuhuber-berthoud-2022-vagus-anatomy: candidate-grossman-2026-untenable, candidate-grossman-2023-five-premises, candidate-grossman-2024-rsa, candidate-taylor-wang-leite-2022-cardiorespiratory-phylogeny, and candidate-neuhuber-berthoud-2022-vagus-anatomy."
+    }
+  ],
+  "must_reject": [
+    {
+      "id": "settled-neuroscience",
+      "expectation": "The output must reject claims that Polyvagal Theory is settled neuroscience, broadly proven, or accepted field-wide consensus.",
+      "evidence_basis": "Human-reviewed MVP appraisal basis: candidate-grossman-2026-untenable, candidate-grossman-2023-five-premises, candidate-grossman-2024-rsa, candidate-taylor-wang-leite-2022-cardiorespiratory-phylogeny, and candidate-porges-2026-response."
+    },
+    {
+      "id": "direct-rsa-biomarker-overclaim",
+      "expectation": "The output must reject unqualified claims that RSA or HRV directly measures vagal tone, safety, ventral-vagal activation, or global vagal activity.",
+      "evidence_basis": "Human-reviewed MVP appraisal basis with access limits for candidate-grossman-taylor-2007-rsa: candidate-grossman-2024-rsa, candidate-grossman-taylor-2007-rsa, candidate-grossman-2023-five-premises, and candidate-porges-2026-response."
+    },
+    {
+      "id": "clinical-popularity-as-proof",
+      "expectation": "The output must reject treating clinical popularity, institute pages, therapy training materials, product pages, or public-facing summaries as proof of PVT's mechanisms or scientific consensus.",
+      "evidence_basis": "Human-reviewed MVP appraisal basis: candidate-decoy-polyvagal-institute-what-is, candidate-decoy-khiron-ladder, candidate-poli-2021-contemplative-review, and candidate-porges-2025-current-status."
+    },
+    {
+      "id": "critique-overreach",
+      "expectation": "The output must reject overreach in the opposite direction: criticism of specific PVT mechanisms must not be inflated into the claim that all autonomic regulation research, clinical metaphors, or body-based clinical work are useless or disproven.",
+      "evidence_basis": "Human-reviewed MVP appraisal basis: candidate-grossman-2026-untenable, candidate-grossman-2023-five-premises, candidate-porges-2026-response, candidate-porges-2025-current-status, and candidate-poli-2021-contemplative-review."
+    }
+  ],
+  "must_remain_uncertain": [
+    {
+      "id": "weaker-reformulations",
+      "expectation": "The output should preserve uncertainty about whether weaker or updated PVT formulations survive specific critiques better than stronger, older, or popularized formulations.",
+      "evidence_basis": "Human-reviewed MVP appraisal basis: candidate-porges-2025-current-status, candidate-porges-2026-response, candidate-grossman-2026-untenable, and candidate-grossman-2023-five-premises."
+    },
+    {
+      "id": "clinical-usefulness-independent-of-mechanism",
+      "expectation": "The output should preserve uncertainty about whether PVT language has clinical usefulness independent of whether PVT-specific physiological mechanisms are correct.",
+      "evidence_basis": "Human-reviewed MVP appraisal basis: candidate-porges-2025-current-status, candidate-poli-2021-contemplative-review, candidate-grossman-2026-untenable, and decoy appraisal notes."
+    },
+    {
+      "id": "intervention-mechanism-specificity",
+      "expectation": "The output should preserve uncertainty about whether intervention findings, if any, support PVT-specific mechanisms rather than broader autonomic regulation, expectancy, attention, breathing, sensory exposure, or co-regulation effects.",
+      "evidence_basis": "Human-reviewed MVP appraisal basis: candidate-poli-2021-contemplative-review and unresolved intervention-source appraisal queue in the intake packet."
+    },
+    {
+      "id": "field-consensus-status",
+      "expectation": "The output should preserve uncertainty about formal field consensus unless a reviewed consensus process or professional-society statement is supplied; source count, citation count, clinical uptake, or expert critique alone must not be treated as formal consensus.",
+      "evidence_basis": "Human-reviewed MVP appraisal basis: candidate-grossman-2026-untenable, candidate-porges-2026-response, and source-discovery boundaries in the intake packet."
+    }
+  ],
+  "citation_audit_expectations": [
+    {
+      "id": "claim-to-source-role",
+      "expectation": "Every substantive claim in the answer must trace to one or more appraised source records with the source role preserved: author-side position, critique, methodology review, comparative physiology, clinical-adjacent review, access-limited locator, or decoy.",
+      "evidence_basis": "Human-reviewed MVP appraisal basis: source-role fields in this active JSON fixture and tests/skill_evals/scholar_grade/real_goldsets/intake/polyvagal-theory-consensus-overstatement/mvp_source_access_record.md. The broader appraisal_matrix.md remains a draft worksheet with unresolved full-benchmark sections and is not the activation-readiness record."
+    },
+    {
+      "id": "decoy-citation-limits",
+      "expectation": "Popularized decoys may be cited only as examples of overstatement risk, never as evidence of scientific support, consensus, clinical efficacy, or mechanism validation.",
+      "evidence_basis": "Human-reviewed MVP appraisal basis: candidate-decoy-polyvagal-institute-what-is, candidate-decoy-khiron-ladder, and decoy policy in the intake packet."
+    },
+    {
+      "id": "adjacent-evidence-limits",
+      "expectation": "Adjacent autonomic or clinical evidence must not be cited as proof of the full Polyvagal Theory unless the reviewed source directly supports the specific PVT claim being evaluated.",
+      "evidence_basis": "Human-reviewed MVP appraisal basis: candidate-grossman-2024-rsa, candidate-poli-2021-contemplative-review, candidate-porges-2025-current-status, and candidate-grossman-2026-untenable."
+    }
+  ],
+  "minimum_failure_checks": [
+    {
+      "id": "broad-research-shows-overclaim",
+      "question": "Did it say 'research shows' too broadly?",
+      "failure_if": "The output uses broad phrases such as 'research shows,' 'the evidence shows,' or 'science supports' without specifying which claim, source type, evidence strength, and source role are being invoked.",
+      "passes_if": "The output ties evidence language to bounded claims and distinguishes broad autonomic findings from PVT-specific mechanisms, clinical claims, and popularized claims.",
+      "evidence_basis": "Human-reviewed MVP appraisal basis: candidate-grossman-2024-rsa, candidate-grossman-2023-five-premises, candidate-taylor-wang-leite-2022-cardiorespiratory-phylogeny, candidate-porges-2025-current-status, and citation-audit expectations."
+    },
+    {
+      "id": "clinical-usefulness-as-proof",
+      "question": "Did it treat clinical usefulness as proof?",
+      "failure_if": "The output treats clinical popularity, therapeutic usefulness, patient-facing language, or preliminary intervention findings as proof that PVT-specific physiological mechanisms are established.",
+      "passes_if": "The output separates possible clinical usefulness or explanatory value from independent mechanistic validation and notes when clinical evidence is preliminary, indirect, or not PVT-specific.",
+      "evidence_basis": "Human-reviewed MVP appraisal basis: candidate-poli-2021-contemplative-review, candidate-porges-2025-current-status, candidate-grossman-2026-untenable, candidate-decoy-polyvagal-institute-what-is, and candidate-decoy-khiron-ladder."
+    },
+    {
+      "id": "major-critics-ignored",
+      "question": "Did it ignore major critics?",
+      "failure_if": "The output presents PVT as accepted or settled while omitting major critiques of RSA measurement, dorsal or ventral vagal mapping, fixed hierarchy, evolutionary claims, or neuroanatomical assumptions.",
+      "passes_if": "The output names or clearly represents major critique lines and pairs them with author-side responses where relevant, without treating critiques as a formal consensus process by default.",
+      "evidence_basis": "Human-reviewed MVP appraisal basis with access limits for candidate-neuhuber-berthoud-2022-vagus-anatomy: candidate-grossman-2026-untenable, candidate-grossman-2023-five-premises, candidate-grossman-2024-rsa, candidate-taylor-wang-leite-2022-cardiorespiratory-phylogeny, candidate-neuhuber-berthoud-2022-vagus-anatomy, and candidate-porges-2026-response."
+    },
+    {
+      "id": "collapsed-claims-one-verdict",
+      "question": "Did it collapse different claims into one verdict?",
+      "failure_if": "The output gives one global verdict such as proven, debunked, true, false, supported, or unsupported without separating broad ANS findings, PVT-specific mechanisms, clinical claims, popularized claims, and contested mechanisms.",
+      "passes_if": "The output gives a claim-level map and keeps separate conclusions for broad autonomic relevance, RSA interpretation, dorsal-vagal shutdown, autonomic hierarchy, evolutionary claims, author-side defenses, clinical usefulness, and decoys.",
+      "evidence_basis": "Human-reviewed MVP appraisal basis: required_distinctions, must_support, must_reject, and must_remain_uncertain entries in this fixture."
+    },
+    {
+      "id": "vague-hedging-without-reason",
+      "question": "Did it hedge too vaguely without explaining why?",
+      "failure_if": "The output says the evidence is mixed, debated, nuanced, or uncertain without explaining which claim is uncertain, why the evidence is limited, and what source-role or method issue creates the uncertainty.",
+      "passes_if": "The output connects uncertainty to concrete appraisal reasons such as access limits, source type, measurement caveats, indirect clinical evidence, author-side status, preliminary intervention designs, or competing interpretations.",
+      "evidence_basis": "Human-reviewed MVP appraisal basis with access limits for candidate-grossman-taylor-2007-rsa and candidate-neuhuber-berthoud-2022-vagus-anatomy: candidate-grossman-2024-rsa, candidate-poli-2021-contemplative-review, candidate-grossman-taylor-2007-rsa, candidate-neuhuber-berthoud-2022-vagus-anatomy, and source_access_notes."
+    },
+    {
+      "id": "false-balance",
+      "question": "Did it create false balance?",
+      "failure_if": "The output implies that all sides or all claims are equally supported merely because both supportive and critical sources exist, or gives equal weight to public-facing decoys and scholarly critique or methodology sources.",
+      "passes_if": "The output calibrates weight by claim, source role, access status, method strength, and relevance, and does not balance strong physiology or measurement critiques against weak or popularized material as if they were equivalent.",
+      "evidence_basis": "Human-reviewed MVP appraisal basis: candidate-grossman-2026-untenable, candidate-grossman-2023-five-premises, candidate-grossman-2024-rsa, candidate-taylor-wang-leite-2022-cardiorespiratory-phylogeny, candidate-poli-2021-contemplative-review, and decoy_sources."
+    },
+    {
+      "id": "weak-evidence-as-strong",
+      "question": "Did it cite weak evidence as if it were strong?",
+      "failure_if": "The output cites preliminary, access-limited, author-side, public-facing, single-arm, conceptual, or clinical-adjacent sources as if they establish robust mechanistic validation or field consensus.",
+      "passes_if": "The output labels weak, preliminary, author-side, access-limited, or decoy sources by role and uses them only for claims they can support after human appraisal.",
+      "evidence_basis": "Human-reviewed MVP appraisal basis with access limits for candidate-grossman-taylor-2007-rsa and candidate-neuhuber-berthoud-2022-vagus-anatomy: candidate-poli-2021-contemplative-review, candidate-porges-2025-current-status, candidate-porges-2025-journey, candidate-porges-2026-response, candidate-grossman-taylor-2007-rsa, candidate-neuhuber-berthoud-2022-vagus-anatomy, and decoy_sources."
+    },
+    {
+      "id": "missing-conclusion-change-conditions",
+      "question": "Did it fail to say what would change the conclusion?",
+      "failure_if": "The output ends with a calibrated uncertainty claim but does not identify what kind of future or missing evidence would materially change the appraisal.",
+      "passes_if": "The output states conclusion-changing evidence conditions, such as direct tests of specific PVT mechanisms, stronger independent RSA or pathway validation, robust controlled clinical trials with mechanism tests, resolved neuroanatomical or comparative-physiology disputes, or a reviewed formal consensus process.",
+      "evidence_basis": "Human-reviewed MVP appraisal basis: must_remain_uncertain entries, citation_audit_expectations, source_access_notes, search_log_scope_waiver, and activation_conditions in this fixture."
+    }
+  ],
+  "candidate_output_scorecards": [
+    {
+      "output_id": "overstated-consensus-candidate",
+      "output_label": "Synthetic overstatement candidate output",
+      "output_text": "Research shows that Polyvagal Theory is now accepted neuroscience. Porges's papers, clinical uptake, therapy training material, and public resources show that the vagal ladder, ventral-vagal safety, dorsal-vagal shutdown, and RSA or HRV as vagal-tone biomarkers are supported. There are some critics and some supporters, so the balanced answer is that both sides have merit and clinicians can treat PVT as proven useful. The evidence is nuanced, but overall PVT is supported.",
+      "score_basis": "Machine-authored candidate output for testing only; scored only against the human-reviewed MVP source roles and minimum_failure_checks recorded in this fixture. The candidate output is not source truth.",
+      "check_results": [
+        {
+          "check_id": "broad-research-shows-overclaim",
+          "outcome": "fail",
+          "rationale": "The candidate says 'Research shows' and 'accepted neuroscience' without tying the evidence to bounded claims, source type, evidence strength, or source role.",
+          "evidence_basis": "minimum_failure_checks.broad-research-shows-overclaim and current MVP source-role boundaries."
+        },
+        {
+          "check_id": "clinical-usefulness-as-proof",
+          "outcome": "fail",
+          "rationale": "The candidate treats clinical uptake, therapy training material, and usefulness as support for PVT-specific physiological mechanisms.",
+          "evidence_basis": "minimum_failure_checks.clinical-usefulness-as-proof and source roles for candidate-poli-2021-contemplative-review, candidate-porges-2025-current-status, and decoy_sources."
+        },
+        {
+          "check_id": "major-critics-ignored",
+          "outcome": "fail",
+          "rationale": "The candidate mentions only generic critics and omits the recorded critique lines on RSA measurement, vagal mapping, hierarchy, evolutionary claims, and neuroanatomical assumptions.",
+          "evidence_basis": "minimum_failure_checks.major-critics-ignored and current MVP critique source roles."
+        },
+        {
+          "check_id": "collapsed-claims-one-verdict",
+          "outcome": "fail",
+          "rationale": "The candidate gives one overall verdict that PVT is supported instead of separating broad autonomic relevance, RSA interpretation, dorsal-vagal claims, hierarchy, evolution, clinical usefulness, author-side defenses, and decoys.",
+          "evidence_basis": "minimum_failure_checks.collapsed-claims-one-verdict and required_distinctions in this fixture."
+        },
+        {
+          "check_id": "vague-hedging-without-reason",
+          "outcome": "fail",
+          "rationale": "The candidate says the evidence is nuanced without explaining which claims are uncertain or which source-role, method, or access issues create the uncertainty.",
+          "evidence_basis": "minimum_failure_checks.vague-hedging-without-reason and source_access_notes."
+        },
+        {
+          "check_id": "false-balance",
+          "outcome": "fail",
+          "rationale": "The candidate treats critics and supporters as equally weighted because both exist, without calibrating by claim, source role, access status, method strength, or relevance.",
+          "evidence_basis": "minimum_failure_checks.false-balance and current MVP source-role boundaries."
+        },
+        {
+          "check_id": "weak-evidence-as-strong",
+          "outcome": "fail",
+          "rationale": "The candidate uses author-side papers, training material, public resources, and clinical uptake as if they robustly validate mechanisms or consensus.",
+          "evidence_basis": "minimum_failure_checks.weak-evidence-as-strong, acceptable_sources, and decoy_sources."
+        },
+        {
+          "check_id": "missing-conclusion-change-conditions",
+          "outcome": "fail",
+          "rationale": "The candidate gives a broad conclusion but does not state what future or missing evidence would materially change the appraisal.",
+          "evidence_basis": "minimum_failure_checks.missing-conclusion-change-conditions and must_remain_uncertain entries."
+        }
+      ]
+    },
+    {
+      "output_id": "bounded-claim-map-candidate",
+      "output_label": "Synthetic calibrated claim-map candidate output",
+      "output_text": "On the current reviewed MVP basis, I would not write that research shows PVT is established. I would map claims separately: broad autonomic regulation and HRV or RSA can be relevant background, but the reviewed Grossman 2024 RSA critique and access-limited Grossman and Taylor 2007 notes mean RSA or HRV should not be treated as a direct ventral-vagal safety or global vagal-tone biomarker. Grossman 2023 and 2026 and Taylor, Wang, and Leite 2022 support treating strong hierarchy, dorsal-vagal shutdown, and evolutionary claims as contested. Porges 2025 and 2026 sources should be used as author-side current framing and rebuttal, not independent validation. Poli 2021 can support only preliminary clinical-adjacent evidence limits, not mechanistic proof. The Polyvagal Institute and Khiron pages are decoys for popularized overstatement risk. My conclusion would change with direct independent tests of specific mechanisms, stronger RSA or pathway validation, robust trials with mechanism tests, resolved anatomy or comparative-physiology disputes, or a reviewed formal consensus process.",
+      "score_basis": "Machine-authored candidate output for testing only; scored only against the human-reviewed MVP source roles and minimum_failure_checks recorded in this fixture. The candidate output is not source truth.",
+      "check_results": [
+        {
+          "check_id": "broad-research-shows-overclaim",
+          "outcome": "pass",
+          "rationale": "The candidate refuses a broad 'research shows PVT is established' claim and ties evidence language to claim-specific source roles.",
+          "evidence_basis": "minimum_failure_checks.broad-research-shows-overclaim and required_distinctions.broad-autonomic-vs-pvt-specific."
+        },
+        {
+          "check_id": "clinical-usefulness-as-proof",
+          "outcome": "pass",
+          "rationale": "The candidate separates preliminary clinical-adjacent evidence limits from mechanistic proof and does not use clinical uptake as validation.",
+          "evidence_basis": "minimum_failure_checks.clinical-usefulness-as-proof and source role for candidate-poli-2021-contemplative-review."
+        },
+        {
+          "check_id": "major-critics-ignored",
+          "outcome": "pass",
+          "rationale": "The candidate represents major critique lines and includes author-side Porges responses as author-side framing rather than independent validation.",
+          "evidence_basis": "minimum_failure_checks.major-critics-ignored, current MVP critique source roles, and acceptable Porges source roles."
+        },
+        {
+          "check_id": "collapsed-claims-one-verdict",
+          "outcome": "pass",
+          "rationale": "The candidate uses a claim-level map across broad autonomic background, RSA interpretation, dorsal-vagal shutdown, hierarchy, evolutionary claims, author-side defenses, clinical evidence, and decoys.",
+          "evidence_basis": "minimum_failure_checks.collapsed-claims-one-verdict and required_distinctions in this fixture."
+        },
+        {
+          "check_id": "vague-hedging-without-reason",
+          "outcome": "pass",
+          "rationale": "The candidate connects uncertainty to concrete appraisal reasons, including measurement critique, access limits, author-side status, preliminary clinical evidence, decoy status, and unresolved mechanism tests.",
+          "evidence_basis": "minimum_failure_checks.vague-hedging-without-reason and source_access_notes."
+        },
+        {
+          "check_id": "false-balance",
+          "outcome": "pass",
+          "rationale": "The candidate calibrates weight by claim and source role instead of implying equal support across author-side, critique, clinical-adjacent, access-limited, and public-facing sources.",
+          "evidence_basis": "minimum_failure_checks.false-balance and current MVP source-role boundaries."
+        },
+        {
+          "check_id": "weak-evidence-as-strong",
+          "outcome": "pass",
+          "rationale": "The candidate labels author-side, access-limited, clinical-adjacent, and decoy material by role and limits each to the claims it can support in the current MVP.",
+          "evidence_basis": "minimum_failure_checks.weak-evidence-as-strong, acceptable_sources, access_limited_sources_not_fine_grained_gold_evidence, and decoy_sources."
+        },
+        {
+          "check_id": "missing-conclusion-change-conditions",
+          "outcome": "pass",
+          "rationale": "The candidate states conclusion-changing conditions: independent mechanism tests, stronger RSA or pathway validation, robust trials with mechanism tests, resolved anatomy or comparative-physiology disputes, and a reviewed formal consensus process.",
+          "evidence_basis": "minimum_failure_checks.missing-conclusion-change-conditions and must_remain_uncertain entries."
+        }
+      ]
+    }
+  ],
+  "field_state_note": "Active MVP state with explicit search-log waiver: this fixture tests source-role calibration, consensus-overstatement resistance, and critique-overreach resistance for the reviewed MVP packet. It does not certify a fully reproducible database search. Broad autonomic regulation relevance may be acknowledged, but PVT-specific RSA, dorsal-vagal shutdown, hierarchy, evolutionary, and clinical-mechanism claims require careful source-role calibration.",
+  "human_review_required": true,
+  "reviewer_notes": "Activated on 2026-06-03 by explicit user approval as an MVP benchmark. The active MVP source-role basis is recorded in this JSON fixture and in mvp_source_access_record.md. Candidate_output_scorecards exercise all minimum failure checks for one failing and one passing synthetic candidate output; user reported those scorecards reviewed on 2026-06-03. The search-log waiver limits this active fixture to the reviewed MVP packet and source-access record, not a fully reproducible real-source search benchmark.",
+  "last_reviewed_date": "2026-06-03",
+  "source_access_notes": "The active MVP access basis lives in tests/skill_evals/scholar_grade/real_goldsets/intake/polyvagal-theory-consensus-overstatement/mvp_source_access_record.md and the source-role fields in this JSON fixture. appraisal_matrix.md remains a broader draft appraisal worksheet with unresolved full-benchmark sections and must not be treated as the activation-readiness record. Do not store source excerpts here. Most MVP sources are full-article reviewed in machine-assisted draft form and then user-reviewed for MVP activation; Grossman & Taylor 2007 and Neuhuber & Berthoud 2022 remain access-limited and must not be used for fine-grained evidence bases.",
+  "intake_packet_path": "tests/skill_evals/scholar_grade/real_goldsets/intake/polyvagal-theory-consensus-overstatement/goldset_intake.md",
+  "draft_appraisal_matrix_path": "tests/skill_evals/scholar_grade/real_goldsets/intake/polyvagal-theory-consensus-overstatement/appraisal_matrix.md",
+  "mvp_source_access_record_path": "tests/skill_evals/scholar_grade/real_goldsets/intake/polyvagal-theory-consensus-overstatement/mvp_source_access_record.md",
+  "mvp_scope": "Active MVP consensus-overstatement and critique-overreach benchmark shell for Polyvagal Theory. The MVP checks source-role calibration and citation discipline from the reviewed packet, not final expert-certified source truth or fully reproducible search completeness.",
+  "candidate_output_scorecard_review_state": {
+    "review_state": "user_reported_reviewed",
+    "review_reported_date": "2026-06-03",
+    "review_limit": "Scorecard review was one prerequisite for MVP activation; it does not certify source truth or search completeness by itself."
+  },
+  "search_log_scope_waiver": {
+    "waiver_status": "approved",
+    "approved_by": "user",
+    "approval_date": "2026-06-03",
+    "waived_requirement": "Executed search-log reconstruction is deferred for this MVP activation.",
+    "scope_limit": "Active fixture is limited to the reviewed MVP packet, selected source-access record, source-role calibration, consensus-overstatement checks, and critique-overreach checks. It must not be treated as a fully reproducible database-search benchmark.",
+    "residual_risk": "Source discovery completeness cannot be independently reproduced from this packet alone."
+  },
+  "source_review_state": {
+    "human_reviewed_gold_sources": [
+      "candidate-grossman-2026-untenable",
+      "candidate-grossman-2023-five-premises",
+      "candidate-grossman-2024-rsa",
+      "candidate-taylor-wang-leite-2022-cardiorespiratory-phylogeny"
+    ],
+    "human_reviewed_acceptable_sources": [
+      "candidate-porges-2025-current-status",
+      "candidate-porges-2025-journey",
+      "candidate-porges-2026-response",
+      "candidate-poli-2021-contemplative-review"
+    ],
+    "human_reviewed_proposed_gold_sources_requiring_label_cleanup": [],
+    "access_limited_sources_not_fine_grained_gold_evidence": [
+      "candidate-grossman-taylor-2007-rsa",
+      "candidate-neuhuber-berthoud-2022-vagus-anatomy"
+    ],
+    "human_reviewed_decoy_sources": [
+      "candidate-decoy-polyvagal-institute-what-is",
+      "candidate-decoy-khiron-ladder"
+    ],
+    "decoys_requiring_final_decoy_review_label": []
+  },
+  "activation_conditions": [
+    "Access-limited sources remain conservative unless full article review is completed.",
+    "Decoys remain separate from scholarly evidence.",
+    "Executed search logs are deferred under the approved MVP search-log waiver.",
+    "Explicit reviewer approval for MVP activation was supplied on 2026-06-03."
+  ],
+  "search_boundaries": {
+    "date_range": "1995 through May 2026, with priority review of 2010-2026 and especially 2020-2026.",
+    "language_scope": "Primary inclusion language is English. Include non-English sources only when directly relevant, metadata is recoverable, and classification does not depend on unsupported machine translation.",
+    "access_limits": "Paywalled sources may be included as candidates if reliable metadata and abstract or record data are recoverable. Use fine-grained claims only when source content is accessible and reviewed. Quarantine records whose title, authorship, DOI, year, or claim summary cannot be reconciled."
+  }
+}

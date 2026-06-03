@@ -25,9 +25,9 @@ Observed local state:
 - Scholar-grade source access coverage is mostly `controlled-packet` fixtures, with two `private-no-external` fixtures and one each for `prompt-only`, `public-metadata-only`, and `external-lookup-consented`.
 - Every scholar-grade fixture has `human_review_required: true`, a `minimum_score` of 4, required source anchors, and semantic fail patterns.
 - Default scholar-grade manifests are `deterministic-reference` with `model: not-run`; `live_pilot_v2` has 15 `manual-live-capture` artifacts, all from `codex-app`, `gpt-5`, one operator, and one capture date.
-- `live_pilot_v2` calibration currently reports ready with no actions or regressions.
+- At the time of the original audit, `live_pilot_v2` calibration reported ready with no actions or regressions. A later local recheck on 2026-05-20 found `prose-edit-changes-meaning` live-pilot manifests with stale `skill_file_sha256` values after a `dyslexia-friendly-prose-editor` skill change. Per the live-pilot docs, the correct repair is a new additive live capture root, not overwriting the original blind captures.
 
-No material documentation/code drift was found in the evaluated area. The README, eval README, harness limits, `run_package_checks.py`, and `validate.sh` consistently describe default validation as deterministic and no-network, with live/manual capture separated from source-truth claims.
+No material documentation/code drift was found in the evaluated area at the time of the original audit. The README, eval README, harness limits, `run_package_checks.py`, and `validate.sh` consistently describe default validation as deterministic and no-network, with live/manual capture separated from source-truth claims. Current live-pilot readiness must be rechecked after skill instruction changes.
 
 ## What the Current Suite Validates Well
 
@@ -64,7 +64,7 @@ Long workflow traceability is not yet tested end to end. The suite checks per-fi
 
 Deterministic fixture validation:
 
-This is the default CI/package layer. It includes `research_behavior`, `scholar_grade`, deterministic reference outputs, manifests, score files, coverage tests, and the v2 pilot gate in `scripts/run_package_checks.py --scope full`. It validates local artifacts and harness integrity. It does not run a model and does not certify source truth.
+This is the default CI/package layer. It includes `research_behavior`, `scholar_grade`, deterministic reference outputs, manifests, score files, coverage tests, the v2 pilot gate, and active real-source gold-set readiness in `scripts/run_package_checks.py --scope full`. It validates local artifacts and harness integrity. It does not run a model and does not certify source truth.
 
 Live skill behavior validation:
 
@@ -72,7 +72,7 @@ This is represented by `live_pilot/`, `live_pilot_v2/`, `run_live_capture.py`, `
 
 Source-truth validation:
 
-This is not a mature layer yet. Current controlled packets have hidden answer keys, but they are mostly synthetic local truth sets. Source-truth validation would require public, licensed, or metadata-only gold sets where the expected claim/source relationship is independently known and auditable.
+This is not a mature layer yet. Current controlled packets have hidden answer keys, but they are mostly synthetic local truth sets. Real-source MVP gold sets can now validate recorded human-reviewed source-role packets and local live-test readiness, but that remains bounded to each packet and any explicit waiver. Mature source-truth validation would require public, licensed, or metadata-only gold sets where the expected claim/source relationship is independently known and auditable.
 
 Human expert review:
 

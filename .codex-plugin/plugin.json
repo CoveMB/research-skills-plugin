@@ -1,5 +1,5 @@
 {
-  "name": "scholarly-research-book",
+  "name": "research-skills-plugin",
   "version": "1.0.0",
   "description": "Agent Skills plugin for rigorous research nonfiction and research book writing: accessibility support, dictation notes, reading-load triage, prose repair, research intent routing, source discovery, source notes, extraction tables, literature review, argument architecture, chapters, claim traceability, citations, release audits, and proposal support.",
   "author": {

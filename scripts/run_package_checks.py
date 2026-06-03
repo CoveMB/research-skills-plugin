@@ -7,6 +7,9 @@ import subprocess
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from plugin_utils import print_completed_process_output
+
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -71,6 +74,16 @@ SCHOLAR_MUTATION_CHECKS = (
     ),
 )
 
+REAL_GOLDSET_CHECKS = (
+    ("tests/skill_evals/scholar_grade/real_goldsets/validate_goldsets.py",),
+    (
+        "tests/skill_evals/scholar_grade/real_goldsets/live_test_goldsets.py",
+        "--quiet",
+    ),
+)
+
+PACKAGE_CHECKS = INSTALL_CHECKS
+
 
 FULL_CHECKS = (
     *INSTALL_CHECKS,
@@ -124,6 +137,7 @@ FULL_CHECKS = (
     ),
     LIVE_PILOT_CALIBRATION_CHECK,
     LIVE_PILOT_V2_CALIBRATION_CHECK,
+    *REAL_GOLDSET_CHECKS,
     (
         "scripts/check_source_candidates.py",
         "--input",
@@ -179,11 +193,13 @@ PackageCheck = tuple[str, ...]
 def checks_for_scope(scope: str) -> tuple[PackageCheck, ...]:
     checks_by_scope = {
         "install": INSTALL_CHECKS,
+        "package": PACKAGE_CHECKS,
         "full": FULL_CHECKS,
         "live": LIVE_CHECKS,
         "live-pilot": LIVE_PILOT_CHECKS,
         "live-pilot-v2": LIVE_PILOT_V2_CHECKS,
         "scholar-mutation": SCHOLAR_MUTATION_CHECKS,
+        "real-goldsets": REAL_GOLDSET_CHECKS,
     }
     return checks_by_scope[scope]
 
@@ -200,10 +216,7 @@ def run_check(check: PackageCheck, root: Path) -> int:
         text=True,
         capture_output=True,
     )
-    if result.stdout:
-        print(result.stdout, end="" if result.stdout.endswith("\n") else "\n")
-    if result.stderr:
-        print(result.stderr, file=sys.stderr, end="" if result.stderr.endswith("\n") else "\n")
+    print_completed_process_output(result)
     return result.returncode
 
 
@@ -219,12 +232,23 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--scope",
-        choices=["install", "full", "live", "live-pilot", "live-pilot-v2", "scholar-mutation"],
+        choices=[
+            "install",
+            "package",
+            "full",
+            "live",
+            "live-pilot",
+            "live-pilot-v2",
+            "scholar-mutation",
+            "real-goldsets",
+        ],
         default="full",
         help=(
-            "Use install for pre-install checks, full for deterministic package validation, "
+            "Use install for pre-install checks, full for source-checkout validation, "
+            "package for validation that works from a packaged or installed copy without repo-only tests, "
             "live-pilot for the original pilot report, live-pilot-v2 for the strict calibrated pilot, "
             "scholar-mutation for evaluator sensitivity mutations, "
+            "real-goldsets for active real-source gold-set live-test readiness, "
             "or live for recorded live skill captures."
         ),
     )

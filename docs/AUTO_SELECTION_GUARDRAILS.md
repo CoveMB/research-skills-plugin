@@ -20,9 +20,18 @@ Each skill should define:
 - Do not trigger on casual, fictional, grammar-only, or non-research tasks.
 - Do not perform deep lookup when it would not reduce a concrete scholarly risk.
 
+## General escalation gates for accessibility work
+
+Escalate from simple cleanup to visible verification, privacy, or expert-review limits when:
+
+- a factual claim may affect manuscript claims, external sharing, funding, permissions, collaborators, or publication decisions
+- the text includes citations, quotes, policies, legal/medical/financial claims, current facts, consent language, or identifiable private people
+- a wording change could alter responsibility, consent, diagnosis, money, deadlines, obligations, evidence, commitment, or claim strength
+- the user asks for publication-ready, submit-ready, send-ready, share-ready, or final wording
+
 ## Suggested next step policy
 
-The final `## Suggested next step` section is optional, risk-gated, and should be omitted by default unless it reduces a concrete scholarly risk.
+The final `## Suggested next step` section is optional, risk-gated. Omit it by default unless it reduces a concrete scholarly risk.
 
 Add the section only when all gates pass:
 

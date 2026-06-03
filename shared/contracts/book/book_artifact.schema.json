@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://scholarly-research-book.local/shared/contracts/book/book_artifact.schema.json",
+  "$id": "https://research-skills-plugin.local/shared/contracts/book/book_artifact.schema.json",
   "title": "Research Book Artifact",
   "type": "object",
   "additionalProperties": false,

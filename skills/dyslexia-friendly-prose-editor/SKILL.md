@@ -24,7 +24,7 @@ Use this instead of `scholarly-prose-editor` when accessibility, spelling, or or
 
 - High-signal triggers: spelling repair, grammar cleanup, dyslexia-friendly edit, dysorthographic edit, sentence boundaries, punctuation repair, typo-heavy prose, meaning-preserving edit, or correction log.
 - Light-route behavior: revise only the supplied prose, preserve meaning, and provide a brief change summary.
-- Deep-work gate: route to claim audit or citation audit only when the edit exposes evidence gaps, overclaiming, citations, quotes, or locators needing verification.
+- Deep-work gate: route to claim audit, citation audit, release audit, or expert/user verification only when the edit exposes evidence gaps, overclaiming, citations, quotes, locators, privacy concerns, consent language, legal/medical/financial claims, commitments, obligations, or publication-facing wording needing verification.
 - Noise and slowdown guard: do not turn a surface repair into a style rewrite, chapter restructure, source search, or literature synthesis.
 
 ## Do not use this skill when
@@ -39,14 +39,14 @@ Use this instead of `scholarly-prose-editor` when accessibility, spelling, or or
 
 - Existing prose passage, abstract, proposal section, chapter excerpt, or draft paragraph.
 - Desired repair level: minimal correction, local sentence repair, paragraph breaks, or issue-list cleanup.
-- Terms, names, quotes, technical phrases, and claims that must not change.
+- Terms, names, quotes, technical phrases, numbers, dates, diagnoses, policy phrases, commitments, obligations, consent language, and claims that must not change.
 - Optional source basis if claims or citations should be flagged.
 
 ## Source basis and AI limits
 
 Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
-Treat spelling and grammar cleanup as surface repair. If a correction could change a claim, keep the original wording visible and mark the ambiguity.
+Treat spelling and grammar cleanup as surface repair. If a correction could change a claim, responsibility, consent, obligation, commitment, deadline, diagnosis, or evidence status, keep the original wording visible and mark the ambiguity.
 
 ## Compact output
 
@@ -67,9 +67,9 @@ Use compact output when the user asks for low reading load, minimal correction, 
 ## What it must not do
 
 - Do not change the author's argument to make the prose smoother.
-- Do not erase warranted uncertainty, qualifiers, or evidence limits.
-- Do not silently "fix" names, terms, citations, quotes, or technical language when uncertain.
-- Do not add facts, examples, citations, or source claims.
+- Do not erase warranted uncertainty, qualifiers, commitments, consent language, obligations, or evidence limits.
+- Do not silently "fix" names, terms, citations, quotes, numbers, dates, diagnoses, policy language, or technical language when uncertain.
+- Do not add facts, examples, citations, promises, obligations, or source claims.
 - Do not shame or foreground the user's spelling difficulty.
 
 ## Procedure
@@ -85,7 +85,7 @@ Default to minimal correction unless the user asks for a stronger pass or the re
 
 ### 2. Protect meaning
 
-Identify terms, claims, quotes, citations, names, numbers, and qualifiers that must remain stable.
+Identify terms, claims, quotes, citations, names, numbers, dates, diagnoses, commitments, obligations, consent language, policy phrases, and qualifiers that must remain stable.
 
 If a correction may change meaning, keep it in the ambiguity table rather than silently editing.
 
@@ -93,7 +93,7 @@ If a correction may change meaning, keep it in the ambiguity table rather than s
 
 Fix spelling, grammar, punctuation, sentence boundaries, and readability. Keep authorial voice where possible.
 
-Do not add new factual claims. If a repair requires adding explanation, label it as optional.
+Do not add new factual claims, promises, or obligations. If a repair requires adding explanation, label it as optional.
 
 ### 4. Summarize changes compactly
 
@@ -103,7 +103,7 @@ Report:
 - new factual claims introduced
 - ambiguous corrections
 - changed phrases that deserve quick user review, when present
-- claims needing evidence
+- claims or commitments needing verification
 
 ### 5. Route only when needed
 
@@ -111,8 +111,11 @@ If the repaired prose reveals a concrete scholarly risk, suggest one next skill:
 
 - unsupported or overstated claims: `claim-evidence-ledger`
 - citation or quote verification: `citation-integrity-auditor`
+- privacy, consent, or external-sharing risk: `rights-privacy-release-auditor`
 - broader rhythm or public-facing style after evidence is stable: `scholarly-prose-editor`
 - rough idea structure still unclear: `dictation-to-research-notes` or `dyslexia-research-companion`
+
+For legal, medical, financial, workplace, or publication verification, state the need for appropriate source access, user confirmation, or expert review instead of treating the edit as clearance.
 
 ## Output format
 
@@ -135,7 +138,7 @@ If the repaired prose reveals a concrete scholarly risk, suggest one next skill:
 ## Ambiguous corrections
 | Original | Possible correction | Why it matters | User check |
 
-## Claims needing evidence
+## Claims or commitments needing verification
 
 ## What I can verify
 
@@ -171,10 +174,11 @@ Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.m
 ## Quality checks
 
 - Meaning, argument, and uncertainty are preserved.
-- Spelling and grammar repairs do not create new claims.
+- Spelling and grammar repairs do not create new claims, promises, or obligations.
 - Ambiguous corrections are visible.
 - Output includes a brief change summary.
 - No citations, page numbers, source claims, or field consensus are invented.
+- Consent language, commitments, obligations, dates, diagnoses, and policy phrases remain stable or are flagged for user review.
 
 ## Failure modes
 
@@ -183,3 +187,4 @@ Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.m
 - Technical terms, names, or citations are silently miscorrected.
 - The edit becomes generic style polish instead of accessibility-focused repair.
 - Evidence gaps are hidden by cleaner sentences.
+- Smoother prose silently changes commitments, consent, obligations, deadlines, diagnoses, responsibility, or claim strength.

@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import csv
 import json
 import re
 import string
@@ -15,20 +14,23 @@ import urllib.request
 from pathlib import Path
 from typing import Any, Callable, NamedTuple
 
+from plugin_utils import (
+    PRIVATE_SOURCE_TEXT_FIELDS,
+    normalized_field_name,
+    normalized_private_fields,
+    private_payload_field_errors,
+    read_csv_records as read_csv_record_objects,
+    read_json_or_csv_records,
+    read_json_records as read_json_record_objects,
+    validate_record_objects,
+)
 
 PRIVATE_FIELDS = {
     "abstract",
-    "excerpt",
-    "full text",
-    "full_text",
-    "manuscript_text",
-    "manuscript text",
-    "notes",
-    "private_notes",
-    "private notes",
-    "source_text",
-    "source text",
+    *PRIVATE_SOURCE_TEXT_FIELDS,
 }
+JSON_RECORD_ERROR = "JSON input must be a list or an object with a records list"
+EMPTY_RECORD_ERROR = "input must contain at least one metadata record"
 DOI_RE = re.compile(r"^10\.\d{4,9}/\S+$", re.IGNORECASE)
 ARXIV_NEW_RE = re.compile(r"^\d{4}\.\d{4,5}$")
 ARXIV_OLD_RE = re.compile(r"^[a-z-]+(?:\.[a-z]{2})?/\d{7}$")
@@ -37,7 +39,7 @@ OCLC_RE = re.compile(r"^\d+$")
 LCCN_RE = re.compile(r"^[a-z]{0,3}\d{6,10}$")
 LOOKUP_PROVIDERS = {"none", "crossref"}
 CROSSREF_WORKS_ENDPOINT = "https://api.crossref.org/v1/works/"
-CROSSREF_USER_AGENT = "research-book-plugin/1.0 (public metadata lookup)"
+CROSSREF_USER_AGENT = "research-skills-plugin/1.0 (public metadata lookup)"
 MAX_CROSSREF_RESPONSE_BYTES = 1_000_000
 MAX_LOOKUP_TIMEOUT_SECONDS = 60.0
 
@@ -51,40 +53,29 @@ class MetadataPairSpec(NamedTuple):
 
 
 def read_json_records(path: Path) -> list[dict[str, Any]]:
-    payload = json.loads(path.read_text(encoding="utf-8"))
-    if isinstance(payload, list):
-        records = payload
-    elif isinstance(payload, dict) and isinstance(payload.get("records"), list):
-        records = payload["records"]
-    else:
-        raise ValueError("JSON input must be a list or an object with a records list")
-    return validate_metadata_records(records)
+    return read_json_record_objects(
+        path,
+        container_keys=("records",),
+        json_error_message=JSON_RECORD_ERROR,
+        empty_error_message=EMPTY_RECORD_ERROR,
+    )
 
 
 def read_csv_records(path: Path) -> list[dict[str, Any]]:
-    with path.open(newline="", encoding="utf-8") as handle:
-        return validate_metadata_records([dict(row) for row in csv.DictReader(handle)])
+    return read_csv_record_objects(path, empty_error_message=EMPTY_RECORD_ERROR)
 
 
 def validate_metadata_records(records: list[Any]) -> list[dict[str, Any]]:
-    if not records:
-        raise ValueError("input must contain at least one metadata record")
-
-    valid_records: list[dict[str, Any]] = []
-    for index, record in enumerate(records, start=1):
-        if not isinstance(record, dict):
-            raise ValueError(f"record {index} must be an object")
-        valid_records.append(record)
-    return valid_records
+    return validate_record_objects(records, empty_error_message=EMPTY_RECORD_ERROR)
 
 
 def read_records(path: Path) -> list[dict[str, Any]]:
-    suffix = path.suffix.lower()
-    if suffix == ".json":
-        return read_json_records(path)
-    if suffix == ".csv":
-        return read_csv_records(path)
-    raise ValueError("input must be .json or .csv")
+    return read_json_or_csv_records(
+        path,
+        json_container_keys=("records",),
+        json_error_message=JSON_RECORD_ERROR,
+        empty_error_message=EMPTY_RECORD_ERROR,
+    )
 
 
 def record_id(record: dict[str, Any], index: int = 0) -> str:
@@ -92,11 +83,7 @@ def record_id(record: dict[str, Any], index: int = 0) -> str:
     return str(value) if value else f"record-{index + 1}"
 
 
-def normalized_field_name(field: str) -> str:
-    return " ".join(field.replace("_", " ").casefold().split())
-
-
-NORMALIZED_PRIVATE_FIELDS = {normalized_field_name(private_field) for private_field in PRIVATE_FIELDS}
+NORMALIZED_PRIVATE_FIELDS = normalized_private_fields(PRIVATE_FIELDS)
 
 
 def is_private_field(field: str) -> bool:
@@ -104,15 +91,11 @@ def is_private_field(field: str) -> bool:
 
 
 def private_field_errors(records: list[dict[str, Any]]) -> list[str]:
-    errors: list[str] = []
-    for index, record in enumerate(records):
-        identifier = record_id(record, index)
-        for field in sorted(record.keys()):
-            if not is_private_field(field):
-                continue
-            if str(record.get(field, "")).strip():
-                errors.append(f"{identifier}: remove private field {field!r}")
-    return errors
+    return private_payload_field_errors(
+        records,
+        private_fields=PRIVATE_FIELDS,
+        record_identifier=record_id,
+    )
 
 
 def text_value(record: dict[str, Any], key: str) -> str:

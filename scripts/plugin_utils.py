@@ -1,12 +1,15 @@
 """Shared helpers for plugin maintenance scripts."""
 from __future__ import annotations
 
+import csv
 import json
 import re
 import shutil
+import subprocess
+import sys
 from json import JSONDecodeError
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable, Iterable
 
 ALLOWED_PACKAGE_DIRECTORIES = {
     ".codex-plugin",
@@ -45,6 +48,18 @@ EXCLUDED_DIRECTORIES = {
 }
 EXCLUDED_FILE_NAMES = {".DS_Store", ".env", "local-notes.txt", "secrets.json"}
 EXCLUDED_SUFFIXES = {".log", ".pyc", ".zip", ".tmp"}
+PRIVATE_SOURCE_TEXT_FIELDS = {
+    "excerpt",
+    "full text",
+    "full_text",
+    "manuscript_text",
+    "manuscript text",
+    "notes",
+    "private_notes",
+    "private notes",
+    "source_text",
+    "source text",
+}
 DESCRIPTION_STOPWORDS = {
     "after",
     "before",
@@ -231,6 +246,115 @@ def load_json_object_result(path: Path) -> tuple[dict[str, Any] | None, str | No
     except ValueError as exc:
         return None, str(exc)
     return payload, None
+
+
+def record_list_from_json_payload(
+    payload: Any,
+    *,
+    container_keys: tuple[str, ...],
+    error_message: str,
+) -> list[Any]:
+    if isinstance(payload, list):
+        return payload
+    if isinstance(payload, dict):
+        for container_key in container_keys:
+            records = payload.get(container_key)
+            if isinstance(records, list):
+                return records
+    raise ValueError(error_message)
+
+
+def validate_record_objects(
+    records: list[Any],
+    *,
+    empty_error_message: str,
+    item_label: str = "record",
+) -> list[dict[str, Any]]:
+    if not records:
+        raise ValueError(empty_error_message)
+
+    valid_records: list[dict[str, Any]] = []
+    for index, record in enumerate(records, start=1):
+        if not isinstance(record, dict):
+            raise ValueError(f"{item_label} {index} must be an object")
+        valid_records.append(record)
+    return valid_records
+
+
+def read_json_records(
+    path: Path,
+    *,
+    container_keys: tuple[str, ...],
+    json_error_message: str,
+    empty_error_message: str,
+) -> list[dict[str, Any]]:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    records = record_list_from_json_payload(
+        payload,
+        container_keys=container_keys,
+        error_message=json_error_message,
+    )
+    return validate_record_objects(records, empty_error_message=empty_error_message)
+
+
+def read_csv_records(path: Path, *, empty_error_message: str) -> list[dict[str, Any]]:
+    with path.open(newline="", encoding="utf-8") as handle:
+        return validate_record_objects(
+            [dict(row) for row in csv.DictReader(handle)],
+            empty_error_message=empty_error_message,
+        )
+
+
+def read_json_or_csv_records(
+    path: Path,
+    *,
+    json_container_keys: tuple[str, ...],
+    json_error_message: str,
+    empty_error_message: str,
+) -> list[dict[str, Any]]:
+    suffix = path.suffix.lower()
+    if suffix == ".json":
+        return read_json_records(
+            path,
+            container_keys=json_container_keys,
+            json_error_message=json_error_message,
+            empty_error_message=empty_error_message,
+        )
+    if suffix == ".csv":
+        return read_csv_records(path, empty_error_message=empty_error_message)
+    raise ValueError("input must be .json or .csv")
+
+
+def normalized_field_name(field: str) -> str:
+    return " ".join(field.replace("_", " ").casefold().split())
+
+
+def normalized_private_fields(private_fields: Iterable[str]) -> set[str]:
+    return {normalized_field_name(private_field) for private_field in private_fields}
+
+
+def private_payload_field_errors(
+    records: list[dict[str, Any]],
+    *,
+    private_fields: Iterable[str],
+    record_identifier: Callable[[dict[str, Any], int], str],
+) -> list[str]:
+    normalized_fields = normalized_private_fields(private_fields)
+    errors: list[str] = []
+    for index, record in enumerate(records):
+        identifier = record_identifier(record, index)
+        for field in sorted(record.keys()):
+            is_private_field = normalized_field_name(field) in normalized_fields
+            if is_private_field and str(record.get(field, "")).strip():
+                errors.append(f"{identifier}: remove private field {field!r}")
+    return errors
+
+
+def print_completed_process_output(result: subprocess.CompletedProcess[str]) -> None:
+    if result.stdout:
+        print(result.stdout, end="" if result.stdout.endswith("\n") else "\n")
+    if result.stderr:
+        print(result.stderr, file=sys.stderr, end="" if result.stderr.endswith("\n") else "\n")
 
 
 def plugin_manifest_path(root: Path) -> Path:

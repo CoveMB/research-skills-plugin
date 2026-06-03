@@ -11,12 +11,13 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from plugin_utils import (
     package_files as included_package_files,
+    print_completed_process_output,
+    plugin_name,
     plugin_version,
 )
 
 
 VALIDATION_SCRIPT = Path(__file__).resolve().parent / "validate_plugin.py"
-DEFAULT_PACKAGE_STEM = "research-book-plugin"
 
 
 def package_output_files(root: Path, output_path: Path, temporary_output_path: Path) -> list[Path]:
@@ -27,19 +28,24 @@ def package_output_files(root: Path, output_path: Path, temporary_output_path: P
     ]
 
 
+def package_archive_prefix(root: Path) -> str:
+    return plugin_name(root) or root.name
+
+
 def write_package(root: Path, output_path: Path) -> None:
     temporary_output_path = output_path.with_suffix(output_path.suffix + ".tmp")
     output_path.parent.mkdir(parents=True, exist_ok=True)
     if temporary_output_path.exists():
         temporary_output_path.unlink()
+    archive_prefix = package_archive_prefix(root)
     with zipfile.ZipFile(temporary_output_path, "w", compression=zipfile.ZIP_DEFLATED) as archive:
         for path in package_output_files(root, output_path, temporary_output_path):
-            archive.write(path, root.name + "/" + str(path.relative_to(root)))
+            archive.write(path, archive_prefix + "/" + str(path.relative_to(root)))
     temporary_output_path.replace(output_path)
 
 
 def default_output_path(root: Path) -> Path:
-    return Path(f"{DEFAULT_PACKAGE_STEM}-v{plugin_version(root)}.zip")
+    return Path(f"{plugin_name(root)}-v{plugin_version(root)}.zip")
 
 
 def run_validation(root: Path) -> int:
@@ -49,10 +55,7 @@ def run_validation(root: Path) -> int:
         capture_output=True,
         text=True,
     )
-    if result.stdout:
-        print(result.stdout, end="" if result.stdout.endswith("\n") else "\n")
-    if result.stderr:
-        print(result.stderr, file=sys.stderr, end="" if result.stderr.endswith("\n") else "\n")
+    print_completed_process_output(result)
     return result.returncode
 
 
@@ -67,7 +70,7 @@ def main() -> int:
     parser.add_argument(
         "--out",
         type=Path,
-        help=f"Zip file to write. Defaults to {DEFAULT_PACKAGE_STEM}-v<manifest-version>.zip.",
+        help="Zip file to write. Defaults to <manifest-name>-v<manifest-version>.zip.",
     )
     args = parser.parse_args()
     root = args.root.resolve()

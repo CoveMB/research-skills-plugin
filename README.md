@@ -2,11 +2,13 @@
 
 Version: 1.0.0
 
-Research Book Skills is a local skills plugin for people writing scholarly nonfiction, research monographs, long-form essays, or book proposals. It helps turn loose research work into concrete artifacts: low-load research notes, dictation notes, reading triage, meaning-preserving prose repair, a research agenda, source discovery log, source notes, extraction tables, literature map, thesis tree, chapter brief, claim ledger, claim traceability graph, citation audit, figure/table integrity audit, scholarly integrity gate, AI/human workflow log, release audit, continuity review, comparable-title check, and proposal.
+Research Book Skills is a local skills plugin for people writing scholarly nonfiction, research monographs, long-form essays, or book proposals. It turns loose research work into concrete artifacts: low-load research notes, dictation notes, reading triage, meaning-preserving prose repair, a research agenda, source discovery log, source notes, extraction tables, literature map, thesis tree, chapter brief, claim ledger, claim traceability graph, citation audit, figure/table integrity audit, scholarly integrity gate, AI/human workflow log, release audit, continuity review, comparable-title check, and proposal.
 
-The package assumes a person is still doing the research. It can sort, pressure-test, and clean up the work, but it will not treat model memory as source verification. It keeps asking practical scholarly questions: what kind of claim is this, what evidence can support it, where is the argument too strong, and what would an expert reader challenge?
+The package assumes a person is still doing the research. It can sort, pressure-test, and clean up the work, but it will not treat model memory as source verification. Its checks stay practical: what kind of claim is this, what evidence can support it, where is the argument too strong, and what would an expert reader challenge?
 
 It also includes accessibility skills for dyslexic, dysorthographic, dictation-heavy, or reading-fatigued authors. These skills turn rough thoughts, typo-heavy notes, voice transcripts, dense material, and existing prose into short tables, repair passes, and next actions without changing the author's meaning.
+
+The bundled accessibility skills are the research-book integrated variants. For broader everyday, work, learning, and general writing support, use the sibling standalone Accessible Reading and Writing plugin when it is installed. The standalone plugin uses `accessibility-*` skill names so it can be enabled beside this package without colliding with research-book skills such as `reading-load-reducer`.
 
 ## Install in 30 seconds
 
@@ -225,7 +227,7 @@ It also does not replace a researcher, editor, advisor, peer reviewer, or fact-c
 ## Package layout
 
 ```text
-research-book-plugin/
+research-skills-plugin/
   .codex-plugin/plugin.json
   skills/
     dyslexia-research-companion/
@@ -252,16 +254,26 @@ Skill behavior tests live under [`tests/skill_evals/`](tests/skill_evals/). They
 The suite has two layers:
 
 - `research_behavior`: deterministic routing and behavior fixtures that check selected-skill route traces, prompt/output trace hashes, captured-output route evidence, required output markers, forbidden claims, and compact-output boundaries.
-- `scholar_grade`: stricter source-packet fixtures that test claim/evidence fit, allowed-claim boundaries, required uncertainties, hard-fail patterns, private-text boundaries, source-access modes, and resource-backed rubric coverage.
+- `scholar_grade`: stricter source-packet fixtures that test claim/evidence fit, allowed-claim boundaries, required uncertainties, hard-fail patterns, private-text boundaries, source-access modes, resource-backed rubric coverage, and active real-source MVP gold-set readiness.
 
-The scholar-grade fixtures use synthetic controlled packets with separate hidden `answer-key.md` files. Only `source-packet.md` should be supplied during live or manual skill runs. The harness does not run a model or certify source truth; it validates captured outputs, checks semantic fail patterns for paraphrased overclaims, checks run manifests with source/output/skill hashes and manual capture provenance, enforces rubric score thresholds with case-specific evidence notes, enforces fixture coverage for every skill, and produces reviewer scorecards for human or future live-run review. `live_capture_protocol.py` can generate operator-facing prompt packets plus manifest, score, and trace templates for real skill captures without exposing hidden answer keys. CI includes deterministic checks and the calibrated v2 pilot gate through `./validate.sh`, which runs `scripts/run_package_checks.py --scope full`; the original additive pilot can be reported with `python3 scripts/run_package_checks.py --scope live-pilot`, the current calibrated pilot can also be checked directly with `python3 scripts/run_package_checks.py --scope live-pilot-v2`, manual calibration reports use `python3 tests/skill_evals/scholar_grade/live_pilot_calibration.py --format markdown`, and full recorded live captures can be checked separately with `python3 scripts/run_package_checks.py --scope live` after every scholar-grade manifest has real live capture metadata. The full live scope is expected to fail against the shipped deterministic-reference manifests.
+The scholar-grade fixtures use synthetic controlled packets with separate hidden `answer-key.md` files. During live or manual skill runs, supply only `source-packet.md`.
+
+The harness does not run a model or certify source truth. It validates captured outputs, checks semantic fail patterns for paraphrased overclaims, checks run manifests with source/output/skill hashes and manual capture provenance, enforces rubric score thresholds with case-specific evidence notes, enforces fixture coverage for every skill, and produces reviewer scorecards for human or future live-run review.
+
+`live_capture_protocol.py` generates operator-facing prompt packets plus manifest, score, and trace templates for real skill captures without exposing hidden answer keys. Source checkouts run deterministic checks, the calibrated v2 pilot gate, and active real-source gold-set readiness through `./validate.sh`, which uses `scripts/run_package_checks.py --scope full` when `tests/skill_evals` is present. Packaged or installed copies without repo-only test fixtures use the package-safe scope, `python3 scripts/run_package_checks.py --scope package`. The original additive pilot can be reported with `python3 scripts/run_package_checks.py --scope live-pilot`; the current calibrated pilot can be checked directly with `python3 scripts/run_package_checks.py --scope live-pilot-v2`; active real-source MVP cases can be checked with `python3 scripts/run_package_checks.py --scope real-goldsets`. Manual calibration reports use `python3 tests/skill_evals/scholar_grade/live_pilot_calibration.py --format markdown`. Full recorded live captures can be checked separately with `python3 scripts/run_package_checks.py --scope live` after every scholar-grade manifest has real live capture metadata. The full live scope is expected to fail against the shipped deterministic-reference manifests.
 
 ## Validate
 
-Run the full local check:
+Run the full source-checkout check:
 
 ```bash
 ./validate.sh
+```
+
+For a packaged or installed copy without `tests/skill_evals`, run:
+
+```bash
+python3 scripts/run_package_checks.py --scope package
 ```
 
 Or run the checks one by one:

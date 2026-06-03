@@ -21,7 +21,13 @@ from typing import Any, NamedTuple
 
 sys.dont_write_bytecode = True
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from plugin_utils import copy_package_tree, load_plugin_manifest, plugin_manifest_path, plugin_name
+from plugin_utils import (
+    copy_package_tree,
+    load_plugin_manifest,
+    plugin_manifest_path,
+    plugin_name,
+    print_completed_process_output,
+)
 
 MARKETPLACE_NAME = "local-personal-plugins"
 MARKETPLACE_DISPLAY_NAME = "Local Personal Plugins"
@@ -50,10 +56,7 @@ def run_validation(root: Path) -> None:
         text=True,
         capture_output=True,
     )
-    if result.stdout:
-        print(result.stdout, end="" if result.stdout.endswith("\n") else "\n")
-    if result.stderr:
-        print(result.stderr, file=sys.stderr, end="" if result.stderr.endswith("\n") else "\n")
+    print_completed_process_output(result)
     if result.returncode != 0:
         raise SystemExit(result.returncode)
 

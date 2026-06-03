@@ -34,7 +34,9 @@ Use reading-load-reducer. Reduce this source list to a reading plan without pret
 
 ## Typical output
 
-Expect a triage table, reading plan, verification gaps, and one optional risk-gated next step. Close-reading targets, skim targets, and park/skip lists should appear only when they add value beyond the triage table. Ask for compact output when you want one source-basis line, one triage table, uncertainty only when needed, and one next action. Compact output should include `How to use this result: TRIAGE ONLY - Use this only to prioritize reading; do not treat it as literature synthesis or source verification.` It changes output shape, not route selection or evidence requirements.
+Typical output is a triage table, reading plan, verification gaps, and one optional risk-gated next step. Close-reading targets, skim targets, and park/skip lists should appear only when they add value beyond the triage table.
+
+Ask for compact output when you want one source-basis line, one triage table, uncertainty only when needed, and one next action. Compact output should include `How to use this result: TRIAGE ONLY - Use this only to prioritize reading; do not treat it as literature synthesis, source verification, expert-review, or publication clearance.` It changes output shape, not route selection or evidence requirements.
 
 ## Procedure
 
@@ -42,11 +44,11 @@ Follow the shared procedure in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
 
 ## Quality checks
 
-Apply the shared quality checks in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`; keep access-level limits and provisional triage visible in the output.
+Apply the shared quality checks in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`. Keep access-level limits, provisional triage, and expert-review or user-verification limits visible for high-stakes or publication-facing decisions.
 
 ## Failure modes
 
-Use the shared failure modes in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`; call out title-only overreach, unsupported synthesis, or output that adds reading load.
+Use the shared failure modes in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`. Call out title-only overreach, unsupported synthesis, or output that adds reading load.
 
 ## Files/folders it may read
 

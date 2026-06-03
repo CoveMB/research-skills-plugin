@@ -43,7 +43,9 @@ Use one of these before the core research workflow only when text friction block
 3. `dyslexia-friendly-prose-editor` when existing prose needs meaning-preserving repair
 4. `dyslexia-research-companion` when the accessibility bottleneck is mixed or unclear
 
-Ask for compact output with accessibility entry points when the output should be one source-basis line, one table or revised passage, ambiguity only when it matters, and one next action. `dyslexia-research-companion` may use that shape by default when mixed reading load or accessibility friction is the main bottleneck. Compact output is not a route mode.
+Ask for compact output with accessibility entry points when you need one source-basis line, one table or revised passage, only meaning-changing ambiguity, and one next action. `dyslexia-research-companion` may use that shape by default when mixed reading load or accessibility friction is the main bottleneck. Compact output is not a route mode.
+
+These accessibility entry points are tuned for research-book workflows. For broader everyday, work, learning, and general writing support, use the sibling standalone Accessible Reading and Writing plugin when it is installed. Its skill names are prefixed with `accessibility-*` to avoid collisions with the research-book skills listed here.
 
 ## Compact output support
 
@@ -90,7 +92,7 @@ For a research book with scholarly standards, start with:
 12. `figure-table-integrity-auditor`
 13. `scholarly-integrity-gate`
 
-These catch the common failures: vague scope, weak sources, missing literature context, unsupported claims, one-sided argument, citation errors, visual/table evidence problems, and AI research workflow integrity failures.
+This sequence is meant to catch common failures: vague scope, weak sources, missing literature context, unsupported claims, one-sided argument, citation errors, visual/table evidence problems, and AI research workflow integrity failures.
 
 ## Automatic selection policy
 
@@ -100,7 +102,7 @@ Use `research-intent-router` as the light first pass when a prompt could match s
 
 Router modes: `research-route-normal` and `research-route-deep`. See `MODE_REGISTRY.md` for mode behavior.
 
-Suggested next steps are optional and risk-gated. They should appear only when one follow-on skill reduces a named scholarly risk; the shared policy lives in `docs/AUTO_SELECTION_GUARDRAILS.md`, with route gates in `docs/ROUTING_MATRIX.md`.
+Suggested next steps are optional, risk-gated. They should appear only when one follow-on skill reduces a named scholarly risk; the shared policy lives in `docs/AUTO_SELECTION_GUARDRAILS.md`, with route gates in `docs/ROUTING_MATRIX.md`.
 
 ## Later-stage manuscript set
 

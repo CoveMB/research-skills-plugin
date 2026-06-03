@@ -5,10 +5,10 @@
   },
   "plugins": [
     {
-      "name": "scholarly-research-book",
+      "name": "research-skills-plugin",
       "source": {
         "source": "local",
-        "path": "./.codex/plugins/scholarly-research-book"
+        "path": "./.codex/plugins/research-skills-plugin"
       },
       "policy": {
         "installation": "AVAILABLE",

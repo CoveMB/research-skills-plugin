@@ -2,7 +2,7 @@
 
 Gold-set ID: polyvagal-theory-consensus-overstatement
 Gold-set title: Polyvagal Theory Consensus Overstatement
-Status: source appraisal worksheet, not active
+Status: source appraisal worksheet for active MVP fixture
 Reviewer: TODO
 Review date: TODO
 
@@ -28,9 +28,36 @@ Failure modes:
 
 Current packet files:
 
-- `goldset_intake.md`: intake draft and candidate source inventory.
+- `goldset_intake.md`: active MVP intake and candidate source inventory.
 - `appraisal_matrix.md`: parse-friendly appraisal worksheet.
+- `mvp_source_access_record.md`: selected-MVP-source access record and
+  remaining access/search blockers.
+- `first_pass_appraisal_triage.md`: pre-appraisal confidence and review-priority
+  queue.
+- `second_pass_appraisal_review.md`: second-pass confidence scores with proof
+  notes and short quoted evidence for metadata/role triage.
+- `third_pass_appraisal_review.md`: strict third-pass metadata/role confidence
+  scores with short identity or role quotes; evidence strength remains
+  `not_appraised`.
 - `reviewer_checklist.md`: activation gate.
+
+Metadata reconciliation already recorded:
+
+- Neuhuber/Berthoud 2023 corrigendum DOI and article number are reconciled in
+  the packet.
+- Rogowski et al. 2024 AJOT SSP young-children abstract has been added as a
+  candidate source record.
+- Heilman et al. 2023 has recovered Zenodo DOI metadata: record DOI
+  `10.5281/zenodo.8018744` and parent/concept DOI
+  `10.5281/zenodo.8018743`; no separate journal-assigned DOI has been recovered.
+- Kishimoto et al. 2023 has been retired from the candidate queue. The only
+  recovered record was Longdom-hosted, its publisher/PDF-stated DOI
+  `10.35248/2161-0487.23.13.455` did not resolve via `doi.org` in this review
+  pass, and venue/source quality remains unresolved. DOI
+  `10.3390/ijerph20064862` belongs to Kawai et al. 2023, not Kishimoto et al.
+  2023.
+- These reconciliation notes do not appraise source content or establish
+  evidence strength.
 
 Non-appraisal rules already established:
 
@@ -40,7 +67,8 @@ Non-appraisal rules already established:
 - Adjacent autonomic evidence must not be used as proof of the full theory unless
   the reviewed source directly supports the specific claim.
 - Critiques are not automatically a formal field-wide consensus process.
-- This fixture remains inactive until human-reviewed evidence bases are supplied.
+- This fixture is active only as an MVP benchmark with a search-log waiver; do
+  not treat it as a fully reproducible database-search benchmark.
 
 ## Source Metadata
 
@@ -64,6 +92,10 @@ Proposed gold-set role: undecided
 - [gold | acceptable | decoy | disallowed | undecided]
 
 Candidate source IDs and provisional roles are listed in `appraisal_matrix.md`.
+Pre-appraisal confidence scores and low-score review priorities are listed in
+`first_pass_appraisal_triage.md`; second-pass proof notes and exact short quotes
+are listed in `second_pass_appraisal_review.md`; the stricter current
+metadata/role triage is listed in `third_pass_appraisal_review.md`.
 Do not change `Proposed gold-set role` from `undecided` until the source has
 been reviewed.
 

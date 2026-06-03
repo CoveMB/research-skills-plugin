@@ -89,6 +89,7 @@ def write_minimal_plugin(root: Path, *, skill_body: str | None = None) -> None:
 class TestExecutableSafeguards(unittest.TestCase):
     def test_package_excludes_generated_and_vcs_files(self) -> None:
         with TemporaryDirectory() as temporary_directory:
+            packager = load_module("package_plugin.py")
             root = Path(temporary_directory) / "plugin"
             write_minimal_plugin(root)
             (root / ".env").write_text("SECRET=1", encoding="utf-8")
@@ -118,12 +119,16 @@ class TestExecutableSafeguards(unittest.TestCase):
             self.assertEqual(result.returncode, 0, msg=f"stdout={result.stdout} stderr={result.stderr}")
             with zipfile.ZipFile(output_path) as archive:
                 names = archive.namelist()
-            self.assertNotIn(f"{root.name}/.env", names)
-            self.assertNotIn(f"{root.name}/local-notes.txt", names)
-            self.assertNotIn(f"{root.name}/skills/sample-skill/.env", names)
-            self.assertNotIn(f"{root.name}/docs/local-notes.txt", names)
-            self.assertNotIn(f"{root.name}/skills/sample-skill/secrets.json", names)
-            self.assertNotIn(f"{root.name}/bundle.zip", names)
+            archive_prefix = packager.package_archive_prefix(root)
+            self.assertEqual(archive_prefix, "sample-plugin")
+            self.assertTrue(any(name.startswith(f"{archive_prefix}/") for name in names))
+            self.assertFalse(any(name.startswith(f"{root.name}/") for name in names))
+            self.assertNotIn(f"{archive_prefix}/.env", names)
+            self.assertNotIn(f"{archive_prefix}/local-notes.txt", names)
+            self.assertNotIn(f"{archive_prefix}/skills/sample-skill/.env", names)
+            self.assertNotIn(f"{archive_prefix}/docs/local-notes.txt", names)
+            self.assertNotIn(f"{archive_prefix}/skills/sample-skill/secrets.json", names)
+            self.assertNotIn(f"{archive_prefix}/bundle.zip", names)
             self.assertFalse(any("/.git/" in name for name in names))
             self.assertFalse(any(name.endswith(".zip") for name in names))
             self.assertFalse(any("__pycache__" in name for name in names))
@@ -156,7 +161,7 @@ class TestExecutableSafeguards(unittest.TestCase):
             self.assertEqual(result.returncode, 0, msg=f"stdout={result.stdout} stderr={result.stderr}")
             with zipfile.ZipFile(output_path) as archive:
                 names = archive.namelist()
-            self.assertNotIn(f"{root.name}/docs/linked-secret.md", names)
+            self.assertNotIn("sample-plugin/docs/linked-secret.md", names)
             self.assertFalse((destination / "docs" / "linked-secret.md").exists())
 
     def test_package_validates_plugin_before_writing_zip(self) -> None:
@@ -189,7 +194,7 @@ class TestExecutableSafeguards(unittest.TestCase):
 
         self.assertEqual(
             packager.default_output_path(ROOT).name,
-            "research-book-plugin-v1.0.0.zip",
+            "research-skills-plugin-v1.0.0.zip",
         )
 
     def test_installer_refuses_to_replace_unexpected_destination(self) -> None:
@@ -309,7 +314,7 @@ class TestExecutableSafeguards(unittest.TestCase):
                 "--plugin-root",
                 str(ROOT),
                 "--dest",
-                str(root / "scholarly-research-book"),
+                str(root / "research-skills-plugin"),
                 "--marketplace",
                 str(marketplace),
                 "--dry-run",
@@ -543,10 +548,25 @@ class TestExecutableSafeguards(unittest.TestCase):
         ]
         self.assertEqual(missing, [])
 
+    def test_gitignore_excludes_real_goldset_pdf_caches(self) -> None:
+        text = (ROOT / ".gitignore").read_text(encoding="utf-8")
+
+        self.assertIn("tests/skill_evals/scholar_grade/real_goldsets/intake/*/PDFs/", text)
+
     def test_validate_script_uses_unittest_discovery(self) -> None:
         text = (ROOT / "validate.sh").read_text(encoding="utf-8")
         self.assertIn("run_package_checks.py", text)
         self.assertIn("--scope full", text)
+        self.assertIn("--scope package", text)
+        self.assertIn("tests/skill_evals", text)
+
+    def test_package_validation_scope_uses_only_packaged_assets(self) -> None:
+        module = load_module("run_package_checks.py")
+        package_check_text = "\n".join(" ".join(check) for check in module.checks_for_scope("package"))
+
+        self.assertIn("scripts/validate_plugin.py", package_check_text)
+        self.assertIn("scripts/check_book_artifact_contract.py", package_check_text)
+        self.assertNotIn("tests/skill_evals", package_check_text)
 
     def test_full_validation_runner_checks_source_candidates(self) -> None:
         text = (SCRIPTS_DIR / "run_package_checks.py").read_text(encoding="utf-8")
@@ -613,6 +633,16 @@ class TestExecutableSafeguards(unittest.TestCase):
 
         self.assertIn("tests/skill_evals/scholar_grade/mutation_tests/run_mutation_tests.py", mutation_check_text)
         self.assertIn("--quiet", mutation_check_text)
+
+    def test_validation_runner_exposes_real_goldset_scope(self) -> None:
+        module = load_module("run_package_checks.py")
+        real_goldset_check_text = "\n".join(" ".join(check) for check in module.checks_for_scope("real-goldsets"))
+        full_check_text = "\n".join(" ".join(check) for check in module.checks_for_scope("full"))
+
+        self.assertIn("tests/skill_evals/scholar_grade/real_goldsets/validate_goldsets.py", real_goldset_check_text)
+        self.assertIn("tests/skill_evals/scholar_grade/real_goldsets/live_test_goldsets.py", real_goldset_check_text)
+        self.assertIn("tests/skill_evals/scholar_grade/real_goldsets/live_test_goldsets.py", full_check_text)
+        self.assertIn("--quiet", real_goldset_check_text)
 
     def test_full_validation_runner_checks_live_pilot_calibration_report(self) -> None:
         text = (SCRIPTS_DIR / "run_package_checks.py").read_text(encoding="utf-8")

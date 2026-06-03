@@ -9,4 +9,8 @@ fi
 
 export PYTHONDONTWRITEBYTECODE=1
 
-python3 scripts/run_package_checks.py --scope full
+if [[ -d tests/skill_evals ]]; then
+  python3 scripts/run_package_checks.py --scope full
+else
+  python3 scripts/run_package_checks.py --scope package
+fi

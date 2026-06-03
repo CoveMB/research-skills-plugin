@@ -124,7 +124,8 @@ human-review gate is complete.
 
 Activation requirements:
 
-- no `PLACEHOLDER`, `TODO`, or `TBD` values remain
+- no `PLACEHOLDER`, `TODO`, or `TBD` values remain in the active JSON fixture
+  or the files named as its activation-readiness basis
 - `human_review_required` is `true`, unless explicitly waived with rationale
 - `last_reviewed_date` is a real `YYYY-MM-DD` date
 - every source has title, authors or authoring body, year if known,
@@ -134,11 +135,17 @@ Activation requirements:
   has an evidence basis
 - no copyrighted excerpts, full source text, private manuscript text, or
   confidential notes are stored
+- any search-log scope waiver has explicit approval, waived requirement, scope
+  limit, residual risk, and `YYYY-MM-DD` approval date
 - `validate_goldsets.py` passes
 
 Codex may run the validator and report errors. Codex must not mark a fixture
 active unless the human has explicitly provided activation readiness and the
 reviewed fields needed by the validator.
+
+Draft intake worksheets may keep unresolved follow-up sections only when they are
+clearly outside the active fixture scope and the active JSON points to a reviewed
+activation-readiness record instead.
 
 ## Intake Files
 

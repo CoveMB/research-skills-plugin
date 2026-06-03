@@ -16,7 +16,7 @@ Use `dictation-to-research-notes` for spoken notes. Use `reading-load-reducer` f
 
 - Existing prose passage, abstract, proposal section, chapter excerpt, or draft paragraph.
 - Desired repair level: minimal correction, local sentence repair, paragraph repair, or issue-list cleanup.
-- Terms, names, quotes, technical phrases, and claims that must not change.
+- Terms, names, quotes, technical phrases, numbers, dates, diagnoses, policy phrases, commitments, obligations, consent language, and claims that must not change.
 
 ## Example requests
 
@@ -34,7 +34,9 @@ Use dyslexia-friendly-prose-editor. Repair this typo-heavy paragraph and list an
 
 ## Typical output
 
-Expect a revised passage, meaning-preserved note, new-claims check, changed-phrase review when useful, ambiguous corrections table, evidence flags, and one optional risk-gated next step. Ask for compact output when you want one source-basis line, the revised passage, only meaning-changing ambiguity, and one next action. Compact output should include `How to use this result: TRIAGE ONLY - Use this only as meaning-preserving prose repair; do not treat it as evidence, citation, or release clearance.` It changes output shape, not route selection or evidence requirements.
+Typical output is a revised passage, meaning-preserved note, new-claims check, changed-phrase review when useful, ambiguous corrections table, evidence or commitment flags, and one optional risk-gated next step.
+
+Ask for compact output when you want one source-basis line, the revised passage, only meaning-changing ambiguity, and one next action. Compact output should include `How to use this result: TRIAGE ONLY - Use this only as meaning-preserving prose repair; do not treat it as evidence, citation, expert-review, or release clearance.` It changes output shape, not route selection or evidence requirements.
 
 ## Procedure
 
@@ -42,11 +44,11 @@ Follow the shared procedure in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
 
 ## Quality checks
 
-Apply the shared quality checks in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`; keep meaning preservation, ambiguous corrections, and evidence limits visible in the output.
+Apply the shared quality checks in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`. Keep meaning preservation, ambiguous corrections, evidence limits, consent language, commitments, and obligations visible in the output.
 
 ## Failure modes
 
-Use the shared failure modes in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`; call out overcorrection, lost uncertainty, or generic style drift when relevant.
+Use the shared failure modes in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`. Call out overcorrection, lost uncertainty, or generic style drift when relevant.
 
 ## Files/folders it may read
 
@@ -62,4 +64,4 @@ Follow the shared prohibitions in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
 
 ## Best next steps
 
-After this skill, use `claim-evidence-ledger` if cleaner prose exposes unsupported claims, `citation-integrity-auditor` if quotes or citations need verification, or `scholarly-prose-editor` for broader style work after evidence is stable.
+After this skill, use `claim-evidence-ledger` if cleaner prose exposes unsupported claims, `citation-integrity-auditor` if quotes or citations need verification, `rights-privacy-release-auditor` if consent, privacy, or external-sharing risk appears, or `scholarly-prose-editor` for broader style work after evidence is stable.

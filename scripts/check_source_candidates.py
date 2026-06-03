@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import csv
 import json
 import sys
 from collections import Counter, defaultdict
@@ -11,20 +10,21 @@ from pathlib import Path
 from typing import Any, Iterable
 
 from check_citation_metadata import normalize_identifier, normalize_title
+from plugin_utils import (
+    PRIVATE_SOURCE_TEXT_FIELDS,
+    normalized_field_name,
+    normalized_private_fields,
+    private_payload_field_errors,
+    read_csv_records as read_csv_record_objects,
+    read_json_or_csv_records,
+    read_json_records as read_json_record_objects,
+    validate_record_objects,
+)
 
 
-PRIVATE_FIELDS = {
-    "excerpt",
-    "full text",
-    "full_text",
-    "manuscript_text",
-    "manuscript text",
-    "notes",
-    "private_notes",
-    "private notes",
-    "source_text",
-    "source text",
-}
+PRIVATE_FIELDS = set(PRIVATE_SOURCE_TEXT_FIELDS)
+JSON_RECORD_ERROR = "JSON input must be a list or an object with a records or candidates list"
+EMPTY_RECORD_ERROR = "input must contain at least one source candidate record"
 COMPLETED_SEARCH_STATUSES = {"complete", "completed", "completed_search", "executed", "searched"}
 STABLE_IDENTIFIER_FIELDS = {
     "arxiv_id": "arxiv",
@@ -44,49 +44,32 @@ LIMITS = [
 
 
 def read_json_records(path: Path) -> list[dict[str, Any]]:
-    payload = json.loads(path.read_text(encoding="utf-8"))
-    if isinstance(payload, list):
-        records = payload
-    elif isinstance(payload, dict) and isinstance(payload.get("records"), list):
-        records = payload["records"]
-    elif isinstance(payload, dict) and isinstance(payload.get("candidates"), list):
-        records = payload["candidates"]
-    else:
-        raise ValueError("JSON input must be a list or an object with a records or candidates list")
-    return validate_candidate_records(records)
+    return read_json_record_objects(
+        path,
+        container_keys=("records", "candidates"),
+        json_error_message=JSON_RECORD_ERROR,
+        empty_error_message=EMPTY_RECORD_ERROR,
+    )
 
 
 def read_csv_records(path: Path) -> list[dict[str, Any]]:
-    with path.open(newline="", encoding="utf-8") as handle:
-        return validate_candidate_records([dict(row) for row in csv.DictReader(handle)])
+    return read_csv_record_objects(path, empty_error_message=EMPTY_RECORD_ERROR)
 
 
 def validate_candidate_records(records: list[Any]) -> list[dict[str, Any]]:
-    if not records:
-        raise ValueError("input must contain at least one source candidate record")
-
-    valid_records: list[dict[str, Any]] = []
-    for index, record in enumerate(records, start=1):
-        if not isinstance(record, dict):
-            raise ValueError(f"record {index} must be an object")
-        valid_records.append(record)
-    return valid_records
+    return validate_record_objects(records, empty_error_message=EMPTY_RECORD_ERROR)
 
 
 def read_records(path: Path) -> list[dict[str, Any]]:
-    suffix = path.suffix.lower()
-    if suffix == ".json":
-        return read_json_records(path)
-    if suffix == ".csv":
-        return read_csv_records(path)
-    raise ValueError("input must be .json or .csv")
+    return read_json_or_csv_records(
+        path,
+        json_container_keys=("records", "candidates"),
+        json_error_message=JSON_RECORD_ERROR,
+        empty_error_message=EMPTY_RECORD_ERROR,
+    )
 
 
-def normalized_field_name(field: str) -> str:
-    return " ".join(field.replace("_", " ").casefold().split())
-
-
-NORMALIZED_PRIVATE_FIELDS = {normalized_field_name(private_field) for private_field in PRIVATE_FIELDS}
+NORMALIZED_PRIVATE_FIELDS = normalized_private_fields(PRIVATE_FIELDS)
 
 
 def is_private_field(field: str) -> bool:
@@ -104,13 +87,11 @@ def candidate_identifier(record: dict[str, Any], index: int = 0) -> str:
 
 
 def private_field_errors(records: list[dict[str, Any]]) -> list[str]:
-    errors: list[str] = []
-    for index, record in enumerate(records):
-        identifier = candidate_identifier(record, index)
-        for field in sorted(record.keys()):
-            if is_private_field(field) and str(record.get(field, "")).strip():
-                errors.append(f"{identifier}: remove private field {field!r}")
-    return errors
+    return private_payload_field_errors(
+        records,
+        private_fields=PRIVATE_FIELDS,
+        record_identifier=candidate_identifier,
+    )
 
 
 def text_value(record: dict[str, Any], keys: Iterable[str]) -> str:

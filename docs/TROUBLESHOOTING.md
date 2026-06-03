@@ -5,8 +5,8 @@
 - Restart the app.
 - Run `python3 scripts/validate_plugin.py .` from the plugin root.
 - Check that `.codex-plugin/plugin.json` exists.
-- Check that the marketplace file contains a `scholarly-research-book` entry.
-- Check that the plugin folder was copied to `~/.codex/plugins/scholarly-research-book`.
+- Check that the marketplace file contains a `research-skills-plugin` entry.
+- Check that the plugin folder was copied to `~/.codex/plugins/research-skills-plugin`.
 
 ## Python is missing or too old
 
@@ -39,7 +39,7 @@ The installer backs up the existing marketplace file with a timestamped `.backup
 `scripts/package_plugin.py` writes the zip to the current directory by default. If that directory is read-only, pass `--out` with a writable path:
 
 ```bash
-python3 scripts/package_plugin.py --root . --out dist/research-book-plugin.zip
+python3 scripts/package_plugin.py --root . --out dist/research-skills-plugin.zip
 ```
 
 ## A script option is unclear

@@ -22,3 +22,6 @@ node_modules/
 .env
 local-notes.txt
 secrets.json
+
+# Local real-source review caches
+tests/skill_evals/scholar_grade/real_goldsets/intake/*/PDFs/

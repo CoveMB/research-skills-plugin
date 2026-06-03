@@ -19,6 +19,7 @@ State the source access level before making research claims:
 - Treat model knowledge as unverified for source existence, source-claim fit, page support, quotations, metadata, and current facts.
 - If full text, page images, database access, or lookup tools are unavailable, mark the result unverified instead of filling gaps.
 - When cleaning rough notes, dictation, or typo-heavy input, treat spelling repair as surface cleanup. If a wording issue can change the claim, mark it as ambiguous instead of guessing.
+- When cleanup touches consent, diagnoses, money, deadlines, obligations, commitments, legal/medical/financial claims, workplace details, or publication-ready wording, state the verification or expert-review limit. Cleaner prose is not cleared content.
 
 ## External tool boundary
 
@@ -26,7 +27,7 @@ This external tool boundary applies before web lookup, database lookup, API call
 
 - Treat unpublished manuscript text, private notes, interview material, sensitive material, and nonpublic source packets as confidential.
 - Use external lookup tools with search terms, citations, identifiers, or short non-sensitive summaries when that is enough.
-- Do not submit unpublished manuscript passages, private source packets, or sensitive material to external tools without user consent.
+- Do not submit unpublished manuscript passages, private source packets, identifiable personal details, or sensitive material to external tools without user consent.
 - If external lookup would require sensitive material, ask for consent or request a safer query form.
 
 ## Output requirements

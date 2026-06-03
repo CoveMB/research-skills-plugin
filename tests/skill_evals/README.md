@@ -47,7 +47,7 @@ Use these fixture classes together:
 - Safety fixtures test resistance to bad or overconfident user requests.
 - Scholar-grade fixtures use controlled source packets and hidden answer keys to test source discipline, uncertainty, and evidence fit.
 - Adversarial pressure fixtures under `tests/skill_evals/scholar_grade/adversarial_pressure/` test whether skills resist user requests to hide uncertainty, invent locators or citations, overstate consensus, misuse private material, or make weak evidence sound stronger.
-- Real-source gold sets are a separate future layer for human-reviewed source selection and synthesis truth. They must not be confused with controlled fixtures or treated as agent-generated scholarly truth.
+- Real-source gold sets are a separate layer for human-reviewed source selection and synthesis checks. Active MVP cases are bounded to their reviewed packet and waiver notes; they must not be confused with controlled fixtures or treated as agent-generated scholarly truth.
 - Run manifests record capture provenance, file hashes, and structured reviewer decisions for each captured output.
 - Review score files bind a reviewer decision to the exact captured output hash and enforce rubric-dimension scoring plus `minimum_score` thresholds.
 - `required_source_anchors` force the output to mention case-specific source details, reducing false passes from marker-only answers.
@@ -152,11 +152,13 @@ Use fixture `score_anchors` for dimensions where generic 0-to-5 labels are not e
 
 ## Real-source gold sets
 
-`tests/skill_evals/scholar_grade/real_goldsets/` defines the architecture for future real-source gold-set evaluations. This layer is intentionally inactive until human reviewers populate it with source truth.
+`tests/skill_evals/scholar_grade/real_goldsets/` defines real-source gold-set evaluations. Cases remain inactive until human reviewers populate them with a reviewed source basis; active MVP cases are bounded to their recorded review packet, source-access notes, and any explicit waivers.
 
 Controlled fixtures test epistemic discipline: source-basis visibility, uncertainty preservation, hard-fail behavior, privacy boundaries, and resistance to fabricated verification inside bounded local packets. Real-source gold sets test a different problem once populated: whether a skill identifies core sources, avoids decoys, distinguishes primary sources from reviews or commentary, preserves field uncertainty, avoids cherry-picking, and synthesizes accurately.
 
 Do not create active real-source gold sets from model output alone. Before a case becomes active, human review must provide source metadata, source roles, access notes, decoy reasons, evidence bases for support/reject/uncertain expectations, citation-audit expectations, a reviewed field-state note, reviewer notes, and a real review date. Store metadata and short review notes only; do not store copyrighted source excerpts or private unpublished manuscript text.
+
+`tests/skill_evals/scholar_grade/real_goldsets/live_test_goldsets.py` provides the automated local live-test readiness check for active real-source cases. It renders the visible prompt packet, rejects leakage of grader-only fields, and verifies that reviewed candidate outputs exercise every minimum failure check with both passing and failing cases. It does not run a model, certify source truth, or replace human review.
 
 ## Required run metadata
 
@@ -280,6 +282,14 @@ Validate scholar-grade evaluator sensitivity mutations:
 ```bash
 python3 tests/skill_evals/scholar_grade/mutation_tests/run_mutation_tests.py
 python3 scripts/run_package_checks.py --scope scholar-mutation
+```
+
+Validate active real-source gold sets and their local live-test readiness:
+
+```bash
+python3 tests/skill_evals/scholar_grade/real_goldsets/validate_goldsets.py
+python3 tests/skill_evals/scholar_grade/real_goldsets/live_test_goldsets.py
+python3 scripts/run_package_checks.py --scope real-goldsets
 ```
 
 Generate the pilot calibration report:

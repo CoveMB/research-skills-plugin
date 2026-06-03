@@ -1,7 +1,7 @@
 # Real-Source Gold Sets
 
-This directory is the scaffold for future real-source scholar-grade evaluations.
-It is intentionally separate from the controlled fixture suite.
+This directory holds real-source scholar-grade gold sets. It is intentionally
+separate from the controlled fixture suite.
 
 Controlled fixtures test epistemic discipline against small local packets: whether
 a skill preserves uncertainty, refuses unsupported claims, avoids hidden answer
@@ -9,16 +9,19 @@ keys, and hard-fails on fabricated verification. They do not certify real-world
 source truth.
 
 Real-source gold sets test source selection and synthesis after human reviewers
-populate the cases with source truth. They are for questions such as whether a
-skill identifies core sources, avoids decoys, distinguishes primary sources from
-reviews or commentary, preserves live field uncertainty, avoids cherry-picking,
-and synthesizes accurately. They must not be treated as valid until a qualified
-human reviewer has supplied and reviewed the source basis.
+populate the cases with a reviewed source basis. They are for questions such as
+whether a skill identifies core sources, avoids decoys, distinguishes primary
+sources from reviews or commentary, preserves live field uncertainty, avoids
+cherry-picking, and synthesizes accurately. Active MVP cases remain bounded to
+their reviewed packet and waiver notes; they do not certify source discovery
+completeness or independent scholarly truth beyond the recorded human review.
 
 ## Files
 
 - `goldset.schema.json` documents the JSON shape for each gold-set case.
 - `validate_goldsets.py` validates all gold-set JSON files in this directory.
+- `live_test_goldsets.py` validates active real-source cases for local
+  live-test readiness and checks reviewed candidate output scorecards.
 - `templates/` contains fillable Markdown intake, source-appraisal, and reviewer
   checklist templates.
 - `new_goldset_intake.py` scaffolds an inactive Markdown intake packet from the
@@ -76,4 +79,20 @@ python3 tests/skill_evals/scholar_grade/real_goldsets/validate_goldsets.py
 The validator checks required fields, source-entry metadata, decoy reasons,
 expectation evidence bases, active-case placeholder removal, human-review
 requirements, and obvious attempts to store copyrighted excerpts or private
-manuscript text.
+manuscript text. When a draft records `candidate_output_scorecards`, the
+validator also checks that every scorecard covers every listed
+`minimum_failure_checks` entry and does not score unknown checks. If an active
+MVP fixture uses a search-log scope waiver, the waiver must include explicit
+approval, waived requirement, scope limit, residual risk, and approval date.
+
+Validate active real-source live-test readiness:
+
+```bash
+python3 tests/skill_evals/scholar_grade/real_goldsets/live_test_goldsets.py
+python3 scripts/run_package_checks.py --scope real-goldsets
+```
+
+The live-test readiness check renders the visible prompt packet, verifies that
+the packet does not expose grader-only fields, and checks that active cases
+include reviewed passing and failing candidate outputs for every
+`minimum_failure_checks` entry. It does not run a model or replace human review.

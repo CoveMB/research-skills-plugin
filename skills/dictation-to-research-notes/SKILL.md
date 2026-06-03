@@ -25,6 +25,7 @@ Use this instead of `scholarly-prose-editor` when the input is not yet prose. Us
 - High-signal triggers: dictated notes, voice memo, speech-to-text, transcript, rambling notes, spoken fragments, "I talked this out", or meeting notes.
 - Light-route behavior: segment the dictation into idea units, clean only obvious transcription noise, and produce a claim/question/evidence/action table.
 - Deep-work gate: route to claim audit, source lookup, or citation audit only when the structured notes expose a concrete scholarly risk and source material or lookup permission exists.
+- Escalation gate: add privacy, evidence, or verification limits when the transcript includes identifiable people, factual claims, citations, workplace obligations, legal/medical/financial claims, consent language, commitments, or external-sharing intent.
 - Noise and slowdown guard: do not turn dictation cleanup into a full literature review, citation audit, or polished chapter draft.
 
 ## Do not use this skill when
@@ -44,7 +45,7 @@ Use this instead of `scholarly-prose-editor` when the input is not yet prose. Us
 
 Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
-Treat transcription cleanup as surface repair. If a transcript error can change the claim, mark it as an ambiguity instead of guessing.
+Treat transcription cleanup as surface repair. If a transcript error can change the claim, responsibility, consent, obligation, commitment, deadline, diagnosis, or evidence status, mark it as an ambiguity instead of guessing.
 
 ## Compact output
 
@@ -69,6 +70,7 @@ Use compact output when the user asks for low reading load, when the transcript 
 - Do not add sources, citations, examples, or facts not present in the input.
 - Do not output long prose when a table or short chunks would reduce reading load.
 - Do not expose private participant, meeting, or interview details in shareable output without flagging release risk.
+- Do not turn dictated commitments, obligations, deadlines, consent language, or workplace details into polished wording without preserving review needs.
 
 ## Procedure
 
@@ -83,18 +85,20 @@ If multiple speakers, interview participants, meeting attendees, or identifiable
 Break the dictation into discrete units:
 
 - claim
+- decision or commitment
 - question
 - concept or term
 - example or case
 - evidence need
 - writing task
+- privacy, consent, obligation, or verification need
 - uncertainty or ambiguity
 
 Ignore filler words unless they change emphasis, uncertainty, or argument logic.
 
 ### 3. Clean only what is safe
 
-Repair obvious speech-to-text noise, punctuation, and sentence boundaries. Preserve terms, names, and technical language unless the correction is certain.
+Repair obvious speech-to-text noise, punctuation, and sentence boundaries. Preserve terms, names, dates, deadlines, commitments, consent language, quoted wording, and technical language unless the correction is certain.
 
 If a phrase has several plausible meanings, keep the original fragment and mark the ambiguity.
 
@@ -125,6 +129,7 @@ If the cleaned notes reveal a clear next step, suggest one specialist skill:
 - evidence risk: `claim-evidence-ledger`
 - prose after structure is stable: `dyslexia-friendly-prose-editor`
 - identifiable participant, interview, meeting, or third-party details before sharing: `rights-privacy-release-auditor`
+- legal/medical/financial claims, workplace obligations, or commitments before external reliance: state expert-review or user-verification limits before routing further
 
 ## Output format
 
@@ -174,6 +179,7 @@ Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.m
 - Claims, questions, examples, and evidence needs are separated.
 - Output is shorter and easier to scan than the transcript.
 - No citations, page numbers, source claims, or field consensus are invented.
+- Commitments, obligations, consent language, deadlines, and identifiable-person risks are preserved or flagged for user review.
 
 ## Failure modes
 
@@ -183,3 +189,4 @@ Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.m
 - Every sentence is overprocessed instead of grouped into useful idea units.
 - Missing evidence becomes hidden because the note is cleaner.
 - Private meeting, interview, or participant material is prepared for sharing without release review.
+- Transcript cleanup silently changes a commitment, obligation, deadline, consent condition, or workplace responsibility.

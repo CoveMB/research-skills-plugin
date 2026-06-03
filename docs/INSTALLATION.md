@@ -17,14 +17,14 @@ Python 3.10 or newer is only required when you run the bundled install, validati
 ### macOS / Linux
 
 ```bash
-cd research-book-plugin
+cd research-skills-plugin
 ./install.sh
 ```
 
 ### Windows PowerShell
 
 ```powershell
-cd research-book-plugin
+cd research-skills-plugin
 .\install.ps1
 ```
 
@@ -32,7 +32,7 @@ The installer:
 
 1. validates `.codex-plugin/plugin.json`,
 2. validates every `skills/*/SKILL.md`,
-3. copies the plugin to `~/.codex/plugins/scholarly-research-book`,
+3. copies the plugin to `~/.codex/plugins/research-skills-plugin`,
 4. creates or updates `~/.agents/plugins/marketplace.json`,
 5. adds the marketplace entry for this plugin.
 
@@ -51,7 +51,7 @@ More script details are in [`docs/SCRIPTS.md`](SCRIPTS.md).
 1. Copy this folder to:
 
 ```text
-~/.codex/plugins/scholarly-research-book
+~/.codex/plugins/research-skills-plugin
 ```
 
 2. Create or update:
@@ -70,10 +70,10 @@ More script details are in [`docs/SCRIPTS.md`](SCRIPTS.md).
   },
   "plugins": [
     {
-      "name": "scholarly-research-book",
+      "name": "research-skills-plugin",
       "source": {
         "source": "local",
-        "path": "./.codex/plugins/scholarly-research-book"
+        "path": "./.codex/plugins/research-skills-plugin"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -115,7 +115,13 @@ python3 scripts/validate_plugin.py .
 python3 scripts/check_book_artifact_contract.py --path .
 ```
 
-For a full local package check, run:
+For a packaged or installed copy without repo-only test fixtures, run:
+
+```bash
+python3 scripts/run_package_checks.py --scope package
+```
+
+For a full source-checkout validation, run from the repository root:
 
 ```bash
 ./validate.sh
@@ -128,7 +134,7 @@ See [`docs/SCRIPTS.md`](SCRIPTS.md) for the full script list and dependency note
 Remove the copied plugin folder:
 
 ```bash
-rm -rf ~/.codex/plugins/scholarly-research-book
+rm -rf ~/.codex/plugins/research-skills-plugin
 ```
 
-Then remove the `scholarly-research-book` entry from `~/.agents/plugins/marketplace.json`.
+Then remove the `research-skills-plugin` entry from `~/.agents/plugins/marketplace.json`.

@@ -72,6 +72,37 @@ EXPECTATION_REQUIRED_FIELDS = (
     "expectation",
     "evidence_basis",
 )
+MINIMUM_FAILURE_CHECK_REQUIRED_FIELDS = (
+    "id",
+    "question",
+    "failure_if",
+    "passes_if",
+    "evidence_basis",
+)
+CANDIDATE_OUTPUT_SCORECARD_REQUIRED_FIELDS = (
+    "output_id",
+    "output_label",
+    "output_text",
+    "score_basis",
+)
+CANDIDATE_CHECK_RESULT_REQUIRED_FIELDS = (
+    "check_id",
+    "outcome",
+    "rationale",
+    "evidence_basis",
+)
+SEARCH_LOG_SCOPE_WAIVER_REQUIRED_FIELDS = (
+    "waiver_status",
+    "approved_by",
+    "approval_date",
+    "waived_requirement",
+    "scope_limit",
+    "residual_risk",
+)
+VALID_CANDIDATE_CHECK_OUTCOMES = {
+    "pass",
+    "fail",
+}
 ACTIVE_PLACEHOLDER_RE = re.compile(
     r"\b(?:TODO|TBD|PLACEHOLDER|FILL[_ -]?ME|REPLACE[_ -]?ME)\b",
     flags=re.IGNORECASE,
@@ -219,11 +250,7 @@ def validate_expectation_entry(expectation: Any, parts: tuple[str, ...]) -> list
     label = path_label(parts)
     if not isinstance(expectation, dict):
         return [f"{label} must be an object"]
-    return [
-        f"{label}.{field} is required"
-        for field in EXPECTATION_REQUIRED_FIELDS
-        if not is_non_empty_string(expectation.get(field))
-    ]
+    return missing_string_field_errors(expectation, EXPECTATION_REQUIRED_FIELDS, label)
 
 
 def validate_expectation_list(document: dict[str, Any], field: str) -> list[str]:
@@ -233,6 +260,173 @@ def validate_expectation_list(document: dict[str, Any], field: str) -> list[str]
     errors: list[str] = []
     for index, expectation in enumerate(value):
         errors.extend(validate_expectation_entry(expectation, (field, str(index))))
+    return errors
+
+
+def missing_string_field_errors(
+    value: dict[str, Any],
+    required_fields: tuple[str, ...],
+    label: str,
+) -> list[str]:
+    return [
+        f"{label}.{field} is required"
+        for field in required_fields
+        if not is_non_empty_string(value.get(field))
+    ]
+
+
+def duplicate_values(values: list[str]) -> list[str]:
+    seen: set[str] = set()
+    duplicates: set[str] = set()
+    for value in values:
+        if value in seen:
+            duplicates.add(value)
+        seen.add(value)
+    return sorted(duplicates)
+
+
+def validate_minimum_failure_check_entry(check: Any, index: int) -> list[str]:
+    label = f"minimum_failure_checks[{index}]"
+    if not isinstance(check, dict):
+        return [f"{label} must be an object"]
+    return missing_string_field_errors(check, MINIMUM_FAILURE_CHECK_REQUIRED_FIELDS, label)
+
+
+def validate_minimum_failure_checks(document: dict[str, Any]) -> list[str]:
+    checks = document.get("minimum_failure_checks")
+    if checks is None:
+        return []
+    if not isinstance(checks, list):
+        return ["minimum_failure_checks must be a list"]
+
+    errors: list[str] = []
+    check_identifiers: list[str] = []
+    for index, check in enumerate(checks):
+        errors.extend(validate_minimum_failure_check_entry(check, index))
+        if isinstance(check, dict) and is_non_empty_string(check.get("id")):
+            check_identifiers.append(check["id"])
+
+    for identifier in duplicate_values(check_identifiers):
+        errors.append(f"minimum_failure_checks contains duplicate id: {identifier}")
+    return errors
+
+
+def minimum_failure_check_ids(document: dict[str, Any]) -> list[str]:
+    checks = document.get("minimum_failure_checks")
+    if not isinstance(checks, list):
+        return []
+    return [
+        check["id"]
+        for check in checks
+        if isinstance(check, dict) and is_non_empty_string(check.get("id"))
+    ]
+
+
+def validate_candidate_check_result_entry(result: Any, label: str) -> list[str]:
+    if not isinstance(result, dict):
+        return [f"{label} must be an object"]
+
+    errors = missing_string_field_errors(result, CANDIDATE_CHECK_RESULT_REQUIRED_FIELDS, label)
+    outcome = result.get("outcome")
+    if is_non_empty_string(outcome) and outcome not in VALID_CANDIDATE_CHECK_OUTCOMES:
+        errors.append(f"{label}.outcome must be one of {sorted(VALID_CANDIDATE_CHECK_OUTCOMES)}")
+    return errors
+
+
+def validate_candidate_check_results(
+    scorecard: dict[str, Any],
+    label: str,
+    expected_check_identifiers: list[str],
+) -> list[str]:
+    results = scorecard.get("check_results")
+    if not isinstance(results, list):
+        return [f"{label}.check_results must be a list"]
+
+    errors: list[str] = []
+    result_identifiers: list[str] = []
+    for index, result in enumerate(results):
+        result_label = f"{label}.check_results[{index}]"
+        errors.extend(validate_candidate_check_result_entry(result, result_label))
+        if isinstance(result, dict) and is_non_empty_string(result.get("check_id")):
+            result_identifiers.append(result["check_id"])
+
+    for identifier in duplicate_values(result_identifiers):
+        errors.append(f"{label} contains duplicate check result: {identifier}")
+
+    expected_identifiers = set(expected_check_identifiers)
+    actual_identifiers = set(result_identifiers)
+    missing_identifiers = sorted(expected_identifiers - actual_identifiers)
+    unknown_identifiers = sorted(actual_identifiers - expected_identifiers)
+    if missing_identifiers:
+        errors.append(
+            f"{label} is missing check results for minimum_failure_checks: "
+            f"{', '.join(missing_identifiers)}"
+        )
+    if unknown_identifiers:
+        errors.append(
+            f"{label} contains check results not listed in minimum_failure_checks: "
+            f"{', '.join(unknown_identifiers)}"
+        )
+    return errors
+
+
+def validate_candidate_output_scorecard_entry(
+    scorecard: Any,
+    index: int,
+    expected_check_identifiers: list[str],
+) -> list[str]:
+    label = f"candidate_output_scorecards[{index}]"
+    if not isinstance(scorecard, dict):
+        return [f"{label} must be an object"]
+
+    errors = missing_string_field_errors(
+        scorecard,
+        CANDIDATE_OUTPUT_SCORECARD_REQUIRED_FIELDS,
+        label,
+    )
+    errors.extend(validate_candidate_check_results(scorecard, label, expected_check_identifiers))
+    return errors
+
+
+def validate_candidate_output_scorecards(document: dict[str, Any]) -> list[str]:
+    scorecards = document.get("candidate_output_scorecards")
+    if scorecards is None:
+        return []
+    if not isinstance(scorecards, list):
+        return ["candidate_output_scorecards must be a list"]
+
+    check_identifiers = minimum_failure_check_ids(document)
+    if not check_identifiers:
+        return ["candidate_output_scorecards require minimum_failure_checks"]
+
+    errors: list[str] = []
+    output_identifiers: list[str] = []
+    for index, scorecard in enumerate(scorecards):
+        errors.extend(validate_candidate_output_scorecard_entry(scorecard, index, check_identifiers))
+        if isinstance(scorecard, dict) and is_non_empty_string(scorecard.get("output_id")):
+            output_identifiers.append(scorecard["output_id"])
+
+    for identifier in duplicate_values(output_identifiers):
+        errors.append(f"candidate_output_scorecards contains duplicate output_id: {identifier}")
+    return errors
+
+
+def validate_search_log_scope_waiver(document: dict[str, Any]) -> list[str]:
+    waiver = document.get("search_log_scope_waiver")
+    if waiver is None:
+        return []
+    if not isinstance(waiver, dict):
+        return ["search_log_scope_waiver must be an object"]
+
+    errors = missing_string_field_errors(
+        waiver,
+        SEARCH_LOG_SCOPE_WAIVER_REQUIRED_FIELDS,
+        "search_log_scope_waiver",
+    )
+    if is_active_goldset(document) and waiver.get("waiver_status") != "approved":
+        errors.append("active gold set search_log_scope_waiver.waiver_status must be 'approved'")
+    if is_non_empty_string(waiver.get("approval_date")) and not DATE_RE.fullmatch(waiver["approval_date"]):
+        errors.append("search_log_scope_waiver.approval_date must use YYYY-MM-DD")
     return errors
 
 
@@ -292,6 +486,9 @@ def validate_goldset_document(document: Any) -> list[str]:
     for field in EXPECTATION_LIST_FIELDS:
         if field in document:
             errors.extend(validate_expectation_list(document, field))
+    errors.extend(validate_minimum_failure_checks(document))
+    errors.extend(validate_candidate_output_scorecards(document))
+    errors.extend(validate_search_log_scope_waiver(document))
     errors.extend(validate_human_review_gate(document))
     errors.extend(validate_active_placeholders(document))
     errors.extend(validate_stored_text_limits(document))

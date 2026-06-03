@@ -25,6 +25,7 @@ Also use when the request is accessibility-related but it is unclear whether `di
 - High-signal triggers: mixed accessibility bottleneck, unclear accessibility route, "I have dyslexia and this has dictation plus reading load", "rough notes plus spelling ambiguity", or "help me choose the smallest low-load next step".
 - Light-route behavior: choose or recommend the smallest accessibility skill first; normalize input only when no smaller skill clearly owns the request.
 - Deep-work gate: route to source lookup, claim audit, citation audit, or literature mapping only when the normalized material exposes a concrete scholarly risk and the needed source material exists or lookup is explicitly requested.
+- Escalation gate: add verification, privacy, or expert-review limits when the material includes factual claims, citations, consent language, identifiable people, legal/medical/financial claims, workplace obligations, commitments, publication-ready wording, or external-sharing intent.
 - Noise and slowdown guard: do not produce long prose, broad skill menus, or comprehensive audits when the user needs low-load triage first.
 
 ## Do not use this skill when
@@ -47,7 +48,7 @@ Also use when the request is accessibility-related but it is unclear whether `di
 
 Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
-Treat spelling and grammar cleanup as surface repair. If a typo can change the claim, mark it as an ambiguity instead of guessing.
+Treat spelling and grammar cleanup as surface repair. If a typo can change the claim, responsibility, consent, obligation, commitment, deadline, diagnosis, or evidence status, mark it as an ambiguity instead of guessing.
 
 ## Compact output
 
@@ -69,6 +70,7 @@ Use compact output by default when the user's main bottleneck is reading load or
 
 - Do not treat spelling cleanup as permission to change the user's meaning.
 - Do not hide uncertainty, missing evidence, or locator gaps to make text feel smoother.
+- Do not hide privacy, consent, obligation, commitment, or expert-review limits behind cleaner text.
 - Do not overwhelm the user with long paragraphs when a table, numbered list, or short chunks would work.
 - Do not frame dyslexia or dysorthographia as an intellectual weakness.
 - Do not route to many skills when one small next action is enough.
@@ -95,7 +97,7 @@ If several readings are plausible, list the ambiguity in a short table:
 
 | Text fragment | Possible meaning | Why it matters | Question |
 
-Ask only questions that change the argument, evidence need, or next action.
+Ask only questions that change the argument, evidence need, privacy risk, responsibility, consent, obligation, commitment, deadline, or next action.
 
 ### 3. Preserve the author's idea
 
@@ -105,6 +107,7 @@ Separate:
 - cleaned wording
 - interpretation added by the assistant
 - evidence need
+- privacy, consent, obligation, or commitment risk
 - uncertainty or ambiguity
 
 Do not turn a rough idea into a confident scholarly claim unless evidence status is clear.
@@ -210,6 +213,7 @@ Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.m
 - Output is shorter and easier to scan than the input.
 - Only one next action is recommended unless the user asks for a workflow.
 - No citations, page numbers, source claims, or field consensus are invented.
+- Privacy, consent, obligation, commitment, and expert-review limits are visible when they affect the next scholarly action.
 
 ## Failure modes
 
@@ -218,3 +222,4 @@ Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.m
 - Long explanatory output increases reading burden.
 - Routing to several specialist skills instead of reducing load.
 - Treating unsupported material as verified because it is now written clearly.
+- Smoother wording silently changes responsibility, consent, obligations, commitments, deadlines, or evidence strength.

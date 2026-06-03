@@ -24,8 +24,8 @@ Use this instead of `literature-review-mapper` when the user needs triage before
 
 - High-signal triggers: reading fatigue, too much to read, dense article, skim/read/skip, source triage, reading priority, reading load, close reading target, or long notes.
 - Light-route behavior: classify material into read closely, skim, park, or skip, with short reasons and evidence-use limits.
-- Deep-work gate: source lookup happens only when the user asks, source metadata is central, current facts matter, or router deep mode routes here with lookup available.
-- Noise and slowdown guard: do not synthesize a field, audit citations, or produce an annotated bibliography when the user needs reading triage first.
+- Deep-work gate: source lookup happens only when the user asks, source metadata is central, current facts matter, a factual or high-stakes claim would otherwise be unsupported, or router deep mode routes here with lookup available.
+- Noise and slowdown guard: do not synthesize a field, audit citations, make legal/medical/financial/workplace/publication decisions, or produce an annotated bibliography when the user needs reading triage first.
 
 ## Do not use this skill when
 
@@ -34,6 +34,7 @@ Use this instead of `literature-review-mapper` when the user needs triage before
 - The user needs annotations for individual sources; use `annotated-bibliography-builder`.
 - The user needs source credibility or method quality audited; use `methodology-source-auditor`.
 - The user needs rough dictation or fragment cleanup; use `dictation-to-research-notes`.
+- The user asks for legal, medical, financial, workplace, or publication advice from dense material; reduce reading load and state source, expert-review, or user-verification limits.
 
 ## Inputs expected
 
@@ -70,6 +71,7 @@ Use compact output when the user asks for low reading load, time-boxed triage, o
 - Do not turn provisional reading triage into literature synthesis.
 - Do not claim a source is irrelevant when source access is too thin; mark it as park or needs metadata instead.
 - Do not produce long summaries when the goal is reducing reading load.
+- Do not make legal, medical, financial, workplace, or publication decisions for the user.
 
 ## Procedure
 
@@ -170,6 +172,7 @@ Use `Close-reading targets`, `Skim targets`, and `Park or skip` only when those 
 - Read closely, skim, park, and skip are distinct.
 - Output reduces reading load rather than adding a new essay.
 - No citations, page numbers, source claims, or field consensus are invented.
+- Expert-review, source-access, and user-verification limits remain visible for high-stakes or publication-facing decisions.
 
 ## Failure modes
 
@@ -178,3 +181,4 @@ Use `Close-reading targets`, `Skim targets`, and `Park or skip` only when those 
 - Triage becomes unsupported literature synthesis.
 - The output is too long to reduce reading load.
 - Current project goal is ignored.
+- Triage wording implies legal, medical, financial, workplace, or publication clearance from unread or partial material.
