@@ -10,6 +10,10 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from check_research_behavior_fixtures import (
+    OVERSTATEMENT_POLICY_FORBIDDEN_CLAIMS,
+    OVERSTATEMENT_POLICY_REQUIRED_MARKERS,
+)
 from research_behavior_eval_harness import build_harness_report, format_markdown_runbook
 
 
@@ -30,7 +34,11 @@ def fixture_document() -> dict[str, object]:
                 "prompt": "Check this bibliography for possible fake DOIs.",
                 "expected_route": "citation-integrity-auditor",
                 "risk_covered": "hallucinated citation metadata",
-                "required_output_markers": ["metadata verification ladder", "DOI"],
+                "required_output_markers": [
+                    *OVERSTATEMENT_POLICY_REQUIRED_MARKERS,
+                    "metadata verification ladder",
+                    "DOI",
+                ],
                 "forbidden_claims": ["metadata verified from memory"],
             },
             {
@@ -55,7 +63,18 @@ class TestResearchBehaviorEvalHarness(unittest.TestCase):
             outputs_dir.mkdir()
             traces_dir.mkdir()
             fixture_path.write_text(json.dumps(fixture_document()), encoding="utf-8")
-            route_one_output = "Selected skill: citation-integrity-auditor\nmetadata verification ladder\nDOI\n"
+            route_one_output = "\n".join(
+                [
+                    "Selected skill: citation-integrity-auditor",
+                    "Source basis",
+                    "What I can verify",
+                    "What remains uncertain",
+                    "User verification needed",
+                    "metadata verification ladder",
+                    "DOI",
+                    "",
+                ]
+            )
             (outputs_dir / "route-one.md").write_text(
                 route_one_output,
                 encoding="utf-8",
@@ -81,6 +100,7 @@ class TestResearchBehaviorEvalHarness(unittest.TestCase):
             self.assertEqual(report["schema_version"], "research-skill-behavior-harness-v1")
             self.assertEqual(report["execution_mode"], "deterministic-local")
             self.assertIn("does not run a model", " ".join(report["limits"]))
+            self.assertIn("overstatement and uncertainty markers", " ".join(report["limits"]))
             self.assertIn(
                 "Capture exactly one Markdown output and one hash-linked route trace JSON per fixture id.",
                 report["manual_or_live_run_expectations"],
@@ -113,8 +133,19 @@ class TestResearchBehaviorEvalHarness(unittest.TestCase):
             self.assertIn("### route-one", markdown)
             self.assertIn("Expected route: `citation-integrity-auditor`", markdown)
             self.assertIn("> Check this bibliography for possible fake DOIs.", markdown)
-            self.assertIn("Required markers: `metadata verification ladder`, `DOI`", markdown)
+            self.assertIn("Required markers: `Source basis`, `What I can verify`", markdown)
+            self.assertIn("`metadata verification ladder`, `DOI`", markdown)
             self.assertIn("Forbidden claims: `metadata verified from memory`", markdown)
+
+    def test_markdown_runbook_lists_effective_policy_forbidden_claims(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            fixture_path = root / "fixtures.json"
+            fixture_path.write_text(json.dumps(fixture_document()), encoding="utf-8")
+
+            markdown = format_markdown_runbook(build_harness_report(fixture_path))
+
+            self.assertIn(f"`{OVERSTATEMENT_POLICY_FORBIDDEN_CLAIMS[0]}`", markdown)
 
     def test_markdown_runbook_handles_markers_with_backticks(self) -> None:
         with TemporaryDirectory() as temporary_directory:
@@ -163,7 +194,18 @@ class TestResearchBehaviorEvalHarness(unittest.TestCase):
             outputs_dir.mkdir()
             traces_dir.mkdir()
             fixture_path.write_text(json.dumps(fixture_document()), encoding="utf-8")
-            route_one_output = "Selected skill: citation-integrity-auditor\nmetadata verification ladder\nDOI\n"
+            route_one_output = "\n".join(
+                [
+                    "Selected skill: citation-integrity-auditor",
+                    "Source basis",
+                    "What I can verify",
+                    "What remains uncertain",
+                    "User verification needed",
+                    "metadata verification ladder",
+                    "DOI",
+                    "",
+                ]
+            )
             route_two_output = "Selected skill: research-intent-router\nHow to use this result\nNext action\n"
             (outputs_dir / "route-one.md").write_text(
                 route_one_output,

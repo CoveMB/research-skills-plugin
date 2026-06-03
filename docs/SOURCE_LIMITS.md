@@ -18,6 +18,7 @@ State the source access level before making research claims:
 - Separate verified facts, interpretation, speculation, and recommendation.
 - Treat model knowledge as unverified for source existence, source-claim fit, page support, quotations, metadata, and current facts.
 - If full text, page images, database access, or lookup tools are unavailable, mark the result unverified instead of filling gaps.
+- Preserve calibrated certainty. Do not weaken claims just to sound cautious when the source basis is strong, but do not upgrade uncertainty when the available basis is thin, partial, stale, citation-only, abstract-only, one-sided, or method-incomplete.
 - When cleaning rough notes, dictation, or typo-heavy input, treat spelling repair as surface cleanup. If a wording issue can change the claim, mark it as ambiguous instead of guessing.
 - When cleanup touches consent, diagnoses, money, deadlines, obligations, commitments, legal/medical/financial claims, workplace details, or publication-ready wording, state the verification or expert-review limit. Cleaner prose is not cleared content.
 
@@ -38,3 +39,5 @@ Every research output should identify:
 - what can be verified from available material
 - what remains uncertain
 - what the user must verify
+
+These markers support uncertainty handling and overstatement control. They do not show that the output is scholarly true; they show the visible basis, limits, and next verification burden.

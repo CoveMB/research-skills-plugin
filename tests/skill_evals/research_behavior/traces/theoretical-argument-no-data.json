@@ -1,7 +1,7 @@
 {
   "fixture_id": "theoretical-argument-no-data",
   "output_captured": true,
-  "output_sha256": "875131b5745c3eb047d87b20323ebd6f85c4cd65fa63a3282d30c15b0039af31",
+  "output_sha256": "32e3883ce856ed508e4ee829e3e1f5a1e916747990c805440540c522724cc331",
   "prompt_sha256": "ab59595c49321cc5285c7e02106e2be93608ded0714ce1cc48ec0c6c73200189",
   "prompt_supplied": true,
   "schema_version": "research-behavior-route-trace-v2",

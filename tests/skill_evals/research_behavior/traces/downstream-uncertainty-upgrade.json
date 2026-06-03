@@ -1,0 +1,10 @@
+{
+  "fixture_id": "downstream-uncertainty-upgrade",
+  "output_captured": true,
+  "output_sha256": "b3d30032dc8a8abe5ca06540131481689495c8b9fff61d66a144e59e33459181",
+  "prompt_sha256": "343ded65d61945675fcd85dd8918fc64492be0f26440d9b66c0aeaf73c7a6f6e",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "claim-evidence-ledger",
+  "skill_invoked": true
+}

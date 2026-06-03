@@ -6,6 +6,12 @@ Use this standard whenever a skill plans, searches, audits, drafts, or revises s
 
 Every major claim should be classified by evidentiary need: factual, empirical, causal, comparative, conceptual, theoretical, normative, predictive, anecdotal, interpretive, or field-specific.
 
+## Calibrated certainty discipline
+
+The goal is calibrated certainty, not maximum hedging. A strong claim can stay strong when the source basis, method visibility, corpus coverage, locator support, and verification record justify that strength. When those supports are thin, partial, stale, citation-only, abstract-only, one-sided, or method-incomplete, keep the limit visible and push the user toward the smallest needed verification step.
+
+High-risk research outputs should keep source basis, what can be verified, what remains uncertain, and user verification needed visible. They must not turn thin corpora into field-consensus claims, abstracts or summaries into causal certainty, citation-only access into source-support claims, blocker gaps into clearance language, or downstream handoffs into upgraded certainty without an intervening verification step. Novelty and absence-of-evidence claims need a systematic or representative search basis.
+
 ## Evidence discipline
 
 Match source type to claim type:
@@ -53,6 +59,8 @@ Use a `process_passport` in machine-readable artifacts when a result will be han
 ## Evaluation discipline
 
 High-risk routing behavior should have prompt fixtures that state the expected route, required output markers, and forbidden claims. Store reusable fixtures under `tests/skill_evals/` so future skill changes can be checked against real failure modes instead of only structural tests.
+
+The research behavior fixture checker detects structural and behavioral risk markers around overstatement and uncertainty handling. It does not verify source truth, field consensus, citation accuracy, method validity, or scholarly correctness.
 
 ## Counterargument discipline
 

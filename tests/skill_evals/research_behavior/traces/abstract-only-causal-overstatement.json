@@ -1,0 +1,10 @@
+{
+  "fixture_id": "abstract-only-causal-overstatement",
+  "output_captured": true,
+  "output_sha256": "4cfe4f465cb2e54b907b90ff4a2e50c7333543bc1df1f4001b980adcda6edb4f",
+  "prompt_sha256": "625ffa2891359c605ec193a132b1f83d6241c5ae7fa14ed59688c34ef8513a59",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "methodology-source-auditor",
+  "skill_invoked": true
+}

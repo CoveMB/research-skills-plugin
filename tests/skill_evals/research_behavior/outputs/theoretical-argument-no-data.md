@@ -1,7 +1,21 @@
 # Scholarly integrity gate
 Selected skill: scholarly-integrity-gate.
 
-Source basis: conceptual chapter argument only.
+## Source basis
+
+Conceptual chapter argument only.
+
+## What I can verify
+
+The visible artifact is theoretical, interpretive, or normative, not a computed or empirical result-bearing artifact.
+
+## What remains uncertain
+
+Any later factual, empirical, or causal claims would need their own source and method basis.
+
+## User verification needed
+
+Keep empirical or computed claims separate if they are added later.
 
 artifact/method prefilter: theoretical, interpretive, or normative artifact.
 

@@ -1,7 +1,21 @@
 # Scholarly integrity gate
 Selected skill: scholarly-integrity-gate.
 
-Source basis: generated summary table only.
+## Source basis
+
+Generated summary table only.
+
+## What I can verify
+
+The artifact is result-bearing and lacks visible data provenance, transformation logic, run log, and human checkpoint evidence.
+
+## What remains uncertain
+
+Raw numbers, transformation steps, script or notebook, run log, output provenance, and human verification are unavailable.
+
+## User verification needed
+
+Provide data, transformation, script or notebook, and human checkpoint record before relying on the result.
 
 artifact/method prefilter: result-bearing artifact.
 

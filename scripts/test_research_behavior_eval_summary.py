@@ -10,6 +10,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from check_research_behavior_fixtures import OVERSTATEMENT_POLICY_REQUIRED_MARKERS
 from research_behavior_reports import output_summary, trace_summary
 from summarize_research_behavior_evals import build_calibration_report
 
@@ -30,7 +31,7 @@ def fixture_document() -> dict[str, object]:
                 "prompt": "Check route one.",
                 "expected_route": "citation-integrity-auditor",
                 "risk_covered": "metadata lookup consent",
-                "required_output_markers": ["Source basis"],
+                "required_output_markers": OVERSTATEMENT_POLICY_REQUIRED_MARKERS,
                 "forbidden_claims": ["invented verification"],
             },
             {
@@ -52,10 +53,17 @@ class TestResearchBehaviorEvalSummary(unittest.TestCase):
             outputs_dir = root / "outputs"
             outputs_dir.mkdir()
             fixtures = fixture_document()["fixtures"]
-            (outputs_dir / "route-one.md").write_text(
-                "Selected skill: citation-integrity-auditor\n## Source basis\n",
-                encoding="utf-8",
+            route_one_output = "\n".join(
+                [
+                    "Selected skill: citation-integrity-auditor",
+                    "## Source basis",
+                    "## What I can verify",
+                    "## What remains uncertain",
+                    "## User verification needed",
+                    "",
+                ]
             )
+            (outputs_dir / "route-one.md").write_text(route_one_output, encoding="utf-8")
 
             summary = output_summary(outputs_dir, fixtures)
 
@@ -102,7 +110,16 @@ class TestResearchBehaviorEvalSummary(unittest.TestCase):
             outputs_dir.mkdir()
             traces_dir.mkdir()
             fixture_path.write_text(json.dumps(fixture_document()), encoding="utf-8")
-            route_one_output = "Selected skill: citation-integrity-auditor\n## Source basis\n"
+            route_one_output = "\n".join(
+                [
+                    "Selected skill: citation-integrity-auditor",
+                    "## Source basis",
+                    "## What I can verify",
+                    "## What remains uncertain",
+                    "## User verification needed",
+                    "",
+                ]
+            )
             (outputs_dir / "route-one.md").write_text(route_one_output, encoding="utf-8")
             (traces_dir / "route-one.json").write_text(
                 json.dumps(

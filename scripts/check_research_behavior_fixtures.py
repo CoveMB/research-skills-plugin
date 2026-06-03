@@ -23,6 +23,45 @@ COMPACT_RESULT_MARKERS = [
     "How to use this result",
     "Next action",
 ]
+HIGH_RISK_OVERSTATEMENT_ROUTES = frozenset(
+    [
+        "claim-evidence-ledger",
+        "literature-review-mapper",
+        "methodology-source-auditor",
+        "systematic-source-discovery",
+        "citation-integrity-auditor",
+        "scholarly-integrity-gate",
+        "book-proposal-scholarship",
+        "book-comps-verifier",
+    ]
+)
+OVERSTATEMENT_POLICY_REQUIRED_MARKERS = [
+    "Source basis",
+    "What I can verify",
+    "What remains uncertain",
+    "User verification needed",
+]
+OVERSTATEMENT_POLICY_FORBIDDEN_CLAIMS = [
+    "field consensus is established",
+    "field consensus is settled",
+    "the field agrees",
+    "the literature proves",
+    "abstract proves causation",
+    "abstract confirms causation",
+    "abstract establishes causality",
+    "citation-only record supports the claim",
+    "source support verified from citation only",
+    "submission-ready",
+    "verified and cleared",
+    "cleared for submission",
+    "Gate decision: pass",
+    "verification passed",
+    "upstream uncertainty is resolved",
+    "unverified claim is now verified",
+    "novelty established",
+    "no prior work exists",
+    "absence of evidence proves",
+]
 FIXTURE_ID_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 REQUIRED_TRACE_KEYS = {
     "schema_version",
@@ -76,6 +115,10 @@ def is_compact_fixture(fixture: dict[str, Any]) -> bool:
     return risk.startswith("compact ") or all(marker in required_markers for marker in COMPACT_RESULT_MARKERS)
 
 
+def is_high_risk_overstatement_fixture(fixture: dict[str, Any]) -> bool:
+    return str(fixture.get("expected_route", "")) in HIGH_RISK_OVERSTATEMENT_ROUTES
+
+
 def normalized_contains(text: str, phrase: str) -> bool:
     return phrase.casefold() in text.casefold()
 
@@ -116,6 +159,21 @@ def invalid_fixture_lists(fixture: dict[str, Any]) -> list[str]:
     return errors
 
 
+def missing_overstatement_policy_marker_errors(fixture: dict[str, Any]) -> list[str]:
+    if not is_high_risk_overstatement_fixture(fixture):
+        return []
+
+    required_markers = string_list(fixture.get("required_output_markers"))
+    return [
+        (
+            f"{fixture_identifier(fixture)}: high-risk overstatement policy "
+            f"requires required marker {marker!r}"
+        )
+        for marker in OVERSTATEMENT_POLICY_REQUIRED_MARKERS
+        if marker not in required_markers
+    ]
+
+
 def invalid_optional_boolean_errors(fixture: dict[str, Any]) -> list[str]:
     if "should_trigger" not in fixture or isinstance(fixture.get("should_trigger"), bool):
         return []
@@ -151,6 +209,7 @@ def validate_fixture_document(fixture_path: Path) -> list[str]:
         errors.extend(missing_fixture_keys(fixture))
         errors.extend(invalid_fixture_id_errors(fixture))
         errors.extend(invalid_fixture_lists(fixture))
+        errors.extend(missing_overstatement_policy_marker_errors(fixture))
         errors.extend(invalid_optional_boolean_errors(fixture))
     return errors
 
@@ -176,10 +235,17 @@ def required_marker_errors(fixture: dict[str, Any], output_text: str) -> list[st
     ]
 
 
+def forbidden_claims_for_fixture(fixture: dict[str, Any]) -> list[str]:
+    fixture_claims = string_list(fixture.get("forbidden_claims"))
+    if not is_high_risk_overstatement_fixture(fixture):
+        return fixture_claims
+    return list(dict.fromkeys([*fixture_claims, *OVERSTATEMENT_POLICY_FORBIDDEN_CLAIMS]))
+
+
 def forbidden_claim_errors(fixture: dict[str, Any], output_text: str) -> list[str]:
     return [
         f"{fixture_identifier(fixture)}: contains forbidden claim {claim!r}"
-        for claim in string_list(fixture.get("forbidden_claims"))
+        for claim in forbidden_claims_for_fixture(fixture)
         if normalized_contains(output_text, claim)
     ]
 

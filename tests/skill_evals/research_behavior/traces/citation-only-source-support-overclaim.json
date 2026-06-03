@@ -1,0 +1,10 @@
+{
+  "fixture_id": "citation-only-source-support-overclaim",
+  "output_captured": true,
+  "output_sha256": "433a20a58f91c2fbacbdb5e0c6ba9b149dfe4eb1bc7e304562c50dad539a219a",
+  "prompt_sha256": "8ba602011cb1d055b756987493394f3742152037e075a9f42e76f180063189a2",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "citation-integrity-auditor",
+  "skill_invoked": true
+}

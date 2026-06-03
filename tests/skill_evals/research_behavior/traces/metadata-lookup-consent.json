@@ -1,7 +1,7 @@
 {
   "fixture_id": "metadata-lookup-consent",
   "output_captured": true,
-  "output_sha256": "88f674298da45d6f9ea9d1ccd208f8f60dd6812dd9a30abdfd8be1ef9b6b93fe",
+  "output_sha256": "1d8d9b172a943a2215cd733f09675925cc8b851986232360bbb289443b5456c1",
   "prompt_sha256": "c713c451b06f7f93a737219d9bc813580e2e964b87d1194cf45ced5a8525a9b9",
   "prompt_supplied": true,
   "schema_version": "research-behavior-route-trace-v2",

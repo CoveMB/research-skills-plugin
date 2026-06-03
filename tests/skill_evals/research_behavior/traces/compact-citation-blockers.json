@@ -1,7 +1,7 @@
 {
   "fixture_id": "compact-citation-blockers",
   "output_captured": true,
-  "output_sha256": "b20f0071371c9d7feafdd0ca07d7610d8ce51cdb739d987b964bcca1f21de01c",
+  "output_sha256": "225e8dc5275ff1f277b26ab0aa3b59ec76f3e4ae27554ad4601c9a23dd603b3f",
   "prompt_sha256": "91182dd3a506a748eee5c37702f57716dc87eaa4a6e44f1c7712e34a255717f4",
   "prompt_supplied": true,
   "schema_version": "research-behavior-route-trace-v2",

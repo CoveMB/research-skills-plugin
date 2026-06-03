@@ -1,0 +1,10 @@
+{
+  "fixture_id": "thin-corpus-field-consensus-overclaim",
+  "output_captured": true,
+  "output_sha256": "153ae9896d1c5bfcd811bbd555817e01f132cf864cb8db05172ad8c7faf88533",
+  "prompt_sha256": "42e89c21e276c68a9b0a215247d49970d2095be959c6724852b391a65cc7584a",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "literature-review-mapper",
+  "skill_invoked": true
+}

@@ -1,0 +1,10 @@
+{
+  "fixture_id": "stale-bibliography-current-consensus",
+  "output_captured": true,
+  "output_sha256": "5fda18bcb5d76c030925a95d06cd2e1ee73757f9eeb5c580a29064b2535371a1",
+  "prompt_sha256": "b667d3da6f6c92add933ff9e5765d7fe55eff7b5f2d2214c78bc41c905a3dce0",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "literature-review-mapper",
+  "skill_invoked": true
+}

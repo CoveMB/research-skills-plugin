@@ -1,7 +1,7 @@
 {
   "fixture_id": "bibliography-metadata-suspect",
   "output_captured": true,
-  "output_sha256": "2b05c563edc4bd3ee9c19dab1a67bb166ac6ad093ef2fbfbb1da042fa629b30a",
+  "output_sha256": "e11624759ffd326afc4a82bf5922c351731abba14fcc2bea782421c51b63c891",
   "prompt_sha256": "acfe41a09efe92fac46df6727cf3adc7268c7f88badf0a1c141f279178d76a6f",
   "prompt_supplied": true,
   "schema_version": "research-behavior-route-trace-v2",

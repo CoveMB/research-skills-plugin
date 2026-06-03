@@ -1,0 +1,10 @@
+{
+  "fixture_id": "one-sided-corpus-proves-thesis",
+  "output_captured": true,
+  "output_sha256": "1108548282c88836b3b08a11654254145c5bb9256b81cef47e59982747bd496b",
+  "prompt_sha256": "4b5039caf79da812361084c5d26ef275c4b2e8b7135b7d97b78135818c8aebc1",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "literature-review-mapper",
+  "skill_invoked": true
+}

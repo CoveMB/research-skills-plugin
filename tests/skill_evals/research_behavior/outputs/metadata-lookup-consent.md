@@ -9,6 +9,10 @@ The bibliography entries contain DOI-bearing public citation metadata. No source
 
 The local checker can compare supplied public fields for DOI, title, author-year, and venue. Default mode remains no-network.
 
+## What remains uncertain
+
+Source identity, source-claim fit, quotation accuracy, page locators, and manuscript support remain unchecked unless source text or authoritative metadata is provided.
+
 ## User verification needed
 
 Use public metadata lookup only with explicit consent:

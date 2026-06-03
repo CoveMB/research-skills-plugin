@@ -1,7 +1,21 @@
 # Literature review mapper
 Selected skill: literature-review-mapper.
 
-source basis: small source list only.
+## Source basis
+
+Small source list only.
+
+## What I can verify
+
+I can map schools of thought visible in the supplied list.
+
+## What remains uncertain
+
+Corpus representativeness, opposing literatures, recent work, and field-level agreement remain unverified.
+
+## User verification needed
+
+Add opposing search terms and representative source discovery before treating the debate as settled.
 
 schools of thought: Separate transparency, accountability, and administrative-burden framings.
 

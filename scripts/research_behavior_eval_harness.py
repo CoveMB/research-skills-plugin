@@ -11,6 +11,7 @@ from typing import Any
 from check_research_behavior_fixtures import (
     fixture_identifier,
     fixture_list,
+    forbidden_claims_for_fixture,
     output_path_for_fixture,
     read_json_object,
     string_list,
@@ -33,6 +34,7 @@ MANUAL_OR_LIVE_RUN_EXPECTATIONS = [
 LIMITS = [
     "This harness does not run a model or call external services.",
     "It checks fixture coverage, captured-output presence, route-trace presence, selected skill evidence, trace hashes, required markers, forbidden claims, and compact-output boundaries.",
+    "For high-risk research fixtures, it checks structural overstatement and uncertainty markers plus reusable forbidden overclaim phrases.",
     "It does not verify source truth, citation accuracy, methodological validity, or scholarly correctness.",
 ]
 
@@ -52,7 +54,7 @@ def fixture_case_report(
         "expected_route": str(fixture.get("expected_route", "")),
         "risk_covered": str(fixture.get("risk_covered", "")),
         "required_output_markers": string_list(fixture.get("required_output_markers")),
-        "forbidden_claims": string_list(fixture.get("forbidden_claims")),
+        "forbidden_claims": forbidden_claims_for_fixture(fixture),
         "output_file": f"{fixture_identifier(fixture)}.md",
         "output_path": str(output_path) if output_path else None,
         "captured_output_checked": bool(output_path and output_path.exists()),

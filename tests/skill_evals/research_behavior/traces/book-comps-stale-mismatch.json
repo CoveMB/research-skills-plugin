@@ -1,7 +1,7 @@
 {
   "fixture_id": "book-comps-stale-mismatch",
   "output_captured": true,
-  "output_sha256": "1892285b10784ac5f3aeed08235e78605fd249974419d1bc09ed1580a6ebf87e",
+  "output_sha256": "f6d35cf3ae363a25618391d8ffd1807055e1502474d9e9d839850656ee245818",
   "prompt_sha256": "256611716584c5b7b1d6b287b80bbb6a8fbad241a0f70a9e089d7a22413bba58",
   "prompt_supplied": true,
   "schema_version": "research-behavior-route-trace-v2",

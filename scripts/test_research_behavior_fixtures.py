@@ -11,6 +11,7 @@ from tempfile import TemporaryDirectory
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from check_research_behavior_fixtures import (
+    OVERSTATEMENT_POLICY_REQUIRED_MARKERS,
     output_path_for_fixture,
     validate_fixture_document,
     validate_fixture_outputs,
@@ -48,6 +49,21 @@ def fixture(
         or ["Source basis", "How to use this result", "Next action"],
         "forbidden_claims": forbidden_claims or ["source verified"],
     }
+
+
+def high_risk_fixture(
+    *,
+    required_markers: list[str] | None = None,
+    forbidden_claims: list[str] | None = None,
+    risk_covered: str = "thin corpus field consensus overclaim",
+) -> dict:
+    return fixture(
+        fixture_id="thin-corpus-consensus-overclaim",
+        expected_route="literature-review-mapper",
+        risk_covered=risk_covered,
+        required_markers=required_markers or ["schools of thought"],
+        forbidden_claims=forbidden_claims or ["field consensus is settled"],
+    )
 
 
 def write_fixture_file(root: Path, document: dict) -> Path:
@@ -258,6 +274,99 @@ class TestResearchBehaviorFixtures(unittest.TestCase):
             errors = validate_fixture_outputs(fixture_path, outputs_dir)
 
             self.assertIn("compact-routing: missing required marker 'How to use this result'", errors)
+
+    def test_high_risk_fixture_requires_overstatement_policy_markers(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            fixture_path = write_fixture_file(root, fixture_document(high_risk_fixture()))
+
+            errors = validate_fixture_document(fixture_path)
+
+            for marker in OVERSTATEMENT_POLICY_REQUIRED_MARKERS:
+                self.assertIn(
+                    (
+                        "thin-corpus-consensus-overclaim: high-risk overstatement policy "
+                        f"requires required marker {marker!r}"
+                    ),
+                    errors,
+                )
+
+    def test_low_risk_fixture_does_not_require_overstatement_policy_markers(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            low_risk_fixture = fixture(
+                fixture_id="low-risk-routing",
+                expected_route="research-intent-router",
+                risk_covered="low-risk route triage",
+                required_markers=["Best route"],
+                forbidden_claims=["source verified"],
+            )
+            fixture_path = write_fixture_file(root, fixture_document(low_risk_fixture))
+
+            self.assertEqual(validate_fixture_document(fixture_path), [])
+
+    def test_high_risk_output_reports_missing_uncertainty_marker(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            fixture_path = write_fixture_file(
+                root,
+                fixture_document(
+                    high_risk_fixture(
+                        required_markers=OVERSTATEMENT_POLICY_REQUIRED_MARKERS,
+                        forbidden_claims=["field consensus is settled"],
+                    )
+                ),
+            )
+            outputs_dir = root / "outputs"
+            outputs_dir.mkdir()
+            (outputs_dir / "thin-corpus-consensus-overclaim.md").write_text(
+                "\n".join([
+                    "Selected skill: literature-review-mapper.",
+                    "Source basis: two supplied abstracts.",
+                    "User verification needed: run a broader search.",
+                ]),
+                encoding="utf-8",
+            )
+
+            errors = validate_fixture_outputs(fixture_path, outputs_dir)
+
+            self.assertIn(
+                "thin-corpus-consensus-overclaim: missing required marker 'What remains uncertain'",
+                errors,
+            )
+
+    def test_high_risk_output_checks_reusable_policy_forbidden_claims(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            fixture_path = write_fixture_file(
+                root,
+                fixture_document(
+                    high_risk_fixture(
+                        required_markers=OVERSTATEMENT_POLICY_REQUIRED_MARKERS,
+                        forbidden_claims=["field consensus is settled"],
+                    )
+                ),
+            )
+            outputs_dir = root / "outputs"
+            outputs_dir.mkdir()
+            (outputs_dir / "thin-corpus-consensus-overclaim.md").write_text(
+                "\n".join([
+                    "Selected skill: literature-review-mapper.",
+                    "Source basis: abstract only.",
+                    "What I can verify: the source topic.",
+                    "What remains uncertain: method and evidence.",
+                    "User verification needed: read the full source.",
+                    "Abstract proves causation.",
+                ]),
+                encoding="utf-8",
+            )
+
+            errors = validate_fixture_outputs(fixture_path, outputs_dir)
+
+            self.assertIn(
+                "thin-corpus-consensus-overclaim: contains forbidden claim 'abstract proves causation'",
+                errors,
+            )
 
     def test_missing_selected_skill_route_evidence_fails(self) -> None:
         with TemporaryDirectory() as temporary_directory:

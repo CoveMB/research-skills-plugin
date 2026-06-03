@@ -1,0 +1,10 @@
+{
+  "fixture_id": "submission-ready-unresolved-gaps",
+  "output_captured": true,
+  "output_sha256": "809ddc7550fee1ff0ecf3675811d9f88c31226b00f69d05ef0120999fa817b54",
+  "prompt_sha256": "42b4ba7218676be230a429ad75a5f62812dcdaafd791c619a5c70710d32fed40",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "scholarly-integrity-gate",
+  "skill_invoked": true
+}
