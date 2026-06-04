@@ -1,0 +1,9 @@
+{
+  "schema_version": "scholar-grade-live-pilot-v1",
+  "purpose": "Additive v6 blind live expansion for remaining medium-risk current strict-root gaps after high-risk v5 coverage.",
+  "fixture_ids": [
+    "dictation-ambiguous-term",
+    "dyslexia-companion-mixed-bottleneck",
+    "reading-load-abstract-only"
+  ]
+}

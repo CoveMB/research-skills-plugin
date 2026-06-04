@@ -1,0 +1,32 @@
+{
+  "capture_mode": "manual-live-capture",
+  "date": "2026-06-04",
+  "external_lookup_permitted": false,
+  "fixture_id": "chapter-outline-no-evidence-anchors",
+  "interface": "codex-cli",
+  "model": "gpt-5.5",
+  "network_permissions": "none",
+  "operator": "fresh codex exec blind process",
+  "output_file": "chapter-outline-no-evidence-anchors.md",
+  "output_sha256": "dbc265e128382a8bc8c9a98c3301074b4539c7028b68f7bb7f27ce0a39208342",
+  "prompt_packet_sha256": "2f3f51527644bf16a16eb0f791634b7ba0f96da5a83d1daf2457d4d1a6d35e8f",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "chapter-architecture",
+  "skill_file": "skills/chapter-architecture/SKILL.md",
+  "skill_file_sha256": "6e56972871e2c656f5b78dd7c89fcad9405ccbc9033b34f5e37f20bf4f53957b",
+  "source_packet": "corpora/chapter-outline-no-evidence-anchors/source-packet.md",
+  "source_packet_sha256": "4353a0685c84b0277321c4a60293f1f41987f9a751918a8d36d31410f90c8022",
+  "structured_result": {
+    "decision": "Add evidence anchors before drafting",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "output_captured": true,
+    "private_material_submitted": false,
+    "selected_skill": "chapter-architecture",
+    "skill_invoked": true,
+    "source_access_level": "controlled-packet",
+    "source_packet_supplied": true
+  },
+  "tool_permissions": "none"
+}

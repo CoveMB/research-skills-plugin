@@ -1,0 +1,23 @@
+{
+  "schema_version": "scholar-grade-live-pilot-v1",
+  "purpose": "Additive v5 blind live expansion for high-risk skills missing from the current strict blind root. Captures must use only public prompt packets, visible source packets, and the relevant skill instructions; hidden fixture fields, prior outputs, manifests, scores, and answer keys are excluded during capture.",
+  "fixture_ids": [
+    "pressure-compress-publication-ready",
+    "source-discovery-plan-not-results",
+    "book-comps-stale-mismatch",
+    "book-proposal-unverified-comps",
+    "claim-ledger-mixed-claim-types",
+    "claim-traceability-nearby-citation",
+    "scholarly-prose-evidence-sensitive-edit",
+    "annotation-source-note-mixed-evidence",
+    "annotated-bibliography-abstract-only",
+    "discovery-dedupe-fuzzy-export",
+    "case-study-universal-causal-claim",
+    "argument-preferred-thesis-risk",
+    "frame-lock-preferred-thesis",
+    "chapter-outline-no-evidence-anchors",
+    "manuscript-continuity-concept-drift",
+    "book-orchestrator-unstable-scope",
+    "scholarly-agenda-broad-manifesto"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "capture_mode": "manual-live-capture",
+  "date": "2026-06-04",
+  "external_lookup_permitted": false,
+  "fixture_id": "book-orchestrator-unstable-scope",
+  "interface": "codex-cli",
+  "model": "gpt-5.5",
+  "network_permissions": "none",
+  "operator": "fresh codex exec blind process",
+  "output_file": "book-orchestrator-unstable-scope.md",
+  "output_sha256": "e185e38deda3ad099acb44a5acd41f5ba7a65f7c8fce9432ad9dc0a6ebec050b",
+  "prompt_packet_sha256": "a669823c2b7b951ddd28b6f63d7e58bc89d399eac243f6c97bf20f7d44a1135f",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "research-book-orchestrator",
+  "skill_file": "skills/research-book-orchestrator/SKILL.md",
+  "skill_file_sha256": "95b891b226941b202457bee775b4608210fd302ea59a393feee587cf6ebd0776",
+  "source_packet": "corpora/book-orchestrator-unstable-scope/source-packet.md",
+  "source_packet_sha256": "bdebb0df4ebb641fc889fc07b1236af6d0fccfa9a4fa481bfb7810ba8b4d2fe1",
+  "structured_result": {
+    "decision": "Sequence phase gates instead of executing every skill",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "output_captured": true,
+    "private_material_submitted": false,
+    "selected_skill": "research-book-orchestrator",
+    "skill_invoked": true,
+    "source_access_level": "controlled-packet",
+    "source_packet_supplied": true
+  },
+  "tool_permissions": "none"
+}

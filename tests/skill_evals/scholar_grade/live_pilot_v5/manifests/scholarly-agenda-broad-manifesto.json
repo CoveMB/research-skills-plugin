@@ -1,0 +1,32 @@
+{
+  "capture_mode": "manual-live-capture",
+  "date": "2026-06-04",
+  "external_lookup_permitted": false,
+  "fixture_id": "scholarly-agenda-broad-manifesto",
+  "interface": "codex-cli",
+  "model": "gpt-5.5",
+  "network_permissions": "none",
+  "operator": "fresh codex exec blind process",
+  "output_file": "scholarly-agenda-broad-manifesto.md",
+  "output_sha256": "96cb12f3da60fe7e7c736f5ef9f53bdba3340dd9509f09c951a0510a8d08e568",
+  "prompt_packet_sha256": "eee5e4fa64367c54c2c4980a58acf69792786e9bf96397fa9bbdfb0c27774337",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "scholarly-research-agenda",
+  "skill_file": "skills/scholarly-research-agenda/SKILL.md",
+  "skill_file_sha256": "6f126ecf057644164e5cffb265fe3bdaed31a4962b7e4a5de77b12c616eb54d6",
+  "source_packet": "corpora/scholarly-agenda-broad-manifesto/source-packet.md",
+  "source_packet_sha256": "5495033d74758423c4a0303dcd6f1fc410bc8b37da7b350226d324bf72b75bd7",
+  "structured_result": {
+    "decision": "Scope the question before source discovery",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "output_captured": true,
+    "private_material_submitted": false,
+    "selected_skill": "scholarly-research-agenda",
+    "skill_invoked": true,
+    "source_access_level": "controlled-packet",
+    "source_packet_supplied": true
+  },
+  "tool_permissions": "none"
+}

@@ -1,0 +1,30 @@
+{
+  "answer_key_findings": [
+    "Allowed support checked: The prose can be clearer while retaining modal claim strength.",
+    "Rejected disallowed claim checked: claim strengthened",
+    "Required uncertainty checked: The causal pathway still needs support"
+  ],
+  "date": "2026-06-04",
+  "dimension_rationales": {
+    "claim-strength preservation": "Score 4 for claim-strength preservation: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "evidence-flag visibility": "Score 4 for evidence-flag visibility: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "no-fabrication edit discipline": "Score 4 for no-fabrication edit discipline: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "prose quality": "Score 4 for prose quality: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims."
+  },
+  "dimension_scores": {
+    "claim-strength preservation": 4,
+    "evidence-flag visibility": 4,
+    "no-fabrication edit discipline": 4,
+    "prose quality": 4
+  },
+  "evidence_notes": [
+    "Reviewed output evidence includes required source anchor: modal language remains necessary"
+  ],
+  "fixture_id": "scholarly-prose-evidence-sensitive-edit",
+  "hard_fail_triggered": false,
+  "minimum_score": 4,
+  "rationale": "The v5 blind capture satisfies the fixture's source-bound output checks after narrow alias calibration, keeps the expected uncertainty visible, and does not trigger hard-fail behavior.",
+  "reviewed_output_sha256": "b3fe28e92e8a2cb20d2f95da458f99681ae91156b1d197ee4acc4fe34e96d759",
+  "reviewer": "live-pilot-v5-reviewer",
+  "schema_version": "scholar-grade-review-score-v1"
+}

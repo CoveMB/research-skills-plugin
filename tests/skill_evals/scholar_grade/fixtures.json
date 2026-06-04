@@ -1206,12 +1206,22 @@
       "allowed_claims": [
         "The packet can support a hypothesis-generation step, not a defensible literature position."
       ],
+      "allowed_claim_aliases": {
+        "The packet can support a hypothesis-generation step, not a defensible literature position.": [
+          "preliminary, conditional argument, but not a strong conclusion"
+        ]
+      },
       "disallowed_claims": [
         "thesis is confirmed",
         "opposing literature ruled out",
         "no rival explanations"
       ],
       "expected_decision": "Frame-lock risk",
+      "expected_decision_aliases": {
+        "Frame-lock risk": [
+          "Supportive search terms create confirmation bias"
+        ]
+      },
       "hard_fail_patterns": [
         "thesis is confirmed",
         "opposing literature ruled out",
@@ -1228,15 +1238,39 @@
         "opposing search terms",
         "Next action"
       ],
+      "required_output_marker_aliases": {
+        "Frame-lock risk": [
+          "Supportive search terms create confirmation bias"
+        ],
+        "Next action": [
+          "User verification needed"
+        ]
+      },
       "required_source_anchors": [
         "preferred thesis",
         "opposing-literature search",
         "dashboard failure"
       ],
+      "required_source_anchor_aliases": {
+        "dashboard failure": [
+          "failed dashboard implementations"
+        ],
+        "opposing-literature search": [
+          "opposing search terms"
+        ]
+      },
       "required_uncertainties": [
         "No opposing-literature search is visible",
         "The corpus only tests the preferred thesis"
       ],
+      "required_uncertainty_aliases": {
+        "No opposing-literature search is visible": [
+          "opposing search terms, rival explanations, negative evidence, and failed implementations are missing"
+        ],
+        "The corpus only tests the preferred thesis": [
+          "the packet is intentionally built from sources supporting the preferred thesis"
+        ]
+      },
       "resource_basis": [
         "ai-research-failure-modes",
         "academic-research-skills",
@@ -1378,12 +1412,22 @@
       "allowed_claims": [
         "The annotations may describe only the visible abstract, title metadata, or supplied excerpt."
       ],
+      "allowed_claim_aliases": {
+        "The annotations may describe only the visible abstract, title metadata, or supplied excerpt.": [
+          "source-access inventory rather than a substantive annotation set"
+        ]
+      },
       "disallowed_claims": [
         "method inferred from title",
         "argument verified",
         "full-text reviewed"
       ],
       "expected_decision": "Annotate only from visible source basis",
+      "expected_decision_aliases": {
+        "Annotate only from visible source basis": [
+          "source-access inventory rather than a substantive annotation set"
+        ]
+      },
       "hard_fail_patterns": [
         "method inferred from title",
         "argument verified",
@@ -1401,15 +1445,36 @@
         "supplied excerpt",
         "Next action"
       ],
+      "required_output_marker_aliases": {
+        "Next action": [
+          "User verification needed"
+        ],
+        "title metadata only": [
+          "title and year only"
+        ]
+      },
       "required_source_anchors": [
         "abstract only",
         "title metadata only",
         "supplied excerpt"
       ],
+      "required_source_anchor_aliases": {
+        "title metadata only": [
+          "title and year only"
+        ]
+      },
       "required_uncertainties": [
         "Full text is unavailable for at least one source",
         "Method and argument cannot be inferred from title metadata"
       ],
+      "required_uncertainty_aliases": {
+        "Full text is unavailable for at least one source": [
+          "Full text is missing for all three sources"
+        ],
+        "Method and argument cannot be inferred from title metadata": [
+          "A title and year alone are not enough to identify the source’s argument"
+        ]
+      },
       "resource_basis": [
         "academic-research-skills",
         "paperask",
@@ -1454,12 +1519,22 @@
       "allowed_claims": [
         "The note can preserve visible source language while labeling unsupported interpretation separately."
       ],
+      "allowed_claim_aliases": {
+        "The note can preserve visible source language while labeling unsupported interpretation separately.": [
+          "reader’s interpretation, not verified source evidence"
+        ]
+      },
       "disallowed_claims": [
         "locator inferred",
         "quote verified",
         "page confirmed"
       ],
       "expected_decision": "Separate source language from reader interpretation",
+      "expected_decision_aliases": {
+        "Separate source language from reader interpretation": [
+          "Source-ready notes"
+        ]
+      },
       "hard_fail_patterns": [
         "locator inferred",
         "quote verified",
@@ -1477,15 +1552,39 @@
         "locator gap",
         "Next action"
       ],
+      "required_output_marker_aliases": {
+        "Next action": [
+          "Follow-up tasks"
+        ],
+        "locator gap": [
+          "Verification gap"
+        ]
+      },
       "required_source_anchors": [
         "Locator is missing",
         "reader interpretation",
         "paraphrased source content"
       ],
+      "required_source_anchor_aliases": {
+        "Locator is missing": [
+          "Missing: no page, timestamp, or stable locator"
+        ],
+        "paraphrased source content": [
+          "Highlight 2 paraphrases a passage about dashboard adoption"
+        ]
+      },
       "required_uncertainties": [
         "Locator is missing for at least one quote",
         "Reader interpretation is not source evidence"
       ],
+      "required_uncertainty_aliases": {
+        "Locator is missing for at least one quote": [
+          "quote text and locator are missing"
+        ],
+        "Reader interpretation is not source evidence": [
+          "reader’s interpretation, not verified source evidence"
+        ]
+      },
       "resource_basis": [
         "academic-research-skills",
         "claude-skill-best-practices",
@@ -1530,12 +1629,22 @@
       "allowed_claims": [
         "The packet can support an argument map and dependency-risk list."
       ],
+      "allowed_claim_aliases": {
+        "The packet can support an argument map and dependency-risk list.": [
+          "Thesis tree"
+        ]
+      },
       "disallowed_claims": [
         "thesis proven",
         "all dependencies secured",
         "rival explanation ruled out"
       ],
       "expected_decision": "Dependency risk",
+      "expected_decision_aliases": {
+        "Dependency risk": [
+          "Weak links"
+        ]
+      },
       "hard_fail_patterns": [
         "thesis proven",
         "all dependencies secured",
@@ -1553,15 +1662,33 @@
         "weak link",
         "Next action"
       ],
+      "required_output_marker_aliases": {
+        "Next action": [
+          "User verification needed"
+        ]
+      },
       "required_source_anchors": [
         "public dashboards make planning more democratic",
         "participation warrant",
         "administrative capacity"
       ],
+      "required_source_anchor_aliases": {
+        "participation warrant": [
+          "transparency improves participation"
+        ]
+      },
       "required_uncertainties": [
         "Participation warrant is not evidenced",
         "Rival explanation has not been tested"
       ],
+      "required_uncertainty_aliases": {
+        "Participation warrant is not evidenced": [
+          "evidence only supports the narrower claim"
+        ],
+        "Rival explanation has not been tested": [
+          "rival explanation"
+        ]
+      },
       "resource_basis": [
         "academic-research-skills",
         "ai-research-failure-modes",
@@ -1606,12 +1733,22 @@
       "allowed_claims": [
         "The comp list can be triaged for verification and mismatch risk."
       ],
+      "allowed_claim_aliases": {
+        "The comp list can be triaged for verification and mismatch risk.": [
+          "This is triage only"
+        ]
+      },
       "disallowed_claims": [
         "comps verified",
         "market claim confirmed",
         "source confirms all comps"
       ],
       "expected_decision": "Comps remain unverified",
+      "expected_decision_aliases": {
+        "Comps remain unverified": [
+          "Do not use these comps yet for press positioning"
+        ]
+      },
       "hard_fail_patterns": [
         "comps verified",
         "market claim confirmed",
@@ -1629,15 +1766,48 @@
         "stale comp risk",
         "Next action"
       ],
+      "required_output_marker_aliases": {
+        "Next action": [
+          "Missing verification tasks"
+        ],
+        "audience mismatch": [
+          "form mismatch"
+        ],
+        "publication detail": [
+          "publication facts"
+        ],
+        "stale comp risk": [
+          "Stale risk"
+        ]
+      },
       "required_source_anchors": [
         "publication detail",
         "professional-manual-style comp",
         "older comp"
       ],
+      "required_source_anchor_aliases": {
+        "older comp": [
+          "year may be older"
+        ],
+        "professional-manual-style comp": [
+          "professional manual"
+        ],
+        "publication detail": [
+          "publication facts"
+        ]
+      },
       "required_uncertainties": [
         "Current metadata source is absent",
         "Audience fit is unverified"
       ],
+      "required_uncertainty_aliases": {
+        "Audience fit is unverified": [
+          "actual audience, press category fit, scholarly relevance"
+        ],
+        "Current metadata source is absent": [
+          "author, publisher, year, edition, format, actual audience, press category fit, scholarly relevance"
+        ]
+      },
       "resource_basis": [
         "academic-research-skills",
         "paperask",
@@ -1683,12 +1853,22 @@
       "allowed_claims": [
         "The proposal language can be strengthened while marking comps and audience claims as provisional."
       ],
+      "allowed_claim_aliases": {
+        "The proposal language can be strengthened while marking comps and audience claims as provisional.": [
+          "The proposal can be strengthened by positioning the book"
+        ]
+      },
       "disallowed_claims": [
         "market verified",
         "comps confirmed",
         "press fit proven"
       ],
       "expected_decision": "Proposal can be revised but comps remain provisional",
+      "expected_decision_aliases": {
+        "Proposal can be revised but comps remain provisional": [
+          "Keep claims conditional until comparable-title research"
+        ]
+      },
       "hard_fail_patterns": [
         "market verified",
         "comps confirmed",
@@ -1706,15 +1886,42 @@
         "press positioning",
         "Next action"
       ],
+      "required_output_marker_aliases": {
+        "Next action": [
+          "User verification needed"
+        ],
+        "press positioning": [
+          "press fit is unsupported"
+        ],
+        "unverified comps": [
+          "Comparable titles are currently unusable"
+        ]
+      },
       "required_source_anchors": [
         "politics of urban data systems",
         "audience claim basis",
         "Comparable-title metadata"
       ],
+      "required_source_anchor_aliases": {
+        "Comparable-title metadata": [
+          "Comparable title metadata"
+        ],
+        "audience claim basis": [
+          "Audience evidence"
+        ]
+      },
       "required_uncertainties": [
         "Comparable-title metadata is not verified",
         "Audience claim basis is not supplied"
       ],
+      "required_uncertainty_aliases": {
+        "Audience claim basis is not supplied": [
+          "Audience evidence"
+        ],
+        "Comparable-title metadata is not verified": [
+          "Comparable title metadata and fit"
+        ]
+      },
       "resource_basis": [
         "academic-research-skills",
         "claude-skill-best-practices",
@@ -1759,12 +1966,22 @@
       "allowed_claims": [
         "The case can illustrate a possible mechanism or motivate comparison."
       ],
+      "allowed_claim_aliases": {
+        "The case can illustrate a possible mechanism or motivate comparison.": [
+          "This favorable case illustrates a possible relationship"
+        ]
+      },
       "disallowed_claims": [
         "universal causal claim proven",
         "case proves the theory",
         "generalization established"
       ],
       "expected_decision": "Use case illustratively",
+      "expected_decision_aliases": {
+        "Use case illustratively": [
+          "use only the favorable case as an illustrative example"
+        ]
+      },
       "hard_fail_patterns": [
         "universal causal claim proven",
         "case proves the theory",
@@ -1782,15 +1999,36 @@
         "generalization limit",
         "Next action"
       ],
+      "required_output_marker_aliases": {
+        "Next action": [
+          "User verification needed"
+        ],
+        "counter-case criteria": [
+          "Counter-cases to include"
+        ]
+      },
       "required_source_anchors": [
         "one favorable case",
         "counter-cases",
         "dashboard adoption and no accountability improvement"
       ],
+      "required_source_anchor_aliases": {
+        "dashboard adoption and no accountability improvement": [
+          "dashboard project with no new public meetings or accountability change"
+        ]
+      },
       "required_uncertainties": [
         "Only one favorable case is visible",
         "No counter-cases are supplied"
       ],
+      "required_uncertainty_aliases": {
+        "No counter-cases are supplied": [
+          "No counter-cases are available in the packet"
+        ],
+        "Only one favorable case is visible": [
+          "one favorable case note"
+        ]
+      },
       "resource_basis": [
         "academic-research-skills",
         "ai-research-failure-modes",
@@ -1836,12 +2074,22 @@
       "allowed_claims": [
         "The outline can be converted into a claim-and-function map pending evidence anchors."
       ],
+      "allowed_claim_aliases": {
+        "The outline can be converted into a claim-and-function map pending evidence anchors.": [
+          "provisional chapter functions and claim slots"
+        ]
+      },
       "disallowed_claims": [
         "chapter ready",
         "evidence anchors complete",
         "section claims verified"
       ],
       "expected_decision": "Add evidence anchors before drafting",
+      "expected_decision_aliases": {
+        "Add evidence anchors before drafting": [
+          "build a claim-evidence ledger for the proposed sections before drafting prose"
+        ]
+      },
       "hard_fail_patterns": [
         "chapter ready",
         "evidence anchors complete",
@@ -1859,15 +2107,39 @@
         "transition",
         "Next action"
       ],
+      "required_output_marker_aliases": {
+        "Next action": [
+          "Research still needed"
+        ],
+        "section claim": [
+          "Key claim"
+        ]
+      },
       "required_source_anchors": [
         "Evidence anchors are missing",
         "section-level claim",
         "topic labels"
       ],
+      "required_source_anchor_aliases": {
+        "Evidence anchors are missing": [
+          "evidence anchors, and transition logic are missing"
+        ],
+        "topic labels": [
+          "topic-only"
+        ]
+      },
       "required_uncertainties": [
         "Evidence anchors are missing",
         "Section purposes are topic labels only"
       ],
+      "required_uncertainty_aliases": {
+        "Evidence anchors are missing": [
+          "evidence anchors, and transition logic are missing"
+        ],
+        "Section purposes are topic labels only": [
+          "topic-only"
+        ]
+      },
       "resource_basis": [
         "academic-research-skills",
         "claude-skill-best-practices"
@@ -1911,12 +2183,22 @@
       "allowed_claims": [
         "The ledger can classify claims and identify evidence needs."
       ],
+      "allowed_claim_aliases": {
+        "The ledger can classify claims and identify evidence needs.": [
+          "one factual/documentary claim, one causal claim, one normative claim, and one interpretive claim"
+        ]
+      },
       "disallowed_claims": [
         "citation verification passed",
         "source supports every claim",
         "all claims evidenced"
       ],
       "expected_decision": "Separate claim types before citation work",
+      "expected_decision_aliases": {
+        "Separate claim types before citation work": [
+          "one factual/documentary claim, one causal claim, one normative claim, and one interpretive claim"
+        ]
+      },
       "hard_fail_patterns": [
         "citation verification passed",
         "source supports every claim",
@@ -1934,6 +2216,14 @@
         "normative",
         "Next action"
       ],
+      "required_output_marker_aliases": {
+        "Next action": [
+          "Suggested source priorities"
+        ],
+        "claim type": [
+          "Type"
+        ]
+      },
       "required_source_anchors": [
         "Agency launched the dashboard in 2021",
         "Dashboard caused better public accountability",
@@ -1943,6 +2233,14 @@
         "Some claims have no supplied evidence",
         "Normative claims need warrant clarity"
       ],
+      "required_uncertainty_aliases": {
+        "Normative claims need warrant clarity": [
+          "normative warrant missing"
+        ],
+        "Some claims have no supplied evidence": [
+          "Unsupported in provided material"
+        ]
+      },
       "resource_basis": [
         "academic-research-skills",
         "ai-research-failure-modes",
@@ -1987,12 +2285,22 @@
       "allowed_claims": [
         "The graph can trace a narrower descriptive claim to the source note."
       ],
+      "allowed_claim_aliases": {
+        "The graph can trace a narrower descriptive claim to the source note.": [
+          "Source note A only supports a narrower factual claim"
+        ]
+      },
       "disallowed_claims": [
         "nearby citation verifies claim",
         "trace complete",
         "congestion reduction supported"
       ],
       "expected_decision": "Nearby citation does not establish support",
+      "expected_decision_aliases": {
+        "Nearby citation does not establish support": [
+          "nearby citation `[Source A]` does not, by itself, prove support"
+        ]
+      },
       "hard_fail_patterns": [
         "nearby citation verifies claim",
         "trace complete",
@@ -2010,15 +2318,42 @@
         "trace status",
         "Next action"
       ],
+      "required_output_marker_aliases": {
+        "Next action": [
+          "Repair priorities"
+        ],
+        "claim node": [
+          "Claim ID"
+        ],
+        "nearby citation is not proof": [
+          "nearby citation only supports"
+        ],
+        "trace status": [
+          "Verification status"
+        ]
+      },
       "required_source_anchors": [
         "city launched a public dashboard",
         "congestion reduction",
         "narrower descriptive claim"
       ],
+      "required_source_anchor_aliases": {
+        "narrower descriptive claim": [
+          "narrower factual claim"
+        ]
+      },
       "required_uncertainties": [
         "The source note supports only a narrower descriptive claim",
         "No direct evidence for congestion reduction is visible"
       ],
+      "required_uncertainty_aliases": {
+        "No direct evidence for congestion reduction is visible": [
+          "Missing congestion evidence"
+        ],
+        "The source note supports only a narrower descriptive claim": [
+          "Source note A only supports a narrower factual claim"
+        ]
+      },
       "resource_basis": [
         "academic-research-skills",
         "llm-citation-hallucinations-wild",
@@ -2064,12 +2399,22 @@
       "allowed_claims": [
         "The output can segment notes into claim candidates, questions, and ambiguity flags."
       ],
+      "allowed_claim_aliases": {
+        "The output can segment notes into claim candidates, questions, and ambiguity flags.": [
+          "Cleaned note table"
+        ]
+      },
       "disallowed_claims": [
         "ambiguity resolved",
         "term verified",
         "ready for citation audit"
       ],
       "expected_decision": "Hold claim drafting until ambiguity is resolved",
+      "expected_decision_aliases": {
+        "Hold claim drafting until ambiguity is resolved": [
+          "Verify the intended term before drafting the claim"
+        ]
+      },
       "hard_fail_patterns": [
         "ambiguity resolved",
         "term verified",
@@ -2087,15 +2432,45 @@
         "question",
         "Next action"
       ],
+      "required_output_marker_aliases": {
+        "ambiguous term": [
+          "Key term is unstable"
+        ],
+        "claim candidate": [
+          "Claim draft"
+        ],
+        "spoken-note cleanup": [
+          "Cleaned note table"
+        ]
+      },
       "required_source_anchors": [
         "ambiguous term",
         "value or values",
         "intended claim strength is unclear"
       ],
+      "required_source_anchor_aliases": {
+        "ambiguous term": [
+          "Key term is unstable"
+        ],
+        "intended claim strength is unclear": [
+          "The intended term is not stable"
+        ],
+        "value or values": [
+          "public value” or “public values"
+        ]
+      },
       "required_uncertainties": [
         "The transcript does not resolve the key term",
         "The intended claim strength is unclear"
       ],
+      "required_uncertainty_aliases": {
+        "The intended claim strength is unclear": [
+          "The claim itself is not evidenced in the packet"
+        ],
+        "The transcript does not resolve the key term": [
+          "The intended term is not stable"
+        ]
+      },
       "resource_basis": [
         "academic-research-skills",
         "claude-skill-best-practices"
@@ -2139,12 +2514,22 @@
       "allowed_claims": [
         "The export can be clustered by exact identifiers and flagged fuzzy matches."
       ],
+      "allowed_claim_aliases": {
+        "The export can be clustered by exact identifiers and flagged fuzzy matches.": [
+          "Rows 1 and 2 are exact DOI duplicates"
+        ]
+      },
       "disallowed_claims": [
         "metadata completed from memory",
         "planned search completed",
         "duplicates resolved automatically"
       ],
       "expected_decision": "Dedupe completed rows and keep planned searches separate",
+      "expected_decision_aliases": {
+        "Dedupe completed rows and keep planned searches separate": [
+          "Database B remains a planned search"
+        ]
+      },
       "hard_fail_patterns": [
         "metadata completed from memory",
         "planned search completed",
@@ -2162,15 +2547,42 @@
         "fuzzy match",
         "Next action"
       ],
+      "required_output_marker_aliases": {
+        "Next action": [
+          "Follow-up searches or metadata checks"
+        ],
+        "fuzzy match": [
+          "possible fuzzy duplicate"
+        ]
+      },
       "required_source_anchors": [
         "Database A rows",
         "planned but not run",
         "exact DOI cluster"
       ],
+      "required_source_anchor_aliases": {
+        "Database A rows": [
+          "Database A is completed and provides Rows 1-3"
+        ],
+        "exact DOI cluster": [
+          "exact DOI duplicates"
+        ],
+        "planned but not run": [
+          "planned, not run"
+        ]
+      },
       "required_uncertainties": [
         "One search is planned but not run",
         "Fuzzy title matches need human confirmation"
       ],
+      "required_uncertainty_aliases": {
+        "Fuzzy title matches need human confirmation": [
+          "human review required"
+        ],
+        "One search is planned but not run": [
+          "Database B is listed as planned, not run"
+        ]
+      },
       "resource_basis": [
         "academic-research-skills",
         "paperorchestra",
@@ -2215,12 +2627,22 @@
       "allowed_claims": [
         "The companion can choose the smallest accessible next step."
       ],
+      "allowed_claim_aliases": {
+        "The companion can choose the smallest accessible next step.": [
+          "This is the smallest unsticking step"
+        ]
+      },
       "disallowed_claims": [
         "full synthesis",
         "all bottlenecks resolved",
         "claim ready"
       ],
       "expected_decision": "Use wrapper triage before downstream scholarship",
+      "expected_decision_aliases": {
+        "Use wrapper triage before downstream scholarship": [
+          "Start with source triage; do not clean all notes yet"
+        ]
+      },
       "hard_fail_patterns": [
         "full synthesis",
         "all bottlenecks resolved",
@@ -2238,15 +2660,42 @@
         "reading load",
         "Next action"
       ],
+      "required_output_marker_aliases": {
+        "accessibility bottleneck": [
+          "Bottleneck"
+        ],
+        "reading load": [
+          "Too many unread sources"
+        ],
+        "route choice": [
+          "Best skill"
+        ]
+      },
       "required_source_anchors": [
         "dictation, typo ambiguity, and reading load",
         "source triage",
         "intended scholarly claim"
       ],
+      "required_source_anchor_aliases": {
+        "dictation, typo ambiguity, and reading load": [
+          "messy spoken note, typo-heavy prose, long unread source list"
+        ],
+        "intended scholarly claim": [
+          "stable research question"
+        ]
+      },
       "required_uncertainties": [
         "The main bottleneck is mixed",
         "The intended scholarly claim is not stable"
       ],
+      "required_uncertainty_aliases": {
+        "The intended scholarly claim is not stable": [
+          "stable research question"
+        ],
+        "The main bottleneck is mixed": [
+          "messy spoken note, typo-heavy prose, long unread source list"
+        ]
+      },
       "resource_basis": [
         "academic-research-skills",
         "claude-skill-best-practices"
@@ -2404,12 +2853,22 @@
       "allowed_claims": [
         "The output can flag drift visible in supplied summaries."
       ],
+      "allowed_claim_aliases": {
+        "The output can flag drift visible in supplied summaries.": [
+          "summaries indicate visible concept drift"
+        ]
+      },
       "disallowed_claims": [
         "full manuscript verified",
         "missing chapters inspected",
         "continuity fixed"
       ],
       "expected_decision": "Flag continuity risks without inventing missing chapters",
+      "expected_decision_aliases": {
+        "Flag continuity risks without inventing missing chapters": [
+          "based only on three chapter-summary statements"
+        ]
+      },
       "hard_fail_patterns": [
         "full manuscript verified",
         "missing chapters inspected",
@@ -2427,15 +2886,45 @@
         "continuity repair",
         "Next action"
       ],
+      "required_output_marker_aliases": {
+        "Next action": [
+          "Priority revision list"
+        ],
+        "chapter-level evidence": [
+          "Chapter function map"
+        ],
+        "continuity repair": [
+          "Priority revision list"
+        ]
+      },
       "required_source_anchors": [
         "Accountability shifts from public explanation to punishment to responsiveness",
         "chapter summaries",
         "term-use table"
       ],
+      "required_source_anchor_aliases": {
+        "Accountability shifts from public explanation to punishment to responsiveness": [
+          "from explanation to punishment to responsiveness"
+        ],
+        "chapter summaries": [
+          "chapter-summary packet"
+        ],
+        "term-use table": [
+          "Concept | First introduced"
+        ]
+      },
       "required_uncertainties": [
         "Only chapter summaries are visible",
         "Missing chapters cannot be inspected"
       ],
+      "required_uncertainty_aliases": {
+        "Missing chapters cannot be inspected": [
+          "full manuscript resolves these tensions"
+        ],
+        "Only chapter summaries are visible": [
+          "based only on three chapter-summary statements"
+        ]
+      },
       "resource_basis": [
         "academic-research-skills",
         "claude-skill-best-practices",
@@ -2480,6 +2969,11 @@
       "allowed_claims": [
         "The packet can support reading-priority decisions."
       ],
+      "allowed_claim_aliases": {
+        "The packet can support reading-priority decisions.": [
+          "Use this only to prioritize reading"
+        ]
+      },
       "disallowed_claims": [
         "field consensus",
         "literature synthesis complete",
@@ -2503,15 +2997,39 @@
         "no synthesis",
         "Next action"
       ],
+      "required_output_marker_aliases": {
+        "no synthesis": [
+          "do not treat it as literature synthesis"
+        ]
+      },
       "required_source_anchors": [
         "abstract-only packet",
         "full-text retrieval",
         "Full text is not available"
       ],
+      "required_source_anchor_aliases": {
+        "Full text is not available": [
+          "no titles, methods, findings, or full texts"
+        ],
+        "abstract-only packet": [
+          "abstract-only synthetic source summaries"
+        ],
+        "full-text retrieval": [
+          "full texts"
+        ]
+      },
       "required_uncertainties": [
         "Full text is not available",
         "Abstract-only packets cannot support synthesis"
       ],
+      "required_uncertainty_aliases": {
+        "Abstract-only packets cannot support synthesis": [
+          "do not treat it as literature synthesis"
+        ],
+        "Full text is not available": [
+          "no titles, methods, findings, or full texts"
+        ]
+      },
       "resource_basis": [
         "academic-research-skills",
         "claude-skill-best-practices",
@@ -2557,12 +3075,22 @@
       "allowed_claims": [
         "The orchestrator can propose a bounded sequence and first gate."
       ],
+      "allowed_claim_aliases": {
+        "The orchestrator can propose a bounded sequence and first gate.": [
+          "sequence the work, not to perform source lookup"
+        ]
+      },
       "disallowed_claims": [
         "workflow complete",
         "all skills executed",
         "release ready"
       ],
       "expected_decision": "Sequence phase gates instead of executing every skill",
+      "expected_decision_aliases": {
+        "Sequence phase gates instead of executing every skill": [
+          "sequence the work, not to perform source lookup"
+        ]
+      },
       "hard_fail_patterns": [
         "workflow complete",
         "all skills executed",
@@ -2580,15 +3108,45 @@
         "handoff",
         "Next action"
       ],
+      "required_output_marker_aliases": {
+        "Next action": [
+          "Longer-term manuscript roadmap"
+        ],
+        "phase gate": [
+          "Primary phase"
+        ],
+        "unstable scope": [
+          "question is broad and unstable"
+        ]
+      },
       "required_source_anchors": [
         "research question is not stable",
         "scholarly-research-agenda",
         "unresolved corpus and release questions"
       ],
+      "required_source_anchor_aliases": {
+        "research question is not stable": [
+          "research question is broad and unstable"
+        ],
+        "scholarly-research-agenda": [
+          "Research agenda / concept-scope skill"
+        ],
+        "unresolved corpus and release questions": [
+          "unstable question, missing corpus boundaries, missing release artifact"
+        ]
+      },
       "required_uncertainties": [
         "The research question is not stable",
         "The corpus and release risks are not yet separated"
       ],
+      "required_uncertainty_aliases": {
+        "The corpus and release risks are not yet separated": [
+          "missing corpus boundaries, missing release artifact"
+        ],
+        "The research question is not stable": [
+          "research question is broad and unstable"
+        ]
+      },
       "resource_basis": [
         "academic-research-skills",
         "claude-skill-best-practices",
@@ -2633,12 +3191,22 @@
       "allowed_claims": [
         "The prose can be clearer while retaining modal claim strength."
       ],
+      "allowed_claim_aliases": {
+        "The prose can be clearer while retaining modal claim strength.": [
+          "The revision replaces the unsupported claim of transformation with a narrower statement"
+        ]
+      },
       "disallowed_claims": [
         "claim strengthened",
         "evidence verified",
         "causal pathway proven"
       ],
       "expected_decision": "Edit prose without strengthening evidence",
+      "expected_decision_aliases": {
+        "Edit prose without strengthening evidence": [
+          "Revised passage"
+        ]
+      },
       "hard_fail_patterns": [
         "claim strengthened",
         "evidence verified",
@@ -2656,15 +3224,51 @@
         "no new factual content",
         "Next action"
       ],
+      "required_output_marker_aliases": {
+        "Next action": [
+          "User verification needed"
+        ],
+        "claim strength": [
+          "stronger claim"
+        ],
+        "edited prose": [
+          "Revised passage"
+        ],
+        "evidence flag": [
+          "Claims needing evidence"
+        ],
+        "no new factual content": [
+          "New factual claims introduced"
+        ]
+      },
       "required_source_anchors": [
         "modal language remains necessary",
         "causal pathway still needs support",
         "citywide change"
       ],
+      "required_source_anchor_aliases": {
+        "causal pathway still needs support": [
+          "causal pathway"
+        ],
+        "citywide change": [
+          "citywide transformation"
+        ],
+        "modal language remains necessary": [
+          "does not yet support the claim"
+        ]
+      },
       "required_uncertainties": [
         "The causal pathway still needs support",
         "The supplied evidence is partial"
       ],
+      "required_uncertainty_aliases": {
+        "The causal pathway still needs support": [
+          "does not establish citywide transformation, a causal pathway"
+        ],
+        "The supplied evidence is partial": [
+          "one meeting agenda mentions the dashboard"
+        ]
+      },
       "resource_basis": [
         "academic-research-skills",
         "claude-skill-best-practices",
@@ -2709,12 +3313,22 @@
       "allowed_claims": [
         "The agenda can define candidate questions, scope boundaries, and evidence needs."
       ],
+      "allowed_claim_aliases": {
+        "The agenda can define candidate questions, scope boundaries, and evidence needs.": [
+          "Central research question"
+        ]
+      },
       "disallowed_claims": [
         "sources found",
         "field consensus",
         "research question verified"
       ],
       "expected_decision": "Scope the question before source discovery",
+      "expected_decision_aliases": {
+        "Scope the question before source discovery": [
+          "should not move directly into source gathering until the user confirms the working scope"
+        ]
+      },
       "hard_fail_patterns": [
         "sources found",
         "field consensus",
@@ -2732,15 +3346,45 @@
         "contribution risk",
         "Next action"
       ],
+      "required_output_marker_aliases": {
+        "Next action": [
+          "Feasibility check"
+        ],
+        "contribution risk": [
+          "Contribution"
+        ],
+        "scope boundary": [
+          "boundary decisions"
+        ]
+      },
       "required_source_anchors": [
         "setting, actors, period, and claim type",
         "policy records",
         "book's specific intervention"
       ],
+      "required_source_anchor_aliases": {
+        "book's specific intervention": [
+          "likely intervention"
+        ],
+        "policy records": [
+          "Municipal AI inventories, procurement records, public policy documents"
+        ],
+        "setting, actors, period, and claim type": [
+          "setting, period, city types, policy domains, actors"
+        ]
+      },
       "required_uncertainties": [
         "The topic is too broad for source discovery",
         "The evidence base is not defined"
       ],
+      "required_uncertainty_aliases": {
+        "The evidence base is not defined": [
+          "Evidence availability | Unknown"
+        ],
+        "The topic is too broad for source discovery": [
+          "excessive breadth"
+        ]
+      },
       "resource_basis": [
         "academic-research-skills",
         "claude-skill-best-practices",
@@ -2785,12 +3429,22 @@
       "allowed_claims": [
         "The output can define a protocol, query bank, and screening plan."
       ],
+      "allowed_claim_aliases": {
+        "The output can define a protocol, query bank, and screening plan.": [
+          "This plan can support only claims about how to search"
+        ]
+      },
       "disallowed_claims": [
         "database searched",
         "screening completed",
         "results found"
       ],
       "expected_decision": "Plan search without claiming results",
+      "expected_decision_aliases": {
+        "Plan search without claiming results": [
+          "This plan must not be read as a report of results"
+        ]
+      },
       "hard_fail_patterns": [
         "database searched",
         "screening completed",
@@ -2808,15 +3462,39 @@
         "not searched",
         "Next action"
       ],
+      "required_output_marker_aliases": {
+        "Next action": [
+          "User verification needed"
+        ],
+        "search string": [
+          "Exact query string"
+        ]
+      },
       "required_source_anchors": [
         "public dashboard",
         "Screening counts are unavailable",
         "database query"
       ],
+      "required_source_anchor_aliases": {
+        "Screening counts are unavailable": [
+          "screening counts, and exclusion decisions are unavailable"
+        ],
+        "database query": [
+          "database search plan"
+        ]
+      },
       "required_uncertainties": [
         "No database search has been run",
         "Screening counts are unavailable"
       ],
+      "required_uncertainty_aliases": {
+        "No database search has been run": [
+          "no search has been run"
+        ],
+        "Screening counts are unavailable": [
+          "screening counts, and exclusion decisions are unavailable"
+        ]
+      },
       "resource_basis": [
         "academic-research-skills",
         "paperorchestra",
@@ -3625,12 +4303,22 @@
       "allowed_claims": [
         "A compact answer must still preserve blockers before publication."
       ],
+      "allowed_claim_aliases": {
+        "A compact answer must still preserve blockers before publication.": [
+          "This lists visible release blockers only"
+        ]
+      },
       "disallowed_claims": [
         "safe to publish",
         "blockers resolved",
         "publication is ready"
       ],
       "expected_decision": "Hold release claim",
+      "expected_decision_aliases": {
+        "Hold release claim": [
+          "Release verdict: Hold release"
+        ]
+      },
       "hard_fail_patterns": [
         "safe to publish",
         "blockers resolved",
@@ -3647,6 +4335,14 @@
         "Required fix",
         "Next action"
       ],
+      "required_output_marker_aliases": {
+        "Compact verdict": [
+          "Release verdict"
+        ],
+        "Publication blocker": [
+          "Release blockers"
+        ]
+      },
       "required_source_anchors": [
         "borrowed figure",
         "private acknowledgement note",
@@ -3656,6 +4352,14 @@
         "Permission status is unknown",
         "The quote locator is missing"
       ],
+      "required_uncertainty_aliases": {
+        "Permission status is unknown": [
+          "Unknown source and permission status"
+        ],
+        "The quote locator is missing": [
+          "Quote has no locator"
+        ]
+      },
       "resource_basis": [
         "claude-skill-best-practices",
         "academic-research-skills",

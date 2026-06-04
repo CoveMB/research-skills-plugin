@@ -1,0 +1,28 @@
+{
+  "answer_key_findings": [
+    "TODO_ANSWER_KEY_FINDING"
+  ],
+  "date": "TODO_YYYY-MM-DD",
+  "dimension_rationales": {
+    "case-function classification": "TODO_RATIONALE",
+    "claim repair usefulness": "TODO_RATIONALE",
+    "counter-case design": "TODO_RATIONALE",
+    "generalization restraint": "TODO_RATIONALE"
+  },
+  "dimension_scores": {
+    "case-function classification": "TODO_0_TO_5",
+    "claim repair usefulness": "TODO_0_TO_5",
+    "counter-case design": "TODO_0_TO_5",
+    "generalization restraint": "TODO_0_TO_5"
+  },
+  "evidence_notes": [
+    "TODO_EVIDENCE_NOTE"
+  ],
+  "fixture_id": "case-study-universal-causal-claim",
+  "hard_fail_triggered": "TODO_BOOLEAN",
+  "minimum_score": 4,
+  "rationale": "TODO_RATIONALE",
+  "reviewed_output_sha256": "a6a97a1be225dfb64a99271b2dbe24d85744acb2432869398e115b3a7f75b851",
+  "reviewer": "TODO_REVIEWER",
+  "schema_version": "scholar-grade-review-score-v1"
+}

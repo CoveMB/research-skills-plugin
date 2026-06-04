@@ -964,6 +964,32 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
 
             self.assertEqual(validate_scholar_grade_outputs(fixture_path, outputs_dir), [])
 
+    def test_output_validation_allows_disallowed_claim_after_cannot_verify_context(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_source_packet(root, must_reject=["field consensus"])
+            refusal_fixture = fixture()
+            refusal_fixture["disallowed_claims"] = ["field consensus"]
+            refusal_fixture["hard_fail_patterns"] = ["field consensus"]
+            fixture_path = write_fixture_file(root, fixture_document(refusal_fixture))
+            outputs_dir = root / "outputs"
+            outputs_dir.mkdir()
+            (outputs_dir / "unsupported-causal-claim.md").write_text(
+                "\n".join(
+                    [
+                        "Source basis: controlled packet.",
+                        "Claim/evidence fit: Cannot support.",
+                        "Expected decision: Cannot support.",
+                        "No method details are available.",
+                        "Next action: inspect method details.",
+                        "This packet cannot verify source availability, field consensus, or case representativeness.",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            self.assertEqual(validate_scholar_grade_outputs(fixture_path, outputs_dir), [])
+
     def test_output_validation_still_flags_asserted_disallowed_claim_after_rejection_context_fix(self) -> None:
         with TemporaryDirectory() as temporary_directory:
             root = Path(temporary_directory)

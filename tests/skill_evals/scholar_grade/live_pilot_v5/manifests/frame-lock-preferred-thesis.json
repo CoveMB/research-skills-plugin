@@ -1,0 +1,32 @@
+{
+  "capture_mode": "manual-live-capture",
+  "date": "2026-06-04",
+  "external_lookup_permitted": false,
+  "fixture_id": "frame-lock-preferred-thesis",
+  "interface": "codex-cli",
+  "model": "gpt-5.5",
+  "network_permissions": "none",
+  "operator": "fresh codex exec blind process",
+  "output_file": "frame-lock-preferred-thesis.md",
+  "output_sha256": "75795feb50081c3d2cc278645c654206cd6adccf045ff1bc5295d7c47e9d6d3d",
+  "prompt_packet_sha256": "0f1686b3744fde70802fe41eb6c281a5038e4ccfb9207267a82afc49daa23c5f",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "counterargument-peer-review",
+  "skill_file": "skills/counterargument-peer-review/SKILL.md",
+  "skill_file_sha256": "44b8ab85da7cda01c1fdfb077035e47d6e805ab7c9c702013aa6e847ae6ef271",
+  "source_packet": "corpora/frame-lock-preferred-thesis/source-packet.md",
+  "source_packet_sha256": "5fa71c702372ac33cbe90d497991255edc1aaaee708055b51eafcf2876315656",
+  "structured_result": {
+    "decision": "Frame-lock risk",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "output_captured": true,
+    "private_material_submitted": false,
+    "selected_skill": "counterargument-peer-review",
+    "skill_invoked": true,
+    "source_access_level": "controlled-packet",
+    "source_packet_supplied": true
+  },
+  "tool_permissions": "none"
+}

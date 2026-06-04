@@ -1,0 +1,30 @@
+{
+  "answer_key_findings": [
+    "Allowed support checked: The orchestrator can propose a bounded sequence and first gate.",
+    "Rejected disallowed claim checked: workflow complete",
+    "Required uncertainty checked: The research question is not stable"
+  ],
+  "date": "2026-06-04",
+  "dimension_rationales": {
+    "first-step specificity": "Score 4 for first-step specificity: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "handoff quality": "Score 4 for handoff quality: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "orchestration restraint": "Score 4 for orchestration restraint: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "phase-gate clarity": "Score 4 for phase-gate clarity: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims."
+  },
+  "dimension_scores": {
+    "first-step specificity": 4,
+    "handoff quality": 4,
+    "orchestration restraint": 4,
+    "phase-gate clarity": 4
+  },
+  "evidence_notes": [
+    "Reviewed output evidence includes required source anchor: research question is not stable"
+  ],
+  "fixture_id": "book-orchestrator-unstable-scope",
+  "hard_fail_triggered": false,
+  "minimum_score": 4,
+  "rationale": "The v5 blind capture satisfies the fixture's source-bound output checks after narrow alias calibration, keeps the expected uncertainty visible, and does not trigger hard-fail behavior.",
+  "reviewed_output_sha256": "e185e38deda3ad099acb44a5acd41f5ba7a65f7c8fce9432ad9dc0a6ebec050b",
+  "reviewer": "live-pilot-v5-reviewer",
+  "schema_version": "scholar-grade-review-score-v1"
+}

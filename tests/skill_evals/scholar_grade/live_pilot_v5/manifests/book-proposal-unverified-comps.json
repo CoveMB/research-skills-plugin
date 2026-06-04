@@ -1,0 +1,32 @@
+{
+  "capture_mode": "manual-live-capture",
+  "date": "2026-06-04",
+  "external_lookup_permitted": false,
+  "fixture_id": "book-proposal-unverified-comps",
+  "interface": "codex-cli",
+  "model": "gpt-5.5",
+  "network_permissions": "none",
+  "operator": "fresh codex exec blind process",
+  "output_file": "book-proposal-unverified-comps.md",
+  "output_sha256": "8e5e897d5ec1679fb952d6c4faec46a4581d7a80efff2245f590b8d52d090d61",
+  "prompt_packet_sha256": "1de60255eb6d8eb11a99ad49f11a1719839f66e2df6b8f2033121ac88c0813a8",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "book-proposal-scholarship",
+  "skill_file": "skills/book-proposal-scholarship/SKILL.md",
+  "skill_file_sha256": "2615f69910ebd4cbe7bf182c0c5c326d61e06b39fff3d522b37a8fdff983092a",
+  "source_packet": "corpora/book-proposal-unverified-comps/source-packet.md",
+  "source_packet_sha256": "8c1aef4f4606ff3d01f2d241478aa31b88c714febfa28926bd1ee6a7dc28d965",
+  "structured_result": {
+    "decision": "Proposal can be revised but comps remain provisional",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "output_captured": true,
+    "private_material_submitted": false,
+    "selected_skill": "book-proposal-scholarship",
+    "skill_invoked": true,
+    "source_access_level": "controlled-packet",
+    "source_packet_supplied": true
+  },
+  "tool_permissions": "none"
+}

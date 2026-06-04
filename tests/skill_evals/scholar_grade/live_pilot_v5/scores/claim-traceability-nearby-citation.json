@@ -1,0 +1,30 @@
+{
+  "answer_key_findings": [
+    "Allowed support checked: The graph can trace a narrower descriptive claim to the source note.",
+    "Rejected disallowed claim checked: nearby citation verifies claim",
+    "Required uncertainty checked: The source note supports only a narrower descriptive claim"
+  ],
+  "date": "2026-06-04",
+  "dimension_rationales": {
+    "citation-proximity caution": "Score 4 for citation-proximity caution: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "claim narrowing": "Score 4 for claim narrowing: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "repair action usefulness": "Score 4 for repair action usefulness: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "trace-link discipline": "Score 4 for trace-link discipline: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims."
+  },
+  "dimension_scores": {
+    "citation-proximity caution": 4,
+    "claim narrowing": 4,
+    "repair action usefulness": 4,
+    "trace-link discipline": 4
+  },
+  "evidence_notes": [
+    "Reviewed output evidence includes required source anchor: city launched a public dashboard"
+  ],
+  "fixture_id": "claim-traceability-nearby-citation",
+  "hard_fail_triggered": false,
+  "minimum_score": 4,
+  "rationale": "The v5 blind capture satisfies the fixture's source-bound output checks after narrow alias calibration, keeps the expected uncertainty visible, and does not trigger hard-fail behavior.",
+  "reviewed_output_sha256": "9b914c989ed1eae2f0a1c0ca76f9aedfd0f87df0345484fc01db70331ae56f3d",
+  "reviewer": "live-pilot-v5-reviewer",
+  "schema_version": "scholar-grade-review-score-v1"
+}

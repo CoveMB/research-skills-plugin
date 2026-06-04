@@ -1,0 +1,28 @@
+{
+  "answer_key_findings": [
+    "TODO_ANSWER_KEY_FINDING"
+  ],
+  "date": "TODO_YYYY-MM-DD",
+  "dimension_rationales": {
+    "criteria specificity": "TODO_RATIONALE",
+    "next-run action": "TODO_RATIONALE",
+    "provenance restraint": "TODO_RATIONALE",
+    "search-protocol clarity": "TODO_RATIONALE"
+  },
+  "dimension_scores": {
+    "criteria specificity": "TODO_0_TO_5",
+    "next-run action": "TODO_0_TO_5",
+    "provenance restraint": "TODO_0_TO_5",
+    "search-protocol clarity": "TODO_0_TO_5"
+  },
+  "evidence_notes": [
+    "TODO_EVIDENCE_NOTE"
+  ],
+  "fixture_id": "source-discovery-plan-not-results",
+  "hard_fail_triggered": "TODO_BOOLEAN",
+  "minimum_score": 4,
+  "rationale": "TODO_RATIONALE",
+  "reviewed_output_sha256": "9437cf44a891d8fa98e08c4effa3c4a93abeb14eaae3e6812f802f7cbe14ed2c",
+  "reviewer": "TODO_REVIEWER",
+  "schema_version": "scholar-grade-review-score-v1"
+}

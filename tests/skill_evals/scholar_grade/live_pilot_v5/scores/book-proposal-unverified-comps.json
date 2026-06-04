@@ -1,0 +1,30 @@
+{
+  "answer_key_findings": [
+    "Allowed support checked: The proposal language can be strengthened while marking comps and audience claims as provisional.",
+    "Rejected disallowed claim checked: market verified",
+    "Required uncertainty checked: Comparable-title metadata is not verified"
+  ],
+  "date": "2026-06-04",
+  "dimension_rationales": {
+    "next verification step": "Score 4 for next verification step: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "positioning restraint": "Score 4 for positioning restraint: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "proposal contribution clarity": "Score 4 for proposal contribution clarity: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "unverified-claim labeling": "Score 4 for unverified-claim labeling: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims."
+  },
+  "dimension_scores": {
+    "next verification step": 4,
+    "positioning restraint": 4,
+    "proposal contribution clarity": 4,
+    "unverified-claim labeling": 4
+  },
+  "evidence_notes": [
+    "Reviewed output evidence includes required source anchor: politics of urban data systems"
+  ],
+  "fixture_id": "book-proposal-unverified-comps",
+  "hard_fail_triggered": false,
+  "minimum_score": 4,
+  "rationale": "The v5 blind capture satisfies the fixture's source-bound output checks after narrow alias calibration, keeps the expected uncertainty visible, and does not trigger hard-fail behavior.",
+  "reviewed_output_sha256": "8e5e897d5ec1679fb952d6c4faec46a4581d7a80efff2245f590b8d52d090d61",
+  "reviewer": "live-pilot-v5-reviewer",
+  "schema_version": "scholar-grade-review-score-v1"
+}

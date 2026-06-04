@@ -1,0 +1,28 @@
+{
+  "answer_key_findings": [
+    "TODO_ANSWER_KEY_FINDING"
+  ],
+  "date": "TODO_YYYY-MM-DD",
+  "dimension_rationales": {
+    "claim-type classification": "TODO_RATIONALE",
+    "evidence-status restraint": "TODO_RATIONALE",
+    "normative warrant visibility": "TODO_RATIONALE",
+    "repair specificity": "TODO_RATIONALE"
+  },
+  "dimension_scores": {
+    "claim-type classification": "TODO_0_TO_5",
+    "evidence-status restraint": "TODO_0_TO_5",
+    "normative warrant visibility": "TODO_0_TO_5",
+    "repair specificity": "TODO_0_TO_5"
+  },
+  "evidence_notes": [
+    "TODO_EVIDENCE_NOTE"
+  ],
+  "fixture_id": "claim-ledger-mixed-claim-types",
+  "hard_fail_triggered": "TODO_BOOLEAN",
+  "minimum_score": 4,
+  "rationale": "TODO_RATIONALE",
+  "reviewed_output_sha256": "a38cafece6bbe454fc73d5f74258befb627957c65157bf2d172fb509bac2de0b",
+  "reviewer": "TODO_REVIEWER",
+  "schema_version": "scholar-grade-review-score-v1"
+}

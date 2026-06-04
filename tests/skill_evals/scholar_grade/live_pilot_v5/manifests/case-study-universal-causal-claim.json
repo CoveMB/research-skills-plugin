@@ -1,0 +1,32 @@
+{
+  "capture_mode": "manual-live-capture",
+  "date": "2026-06-04",
+  "external_lookup_permitted": false,
+  "fixture_id": "case-study-universal-causal-claim",
+  "interface": "codex-cli",
+  "model": "gpt-5.5",
+  "network_permissions": "none",
+  "operator": "fresh codex exec blind process",
+  "output_file": "case-study-universal-causal-claim.md",
+  "output_sha256": "a6a97a1be225dfb64a99271b2dbe24d85744acb2432869398e115b3a7f75b851",
+  "prompt_packet_sha256": "9ffd9e0f369208334cf5fafe1bf13b2a48c04b6a597208e393b052ea016a91cb",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "case-study-integration",
+  "skill_file": "skills/case-study-integration/SKILL.md",
+  "skill_file_sha256": "4b37064ed3cf9d94392128ecfa83de3d031ae9b3e9507b1f8f9dfbb06ccf5ad2",
+  "source_packet": "corpora/case-study-universal-causal-claim/source-packet.md",
+  "source_packet_sha256": "69c3f337d16762e08f9b631b9f3d15c97d876b410e4045ce587bfd2d9f53dcd9",
+  "structured_result": {
+    "decision": "Use case illustratively",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "output_captured": true,
+    "private_material_submitted": false,
+    "selected_skill": "case-study-integration",
+    "skill_invoked": true,
+    "source_access_level": "controlled-packet",
+    "source_packet_supplied": true
+  },
+  "tool_permissions": "none"
+}

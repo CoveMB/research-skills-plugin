@@ -237,6 +237,7 @@ NEGATED_PHRASE_PREFIX_RE = re.compile(
 CLAIM_REJECTION_CONTEXT_RE = re.compile(
     r"\b("
     r"cannot\s+support|can't\s+support|can\s+not\s+support|"
+    r"cannot\s+verify|can't\s+verify|can\s+not\s+verify|"
     r"does\s+not\s+(?:show|support|establish|verify)|"
     r"do\s+not\s+(?:use|claim|treat|rely|write|state|say)|"
     r"should\s+not\s+(?:use|claim|treat|rely|write|state|say)|"

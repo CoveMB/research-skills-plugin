@@ -1,0 +1,32 @@
+{
+  "capture_mode": "manual-live-capture",
+  "date": "2026-06-04",
+  "external_lookup_permitted": false,
+  "fixture_id": "claim-ledger-mixed-claim-types",
+  "interface": "codex-cli",
+  "model": "gpt-5.5",
+  "network_permissions": "none",
+  "operator": "fresh codex exec blind process",
+  "output_file": "claim-ledger-mixed-claim-types.md",
+  "output_sha256": "a38cafece6bbe454fc73d5f74258befb627957c65157bf2d172fb509bac2de0b",
+  "prompt_packet_sha256": "1606c7c5f20b2d50311573950b5c64dad56a4aff461eee2af313f7d308d0eec6",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "claim-evidence-ledger",
+  "skill_file": "skills/claim-evidence-ledger/SKILL.md",
+  "skill_file_sha256": "577ff8758235cd104969af3dd60e1a4942f0a0727e8601c932bc92bccac1157f",
+  "source_packet": "corpora/claim-ledger-mixed-claim-types/source-packet.md",
+  "source_packet_sha256": "6e2879e2b4eefe7c5d5fc25ba67df6e3feccd2638997d91b259700cf3ee35578",
+  "structured_result": {
+    "decision": "Separate claim types before citation work",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "output_captured": true,
+    "private_material_submitted": false,
+    "selected_skill": "claim-evidence-ledger",
+    "skill_invoked": true,
+    "source_access_level": "controlled-packet",
+    "source_packet_supplied": true
+  },
+  "tool_permissions": "none"
+}

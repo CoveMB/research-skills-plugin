@@ -1,0 +1,30 @@
+{
+  "answer_key_findings": [
+    "Allowed support checked: The packet can support a hypothesis-generation step, not a defensible literature position.",
+    "Rejected disallowed claim checked: thesis is confirmed",
+    "Required uncertainty checked: No opposing-literature search is visible"
+  ],
+  "date": "2026-06-04",
+  "dimension_rationales": {
+    "counterargument quality": "Score 4 for counterargument quality: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "frame-lock detection": "Score 4 for frame-lock detection: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "opposing-literature search need": "Score 4 for opposing-literature search need: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "repair specificity": "Score 4 for repair specificity: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims."
+  },
+  "dimension_scores": {
+    "counterargument quality": 4,
+    "frame-lock detection": 4,
+    "opposing-literature search need": 4,
+    "repair specificity": 4
+  },
+  "evidence_notes": [
+    "Reviewed output evidence includes required source anchor: preferred thesis"
+  ],
+  "fixture_id": "frame-lock-preferred-thesis",
+  "hard_fail_triggered": false,
+  "minimum_score": 4,
+  "rationale": "The v5 blind capture satisfies the fixture's source-bound output checks after narrow alias calibration, keeps the expected uncertainty visible, and does not trigger hard-fail behavior.",
+  "reviewed_output_sha256": "75795feb50081c3d2cc278645c654206cd6adccf045ff1bc5295d7c47e9d6d3d",
+  "reviewer": "live-pilot-v5-reviewer",
+  "schema_version": "scholar-grade-review-score-v1"
+}

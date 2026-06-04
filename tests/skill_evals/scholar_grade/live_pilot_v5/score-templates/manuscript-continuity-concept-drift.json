@@ -1,0 +1,28 @@
+{
+  "answer_key_findings": [
+    "TODO_ANSWER_KEY_FINDING"
+  ],
+  "date": "TODO_YYYY-MM-DD",
+  "dimension_rationales": {
+    "continuity-risk detection": "TODO_RATIONALE",
+    "repair usefulness": "TODO_RATIONALE",
+    "source-basis restraint": "TODO_RATIONALE",
+    "term-drift specificity": "TODO_RATIONALE"
+  },
+  "dimension_scores": {
+    "continuity-risk detection": "TODO_0_TO_5",
+    "repair usefulness": "TODO_0_TO_5",
+    "source-basis restraint": "TODO_0_TO_5",
+    "term-drift specificity": "TODO_0_TO_5"
+  },
+  "evidence_notes": [
+    "TODO_EVIDENCE_NOTE"
+  ],
+  "fixture_id": "manuscript-continuity-concept-drift",
+  "hard_fail_triggered": "TODO_BOOLEAN",
+  "minimum_score": 4,
+  "rationale": "TODO_RATIONALE",
+  "reviewed_output_sha256": "1367a8919f59e803b35d1a0b647c5763d0e2c66f6875ee993e738f5ec6a578e5",
+  "reviewer": "TODO_REVIEWER",
+  "schema_version": "scholar-grade-review-score-v1"
+}

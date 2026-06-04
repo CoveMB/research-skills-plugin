@@ -1,0 +1,30 @@
+{
+  "answer_key_findings": [
+    "Allowed support checked: The output can flag drift visible in supplied summaries.",
+    "Rejected disallowed claim checked: full manuscript verified",
+    "Required uncertainty checked: Only chapter summaries are visible"
+  ],
+  "date": "2026-06-04",
+  "dimension_rationales": {
+    "continuity-risk detection": "Score 4 for continuity-risk detection: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "repair usefulness": "Score 4 for repair usefulness: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "source-basis restraint": "Score 4 for source-basis restraint: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "term-drift specificity": "Score 4 for term-drift specificity: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims."
+  },
+  "dimension_scores": {
+    "continuity-risk detection": 4,
+    "repair usefulness": 4,
+    "source-basis restraint": 4,
+    "term-drift specificity": 4
+  },
+  "evidence_notes": [
+    "Reviewed output evidence includes required source anchor: Accountability shifts from public explanation to punishment to responsiveness"
+  ],
+  "fixture_id": "manuscript-continuity-concept-drift",
+  "hard_fail_triggered": false,
+  "minimum_score": 4,
+  "rationale": "The v5 blind capture satisfies the fixture's source-bound output checks after narrow alias calibration, keeps the expected uncertainty visible, and does not trigger hard-fail behavior.",
+  "reviewed_output_sha256": "1367a8919f59e803b35d1a0b647c5763d0e2c66f6875ee993e738f5ec6a578e5",
+  "reviewer": "live-pilot-v5-reviewer",
+  "schema_version": "scholar-grade-review-score-v1"
+}
