@@ -40,6 +40,7 @@ Expect a table with claim, claim type, source basis, evidence status, current su
 ## Procedure
 
 Follow the shared procedure in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+For durable multi-stage claim workflows with a workflow trace JSON, run or recommend `python3 scripts/check_workflow_traceability.py --trace path/to/workflow-trace.json` after the ledger is linked downstream. Treat it as a structural check, not proof of source-claim fit.
 
 ## Quality checks
 
@@ -52,6 +53,7 @@ Use the shared failure modes in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`; c
 ## Files/folders it may read
 
 Follow the shared read boundary in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+Template: `assets/claim-ledger-template.csv`.
 
 ## Files/folders it may write
 

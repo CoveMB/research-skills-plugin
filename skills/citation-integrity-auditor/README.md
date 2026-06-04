@@ -10,6 +10,8 @@ For public metadata exports, the optional local helper `python3 scripts/check_ci
 
 The helper validates internal metadata consistency only. It does not prove that a source exists, that a DOI is real, or that a source supports a claim unless an allowed lookup or source-content verification path has been completed and recorded.
 
+Optional public metadata lookup requires explicit user approval. Use `--lookup-provider crossref --allow-network` only for DOI identifiers. Do not submit draft text, source text, abstracts, notes, private fields, or manuscript excerpts.
+
 ## When to use it
 
 Use it after a draft has citations, footnotes, bibliography entries, paraphrases, or quoted material. It is most useful after the claim-evidence ledger, because the ledger identifies what needs support and the citation audit checks whether the support is actually there.
@@ -57,6 +59,7 @@ Use the shared failure modes in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`; c
 ## Files/folders it may read
 
 Follow the shared read boundary in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+Template: `assets/citation-audit-checklist.md`.
 
 ## Files/folders it may write
 

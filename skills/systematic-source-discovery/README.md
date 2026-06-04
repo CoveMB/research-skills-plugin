@@ -41,6 +41,7 @@ Expect a source discovery plan with search families, a query bank, priority venu
 ## Procedure
 
 Follow the shared procedure in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+Reference: `references/search-strategy-guide.md`. Template: `assets/search-log-template.md`.
 
 ## Quality checks
 

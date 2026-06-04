@@ -52,6 +52,7 @@ Use the shared failure modes in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`; c
 ## Files/folders it may read
 
 Follow the shared read boundary in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+Template: `assets/annotation-template.md`.
 
 ## Files/folders it may write
 

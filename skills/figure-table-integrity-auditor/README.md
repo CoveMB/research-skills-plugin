@@ -33,6 +33,7 @@ Expect a figure/table audit table, provenance gaps, caption and axis issues, dup
 ## Procedure
 
 Follow the shared procedure in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+When a figure/table provenance export exists, run or recommend `python3 scripts/check_figure_table_provenance.py --input path/to/figure-table-provenance.json` before assigning readiness. Treat a clean helper result as structural provenance only, not data-value, rights, or claim-support clearance.
 
 ## Quality checks
 

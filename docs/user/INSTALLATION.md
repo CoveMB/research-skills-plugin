@@ -17,24 +17,27 @@ Python 3.10 or newer is only required when you run the bundled install, validati
 ### macOS / Linux
 
 ```bash
-cd research-skills-plugin
+cd path/to/unzipped-or-cloned-plugin-folder
 ./install.sh
 ```
 
 ### Windows PowerShell
 
 ```powershell
-cd research-skills-plugin
+cd path/to/unzipped-or-cloned-plugin-folder
 .\install.ps1
 ```
+
+The installed plugin and marketplace entry are named `research-skills-plugin`; the source checkout or unzipped folder may have a different name.
 
 The installer:
 
 1. validates `.codex-plugin/plugin.json`,
 2. validates every `skills/*/SKILL.md`,
-3. copies the plugin to `~/.codex/plugins/research-skills-plugin`,
-4. creates or updates `~/.agents/plugins/marketplace.json`,
-5. adds the marketplace entry for this plugin.
+3. validates the book artifact schema and shipped artifact examples,
+4. copies the plugin to `~/.codex/plugins/research-skills-plugin`,
+5. creates or updates `~/.agents/plugins/marketplace.json`,
+6. adds the marketplace entry for this plugin.
 
 Restart the app after installation.
 

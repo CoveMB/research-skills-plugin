@@ -40,6 +40,7 @@ The output usually includes a source audit table with type, method, credibility,
 ## Procedure
 
 Follow the shared procedure in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+When a source's method matters to the claim, load only the relevant method-family reference under `references/`. Template: `assets/source-audit-rubric.md`.
 
 ## Quality checks
 

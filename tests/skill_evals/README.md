@@ -305,6 +305,20 @@ After skill instruction changes, do not overwrite historical v2 captures whose m
 python3 scripts/run_package_checks.py --scope live-pilot-v3
 ```
 
+Validate later additive live-pilot roots separately. These strict scopes stay outside `--scope full`, so the source-checkout gate does not require every recorded live expansion:
+
+```bash
+python3 scripts/run_package_checks.py --scope live-pilot-v5
+python3 scripts/run_package_checks.py --scope live-pilot-v6
+python3 scripts/run_package_checks.py --scope live-pilot-v7
+```
+
+Validate recorded workflow-passport live handoffs separately:
+
+```bash
+python3 scripts/run_package_checks.py --scope workflow-passport-live-v1
+```
+
 Validate scholar-grade evaluator sensitivity mutations:
 
 ```bash
