@@ -1,0 +1,32 @@
+{
+  "capture_mode": "manual-live-capture",
+  "date": "2026-06-04",
+  "external_lookup_permitted": false,
+  "fixture_id": "book-comps-stale-mismatch",
+  "interface": "codex-cli",
+  "model": "gpt-5.5",
+  "network_permissions": "none",
+  "operator": "fresh codex exec blind process",
+  "output_file": "book-comps-stale-mismatch.md",
+  "output_sha256": "050e35cdbcc20582854b00aa96254c547d5c6fdff92ec0a78f53ce524f014a2b",
+  "prompt_packet_sha256": "1546fb987988f528d13857496724ab83671bb71d076c79b3a6d8a46006d41116",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "book-comps-verifier",
+  "skill_file": "skills/book-comps-verifier/SKILL.md",
+  "skill_file_sha256": "6dbbc6cc9f132821f27924e579ae3de48cb2ab57161fcc5f1260ce2bd553f232",
+  "source_packet": "corpora/book-comps-stale-mismatch/source-packet.md",
+  "source_packet_sha256": "85a417b10a601a6a96d01e7ccf419ef205b86f107f7afc582132afb01865b5c8",
+  "structured_result": {
+    "decision": "Comps remain unverified",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "output_captured": true,
+    "private_material_submitted": false,
+    "selected_skill": "book-comps-verifier",
+    "skill_invoked": true,
+    "source_access_level": "controlled-packet",
+    "source_packet_supplied": true
+  },
+  "tool_permissions": "none"
+}

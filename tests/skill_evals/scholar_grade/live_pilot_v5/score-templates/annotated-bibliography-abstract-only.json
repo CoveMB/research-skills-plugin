@@ -1,0 +1,28 @@
+{
+  "answer_key_findings": [
+    "TODO_ANSWER_KEY_FINDING"
+  ],
+  "date": "TODO_YYYY-MM-DD",
+  "dimension_rationales": {
+    "annotation source-basis labeling": "TODO_RATIONALE",
+    "fabrication avoidance": "TODO_RATIONALE",
+    "full-text access restraint": "TODO_RATIONALE",
+    "useful acquisition next action": "TODO_RATIONALE"
+  },
+  "dimension_scores": {
+    "annotation source-basis labeling": "TODO_0_TO_5",
+    "fabrication avoidance": "TODO_0_TO_5",
+    "full-text access restraint": "TODO_0_TO_5",
+    "useful acquisition next action": "TODO_0_TO_5"
+  },
+  "evidence_notes": [
+    "TODO_EVIDENCE_NOTE"
+  ],
+  "fixture_id": "annotated-bibliography-abstract-only",
+  "hard_fail_triggered": "TODO_BOOLEAN",
+  "minimum_score": 4,
+  "rationale": "TODO_RATIONALE",
+  "reviewed_output_sha256": "1e60aa7b4a6d6b47a011bb385e2bbf7a578095d844dc829c666ba99987505d0d",
+  "reviewer": "TODO_REVIEWER",
+  "schema_version": "scholar-grade-review-score-v1"
+}

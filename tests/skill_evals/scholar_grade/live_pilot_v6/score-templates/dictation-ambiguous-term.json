@@ -1,0 +1,28 @@
+{
+  "answer_key_findings": [
+    "TODO_ANSWER_KEY_FINDING"
+  ],
+  "date": "TODO_YYYY-MM-DD",
+  "dimension_rationales": {
+    "accessible next action": "TODO_RATIONALE",
+    "ambiguity preservation": "TODO_RATIONALE",
+    "claim/question separation": "TODO_RATIONALE",
+    "dictation cleanup": "TODO_RATIONALE"
+  },
+  "dimension_scores": {
+    "accessible next action": "TODO_0_TO_5",
+    "ambiguity preservation": "TODO_0_TO_5",
+    "claim/question separation": "TODO_0_TO_5",
+    "dictation cleanup": "TODO_0_TO_5"
+  },
+  "evidence_notes": [
+    "TODO_EVIDENCE_NOTE"
+  ],
+  "fixture_id": "dictation-ambiguous-term",
+  "hard_fail_triggered": "TODO_BOOLEAN",
+  "minimum_score": 4,
+  "rationale": "TODO_RATIONALE",
+  "reviewed_output_sha256": "75204e31b4e7b702b0f7b90a998c929c5b8fe15611a06d406402cd39ab40e521",
+  "reviewer": "TODO_REVIEWER",
+  "schema_version": "scholar-grade-review-score-v1"
+}

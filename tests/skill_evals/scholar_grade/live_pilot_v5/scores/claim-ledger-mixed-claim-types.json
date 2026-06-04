@@ -1,0 +1,30 @@
+{
+  "answer_key_findings": [
+    "Allowed support checked: The ledger can classify claims and identify evidence needs.",
+    "Rejected disallowed claim checked: citation verification passed",
+    "Required uncertainty checked: Some claims have no supplied evidence"
+  ],
+  "date": "2026-06-04",
+  "dimension_rationales": {
+    "claim-type classification": "Score 4 for claim-type classification: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "evidence-status restraint": "Score 4 for evidence-status restraint: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "normative warrant visibility": "Score 4 for normative warrant visibility: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "repair specificity": "Score 4 for repair specificity: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims."
+  },
+  "dimension_scores": {
+    "claim-type classification": 4,
+    "evidence-status restraint": 4,
+    "normative warrant visibility": 4,
+    "repair specificity": 4
+  },
+  "evidence_notes": [
+    "Reviewed output evidence includes required source anchor: Agency launched the dashboard in 2021"
+  ],
+  "fixture_id": "claim-ledger-mixed-claim-types",
+  "hard_fail_triggered": false,
+  "minimum_score": 4,
+  "rationale": "The v5 blind capture satisfies the fixture's source-bound output checks after narrow alias calibration, keeps the expected uncertainty visible, and does not trigger hard-fail behavior.",
+  "reviewed_output_sha256": "a38cafece6bbe454fc73d5f74258befb627957c65157bf2d172fb509bac2de0b",
+  "reviewer": "live-pilot-v5-reviewer",
+  "schema_version": "scholar-grade-review-score-v1"
+}

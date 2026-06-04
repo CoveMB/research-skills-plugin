@@ -12,6 +12,7 @@ from plugin_utils import print_completed_process_output
 
 
 ROOT = Path(__file__).resolve().parents[1]
+PackageCheck = tuple[str, ...]
 
 
 INSTALL_CHECKS = (
@@ -50,9 +51,70 @@ PILOT_V3_FIXTURE_IDS = (
     "extraction-table-uneven-source-notes",
 )
 
+PILOT_V5_FIXTURE_IDS = (
+    "pressure-compress-publication-ready",
+    "source-discovery-plan-not-results",
+    "book-comps-stale-mismatch",
+    "book-proposal-unverified-comps",
+    "claim-ledger-mixed-claim-types",
+    "claim-traceability-nearby-citation",
+    "scholarly-prose-evidence-sensitive-edit",
+    "annotation-source-note-mixed-evidence",
+    "annotated-bibliography-abstract-only",
+    "discovery-dedupe-fuzzy-export",
+    "case-study-universal-causal-claim",
+    "argument-preferred-thesis-risk",
+    "frame-lock-preferred-thesis",
+    "chapter-outline-no-evidence-anchors",
+    "manuscript-continuity-concept-drift",
+    "book-orchestrator-unstable-scope",
+    "scholarly-agenda-broad-manifesto",
+)
+
+PILOT_V6_FIXTURE_IDS = (
+    "dictation-ambiguous-term",
+    "dyslexia-companion-mixed-bottleneck",
+    "reading-load-abstract-only",
+)
+
 
 def fixture_id_args(fixture_ids: tuple[str, ...]) -> tuple[str, ...]:
     return tuple(argument for fixture_id in fixture_ids for argument in ("--fixture-id", fixture_id))
+
+
+def live_pilot_root_path(live_pilot_root: str) -> str:
+    return f"tests/skill_evals/scholar_grade/{live_pilot_root}"
+
+
+def live_pilot_calibration_check(live_pilot_root: str) -> PackageCheck:
+    root_path = live_pilot_root_path(live_pilot_root)
+    return (
+        "tests/skill_evals/scholar_grade/live_pilot_calibration.py",
+        "--pilot-plan",
+        f"{root_path}/fixture-ids.json",
+        "--live-root",
+        root_path,
+        "--strict",
+        "--quiet",
+    )
+
+
+def live_pilot_harness_check(live_pilot_root: str, fixture_ids: tuple[str, ...]) -> PackageCheck:
+    root_path = live_pilot_root_path(live_pilot_root)
+    return (
+        "tests/skill_evals/scholar_grade/scholar_grade_eval_harness.py",
+        "--fixtures",
+        "tests/skill_evals/scholar_grade/fixtures.json",
+        "--outputs-dir",
+        f"{root_path}/outputs",
+        "--manifests-dir",
+        f"{root_path}/manifests",
+        "--scores-dir",
+        f"{root_path}/scores",
+        *fixture_id_args(fixture_ids),
+        "--require-live-captures",
+        "--quiet",
+    )
 
 
 LIVE_PILOT_CALIBRATION_CHECK = (
@@ -99,6 +161,10 @@ LIVE_PILOT_V3_REPORT_CHECK = (
     "--format",
     "markdown",
 )
+
+LIVE_PILOT_V5_CALIBRATION_CHECK = live_pilot_calibration_check("live_pilot_v5")
+
+LIVE_PILOT_V6_CALIBRATION_CHECK = live_pilot_calibration_check("live_pilot_v6")
 
 SCHOLAR_MUTATION_CHECKS = (
     (
@@ -253,8 +319,15 @@ LIVE_PILOT_V3_CHECKS = (
     LIVE_PILOT_V3_CALIBRATION_CHECK,
 )
 
+LIVE_PILOT_V5_CHECKS = (
+    live_pilot_harness_check("live_pilot_v5", PILOT_V5_FIXTURE_IDS),
+    LIVE_PILOT_V5_CALIBRATION_CHECK,
+)
 
-PackageCheck = tuple[str, ...]
+LIVE_PILOT_V6_CHECKS = (
+    live_pilot_harness_check("live_pilot_v6", PILOT_V6_FIXTURE_IDS),
+    LIVE_PILOT_V6_CALIBRATION_CHECK,
+)
 
 
 def checks_for_scope(scope: str) -> tuple[PackageCheck, ...]:
@@ -266,6 +339,8 @@ def checks_for_scope(scope: str) -> tuple[PackageCheck, ...]:
         "live-pilot": LIVE_PILOT_CHECKS,
         "live-pilot-v2": LIVE_PILOT_V2_CHECKS,
         "live-pilot-v3": LIVE_PILOT_V3_CHECKS,
+        "live-pilot-v5": LIVE_PILOT_V5_CHECKS,
+        "live-pilot-v6": LIVE_PILOT_V6_CHECKS,
         "scholar-mutation": SCHOLAR_MUTATION_CHECKS,
         "real-goldsets": REAL_GOLDSET_CHECKS,
     }
@@ -308,6 +383,8 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
             "live-pilot",
             "live-pilot-v2",
             "live-pilot-v3",
+            "live-pilot-v5",
+            "live-pilot-v6",
             "scholar-mutation",
             "real-goldsets",
         ],
@@ -317,6 +394,8 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
             "package for validation that works from a packaged or installed copy without repo-only tests, "
             "live-pilot for the original pilot report, live-pilot-v2 for the strict calibrated pilot, "
             "live-pilot-v3 for the strict calibrated recapture pilot, "
+            "live-pilot-v5 for the high-risk strict-gap expansion, "
+            "live-pilot-v6 for the lower-risk strict-gap expansion, "
             "scholar-mutation for evaluator sensitivity mutations, "
             "real-goldsets for active real-source gold-set live-test readiness, "
             "or live for recorded live skill captures."

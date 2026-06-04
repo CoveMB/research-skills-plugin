@@ -1,0 +1,32 @@
+{
+  "capture_mode": "manual-live-capture",
+  "date": "2026-06-04",
+  "external_lookup_permitted": false,
+  "fixture_id": "argument-preferred-thesis-risk",
+  "interface": "codex-cli",
+  "model": "gpt-5.5",
+  "network_permissions": "none",
+  "operator": "fresh codex exec blind process",
+  "output_file": "argument-preferred-thesis-risk.md",
+  "output_sha256": "41d845b8deb769f780d3c00e39a75a4e89a92c7c8e225e3f64b9cd3c3d703d32",
+  "prompt_packet_sha256": "a7bc94017ffaf74cc08fa951deccc3b94f9c32d311ef8a549a163b1a37715e9f",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "argument-architecture",
+  "skill_file": "skills/argument-architecture/SKILL.md",
+  "skill_file_sha256": "e2538850ba8d4cba2ecb8f36faf174568c3edc541ebb6944bf63e01ae4c05c12",
+  "source_packet": "corpora/argument-preferred-thesis-risk/source-packet.md",
+  "source_packet_sha256": "b8dffc48a03f7ba39af53d509577a2d9b1a5ecbc54f59ad7b3042094da59a99a",
+  "structured_result": {
+    "decision": "Dependency risk",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "output_captured": true,
+    "private_material_submitted": false,
+    "selected_skill": "argument-architecture",
+    "skill_invoked": true,
+    "source_access_level": "controlled-packet",
+    "source_packet_supplied": true
+  },
+  "tool_permissions": "none"
+}

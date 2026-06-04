@@ -1,0 +1,30 @@
+{
+  "answer_key_findings": [
+    "Allowed support checked: The output can define a protocol, query bank, and screening plan.",
+    "Rejected disallowed claim checked: database searched",
+    "Required uncertainty checked: No database search has been run"
+  ],
+  "date": "2026-06-04",
+  "dimension_rationales": {
+    "criteria specificity": "Score 4 for criteria specificity: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "next-run action": "Score 4 for next-run action: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "provenance restraint": "Score 4 for provenance restraint: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "search-protocol clarity": "Score 4 for search-protocol clarity: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims."
+  },
+  "dimension_scores": {
+    "criteria specificity": 4,
+    "next-run action": 4,
+    "provenance restraint": 4,
+    "search-protocol clarity": 4
+  },
+  "evidence_notes": [
+    "Reviewed output evidence includes required source anchor: public dashboard"
+  ],
+  "fixture_id": "source-discovery-plan-not-results",
+  "hard_fail_triggered": false,
+  "minimum_score": 4,
+  "rationale": "The v5 blind capture satisfies the fixture's source-bound output checks after narrow alias calibration, keeps the expected uncertainty visible, and does not trigger hard-fail behavior.",
+  "reviewed_output_sha256": "9437cf44a891d8fa98e08c4effa3c4a93abeb14eaae3e6812f802f7cbe14ed2c",
+  "reviewer": "live-pilot-v5-reviewer",
+  "schema_version": "scholar-grade-review-score-v1"
+}

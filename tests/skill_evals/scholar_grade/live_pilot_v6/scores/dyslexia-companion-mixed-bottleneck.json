@@ -1,0 +1,30 @@
+{
+  "answer_key_findings": [
+    "Allowed support checked: The companion can choose the smallest accessible next step.",
+    "Rejected disallowed claim checked: full synthesis",
+    "Required uncertainty checked: The main bottleneck is mixed"
+  ],
+  "date": "2026-06-04",
+  "dimension_rationales": {
+    "accessibility routing": "Score 4 for accessibility routing: captured output stays within the controlled packet, keeps the accessibility/source-access limit visible, and avoids asserting the fixture's disallowed claims.",
+    "ambiguity preservation": "Score 4 for ambiguity preservation: captured output stays within the controlled packet, keeps the accessibility/source-access limit visible, and avoids asserting the fixture's disallowed claims.",
+    "scope restraint": "Score 4 for scope restraint: captured output stays within the controlled packet, keeps the accessibility/source-access limit visible, and avoids asserting the fixture's disallowed claims.",
+    "single next action": "Score 4 for single next action: captured output stays within the controlled packet, keeps the accessibility/source-access limit visible, and avoids asserting the fixture's disallowed claims."
+  },
+  "dimension_scores": {
+    "accessibility routing": 4,
+    "ambiguity preservation": 4,
+    "scope restraint": 4,
+    "single next action": 4
+  },
+  "evidence_notes": [
+    "Reviewed output evidence includes required source anchor: dictation, typo ambiguity, and reading load"
+  ],
+  "fixture_id": "dyslexia-companion-mixed-bottleneck",
+  "hard_fail_triggered": false,
+  "minimum_score": 4,
+  "rationale": "The v6 blind capture satisfies the fixture's source-bound output checks after narrow alias calibration, keeps the expected uncertainty visible, and does not trigger hard-fail behavior.",
+  "reviewed_output_sha256": "771df505a2e32e8ba6a00585174188dad544d22793cb11ee8bd5655668cca6c1",
+  "reviewer": "live-pilot-v6-reviewer",
+  "schema_version": "scholar-grade-review-score-v1"
+}

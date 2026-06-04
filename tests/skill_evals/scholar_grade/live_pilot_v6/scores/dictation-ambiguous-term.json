@@ -1,0 +1,30 @@
+{
+  "answer_key_findings": [
+    "Allowed support checked: The output can segment notes into claim candidates, questions, and ambiguity flags.",
+    "Rejected disallowed claim checked: ambiguity resolved",
+    "Required uncertainty checked: The transcript does not resolve the key term"
+  ],
+  "date": "2026-06-04",
+  "dimension_rationales": {
+    "accessible next action": "Score 4 for accessible next action: captured output stays within the controlled packet, keeps the accessibility/source-access limit visible, and avoids asserting the fixture's disallowed claims.",
+    "ambiguity preservation": "Score 4 for ambiguity preservation: captured output stays within the controlled packet, keeps the accessibility/source-access limit visible, and avoids asserting the fixture's disallowed claims.",
+    "claim/question separation": "Score 4 for claim/question separation: captured output stays within the controlled packet, keeps the accessibility/source-access limit visible, and avoids asserting the fixture's disallowed claims.",
+    "dictation cleanup": "Score 4 for dictation cleanup: captured output stays within the controlled packet, keeps the accessibility/source-access limit visible, and avoids asserting the fixture's disallowed claims."
+  },
+  "dimension_scores": {
+    "accessible next action": 4,
+    "ambiguity preservation": 4,
+    "claim/question separation": 4,
+    "dictation cleanup": 4
+  },
+  "evidence_notes": [
+    "Reviewed output evidence includes required source anchor: ambiguous term"
+  ],
+  "fixture_id": "dictation-ambiguous-term",
+  "hard_fail_triggered": false,
+  "minimum_score": 4,
+  "rationale": "The v6 blind capture satisfies the fixture's source-bound output checks after narrow alias calibration, keeps the expected uncertainty visible, and does not trigger hard-fail behavior.",
+  "reviewed_output_sha256": "75204e31b4e7b702b0f7b90a998c929c5b8fe15611a06d406402cd39ab40e521",
+  "reviewer": "live-pilot-v6-reviewer",
+  "schema_version": "scholar-grade-review-score-v1"
+}

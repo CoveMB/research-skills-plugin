@@ -1,0 +1,28 @@
+{
+  "answer_key_findings": [
+    "TODO_ANSWER_KEY_FINDING"
+  ],
+  "date": "TODO_YYYY-MM-DD",
+  "dimension_rationales": {
+    "argument dependency clarity": "TODO_RATIONALE",
+    "counterclaim restraint": "TODO_RATIONALE",
+    "repair specificity": "TODO_RATIONALE",
+    "warrant visibility": "TODO_RATIONALE"
+  },
+  "dimension_scores": {
+    "argument dependency clarity": "TODO_0_TO_5",
+    "counterclaim restraint": "TODO_0_TO_5",
+    "repair specificity": "TODO_0_TO_5",
+    "warrant visibility": "TODO_0_TO_5"
+  },
+  "evidence_notes": [
+    "TODO_EVIDENCE_NOTE"
+  ],
+  "fixture_id": "argument-preferred-thesis-risk",
+  "hard_fail_triggered": "TODO_BOOLEAN",
+  "minimum_score": 4,
+  "rationale": "TODO_RATIONALE",
+  "reviewed_output_sha256": "41d845b8deb769f780d3c00e39a75a4e89a92c7c8e225e3f64b9cd3c3d703d32",
+  "reviewer": "TODO_REVIEWER",
+  "schema_version": "scholar-grade-review-score-v1"
+}

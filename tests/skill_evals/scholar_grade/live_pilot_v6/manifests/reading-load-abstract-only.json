@@ -1,0 +1,32 @@
+{
+  "capture_mode": "manual-live-capture",
+  "date": "2026-06-04",
+  "external_lookup_permitted": false,
+  "fixture_id": "reading-load-abstract-only",
+  "interface": "codex-cli",
+  "model": "gpt-5.5",
+  "network_permissions": "none",
+  "operator": "fresh codex exec blind process",
+  "output_file": "reading-load-abstract-only.md",
+  "output_sha256": "300c90c0da33155331630553dab17046a462dc0b1361ab6120566388a0e34329",
+  "prompt_packet_sha256": "d23324591046198f408d49b70fb66224527eaec430fd5088b1cafc41fb905164",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "reading-load-reducer",
+  "skill_file": "skills/reading-load-reducer/SKILL.md",
+  "skill_file_sha256": "f7654ef15c200d3f1ab9732a1a395305d9f18c6e362ea4513a889a2a3b4f6302",
+  "source_packet": "corpora/reading-load-abstract-only/source-packet.md",
+  "source_packet_sha256": "29e026a9d8db1187ab823e69a6edd71a893266fc6af78235dd969ff60f8adcde",
+  "structured_result": {
+    "decision": "Triage only",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "output_captured": true,
+    "private_material_submitted": false,
+    "selected_skill": "reading-load-reducer",
+    "skill_invoked": true,
+    "source_access_level": "controlled-packet",
+    "source_packet_supplied": true
+  },
+  "tool_permissions": "none"
+}

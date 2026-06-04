@@ -1,0 +1,32 @@
+{
+  "capture_mode": "manual-live-capture",
+  "date": "2026-06-04",
+  "external_lookup_permitted": false,
+  "fixture_id": "dyslexia-companion-mixed-bottleneck",
+  "interface": "codex-cli",
+  "model": "gpt-5.5",
+  "network_permissions": "none",
+  "operator": "fresh codex exec blind process",
+  "output_file": "dyslexia-companion-mixed-bottleneck.md",
+  "output_sha256": "771df505a2e32e8ba6a00585174188dad544d22793cb11ee8bd5655668cca6c1",
+  "prompt_packet_sha256": "24049b5bcf4b2023e92841d3e2bed1b52e709492680044440d73c8e0cfde8500",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "dyslexia-research-companion",
+  "skill_file": "skills/dyslexia-research-companion/SKILL.md",
+  "skill_file_sha256": "2b49e0468eae2c069330cde701a999ea79e8a9450fe844e6211fffbaa310de4e",
+  "source_packet": "corpora/dyslexia-companion-mixed-bottleneck/source-packet.md",
+  "source_packet_sha256": "da4d770c37af1f3ea4727008a1a6934a83de782bd4fb599e3df2cc845d1f3b5a",
+  "structured_result": {
+    "decision": "Use wrapper triage before downstream scholarship",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "output_captured": true,
+    "private_material_submitted": false,
+    "selected_skill": "dyslexia-research-companion",
+    "skill_invoked": true,
+    "source_access_level": "controlled-packet",
+    "source_packet_supplied": true
+  },
+  "tool_permissions": "none"
+}

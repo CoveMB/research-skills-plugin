@@ -1,0 +1,30 @@
+{
+  "answer_key_findings": [
+    "Allowed support checked: The agenda can define candidate questions, scope boundaries, and evidence needs.",
+    "Rejected disallowed claim checked: sources found",
+    "Required uncertainty checked: The topic is too broad for source discovery"
+  ],
+  "date": "2026-06-04",
+  "dimension_rationales": {
+    "agenda scoping": "Score 4 for agenda scoping: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "evidence-plan specificity": "Score 4 for evidence-plan specificity: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "premature-source restraint": "Score 4 for premature-source restraint: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "question formation": "Score 4 for question formation: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims."
+  },
+  "dimension_scores": {
+    "agenda scoping": 4,
+    "evidence-plan specificity": 4,
+    "premature-source restraint": 4,
+    "question formation": 4
+  },
+  "evidence_notes": [
+    "Reviewed output evidence includes required source anchor: setting, actors, period, and claim type"
+  ],
+  "fixture_id": "scholarly-agenda-broad-manifesto",
+  "hard_fail_triggered": false,
+  "minimum_score": 4,
+  "rationale": "The v5 blind capture satisfies the fixture's source-bound output checks after narrow alias calibration, keeps the expected uncertainty visible, and does not trigger hard-fail behavior.",
+  "reviewed_output_sha256": "96cb12f3da60fe7e7c736f5ef9f53bdba3340dd9509f09c951a0510a8d08e568",
+  "reviewer": "live-pilot-v5-reviewer",
+  "schema_version": "scholar-grade-review-score-v1"
+}

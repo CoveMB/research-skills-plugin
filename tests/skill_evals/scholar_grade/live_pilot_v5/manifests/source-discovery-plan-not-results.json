@@ -1,0 +1,32 @@
+{
+  "capture_mode": "manual-live-capture",
+  "date": "2026-06-04",
+  "external_lookup_permitted": false,
+  "fixture_id": "source-discovery-plan-not-results",
+  "interface": "codex-cli",
+  "model": "gpt-5.5",
+  "network_permissions": "none",
+  "operator": "fresh codex exec blind process",
+  "output_file": "source-discovery-plan-not-results.md",
+  "output_sha256": "9437cf44a891d8fa98e08c4effa3c4a93abeb14eaae3e6812f802f7cbe14ed2c",
+  "prompt_packet_sha256": "6527b53e85068a50da21bed6c6245323037a81c839e9ddfd4f488c4e4c346f91",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "systematic-source-discovery",
+  "skill_file": "skills/systematic-source-discovery/SKILL.md",
+  "skill_file_sha256": "34d28a1c9d33a83b2fabae5630e9b2c9ca74aa391e68fe1aa20be6708911a9de",
+  "source_packet": "corpora/source-discovery-plan-not-results/source-packet.md",
+  "source_packet_sha256": "675efec52690e66061f69cf5dd03a8efdda59ea4d62503703908ada5c805c75a",
+  "structured_result": {
+    "decision": "Plan search without claiming results",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "output_captured": true,
+    "private_material_submitted": false,
+    "selected_skill": "systematic-source-discovery",
+    "skill_invoked": true,
+    "source_access_level": "controlled-packet",
+    "source_packet_supplied": true
+  },
+  "tool_permissions": "none"
+}

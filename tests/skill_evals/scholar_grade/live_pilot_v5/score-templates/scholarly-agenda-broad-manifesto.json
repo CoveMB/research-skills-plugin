@@ -1,0 +1,28 @@
+{
+  "answer_key_findings": [
+    "TODO_ANSWER_KEY_FINDING"
+  ],
+  "date": "TODO_YYYY-MM-DD",
+  "dimension_rationales": {
+    "agenda scoping": "TODO_RATIONALE",
+    "evidence-plan specificity": "TODO_RATIONALE",
+    "premature-source restraint": "TODO_RATIONALE",
+    "question formation": "TODO_RATIONALE"
+  },
+  "dimension_scores": {
+    "agenda scoping": "TODO_0_TO_5",
+    "evidence-plan specificity": "TODO_0_TO_5",
+    "premature-source restraint": "TODO_0_TO_5",
+    "question formation": "TODO_0_TO_5"
+  },
+  "evidence_notes": [
+    "TODO_EVIDENCE_NOTE"
+  ],
+  "fixture_id": "scholarly-agenda-broad-manifesto",
+  "hard_fail_triggered": "TODO_BOOLEAN",
+  "minimum_score": 4,
+  "rationale": "TODO_RATIONALE",
+  "reviewed_output_sha256": "96cb12f3da60fe7e7c736f5ef9f53bdba3340dd9509f09c951a0510a8d08e568",
+  "reviewer": "TODO_REVIEWER",
+  "schema_version": "scholar-grade-review-score-v1"
+}

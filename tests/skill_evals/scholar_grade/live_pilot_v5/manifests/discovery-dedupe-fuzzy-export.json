@@ -1,0 +1,32 @@
+{
+  "capture_mode": "manual-live-capture",
+  "date": "2026-06-04",
+  "external_lookup_permitted": false,
+  "fixture_id": "discovery-dedupe-fuzzy-export",
+  "interface": "codex-cli",
+  "model": "gpt-5.5",
+  "network_permissions": "none",
+  "operator": "fresh codex exec blind process",
+  "output_file": "discovery-dedupe-fuzzy-export.md",
+  "output_sha256": "4afce2e48fb6d9e516cd428b5c201f20375931b399010d21b0f13a6e62a6a7ff",
+  "prompt_packet_sha256": "ae53dfb58d82b73fc1f69f2348dae34eb59ee5097066bb0fa1b283b2bcbad11d",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "discovery-runner-deduper",
+  "skill_file": "skills/discovery-runner-deduper/SKILL.md",
+  "skill_file_sha256": "645d9dfe08bd218db02a7b99ad402a6c59c906f79920e3e22ca0da7221004046",
+  "source_packet": "corpora/discovery-dedupe-fuzzy-export/source-packet.md",
+  "source_packet_sha256": "868afe425a3b22141bf741191e8b27ed95ca6b7caab3921ab192cfaedec13165",
+  "structured_result": {
+    "decision": "Dedupe completed rows and keep planned searches separate",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "output_captured": true,
+    "private_material_submitted": false,
+    "selected_skill": "discovery-runner-deduper",
+    "skill_invoked": true,
+    "source_access_level": "controlled-packet",
+    "source_packet_supplied": true
+  },
+  "tool_permissions": "none"
+}

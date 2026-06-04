@@ -1,0 +1,30 @@
+{
+  "answer_key_findings": [
+    "Allowed support checked: The comp list can be triaged for verification and mismatch risk.",
+    "Rejected disallowed claim checked: comps verified",
+    "Required uncertainty checked: Current metadata source is absent"
+  ],
+  "date": "2026-06-04",
+  "dimension_rationales": {
+    "audience-fit caution": "Score 4 for audience-fit caution: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "metadata verification restraint": "Score 4 for metadata verification restraint: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "press-positioning usefulness": "Score 4 for press-positioning usefulness: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "staleness detection": "Score 4 for staleness detection: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims."
+  },
+  "dimension_scores": {
+    "audience-fit caution": 4,
+    "metadata verification restraint": 4,
+    "press-positioning usefulness": 4,
+    "staleness detection": 4
+  },
+  "evidence_notes": [
+    "Reviewed output evidence includes required source anchor: publication detail"
+  ],
+  "fixture_id": "book-comps-stale-mismatch",
+  "hard_fail_triggered": false,
+  "minimum_score": 4,
+  "rationale": "The v5 blind capture satisfies the fixture's source-bound output checks after narrow alias calibration, keeps the expected uncertainty visible, and does not trigger hard-fail behavior.",
+  "reviewed_output_sha256": "050e35cdbcc20582854b00aa96254c547d5c6fdff92ec0a78f53ce524f014a2b",
+  "reviewer": "live-pilot-v5-reviewer",
+  "schema_version": "scholar-grade-review-score-v1"
+}

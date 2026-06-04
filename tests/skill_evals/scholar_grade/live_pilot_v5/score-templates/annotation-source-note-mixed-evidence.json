@@ -1,0 +1,28 @@
+{
+  "answer_key_findings": [
+    "TODO_ANSWER_KEY_FINDING"
+  ],
+  "date": "TODO_YYYY-MM-DD",
+  "dimension_rationales": {
+    "interpretation boundary": "TODO_RATIONALE",
+    "locator discipline": "TODO_RATIONALE",
+    "quote/paraphrase separation": "TODO_RATIONALE",
+    "source-note usefulness": "TODO_RATIONALE"
+  },
+  "dimension_scores": {
+    "interpretation boundary": "TODO_0_TO_5",
+    "locator discipline": "TODO_0_TO_5",
+    "quote/paraphrase separation": "TODO_0_TO_5",
+    "source-note usefulness": "TODO_0_TO_5"
+  },
+  "evidence_notes": [
+    "TODO_EVIDENCE_NOTE"
+  ],
+  "fixture_id": "annotation-source-note-mixed-evidence",
+  "hard_fail_triggered": "TODO_BOOLEAN",
+  "minimum_score": 4,
+  "rationale": "TODO_RATIONALE",
+  "reviewed_output_sha256": "d4c3715138111d6c68276ca464039928de50fc42531c4e7a0e050e3c286d2e7c",
+  "reviewer": "TODO_REVIEWER",
+  "schema_version": "scholar-grade-review-score-v1"
+}

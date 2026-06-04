@@ -1,0 +1,30 @@
+{
+  "answer_key_findings": [
+    "Allowed support checked: The case can illustrate a possible mechanism or motivate comparison.",
+    "Rejected disallowed claim checked: universal causal claim proven",
+    "Required uncertainty checked: Only one favorable case is visible"
+  ],
+  "date": "2026-06-04",
+  "dimension_rationales": {
+    "case-function classification": "Score 4 for case-function classification: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "claim repair usefulness": "Score 4 for claim repair usefulness: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "counter-case design": "Score 4 for counter-case design: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims.",
+    "generalization restraint": "Score 4 for generalization restraint: captured output stays within the controlled packet, names source-basis limits or uncertainty, and avoids asserting the fixture's disallowed claims."
+  },
+  "dimension_scores": {
+    "case-function classification": 4,
+    "claim repair usefulness": 4,
+    "counter-case design": 4,
+    "generalization restraint": 4
+  },
+  "evidence_notes": [
+    "Reviewed output evidence includes required source anchor: one favorable case"
+  ],
+  "fixture_id": "case-study-universal-causal-claim",
+  "hard_fail_triggered": false,
+  "minimum_score": 4,
+  "rationale": "The v5 blind capture satisfies the fixture's source-bound output checks after narrow alias calibration, keeps the expected uncertainty visible, and does not trigger hard-fail behavior.",
+  "reviewed_output_sha256": "a6a97a1be225dfb64a99271b2dbe24d85744acb2432869398e115b3a7f75b851",
+  "reviewer": "live-pilot-v5-reviewer",
+  "schema_version": "scholar-grade-review-score-v1"
+}
