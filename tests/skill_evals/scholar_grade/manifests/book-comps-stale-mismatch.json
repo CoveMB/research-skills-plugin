@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "book-comps-verifier",
   "skill_file": "skills/book-comps-verifier/SKILL.md",
-  "skill_file_sha256": "bd349c9cd38ed8cb514ee444fff51ddbf59ce9e05ef3ddabfa9a7420f78cc95d",
+  "skill_file_sha256": "d11383d2b17ea49b0a15483c994e29cd4700fc84835cf4521add98b3c4562162",
   "source_packet": "corpora/book-comps-stale-mismatch/source-packet.md",
   "source_packet_sha256": "85a417b10a601a6a96d01e7ccf419ef205b86f107f7afc582132afb01865b5c8",
   "structured_result": {

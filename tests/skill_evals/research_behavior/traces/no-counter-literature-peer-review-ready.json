@@ -1,0 +1,10 @@
+{
+  "fixture_id": "no-counter-literature-peer-review-ready",
+  "output_captured": true,
+  "output_sha256": "e7983054f3ae49b215a6894a90d07a968b27808e67cf75c96978921df55f68db",
+  "prompt_sha256": "275f67c192ac0c3e9ef9fa079aea1a653dca5ce1407ddc93320fdec7629590e9",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "counterargument-peer-review",
+  "skill_invoked": true
+}

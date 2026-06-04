@@ -44,9 +44,11 @@ If inputs are missing, proceed with assumptions and label them.
 
 Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
+Use `docs/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` when a proposed contribution, novelty claim, field-coverage claim, or missing-literature premise depends on a source corpus. At agenda stage, corpus coverage is usually `unknown_coverage` until source discovery or supplied search provenance changes it.
+
 ## Machine-readable artifacts
 
-When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: book_research_agenda`. If the output is normal Markdown, do not force the JSON contract.
+When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: book_research_agenda`. If the output is normal Markdown, do not force the JSON contract. For durable handoff artifacts, follow `docs/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits instead of upgrading verification.
 
 ## Files/folders it may read
 
@@ -159,6 +161,8 @@ Assess whether the project is answerable at book scale. Check scope size, likely
 
 ## Scope boundaries
 
+## Corpus coverage assumptions
+
 ## Key terms requiring definition
 
 ## Evidence plan
@@ -182,6 +186,7 @@ Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.m
 - Each major question must imply a source strategy.
 - The project must have boundaries tight enough to write a chapter, not a conversation topic.
 - Treat the provisional thesis as provisional until source discovery and literature mapping test it.
+- Treat contribution and novelty claims as hypotheses until corpus coverage is labeled and tested.
 
 ## Failure modes
 

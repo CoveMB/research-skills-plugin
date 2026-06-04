@@ -1,0 +1,10 @@
+{
+  "fixture_id": "public-identifiers-router-normal",
+  "output_captured": true,
+  "output_sha256": "734913d09e359a074c06fb07bd44f6631cd0f559fcdc3a4da76b4f13d54d1721",
+  "prompt_sha256": "bf1b526273aca44ff7c3a96545e025e49fdba54705e642ebc9f6710ad2543eeb",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "research-intent-router",
+  "skill_invoked": true
+}

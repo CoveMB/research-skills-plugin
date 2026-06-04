@@ -42,7 +42,9 @@ Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, W
 
 ## Machine-readable artifacts
 
-When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: continuity_review`. If the output is normal Markdown, do not force the JSON contract.
+When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: continuity_review`. If the output is normal Markdown, do not force the JSON contract. For durable handoff artifacts, follow `docs/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits instead of upgrading verification.
+
+For cross-artifact manuscript workflows with claim IDs and a workflow trace JSON, use or recommend `python3 scripts/check_workflow_traceability.py --trace path/to/workflow-trace.json` before treating continuity changes as evidence-stable. The helper checks structural traceability, claim drift, source locator/source-basis preservation, and unsupported status upgrades; it does not judge prose quality, argument quality, or source truth.
 
 ## Files/folders it may read
 
@@ -84,6 +86,8 @@ For each key concept, check:
 - whether it needs a glossary or earlier explanation
 
 Also track claim drift: whether a claim becomes stronger, weaker, broader, or contradictory across chapters.
+
+When claim drift is intentional, record a version note or explanation tied to the claim ID. Do not silently rewrite claim text, claim type, source basis, locator status, evidence status, or unresolved risks in durable handoff artifacts.
 
 ### 4. Detect repetition and redundancy
 

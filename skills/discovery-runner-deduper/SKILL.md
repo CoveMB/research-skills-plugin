@@ -41,10 +41,14 @@ Use when the user has a search plan or candidate source export from an academic 
 
 Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
+Use `docs/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` when candidate exports, screening logs, or search-log updates could imply corpus coverage, balance, consensus, missing literature, or absence of evidence. Candidate records are not a representative corpus unless the logged venue, query, date, filter, and protocol basis justify that label.
+
+For durable candidate matrices, duplicate clusters, screening logs, or search-log update drafts that are saved or handed to another skill, include a human-readable process passport following `docs/PROCESS_PASSPORT.md`. Preserve upstream source-access, corpus-coverage, unresolved-risk, and handoff-limit labels; do not mark planned searches as completed.
+
 ## Files/folders it may read
 
 - Shared operational boundary doc: `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
-- Shared policy docs, especially `docs/SOURCE_LIMITS.md` and `docs/AUTO_SELECTION_GUARDRAILS.md`.
+- Shared policy docs, especially `docs/SOURCE_LIMITS.md`, `docs/PROCESS_PASSPORT.md`, and `docs/AUTO_SELECTION_GUARDRAILS.md`.
 - User-provided search plans, search logs, candidate exports, bibliography exports, tabular files, source lists, and project files explicitly named in the request.
 
 ## Files/folders it may write
@@ -74,6 +78,14 @@ Extract title, authors, year, venue, DOI, URL, stable identifiers, abstract, sou
 
 Cluster by DOI or stable identifier first, then normalized title, then author-year-title similarity. Keep uncertainty visible for fuzzy matches.
 
+When local JSON or CSV candidate exports are available, the optional deterministic helper can produce the first-pass duplicate screen:
+
+```bash
+python3 scripts/check_source_candidates.py --input path/to/source-candidates.json
+```
+
+Use the helper output as screening evidence only. It labels `exact_duplicate`, `probable_duplicate`, `possible_duplicate`, `related_but_distinct`, `insufficient_metadata`, and `human_review_required` cases, but it does not merge records, verify source truth, run searches, or add records to a bibliography. Preserve both records when the helper reports title-only similarity, author-year-title similarity, conflicting metadata, edition/version distinction, preprint/published distinction, translated or alternate-title caution, or missing metadata.
+
 ### 4. Screen candidates
 
 Apply the supplied inclusion and exclusion criteria. Mark keep, reject, maybe, duplicate, or needs review. Never invent a reason if the record lacks enough data.
@@ -98,6 +110,8 @@ Produce a search-log update that distinguishes completed search facts from candi
 ## Search status
 | Venue | Query | Date | Filters | Candidate count | Status | Basis |
 
+## Corpus representativeness label
+
 ## Candidate matrix
 | Candidate ID | Title | Authors | Year | Venue | DOI / identifier | Source export | Metadata confidence | Screening decision | Reason |
 
@@ -111,6 +125,8 @@ Produce a search-log update that distinguishes completed search facts from candi
 
 ## Follow-up searches or metadata checks
 
+## Process passport, if saved or handed downstream
+
 ## Limits / failure risks
 
 ```
@@ -121,8 +137,11 @@ Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.m
 
 - Planned and completed searches are separate.
 - Duplicate clusters show the match basis.
+- Duplicate clusters preserve uncertain records and label human review needs.
 - Metadata confidence is visible.
 - Candidate records are not treated as verified bibliography entries.
+- Corpus coverage labels reflect the logged search/export basis, not the number of candidates.
+- Saved or downstream handoff outputs include a process passport and retain prior uncertainty labels.
 
 ## Failure modes
 
@@ -131,3 +150,4 @@ Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.m
 - Candidate metadata is silently completed from memory.
 - Rejected sources lack a documented criterion.
 - Premature citation audit before citations, quotes, page numbers, bibliography entries, or cited claims exist.
+- A downstream search log loses source-access, corpus-coverage, unresolved-risk, or handoff-limit labels from earlier work.

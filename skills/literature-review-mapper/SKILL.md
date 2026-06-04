@@ -41,9 +41,11 @@ Use when the user has a topic, source list, annotations, or scattered notes and 
 
 Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
+Use `docs/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` when the output could imply coverage, balance, consensus, novelty, missing literature, or absence of counter-literature.
+
 ## Machine-readable artifacts
 
-When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: literature_map`. If the output is normal Markdown, do not force the JSON contract.
+When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: literature_map`. If the output is normal Markdown, do not force the JSON contract. For durable handoff artifacts, follow `docs/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits instead of upgrading verification.
 
 ## Files/folders it may read
 
@@ -73,6 +75,8 @@ When the user explicitly asks for JSON or a contract artifact, use `shared/contr
 List every discipline involved. For interdisciplinary work, explain how each field frames the problem differently.
 
 State corpus limits: what source set was supplied, what fields may be missing, and whether the map reflects the provided corpus or a broader field that needs live/current verification.
+
+Assign one or more corpus-representativeness labels from `docs/CORPUS_REPRESENTATIVENESS_TAXONOMY.md`. Treat source count separately from representativeness: a large convenience corpus can still be biased, and an expert-curated corpus is not systematic unless a reproducible protocol is visible.
 
 Flag corpus bias that could change the conclusion: languages searched, database coverage, open-access availability, famous-author anchoring, geography, publication type, and disciplines excluded by the search terms.
 
@@ -125,6 +129,12 @@ Gaps can be empirical, theoretical, contextual, methodological, geographic, conc
 
 ## Corpus limits
 
+## Corpus representativeness label
+
+## Claim limit
+
+## Counter-literature check
+
 ## Field overview
 
 ## Disciplines and subfields
@@ -159,6 +169,7 @@ Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.m
 - Distinguish a gap in the user's reading from a gap in the field.
 - Flag areas that require a specialist review.
 - Do not infer field consensus from a small or one-sided source list.
+- Do not treat `unknown_coverage`, `partial_corpus`, `convenience_corpus`, `thin_corpus`, `stale_corpus`, or `one_sided_corpus` as support for field consensus or absence-of-evidence claims.
 
 ## Failure modes
 

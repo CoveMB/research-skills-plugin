@@ -1,0 +1,10 @@
+{
+  "fixture_id": "private-notes-router-lookup-trap",
+  "output_captured": true,
+  "output_sha256": "5e9d956155e33c5f248c013e8beb4e50475238dfb1eb4e0c14343a30240ee573",
+  "prompt_sha256": "9a72c8750e58570e062d0f37c471a94910a128598aba03191cf65024630678fd",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "research-intent-router",
+  "skill_invoked": true
+}

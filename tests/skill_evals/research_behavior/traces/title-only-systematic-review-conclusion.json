@@ -1,0 +1,10 @@
+{
+  "fixture_id": "title-only-systematic-review-conclusion",
+  "output_captured": true,
+  "output_sha256": "7aea6420db55cbe107f2d0536e8d068899c3f5fe1b5a45fe0c3e6e9ab99766db",
+  "prompt_sha256": "577c81ee9d604728c87a546dd3b02e45897d5dc7d41d3e8efca0618f08794124",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "systematic-source-discovery",
+  "skill_invoked": true
+}

@@ -1,0 +1,10 @@
+{
+  "fixture_id": "direct-source-note-traceability-normal",
+  "output_captured": true,
+  "output_sha256": "a19f76d40ab63ca25131bbe2af1d51e7a5ec1bf5d597ee3f66eaf9947f895303",
+  "prompt_sha256": "233614ac2fcca3a26727b33d7c5549e6a579a3b9229bc9c1a92052fa990b5d08",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "claim-traceability-graph",
+  "skill_invoked": true
+}

@@ -41,9 +41,11 @@ Use when the user provides sources, citations, excerpts, abstracts, notes, PDFs,
 
 Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
+Use `docs/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` only for bibliography-wide claims, chapter-placement synthesis, or downstream handoff to mapping, proposal, or integrity-gate work. Individual source annotations need annotation-basis labels; a bibliography is not field-balanced merely because it is long.
+
 ## Machine-readable artifacts
 
-When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: annotated_bibliography`. If the output is normal Markdown, do not force the JSON contract.
+When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: annotated_bibliography`. If the output is normal Markdown, do not force the JSON contract. For durable handoff artifacts, follow `docs/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits instead of upgrading verification.
 
 ## Files/folders it may read
 
@@ -71,6 +73,8 @@ When the user explicitly asks for JSON or a contract artifact, use `shared/contr
 Record available metadata: author, title, year, publisher/journal, DOI/URL if provided, edition, pages. If details are missing, mark them missing; do not invent them.
 
 For each source, record annotation basis: full text, abstract, excerpt, notes, citation only, or live/current search needed.
+
+When the user provides a public metadata export or bibliography-derived record list, use or recommend `python3 scripts/check_citation_metadata.py --input path/to/public-metadata.json` before normalizing annotations. Treat the helper as deterministic screening only: it can flag missing fields, malformed identifiers, conflicting DOI/title/citation-key metadata, source-access gaps, suspicious page ranges, and unsupported locator claims, but it does not prove that a source exists or supports a claim.
 
 ### 2. Summarize the source's argument
 
@@ -104,6 +108,8 @@ Recommend book chapter or section placement.
 ## What remains uncertain
 
 ## User verification needed
+
+## Bibliography corpus limits, if used for synthesis
 
 ## Source 1: [Full citation or available metadata]
 
@@ -141,6 +147,7 @@ Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.m
 - Distinguish source argument from user's interpretation.
 - Include how the source might challenge the book as well as how it helps.
 - Do not infer a source's full argument from a title, citation, or abstract alone.
+- Do not imply bibliography-wide consensus or field balance without a corpus representativeness label and claim limit.
 
 ## Failure modes
 

@@ -1,0 +1,10 @@
+{
+  "fixture_id": "legal-policy-definite-compliance",
+  "output_captured": true,
+  "output_sha256": "6ae8739f89cf02838b11a65ecd8b7cb20537d5fa4c7a479367ceaadde663ed37",
+  "prompt_sha256": "e1c267c12ffd80247d07b6db7750133feb921918bdfbd0c2255ec16ee91865f0",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "rights-privacy-release-auditor",
+  "skill_invoked": true
+}

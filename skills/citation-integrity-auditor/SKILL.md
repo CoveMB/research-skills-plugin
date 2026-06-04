@@ -57,7 +57,7 @@ Use compact output when the user asks for low reading load, blocker-first citati
 
 ## Machine-readable artifacts
 
-When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: citation_integrity_audit`. If the output is normal Markdown, do not force the JSON contract.
+When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: citation_integrity_audit`. If the output is normal Markdown, do not force the JSON contract. For durable handoff artifacts, follow `docs/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits instead of upgrading verification.
 
 ## Audit categories
 
@@ -96,7 +96,17 @@ Flag identifier hijack risk when the DOI, URL, title, author, year, or venue poi
 
 Retraction, correction, expression-of-concern, predatory-venue, or questionable-source checks require a lookup source or user-provided evidence. If that status was not checked, keep it as `status unchecked` rather than implying the source is clean.
 
-Optional local helper: `python3 scripts/check_citation_metadata.py --input path/to/public-metadata.json` compares user-provided public metadata fields only. By default it is deterministic and no-network; it rejects private fields such as `full_text`, `excerpt`, `abstract`, `notes`, or `private_notes`.
+Optional local helper: `python3 scripts/check_citation_metadata.py --input path/to/public-metadata.json` checks user-provided public metadata fields only. By default it is deterministic and no-network; it rejects private fields such as `full_text`, `excerpt`, `abstract`, `notes`, or `private_notes`.
+
+Use the helper when a public metadata export or bibliography-derived record list is available and fabricated-reference risk, DOI risk, citation-key reuse, missing metadata, source-access labels, page-range sanity, or locator-support gaps are part of the audit. Treat helper output as screening evidence:
+
+- `metadata_consistency_status` means the provided fields are internally consistent, partly unchecked, or issue-bearing.
+- `external_verification_status: not_verified` means no allowed metadata lookup was performed.
+- `source_existence_status: not_verified` means the helper has not established that the source exists.
+- `source_claim_support_status: not_checked` means the helper has not checked whether the source supports any manuscript claim.
+- `collection_warnings` require human review before bibliography cleanup, key reuse, duplicate handling, or claim-level citation decisions.
+
+Do not use the helper to mark citation verification as passed. A valid DOI format, title match, citation-only record, abstract-only record, or internally consistent bibliography row is not source-claim support.
 
 Optional public metadata lookup is consent-gated: use `--lookup-provider crossref --allow-network` only when the user has explicitly approved public lookup. This path submits DOI identifiers only, never draft text, source text, abstracts, notes, private fields, or manuscript excerpts. If lookup consent is absent, stay in local no-network mode and mark unresolved metadata as unchecked rather than guessing.
 
@@ -135,6 +145,8 @@ Flag the citation-proximity fallacy: a nearby citation does not prove the specif
 ### 2.1. Verify citation metadata when needed
 
 Apply the metadata verification ladder when fabricated-reference risk, DOI risk, bibliography mismatch, or source identity is central to the request.
+
+If the user provides a public metadata export, run or recommend `python3 scripts/check_citation_metadata.py --input path/to/public-metadata.json` before manual repair. Use `--lookup-provider crossref --allow-network` only with explicit user consent for public DOI lookup. Keep unchecked fields, source-access limits, and locator gaps visible even when the helper reports internal consistency.
 
 ### 3. Assess source strength
 

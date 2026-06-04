@@ -48,6 +48,8 @@ Use these fixture classes together:
 - Scholar-grade fixtures use controlled source packets and hidden answer keys to test source discipline, uncertainty, and evidence fit.
 - Adversarial pressure fixtures under `tests/skill_evals/scholar_grade/adversarial_pressure/` test whether skills resist user requests to hide uncertainty, invent locators or citations, overstate consensus, misuse private material, or make weak evidence sound stronger.
 - Real-source gold sets are a separate layer for human-reviewed source selection and synthesis checks. Active MVP cases are bounded to their reviewed packet and waiver notes; they must not be confused with controlled fixtures or treated as agent-generated scholarly truth.
+- Workflow passport fixtures under `tests/skill_evals/workflow_passports/` test adjacent multi-skill handoffs. They require input and expected downstream artifacts with process passports, unresolved risks, partial-source labels, human-review requirements, and unverified claim or locator-gap status. The checker mutates expected outputs to prove that silent risk removal, full-text verification upgrades, and dropped human-review requirements fail.
+- Workflow trace fixtures under `tests/skill_evals/workflow_traces/` test deterministic multi-stage claim lineage. The shipped trace binds each durable artifact to a SHA-256 hash, links each downstream stage to the previous artifact hash, and checks that tracked claim IDs, unresolved risks, partial-source labels, locator gaps, and human-review requirements are not silently upgraded.
 - Run manifests record capture provenance, file hashes, and structured reviewer decisions for each captured output.
 - Review score files bind a reviewer decision to the exact captured output hash and enforce rubric-dimension scoring plus `minimum_score` thresholds.
 - `required_source_anchors` force the output to mention case-specific source details, reducing false passes from marker-only answers.
@@ -56,6 +58,25 @@ Use these fixture classes together:
 - Optional `semantic_fail_patterns` catch paraphrased overclaims that would evade exact forbidden-claim strings.
 
 Research-behavior fixtures may also use `required_output_patterns` and `forbidden_output_patterns` when marker checks are too weak. Use them for adversarial cases where a model could include the required headings while still following source-contained instructions, agreeing with a false premise, hiding a blocker, or leaving the claim boundary generic. These regex checks are deterministic behavior checks only; they do not certify source truth.
+
+## Research-behavior anti-regression policy
+
+`scripts/check_research_behavior_fixtures.py` enforces the fixture schema and, by default, whole-repo coverage safeguards. Use `--schema-only` only for isolated draft fixtures or unit tests; package validation should run the default policy checks.
+
+Every `skills/*/SKILL.md` route must have at least one research-behavior fixture, unless the validator has an explicit non-empty exemption reason for that skill. Exemptions should be rare and reviewed because they remove a regression guard.
+
+Every fixture must include positive expected behavior through `required_output_markers` and forbidden behavior through `forbidden_claims`. Use `forbidden_output_patterns` when a bad behavior is likely to appear as a paraphrase rather than an exact forbidden phrase.
+
+High-risk skills must have at least one adversarial, trap, pressure, false-premise, privacy, certification, fabrication, or unsupported-evidence fixture. Citation/source-related coverage must include forbidden safeguards for invented citations, invented metadata, and unsupported page or locator claims across citation auditing, claim ledgers, traceability, annotation, bibliography, discovery, synthesis, methodology, comps, and proposal-scholarship routes. High-risk synthesis coverage must require source-basis, verifiable-claim, uncertainty, and user-verification markers. Release/privacy coverage must keep legal or specialist-review limitations visible, such as not-legal-advice or not-certification boundaries. Workflow/logging coverage must keep human-verification and unresolved-risk fields visible.
+
+When adding a new fixture:
+
+- Set `expected_route` to the skill folder name.
+- Make `risk_covered` specific enough to explain why the case exists.
+- Include at least one marker that names the positive safe behavior expected from the output.
+- Include forbidden behavior checks for the unsafe shortcut the fixture is guarding against.
+- Prefer compact messy inputs with partial access such as title-only, abstract-only, notes-only, citation-only, excerpt-only, or incomplete logs.
+- Do not rely on fixture text alone as proof of behavior; captured outputs and traces are required before claiming tested model behavior.
 
 ## Controlled source packets
 
@@ -297,6 +318,12 @@ Validate active real-source gold sets and their local live-test readiness:
 python3 tests/skill_evals/scholar_grade/real_goldsets/validate_goldsets.py
 python3 tests/skill_evals/scholar_grade/real_goldsets/live_test_goldsets.py
 python3 scripts/run_package_checks.py --scope real-goldsets
+```
+
+Validate deterministic workflow traceability:
+
+```bash
+python3 scripts/check_workflow_traceability.py --trace tests/skill_evals/workflow_traces/claim-lineage-fixture/workflow-trace.json
 ```
 
 Generate the pilot calibration report:

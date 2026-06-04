@@ -1,0 +1,10 @@
+{
+  "fixture_id": "title-only-citation-metadata-trap",
+  "output_captured": true,
+  "output_sha256": "670d1463dd35e03b9f716c20df7b31eaca82749ee6291936387897b22a5ab8f2",
+  "prompt_sha256": "cd5c4a824d2626dd70284eff0b2946cbe9869a430b34240dab6803d723e9fe42",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "citation-integrity-auditor",
+  "skill_invoked": true
+}

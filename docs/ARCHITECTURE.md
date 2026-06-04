@@ -9,6 +9,8 @@ This package is organized as a book-length research workflow, not a loose set of
 - Check the quality gates before moving from planning to drafting or from drafting to audit.
 - Use `MODE_REGISTRY.md` as the short routing reference.
 - Use `shared/contracts/book/book_artifact.schema.json` when JSON artifacts are requested or examples are changed.
+- Use `docs/PROCESS_PASSPORT.md` when a durable artifact is handed to another skill, reviewer, gate, release step, or submission workflow.
+- Use `docs/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` when a source set is used to imply coverage, balance, consensus, novelty, or missing literature.
 - Use `docs/SKILL_README_TEMPLATE.md` when adding or refreshing skill README files.
 
 ## Pipeline flow
@@ -226,6 +228,8 @@ graph TD
 
 JSON artifacts must use `schema_version: "book-artifact-v1"` and one artifact type listed in the contract.
 
+Durable cross-skill artifacts should set `handoff_artifact: true` and include `process_passport`. The passport records source basis, source access level, corpus coverage, evidence status, tool use, human verification status, unresolved risks, and handoff limits so downstream skills do not erase uncertainty or upgrade verification without an actual verification step. Casual replies, raw user material, non-persisted routing, and private accessibility cleanup are not handoff artifacts by default.
+
 ## Quality gates
 
 | Gate | Blocks on | Why it matters |
@@ -236,11 +240,11 @@ JSON artifacts must use `schema_version: "book-artifact-v1"` and one artifact ty
 | Prose-repair gate | Spelling, grammar, or sentence-boundary friction blocks review of existing prose | Prevents surface errors from being mistaken for weak argument while keeping meaning stable |
 | Intent route gate | Unclear research intent, artifact stage, source access, or risk level | Prevents noisy skill chains and premature deep lookup |
 | Scope gate | Vague central question or undefined audience | Prevents scope drift |
-| Source gate | Unclear source strategy or undocumented search path | Prevents cherry-picking |
-| Candidate gate | Completed searches, duplicate records, and screening decisions are mixed | Prevents false corpus confidence |
+| Source gate | Unclear source strategy, undocumented search path, or missing corpus-representativeness label | Prevents cherry-picking and false field-coverage claims |
+| Candidate gate | Completed searches, duplicate records, screening decisions, and corpus-representativeness limits are mixed | Prevents false corpus confidence |
 | Source-note gate | Quotes, paraphrases, summaries, interpretations, metadata, or locators are mixed | Prevents weak notes from becoming draft claims |
 | Extraction gate | Sources are compared before extraction is even enough | Prevents premature synthesis |
-| Literature gate | One-sided literature map | Prevents literature blindness |
+| Literature gate | One-sided, thin, stale, convenience-selected, or unknown-coverage literature map | Prevents literature blindness |
 | Argument gate | Topic outline without thesis dependency | Prevents chapters that only summarize |
 | Counterargument gate | No strong rival explanation | Prevents brittle thesis framing |
 | Chapter gate | Chapter has a topic but no argumentative function | Prevents chapter drift |

@@ -14,20 +14,24 @@
     "Verify data provenance, labels, and rights before using the figure or table."
   ],
   "process_passport": {
-    "stage": "Fixture figure/table audit handoff",
-    "artifact_inputs": [
-      "Fixture figure/table row"
-    ],
-    "tool_use_summary": [
+    "artifact_id": "figure-table-integrity-audit",
+    "source_basis": "Fixture figure/table audit; no data files reviewed.",
+    "source_access_level": "fixture only; no live source access verified",
+    "corpus_coverage": "Fixture artifact only; no corpus coverage or representativeness was verified.",
+    "evidence_status": "fixture_unverified",
+    "tool_use": [
       "No dataset, source image, notebook, run log, or license file was reviewed."
     ],
-    "gate_status": [
-      "Not ready for empirical or release reliance until data provenance, caption, axis, and rights checks are complete."
+    "human_verification_status": "needed before scholarly reliance",
+    "unresolved_risks": [
+      "Caption, axis, and data provenance require source files or data."
     ],
-    "human_checkpoints": [
-      "Human reviewer must confirm provenance, visual integrity, and rights before manuscript or release use."
+    "handoff_limits": [
+      "Use this fixture only to validate figure/table audit structure and handoff limits."
     ],
-    "handoff_notes": "Use this fixture only to validate figure/table audit structure and handoff limits."
+    "generated_or_updated_at": "2026-05-12T00:00:00-04:00",
+    "producing_skill": "figure-table-integrity-auditor",
+    "intended_next_skill_or_use": "scholarly-integrity-gate or rights-privacy-release-auditor"
   },
   "figure_table_checks": [
     {
@@ -39,5 +43,6 @@
       "verification_status": "verification_unavailable",
       "repair_action": "Provide data source, caption basis, and rights status."
     }
-  ]
+  ],
+  "handoff_artifact": true
 }

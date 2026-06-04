@@ -1,0 +1,10 @@
+{
+  "fixture_id": "rights-release-complete-permissions-normal",
+  "output_captured": true,
+  "output_sha256": "af77bc685c3f15fc6307199a2a084ce358236fba23b927250de35dc39aa09726",
+  "prompt_sha256": "c49f7cbc5fade307a85c5fd069ca792491c499a527947ce6f6f0f7bbe8287bab",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "rights-privacy-release-auditor",
+  "skill_invoked": true
+}

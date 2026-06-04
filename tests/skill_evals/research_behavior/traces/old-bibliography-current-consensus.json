@@ -1,0 +1,10 @@
+{
+  "fixture_id": "old-bibliography-current-consensus",
+  "output_captured": true,
+  "output_sha256": "84d82335aca99d23b2a58d7c12715c3d5fdd583485746b87dc379419d2cd4711",
+  "prompt_sha256": "47affc62ee451ce2348d5f02a28f4d231a739d38d2c280cf9d070a09db89b274",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "literature-review-mapper",
+  "skill_invoked": true
+}

@@ -14,20 +14,24 @@
     "Provide the actual source material and target claim before relying on the audit."
   ],
   "process_passport": {
-    "stage": "Fixture methodology source audit handoff",
-    "artifact_inputs": [
-      "Fixture source-audit row"
-    ],
-    "tool_use_summary": [
+    "artifact_id": "methodology-source-audit",
+    "source_basis": "Fixture methodology audit; no full text, data, or live lookup reviewed.",
+    "source_access_level": "fixture only; no live source access verified",
+    "corpus_coverage": "Fixture artifact only; no corpus coverage or representativeness was verified.",
+    "evidence_status": "fixture_unverified",
+    "tool_use": [
       "No external lookup, source text, dataset, or method appendix was checked."
     ],
-    "gate_status": [
-      "Not ready for source-use reliance until method evidence is visible."
+    "human_verification_status": "needed before scholarly reliance",
+    "unresolved_risks": [
+      "Real source-use verdicts require source text, method details, and claim context."
     ],
-    "human_checkpoints": [
-      "Human reviewer must verify source identity, method access, and source-claim fit."
+    "handoff_limits": [
+      "Use this fixture only to validate methodology-source audit structure and handoff limits."
     ],
-    "handoff_notes": "Use this fixture only to validate methodology-source audit structure and handoff limits."
+    "generated_or_updated_at": "2026-05-13T00:00:00-04:00",
+    "producing_skill": "methodology-source-auditor",
+    "intended_next_skill_or_use": "claim-evidence-ledger or literature-review-mapper"
   },
   "source_audit_rows": [
     {
@@ -40,5 +44,6 @@
       "cannot_support": "Robust causal, generalizable, or method-quality claims.",
       "use_recommendation": "Request full method details before relying on the source."
     }
-  ]
+  ],
+  "handoff_artifact": true
 }

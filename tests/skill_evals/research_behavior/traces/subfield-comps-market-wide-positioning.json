@@ -1,0 +1,10 @@
+{
+  "fixture_id": "subfield-comps-market-wide-positioning",
+  "output_captured": true,
+  "output_sha256": "fe9a09698fc1706ac3fc0797a08183d3f68b89a0ffafad958d052be358b8d8d8",
+  "prompt_sha256": "d05ff88d4c70df943ddd4b90e1da44294dbe10d18db0121d54e7190f2b578876",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "book-comps-verifier",
+  "skill_invoked": true
+}

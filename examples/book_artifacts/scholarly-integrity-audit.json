@@ -14,20 +14,24 @@
     "Provide the workflow materials needed to clear or hold each gate."
   ],
   "process_passport": {
-    "stage": "Fixture scholarly integrity handoff",
-    "artifact_inputs": [
-      "Fixture integrity-check row"
-    ],
-    "tool_use_summary": [
+    "artifact_id": "scholarly-integrity-audit",
+    "source_basis": "Fixture integrity audit; no workflow artifacts reviewed.",
+    "source_access_level": "fixture only; no live source access verified",
+    "corpus_coverage": "Fixture artifact only; no corpus coverage or representativeness was verified.",
+    "evidence_status": "fixture_unverified",
+    "tool_use": [
       "No source log, code, data, citation audit, figure/table audit, or workflow record was reviewed."
     ],
-    "gate_status": [
-      "Hold until visible provenance and human checkpoints support any CLEAR verdict."
+    "human_verification_status": "needed before scholarly reliance",
+    "unresolved_risks": [
+      "Real integrity verdicts require source logs, claim ledgers, data, or tool-use records."
     ],
-    "human_checkpoints": [
-      "Human reviewer must approve unresolved-risk handling before any override or forward movement."
+    "handoff_limits": [
+      "Use this fixture only to validate scholarly-integrity audit structure and handoff limits."
     ],
-    "handoff_notes": "Use this fixture only to validate scholarly-integrity audit structure and handoff limits."
+    "generated_or_updated_at": "2026-05-12T00:00:00-04:00",
+    "producing_skill": "scholarly-integrity-gate",
+    "intended_next_skill_or_use": "ai-human-workflow-log or revision"
   },
   "integrity_checks": [
     {
@@ -37,5 +41,6 @@
       "risk": "high",
       "required_repair": "Provide source log and citation audit before relying on generated synthesis."
     }
-  ]
+  ],
+  "handoff_artifact": true
 }

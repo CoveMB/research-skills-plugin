@@ -3,13 +3,15 @@
 from __future__ import annotations
 
 import argparse
+import difflib
 import json
+import re
 import sys
-from collections import Counter, defaultdict
+from collections import Counter
 from pathlib import Path
 from typing import Any, Iterable
 
-from check_citation_metadata import normalize_identifier, normalize_title
+from check_citation_metadata import DOI_RE, PUBLIC_IDENTIFIER_SPECS, normalize_identifier, normalize_title
 from plugin_utils import (
     PRIVATE_SOURCE_TEXT_FIELDS,
     normalized_field_name,
@@ -26,6 +28,9 @@ PRIVATE_FIELDS = set(PRIVATE_SOURCE_TEXT_FIELDS)
 JSON_RECORD_ERROR = "JSON input must be a list or an object with a records or candidates list"
 EMPTY_RECORD_ERROR = "input must contain at least one source candidate record"
 COMPLETED_SEARCH_STATUSES = {"complete", "completed", "completed_search", "executed", "searched"}
+AUTHOR_YEAR_TITLE_SIMILARITY_THRESHOLD = 0.86
+TITLE_ONLY_SIMILARITY_THRESHOLD = 0.82
+PREPRINT_MARKERS = {"arxiv", "biorxiv", "medrxiv", "preprint", "ssrn"}
 STABLE_IDENTIFIER_FIELDS = {
     "arxiv_id": "arxiv",
     "corpus_id": "semantic_scholar",
@@ -36,6 +41,27 @@ STABLE_IDENTIFIER_FIELDS = {
     "semantic_scholar_id": "semantic_scholar",
     "stable_id": "stable",
 }
+STABLE_IDENTIFIER_PLACEHOLDERS = {
+    "-",
+    "--",
+    "?",
+    "missing",
+    "n/a",
+    "na",
+    "none",
+    "not applicable",
+    "not available",
+    "not provided",
+    "not specified",
+    "null",
+    "pending",
+    "tba",
+    "tbd",
+    "todo",
+    "unclear",
+    "unknown",
+}
+OPENALEX_ID_RE = re.compile(r"^[a-z]\d+$", re.IGNORECASE)
 LIMITS = [
     "This checker parses local JSON or CSV candidate exports only.",
     "It does not run searches, call APIs, verify source truth, or add records to a bibliography.",
@@ -136,17 +162,67 @@ def search_status_errors(records: list[dict[str, Any]]) -> list[str]:
     ]
 
 
+def doi_is_valid(value: str) -> bool:
+    return bool(DOI_RE.match(normalize_identifier(value)))
+
+
 def normalized_doi(record: dict[str, Any]) -> str:
-    return normalize_identifier(text_value(record, ["doi", "DOI", "claimed_doi"]))
+    value = text_value(record, ["doi", "DOI", "claimed_doi"])
+    return normalize_identifier(value) if doi_is_valid(value) else ""
+
+
+def raw_doi(record: dict[str, Any]) -> str:
+    return text_value(record, ["doi", "DOI", "claimed_doi"]).strip()
+
+
+def placeholder_identifier(value: str) -> bool:
+    normalized = normalize_identifier(value).strip().casefold()
+    normalized_words = normalized.replace("_", " ").replace("-", " ")
+    normalized_words = " ".join(normalized_words.split())
+    return normalized in STABLE_IDENTIFIER_PLACEHOLDERS or normalized_words in STABLE_IDENTIFIER_PLACEHOLDERS
+
+
+def normalize_openalex_id(value: str) -> str:
+    normalized = value.strip()
+    folded = normalized.casefold()
+    for prefix in ("https://openalex.org/", "http://openalex.org/", "openalex:"):
+        if folded.startswith(prefix):
+            return normalized[len(prefix):].strip()
+    return normalized
+
+
+def normalize_corpus_id(value: str) -> str:
+    return "".join(value.strip().split())
+
+
+def validated_public_identifier(field: str, value: str) -> str:
+    normalizer, validator = PUBLIC_IDENTIFIER_SPECS[field]
+    normalized = normalizer(value)
+    return normalized if normalized and validator(normalized) else ""
+
+
+def normalized_stable_identifier_value(field: str, value: str) -> str:
+    if not value or placeholder_identifier(value):
+        return ""
+    if field in PUBLIC_IDENTIFIER_SPECS:
+        return validated_public_identifier(field, value)
+    if field == "corpus_id":
+        normalized = normalize_corpus_id(value)
+        return normalized if normalized.isdigit() else ""
+    if field == "openalex_id":
+        normalized = normalize_openalex_id(value)
+        return normalized if OPENALEX_ID_RE.match(normalized) else ""
+    return value.strip()
 
 
 def stable_identifiers(record: dict[str, Any]) -> list[str]:
     identifiers: list[str] = []
     for field, prefix in sorted(STABLE_IDENTIFIER_FIELDS.items()):
-        value = text_value(record, [field])
+        value = normalized_stable_identifier_value(field, text_value(record, [field]))
         if value:
             identifiers.append(f"{prefix}:{value}")
     return identifiers
+
 
 
 def metadata_confidence(candidate: dict[str, Any]) -> str:
@@ -164,37 +240,28 @@ def normalized_candidate(record: dict[str, Any], index: int) -> dict[str, Any]:
         "authors": text_value(record, ["authors", "author", "creators"]),
         "year": year_value(record),
         "venue": text_value(record, ["venue", "journal", "publisher", "source"]),
+        "raw_doi": raw_doi(record),
         "doi": normalized_doi(record),
         "url": text_value(record, ["url", "link"]),
         "stable_identifiers": stable_identifiers(record),
+        "edition": text_value(record, ["edition", "version", "book_edition"]),
+        "publication_type": text_value(record, ["publication_type", "record_type", "type", "source_type"]),
+        "alternate_title": text_value(record, ["alternate_title", "translated_title", "original_title"]),
         "source_export": text_value(record, ["source_export", "export_source", "search_export"]),
         "search_status": normalized_search_status(record) or "unknown",
     }
     return {**candidate, "metadata_confidence": metadata_confidence(candidate)}
 
 
-def duplicate_keys(candidate: dict[str, Any]) -> list[tuple[str, str]]:
-    keys: list[tuple[str, str]] = []
-    if candidate["doi"]:
-        keys.append(("doi", candidate["doi"]))
-    for identifier in candidate["stable_identifiers"]:
-        keys.append(("stable_identifier", identifier.casefold()))
-    title_key = normalize_title(candidate["title"])
-    if title_key:
-        keys.append(("normalized_title", title_key))
-    return keys
-
-
-def grouped_duplicate_candidates(candidates: list[dict[str, Any]]) -> dict[tuple[str, str], list[dict[str, Any]]]:
-    groups: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
-    for candidate in candidates:
-        for basis, key in duplicate_keys(candidate):
-            groups[(basis, key)].append(candidate)
-    return {key: value for key, value in groups.items() if len(value) > 1}
-
-
 def cluster_priority(match_basis: str) -> int:
-    priorities = {"doi": 0, "stable_identifier": 1, "normalized_title": 2}
+    priorities = {
+        "exact_doi": 0,
+        "doi": 1,
+        "stable_identifier": 2,
+        "normalized_title": 3,
+        "author_year_title_similarity": 4,
+        "title_similarity": 5,
+    }
     return priorities.get(match_basis, 99)
 
 
@@ -208,29 +275,204 @@ def preferred_candidate_id(candidates: list[dict[str, Any]]) -> str:
     return str(preferred["candidate_id"])
 
 
-def duplicate_clusters(candidates: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    groups = grouped_duplicate_candidates(candidates)
-    clusters: list[dict[str, Any]] = []
-    assigned: set[str] = set()
-    for (match_basis, _), duplicate_candidates in sorted(groups.items(), key=lambda item: cluster_priority(item[0][0])):
-        unassigned_candidates = [
-            candidate for candidate in duplicate_candidates if candidate["candidate_id"] not in assigned
+def normalized_authors(candidate: dict[str, Any]) -> str:
+    return normalize_title(candidate["authors"])
+
+
+def normalized_candidate_title(candidate: dict[str, Any]) -> str:
+    return normalize_title(candidate["title"])
+
+
+def stable_identifier_overlap(first: dict[str, Any], second: dict[str, Any]) -> list[str]:
+    first_identifiers = {identifier.casefold() for identifier in first["stable_identifiers"]}
+    second_identifiers = {identifier.casefold() for identifier in second["stable_identifiers"]}
+    return sorted(first_identifiers & second_identifiers)
+
+
+def same_available_authors(first: dict[str, Any], second: dict[str, Any]) -> bool:
+    first_authors = normalized_authors(first)
+    second_authors = normalized_authors(second)
+    return bool(first_authors and second_authors and first_authors == second_authors)
+
+
+def same_available_year(first: dict[str, Any], second: dict[str, Any]) -> bool:
+    return bool(first["year"] and second["year"] and first["year"] == second["year"])
+
+
+def conflicting_available_titles(first: dict[str, Any], second: dict[str, Any]) -> bool:
+    first_title = normalized_candidate_title(first)
+    second_title = normalized_candidate_title(second)
+    return bool(first_title and second_title and first_title != second_title)
+
+
+def title_similarity(first: dict[str, Any], second: dict[str, Any]) -> float:
+    first_title = normalized_candidate_title(first)
+    second_title = normalized_candidate_title(second)
+    if not first_title or not second_title:
+        return 0.0
+    return difflib.SequenceMatcher(None, first_title, second_title).ratio()
+
+
+def candidate_has_preprint_marker(candidate: dict[str, Any]) -> bool:
+    text = " ".join(
+        [
+            candidate["venue"],
+            candidate["publication_type"],
+            " ".join(candidate["stable_identifiers"]),
+            candidate["source_export"],
         ]
-        if len(unassigned_candidates) < 2:
-            continue
-        candidate_ids = [candidate["candidate_id"] for candidate in unassigned_candidates]
-        assigned.update(candidate_ids)
-        clusters.append(
-            {
-                "cluster_id": f"cluster-{len(clusters) + 1}",
-                "candidate_ids": candidate_ids,
-                "match_basis": match_basis,
-                "confidence": "high" if match_basis in {"doi", "stable_identifier"} else "medium",
-                "preferred_record": preferred_candidate_id(unassigned_candidates),
-                "review_needed": match_basis == "normalized_title",
-            }
-        )
+    ).casefold()
+    return any(marker in text for marker in PREPRINT_MARKERS)
+
+
+def preprint_published_distinction(first: dict[str, Any], second: dict[str, Any]) -> bool:
+    first_preprint = candidate_has_preprint_marker(first)
+    second_preprint = candidate_has_preprint_marker(second)
+    if first_preprint == second_preprint:
+        return False
+    first_published = bool(first["doi"] or first["venue"])
+    second_published = bool(second["doi"] or second["venue"])
+    return first_published and second_published
+
+
+def exact_identifier_match(match_basis: str) -> bool:
+    return match_basis in {"exact_doi", "doi", "stable_identifier"}
+
+
+def false_merge_warnings(first: dict[str, Any], second: dict[str, Any], match_basis: str) -> list[str]:
+    warnings: list[str] = []
+    if exact_identifier_match(match_basis) and conflicting_available_titles(first, second):
+        warnings.append("conflicting title metadata")
+    if first["authors"] and second["authors"] and not same_available_authors(first, second):
+        warnings.append("conflicting author metadata")
+    if first["year"] and second["year"] and not same_available_year(first, second):
+        warnings.append("conflicting year metadata")
+    if first["edition"] and second["edition"] and normalize_title(first["edition"]) != normalize_title(second["edition"]):
+        warnings.append("edition or version distinction")
+    if preprint_published_distinction(first, second):
+        warnings.append("preprint and published version distinction")
+    if first["alternate_title"] or second["alternate_title"]:
+        warnings.append("translated or alternate title caution")
+    return warnings
+
+
+def relation_status(match_basis: str, warnings: list[str]) -> str:
+    if warnings:
+        return "related_but_distinct"
+    if match_basis in {"exact_doi", "doi", "stable_identifier"}:
+        return "exact_duplicate"
+    if match_basis in {"normalized_title", "author_year_title_similarity"}:
+        return "probable_duplicate"
+    return "possible_duplicate"
+
+
+def relation_confidence(status: str, match_basis: str) -> str:
+    if status == "exact_duplicate":
+        return "high"
+    if status == "probable_duplicate":
+        return "medium"
+    if match_basis == "title_similarity":
+        return "low"
+    return "low"
+
+
+def relation_reason_for_basis(match_basis: str) -> str:
+    reasons = {
+        "exact_doi": "exact DOI match",
+        "doi": "normalized DOI match",
+        "stable_identifier": "stable identifier match",
+        "normalized_title": "normalized title match",
+        "author_year_title_similarity": "author-year-title similarity",
+        "title_similarity": "title-only near duplicate",
+    }
+    return reasons[match_basis]
+
+
+def match_basis_for_pair(first: dict[str, Any], second: dict[str, Any]) -> str:
+    if (
+        first["raw_doi"]
+        and second["raw_doi"]
+        and doi_is_valid(first["raw_doi"])
+        and doi_is_valid(second["raw_doi"])
+        and first["raw_doi"].casefold() == second["raw_doi"].casefold()
+    ):
+        return "exact_doi"
+    if first["doi"] and second["doi"] and first["doi"] == second["doi"]:
+        return "doi"
+    if stable_identifier_overlap(first, second):
+        return "stable_identifier"
+
+    first_title = normalized_candidate_title(first)
+    second_title = normalized_candidate_title(second)
+    if first_title and first_title == second_title:
+        return "normalized_title"
+
+    similarity = title_similarity(first, second)
+    if same_available_authors(first, second) and same_available_year(first, second):
+        if similarity >= AUTHOR_YEAR_TITLE_SIMILARITY_THRESHOLD:
+            return "author_year_title_similarity"
+    if similarity >= TITLE_ONLY_SIMILARITY_THRESHOLD:
+        return "title_similarity"
+    return ""
+
+
+def duplicate_relation(first: dict[str, Any], second: dict[str, Any]) -> dict[str, Any] | None:
+    match_basis = match_basis_for_pair(first, second)
+    if not match_basis:
+        return None
+
+    warnings = false_merge_warnings(first, second, match_basis)
+    duplicate_status = relation_status(match_basis, warnings)
+    review_required = duplicate_status != "exact_duplicate" or bool(warnings)
+    candidates = [first, second]
+    return {
+        "candidate_ids": [candidate["candidate_id"] for candidate in candidates],
+        "match_basis": match_basis,
+        "duplicate_status": duplicate_status,
+        "match_reasons": [relation_reason_for_basis(match_basis)],
+        "confidence": relation_confidence(duplicate_status, match_basis),
+        "preferred_record": preferred_candidate_id(candidates),
+        "review_needed": review_required,
+        "human_review_required": review_required,
+        "preserve_records": True,
+        "false_merge_warnings": warnings,
+    }
+
+
+def duplicate_clusters(candidates: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    clusters = [
+        relation
+        for first_index, first_candidate in enumerate(candidates)
+        for second_candidate in candidates[first_index + 1 :]
+        for relation in [duplicate_relation(first_candidate, second_candidate)]
+        if relation is not None
+    ]
+    clusters.sort(key=lambda cluster: cluster_priority(cluster["match_basis"]))
+    for index, cluster in enumerate(clusters, start=1):
+        cluster["cluster_id"] = f"cluster-{index}"
     return clusters
+
+
+def metadata_warnings(candidates: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    warnings: list[dict[str, Any]] = []
+    for candidate in candidates:
+        candidate_warnings: list[str] = []
+        if not candidate["title"]:
+            candidate_warnings.append("missing title")
+        if candidate["raw_doi"] and not candidate["doi"]:
+            candidate_warnings.append("invalid DOI format")
+        if not candidate["doi"] and not candidate["stable_identifiers"]:
+            candidate_warnings.append("missing DOI or stable identifier")
+        if candidate_warnings:
+            warnings.append(
+                {
+                    "candidate_id": candidate["candidate_id"],
+                    "duplicate_status": "insufficient_metadata",
+                    "human_review_required": True,
+                    "warnings": candidate_warnings,
+                }
+            )
+    return warnings
 
 
 def search_status_summary(candidates: list[dict[str, Any]], validation_errors: list[str]) -> dict[str, Any]:
@@ -253,6 +495,7 @@ def build_candidate_report(path: Path) -> dict[str, Any]:
         "limits": LIMITS,
         "records": candidates,
         "duplicate_clusters": duplicate_clusters(candidates),
+        "metadata_warnings": metadata_warnings(candidates),
         "search_status": search_status_summary(candidates, search_errors),
         "errors": errors,
     }

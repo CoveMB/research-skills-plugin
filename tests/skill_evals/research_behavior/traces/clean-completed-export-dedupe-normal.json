@@ -1,0 +1,10 @@
+{
+  "fixture_id": "clean-completed-export-dedupe-normal",
+  "output_captured": true,
+  "output_sha256": "3c5e3e0c93fc43841f332b8efeba1af9b444714d93b36428a6f59f48f1ee4d53",
+  "prompt_sha256": "362f4f9295c1a206f157d6a6e0ee92446a853d340f85598fab6fada8cf0bcb4b",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "discovery-runner-deduper",
+  "skill_invoked": true
+}

@@ -121,6 +121,35 @@ COMPACT_RESULT_USE_STATUSES = [
     "BLOCKER SUMMARY",
     "LIMITED GATE DECISION",
 ]
+CORPUS_REPRESENTATIVENESS_LABELS = [
+    "single_source",
+    "thin_corpus",
+    "partial_corpus",
+    "convenience_corpus",
+    "field_balanced_corpus",
+    "systematic_protocol",
+    "scoping_protocol",
+    "expert_curated_corpus",
+    "unknown_coverage",
+    "stale_corpus",
+    "one_sided_corpus",
+    "mixed_quality_corpus",
+]
+CORPUS_REPRESENTATIVENESS_SKILLS = [
+    "systematic-source-discovery",
+    "discovery-runner-deduper",
+    "reading-load-reducer",
+    "extraction-table-builder",
+    "literature-review-mapper",
+    "annotated-bibliography-builder",
+    "methodology-source-auditor",
+    "counterargument-peer-review",
+    "argument-architecture",
+    "scholarly-research-agenda",
+    "book-proposal-scholarship",
+    "book-comps-verifier",
+    "scholarly-integrity-gate",
+]
 
 
 @cache
@@ -981,6 +1010,50 @@ class TestPluginStructure(unittest.TestCase):
         ]
         self.assertEqual(missing_phrases(source_discovery + search_guide, required_phrases), [])
 
+    def test_shared_corpus_representativeness_taxonomy_is_wired_into_core_surfaces(self) -> None:
+        taxonomy_path = ROOT / "docs" / "CORPUS_REPRESENTATIVENESS_TAXONOMY.md"
+        self.assertTrue(taxonomy_path.is_file())
+        taxonomy = read_text(taxonomy_path)
+        required_phrases = [
+            "size is not representativeness",
+            "systematic search is not expert curation",
+            "no source found is not no source exists",
+            "Meaning",
+            "Allowed claims",
+            "Not allowed claims",
+            "Required uncertainty language",
+            "Consensus claims permitted?",
+            "Absence-of-evidence claims permitted?",
+            "Counter-literature check required?",
+            "Example output wording",
+        ]
+        self.assertEqual(missing_phrases(taxonomy, required_phrases), [])
+        self.assertEqual(missing_phrases(taxonomy, CORPUS_REPRESENTATIVENESS_LABELS), [])
+
+        for relative_path in [
+            "docs/SOURCE_LIMITS.md",
+            "docs/QUALITY_STANDARD.md",
+            "docs/SKILL_OPERATIONAL_BOUNDARIES.md",
+        ]:
+            self.assertIn(
+                "docs/CORPUS_REPRESENTATIVENESS_TAXONOMY.md",
+                read_text(ROOT / relative_path),
+            )
+        for skill_name in CORPUS_REPRESENTATIVENESS_SKILLS:
+            skill_text = skill_markdown(SKILLS_DIR / skill_name)
+            self.assertIn("docs/CORPUS_REPRESENTATIVENESS_TAXONOMY.md", skill_text)
+            self.assertIn("corpus", skill_text.casefold())
+
+        schema = read_json(ROOT / "shared" / "contracts" / "book" / "book_artifact.schema.json")
+        self.assertIn("corpus_representativeness", schema["properties"])
+        corpus_representativeness = schema["$defs"]["corpus_representativeness"]
+        self.assertEqual(corpus_representativeness["properties"]["labels"]["items"]["enum"], CORPUS_REPRESENTATIVENESS_LABELS)
+        self.assertIn("labels", corpus_representativeness["required"])
+        self.assertIn("claim_limits", corpus_representativeness["required"])
+        self.assertIn("counter_literature_check", corpus_representativeness["required"])
+        self.assertIn("corpus_representativeness", read_json(ROOT / "examples" / "book_artifacts" / "source-discovery-log.json"))
+        self.assertIn("corpus_representativeness", read_json(ROOT / "examples" / "book_artifacts" / "literature-map.json"))
+
     def test_source_discovery_contract_supports_systematic_review_fields(self) -> None:
         schema = read_json(ROOT / "shared" / "contracts" / "book" / "book_artifact.schema.json")
         properties = schema["properties"]
@@ -1064,19 +1137,36 @@ class TestPluginStructure(unittest.TestCase):
 
     def test_artifact_contract_supports_optional_process_passport(self) -> None:
         schema = read_json(ROOT / "shared" / "contracts" / "book" / "book_artifact.schema.json")
+        self.assertIn("handoff_artifact", schema["properties"])
         self.assertIn("process_passport", schema["properties"])
         self.assertNotIn("process_passport", schema["required"])
-        for path in [
-            ROOT / "docs" / "QUALITY_STANDARD.md",
-            ROOT / "docs" / "SCRIPTS.md",
-        ]:
-            text = read_text(path)
-            self.assertNotIn("requires `process_passport`", text)
-            self.assertNotIn("requires process_passport", text)
+
+        handoff_conditionals = [
+            conditional
+            for conditional in schema_conditionals(schema)
+            if const_condition_keys(conditional["if"]) == ["handoff_artifact"]
+        ]
+        self.assertEqual(len(handoff_conditionals), 1)
+        self.assertIn("process_passport", handoff_conditionals[0]["then"]["required"])
 
         passport = schema["$defs"]["process_passport"]
         required_fields = passport["required"]
         for field in [
+            "artifact_id",
+            "source_basis",
+            "source_access_level",
+            "corpus_coverage",
+            "evidence_status",
+            "tool_use",
+            "human_verification_status",
+            "unresolved_risks",
+            "handoff_limits",
+            "generated_or_updated_at",
+            "producing_skill",
+            "intended_next_skill_or_use",
+        ]:
+            self.assertIn(field, required_fields)
+        for old_field in [
             "stage",
             "artifact_inputs",
             "tool_use_summary",
@@ -1084,7 +1174,16 @@ class TestPluginStructure(unittest.TestCase):
             "human_checkpoints",
             "handoff_notes",
         ]:
-            self.assertIn(field, required_fields)
+            self.assertNotIn(old_field, passport["properties"])
+
+        for path in [
+            ROOT / "docs" / "QUALITY_STANDARD.md",
+            ROOT / "docs" / "SKILL_OPERATIONAL_BOUNDARIES.md",
+            ROOT / "docs" / "SCRIPTS.md",
+        ]:
+            text = read_text(path)
+            self.assertIn("handoff_artifact", text)
+            self.assertIn("process_passport", text)
 
     def test_contract_uses_controlled_status_vocabularies(self) -> None:
         schema = read_json(ROOT / "shared" / "contracts" / "book" / "book_artifact.schema.json")

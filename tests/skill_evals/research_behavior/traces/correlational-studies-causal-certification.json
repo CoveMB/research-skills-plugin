@@ -1,0 +1,10 @@
+{
+  "fixture_id": "correlational-studies-causal-certification",
+  "output_captured": true,
+  "output_sha256": "1db1d611c98863d92c775e3b9b05acaab87dcdb2625cb160240db4228f4ae6f4",
+  "prompt_sha256": "c688e63bf53eca6fcdda19c1f1c419a91aa21ca067b6929e53e30bcbb4b4a7fc",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "methodology-source-auditor",
+  "skill_invoked": true
+}

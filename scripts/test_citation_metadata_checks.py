@@ -12,6 +12,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import check_citation_metadata as checker
 from check_citation_metadata import (
     METADATA_PAIR_SPECS,
+    PublicLookupState,
     crossref_work_url,
     evaluate_records,
     metadata_lookup_consent_errors,
@@ -34,6 +35,7 @@ def matching_record() -> dict[str, str]:
         "authoritative_author_year": "Fixture 2026",
         "claimed_venue": "Fixture Venue",
         "authoritative_venue": "Fixture Venue",
+        "source_access_level": "public_metadata_only",
         "claimed_isbn": "978-0-306-40615-7",
         "authoritative_isbn": "9780306406157",
         "claimed_arxiv_id": "2604.05018",
@@ -184,12 +186,177 @@ class TestCitationMetadataChecks(unittest.TestCase):
         self.assertEqual(results[0]["doi_status"], "format_warning")
         self.assertEqual(results[0]["risk"], "medium")
 
+    def test_malformed_doi_is_reported_as_format_warning(self) -> None:
+        record = matching_record()
+        record["claimed_doi"] = "10.bad/fabricated"
+
+        results = evaluate_records([record])
+
+        self.assertEqual(results[0]["doi_status"], "format_warning")
+        self.assertEqual(results[0]["status"], "metadata_format_warning")
+        self.assertIn("DOI format warning", results[0]["notes"])
+
+    def test_fake_looking_doi_is_not_treated_as_externally_verified(self) -> None:
+        record = {
+            "reference_id": "fake-doi",
+            "citation_key": "fake2026",
+            "claimed_doi": "10.9999/fabricated-local-fixture",
+            "claimed_title": "Fabricated Local Fixture",
+            "claimed_author_year": "Example 2026",
+            "claimed_venue": "Fixture Journal",
+            "source_access_level": "public_metadata_only",
+        }
+
+        results = evaluate_records([record])
+
+        self.assertEqual(results[0]["doi_status"], "unchecked")
+        self.assertEqual(results[0]["external_verification_status"], "not_verified")
+        self.assertEqual(results[0]["source_existence_status"], "not_verified")
+        self.assertIn("DOI format is syntactically valid only; source existence is not verified", results[0]["notes"])
+
+    def test_input_lookup_markers_do_not_attest_external_verification(self) -> None:
+        record = {
+            "reference_id": "declared-lookup-only",
+            "claimed_doi": "10.9999/fabricated-local-fixture",
+            "claimed_title": "Fabricated Local Fixture",
+            "claimed_author_year": "Example 2026",
+            "claimed_venue": "Fixture Journal",
+            "source_access_level": "public_metadata_only",
+            "metadata_lookup_provider": "crossref",
+            "external_verification_status": "metadata_lookup_performed",
+        }
+
+        results = evaluate_records([record])
+
+        self.assertEqual(results[0]["external_verification_status"], "not_verified")
+        self.assertEqual(results[0]["source_existence_status"], "not_verified")
+        self.assertIn("DOI format is syntactically valid only; source existence is not verified", results[0]["notes"])
+
+    def test_runtime_lookup_state_attests_returned_public_metadata(self) -> None:
+        record = matching_record()
+
+        results = evaluate_records([record], [PublicLookupState(attempted=True, metadata_returned=True)])
+
+        self.assertEqual(results[0]["external_verification_status"], "metadata_lookup_performed")
+        self.assertEqual(results[0]["source_existence_status"], "public_metadata_record_returned")
+
+    def test_runtime_lookup_without_returned_record_does_not_attest_source_existence(self) -> None:
+        record = {
+            "reference_id": "lookup-no-record",
+            "claimed_doi": "10.9999/fabricated-local-fixture",
+            "claimed_title": "Fabricated Local Fixture",
+            "claimed_author_year": "Example 2026",
+            "claimed_venue": "Fixture Journal",
+            "source_access_level": "public_metadata_only",
+        }
+
+        results = evaluate_records([record], [PublicLookupState(attempted=True, metadata_returned=False)])
+
+        self.assertEqual(results[0]["external_verification_status"], "metadata_lookup_no_record_returned")
+        self.assertEqual(results[0]["source_existence_status"], "not_verified")
+        self.assertIn("DOI format is syntactically valid only; source existence is not verified", results[0]["notes"])
+
+    def test_duplicate_doi_with_conflicting_title_is_collection_warning(self) -> None:
+        first_record = matching_record()
+        first_record["reference_id"] = "first"
+        first_record["citation_key"] = "same-doi-a"
+        first_record["claimed_title"] = "First Claimed Work"
+        second_record = matching_record()
+        second_record["reference_id"] = "second"
+        second_record["citation_key"] = "same-doi-b"
+        second_record["claimed_title"] = "Different Claimed Work"
+
+        report = checker.evaluate_metadata_report([first_record, second_record])
+
+        self.assertEqual(report["collection_warnings"][0]["code"], "same_doi_conflicting_titles")
+        self.assertEqual(report["collection_warnings"][0]["severity"], "high")
+        self.assertEqual(report["collection_warnings"][0]["record_ids"], ["first", "second"])
+        self.assertTrue(report["collection_warnings"][0]["human_review_required"])
+
+    def test_invalid_doi_alias_does_not_shadow_valid_claimed_doi_for_collection_conflicts(self) -> None:
+        first_record = matching_record()
+        first_record["reference_id"] = "first"
+        first_record["doi"] = "unknown"
+        first_record["claimed_doi"] = "10.0000/first-fixture"
+        first_record["authoritative_doi"] = ""
+        first_record["claimed_title"] = "First Claimed Work"
+        second_record = matching_record()
+        second_record["reference_id"] = "second"
+        second_record["doi"] = "unknown"
+        second_record["claimed_doi"] = "10.0000/second-fixture"
+        second_record["authoritative_doi"] = ""
+        second_record["claimed_title"] = "Different Claimed Work"
+
+        report = checker.evaluate_metadata_report([first_record, second_record])
+
+        self.assertEqual(report["collection_warnings"], [])
+
+    def test_repeated_citation_key_with_different_work_is_collection_warning(self) -> None:
+        first_record = matching_record()
+        first_record["reference_id"] = "first"
+        first_record["citation_key"] = "fixture2026"
+        second_record = matching_record()
+        second_record["reference_id"] = "second"
+        second_record["citation_key"] = "fixture2026"
+        second_record["claimed_doi"] = "10.0000/other-fixture"
+        second_record["authoritative_doi"] = "10.0000/other-fixture"
+        second_record["claimed_title"] = "Other Fixture"
+        second_record["authoritative_title"] = "Other Fixture"
+
+        report = checker.evaluate_metadata_report([first_record, second_record])
+
+        self.assertEqual(report["collection_warnings"][0]["code"], "citation_key_conflicting_works")
+        self.assertEqual(report["collection_warnings"][0]["severity"], "high")
+        self.assertEqual(report["collection_warnings"][0]["citation_key"], "fixture2026")
+
+    def test_citation_only_source_is_not_source_claim_verification(self) -> None:
+        record = matching_record()
+        record["source_access_level"] = "citation_only"
+
+        results = evaluate_records([record])
+
+        self.assertEqual(results[0]["source_access_status"], "citation_only")
+        self.assertEqual(results[0]["source_claim_support_status"], "not_checked")
+        self.assertIn("citation-only access does not verify source-claim support", results[0]["notes"])
+
+    def test_abstract_only_source_is_limited_to_abstract_basis(self) -> None:
+        record = matching_record()
+        record["source_access_level"] = "abstract_only"
+
+        results = evaluate_records([record])
+
+        self.assertEqual(results[0]["source_access_status"], "abstract_only")
+        self.assertEqual(results[0]["source_claim_support_status"], "not_checked")
+        self.assertIn("abstract-only access cannot verify full-text source-claim support", results[0]["notes"])
+
+    def test_unknown_source_access_label_is_validation_warning(self) -> None:
+        record = matching_record()
+        record["source_access_level"] = "verified from memory"
+
+        results = evaluate_records([record])
+
+        self.assertEqual(results[0]["source_access_status"], "verified_from_memory")
+        self.assertEqual(results[0]["status"], "metadata_validation_warning")
+        self.assertEqual(results[0]["risk"], "medium")
+        self.assertIn("unknown source access level 'verified_from_memory'", results[0]["notes"])
+
+    def test_unsupported_locator_claim_is_reported(self) -> None:
+        record = matching_record()
+        record["locator_claim"] = "direct quote appears on a specific page"
+
+        results = evaluate_records([record])
+
+        self.assertEqual(results[0]["status"], "metadata_validation_warning")
+        self.assertEqual(results[0]["risk"], "medium")
+        self.assertIn("locator claim lacks page, section, paragraph, or locator support", results[0]["notes"])
+
     def test_absent_metadata_is_not_treated_as_low_risk(self) -> None:
         results = evaluate_records([{"reference_id": "empty-fixture"}])
 
         self.assertEqual(results[0]["status"], "metadata_partly_unchecked")
         self.assertEqual(results[0]["risk"], "medium")
         self.assertIn("metadata pair missing or unchecked", results[0]["notes"])
+        self.assertIn("source access level missing", results[0]["notes"])
 
     def test_cli_outputs_json_and_fails_on_private_fields(self) -> None:
         with TemporaryDirectory() as temporary_directory:
@@ -299,7 +466,7 @@ class TestCitationMetadataChecks(unittest.TestCase):
 
         checker.fetch_crossref_metadata = fake_fetch_crossref_metadata
         try:
-            records = checker.enrich_records_with_public_lookup(
+            records, lookup_states = checker.enrich_records_with_public_lookup_result(
                 [{"claimed_doi": "https://doi.org/10.0000/fixture"}],
                 lookup_provider="crossref",
                 timeout=2.5,
@@ -309,6 +476,7 @@ class TestCitationMetadataChecks(unittest.TestCase):
 
         self.assertEqual(observed, {"doi": "10.0000/fixture", "timeout": 2.5})
         self.assertEqual(records[0]["authoritative_title"], "Crossref Fixture")
+        self.assertEqual(lookup_states, [PublicLookupState(attempted=True, metadata_returned=True)])
 
     def test_crossref_response_body_size_is_capped(self) -> None:
         class LargeResponse:

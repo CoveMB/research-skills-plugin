@@ -14,20 +14,24 @@
     "Verify citation metadata and source-claim fit before marking passed."
   ],
   "process_passport": {
-    "stage": "Fixture citation audit handoff",
-    "artifact_inputs": [
-      "Fixture citation row"
-    ],
-    "tool_use_summary": [
+    "artifact_id": "citation-integrity-audit",
+    "source_basis": "Fixture citation audit; no source text supplied.",
+    "source_access_level": "fixture only; no live source access verified",
+    "corpus_coverage": "Fixture artifact only; no corpus coverage or representativeness was verified.",
+    "evidence_status": "fixture_unverified",
+    "tool_use": [
       "No source text, page image, DOI lookup, or bibliography database was checked."
     ],
-    "gate_status": [
-      "Not ready for citation clearance until authoritative source text or metadata is supplied."
+    "human_verification_status": "needed before scholarly reliance",
+    "unresolved_risks": [
+      "Citation-source fit cannot be verified without source text or authoritative metadata."
     ],
-    "human_checkpoints": [
-      "Human reviewer must verify source identity, locator, and source-claim fit before relying on this audit."
+    "handoff_limits": [
+      "Use this fixture only to validate citation-audit structure and handoff limits."
     ],
-    "handoff_notes": "Use this fixture only to validate citation-audit structure and handoff limits."
+    "generated_or_updated_at": "2026-05-12T00:00:00-04:00",
+    "producing_skill": "citation-integrity-auditor",
+    "intended_next_skill_or_use": "scholarly-integrity-gate or revision"
   },
   "citation_audit_rows": [
     {
@@ -38,5 +42,6 @@
       "risk": "medium",
       "repair_action": "Provide source text, page, or authoritative metadata."
     }
-  ]
+  ],
+  "handoff_artifact": true
 }

@@ -47,6 +47,8 @@ Use this instead of `literature-review-mapper` when the user needs triage before
 
 Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
+Use `docs/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` only when triage could imply corpus coverage, field balance, missing counterarguments, or literature synthesis. Keep the label compact in source-basis or uncertainty text; do not add a full taxonomy section to low-load output unless the user asks.
+
 If only titles, abstracts, or snippets are available, mark triage and skip risk as provisional.
 
 ## Compact output
@@ -72,6 +74,7 @@ Compression must not remove decision-critical caveats. Keep access level, provis
 - Do not infer source support from title or abstract alone.
 - Do not turn provisional reading triage into literature synthesis.
 - Do not claim a source is irrelevant when source access is too thin; mark it as park or needs metadata instead.
+- Do not convert `not yet assessed`, title-only, citation-only, or unknown-access items into `irrelevant`.
 - Do not produce long summaries when the goal is reducing reading load.
 - Do not make legal, medical, financial, workplace, or publication decisions for the user.
 
@@ -174,6 +177,7 @@ Use `Close-reading targets`, `Skim targets`, and `Park or skip` only when those 
 - Read closely, skim, park, and skip are distinct.
 - Output reduces reading load rather than adding a new essay.
 - No citations, page numbers, source claims, or field consensus are invented.
+- Corpus coverage labels are used only when a triage decision could be mistaken for synthesis or field balance.
 - Expert-review, source-access, and user-verification limits remain visible for high-stakes or publication-facing decisions.
 - Compact output preserves the caveat that would change the next reading decision.
 

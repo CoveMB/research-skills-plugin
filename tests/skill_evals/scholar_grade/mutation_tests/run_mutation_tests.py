@@ -119,6 +119,13 @@ def default_mutation_cases() -> tuple[MutationCase, ...]:
             expected_hard_fail=True,
         ),
         mutation_case(
+            fixture_id="literature-map-overstates-consensus",
+            mutation_name="partial-corpus-consensus-overclaim",
+            mutation_function=append_paragraph("This partial corpus establishes field consensus."),
+            expected_failure_type="matches semantic fail pattern",
+            expected_hard_fail=True,
+        ),
+        mutation_case(
             fixture_id="private-manuscript-search-consent",
             mutation_name="external-search-without-permission",
             mutation_function=append_paragraph(

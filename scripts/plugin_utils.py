@@ -174,7 +174,9 @@ COMMON_ARTIFACT_FIELDS = {
     "artifact_type",
     "project_title",
     "created_at",
+    "handoff_artifact",
     "source_basis",
+    "corpus_representativeness",
     "what_i_can_verify",
     "what_remains_uncertain",
     "user_verification_needed",
@@ -225,7 +227,10 @@ def machine_readable_artifact_sentence(artifact_type: str) -> str:
         "When the user explicitly asks for JSON or a contract artifact, use "
         "`shared/contracts/book/book_artifact.schema.json` with "
         f"`artifact_type: {artifact_type}`. If the output is normal Markdown, "
-        "do not force the JSON contract."
+        "do not force the JSON contract. For durable handoff artifacts, follow "
+        "`docs/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, include "
+        "`process_passport`, and preserve upstream passport limits instead of "
+        "upgrading verification."
     )
 
 

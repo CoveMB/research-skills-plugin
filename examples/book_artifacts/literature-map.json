@@ -4,6 +4,21 @@
   "project_title": "Fixture Research Book",
   "created_at": "2026-05-12",
   "source_basis": "Fixture example; no live source lookup or full-text verification performed.",
+  "corpus_representativeness": {
+    "labels": [
+      "unknown_coverage"
+    ],
+    "claim_limits": [
+      "This fixture map demonstrates artifact shape only.",
+      "It cannot support field consensus, novelty, or absence-of-literature claims."
+    ],
+    "counter_literature_check": "required",
+    "consensus_claims": "not_permitted",
+    "absence_of_evidence_claims": "not_permitted",
+    "notes": [
+      "Replace the fixture basis with a documented source set before relying on the literature map."
+    ]
+  },
   "what_i_can_verify": [
     "The artifact follows the shared book artifact schema."
   ],
@@ -40,5 +55,26 @@
   "sources_still_needed": [
     "Recent review source",
     "Source that challenges the preferred explanation"
-  ]
+  ],
+  "handoff_artifact": true,
+  "process_passport": {
+    "artifact_id": "literature-map",
+    "source_basis": "Fixture example; no live source lookup or full-text verification performed.",
+    "source_access_level": "fixture only; no live source access verified",
+    "corpus_coverage": "Corpus representativeness labels: unknown_coverage. Claim limits: This fixture map demonstrates artifact shape only.; It cannot support field consensus, novelty, or absence-of-literature claims.",
+    "evidence_status": "fixture_unverified",
+    "tool_use": [
+      "No live tool use or external lookup was performed for this fixture."
+    ],
+    "human_verification_status": "needed before scholarly reliance",
+    "unresolved_risks": [
+      "Field structure, consensus, and gaps require a representative source set."
+    ],
+    "handoff_limits": [
+      "Use this fixture only for schema validation, not as verified scholarship."
+    ],
+    "generated_or_updated_at": "2026-05-12T00:00:00-04:00",
+    "producing_skill": "literature-review-mapper",
+    "intended_next_skill_or_use": "argument-architecture"
+  }
 }

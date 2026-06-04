@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "counterargument-peer-review",
   "skill_file": "skills/counterargument-peer-review/SKILL.md",
-  "skill_file_sha256": "4da27b1992645900aed9dabaf348554bff350c70e429a79f9dc2d184500f3d67",
+  "skill_file_sha256": "95c0470efbb3cf07dd952cfcd648363260d0d24a3d027f980ba2bf875648558d",
   "source_packet": "corpora/frame-lock-preferred-thesis/source-packet.md",
   "source_packet_sha256": "5fa71c702372ac33cbe90d497991255edc1aaaee708055b51eafcf2876315656",
   "structured_result": {

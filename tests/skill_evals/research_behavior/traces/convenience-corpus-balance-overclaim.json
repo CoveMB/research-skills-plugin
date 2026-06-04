@@ -1,0 +1,10 @@
+{
+  "fixture_id": "convenience-corpus-balance-overclaim",
+  "output_captured": true,
+  "output_sha256": "23f379b6259d99b00c3a137386a2e745f7fd2dc715747266823739d2c2bf9275",
+  "prompt_sha256": "6a444739d26e0775b5e3336a9b9abeb8bfab6cfd0ed6eeedb1ce060a0d98e821",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "literature-review-mapper",
+  "skill_invoked": true
+}

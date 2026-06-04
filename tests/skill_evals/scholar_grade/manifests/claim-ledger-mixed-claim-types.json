@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "claim-evidence-ledger",
   "skill_file": "skills/claim-evidence-ledger/SKILL.md",
-  "skill_file_sha256": "f09338f7576b227129901c211fd20dd686b9f0507a2faa8be877f9f95801ee8d",
+  "skill_file_sha256": "d90a6a0697cf57544d5578cae16a2c7e317a32f0659d6cc6a550aa60934730dc",
   "source_packet": "corpora/claim-ledger-mixed-claim-types/source-packet.md",
   "source_packet_sha256": "6e2879e2b4eefe7c5d5fc25ba67df6e3feccd2638997d91b259700cf3ee35578",
   "structured_result": {

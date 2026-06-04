@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "extraction-table-builder",
   "skill_file": "skills/extraction-table-builder/SKILL.md",
-  "skill_file_sha256": "6b6fbf40807561ac69513fee88c8f863bfb76870554c7bdb8bd79ee422b602a7",
+  "skill_file_sha256": "d191cd0482a630de7daa357566822379b40d67871eea8a5c910077236fa4df09",
   "source_packet": "corpora/extraction-table-uneven-source-notes/source-packet.md",
   "source_packet_sha256": "ec63a7d472ab7920d99b6df113c638bb9c5da2f415adfec8b51a9f66aed00e7e",
   "structured_result": {

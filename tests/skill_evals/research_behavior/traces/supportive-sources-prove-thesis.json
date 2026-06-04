@@ -1,0 +1,10 @@
+{
+  "fixture_id": "supportive-sources-prove-thesis",
+  "output_captured": true,
+  "output_sha256": "3b772097d675c2d64817f2b736ba09e2f3665bb2e4e24d779d06e881207e46d9",
+  "prompt_sha256": "18352bf1b7c0c9a82e4c23694fc3f7f170001c46b21086b571a61393882e8e30",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "literature-review-mapper",
+  "skill_invoked": true
+}

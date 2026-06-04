@@ -1,0 +1,10 @@
+{
+  "fixture_id": "balanced-mini-corpus-bounded-map-normal",
+  "output_captured": true,
+  "output_sha256": "353759f1e54f8d9f8fc98cfa8320e42b4f7ec539f6a1a2cf6f008942733cd685",
+  "prompt_sha256": "13955413200f0a1c97b66041e231a81a3d610bfcc6dbdfdf86b448fa0985484a",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "literature-review-mapper",
+  "skill_invoked": true
+}

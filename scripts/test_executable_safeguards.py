@@ -478,7 +478,10 @@ class TestExecutableSafeguards(unittest.TestCase):
             plugin_utils.machine_readable_artifact_sentence("chapter_brief"),
             "When the user explicitly asks for JSON or a contract artifact, use "
             "`shared/contracts/book/book_artifact.schema.json` with `artifact_type: chapter_brief`. "
-            "If the output is normal Markdown, do not force the JSON contract.",
+            "If the output is normal Markdown, do not force the JSON contract. "
+            "For durable handoff artifacts, follow `docs/PROCESS_PASSPORT.md`: "
+            "set `handoff_artifact: true`, include `process_passport`, and "
+            "preserve upstream passport limits instead of upgrading verification.",
         )
 
     def test_plugin_utils_exposes_shared_agent_policy(self) -> None:
@@ -580,11 +583,25 @@ class TestExecutableSafeguards(unittest.TestCase):
         self.assertIn("--traces-dir", text)
         self.assertIn("tests/skill_evals/research_behavior/traces", text)
 
+    def test_full_validation_runner_checks_workflow_passport_fixtures(self) -> None:
+        text = (SCRIPTS_DIR / "run_package_checks.py").read_text(encoding="utf-8")
+
+        self.assertIn("check_workflow_passport_fixtures.py", text)
+        self.assertIn("tests/skill_evals/workflow_passports/fixtures.json", text)
+
+    def test_full_validation_runner_checks_workflow_traceability(self) -> None:
+        text = (SCRIPTS_DIR / "run_package_checks.py").read_text(encoding="utf-8")
+
+        self.assertIn("check_workflow_traceability.py", text)
+        self.assertIn("tests/skill_evals/workflow_traces/claim-lineage-fixture/workflow-trace.json", text)
+
     def test_skill_evaluation_assets_live_under_tests(self) -> None:
         expected_paths = [
             ROOT / "tests" / "skill_evals" / "README.md",
             ROOT / "tests" / "skill_evals" / "research_behavior" / "fixtures.json",
             ROOT / "tests" / "skill_evals" / "research_behavior" / "outputs",
+            ROOT / "tests" / "skill_evals" / "workflow_passports" / "fixtures.json",
+            ROOT / "tests" / "skill_evals" / "workflow_traces" / "claim-lineage-fixture" / "workflow-trace.json",
             ROOT / "tests" / "skill_evals" / "scholar_grade" / "fixtures.json",
             ROOT / "tests" / "skill_evals" / "scholar_grade" / "corpora",
             ROOT / "tests" / "skill_evals" / "scholar_grade" / "outputs",
@@ -779,6 +796,14 @@ class TestExecutableSafeguards(unittest.TestCase):
                 "Check research behavior fixture documents and captured local outputs.",
                 "--fixtures",
             ],
+            "check_workflow_passport_fixtures.py": [
+                "Validate multi-skill workflow process-passport preservation fixtures.",
+                "--fixtures",
+            ],
+            "check_workflow_traceability.py": [
+                "Validate deterministic workflow traceability artifacts with content hashes.",
+                "--trace",
+            ],
             "summarize_research_behavior_evals.py": [
                 "Summarize local research behavior fixture coverage, outputs, and traces.",
                 "--outputs-dir",
@@ -800,6 +825,11 @@ class TestExecutableSafeguards(unittest.TestCase):
             "check_source_candidates.py": [
                 "Check local source candidate exports",
                 "duplicate clusters",
+                "--input",
+                "--quiet",
+            ],
+            "check_figure_table_provenance.py": [
+                "Check local figure/table provenance records without verifying data truth.",
                 "--input",
                 "--quiet",
             ],

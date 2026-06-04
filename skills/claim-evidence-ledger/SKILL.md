@@ -77,7 +77,9 @@ Use compact output when the user asks for low reading load, blocker-first claim 
 
 ## Machine-readable artifacts
 
-When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: claim_evidence_ledger`. If the output is normal Markdown, do not force the JSON contract.
+When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: claim_evidence_ledger`. If the output is normal Markdown, do not force the JSON contract. For durable handoff artifacts, follow `docs/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits instead of upgrading verification.
+
+For durable multi-stage claim workflows with a workflow trace JSON, use or recommend `python3 scripts/check_workflow_traceability.py --trace path/to/workflow-trace.json` after the ledger is linked downstream. Treat the helper as structural only: it checks claim IDs, link integrity, claim drift, source locator/source-basis preservation, evidence-status non-upgrades, and unresolved-risk preservation; it does not judge argument quality or source-claim fit.
 
 ## Files/folders it may read
 
@@ -113,6 +115,8 @@ Identify type and level of risk. Causal, predictive, and universal claims are hi
 If sources are provided, match each claim to source support. If no sources are provided, mark evidence needs without inventing citations.
 
 For each claim, record source basis, confidence, and whether a page, timestamp, section, archive locator, dataset variable, or other locator is needed.
+
+Preserve stable claim IDs across downstream artifacts. If claim text, claim type, evidence status, locator status, source basis, or unresolved risk changes, record a version note, verification event, or explicit explanation rather than silently rewriting the lineage.
 
 For empirical, quantitative, computational, or table/figure-backed claims, record analysis provenance: dataset, transformation, script or notebook, run log, output table/figure pointer, and any missing reproducibility material.
 

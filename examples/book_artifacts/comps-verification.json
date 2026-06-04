@@ -14,20 +14,24 @@
     "Verify title, author, publisher, year, and comparability before proposal use."
   ],
   "process_passport": {
-    "stage": "Fixture comps verification handoff",
-    "artifact_inputs": [
-      "Fixture comparable-title row"
-    ],
-    "tool_use_summary": [
+    "artifact_id": "comps-verification",
+    "source_basis": "Fixture comp verification; no publication lookup performed.",
+    "source_access_level": "fixture only; no live source access verified",
+    "corpus_coverage": "Fixture artifact only; no corpus coverage or representativeness was verified.",
+    "evidence_status": "fixture_unverified",
+    "tool_use": [
       "No publisher, catalogue, sales, or market lookup was performed."
     ],
-    "gate_status": [
-      "Not ready for proposal positioning until publication details and fit are verified."
+    "human_verification_status": "needed before scholarly reliance",
+    "unresolved_risks": [
+      "Comparable-title publication details require authoritative lookup."
     ],
-    "human_checkpoints": [
-      "Human reviewer must approve each comp's title metadata, audience fit, and mismatch risk."
+    "handoff_limits": [
+      "Use this fixture only to validate comps-verification structure and handoff limits."
     ],
-    "handoff_notes": "Use this fixture only to validate comps-verification structure and handoff limits."
+    "generated_or_updated_at": "2026-05-12T00:00:00-04:00",
+    "producing_skill": "book-comps-verifier",
+    "intended_next_skill_or_use": "book-proposal-scholarship"
   },
   "comps_verification_rows": [
     {
@@ -36,5 +40,6 @@
       "mismatch_risk": "medium",
       "repair_task": "Verify publication details and fit by topic, audience, method, form, and press category."
     }
-  ]
+  ],
+  "handoff_artifact": true
 }

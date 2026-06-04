@@ -1,0 +1,14 @@
+{
+  "records": [
+    {
+      "object_id": "table-generated",
+      "object_type": "table",
+      "caption": "Generated summary table of fixture rates.",
+      "claim_supported": "The generated table shows the fixture rate improved.",
+      "source_access_level": "none",
+      "origin": "generated",
+      "rights_status": "unknown",
+      "caption_source_consistency": "unknown"
+    }
+  ]
+}

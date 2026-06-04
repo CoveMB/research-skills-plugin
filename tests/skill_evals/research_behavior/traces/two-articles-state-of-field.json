@@ -1,0 +1,10 @@
+{
+  "fixture_id": "two-articles-state-of-field",
+  "output_captured": true,
+  "output_sha256": "822e5727d73889583d649c46861abfb15d82f10f4ab4ca349f441431288ff542",
+  "prompt_sha256": "369ff6797d1aff51e32198c4d165b9cfce9dc7ca91bf4405180fda7007053636",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "literature-review-mapper",
+  "skill_invoked": true
+}

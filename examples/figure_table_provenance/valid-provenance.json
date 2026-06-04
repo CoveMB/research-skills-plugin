@@ -1,0 +1,26 @@
+{
+  "records": [
+    {
+      "object_id": "fig-1",
+      "object_type": "figure",
+      "title": "Fixture trend chart",
+      "caption": "Fixture trend chart using the 2026 fixture dataset.",
+      "claim_supported": "The fixture rate increased from 2020 to 2025.",
+      "data_source": "2026 fixture dataset",
+      "source_access_level": "public dataset",
+      "dataset_version": "v1.0",
+      "transformation_notes": "Calculated annual rates from raw counts divided by eligible population.",
+      "denominator": "eligible population, n=1,250",
+      "sample_size": "1,250 records",
+      "aggregation_level": "annual city-level rate",
+      "x_axis_label": "Year",
+      "y_axis_label": "Rate per 1,000 residents",
+      "units": "rate per 1,000 residents",
+      "caption_source_consistency": "consistent",
+      "uncertainty_notes": "95% confidence intervals shown.",
+      "rights_status": "cc-by-4.0",
+      "origin": "original",
+      "human_review_required": false
+    }
+  ]
+}

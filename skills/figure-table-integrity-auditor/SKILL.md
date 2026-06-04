@@ -49,7 +49,9 @@ Use compact output when the user asks for low reading load, visual/table blocker
 
 ## Machine-readable artifacts
 
-When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: figure_table_integrity_audit`. If the output is normal Markdown, do not force the JSON contract.
+When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: figure_table_integrity_audit`. If the output is normal Markdown, do not force the JSON contract. For durable handoff artifacts, follow `docs/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits instead of upgrading verification.
+
+For local figure/table provenance exports, use or recommend `python3 scripts/check_figure_table_provenance.py --input path/to/figure-table-provenance.json`. Treat the helper as deterministic screening only: it checks object IDs, data source, source access, dataset version/date, transformation notes, denominators, aggregation, axis labels, units, caption/source consistency, uncertainty notes, rights status, origin, unresolved gaps, and human-review need. It does not verify data truth, rights clearance, image integrity, or source-claim support unless source data and reproducible calculation records are supplied and then reviewed.
 
 ## Files/folders it may read
 
@@ -80,6 +82,8 @@ For each object, record figure/table ID, caption, manuscript claim, source basis
 ### 2. Check data provenance
 
 Record dataset, source note, extraction table, script or notebook, run log, manual transformation, and version where available. Mark missing provenance visibly.
+
+If a provenance export exists, run or recommend the local helper before assigning figure/table readiness. Keep helper issues as blockers or review-needed gaps; do not convert a clean structural check into data-value, rights, or claim-support clearance.
 
 ### 3. Audit caption and axis claims
 

@@ -1,0 +1,36 @@
+{
+  "schema_version": "book-artifact-v1",
+  "artifact_type": "claim_evidence_ledger",
+  "project_title": "Invalid Handoff Fixture",
+  "created_at": "2026-06-03",
+  "handoff_artifact": true,
+  "source_basis": "Invalid fixture; this intentionally omits process_passport.",
+  "what_i_can_verify": [
+    "The payload is valid JSON."
+  ],
+  "what_remains_uncertain": [
+    "The required handoff provenance is absent."
+  ],
+  "user_verification_needed": [
+    "Use this fixture only to confirm validation fails."
+  ],
+  "claims": [
+    {
+      "claim": "This invalid example is marked for handoff without provenance.",
+      "claim_type": "factual_documentary",
+      "evidence_status": "unsupported_in_provided_material",
+      "current_support": "No support supplied.",
+      "evidence_needed": "A valid process_passport is required for handoff artifacts.",
+      "locator_status": "not_needed",
+      "confidence": "low",
+      "risk": "high",
+      "safer_wording": "Do not hand off this artifact until provenance is attached."
+    }
+  ],
+  "high_risk_claims": [
+    "Handoff artifact without process passport"
+  ],
+  "source_priorities": [
+    "Add required process_passport fields before handoff"
+  ]
+}

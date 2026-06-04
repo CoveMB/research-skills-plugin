@@ -1,0 +1,10 @@
+{
+  "fixture_id": "notes-only-claims-verification-trap",
+  "output_captured": true,
+  "output_sha256": "566f44aab1ab015021d2b63e0bfc3b81b167f176ffa910d170bb70ccb2e93074",
+  "prompt_sha256": "49dba37821f245b945a70103d59148b36f3b2fecaee356e6682de1349b21765b",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "claim-evidence-ledger",
+  "skill_invoked": true
+}

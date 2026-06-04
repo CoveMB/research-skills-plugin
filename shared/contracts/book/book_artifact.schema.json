@@ -49,8 +49,14 @@
     "created_at": {
       "$ref": "#/$defs/non_empty_string"
     },
+    "handoff_artifact": {
+      "type": "boolean"
+    },
     "source_basis": {
       "$ref": "#/$defs/non_empty_string"
+    },
+    "corpus_representativeness": {
+      "$ref": "#/$defs/corpus_representativeness"
     },
     "what_i_can_verify": {
       "$ref": "#/$defs/non_empty_strings"
@@ -477,6 +483,23 @@
     }
   },
   "allOf": [
+    {
+      "if": {
+        "required": [
+          "handoff_artifact"
+        ],
+        "properties": {
+          "handoff_artifact": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "process_passport"
+        ]
+      }
+    },
     {
       "if": {
         "required": [
@@ -946,6 +969,67 @@
         "$ref": "#/$defs/non_empty_string"
       }
     },
+    "corpus_representativeness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "labels",
+        "claim_limits",
+        "counter_literature_check"
+      ],
+      "properties": {
+        "labels": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": [
+              "single_source",
+              "thin_corpus",
+              "partial_corpus",
+              "convenience_corpus",
+              "field_balanced_corpus",
+              "systematic_protocol",
+              "scoping_protocol",
+              "expert_curated_corpus",
+              "unknown_coverage",
+              "stale_corpus",
+              "one_sided_corpus",
+              "mixed_quality_corpus"
+            ]
+          }
+        },
+        "claim_limits": {
+          "$ref": "#/$defs/non_empty_strings"
+        },
+        "counter_literature_check": {
+          "enum": [
+            "required",
+            "not_required",
+            "already_completed",
+            "not_applicable"
+          ]
+        },
+        "consensus_claims": {
+          "enum": [
+            "permitted",
+            "not_permitted",
+            "protocol_bound_only",
+            "corpus_bound_only"
+          ]
+        },
+        "absence_of_evidence_claims": {
+          "enum": [
+            "permitted",
+            "not_permitted",
+            "protocol_bound_only",
+            "corpus_bound_only"
+          ]
+        },
+        "notes": {
+          "$ref": "#/$defs/non_empty_strings"
+        }
+      }
+    },
     "claim_type": {
       "enum": [
         "empirical",
@@ -1021,31 +1105,70 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "stage",
-        "artifact_inputs",
-        "tool_use_summary",
-        "gate_status",
-        "human_checkpoints",
-        "handoff_notes"
+        "artifact_id",
+        "source_basis",
+        "source_access_level",
+        "corpus_coverage",
+        "evidence_status",
+        "tool_use",
+        "human_verification_status",
+        "unresolved_risks",
+        "handoff_limits",
+        "generated_or_updated_at",
+        "producing_skill",
+        "intended_next_skill_or_use"
       ],
       "properties": {
-        "stage": {
+        "artifact_id": {
           "$ref": "#/$defs/non_empty_string"
         },
-        "artifact_inputs": {
-          "$ref": "#/$defs/non_empty_strings"
-        },
-        "tool_use_summary": {
-          "$ref": "#/$defs/non_empty_strings"
-        },
-        "gate_status": {
-          "$ref": "#/$defs/non_empty_strings"
-        },
-        "human_checkpoints": {
-          "$ref": "#/$defs/non_empty_strings"
-        },
-        "handoff_notes": {
+        "source_basis": {
           "$ref": "#/$defs/non_empty_string"
+        },
+        "source_access_level": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "corpus_coverage": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "evidence_status": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "tool_use": {
+          "$ref": "#/$defs/non_empty_strings"
+        },
+        "human_verification_status": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "unresolved_risks": {
+          "$ref": "#/$defs/non_empty_strings"
+        },
+        "handoff_limits": {
+          "$ref": "#/$defs/non_empty_strings"
+        },
+        "generated_or_updated_at": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "producing_skill": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "intended_next_skill_or_use": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "parent_artifact_ids": {
+          "$ref": "#/$defs/non_empty_strings"
+        },
+        "input_artifact_hashes": {
+          "$ref": "#/$defs/non_empty_strings"
+        },
+        "output_artifact_hash": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "verification_tasks": {
+          "$ref": "#/$defs/non_empty_strings"
+        },
+        "privacy_flags": {
+          "$ref": "#/$defs/non_empty_strings"
         }
       }
     },

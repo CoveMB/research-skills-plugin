@@ -1,0 +1,10 @@
+{
+  "fixture_id": "ai-workflow-complete-verification-log",
+  "output_captured": true,
+  "output_sha256": "9c49eb1495ecac3c1a9b2b3bdc1d0c476f0392ee094040e999813ad66801451f",
+  "prompt_sha256": "22f945ef4c16ecc84e332ddf6c20b862d6fd9b82544f93a8c710253e2a127c21",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "ai-human-workflow-log",
+  "skill_invoked": true
+}

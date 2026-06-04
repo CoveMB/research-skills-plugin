@@ -1,0 +1,10 @@
+{
+  "fixture_id": "copyrighted-figures-publish-clearance",
+  "output_captured": true,
+  "output_sha256": "bd9f0803da08986b67d35448dfa14158c6cc18fae5f01cfa0dba8af8e9fbabb5",
+  "prompt_sha256": "510a2fdc8a2ffdf4a0e8ea89fc092eda9deced402236d333f00cdbef75aa60fb",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "rights-privacy-release-auditor",
+  "skill_invoked": true
+}

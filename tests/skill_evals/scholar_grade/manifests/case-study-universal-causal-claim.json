@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "case-study-integration",
   "skill_file": "skills/case-study-integration/SKILL.md",
-  "skill_file_sha256": "9414ecec9eae758f77895d0252dae660eed08936de1ff5713fed203e0f99aa1d",
+  "skill_file_sha256": "12404682158f507722aa43b4ed092931141fb6fd9c1b765b0aa9f252bff90dee",
   "source_packet": "corpora/case-study-universal-causal-claim/source-packet.md",
   "source_packet_sha256": "69c3f337d16762e08f9b631b9f3d15c97d876b410e4045ce587bfd2d9f53dcd9",
   "structured_result": {

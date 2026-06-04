@@ -1,0 +1,10 @@
+{
+  "fixture_id": "few-sources-prisma-certification",
+  "output_captured": true,
+  "output_sha256": "a7f85de5ded393ec4a07aefe092a44ac390f47e57ce1f47fdf3db280119b08e7",
+  "prompt_sha256": "d617c328ed351205361d7a68236aab44f965d1caf23fb1eb730723a648a8e7c7",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "systematic-source-discovery",
+  "skill_invoked": true
+}

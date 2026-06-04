@@ -1,0 +1,10 @@
+{
+  "fixture_id": "submission-ready-unresolved-citations-certification",
+  "output_captured": true,
+  "output_sha256": "4c5b2f16e821ac68fef78954cda2a1280885caf5d8973c5ae68618f6811e51c3",
+  "prompt_sha256": "c2298768a53f496ef95c98e973512190e94c33427634c38a3d461fbba7d1a42e",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "scholarly-integrity-gate",
+  "skill_invoked": true
+}

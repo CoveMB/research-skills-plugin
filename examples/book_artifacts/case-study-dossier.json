@@ -14,20 +14,24 @@
     "Verify case facts, case-selection rationale, and generalization limits before using the case."
   ],
   "process_passport": {
-    "stage": "Fixture case-study dossier handoff",
-    "artifact_inputs": [
-      "Fixture case dossier row"
-    ],
-    "tool_use_summary": [
+    "artifact_id": "case-study-dossier",
+    "source_basis": "Fixture case dossier; no real case source base reviewed.",
+    "source_access_level": "fixture only; no live source access verified",
+    "corpus_coverage": "Fixture artifact only; no corpus coverage or representativeness was verified.",
+    "evidence_status": "fixture_unverified",
+    "tool_use": [
       "No case source base, timeline, dataset, or counter-case evidence was checked."
     ],
-    "gate_status": [
-      "Not ready for argumentative use until selection bias and source base are reviewed."
+    "human_verification_status": "needed before scholarly reliance",
+    "unresolved_risks": [
+      "Real case use requires source base, comparison class, selection logic, and counter-case review."
     ],
-    "human_checkpoints": [
-      "Human reviewer must confirm the case function and limits before drafting from it."
+    "handoff_limits": [
+      "Use this fixture only to validate case-study dossier structure and handoff limits."
     ],
-    "handoff_notes": "Use this fixture only to validate case-study dossier structure and handoff limits."
+    "generated_or_updated_at": "2026-05-13T00:00:00-04:00",
+    "producing_skill": "case-study-integration",
+    "intended_next_skill_or_use": "chapter-architecture or claim-evidence-ledger"
   },
   "claim_needing_case": "The chapter needs a bounded illustrative case.",
   "case_selection_logic": "Fixture case selected only to validate the artifact shape.",
@@ -48,5 +52,6 @@
   ],
   "safer_case_claims": [
     "This case can illustrate, not prove, the claim."
-  ]
+  ],
+  "handoff_artifact": true
 }

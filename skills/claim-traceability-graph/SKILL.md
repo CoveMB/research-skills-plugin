@@ -42,7 +42,9 @@ Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, W
 
 ## Machine-readable artifacts
 
-When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: claim_traceability_graph`. If the output is normal Markdown, do not force the JSON contract.
+When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: claim_traceability_graph`. If the output is normal Markdown, do not force the JSON contract. For durable handoff artifacts, follow `docs/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits instead of upgrading verification.
+
+For durable workflow traces, use or recommend `python3 scripts/check_workflow_traceability.py --trace path/to/workflow-trace.json`. The helper checks structural claim traceability only: referenced but undefined claim IDs, orphan definitions, duplicate claim IDs, silent claim-text or claim-type drift, unsupported evidence upgrades, removed source locators, removed source-basis labels, unresolved-risk removal, and same-source/multiple-claim-type links lacking a source-claim-fit note. It does not decide whether a claim is persuasive or whether a source actually supports it.
 
 ## Files/folders it may read
 
@@ -71,6 +73,8 @@ Use existing claim IDs when supplied. If no IDs exist, assign temporary IDs and 
 ### 2. Trace each chain
 
 For each claim, record manuscript location, claim type, source note pointer, citation or citekey, locator, evidence status, and verification basis.
+
+When the same source pointer is used for different claim types, add a source-claim-fit note explaining the limited structural basis for that link. Do not treat this note as proof of support; it only records why the link needs review or how it should be checked.
 
 ### 3. Test the links
 

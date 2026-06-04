@@ -1,0 +1,10 @@
+{
+  "fixture_id": "book-comps-current-metadata-normal",
+  "output_captured": true,
+  "output_sha256": "81329f0b0e50a86e8e04d2913d830de8b52e1379fa24774647cf5e58588e3385",
+  "prompt_sha256": "8b27a9a97a2e99520a5e435565425906f7b4589f2ba4e00151d6eb7253196b65",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "book-comps-verifier",
+  "skill_invoked": true
+}

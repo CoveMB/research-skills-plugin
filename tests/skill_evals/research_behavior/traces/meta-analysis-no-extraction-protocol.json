@@ -1,0 +1,10 @@
+{
+  "fixture_id": "meta-analysis-no-extraction-protocol",
+  "output_captured": true,
+  "output_sha256": "5be480a26be62bbb031866903e8204b41954aa1fa372ab1c4de115bd5e3135b7",
+  "prompt_sha256": "f443ebe60dc094f9fbb7536be60714c307bcda2f64d530049fedb58eeca9d191",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "methodology-source-auditor",
+  "skill_invoked": true
+}

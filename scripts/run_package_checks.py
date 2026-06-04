@@ -135,6 +135,16 @@ FULL_CHECKS = (
         "tests/skill_evals/research_behavior/traces",
     ),
     (
+        "scripts/check_workflow_passport_fixtures.py",
+        "--fixtures",
+        "tests/skill_evals/workflow_passports/fixtures.json",
+    ),
+    (
+        "scripts/check_workflow_traceability.py",
+        "--trace",
+        "tests/skill_evals/workflow_traces/claim-lineage-fixture/workflow-trace.json",
+    ),
+    (
         "tests/skill_evals/scholar_grade/scholar_grade_eval_harness.py",
         "--fixtures",
         "tests/skill_evals/scholar_grade/fixtures.json",
@@ -161,6 +171,12 @@ FULL_CHECKS = (
         "scripts/check_source_candidates.py",
         "--input",
         "tests/skill_evals/source-candidates.json",
+        "--quiet",
+    ),
+    (
+        "scripts/check_figure_table_provenance.py",
+        "--input",
+        "examples/figure_table_provenance/valid-provenance.json",
         "--quiet",
     ),
     ("-m", "unittest", "discover", "-s", "scripts", "-p", "test_*.py"),

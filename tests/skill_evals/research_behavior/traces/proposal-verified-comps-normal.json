@@ -1,0 +1,10 @@
+{
+  "fixture_id": "proposal-verified-comps-normal",
+  "output_captured": true,
+  "output_sha256": "de0337d57bffa706f807a0730cb2ce1b6ecab6e50f69103f49970b8e03b683fb",
+  "prompt_sha256": "97c0992e672b83047cd11a5e798ae79c057c202ca7e90119b899be04362155cd",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "book-proposal-scholarship",
+  "skill_invoked": true
+}

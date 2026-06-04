@@ -14,21 +14,25 @@
     "Replace fixture values with a real protocol and executed search log before using this in scholarship."
   ],
   "process_passport": {
-    "stage": "Fixture systematic source-discovery handoff",
-    "artifact_inputs": [
-      "Fixture prompt",
-      "Fixture protocol fields"
-    ],
-    "tool_use_summary": [
+    "artifact_id": "source-discovery-log-systematic",
+    "source_basis": "Fixture systematic-review example; no live database search or source verification performed.",
+    "source_access_level": "fixture only; no live source access verified",
+    "corpus_coverage": "Fixture artifact only; no corpus coverage or representativeness was verified.",
+    "evidence_status": "fixture_unverified",
+    "tool_use": [
       "No external tools or databases were queried."
     ],
-    "gate_status": [
-      "Not ready for scholarship until a real search protocol and execution log replace fixture values."
+    "human_verification_status": "needed before scholarly reliance",
+    "unresolved_risks": [
+      "All counts, search strings, and source metadata require actual project search execution."
     ],
-    "human_checkpoints": [
-      "Human reviewer must approve scope, databases, filters, and inclusion/exclusion rules before execution."
+    "handoff_limits": [
+      "Use this passport as a fixture for chained artifact validation, not as evidence of completed search work.",
+      "Use this fixture only for schema validation, not as verified scholarship."
     ],
-    "handoff_notes": "Use this passport as a fixture for chained artifact validation, not as evidence of completed search work."
+    "generated_or_updated_at": "2026-05-13T00:00:00-04:00",
+    "producing_skill": "systematic-source-discovery",
+    "intended_next_skill_or_use": "discovery-runner-deduper or annotation-to-source-note"
   },
   "search_families": [
     "Core concept terms",
@@ -125,5 +129,6 @@
         "filters": "Fixture filters only"
       }
     ]
-  }
+  },
+  "handoff_artifact": true
 }

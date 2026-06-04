@@ -58,9 +58,11 @@ Include:
 
 Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
+Use `docs/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` for contribution-to-field, originality, timeliness, field-positioning, comparable-title set, or market-coverage claims. Supplied comps are supplied evidence, not market-level coverage, unless a representative or protocol-bounded comp search is visible.
+
 ## Machine-readable artifacts
 
-When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: book_proposal`. If the output is normal Markdown, do not force the JSON contract.
+When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: book_proposal`. If the output is normal Markdown, do not force the JSON contract. For durable handoff artifacts, follow `docs/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits instead of upgrading verification.
 
 ## Files/folders it may read
 
@@ -112,6 +114,8 @@ If verified current comparable titles are not available, request source discover
 
 Mark comparable titles, audience claims, market claims, and timing claims as verified, unverified, or needed. Do not present unverified positioning as market fact.
 
+Distinguish supplied comps from market-level evidence. Label a small, stale, or user-selected comp list as `partial_corpus`, `convenience_corpus`, `stale_corpus`, or `unknown_coverage` before using it for positioning strength.
+
 ### 6. Create development plan
 
 Recommend missing research, proposal materials, and sample chapter priorities.
@@ -143,6 +147,8 @@ Recommend missing research, proposal materials, and sample chapter priorities.
 
 ## Methods and source base
 
+## Scholarship / market coverage limits
+
 ## Chapter summaries
 
 ## Comparable titles needed / known
@@ -172,6 +178,7 @@ Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.m
 - Academic proposal style should be specific about contribution and source base.
 - Trade proposal style should be specific about reader need and narrative hook.
 - Label public relevance and market timing claims as claims needing evidence unless verified.
+- Supplied comps must not be treated as market-level evidence without a corpus coverage label and verification path.
 
 ## Failure modes
 

@@ -1,0 +1,108 @@
+{
+  "description": "Synthetic deterministic full-lineage fixture for a book workflow. It validates hash links and preservation of uncertainty labels; it does not validate live model behavior or source truth.",
+  "scenario_id": "claim-lineage-fixture",
+  "schema_version": "workflow-trace-v1",
+  "stages": [
+    {
+      "artifact_id": "source-discovery-log",
+      "artifact_path": "artifacts/01-source-discovery-log.json",
+      "artifact_sha256": "44a32d4b433811631bbdc6fbb765c5e6a2494a5c77dee4593cd7b7c506372197",
+      "skill": "systematic-source-discovery",
+      "stage_id": "source-discovery"
+    },
+    {
+      "artifact_id": "extraction-table",
+      "artifact_path": "artifacts/02-extraction-table.json",
+      "artifact_sha256": "40ea646a89168090b580868585ce39a56814b22dccd698bad4b2609f8875f287",
+      "parent_artifact_ids": [
+        "source-discovery-log"
+      ],
+      "parent_artifact_sha256": [
+        "44a32d4b433811631bbdc6fbb765c5e6a2494a5c77dee4593cd7b7c506372197"
+      ],
+      "skill": "extraction-table-builder",
+      "stage_id": "extraction"
+    },
+    {
+      "artifact_id": "literature-map",
+      "artifact_path": "artifacts/03-literature-map.json",
+      "artifact_sha256": "ae2c5c6117da3e8c782f2a19eb96ae9a03249e058cdceecd4b45f2518cb67a6c",
+      "parent_artifact_ids": [
+        "extraction-table"
+      ],
+      "parent_artifact_sha256": [
+        "40ea646a89168090b580868585ce39a56814b22dccd698bad4b2609f8875f287"
+      ],
+      "skill": "literature-review-mapper",
+      "stage_id": "literature-map"
+    },
+    {
+      "artifact_id": "argument-architecture",
+      "artifact_path": "artifacts/04-argument-architecture.json",
+      "artifact_sha256": "cbda49dcd0713b8e8c017e5f79476e7d60ced414baac4c7d995d7c11f81d8d14",
+      "parent_artifact_ids": [
+        "literature-map"
+      ],
+      "parent_artifact_sha256": [
+        "ae2c5c6117da3e8c782f2a19eb96ae9a03249e058cdceecd4b45f2518cb67a6c"
+      ],
+      "skill": "argument-architecture",
+      "stage_id": "argument-architecture"
+    },
+    {
+      "artifact_id": "claim-evidence-ledger",
+      "artifact_path": "artifacts/05-claim-evidence-ledger.json",
+      "artifact_sha256": "a4c78833250a79eea49b8cd73994194bd4994ac9707fbba5f6434786370e0e5c",
+      "parent_artifact_ids": [
+        "argument-architecture"
+      ],
+      "parent_artifact_sha256": [
+        "cbda49dcd0713b8e8c017e5f79476e7d60ced414baac4c7d995d7c11f81d8d14"
+      ],
+      "skill": "claim-evidence-ledger",
+      "stage_id": "claim-ledger"
+    },
+    {
+      "artifact_id": "citation-integrity-audit",
+      "artifact_path": "artifacts/06-citation-integrity-audit.json",
+      "artifact_sha256": "14a75ca845e1a143e47b98b1d7a036f8cb957b64c86e5a19f5e01b42f93af8db",
+      "parent_artifact_ids": [
+        "claim-evidence-ledger"
+      ],
+      "parent_artifact_sha256": [
+        "a4c78833250a79eea49b8cd73994194bd4994ac9707fbba5f6434786370e0e5c"
+      ],
+      "skill": "citation-integrity-auditor",
+      "stage_id": "citation-audit"
+    },
+    {
+      "artifact_id": "chapter-draft",
+      "artifact_path": "artifacts/07-chapter-draft.json",
+      "artifact_sha256": "1f38692035ba674978ced2e7b9efa13a3be1f43d5331a91e45ba04d14bc16694",
+      "parent_artifact_ids": [
+        "citation-integrity-audit"
+      ],
+      "parent_artifact_sha256": [
+        "14a75ca845e1a143e47b98b1d7a036f8cb957b64c86e5a19f5e01b42f93af8db"
+      ],
+      "skill": "chapter-architecture",
+      "stage_id": "chapter-draft"
+    },
+    {
+      "artifact_id": "scholarly-integrity-audit",
+      "artifact_path": "artifacts/08-scholarly-integrity-audit.json",
+      "artifact_sha256": "3d0740adb7f9889903b766bd40de8b1704029f7982a889c153ce1f7fa25d689a",
+      "parent_artifact_ids": [
+        "chapter-draft"
+      ],
+      "parent_artifact_sha256": [
+        "1f38692035ba674978ced2e7b9efa13a3be1f43d5331a91e45ba04d14bc16694"
+      ],
+      "skill": "scholarly-integrity-gate",
+      "stage_id": "integrity-gate"
+    }
+  ],
+  "tracked_claim_ids": [
+    "claim-dashboard-causality"
+  ]
+}

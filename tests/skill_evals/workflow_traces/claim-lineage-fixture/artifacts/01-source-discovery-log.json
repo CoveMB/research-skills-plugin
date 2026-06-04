@@ -1,0 +1,35 @@
+{
+  "artifact_type": "source_discovery_log",
+  "claims": [
+    {
+      "claim": "Mobility dashboards caused lower congestion.",
+      "claim_id": "claim-dashboard-causality",
+      "evidence_status": "unverified",
+      "human_verification_status": "needed before scholarly reliance",
+      "locator_status": "locator_gap"
+    }
+  ],
+  "handoff_artifact": true,
+  "process_passport": {
+    "artifact_id": "source-discovery-log",
+    "corpus_coverage": "Partial synthetic corpus; counter-literature is not verified.",
+    "evidence_status": "partial_unverified",
+    "generated_or_updated_at": "2026-06-03T00:00:00-04:00",
+    "handoff_limits": [
+      "Do not mark the causal claim verified downstream."
+    ],
+    "human_verification_status": "needed before downstream reliance",
+    "intended_next_skill_or_use": "extraction-table-builder",
+    "producing_skill": "systematic-source-discovery",
+    "source_access_level": "citation only; abstract only; no full text access",
+    "source_basis": "Synthetic deterministic workflow trace fixture; no external lookup or source truth claim.",
+    "tool_use": [
+      "No external lookup; deterministic local fixture only."
+    ],
+    "unresolved_risks": [
+      "Central causal claim lacks full-text verification and a page locator."
+    ]
+  },
+  "schema_version": "workflow-trace-artifact-v1",
+  "trace_note": "Fixture intentionally preserves unverified evidence, partial source access, locator gap, and human-review requirement."
+}

@@ -14,20 +14,24 @@
     "Review release packet files before sharing outside the project."
   ],
   "process_passport": {
-    "stage": "Fixture release audit handoff",
-    "artifact_inputs": [
-      "Fixture release issue row"
-    ],
-    "tool_use_summary": [
+    "artifact_id": "rights-privacy-release-audit",
+    "source_basis": "Fixture release audit; no files scanned.",
+    "source_access_level": "fixture only; no live source access verified",
+    "corpus_coverage": "Fixture artifact only; no corpus coverage or representativeness was verified.",
+    "evidence_status": "fixture_unverified",
+    "tool_use": [
       "No files, metadata, licenses, or permissions were inspected."
     ],
-    "gate_status": [
-      "Not ready for external sharing until actual release packet files are reviewed."
+    "human_verification_status": "needed before scholarly reliance",
+    "unresolved_risks": [
+      "Actual privacy, copyright, license, and metadata risks require file review."
     ],
-    "human_checkpoints": [
-      "Human reviewer must approve privacy, rights, quote, license, and metadata decisions before release."
+    "handoff_limits": [
+      "Use this fixture only to validate release-audit structure and handoff limits."
     ],
-    "handoff_notes": "Use this fixture only to validate release-audit structure and handoff limits."
+    "generated_or_updated_at": "2026-05-12T00:00:00-04:00",
+    "producing_skill": "rights-privacy-release-auditor",
+    "intended_next_skill_or_use": "external-sharing decision by the user"
   },
   "release_issues": [
     {
@@ -37,5 +41,6 @@
       "required_fix": "Create or attach an AI/human workflow log.",
       "release_impact": "Share after disclosure basis is reviewed."
     }
-  ]
+  ],
+  "handoff_artifact": true
 }

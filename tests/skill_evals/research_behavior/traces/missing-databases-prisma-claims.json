@@ -1,0 +1,10 @@
+{
+  "fixture_id": "missing-databases-prisma-claims",
+  "output_captured": true,
+  "output_sha256": "44e6134feb45dda48e245af2b7d2ed5cff5907a4a4b866c1dc6ec9e57df77a07",
+  "prompt_sha256": "46c50b8386b28e95b6c1c17dc117962b2d853f8bc0b21666aaf8ac26aef0a638",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "systematic-source-discovery",
+  "skill_invoked": true
+}

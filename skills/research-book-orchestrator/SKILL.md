@@ -61,10 +61,12 @@ Use `docs/ROUTING_MATRIX.md` as the canonical route table. This skill should sum
 
 Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
+Use `docs/PROCESS_PASSPORT.md` when a workflow plan, artifact sequence, or generated project artifact is saved as durable project state or handed to another skill. Preserve upstream source-access, evidence-status, corpus-coverage, unresolved-risk, and handoff-limit labels; do not turn routing confidence into scholarly verification.
+
 ## Files/folders it may read
 
 - Shared operational boundary doc: `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
-- Shared policy docs, especially `docs/SOURCE_LIMITS.md` and `docs/AUTO_SELECTION_GUARDRAILS.md`.
+- Shared policy docs, especially `docs/SOURCE_LIMITS.md`, `docs/PROCESS_PASSPORT.md`, and `docs/AUTO_SELECTION_GUARDRAILS.md`.
 - `docs/ARCHITECTURE.md`, `MODE_REGISTRY.md`, `docs/QUALITY_STANDARD.md`, and `shared/contracts/book/book_artifact.schema.json` when routing, artifacts, or quality gates matter.
 - User-provided files, drafts, notes, bibliographies, and artifacts explicitly named in the request.
 
@@ -131,7 +133,7 @@ Recommend a sequence of 3–6 skills. For each, explain:
 
 Create a plan with deliverables. Prefer concrete artifacts: research agenda, search log, literature map, thesis tree, chapter brief, claim ledger, citation audit, continuity memo.
 
-When the user requests machine-readable artifacts, use `shared/contracts/book/book_artifact.schema.json`. The supported artifact types are:
+When the user requests machine-readable artifacts, use `shared/contracts/book/book_artifact.schema.json`. Durable handoff artifacts must set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits. The supported artifact types are:
 
 - `book_research_agenda`
 - `source_discovery_log`
@@ -196,6 +198,8 @@ At each transition, check:
 ## Limits / failure risks
 
 ## Longer-term manuscript roadmap
+
+## Process passport, if saved or handed downstream
 ```
 
 ## Failure modes
@@ -213,3 +217,4 @@ At each transition, check:
 - Block drafting when phase gates are not met.
 - Make assumptions and verification gaps visible.
 - Prefer concrete artifacts over vague next steps.
+- Saved workflow plans or downstream artifact handoffs include a process passport without upgrading verification status.

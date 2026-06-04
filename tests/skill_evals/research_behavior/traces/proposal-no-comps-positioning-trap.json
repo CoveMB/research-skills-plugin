@@ -1,0 +1,10 @@
+{
+  "fixture_id": "proposal-no-comps-positioning-trap",
+  "output_captured": true,
+  "output_sha256": "d1cab007a18584973409ae701b4add81cb40367b383cab80de3b6d9051313531",
+  "prompt_sha256": "7f83de608593fdac283a2e13e84b66a5a5fd720f990df5be50c573c8837ec5a3",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "book-proposal-scholarship",
+  "skill_invoked": true
+}

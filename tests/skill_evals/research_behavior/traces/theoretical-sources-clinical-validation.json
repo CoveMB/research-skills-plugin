@@ -1,0 +1,10 @@
+{
+  "fixture_id": "theoretical-sources-clinical-validation",
+  "output_captured": true,
+  "output_sha256": "348e821a5bd8887e07fd22aec76569ee738d6a3a2f3ed83c16ce58b7fd6fae96",
+  "prompt_sha256": "2842bc7b421c1f4980db19efc1727a039844c47c5734d0e2a6cb24a338e05f86",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "methodology-source-auditor",
+  "skill_invoked": true
+}

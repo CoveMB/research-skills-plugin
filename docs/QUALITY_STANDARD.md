@@ -44,6 +44,10 @@ Claims about current consensus, recent challenges, publication status, retractio
 
 Name corpus limits that could change the conclusion: English-only searching, famous-author anchoring, database coverage, open-access skew, Global North concentration, discipline-boundary omissions, and one-sided or thesis-confirming search terms. Acknowledge bias only when it affects a decision, source plan, synthesis claim, or next verification step; do not add generic caveats for their own sake.
 
+Use `docs/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` when a skill could imply literature coverage, evidentiary balance, consensus, novelty, or absence of counter-literature. The taxonomy distinguishes corpus size from representativeness and distinguishes systematic search from expert-curated but non-systematic selection. Treat "no source found" as a protocol-bounded search result, not as proof that no source exists.
+
+Label corpus coverage before synthesis claims. A partial, convenience, thin, stale, one-sided, or unknown-coverage corpus can support local observations and next-search tasks, but not field consensus, market-level coverage, novelty, or absence-of-evidence claims unless a stronger search or curation basis is visible.
+
 ## Accessibility discipline
 
 When spelling, dictation, rough fragments, dense material, or reading fatigue shape the task, reduce text load before adding scholarly complexity. Preserve the author's meaning, mark only ambiguities that affect claims or evidence, and prefer short tables with one next action. Use specific accessibility skills for clear bottlenecks: spoken input, reading triage, or prose repair.
@@ -74,7 +78,9 @@ AI-assisted research, generated synthesis, automated extraction, or computed res
 
 AI involvement must not be concealed. Disclosure wording remains venue-specific and uncertain unless the venue policy was provided or checked; the author or project owner remains responsible for claims, source use, rights, privacy, and final submission decisions.
 
-Use a `process_passport` in machine-readable artifacts when a result will be handed to another skill, reviewer, or submission workflow. The schema keeps this field structurally optional so drafts and partial fixtures can validate before they become handoff artifacts. When present, it should name the stage, inputs, tool use, gate status, human checkpoints, and handoff limits without turning fixture or partial work into verified scholarship.
+Use `docs/PROCESS_PASSPORT.md` for durable cross-skill handoffs. A machine-readable artifact that becomes reusable project state or input to another skill, reviewer, integrity gate, release step, or submission workflow must set `handoff_artifact: true` and include a valid `process_passport`. The passport must name source basis, source access level, corpus coverage, evidence status, tool use, human verification status, unresolved risks, handoff limits, producing skill, and intended next use. Do not require a passport for casual replies, raw user material, non-persisted routing, or private accessibility cleanup that is not reused downstream.
+
+A passport does not verify scholarship by itself. It must not turn fixture, partial, prompt-only, citation-only, abstract-only, unknown-coverage, or unverified work into verified status. Downstream skills must preserve unresolved risks and handoff limits unless a visible verification step resolves them.
 
 ## Evaluation discipline
 

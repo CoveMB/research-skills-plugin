@@ -1,0 +1,10 @@
+{
+  "fixture_id": "book-comps-market-claims-unverified",
+  "output_captured": true,
+  "output_sha256": "650480c01040440754253664be0c7ab79802c2490312ed43301585993fc5f070",
+  "prompt_sha256": "cd5edfd8d6e665ee7dd3bdb4399a5057107256429d9cf049c685068e4435c54a",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "book-comps-verifier",
+  "skill_invoked": true
+}

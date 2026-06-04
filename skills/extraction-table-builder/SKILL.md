@@ -40,9 +40,11 @@ Use when the user needs comparable evidence across sources before literature map
 
 Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
+Use `docs/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` when an extraction table or comparison matrix could be handed off as evidence of corpus coverage, balance, consensus, novelty, or missing literature. Keep extraction completeness separate from corpus representativeness.
+
 ## Machine-readable artifacts
 
-When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: extraction_table`. If the output is normal Markdown, do not force the JSON contract.
+When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: extraction_table`. If the output is normal Markdown, do not force the JSON contract. For durable handoff artifacts, follow `docs/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits instead of upgrading verification.
 
 ## Files/folders it may read
 
@@ -101,6 +103,8 @@ List sources that need full text, better locators, method details, coding clarif
 
 ## User verification needed
 
+## Corpus representativeness label, if used for synthesis handoff
+
 ## Extraction fields
 
 ## Source-level extraction
@@ -125,6 +129,7 @@ Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.m
 - Empty or uncertain cells are marked instead of guessed.
 - Passage-level claims keep locator needs visible.
 - Comparison does not become synthesis unless the user asks and the evidence supports it.
+- Uneven extraction and corpus representativeness remain separate labels.
 
 ## Failure modes
 

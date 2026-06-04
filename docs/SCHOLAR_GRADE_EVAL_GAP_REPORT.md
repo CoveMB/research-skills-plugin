@@ -11,6 +11,8 @@ Inspected:
 - `README.md`
 - `tests/skill_evals/README.md`
 - `tests/skill_evals/research_behavior/`
+- `tests/skill_evals/workflow_passports/`
+- `tests/skill_evals/workflow_traces/`
 - `tests/skill_evals/scholar_grade/`
 - `tests/skill_evals/scholar_grade/live_pilot/`
 - `tests/skill_evals/scholar_grade/live_pilot_v2/`
@@ -43,6 +45,7 @@ The current suite is already strong for deterministic source-boundary discipline
 - `tests/skill_evals/scholar_grade/run_live_capture.py` records prompt packets, captured outputs, manifests, score templates, and optional automated traces without overwriting by default.
 - `tests/skill_evals/scholar_grade/live_pilot_calibration.py` compares live-pilot review scores against deterministic baseline scores and reports missing artifacts, validation failures, and score regressions.
 - `tests/skill_evals/scholar_grade/mediocre_controls/` plus `test_shipped_mediocre_control_fails_review_score_gate` gives one intentional negative control proving that a basic marker-passing output can still fail the score gate.
+- `scripts/check_workflow_passport_fixtures.py` validates adjacent handoff preservation, and `scripts/check_workflow_traceability.py` validates one deterministic multi-stage claim lineage with artifact SHA-256 continuity.
 
 This is a good deterministic validation base. It is especially good at preventing false confidence from fabricated citations, missing locators, overclaiming, compact-output blocker loss, privacy-boundary violations, unlogged AI workflow claims, and missing provenance in controlled local packets.
 
@@ -60,7 +63,7 @@ The live pilot is a behavior sample, not stability evidence. `live_pilot_v2` cov
 
 Retrieval quality is mostly separate from synthesis quality. `scripts/check_source_candidates.py` validates local candidate exports, private field exclusion, completed-search evidence fields, metadata normalization, and duplicate clusters. It does not measure search recall, precision, source selection quality, or whether a source set is representative.
 
-Long workflow traceability is not yet tested end to end. The suite checks per-fixture outputs, manifests, traces, and example artifact schemas. It does not follow a claim across router, discovery, notes, extraction table, literature map, claim ledger, traceability graph, and integrity gate in one auditable workflow.
+Workflow provenance is now tested in two deterministic layers. `tests/skill_evals/workflow_passports/fixtures.json` and `scripts/check_workflow_passport_fixtures.py` validate adjacent handoff preservation across eight multi-skill pairs. `tests/skill_evals/workflow_traces/claim-lineage-fixture/` and `scripts/check_workflow_traceability.py` follow one synthetic claim through a multi-stage book workflow with artifact hashes, claim IDs, locator-gap status, unresolved risks, source-access limits, and human-review requirements. This remains synthetic and deterministic; it does not run skills, verify source truth, measure retrieval quality, or prove that real workflow outputs preserve lineage.
 
 ## Validation Layer Distinctions
 
@@ -90,7 +93,7 @@ The current score files enforce human review structure, but not independent expe
 | Adversarial user pressure and compliance pressure | Scholar-grade tools must refuse unsafe shortcuts when the user pushes for clearance, certainty, speed, or private-text submission. | Partially addressed by 8 synthetic scholar-grade fixtures under `tests/skill_evals/scholar_grade/adversarial_pressure/`, covering weak-evidence certainty, placeholder citations, hidden limitations, private-text online search, invented page locators, consensus overclaiming, compact-output blocker loss, and prose-repair claim strengthening. | Remaining future work, if needed, is matching research-behavior route fixtures or live captures for the same pressure families. Do not treat the synthetic packets as source-truth gold sets. | Existing scholar-grade harness and mutation checks validate the controlled pressure layer with no harness refactor. | P1 |
 | Inter-rater reliability | Single-reviewer score files can encode one person's calibration. Scholar-grade claims need evidence that the rubric is understandable and stable across reviewers. | `scores/*.json` require rationales and evidence notes; baseline and live scores each have one reviewer label. No agreement check exists. | Add `tests/skill_evals/scholar_grade/reviewer_panels/live_pilot_v2/<reviewer-id>/<fixture-id>.json` for a small shared subset. | Add `scripts/check_reviewer_agreement.py --panel tests/skill_evals/scholar_grade/reviewer_panels/live_pilot_v2 --fixtures tests/skill_evals/scholar_grade/fixtures.json`; start with exact agreement and within-one-point agreement before considering heavier statistics. | P1 |
 | Repeated live-run stability across models/sessions | One successful live capture does not show robustness. Model changes, session context, and operator behavior can change outputs. | `live_pilot/` has 8 manual captures for `gpt-5-codex`; `live_pilot_v2/` has 15 manual captures for `gpt-5`; both are additive roots and can be calibrated. `live_pilot_v3/` is currently a planned stale-hash recapture root, not completed stability evidence. | Add future completed additive roots such as `tests/skill_evals/scholar_grade/live_matrix/<model>-<date>/` with the same P0 fixture subset repeated across at least two sessions/models. | Reuse `live_pilot_calibration.py --pilot-plan ... --live-root ...`; add `scripts/compare_live_capture_roots.py --roots ...` only after two or more completed roots exist. | P1 |
-| Long workflow traceability | Research-book work fails when claims lose provenance across multiple artifacts, not only in one isolated answer. | Per-fixture route traces, run manifests, and example book artifacts exist; no chained workflow trace follows a claim across skills. | Add one scenario under `tests/skill_evals/workflow_traces/<scenario-id>/` with `workflow-trace.json`, source packet hashes, artifact hashes, and a final claim ledger/traceability graph. | Add `scripts/check_workflow_traceability.py --trace tests/skill_evals/workflow_traces/<scenario-id>/workflow-trace.json`; validate hash continuity, claim IDs, source-note IDs, locators, and unresolved uncertainty propagation. | P1 |
+| Long workflow traceability breadth | Research-book work fails when claims lose provenance across multiple artifacts, not only in one isolated answer. | Adjacent process-passport preservation is checked across eight handoff pairs. One deterministic synthetic trace under `tests/skill_evals/workflow_traces/claim-lineage-fixture/` now validates artifact SHA-256 continuity, previous-artifact hash links, tracked claim IDs, unresolved risk preservation, partial-source labels, locator gaps, and human-review requirements. It is not live behavior evidence and does not validate source truth or retrieval quality. | Add additional trace scenarios only when a new failure mode is identified, such as multi-claim branching, source-note IDs, or a final traceability graph. | Reuse `scripts/check_workflow_traceability.py --trace tests/skill_evals/workflow_traces/<scenario-id>/workflow-trace.json`; extend it only for concrete new lineage fields. | P2 |
 | Automated live trace coverage | The harness supports automated trace validation, but current v2 pilot artifacts are manual captures, so tool counts, command counts, and token counts are not exercised by live artifacts. | `scholar_grade_eval_harness.py` validates `automated-live-capture` traces when present; `live_capture_protocol.py` writes trace templates; `live_pilot_v2` uses manual manifests. | Add two automated captures in a future completed additive root under `tests/skill_evals/scholar_grade/live_matrix/<automated-session>/traces/`, preferably `private-manuscript-search-consent` and `metadata-lookup-consented-identifiers`. | Existing scholar-grade harness with `--require-live-captures` validates automated traces. No new script needed unless comparing trace metrics over time. | P2 |
 | Expert review records for publication-facing claims | Some claims require domain, legal, privacy, or methodology expertise. Automated and internal reviewer checks should not be presented as expert clearance. | `human_review_required` is true for all 46 fixtures; score files enforce rationale and evidence notes but not expert credentials or independent review. | Add optional `tests/skill_evals/scholar_grade/expert_reviews/<fixture-id>.json` for a small high-risk subset and a future scholar expert review protocol explaining when expert review is required. | Keep expert review outside default CI; optionally add a schema-only check later. | P2 |
 | Discipline/source-type breadth | Current risks are well chosen for general research-book workflows, but not all disciplines, languages, archival materials, quantitative methods, or legal/privacy regimes are represented. | Existing fixtures cover broad source discipline, citation, privacy, figure/table, AI workflow, method, prose, and routing risks. | Add discipline extensions only when real use reveals a gap, e.g. `tests/skill_evals/scholar_grade/extensions/archival-locators/` or `extensions/quant-methods/`. | Run as optional extension fixtures with the existing scholar-grade harness before adding to full validation. | P2 |
@@ -108,7 +111,7 @@ P1 gaps should follow once the P0 layer is stable:
 - Adversarial pressure cases are now covered for the controlled scholar-grade fixture layer; remaining work would be route or live-capture coverage if needed.
 - Reviewer agreement.
 - Repeated live-run stability across models and sessions.
-- Long workflow traceability across chained artifacts.
+- Broader workflow traceability scenarios only after the first deterministic trace exposes a concrete missing lineage field.
 
 P2 gaps are useful but not blockers for the next defensibility layer:
 
@@ -124,7 +127,7 @@ P2 gaps are useful but not blockers for the next defensibility layer:
 4. Adversarial pressure cases now exist for the scholar-grade controlled-fixture layer. If the pressure layer needs to expand later, add matching `research_behavior` or live-capture coverage rather than adding more synthetic variants without a new failure mode.
 5. Repeat the high-risk live subset across at least two additive live roots. Use existing `live_pilot_calibration.py` per root; only add a comparison script after there are multiple roots to compare.
 6. Add a reviewer-panel layer for the same high-risk subset. Keep the first agreement metric simple: exact agreement, within-one-point agreement, and hard-fail agreement.
-7. Add one long workflow trace. Do not build a full workflow simulator. Validate hash and claim lineage across a small staged scenario.
+7. Extend workflow traces only for concrete new failure modes, such as multi-claim branching or source-note ID lineage. Do not build a full workflow simulator.
 
 ## Do Not Overbuild
 
@@ -142,6 +145,6 @@ Do not build dashboards, statistical reliability packages, or large benchmark ma
 
 ## Bottom Line
 
-The current suite is merge-ready as a deterministic validation system for source-boundary discipline, capture provenance, fixture coverage, and reviewer-score completeness. It is not yet enough to defend broad "scholar-grade" claims about real source accuracy, retrieval quality, repeated model behavior, reviewer agreement, or long workflow provenance.
+The current suite is merge-ready as a deterministic validation system for source-boundary discipline, adjacent handoff-passport preservation, one synthetic hash-linked workflow trace, capture provenance, fixture coverage, and reviewer-score completeness. It is not yet enough to defend broad "scholar-grade" claims about real source accuracy, retrieval quality, repeated model behavior, reviewer agreement, or live long-workflow behavior.
 
 The smallest useful next move is not a broad refactor. It is an additive P0 layer: more expected-failing near-miss controls, a small real-source truth set, and retrieval-quality checks separated from synthesis-quality checks.

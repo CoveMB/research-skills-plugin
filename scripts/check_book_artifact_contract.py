@@ -16,6 +16,7 @@ from plugin_utils import (
 
 SCHEMA_RELATIVE_PATH = Path("shared/contracts/book/book_artifact.schema.json")
 EXAMPLES_RELATIVE_DIR = Path("examples/book_artifacts")
+INVALID_EXAMPLES_RELATIVE_DIR = EXAMPLES_RELATIVE_DIR / "invalid"
 SUPPORTED_SCHEMA_KEYWORDS = {
     "$defs",
     "$id",
@@ -281,6 +282,14 @@ def example_files(examples_dir: Path) -> tuple[list[Path], list[str]]:
     return files, []
 
 
+def invalid_example_files(invalid_examples_dir: Path) -> tuple[list[Path], list[str]]:
+    if not invalid_examples_dir.exists():
+        return [], []
+    if not invalid_examples_dir.is_dir():
+        return [], [f"{invalid_examples_dir}: invalid examples path is not a directory"]
+    return sorted(invalid_examples_dir.glob("*.json")), []
+
+
 def validate_examples(schema: dict[str, Any], files: list[Path]) -> list[str]:
     errors: list[str] = []
     for path in files:
@@ -293,6 +302,30 @@ def validate_examples(schema: dict[str, Any], files: list[Path]) -> list[str]:
             errors.append(f"{path}: {validation_error}")
         for boundary_error in validate_artifact_field_boundaries(schema, payload):
             errors.append(f"{path}: {boundary_error}")
+    return errors
+
+
+def validation_errors_for_payload(
+    schema: dict[str, Any],
+    payload: dict[str, Any],
+) -> list[str]:
+    return [
+        *validate_value(schema, schema, payload, []),
+        *validate_artifact_field_boundaries(schema, payload),
+    ]
+
+
+def validate_invalid_examples(schema: dict[str, Any], files: list[Path]) -> list[str]:
+    errors: list[str] = []
+    for path in files:
+        payload, error = load_json_object_result(path)
+        if error is not None:
+            errors.append(f"{path}: invalid example must be valid JSON: {error}")
+            continue
+        assert payload is not None
+        validation_errors = validation_errors_for_payload(schema, payload)
+        if not validation_errors:
+            errors.append(f"{path}: expected invalid example to fail validation")
     return errors
 
 
@@ -392,6 +425,10 @@ def check(root: Path) -> list[str]:
 
     errors.extend(validate_examples(schema, files))
     errors.extend(validate_example_coverage(schema, files))
+    invalid_files, invalid_file_errors = invalid_example_files(root / INVALID_EXAMPLES_RELATIVE_DIR)
+    errors.extend(invalid_file_errors)
+    if not invalid_file_errors:
+        errors.extend(validate_invalid_examples(schema, invalid_files))
     return errors
 
 
@@ -412,7 +449,11 @@ def main() -> int:
             print(f"- {error}")
         return 1
 
-    print("OK: book artifact contract schema and examples are valid.")
+    invalid_files, _invalid_file_errors = invalid_example_files(
+        args.path.resolve() / INVALID_EXAMPLES_RELATIVE_DIR
+    )
+    invalid_status = " invalid examples failed as expected." if invalid_files else ""
+    print(f"OK: book artifact contract schema and examples are valid.{invalid_status}")
     return 0
 
 

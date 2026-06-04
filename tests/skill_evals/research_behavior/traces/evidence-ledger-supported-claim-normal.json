@@ -1,0 +1,10 @@
+{
+  "fixture_id": "evidence-ledger-supported-claim-normal",
+  "output_captured": true,
+  "output_sha256": "6370ed9dcb16aa41e96c749b76510803e7b19bf67a9b1086a8d7ee4c8c60ff77",
+  "prompt_sha256": "764cf76fc3ff9029171a1289ad902f3a8159a78a2932a549bb76484dc9fff48b",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "claim-evidence-ledger",
+  "skill_invoked": true
+}

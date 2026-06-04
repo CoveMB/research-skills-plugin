@@ -40,13 +40,15 @@ Use when the user is building or checking comparable titles, audience claims, ma
 
 Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
+Use `docs/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` when the comp set is used to imply market coverage, press-category coverage, field positioning, timeliness, or absence of better comps. Verifying individual titles is not the same as verifying a representative comp corpus.
+
 ## Compact output
 
 Use compact output when the user asks for low reading load, comp blockers, or a fast proposal-positioning check. Compact output should keep source basis and lookup needs visible, show only comps or claims whose status changes positioning, and end with one next action.
 
 ## Machine-readable artifacts
 
-When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: comps_verification`. If the output is normal Markdown, do not force the JSON contract.
+When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: comps_verification`. If the output is normal Markdown, do not force the JSON contract. For durable handoff artifacts, follow `docs/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits instead of upgrading verification.
 
 ## Files/folders it may read
 
@@ -71,6 +73,8 @@ When the user explicitly asks for JSON or a contract artifact, use `shared/contr
 ### 1. Separate comp types
 
 Classify each item as verified comparable title, unverified comparable title, speculative comparable need, or positioning claim.
+
+Classify the comp set itself as supplied, partial, convenience-selected, stale, field-balanced, or unknown coverage before using it for market-level or field-positioning claims.
 
 ### 2. Verify available details
 
@@ -109,6 +113,8 @@ Suggest replacement criteria, missing verification tasks, safer wording, or comp
 ## Audience / market / timeliness claims
 | Claim | Status | Source basis | Risk | Repair action |
 
+## Comp corpus coverage
+
 ## Stale, mismatched, fabricated, or unverified comps
 
 ## Missing verification tasks
@@ -139,6 +145,7 @@ Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.m
 - Publication details are marked by verification status.
 - Speculative comp needs are not presented as actual titles.
 - Market and sales claims stay unverified unless sources support them.
+- Supplied comps are distinguished from market-level evidence.
 
 ## Failure modes
 

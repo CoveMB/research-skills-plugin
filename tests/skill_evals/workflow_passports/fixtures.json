@@ -1,0 +1,646 @@
+{
+  "schema_version": "workflow-passport-fixtures-v1",
+  "purpose": "Deterministic multi-skill workflow fixtures that check process-passport preservation across downstream research artifacts. These fixtures do not run a model or verify source truth.",
+  "fixtures": [
+    {
+      "id": "source-discovery-to-extraction-preserves-passport",
+      "from_skill": "systematic-source-discovery",
+      "to_skill": "extraction-table-builder",
+      "handoff": "source discovery -> extraction table",
+      "input_artifact": {
+        "schema_version": "book-artifact-v1",
+        "artifact_type": "source_discovery_log",
+        "handoff_artifact": true,
+        "process_passport": {
+          "artifact_id": "source-discovery-to-extraction-preserves-passport-input",
+          "source_basis": "Synthetic upstream source_discovery_log with process passport; no full-text verification.",
+          "source_access_level": "citation only; abstract only; no full text access",
+          "corpus_coverage": "Partial workflow fixture corpus; representativeness and counter-literature are not verified.",
+          "evidence_status": "partial_unverified",
+          "tool_use": [
+            "No external lookup; deterministic local workflow-passport fixture only."
+          ],
+          "human_verification_status": "needed before downstream reliance",
+          "unresolved_risks": [
+            "Search log is planned and citation-only; no full-text source-claim fit or locator check has been performed."
+          ],
+          "handoff_limits": [
+            "Do not extract this as verified evidence or completed search results."
+          ],
+          "generated_or_updated_at": "2026-06-03T00:00:00-04:00",
+          "producing_skill": "systematic-source-discovery",
+          "intended_next_skill_or_use": "extraction-table-builder"
+        },
+        "workflow_claims": [
+          {
+            "claim_id": "source_discovery_log-claim-1",
+            "claim": "Candidate source may support a chapter claim, but support has not been verified.",
+            "evidence_status": "unverified",
+            "locator_status": "locator_gap"
+          }
+        ]
+      },
+      "expected_output_artifact": {
+        "schema_version": "book-artifact-v1",
+        "artifact_type": "extraction_table",
+        "handoff_artifact": true,
+        "process_passport": {
+          "artifact_id": "source-discovery-to-extraction-preserves-passport-output",
+          "source_basis": "Consumed upstream source_discovery_log process passport and generated provisional extraction_table; no verification step performed.",
+          "source_access_level": "citation only; abstract only; no full text access",
+          "corpus_coverage": "Partial workflow fixture corpus; representativeness and counter-literature are not verified.",
+          "evidence_status": "hold_for_verification",
+          "tool_use": [
+            "No external lookup; deterministic local workflow-passport fixture only."
+          ],
+          "human_verification_status": "needed before downstream reliance",
+          "unresolved_risks": [
+            "Search log is planned and citation-only; no full-text source-claim fit or locator check has been performed.",
+            "Downstream artifact must preserve upstream uncertainty until a visible verification step resolves it."
+          ],
+          "handoff_limits": [
+            "Do not extract this as verified evidence or completed search results.",
+            "Do not upgrade evidence, locator, or human-verification status from this handoff alone."
+          ],
+          "generated_or_updated_at": "2026-06-03T00:00:00-04:00",
+          "producing_skill": "extraction-table-builder",
+          "intended_next_skill_or_use": "next workflow gate or human reviewer"
+        },
+        "workflow_claims": [
+          {
+            "claim_id": "extraction_table-claim-1",
+            "claim": "Candidate source may support a chapter claim, but support has not been verified.",
+            "evidence_status": "unverified",
+            "locator_status": "locator_gap"
+          }
+        ]
+      },
+      "forbidden_behavior": [
+        "Removing unresolved risks without a verification note.",
+        "Treating citation-only or abstract-only access as full-text verification.",
+        "Dropping human-review requirements.",
+        "Silently upgrading unverified claims, missing locators, or partial corpus limits to verified status."
+      ]
+    },
+    {
+      "id": "extraction-to-literature-map-preserves-passport",
+      "from_skill": "extraction-table-builder",
+      "to_skill": "literature-review-mapper",
+      "handoff": "extraction table -> literature map",
+      "input_artifact": {
+        "schema_version": "book-artifact-v1",
+        "artifact_type": "extraction_table",
+        "handoff_artifact": true,
+        "process_passport": {
+          "artifact_id": "extraction-to-literature-map-preserves-passport-input",
+          "source_basis": "Synthetic upstream extraction_table with process passport; no full-text verification.",
+          "source_access_level": "citation only; abstract only; no full text access",
+          "corpus_coverage": "Partial workflow fixture corpus; representativeness and counter-literature are not verified.",
+          "evidence_status": "partial_unverified",
+          "tool_use": [
+            "No external lookup; deterministic local workflow-passport fixture only."
+          ],
+          "human_verification_status": "needed before downstream reliance",
+          "unresolved_risks": [
+            "Extraction rows come from excerpts and abstract-only notes; rival literature and locators remain unchecked."
+          ],
+          "handoff_limits": [
+            "Do not convert extraction patterns into field consensus."
+          ],
+          "generated_or_updated_at": "2026-06-03T00:00:00-04:00",
+          "producing_skill": "extraction-table-builder",
+          "intended_next_skill_or_use": "literature-review-mapper"
+        },
+        "workflow_claims": [
+          {
+            "claim_id": "extraction_table-claim-1",
+            "claim": "Several extracted notes suggest a pattern, but the pattern is unverified outside the partial packet.",
+            "evidence_status": "unverified",
+            "locator_status": "locator_gap"
+          }
+        ]
+      },
+      "expected_output_artifact": {
+        "schema_version": "book-artifact-v1",
+        "artifact_type": "literature_map",
+        "handoff_artifact": true,
+        "process_passport": {
+          "artifact_id": "extraction-to-literature-map-preserves-passport-output",
+          "source_basis": "Consumed upstream extraction_table process passport and generated provisional literature_map; no verification step performed.",
+          "source_access_level": "citation only; abstract only; no full text access",
+          "corpus_coverage": "Partial workflow fixture corpus; representativeness and counter-literature are not verified.",
+          "evidence_status": "hold_for_verification",
+          "tool_use": [
+            "No external lookup; deterministic local workflow-passport fixture only."
+          ],
+          "human_verification_status": "needed before downstream reliance",
+          "unresolved_risks": [
+            "Extraction rows come from excerpts and abstract-only notes; rival literature and locators remain unchecked.",
+            "Downstream artifact must preserve upstream uncertainty until a visible verification step resolves it."
+          ],
+          "handoff_limits": [
+            "Do not convert extraction patterns into field consensus.",
+            "Do not upgrade evidence, locator, or human-verification status from this handoff alone."
+          ],
+          "generated_or_updated_at": "2026-06-03T00:00:00-04:00",
+          "producing_skill": "literature-review-mapper",
+          "intended_next_skill_or_use": "next workflow gate or human reviewer"
+        },
+        "workflow_claims": [
+          {
+            "claim_id": "literature_map-claim-1",
+            "claim": "Several extracted notes suggest a pattern, but the pattern is unverified outside the partial packet.",
+            "evidence_status": "unverified",
+            "locator_status": "locator_gap"
+          }
+        ]
+      },
+      "forbidden_behavior": [
+        "Removing unresolved risks without a verification note.",
+        "Treating citation-only or abstract-only access as full-text verification.",
+        "Dropping human-review requirements.",
+        "Silently upgrading unverified claims, missing locators, or partial corpus limits to verified status."
+      ]
+    },
+    {
+      "id": "literature-map-to-argument-preserves-passport",
+      "from_skill": "literature-review-mapper",
+      "to_skill": "argument-architecture",
+      "handoff": "literature map -> argument architecture",
+      "input_artifact": {
+        "schema_version": "book-artifact-v1",
+        "artifact_type": "literature_map",
+        "handoff_artifact": true,
+        "process_passport": {
+          "artifact_id": "literature-map-to-argument-preserves-passport-input",
+          "source_basis": "Synthetic upstream literature_map with process passport; no full-text verification.",
+          "source_access_level": "citation only; abstract only; no full text access",
+          "corpus_coverage": "Partial workflow fixture corpus; representativeness and counter-literature are not verified.",
+          "evidence_status": "partial_unverified",
+          "tool_use": [
+            "No external lookup; deterministic local workflow-passport fixture only."
+          ],
+          "human_verification_status": "needed before downstream reliance",
+          "unresolved_risks": [
+            "Literature map is a partial corpus with unresolved counter-literature and locator gaps."
+          ],
+          "handoff_limits": [
+            "Do not state the thesis as established by the field."
+          ],
+          "generated_or_updated_at": "2026-06-03T00:00:00-04:00",
+          "producing_skill": "literature-review-mapper",
+          "intended_next_skill_or_use": "argument-architecture"
+        },
+        "workflow_claims": [
+          {
+            "claim_id": "literature_map-claim-1",
+            "claim": "The provisional map may inform a thesis branch, but cannot establish field agreement.",
+            "evidence_status": "unverified",
+            "locator_status": "locator_gap"
+          }
+        ]
+      },
+      "expected_output_artifact": {
+        "schema_version": "book-artifact-v1",
+        "artifact_type": "thesis_tree",
+        "handoff_artifact": true,
+        "process_passport": {
+          "artifact_id": "literature-map-to-argument-preserves-passport-output",
+          "source_basis": "Consumed upstream literature_map process passport and generated provisional thesis_tree; no verification step performed.",
+          "source_access_level": "citation only; abstract only; no full text access",
+          "corpus_coverage": "Partial workflow fixture corpus; representativeness and counter-literature are not verified.",
+          "evidence_status": "hold_for_verification",
+          "tool_use": [
+            "No external lookup; deterministic local workflow-passport fixture only."
+          ],
+          "human_verification_status": "needed before downstream reliance",
+          "unresolved_risks": [
+            "Literature map is a partial corpus with unresolved counter-literature and locator gaps.",
+            "Downstream artifact must preserve upstream uncertainty until a visible verification step resolves it."
+          ],
+          "handoff_limits": [
+            "Do not state the thesis as established by the field.",
+            "Do not upgrade evidence, locator, or human-verification status from this handoff alone."
+          ],
+          "generated_or_updated_at": "2026-06-03T00:00:00-04:00",
+          "producing_skill": "argument-architecture",
+          "intended_next_skill_or_use": "next workflow gate or human reviewer"
+        },
+        "workflow_claims": [
+          {
+            "claim_id": "thesis_tree-claim-1",
+            "claim": "The provisional map may inform a thesis branch, but cannot establish field agreement.",
+            "evidence_status": "unverified",
+            "locator_status": "locator_gap"
+          }
+        ]
+      },
+      "forbidden_behavior": [
+        "Removing unresolved risks without a verification note.",
+        "Treating citation-only or abstract-only access as full-text verification.",
+        "Dropping human-review requirements.",
+        "Silently upgrading unverified claims, missing locators, or partial corpus limits to verified status."
+      ]
+    },
+    {
+      "id": "argument-to-claim-ledger-preserves-passport",
+      "from_skill": "argument-architecture",
+      "to_skill": "claim-evidence-ledger",
+      "handoff": "argument architecture -> claim-evidence ledger",
+      "input_artifact": {
+        "schema_version": "book-artifact-v1",
+        "artifact_type": "thesis_tree",
+        "handoff_artifact": true,
+        "process_passport": {
+          "artifact_id": "argument-to-claim-ledger-preserves-passport-input",
+          "source_basis": "Synthetic upstream thesis_tree with process passport; no full-text verification.",
+          "source_access_level": "citation only; abstract only; no full text access",
+          "corpus_coverage": "Partial workflow fixture corpus; representativeness and counter-literature are not verified.",
+          "evidence_status": "partial_unverified",
+          "tool_use": [
+            "No external lookup; deterministic local workflow-passport fixture only."
+          ],
+          "human_verification_status": "needed before downstream reliance",
+          "unresolved_risks": [
+            "Argument branches contain unverified causal and comparative claims with no source locators."
+          ],
+          "handoff_limits": [
+            "Do not mark thesis claims supported until ledger evidence is checked."
+          ],
+          "generated_or_updated_at": "2026-06-03T00:00:00-04:00",
+          "producing_skill": "argument-architecture",
+          "intended_next_skill_or_use": "claim-evidence-ledger"
+        },
+        "workflow_claims": [
+          {
+            "claim_id": "thesis_tree-claim-1",
+            "claim": "A causal thesis branch remains unverified and lacks page or source locators.",
+            "evidence_status": "unverified",
+            "locator_status": "locator_gap"
+          }
+        ]
+      },
+      "expected_output_artifact": {
+        "schema_version": "book-artifact-v1",
+        "artifact_type": "claim_evidence_ledger",
+        "handoff_artifact": true,
+        "process_passport": {
+          "artifact_id": "argument-to-claim-ledger-preserves-passport-output",
+          "source_basis": "Consumed upstream thesis_tree process passport and generated provisional claim_evidence_ledger; no verification step performed.",
+          "source_access_level": "citation only; abstract only; no full text access",
+          "corpus_coverage": "Partial workflow fixture corpus; representativeness and counter-literature are not verified.",
+          "evidence_status": "hold_for_verification",
+          "tool_use": [
+            "No external lookup; deterministic local workflow-passport fixture only."
+          ],
+          "human_verification_status": "needed before downstream reliance",
+          "unresolved_risks": [
+            "Argument branches contain unverified causal and comparative claims with no source locators.",
+            "Downstream artifact must preserve upstream uncertainty until a visible verification step resolves it."
+          ],
+          "handoff_limits": [
+            "Do not mark thesis claims supported until ledger evidence is checked.",
+            "Do not upgrade evidence, locator, or human-verification status from this handoff alone."
+          ],
+          "generated_or_updated_at": "2026-06-03T00:00:00-04:00",
+          "producing_skill": "claim-evidence-ledger",
+          "intended_next_skill_or_use": "next workflow gate or human reviewer"
+        },
+        "workflow_claims": [
+          {
+            "claim_id": "claim_evidence_ledger-claim-1",
+            "claim": "A causal thesis branch remains unverified and lacks page or source locators.",
+            "evidence_status": "unverified",
+            "locator_status": "locator_gap"
+          }
+        ]
+      },
+      "forbidden_behavior": [
+        "Removing unresolved risks without a verification note.",
+        "Treating citation-only or abstract-only access as full-text verification.",
+        "Dropping human-review requirements.",
+        "Silently upgrading unverified claims, missing locators, or partial corpus limits to verified status."
+      ]
+    },
+    {
+      "id": "claim-ledger-to-citation-audit-preserves-passport",
+      "from_skill": "claim-evidence-ledger",
+      "to_skill": "citation-integrity-auditor",
+      "handoff": "claim-evidence ledger -> citation-integrity audit",
+      "input_artifact": {
+        "schema_version": "book-artifact-v1",
+        "artifact_type": "claim_evidence_ledger",
+        "handoff_artifact": true,
+        "process_passport": {
+          "artifact_id": "claim-ledger-to-citation-audit-preserves-passport-input",
+          "source_basis": "Synthetic upstream claim_evidence_ledger with process passport; no full-text verification.",
+          "source_access_level": "citation only; abstract only; no full text access",
+          "corpus_coverage": "Partial workflow fixture corpus; representativeness and counter-literature are not verified.",
+          "evidence_status": "partial_unverified",
+          "tool_use": [
+            "No external lookup; deterministic local workflow-passport fixture only."
+          ],
+          "human_verification_status": "needed before downstream reliance",
+          "unresolved_risks": [
+            "Ledger has citation-only support and missing quote/page locators."
+          ],
+          "handoff_limits": [
+            "Do not clear citations or quotations as verified."
+          ],
+          "generated_or_updated_at": "2026-06-03T00:00:00-04:00",
+          "producing_skill": "claim-evidence-ledger",
+          "intended_next_skill_or_use": "citation-integrity-auditor"
+        },
+        "workflow_claims": [
+          {
+            "claim_id": "claim_evidence_ledger-claim-1",
+            "claim": "A cited quotation is present in the ledger, but the quote and page locator are unverified.",
+            "evidence_status": "unverified",
+            "locator_status": "locator_gap"
+          }
+        ]
+      },
+      "expected_output_artifact": {
+        "schema_version": "book-artifact-v1",
+        "artifact_type": "citation_integrity_audit",
+        "handoff_artifact": true,
+        "process_passport": {
+          "artifact_id": "claim-ledger-to-citation-audit-preserves-passport-output",
+          "source_basis": "Consumed upstream claim_evidence_ledger process passport and generated provisional citation_integrity_audit; no verification step performed.",
+          "source_access_level": "citation only; abstract only; no full text access",
+          "corpus_coverage": "Partial workflow fixture corpus; representativeness and counter-literature are not verified.",
+          "evidence_status": "hold_for_verification",
+          "tool_use": [
+            "No external lookup; deterministic local workflow-passport fixture only."
+          ],
+          "human_verification_status": "needed before downstream reliance",
+          "unresolved_risks": [
+            "Ledger has citation-only support and missing quote/page locators.",
+            "Downstream artifact must preserve upstream uncertainty until a visible verification step resolves it."
+          ],
+          "handoff_limits": [
+            "Do not clear citations or quotations as verified.",
+            "Do not upgrade evidence, locator, or human-verification status from this handoff alone."
+          ],
+          "generated_or_updated_at": "2026-06-03T00:00:00-04:00",
+          "producing_skill": "citation-integrity-auditor",
+          "intended_next_skill_or_use": "next workflow gate or human reviewer"
+        },
+        "workflow_claims": [
+          {
+            "claim_id": "citation_integrity_audit-claim-1",
+            "claim": "A cited quotation is present in the ledger, but the quote and page locator are unverified.",
+            "evidence_status": "unverified",
+            "locator_status": "locator_gap"
+          }
+        ]
+      },
+      "forbidden_behavior": [
+        "Removing unresolved risks without a verification note.",
+        "Treating citation-only or abstract-only access as full-text verification.",
+        "Dropping human-review requirements.",
+        "Silently upgrading unverified claims, missing locators, or partial corpus limits to verified status."
+      ]
+    },
+    {
+      "id": "chapter-brief-to-integrity-gate-preserves-passport",
+      "from_skill": "chapter-architecture",
+      "to_skill": "scholarly-integrity-gate",
+      "handoff": "chapter draft -> scholarly-integrity gate",
+      "input_artifact": {
+        "schema_version": "book-artifact-v1",
+        "artifact_type": "chapter_brief",
+        "handoff_artifact": true,
+        "process_passport": {
+          "artifact_id": "chapter-brief-to-integrity-gate-preserves-passport-input",
+          "source_basis": "Synthetic upstream chapter_brief with process passport; no full-text verification.",
+          "source_access_level": "citation only; abstract only; no full text access",
+          "corpus_coverage": "Partial workflow fixture corpus; representativeness and counter-literature are not verified.",
+          "evidence_status": "partial_unverified",
+          "tool_use": [
+            "No external lookup; deterministic local workflow-passport fixture only."
+          ],
+          "human_verification_status": "needed before downstream reliance",
+          "unresolved_risks": [
+            "Chapter draft contains unverified synthesis and missing run/source logs for a numeric claim."
+          ],
+          "handoff_limits": [
+            "Do not issue gate pass or manuscript-ready status."
+          ],
+          "generated_or_updated_at": "2026-06-03T00:00:00-04:00",
+          "producing_skill": "chapter-architecture",
+          "intended_next_skill_or_use": "scholarly-integrity-gate"
+        },
+        "workflow_claims": [
+          {
+            "claim_id": "chapter_brief-claim-1",
+            "claim": "The chapter draft includes an unverified numeric claim without a source or run locator.",
+            "evidence_status": "unverified",
+            "locator_status": "locator_gap"
+          }
+        ]
+      },
+      "expected_output_artifact": {
+        "schema_version": "book-artifact-v1",
+        "artifact_type": "scholarly_integrity_audit",
+        "handoff_artifact": true,
+        "process_passport": {
+          "artifact_id": "chapter-brief-to-integrity-gate-preserves-passport-output",
+          "source_basis": "Consumed upstream chapter_brief process passport and generated provisional scholarly_integrity_audit; no verification step performed.",
+          "source_access_level": "citation only; abstract only; no full text access",
+          "corpus_coverage": "Partial workflow fixture corpus; representativeness and counter-literature are not verified.",
+          "evidence_status": "hold_for_verification",
+          "tool_use": [
+            "No external lookup; deterministic local workflow-passport fixture only."
+          ],
+          "human_verification_status": "needed before downstream reliance",
+          "unresolved_risks": [
+            "Chapter draft contains unverified synthesis and missing run/source logs for a numeric claim.",
+            "Downstream artifact must preserve upstream uncertainty until a visible verification step resolves it."
+          ],
+          "handoff_limits": [
+            "Do not issue gate pass or manuscript-ready status.",
+            "Do not upgrade evidence, locator, or human-verification status from this handoff alone."
+          ],
+          "generated_or_updated_at": "2026-06-03T00:00:00-04:00",
+          "producing_skill": "scholarly-integrity-gate",
+          "intended_next_skill_or_use": "next workflow gate or human reviewer"
+        },
+        "workflow_claims": [
+          {
+            "claim_id": "scholarly_integrity_audit-claim-1",
+            "claim": "The chapter draft includes an unverified numeric claim without a source or run locator.",
+            "evidence_status": "unverified",
+            "locator_status": "locator_gap"
+          }
+        ]
+      },
+      "forbidden_behavior": [
+        "Removing unresolved risks without a verification note.",
+        "Treating citation-only or abstract-only access as full-text verification.",
+        "Dropping human-review requirements.",
+        "Silently upgrading unverified claims, missing locators, or partial corpus limits to verified status."
+      ]
+    },
+    {
+      "id": "book-proposal-to-comps-preserves-passport",
+      "from_skill": "book-proposal-scholarship",
+      "to_skill": "book-comps-verifier",
+      "handoff": "book proposal -> book-comps verifier",
+      "input_artifact": {
+        "schema_version": "book-artifact-v1",
+        "artifact_type": "book_proposal",
+        "handoff_artifact": true,
+        "process_passport": {
+          "artifact_id": "book-proposal-to-comps-preserves-passport-input",
+          "source_basis": "Synthetic upstream book_proposal with process passport; no full-text verification.",
+          "source_access_level": "citation only; abstract only; no full text access",
+          "corpus_coverage": "Partial workflow fixture corpus; representativeness and counter-literature are not verified.",
+          "evidence_status": "partial_unverified",
+          "tool_use": [
+            "No external lookup; deterministic local workflow-passport fixture only."
+          ],
+          "human_verification_status": "needed before downstream reliance",
+          "unresolved_risks": [
+            "Proposal comparable titles are stale or citation-only; sales positioning and publication dates are not verified."
+          ],
+          "handoff_limits": [
+            "Do not treat comparable titles as verified market evidence."
+          ],
+          "generated_or_updated_at": "2026-06-03T00:00:00-04:00",
+          "producing_skill": "book-proposal-scholarship",
+          "intended_next_skill_or_use": "book-comps-verifier"
+        },
+        "workflow_claims": [
+          {
+            "claim_id": "book_proposal-claim-1",
+            "claim": "A comparable title may fit the proposal, but publication status and positioning are unverified.",
+            "evidence_status": "unverified",
+            "locator_status": "locator_gap"
+          }
+        ]
+      },
+      "expected_output_artifact": {
+        "schema_version": "book-artifact-v1",
+        "artifact_type": "comps_verification",
+        "handoff_artifact": true,
+        "process_passport": {
+          "artifact_id": "book-proposal-to-comps-preserves-passport-output",
+          "source_basis": "Consumed upstream book_proposal process passport and generated provisional comps_verification; no verification step performed.",
+          "source_access_level": "citation only; abstract only; no full text access",
+          "corpus_coverage": "Partial workflow fixture corpus; representativeness and counter-literature are not verified.",
+          "evidence_status": "hold_for_verification",
+          "tool_use": [
+            "No external lookup; deterministic local workflow-passport fixture only."
+          ],
+          "human_verification_status": "needed before downstream reliance",
+          "unresolved_risks": [
+            "Proposal comparable titles are stale or citation-only; sales positioning and publication dates are not verified.",
+            "Downstream artifact must preserve upstream uncertainty until a visible verification step resolves it."
+          ],
+          "handoff_limits": [
+            "Do not treat comparable titles as verified market evidence.",
+            "Do not upgrade evidence, locator, or human-verification status from this handoff alone."
+          ],
+          "generated_or_updated_at": "2026-06-03T00:00:00-04:00",
+          "producing_skill": "book-comps-verifier",
+          "intended_next_skill_or_use": "next workflow gate or human reviewer"
+        },
+        "workflow_claims": [
+          {
+            "claim_id": "comps_verification-claim-1",
+            "claim": "A comparable title may fit the proposal, but publication status and positioning are unverified.",
+            "evidence_status": "unverified",
+            "locator_status": "locator_gap"
+          }
+        ]
+      },
+      "forbidden_behavior": [
+        "Removing unresolved risks without a verification note.",
+        "Treating citation-only or abstract-only access as full-text verification.",
+        "Dropping human-review requirements.",
+        "Silently upgrading unverified claims, missing locators, or partial corpus limits to verified status."
+      ]
+    },
+    {
+      "id": "workflow-log-to-release-audit-preserves-passport",
+      "from_skill": "ai-human-workflow-log",
+      "to_skill": "rights-privacy-release-auditor",
+      "handoff": "AI-human workflow log -> release/integrity gate",
+      "input_artifact": {
+        "schema_version": "book-artifact-v1",
+        "artifact_type": "ai_human_workflow_log",
+        "handoff_artifact": true,
+        "process_passport": {
+          "artifact_id": "workflow-log-to-release-audit-preserves-passport-input",
+          "source_basis": "Synthetic upstream ai_human_workflow_log with process passport; no full-text verification.",
+          "source_access_level": "citation only; abstract only; no full text access",
+          "corpus_coverage": "Partial workflow fixture corpus; representativeness and counter-literature are not verified.",
+          "evidence_status": "partial_unverified",
+          "tool_use": [
+            "No external lookup; deterministic local workflow-passport fixture only."
+          ],
+          "human_verification_status": "needed before downstream reliance",
+          "unresolved_risks": [
+            "Workflow log shows a missing human checkpoint and unresolved AI-use disclosure or quote locator."
+          ],
+          "handoff_limits": [
+            "Do not clear release or hide AI involvement."
+          ],
+          "generated_or_updated_at": "2026-06-03T00:00:00-04:00",
+          "producing_skill": "ai-human-workflow-log",
+          "intended_next_skill_or_use": "rights-privacy-release-auditor"
+        },
+        "workflow_claims": [
+          {
+            "claim_id": "ai_human_workflow_log-claim-1",
+            "claim": "The release packet includes AI-assisted material with missing human verification and locator gaps.",
+            "evidence_status": "unverified",
+            "locator_status": "locator_gap"
+          }
+        ]
+      },
+      "expected_output_artifact": {
+        "schema_version": "book-artifact-v1",
+        "artifact_type": "rights_privacy_release_audit",
+        "handoff_artifact": true,
+        "process_passport": {
+          "artifact_id": "workflow-log-to-release-audit-preserves-passport-output",
+          "source_basis": "Consumed upstream ai_human_workflow_log process passport and generated provisional rights_privacy_release_audit; no verification step performed.",
+          "source_access_level": "citation only; abstract only; no full text access",
+          "corpus_coverage": "Partial workflow fixture corpus; representativeness and counter-literature are not verified.",
+          "evidence_status": "hold_for_verification",
+          "tool_use": [
+            "No external lookup; deterministic local workflow-passport fixture only."
+          ],
+          "human_verification_status": "needed before downstream reliance",
+          "unresolved_risks": [
+            "Workflow log shows a missing human checkpoint and unresolved AI-use disclosure or quote locator.",
+            "Downstream artifact must preserve upstream uncertainty until a visible verification step resolves it."
+          ],
+          "handoff_limits": [
+            "Do not clear release or hide AI involvement.",
+            "Do not upgrade evidence, locator, or human-verification status from this handoff alone."
+          ],
+          "generated_or_updated_at": "2026-06-03T00:00:00-04:00",
+          "producing_skill": "rights-privacy-release-auditor",
+          "intended_next_skill_or_use": "next workflow gate or human reviewer"
+        },
+        "workflow_claims": [
+          {
+            "claim_id": "rights_privacy_release_audit-claim-1",
+            "claim": "The release packet includes AI-assisted material with missing human verification and locator gaps.",
+            "evidence_status": "unverified",
+            "locator_status": "locator_gap"
+          }
+        ]
+      },
+      "forbidden_behavior": [
+        "Removing unresolved risks without a verification note.",
+        "Treating citation-only or abstract-only access as full-text verification.",
+        "Dropping human-review requirements.",
+        "Silently upgrading unverified claims, missing locators, or partial corpus limits to verified status."
+      ]
+    }
+  ]
+}

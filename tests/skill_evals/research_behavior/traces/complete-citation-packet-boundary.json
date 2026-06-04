@@ -1,0 +1,10 @@
+{
+  "fixture_id": "complete-citation-packet-boundary",
+  "output_captured": true,
+  "output_sha256": "0c55a24ef6ccf2ff89b4b4e021385d811268d8a9aa875fe1b1c5915536f6056f",
+  "prompt_sha256": "6daabd3c37d80b8f0821610f7143375480574d2b4943dad8194f7931de3b6652",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "citation-integrity-auditor",
+  "skill_invoked": true
+}

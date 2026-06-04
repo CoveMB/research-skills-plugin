@@ -23,6 +23,11 @@ COMPACT_RESULT_MARKERS = [
     "How to use this result",
     "Next action",
 ]
+ROOT_DIR = Path(__file__).resolve().parents[1]
+SKILLS_DIR = ROOT_DIR / "skills"
+BOOK_ARTIFACT_SCHEMA = ROOT_DIR / "shared" / "contracts" / "book" / "book_artifact.schema.json"
+CORPUS_REPRESENTATIVENESS_PREFIX = "Corpus representativeness:"
+BEHAVIOR_FIXTURE_EXEMPTIONS: dict[str, str] = {}
 HIGH_RISK_OVERSTATEMENT_ROUTES = frozenset(
     [
         "claim-evidence-ledger",
@@ -35,6 +40,50 @@ HIGH_RISK_OVERSTATEMENT_ROUTES = frozenset(
         "book-comps-verifier",
     ]
 )
+HIGH_RISK_BEHAVIOR_ROUTES = HIGH_RISK_OVERSTATEMENT_ROUTES | frozenset(
+    [
+        "research-intent-router",
+        "discovery-runner-deduper",
+        "claim-traceability-graph",
+        "rights-privacy-release-auditor",
+        "ai-human-workflow-log",
+        "counterargument-peer-review",
+    ]
+)
+ADVERSARIAL_SIGNAL_TERMS = [
+    "adversarial",
+    "trap",
+    "pressure",
+    "false premise",
+    "prompt injection",
+    "overclaim",
+    "unsupported",
+    "unverified",
+    "invent",
+    "fabricat",
+    "hallucinat",
+    "private",
+    "conceal",
+    "hide",
+    "certification",
+    "certify",
+    "retraction",
+    "questionable",
+    "predatory",
+    "title-only",
+    "notes-only",
+    "citation-only",
+    "planned searches",
+    "nearby citation",
+    "stale",
+    "mismatch",
+    "no-counter",
+    "correlational",
+    "causal",
+    "prisma",
+    "copyright",
+    "legal",
+]
 OVERSTATEMENT_POLICY_REQUIRED_MARKERS = [
     "Source basis",
     "What I can verify",
@@ -62,6 +111,104 @@ OVERSTATEMENT_POLICY_FORBIDDEN_CLAIMS = [
     "no prior work exists",
     "absence of evidence proves",
 ]
+SOURCE_INTEGRITY_ROUTES = frozenset(
+    [
+        "annotated-bibliography-builder",
+        "annotation-to-source-note",
+        "book-comps-verifier",
+        "book-proposal-scholarship",
+        "citation-integrity-auditor",
+        "claim-evidence-ledger",
+        "claim-traceability-graph",
+        "discovery-runner-deduper",
+        "literature-review-mapper",
+        "methodology-source-auditor",
+        "systematic-source-discovery",
+    ]
+)
+SOURCE_INTEGRITY_FORBIDDEN_FAMILIES = {
+    "invented citation": [
+        "invented citation",
+        "invented citation verified",
+        "fabricated citation",
+        "hallucinated citation",
+        "nonexistent citation",
+        "made-up citation",
+        "apa reference complete",
+        "all citations verified",
+        "citation verified",
+        "publication details invented",
+    ],
+    "invented metadata": [
+        "invented metadata",
+        "invented metadata verified",
+        "hallucinated citation metadata",
+        "metadata verified from memory",
+        "metadata completed from memory",
+        "doi generated",
+        "doi fixed without source basis",
+        "publisher confirmed",
+        "publication details invented",
+    ],
+    "unsupported page/locator": [
+        "unsupported page",
+        "unsupported locator",
+        "unsupported page locator verified",
+        "page number",
+        "page range",
+        "page range confirmed",
+        "locator gap",
+        "locator inferred",
+        "quote verified",
+    ],
+}
+SYNTHESIS_ROUTES = frozenset(
+    [
+        "book-comps-verifier",
+        "book-proposal-scholarship",
+        "counterargument-peer-review",
+        "literature-review-mapper",
+        "methodology-source-auditor",
+        "systematic-source-discovery",
+    ]
+)
+SYNTHESIS_REQUIRED_FAMILIES = {
+    "source basis": ["source basis"],
+    "verifiable claims": ["what i can verify"],
+    "uncertainty": ["what remains uncertain"],
+    "user verification": ["user verification needed"],
+}
+RELEASE_PRIVACY_ROUTES = frozenset(["rights-privacy-release-auditor"])
+RELEASE_PRIVACY_LIMITATION_FAMILIES = {
+    "legal/review limitation": [
+        "not legal advice",
+        "not certification",
+        "legal review boundary",
+        "legal review",
+        "human/specialist review needed",
+        "rights clearance",
+        "permission evidence",
+    ],
+}
+WORKFLOW_LOGGING_ROUTES = frozenset(["ai-human-workflow-log", "scholarly-integrity-gate"])
+WORKFLOW_LOGGING_REQUIRED_FAMILIES = {
+    "human verification": [
+        "human verification",
+        "human checkpoint",
+        "human responsibility",
+        "residual human review",
+        "human/specialist review needed",
+    ],
+    "unresolved risk": [
+        "unresolved",
+        "what remains uncertain",
+        "venue policy",
+        "residual human review",
+        "risk",
+        "blocker",
+        "gate decision: hold",
+    ],
+}
 OPTIONAL_REGEX_LIST_KEYS = {
     "required_output_patterns",
     "forbidden_output_patterns",
@@ -107,10 +254,76 @@ def fixture_list(document: dict[str, Any]) -> list[dict[str, Any]]:
     return [fixture for fixture in fixtures if isinstance(fixture, dict)]
 
 
+def discover_skill_names(skills_dir: Path = SKILLS_DIR) -> set[str]:
+    if not skills_dir.exists():
+        return set()
+    return {skill_file.parent.name for skill_file in skills_dir.glob("*/SKILL.md")}
+
+
 def string_list(value: Any) -> list[str]:
     if not isinstance(value, list):
         return []
-    return [item for item in value if isinstance(item, str)]
+    return [item.strip() for item in value if isinstance(item, str) and item.strip()]
+
+
+def corpus_label_values_from_contract(schema_path: Path = BOOK_ARTIFACT_SCHEMA) -> set[str]:
+    try:
+        schema = read_json_object(schema_path)
+    except (OSError, ValueError, json.JSONDecodeError):
+        return set()
+
+    defs = schema.get("$defs")
+    corpus_schema = defs.get("corpus_representativeness") if isinstance(defs, dict) else None
+    properties = corpus_schema.get("properties") if isinstance(corpus_schema, dict) else None
+    labels_schema = properties.get("labels") if isinstance(properties, dict) else None
+    items_schema = labels_schema.get("items") if isinstance(labels_schema, dict) else None
+    label_values = items_schema.get("enum") if isinstance(items_schema, dict) else None
+    if not isinstance(label_values, list):
+        return set()
+    return {value for value in label_values if isinstance(value, str)}
+
+
+def corpus_label_values_from_marker(marker: str) -> list[str]:
+    if not marker.startswith(CORPUS_REPRESENTATIVENESS_PREFIX):
+        return []
+    label_text = marker.removeprefix(CORPUS_REPRESENTATIVENESS_PREFIX)
+    return [
+        label.strip().strip("`.")
+        for label in label_text.split(",")
+        if label.strip().strip("`.")
+    ]
+
+
+def unknown_corpus_label_errors(fixture: dict[str, Any], known_labels: set[str] | None = None) -> list[str]:
+    labels = known_labels if known_labels is not None else corpus_label_values_from_contract()
+    if not labels:
+        return []
+    return [
+        f"{fixture_identifier(fixture)}: unknown corpus representativeness label {label!r}"
+        for marker in string_list(fixture.get("required_output_markers"))
+        for label in corpus_label_values_from_marker(marker)
+        if label not in labels
+    ]
+
+
+def corpus_label_lines(output_text: str) -> list[str]:
+    return [
+        line.strip()
+        for line in output_text.splitlines()
+        if line.strip().startswith(CORPUS_REPRESENTATIVENESS_PREFIX)
+    ]
+
+
+def unknown_corpus_output_label_errors(fixture: dict[str, Any], output_text: str) -> list[str]:
+    labels = corpus_label_values_from_contract()
+    if not labels:
+        return []
+    return [
+        f"{fixture_identifier(fixture)}: output contains unknown corpus representativeness label {label!r}"
+        for line in corpus_label_lines(output_text)
+        for label in corpus_label_values_from_marker(line)
+        if label not in labels
+    ]
 
 
 def is_compact_fixture(fixture: dict[str, Any]) -> bool:
@@ -129,6 +342,11 @@ def normalized_contains(text: str, phrase: str) -> bool:
 
 def normalized_count(text: str, phrase: str) -> int:
     return text.casefold().count(phrase.casefold())
+
+
+def contains_any(text: str, terms: list[str]) -> bool:
+    normalized_text = text.casefold()
+    return any(term.casefold() in normalized_text for term in terms)
 
 
 def fixture_identifier(fixture: dict[str, Any]) -> str:
@@ -213,7 +431,185 @@ def duplicate_fixture_id_errors(fixtures: list[dict[str, Any]]) -> list[str]:
     return errors
 
 
-def validate_fixture_document(fixture_path: Path) -> list[str]:
+def fixture_policy_text(fixture: dict[str, Any]) -> str:
+    fields = [
+        str(fixture.get("id", "")),
+        str(fixture.get("prompt", "")),
+        str(fixture.get("risk_covered", "")),
+        *string_list(fixture.get("required_output_markers")),
+        *string_list(fixture.get("forbidden_claims")),
+        *string_list(fixture.get("required_output_patterns")),
+        *string_list(fixture.get("forbidden_output_patterns")),
+    ]
+    return "\n".join(fields)
+
+
+def fixture_forbidden_policy_text(fixture: dict[str, Any]) -> str:
+    return "\n".join(
+        [
+            *string_list(fixture.get("forbidden_claims")),
+            *string_list(fixture.get("forbidden_output_patterns")),
+        ]
+    )
+
+
+def active_skill_routes(fixtures: list[dict[str, Any]]) -> set[str]:
+    return {
+        str(fixture.get("expected_route"))
+        for fixture in fixtures
+        if fixture.get("should_trigger", True) is not False
+        and isinstance(fixture.get("expected_route"), str)
+        and fixture.get("expected_route") != "none"
+    }
+
+
+def fixtures_by_route(fixtures: list[dict[str, Any]]) -> dict[str, list[dict[str, Any]]]:
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for fixture in fixtures:
+        route = fixture.get("expected_route")
+        if fixture.get("should_trigger", True) is False or not isinstance(route, str) or route == "none":
+            continue
+        grouped.setdefault(route, []).append(fixture)
+    return grouped
+
+
+def route_policy_text(route_fixtures: list[dict[str, Any]]) -> str:
+    return "\n".join(fixture_policy_text(fixture) for fixture in route_fixtures)
+
+
+def route_forbidden_policy_text(route_fixtures: list[dict[str, Any]]) -> str:
+    return "\n".join(fixture_forbidden_policy_text(fixture) for fixture in route_fixtures)
+
+
+def missing_family_names(text: str, families: dict[str, list[str]]) -> list[str]:
+    return [family for family, terms in families.items() if not contains_any(text, terms)]
+
+
+def missing_behavior_fixture_errors(covered_routes: set[str], known_skills: set[str]) -> list[str]:
+    errors = []
+    for skill_name in sorted(known_skills - covered_routes):
+        exemption_reason = BEHAVIOR_FIXTURE_EXEMPTIONS.get(skill_name)
+        if exemption_reason:
+            continue
+        errors.append(f"{skill_name}: missing behavior fixture or explicit exemption reason")
+    return errors
+
+
+def invalid_exemption_errors(known_skills: set[str]) -> list[str]:
+    errors = []
+    for skill_name, reason in sorted(BEHAVIOR_FIXTURE_EXEMPTIONS.items()):
+        if skill_name not in known_skills:
+            errors.append(f"{skill_name}: behavior fixture exemption references an unknown skill")
+        if not reason.strip():
+            errors.append(f"{skill_name}: behavior fixture exemption reason must be non-empty")
+    return errors
+
+
+def high_risk_adversarial_errors(grouped_fixtures: dict[str, list[dict[str, Any]]], known_skills: set[str]) -> list[str]:
+    errors = []
+    for route in sorted(HIGH_RISK_BEHAVIOR_ROUTES & known_skills):
+        route_fixtures = grouped_fixtures.get(route, [])
+        if not route_fixtures:
+            continue
+        if any(contains_any(fixture_policy_text(fixture), ADVERSARIAL_SIGNAL_TERMS) for fixture in route_fixtures):
+            continue
+        errors.append(
+            (
+                f"{route}: high-risk skill requires at least one adversarial/trap behavior fixture; "
+                "add pressure, false-premise, fabrication, privacy, certification, or unsupported-evidence coverage"
+            )
+        )
+    return errors
+
+
+def route_family_errors(
+    grouped_fixtures: dict[str, list[dict[str, Any]]],
+    known_skills: set[str],
+    routes: frozenset[str],
+    families: dict[str, list[str]],
+    message: str,
+) -> list[str]:
+    errors = []
+    for route in sorted(routes & known_skills):
+        route_fixtures = grouped_fixtures.get(route, [])
+        if not route_fixtures:
+            continue
+        missing = missing_family_names(route_policy_text(route_fixtures), families)
+        if missing:
+            errors.append(f"{route}: {message}: {', '.join(missing)}")
+    return errors
+
+
+def source_integrity_forbidden_family_errors(
+    grouped_fixtures: dict[str, list[dict[str, Any]]],
+    known_skills: set[str],
+) -> list[str]:
+    errors = []
+    for route in sorted(SOURCE_INTEGRITY_ROUTES & known_skills):
+        route_fixtures = grouped_fixtures.get(route, [])
+        if not route_fixtures:
+            continue
+        missing = missing_family_names(
+            route_forbidden_policy_text(route_fixtures),
+            SOURCE_INTEGRITY_FORBIDDEN_FAMILIES,
+        )
+        if missing:
+            errors.append(
+                (
+                    f"{route}: citation/source integrity coverage missing forbidden safeguards: "
+                    f"{', '.join(missing)}"
+                )
+            )
+    return errors
+
+
+def fixture_positive_and_forbidden_behavior_errors(fixtures: list[dict[str, Any]]) -> list[str]:
+    return [
+        f"{fixture_identifier(fixture)}: fixture must include positive expected behavior markers and forbidden behavior checks"
+        for fixture in fixtures
+        if not string_list(fixture.get("required_output_markers")) or not string_list(fixture.get("forbidden_claims"))
+    ]
+
+
+def policy_coverage_errors(
+    fixtures: list[dict[str, Any]],
+    *,
+    known_skills: set[str] | None = None,
+) -> list[str]:
+    skill_names = known_skills if known_skills is not None else discover_skill_names()
+    covered_routes = active_skill_routes(fixtures)
+    grouped_fixtures = fixtures_by_route(fixtures)
+    return [
+        *invalid_exemption_errors(skill_names),
+        *missing_behavior_fixture_errors(covered_routes, skill_names),
+        *fixture_positive_and_forbidden_behavior_errors(fixtures),
+        *high_risk_adversarial_errors(grouped_fixtures, skill_names),
+        *source_integrity_forbidden_family_errors(grouped_fixtures, skill_names),
+        *route_family_errors(
+            grouped_fixtures,
+            skill_names,
+            SYNTHESIS_ROUTES,
+            SYNTHESIS_REQUIRED_FAMILIES,
+            "synthesis coverage missing uncertainty/source-basis markers",
+        ),
+        *route_family_errors(
+            grouped_fixtures,
+            skill_names,
+            RELEASE_PRIVACY_ROUTES,
+            RELEASE_PRIVACY_LIMITATION_FAMILIES,
+            "release/privacy coverage missing legal/review limitation",
+        ),
+        *route_family_errors(
+            grouped_fixtures,
+            skill_names,
+            WORKFLOW_LOGGING_ROUTES,
+            WORKFLOW_LOGGING_REQUIRED_FAMILIES,
+            "workflow/logging coverage missing human-verification and unresolved-risk checks",
+        ),
+    ]
+
+
+def validate_fixture_document(fixture_path: Path, *, enforce_policy: bool = False) -> list[str]:
     try:
         document = read_json_object(fixture_path)
     except (OSError, ValueError, json.JSONDecodeError) as error:
@@ -227,6 +623,7 @@ def validate_fixture_document(fixture_path: Path) -> list[str]:
         errors.append("fixtures must be a non-empty list of objects")
 
     errors.extend(duplicate_fixture_id_errors(fixtures))
+    known_corpus_labels = corpus_label_values_from_contract()
     for fixture in fixtures:
         errors.extend(missing_fixture_keys(fixture))
         errors.extend(invalid_fixture_id_errors(fixture))
@@ -234,6 +631,9 @@ def validate_fixture_document(fixture_path: Path) -> list[str]:
         errors.extend(missing_overstatement_policy_marker_errors(fixture))
         errors.extend(invalid_optional_boolean_errors(fixture))
         errors.extend(invalid_optional_regex_list_errors(fixture))
+        errors.extend(unknown_corpus_label_errors(fixture, known_corpus_labels))
+    if enforce_policy:
+        errors.extend(policy_coverage_errors(fixtures))
     return errors
 
 
@@ -326,6 +726,7 @@ def validate_output_for_fixture(outputs_dir: Path, fixture: dict[str, Any]) -> l
         *forbidden_claim_errors(fixture, output_text),
         *forbidden_output_pattern_errors(fixture, output_text),
         *compact_marker_count_errors(fixture, output_text),
+        *unknown_corpus_output_label_errors(fixture, output_text),
     ]
 
 
@@ -453,12 +854,17 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
         type=Path,
         help="Directory containing one route trace JSON file per fixture id.",
     )
+    parser.add_argument(
+        "--schema-only",
+        action="store_true",
+        help="Check fixture schema without whole-repo anti-regression coverage policy.",
+    )
     return parser.parse_args(argv)
 
 
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv or sys.argv[1:])
-    errors = validate_fixture_document(args.fixtures)
+    errors = validate_fixture_document(args.fixtures, enforce_policy=not args.schema_only)
     if not errors and args.outputs_dir:
         errors.extend(validate_fixture_outputs(args.fixtures, args.outputs_dir))
     if not errors and args.traces_dir:

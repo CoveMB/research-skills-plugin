@@ -46,6 +46,8 @@ def write_schema(root: Path) -> None:
                         ]
                     },
                     "project_title": {"type": "string", "minLength": 1},
+                    "handoff_artifact": {"type": "boolean"},
+                    "process_passport": {"$ref": "#/$defs/process_passport"},
                     "claims": {
                         "type": "array",
                         "minItems": 1,
@@ -227,7 +229,54 @@ def write_schema(root: Path) -> None:
                     },
                     "new_factual_claims_policy": {"type": "string", "minLength": 1},
                 },
+                "$defs": {
+                    "non_empty_string": {"type": "string", "minLength": 1},
+                    "non_empty_strings": {
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {"$ref": "#/$defs/non_empty_string"},
+                    },
+                    "process_passport": {
+                        "type": "object",
+                        "additionalProperties": False,
+                        "required": [
+                            "artifact_id",
+                            "source_basis",
+                            "source_access_level",
+                            "corpus_coverage",
+                            "evidence_status",
+                            "tool_use",
+                            "human_verification_status",
+                            "unresolved_risks",
+                            "handoff_limits",
+                            "generated_or_updated_at",
+                            "producing_skill",
+                            "intended_next_skill_or_use",
+                        ],
+                        "properties": {
+                            "artifact_id": {"$ref": "#/$defs/non_empty_string"},
+                            "source_basis": {"$ref": "#/$defs/non_empty_string"},
+                            "source_access_level": {"$ref": "#/$defs/non_empty_string"},
+                            "corpus_coverage": {"$ref": "#/$defs/non_empty_string"},
+                            "evidence_status": {"$ref": "#/$defs/non_empty_string"},
+                            "tool_use": {"$ref": "#/$defs/non_empty_strings"},
+                            "human_verification_status": {"$ref": "#/$defs/non_empty_string"},
+                            "unresolved_risks": {"$ref": "#/$defs/non_empty_strings"},
+                            "handoff_limits": {"$ref": "#/$defs/non_empty_strings"},
+                            "generated_or_updated_at": {"$ref": "#/$defs/non_empty_string"},
+                            "producing_skill": {"$ref": "#/$defs/non_empty_string"},
+                            "intended_next_skill_or_use": {"$ref": "#/$defs/non_empty_string"},
+                        },
+                    },
+                },
                 "allOf": [
+                    {
+                        "if": {
+                            "required": ["handoff_artifact"],
+                            "properties": {"handoff_artifact": {"const": True}},
+                        },
+                        "then": {"required": ["process_passport"]},
+                    },
                     {
                         "if": {"properties": {"artifact_type": {"const": "claim_evidence_ledger"}}},
                         "then": {"required": ["claims"]},
@@ -285,6 +334,23 @@ def valid_claim_ledger() -> dict:
                 "safer_wording": "The draft can frame this as a plausible causal pathway.",
             }
         ],
+    }
+
+
+def valid_process_passport() -> dict:
+    return {
+        "artifact_id": "claim-ledger-fixture-2026-06-03",
+        "source_basis": "Fixture chapter excerpt only; no source lookup.",
+        "source_access_level": "excerpt only",
+        "corpus_coverage": "No corpus coverage; claim audit is limited to the supplied excerpt.",
+        "evidence_status": "partial_unverified",
+        "tool_use": ["No external lookup; local fixture validation only."],
+        "human_verification_status": "needed",
+        "unresolved_risks": ["Source-claim fit remains unchecked."],
+        "handoff_limits": ["Do not treat unverified claims as verified downstream."],
+        "generated_or_updated_at": "2026-06-03T00:00:00-04:00",
+        "producing_skill": "claim-evidence-ledger",
+        "intended_next_skill_or_use": "claim-traceability-graph",
     }
 
 
@@ -560,6 +626,61 @@ class TestBookArtifactContract(unittest.TestCase):
             self.assertEqual(result.returncode, 1)
             self.assertIn("expected one of", result.stdout)
 
+    def test_handoff_artifact_requires_process_passport(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_schema(root)
+            write_valid_coverage_examples(root, skip={"claim_evidence_ledger"})
+            payload = valid_claim_ledger()
+            payload["handoff_artifact"] = True
+            write_example(root, "claim-ledger.json", payload)
+
+            result = run_checker(root)
+
+            self.assertEqual(result.returncode, 1)
+            self.assertIn("process_passport", result.stdout)
+
+    def test_handoff_artifact_accepts_valid_process_passport(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_schema(root)
+            write_valid_coverage_examples(root, skip={"claim_evidence_ledger"})
+            payload = valid_claim_ledger()
+            payload["handoff_artifact"] = True
+            payload["process_passport"] = valid_process_passport()
+            write_example(root, "claim-ledger.json", payload)
+
+            result = run_checker(root)
+
+            self.assertEqual(
+                result.returncode,
+                0,
+                msg=f"stdout={result.stdout!r} stderr={result.stderr!r}",
+            )
+
+    def test_invalid_examples_are_checked_as_expected_failures(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_schema(root)
+            write_valid_coverage_examples(root)
+            invalid_dir = root / "examples" / "book_artifacts" / "invalid"
+            invalid_dir.mkdir(parents=True, exist_ok=True)
+            payload = valid_claim_ledger()
+            payload["handoff_artifact"] = True
+            (invalid_dir / "handoff-missing-passport.json").write_text(
+                json.dumps(payload),
+                encoding="utf-8",
+            )
+
+            result = run_checker(root)
+
+            self.assertEqual(
+                result.returncode,
+                0,
+                msg=f"stdout={result.stdout!r} stderr={result.stderr!r}",
+            )
+            self.assertIn("invalid examples failed as expected", result.stdout)
+
     def test_unexpected_property_fails_with_property_name(self) -> None:
         with TemporaryDirectory() as temporary_directory:
             root = Path(temporary_directory)
@@ -711,7 +832,7 @@ class TestBookArtifactContract(unittest.TestCase):
             schema = json.loads(schema_path.read_text(encoding="utf-8"))
             schema["properties"]["optional_protocol_note"] = {"type": "string", "minLength": 1}
             for branch in schema["allOf"]:
-                artifact_type = branch["if"]["properties"]["artifact_type"]["const"]
+                artifact_type = branch["if"].get("properties", {}).get("artifact_type", {}).get("const")
                 if artifact_type == "source_discovery_log":
                     branch["then"]["properties"] = {
                         "optional_protocol_note": {"type": "string", "minLength": 1}

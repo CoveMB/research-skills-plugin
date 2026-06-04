@@ -1,0 +1,10 @@
+{
+  "fixture_id": "integrity-gate-complete-evidence-normal",
+  "output_captured": true,
+  "output_sha256": "0f753896a3fe27e324a5cf9bcba92a5af064888da01ec3c5c347cc442069da67",
+  "prompt_sha256": "706be1e7efc76af600dac35f052f306ab8c02c0d9aa88ccebea4780924971faf",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "scholarly-integrity-gate",
+  "skill_invoked": true
+}

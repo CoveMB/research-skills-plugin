@@ -1,0 +1,10 @@
+{
+  "fixture_id": "planned-searches-as-completed-trap",
+  "output_captured": true,
+  "output_sha256": "143d371d4e80d9a02a61de961a095715af8f93102d295cbda945d5b68226498d",
+  "prompt_sha256": "a701f89bc18c5c2263c888124237ed88504d8021df56b299755088563aada9c5",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "discovery-runner-deduper",
+  "skill_invoked": true
+}

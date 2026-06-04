@@ -129,6 +129,8 @@ Use `docs/ROUTING_MATRIX.md` as the canonical route table. If the request matche
 
 Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
+This is normally a non-contract routing output and does not require a process passport. If a routing note or workflow plan is saved as durable project state or handed to another skill, follow `docs/PROCESS_PASSPORT.md`; preserve upstream uncertainty, source-access, corpus-coverage, unresolved-risk, and handoff-limit labels.
+
 ## Compact output
 
 Use compact output when the user asks for low reading load, fast routing, or the smallest next step. Compact output should preserve the active research mode, source basis, lookup decision, verification limits, and one next action. Use one routing table and include ambiguity only if it could change the selected skill or lookup decision.
@@ -136,7 +138,7 @@ Use compact output when the user asks for low reading load, fast routing, or the
 ## Files/folders it may read
 
 - Shared operational boundary doc: `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
-- Shared policy docs, especially `docs/SOURCE_LIMITS.md` and `docs/AUTO_SELECTION_GUARDRAILS.md`.
+- Shared policy docs, especially `docs/SOURCE_LIMITS.md`, `docs/PROCESS_PASSPORT.md`, and `docs/AUTO_SELECTION_GUARDRAILS.md`.
 - `docs/ROUTING_MATRIX.md` for canonical skill-routing choices.
 - `docs/ARCHITECTURE.md`, `MODE_REGISTRY.md`, `docs/SKILL_INDEX.md`, `docs/QUALITY_STANDARD.md`, and `shared/contracts/book/book_artifact.schema.json` when routing, artifacts, or quality gates matter.
 - User-provided files, drafts, notes, bibliographies, artifacts, or source excerpts explicitly named in the request.
@@ -207,6 +209,8 @@ This is a non-contract routing output unless the user explicitly asks for a book
 
 ## User verification needed
 
+## Process passport, if saved or handed downstream
+
 ```
 
 ## Failure-mode output boundaries
@@ -239,6 +243,7 @@ Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.m
 - Unverified source, quote, page, metadata, and field-consensus claims must stay labeled.
 - Suggested next step must name why this skill helps now and must not promote a skill without usable input.
 - Do not suggest `citation-integrity-auditor` before citations, quotes, page numbers, bibliography entries, or cited claims exist.
+- Saved routing notes or workflow plans include a process passport without treating route selection as source verification.
 
 ## Failure modes
 
@@ -249,6 +254,7 @@ Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.m
 - Over-routing to many skills and slowing the user's research.
 - Generic skill promotion or premature citation audit.
 - Running open-ended deep lookup without a lookup target object.
+- A saved route erases prior source-access, corpus-coverage, unresolved-risk, or handoff-limit labels.
 
 ## Suggested next step
 

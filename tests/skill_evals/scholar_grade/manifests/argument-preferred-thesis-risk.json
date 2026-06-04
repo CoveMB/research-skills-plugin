@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "argument-architecture",
   "skill_file": "skills/argument-architecture/SKILL.md",
-  "skill_file_sha256": "6ca9b2f96c18c29c9c2efffe7a709aebd9b26094924acf522167eda1145bc651",
+  "skill_file_sha256": "0471b30f7bccab6cd7e57e5ca2d9b7c4e79074b08bf5405b4f47077e8dcfedf8",
   "source_packet": "corpora/argument-preferred-thesis-risk/source-packet.md",
   "source_packet_sha256": "b8dffc48a03f7ba39af53d509577a2d9b1a5ecbc54f59ad7b3042094da59a99a",
   "structured_result": {

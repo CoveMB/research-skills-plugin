@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "scholarly-research-agenda",
   "skill_file": "skills/scholarly-research-agenda/SKILL.md",
-  "skill_file_sha256": "c1362a4e82204977b50f818f8bbf59f685603b49043d1f1538d427f0f1983557",
+  "skill_file_sha256": "f9e7e40a402158a4875d729cc9b1816803d7a70ce41ea6bb89b62e4c756a7613",
   "source_packet": "corpora/scholarly-agenda-broad-manifesto/source-packet.md",
   "source_packet_sha256": "5495033d74758423c4a0303dcd6f1fc410bc8b37da7b350226d324bf72b75bd7",
   "structured_result": {

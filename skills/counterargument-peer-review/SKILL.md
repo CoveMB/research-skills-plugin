@@ -44,9 +44,11 @@ Be charitable first, then direct. Steelman the argument before attacking it, and
 
 Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
+Use `docs/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` before claiming that a literature is missing, settled, one-sided, or adequately covered. In critique mode, likely missing literatures may be named as areas to check, not as proven absences, unless a protocol-bounded search supports that claim.
+
 ## Machine-readable artifacts
 
-When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: peer_review_report`. If the output is normal Markdown, do not force the JSON contract.
+When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: peer_review_report`. If the output is normal Markdown, do not force the JSON contract. For durable handoff artifacts, follow `docs/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits instead of upgrading verification.
 
 ## Files/folders it may read
 
@@ -92,6 +94,8 @@ Generate objections from:
 
 Name literatures or fields that would likely object or add nuance. Do not invent specific citations unless verified or provided; name the area instead.
 
+Label the corpus basis before any missing-literature or settled-literature claim. With `single_source`, `thin_corpus`, `partial_corpus`, `convenience_corpus`, `unknown_coverage`, `stale_corpus`, or `one_sided_corpus`, phrase missing literatures as likely checks rather than absence findings.
+
 Name missing specialist review needs when a claim requires field expertise, methods expertise, legal/medical/technical review, or current source verification.
 
 ### 4. Identify hidden assumptions and biases
@@ -134,6 +138,8 @@ For high-severity objections, state what evidence would falsify or materially we
 
 ## User verification needed
 
+## Corpus representativeness label
+
 ## Charitable restatement
 
 ## Strongest objections
@@ -171,6 +177,7 @@ Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.m
 - Do not replace critique with generic warnings.
 - Always offer constructive fixes.
 - Do not name specific missing sources unless they are provided or verified.
+- Missing-literature claims are labeled as likely checks unless the search protocol justifies absence wording.
 
 ## Failure modes
 

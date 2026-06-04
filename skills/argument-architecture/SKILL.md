@@ -44,9 +44,11 @@ An outline orders topics. An argument architecture orders claims and evidence. P
 
 Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
+Use `docs/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` when thesis strength depends on literature coverage, consensus, novelty, missing counter-literature, or source-set balance. Argument architecture may use planned evidence paths, but planned evidence does not establish corpus coverage.
+
 ## Machine-readable artifacts
 
-When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: thesis_tree`. If the output is normal Markdown, do not force the JSON contract.
+When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: thesis_tree`. If the output is normal Markdown, do not force the JSON contract. For durable handoff artifacts, follow `docs/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits instead of upgrading verification.
 
 ## Files/folders it may read
 
@@ -105,6 +107,8 @@ Ask: if this claim fails, does the whole thesis fail? Mark claims as:
 
 Add failure impact for each claim. Mark claims that could collapse the thesis without stronger evidence.
 
+If a claim relies on field consensus, novelty, or missing counter-literature, attach the corpus representativeness label or mark the dependency as unverified.
+
 ### 5. Build chapter logic
 
 Each chapter should advance the argument, not simply cover a topic. Assign a function:
@@ -154,6 +158,8 @@ Offer versions:
 
 ## Weak links
 
+## Corpus-dependent weak links
+
 ## Stronger formulation
 
 ## Limits / failure risks
@@ -170,6 +176,7 @@ Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.m
 - Include the strongest counterargument at the architecture stage, not after drafting.
 - Avoid single-factor determinism or reductionism unless strongly evidenced.
 - Do not make a thesis sound proven when the evidence path is only proposed.
+- Do not let a thesis tree imply field consensus when corpus coverage is partial, unknown, thin, stale, or one-sided.
 
 ## Failure modes
 

@@ -84,9 +84,11 @@ For each family, ask method-specific questions:
 
 Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
+Use `docs/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` when auditing a source set, review article, evidence map, or claim of generalizability, consensus, missing evidence, or source balance. Source quality and corpus representativeness are separate judgments.
+
 ## Machine-readable artifacts
 
-When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: methodology_source_audit`. If the output is normal Markdown, do not force the JSON contract.
+When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: methodology_source_audit`. If the output is normal Markdown, do not force the JSON contract. For durable handoff artifacts, follow `docs/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits instead of upgrading verification.
 
 ## Compact output
 
@@ -174,6 +176,8 @@ Decide whether to use as core evidence, contextual support, counterpoint, object
 
 | Source | Type | Method/evidence | Credibility | Bias risk | Can support | Cannot support | Only contextual | Use recommendation |
 
+## Corpus / source-set limits
+
 ## High-risk sources
 
 ## Missing stronger evidence
@@ -211,6 +215,7 @@ Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.m
 - Do not generalize from a single case without warning.
 - Treat old sources carefully: they may be canonical but not current.
 - Do not claim methodological quality is high unless method and evidence are visible enough to assess.
+- Do not let strong individual-source quality imply corpus representativeness or field consensus.
 
 ## Failure modes
 

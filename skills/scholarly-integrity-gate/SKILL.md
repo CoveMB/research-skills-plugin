@@ -45,13 +45,17 @@ Use this before relying on generated research claims, generated reviews, automat
 
 Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
+Use `docs/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` when auditing literature synthesis, source discovery logs, extraction tables, proposal positioning, comp sets, or any artifact that makes consensus, novelty, balance, missing-literature, market-coverage, or absence-of-evidence claims.
+
 ## Compact output
 
 Use compact output when the user asks for low reading load, a quick gate decision, or blockers only. Compact output should keep the gate decision, source basis, verification gaps, and required human checkpoint visible. Include CLEAR checks only when they justify a pass; otherwise focus on SUSPECTED, INSUFFICIENT EVIDENCE, and OVERRIDDEN items.
 
 ## Machine-readable artifacts
 
-When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: scholarly_integrity_audit`. If the output is normal Markdown, do not force the JSON contract.
+When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: scholarly_integrity_audit`. If the output is normal Markdown, do not force the JSON contract. For durable handoff artifacts, follow `docs/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits instead of upgrading verification.
+
+For multi-stage claim workflows with a workflow trace JSON, use or recommend `python3 scripts/check_workflow_traceability.py --trace path/to/workflow-trace.json` as a deterministic pre-gate. Treat it as structural provenance evidence only: it can detect broken claim IDs, orphan claims, unsupported status upgrades, silent claim drift, removed locators, removed source-basis labels, and unresolved-risk erasure, but it cannot clear source truth, source-claim fit, methodology quality, or argument strength.
 
 ## Files/folders it may read
 
@@ -98,18 +102,22 @@ Check only relevant failure classes:
 - hallucinated evidence: source, quote, metadata, fact, or support is not verified
 - methodology fabrication: method, sample, instrument, search process, or analysis design is claimed without evidence
 - shortcut reliance: generated summaries, abstracts, snippets, or convenience sources replace needed reading
+- corpus overclaiming: partial, convenience, thin, stale, one-sided, unknown, or fixture-only corpus is used to claim field consensus, market coverage, novelty, or absence of evidence
 - frame-lock: the workflow only tests the user's preferred thesis or search vocabulary
 - duplicate or recycled result: table, figure, case, or source appears reused without provenance
 - missing human checkpoint: stage advanced without user decision, rationale, or unresolved-risk record
 - marker-only compliance: required headings or checklist labels appear, but the output leaves decision-critical evidence, blockers, or caveats empty, generic, or contradicted by the body
+- broken claim lineage: claim IDs, traceability links, source locators, source-basis labels, claim types, evidence statuses, or unresolved risks drift across artifacts without recorded explanation
 
 ### 2.1. Stage-specific block rules
 
 Use these block rules before assigning a pass:
 
 - A result-bearing artifact must hold when data provenance, transformation logic, script or notebook, run log, source text, or human verification is unavailable and the artifact is being used for manuscript claims.
-- A generated literature synthesis must hold when corpus boundaries, search/source log, included/excluded source basis, or opposing-literature search terms are missing.
+- A generated literature synthesis must hold when corpus boundaries, corpus representativeness label, search/source log, included/excluded source basis, or opposing-literature search terms are missing.
+- A proposal, comps, or market-positioning artifact must hold when supplied comps or a partial comp list are treated as market-level evidence without corpus coverage and verification limits.
 - A citation, quotation, or locator-dependent claim must hold or route to `citation-integrity-auditor` when source text, page image, authoritative metadata, or locator support is unavailable.
+- A claim-lineage workflow must hold or route to `claim-traceability-graph` when claim IDs are orphaned, duplicated, referenced without definition, silently rewritten, upgraded without justification, or detached from source locator/source-basis labels.
 - A figure or table must hold or route to `figure-table-integrity-auditor` when caption, axis, source data, license, or duplicate-visual status is unavailable.
 - A release or disclosure artifact must hold or route to `rights-privacy-release-auditor` or `ai-human-workflow-log` when external sharing is intended and rights, privacy, copied-text, tool-use, human-verification, or disclosure basis is missing.
 - A theoretical, interpretive, or normative artifact must not block on empirical or computational materials that are not part of its claim basis; record those checks as not applicable instead.
@@ -148,6 +156,8 @@ Recommend one repair owner only when useful: citation audit, methodology audit, 
 ## User verification needed
 
 ## Workflow stage under review
+
+## Corpus coverage check
 
 ## Integrity checks
 | Check | Verdict | Evidence visible | Risk | Required repair | Human checkpoint |
@@ -192,6 +202,7 @@ Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.m
 - Irrelevant checks should be labeled not applicable rather than converted into INSUFFICIENT EVIDENCE.
 - Stage-specific block rules must override fluent or plausible prose when provenance is missing.
 - Required headings do not satisfy an integrity gate when their content is empty, generic, or contradicted by unsupported clearance language.
+- Integrity gates flag corpus overclaiming when coverage labels or claim limits do not support consensus, novelty, missing-literature, market-coverage, or absence claims.
 
 ## Failure modes
 

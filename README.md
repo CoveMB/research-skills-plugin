@@ -254,6 +254,7 @@ Skill behavior tests live under [`tests/skill_evals/`](tests/skill_evals/). They
 The suite has two layers:
 
 - `research_behavior`: deterministic routing and behavior fixtures that check selected-skill route traces, prompt/output trace hashes, captured-output route evidence, required output markers, forbidden claims, and compact-output boundaries.
+- `workflow_traces`: deterministic multi-stage fixtures that bind durable artifacts to SHA-256 hashes and check that tracked claim IDs, unresolved risks, partial-source labels, locator gaps, and human-review requirements survive downstream handoffs.
 - `scholar_grade`: stricter source-packet fixtures that test claim/evidence fit, allowed-claim boundaries, required uncertainties, hard-fail patterns, private-text boundaries, source-access modes, resource-backed rubric coverage, and active real-source MVP gold-set readiness.
 
 The scholar-grade fixtures use synthetic controlled packets with separate hidden `answer-key.md` files. During live or manual skill runs, supply only `source-packet.md`.
@@ -284,6 +285,8 @@ python3 scripts/check_book_artifact_contract.py --path .
 python3 scripts/check_research_behavior_fixtures.py --fixtures tests/skill_evals/research_behavior/fixtures.json --outputs-dir tests/skill_evals/research_behavior/outputs --traces-dir tests/skill_evals/research_behavior/traces
 python3 scripts/research_behavior_eval_harness.py --fixtures tests/skill_evals/research_behavior/fixtures.json --outputs-dir tests/skill_evals/research_behavior/outputs --traces-dir tests/skill_evals/research_behavior/traces --quiet
 python3 scripts/summarize_research_behavior_evals.py --fixtures tests/skill_evals/research_behavior/fixtures.json --outputs-dir tests/skill_evals/research_behavior/outputs --traces-dir tests/skill_evals/research_behavior/traces
+python3 scripts/check_workflow_passport_fixtures.py --fixtures tests/skill_evals/workflow_passports/fixtures.json
+python3 scripts/check_workflow_traceability.py --trace tests/skill_evals/workflow_traces/claim-lineage-fixture/workflow-trace.json
 python3 tests/skill_evals/scholar_grade/scholar_grade_eval_harness.py --fixtures tests/skill_evals/scholar_grade/fixtures.json --outputs-dir tests/skill_evals/scholar_grade/outputs --manifests-dir tests/skill_evals/scholar_grade/manifests --scores-dir tests/skill_evals/scholar_grade/scores --quiet
 python3 tests/skill_evals/scholar_grade/live_capture_protocol.py --fixtures tests/skill_evals/scholar_grade/fixtures.json --root . --check
 python3 tests/skill_evals/scholar_grade/live_pilot_calibration.py --quiet

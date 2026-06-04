@@ -14,20 +14,24 @@
     "Verify comparable titles and proposal claims before submission."
   ],
   "process_passport": {
-    "stage": "Fixture proposal handoff",
-    "artifact_inputs": [
-      "Fixture proposal fields"
-    ],
-    "tool_use_summary": [
+    "artifact_id": "book-proposal",
+    "source_basis": "Fixture example; no live source lookup or full-text verification performed.",
+    "source_access_level": "fixture only; no live source access verified",
+    "corpus_coverage": "Fixture artifact only; no corpus coverage or representativeness was verified.",
+    "evidence_status": "fixture_unverified",
+    "tool_use": [
       "No live market, press, or source lookup was performed."
     ],
-    "gate_status": [
-      "Not ready for external submission until comps, source base, and positioning claims are verified."
+    "human_verification_status": "needed before scholarly reliance",
+    "unresolved_risks": [
+      "Comparable titles, market positioning, and source base require verification."
     ],
-    "human_checkpoints": [
-      "Human reviewer must approve proposal claims, audience framing, and comparable-title status before submission."
+    "handoff_limits": [
+      "Use this fixture only to validate proposal artifact shape and handoff limits."
     ],
-    "handoff_notes": "Use this fixture only to validate proposal artifact shape and handoff limits."
+    "generated_or_updated_at": "2026-05-12T00:00:00-04:00",
+    "producing_skill": "book-proposal-scholarship",
+    "intended_next_skill_or_use": "book-comps-verifier or rights-privacy-release-auditor"
   },
   "title_options": [
     "Working Title",
@@ -57,5 +61,6 @@
   ],
   "author_positioning": "Author credentials and relevant experience should be stated without overclaiming.",
   "status_and_timeline": "Proposal stage; sample chapter and source dossier pending.",
-  "sample_material_plan": "Use the strongest chapter brief as the sample chapter plan."
+  "sample_material_plan": "Use the strongest chapter brief as the sample chapter plan.",
+  "handoff_artifact": true
 }

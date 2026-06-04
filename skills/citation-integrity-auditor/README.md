@@ -6,7 +6,9 @@ Use this skill to protect a research draft from citation problems. It checks whe
 
 It does not pretend to verify sources it cannot see. If source text is unavailable, it marks verification as unavailable and states what would be needed.
 
-For public metadata exports, the optional local helper `python3 scripts/check_citation_metadata.py --input path/to/public-metadata.json` can compare DOI, normalized title, author-year, and venue fields without network lookup. Do not pass manuscript text, excerpts, abstracts, or private notes to that helper.
+For public metadata exports, the optional local helper `python3 scripts/check_citation_metadata.py --input path/to/public-metadata.json` can check identifier format, normalized metadata consistency, missing source-access labels, page-range warnings, locator-support gaps, duplicate citation keys, DOI/title conflicts, and title/metadata conflicts without network lookup. Do not pass manuscript text, excerpts, abstracts, or private notes to that helper.
+
+The helper validates internal metadata consistency only. It does not prove that a source exists, that a DOI is real, or that a source supports a claim unless an allowed lookup or source-content verification path has been completed and recorded.
 
 ## When to use it
 

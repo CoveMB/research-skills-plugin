@@ -631,6 +631,7 @@
         }
       },
       "semantic_fail_patterns": [
+        "(?i)(partial|thin|convenience|one-sided|unknown|stale).{0,40}corpus.{0,80}\\b(proves|establishes|settles|demonstrates)\\b.{0,80}(field )?consensus",
         "(?i)(literature|sources|field).{0,80}\\b(proves|establishes|settles|demonstrates)\\b.{0,80}(consensus|thesis|position)",
         "(?i)consensus.{0,40}\\b(is|has been|was)\\b.{0,40}(clear|settled|established)"
       ],
