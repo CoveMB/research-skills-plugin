@@ -1,0 +1,46 @@
+{
+  "schema_version": "workflow-passport-live-run-manifest-v1",
+  "fixture_id": "workflow-log-to-release-audit-preserves-passport",
+  "from_skill": "ai-human-workflow-log",
+  "to_skill": "rights-privacy-release-auditor",
+  "capture_mode": "manual-live-capture",
+  "capture_interface": "codex-cli",
+  "capture_model": "gpt-5.5",
+  "capture_date": "2026-06-04",
+  "capture_operator": "fresh codex exec blind process",
+  "capture_workspace": "/private/tmp/workflow-passport-live-v1",
+  "capture_sandbox": "read-only",
+  "tool_permissions": "local-only",
+  "network_permissions": "none",
+  "external_lookup_permitted": false,
+  "external_lookup_used": false,
+  "private_material_submitted": false,
+  "raw_output_edited": false,
+  "prompt_file": "tests/skill_evals/workflow_passports/live_pilot_v1/prompts/workflow-log-to-release-audit-preserves-passport.md",
+  "prompt_sha256": "3f73ae813cff068ed7668b6ba37db4fd39cca97ff8e351e57cdf41e9122f537c",
+  "process_passport_policy_file": "docs/policy/PROCESS_PASSPORT.md",
+  "process_passport_policy_sha256": "622912b6651a6bcffaa2e58577c66b13eefdebb49439ead8458ace722c8bffe0",
+  "skill_file": "skills/rights-privacy-release-auditor/SKILL.md",
+  "skill_file_sha256": "8ffcc7011835857662c6c374e2f570fdac55b16097570983ee0fb27b65b13598",
+  "output_file": "tests/skill_evals/workflow_passports/live_pilot_v1/outputs/workflow-log-to-release-audit-preserves-passport.json",
+  "output_sha256": "b0d614d29c17beccdc1515d16ca93d3498c99ddba610c36f1e40c68ebb2e1304",
+  "prompt_basis": [
+    "live capture prompt packet",
+    "input artifact JSON embedded in prompt packet",
+    "docs/policy/PROCESS_PASSPORT.md",
+    "skills/rights-privacy-release-auditor/SKILL.md"
+  ],
+  "excluded_capture_materials": [
+    "workflow passport fixture JSON",
+    "expected output artifacts",
+    "forbidden behavior lists",
+    "checker code",
+    "previous outputs"
+  ],
+  "runtime_environment_notes": [
+    "Codex startup emitted plugin loader warnings unrelated to repository logic.",
+    "The Codex runtime exposed generic Superpowers using-superpowers hook content during capture; this was not fixture, checker, expected-output, previous-output, or answer-key material."
+  ],
+  "validation_command": "python3 scripts/check_workflow_passport_fixtures.py --fixtures tests/skill_evals/workflow_passports/fixtures.json --actual-output-root tests/skill_evals/workflow_passports/live_pilot_v1/outputs",
+  "validation_status": "passed"
+}

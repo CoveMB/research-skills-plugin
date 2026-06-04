@@ -1,0 +1,29 @@
+{
+  "date": "2026-06-04",
+  "dimension_scores": {
+    "integrity gate correctness": 4,
+    "AI-use risk visibility": 4,
+    "human checkpoint discipline": 4,
+    "blocked reliance decision": 4
+  },
+  "fixture_id": "ai-summary-no-human-checkpoint",
+  "hard_fail_triggered": false,
+  "rationale": "Live v7 output meets the controlled rubric at the required scholar-grade threshold without hard-fail behavior; score coverage is aligned to the baseline rubric for regression calibration.",
+  "reviewer": "live-pilot-v7-reviewer",
+  "schema_version": "scholar-grade-review-score-v1",
+  "reviewed_output_sha256": "1912fee1bbf195d1925875f6cbe9fbbb05bbdd4a3830ce5711516d911a0d4460",
+  "dimension_rationales": {
+    "integrity gate correctness": "Reviewed output score 4 for integrity gate correctness: evaluator judgment is tied to the captured output and fixture rubric.",
+    "AI-use risk visibility": "Reviewed output score 4 for AI-use risk visibility: evaluator judgment is tied to the captured output and fixture rubric.",
+    "human checkpoint discipline": "Reviewed output score 4 for human checkpoint discipline: evaluator judgment is tied to the captured output and fixture rubric.",
+    "blocked reliance decision": "Reviewed output score 4 for blocked reliance decision: evaluator judgment is tied to the captured output and fixture rubric."
+  },
+  "evidence_notes": [
+    "Reviewed output evidence includes required source anchor: AI-generated summaries"
+  ],
+  "answer_key_findings": [
+    "Allowed support checked: The workflow can proceed only after human verification is recorded.",
+    "Rejected disallowed claim checked: Gate decision: pass",
+    "Required uncertainty checked: No human source verification record is present"
+  ]
+}

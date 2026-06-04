@@ -1,0 +1,32 @@
+{
+  "capture_mode": "manual-live-capture",
+  "date": "2026-06-04",
+  "external_lookup_permitted": true,
+  "fixture_id": "metadata-lookup-consented-identifiers",
+  "interface": "codex-cli",
+  "model": "gpt-5.5",
+  "network_permissions": "none",
+  "operator": "fresh codex exec blind process",
+  "output_file": "metadata-lookup-consented-identifiers.md",
+  "output_sha256": "ab6c6de37bacebc9071b85efb470f11c2d8acb740cb2ee33c63b31f12e9c6943",
+  "prompt_packet_sha256": "835afb0a8181e596c4f1d4d85a3fd41a0bdb518561835d73e6b511cbf8c5806e",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "citation-integrity-auditor",
+  "skill_file": "skills/citation-integrity-auditor/SKILL.md",
+  "skill_file_sha256": "98c8f8e70a23bf14a77e0862a0423acbd3075dc9943e10aa0da30467012188ed",
+  "source_packet": "corpora/metadata-lookup-consented-identifiers/source-packet.md",
+  "source_packet_sha256": "aa43d149b786098c3ae997c040cc6808c288534631dfc38cc755a6624f25d91f",
+  "structured_result": {
+    "decision": "External public metadata lookup permitted for identifiers only",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "output_captured": true,
+    "private_material_submitted": false,
+    "selected_skill": "citation-integrity-auditor",
+    "skill_invoked": true,
+    "source_access_level": "external-lookup-consented",
+    "source_packet_supplied": true
+  },
+  "tool_permissions": "local-only"
+}

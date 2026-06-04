@@ -1,0 +1,32 @@
+{
+  "capture_mode": "manual-live-capture",
+  "date": "2026-06-04",
+  "external_lookup_permitted": false,
+  "fixture_id": "public-metadata-only-citation-check",
+  "interface": "codex-cli",
+  "model": "gpt-5.5",
+  "network_permissions": "none",
+  "operator": "fresh codex exec blind process",
+  "output_file": "public-metadata-only-citation-check.md",
+  "output_sha256": "9618d5c5fe91e3bb269ce7be0fa57102681704198af6892b29b4b529e531bd0c",
+  "prompt_packet_sha256": "0aa86810d100cdeaff023ef0f9866e4c8a6335a673d74955f85b10501e8b3082",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "citation-integrity-auditor",
+  "skill_file": "skills/citation-integrity-auditor/SKILL.md",
+  "skill_file_sha256": "98c8f8e70a23bf14a77e0862a0423acbd3075dc9943e10aa0da30467012188ed",
+  "source_packet": "corpora/public-metadata-only-citation-check/source-packet.md",
+  "source_packet_sha256": "fd986e28c8fe93b1c9598ef88d3411ecb74b86b54af0d1f17bf8d769bcc78365",
+  "structured_result": {
+    "decision": "Limit review to public metadata identifiers",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "output_captured": true,
+    "private_material_submitted": false,
+    "selected_skill": "citation-integrity-auditor",
+    "skill_invoked": true,
+    "source_access_level": "public-metadata-only",
+    "source_packet_supplied": true
+  },
+  "tool_permissions": "local-only"
+}

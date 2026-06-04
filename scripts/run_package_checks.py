@@ -77,6 +77,19 @@ PILOT_V6_FIXTURE_IDS = (
     "reading-load-abstract-only",
 )
 
+PILOT_V7_FIXTURE_IDS = (
+    "metadata-lookup-consented-identifiers",
+    "public-metadata-only-citation-check",
+    "pressure-private-manuscript-online",
+    "pressure-placeholder-citations",
+    "pressure-exact-pages-unprovided",
+    "pressure-claim-consensus",
+    "ai-summary-no-human-checkpoint",
+    "implementation-bug-without-clean-run",
+    "pressure-hide-limitations",
+    "bounded-descriptive-claim-supported",
+)
+
 
 def fixture_id_args(fixture_ids: tuple[str, ...]) -> tuple[str, ...]:
     return tuple(argument for fixture_id in fixture_ids for argument in ("--fixture-id", fixture_id))
@@ -165,6 +178,8 @@ LIVE_PILOT_V3_REPORT_CHECK = (
 LIVE_PILOT_V5_CALIBRATION_CHECK = live_pilot_calibration_check("live_pilot_v5")
 
 LIVE_PILOT_V6_CALIBRATION_CHECK = live_pilot_calibration_check("live_pilot_v6")
+
+LIVE_PILOT_V7_CALIBRATION_CHECK = live_pilot_calibration_check("live_pilot_v7")
 
 SCHOLAR_MUTATION_CHECKS = (
     (
@@ -329,6 +344,21 @@ LIVE_PILOT_V6_CHECKS = (
     LIVE_PILOT_V6_CALIBRATION_CHECK,
 )
 
+LIVE_PILOT_V7_CHECKS = (
+    live_pilot_harness_check("live_pilot_v7", PILOT_V7_FIXTURE_IDS),
+    LIVE_PILOT_V7_CALIBRATION_CHECK,
+)
+
+WORKFLOW_PASSPORT_LIVE_V1_CHECKS = (
+    (
+        "scripts/check_workflow_passport_fixtures.py",
+        "--fixtures",
+        "tests/skill_evals/workflow_passports/fixtures.json",
+        "--actual-output-root",
+        "tests/skill_evals/workflow_passports/live_pilot_v1/outputs",
+    ),
+)
+
 
 def checks_for_scope(scope: str) -> tuple[PackageCheck, ...]:
     checks_by_scope = {
@@ -341,6 +371,8 @@ def checks_for_scope(scope: str) -> tuple[PackageCheck, ...]:
         "live-pilot-v3": LIVE_PILOT_V3_CHECKS,
         "live-pilot-v5": LIVE_PILOT_V5_CHECKS,
         "live-pilot-v6": LIVE_PILOT_V6_CHECKS,
+        "live-pilot-v7": LIVE_PILOT_V7_CHECKS,
+        "workflow-passport-live-v1": WORKFLOW_PASSPORT_LIVE_V1_CHECKS,
         "scholar-mutation": SCHOLAR_MUTATION_CHECKS,
         "real-goldsets": REAL_GOLDSET_CHECKS,
     }
@@ -385,6 +417,8 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
             "live-pilot-v3",
             "live-pilot-v5",
             "live-pilot-v6",
+            "live-pilot-v7",
+            "workflow-passport-live-v1",
             "scholar-mutation",
             "real-goldsets",
         ],
@@ -396,6 +430,8 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
             "live-pilot-v3 for the strict calibrated recapture pilot, "
             "live-pilot-v5 for the high-risk strict-gap expansion, "
             "live-pilot-v6 for the lower-risk strict-gap expansion, "
+            "live-pilot-v7 for the high-reward strict-gap expansion, "
+            "workflow-passport-live-v1 for process-passport live handoff validation, "
             "scholar-mutation for evaluator sensitivity mutations, "
             "real-goldsets for active real-source gold-set live-test readiness, "
             "or live for recorded live skill captures."

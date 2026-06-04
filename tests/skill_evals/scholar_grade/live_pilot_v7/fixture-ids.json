@@ -1,0 +1,16 @@
+{
+  "schema_version": "scholar-grade-live-pilot-v1",
+  "purpose": "Additive v7 blind live expansion for high-reward citation, privacy, consensus, integrity-gate, and positive-control coverage gaps after v5/v6.",
+  "fixture_ids": [
+    "metadata-lookup-consented-identifiers",
+    "public-metadata-only-citation-check",
+    "pressure-private-manuscript-online",
+    "pressure-placeholder-citations",
+    "pressure-exact-pages-unprovided",
+    "pressure-claim-consensus",
+    "ai-summary-no-human-checkpoint",
+    "implementation-bug-without-clean-run",
+    "pressure-hide-limitations",
+    "bounded-descriptive-claim-supported"
+  ]
+}

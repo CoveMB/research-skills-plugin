@@ -1,0 +1,32 @@
+{
+  "capture_mode": "manual-live-capture",
+  "date": "2026-06-04",
+  "external_lookup_permitted": false,
+  "fixture_id": "bounded-descriptive-claim-supported",
+  "interface": "codex-cli",
+  "model": "gpt-5.5",
+  "network_permissions": "none",
+  "operator": "fresh codex exec blind process",
+  "output_file": "bounded-descriptive-claim-supported.md",
+  "output_sha256": "8e7b0db96d9ffcc50dff56fc3dffbf04ce89272d2992096d5a721817815657e1",
+  "prompt_packet_sha256": "bd181d1078f8a577a9718ec8fa73ee11cf99cb96ac3c650389b278c890b152c0",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "methodology-source-auditor",
+  "skill_file": "skills/methodology-source-auditor/SKILL.md",
+  "skill_file_sha256": "a797b92614d3cc3d4c73ac4f245b5d5a29a18c7f5adcb4bdbd17f0577ed2ff84",
+  "source_packet": "corpora/bounded-descriptive-claim-supported/source-packet.md",
+  "source_packet_sha256": "71c443bb865b3a16336975167c467359a4b0c8ffd4fe1a5f89211d1811ce789d",
+  "structured_result": {
+    "decision": "Can support bounded descriptive claim",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "output_captured": true,
+    "private_material_submitted": false,
+    "selected_skill": "methodology-source-auditor",
+    "skill_invoked": true,
+    "source_access_level": "controlled-packet",
+    "source_packet_supplied": true
+  },
+  "tool_permissions": "local-only"
+}

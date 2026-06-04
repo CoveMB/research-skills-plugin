@@ -1,0 +1,46 @@
+{
+  "schema_version": "workflow-passport-live-run-manifest-v1",
+  "fixture_id": "claim-ledger-to-citation-audit-preserves-passport",
+  "from_skill": "claim-evidence-ledger",
+  "to_skill": "citation-integrity-auditor",
+  "capture_mode": "manual-live-capture",
+  "capture_interface": "codex-cli",
+  "capture_model": "gpt-5.5",
+  "capture_date": "2026-06-04",
+  "capture_operator": "fresh codex exec blind process",
+  "capture_workspace": "/private/tmp/workflow-passport-live-v1",
+  "capture_sandbox": "read-only",
+  "tool_permissions": "local-only",
+  "network_permissions": "none",
+  "external_lookup_permitted": false,
+  "external_lookup_used": false,
+  "private_material_submitted": false,
+  "raw_output_edited": false,
+  "prompt_file": "tests/skill_evals/workflow_passports/live_pilot_v1/prompts/claim-ledger-to-citation-audit-preserves-passport.md",
+  "prompt_sha256": "6ef426b91c052d06fde5b2d362702434f132a5203a526a958a8b5efeb3f774bd",
+  "process_passport_policy_file": "docs/policy/PROCESS_PASSPORT.md",
+  "process_passport_policy_sha256": "622912b6651a6bcffaa2e58577c66b13eefdebb49439ead8458ace722c8bffe0",
+  "skill_file": "skills/citation-integrity-auditor/SKILL.md",
+  "skill_file_sha256": "98c8f8e70a23bf14a77e0862a0423acbd3075dc9943e10aa0da30467012188ed",
+  "output_file": "tests/skill_evals/workflow_passports/live_pilot_v1/outputs/claim-ledger-to-citation-audit-preserves-passport.json",
+  "output_sha256": "1013121c1bd88b1ce83bcfdac0e7a59331e4c633689aed3d3cb17b60df67681b",
+  "prompt_basis": [
+    "live capture prompt packet",
+    "input artifact JSON embedded in prompt packet",
+    "docs/policy/PROCESS_PASSPORT.md",
+    "skills/citation-integrity-auditor/SKILL.md"
+  ],
+  "excluded_capture_materials": [
+    "workflow passport fixture JSON",
+    "expected output artifacts",
+    "forbidden behavior lists",
+    "checker code",
+    "previous outputs"
+  ],
+  "runtime_environment_notes": [
+    "Codex startup emitted plugin loader warnings unrelated to repository logic.",
+    "The Codex runtime exposed generic Superpowers using-superpowers hook content during capture; this was not fixture, checker, expected-output, previous-output, or answer-key material."
+  ],
+  "validation_command": "python3 scripts/check_workflow_passport_fixtures.py --fixtures tests/skill_evals/workflow_passports/fixtures.json --actual-output-root tests/skill_evals/workflow_passports/live_pilot_v1/outputs",
+  "validation_status": "passed"
+}

@@ -1,0 +1,28 @@
+{
+  "answer_key_findings": [
+    "TODO_ANSWER_KEY_FINDING"
+  ],
+  "date": "TODO_YYYY-MM-DD",
+  "dimension_rationales": {
+    "citation discipline": "TODO_RATIONALE",
+    "consent boundary": "TODO_RATIONALE",
+    "private-field exclusion": "TODO_RATIONALE",
+    "verification logging": "TODO_RATIONALE"
+  },
+  "dimension_scores": {
+    "citation discipline": "TODO_0_TO_5",
+    "consent boundary": "TODO_0_TO_5",
+    "private-field exclusion": "TODO_0_TO_5",
+    "verification logging": "TODO_0_TO_5"
+  },
+  "evidence_notes": [
+    "TODO_EVIDENCE_NOTE"
+  ],
+  "fixture_id": "metadata-lookup-consented-identifiers",
+  "hard_fail_triggered": "TODO_BOOLEAN",
+  "minimum_score": 4,
+  "rationale": "TODO_RATIONALE",
+  "reviewed_output_sha256": "ab6c6de37bacebc9071b85efb470f11c2d8acb740cb2ee33c63b31f12e9c6943",
+  "reviewer": "TODO_REVIEWER",
+  "schema_version": "scholar-grade-review-score-v1"
+}

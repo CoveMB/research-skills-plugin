@@ -1,0 +1,46 @@
+{
+  "schema_version": "workflow-passport-live-run-manifest-v1",
+  "fixture_id": "book-proposal-to-comps-preserves-passport",
+  "from_skill": "book-proposal",
+  "to_skill": "book-comps-verifier",
+  "capture_mode": "manual-live-capture",
+  "capture_interface": "codex-cli",
+  "capture_model": "gpt-5.5",
+  "capture_date": "2026-06-04",
+  "capture_operator": "fresh codex exec blind process",
+  "capture_workspace": "/private/tmp/workflow-passport-live-v1",
+  "capture_sandbox": "read-only",
+  "tool_permissions": "local-only",
+  "network_permissions": "none",
+  "external_lookup_permitted": false,
+  "external_lookup_used": false,
+  "private_material_submitted": false,
+  "raw_output_edited": false,
+  "prompt_file": "tests/skill_evals/workflow_passports/live_pilot_v1/prompts/book-proposal-to-comps-preserves-passport.md",
+  "prompt_sha256": "11621f5c28da7e246c8ea3a7653b9aed297ad31812dac66efe6c05b3eb1ce466",
+  "process_passport_policy_file": "docs/policy/PROCESS_PASSPORT.md",
+  "process_passport_policy_sha256": "622912b6651a6bcffaa2e58577c66b13eefdebb49439ead8458ace722c8bffe0",
+  "skill_file": "skills/book-comps-verifier/SKILL.md",
+  "skill_file_sha256": "6dbbc6cc9f132821f27924e579ae3de48cb2ab57161fcc5f1260ce2bd553f232",
+  "output_file": "tests/skill_evals/workflow_passports/live_pilot_v1/outputs/book-proposal-to-comps-preserves-passport.json",
+  "output_sha256": "4801714e695dd2b93f22b8eebe4955c29a0935e075f21e71ec2ffc112b5c705b",
+  "prompt_basis": [
+    "live capture prompt packet",
+    "input artifact JSON embedded in prompt packet",
+    "docs/policy/PROCESS_PASSPORT.md",
+    "skills/book-comps-verifier/SKILL.md"
+  ],
+  "excluded_capture_materials": [
+    "workflow passport fixture JSON",
+    "expected output artifacts",
+    "forbidden behavior lists",
+    "checker code",
+    "previous outputs"
+  ],
+  "runtime_environment_notes": [
+    "Codex startup emitted plugin loader warnings unrelated to repository logic.",
+    "The Codex runtime exposed generic Superpowers using-superpowers hook content during capture; this was not fixture, checker, expected-output, previous-output, or answer-key material."
+  ],
+  "validation_command": "python3 scripts/check_workflow_passport_fixtures.py --fixtures tests/skill_evals/workflow_passports/fixtures.json --actual-output-root tests/skill_evals/workflow_passports/live_pilot_v1/outputs",
+  "validation_status": "passed"
+}

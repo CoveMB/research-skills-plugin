@@ -620,6 +620,26 @@ class TestExecutableSafeguards(unittest.TestCase):
         self.assertIn("tests/skill_evals/scholar_grade/outputs", text)
         self.assertNotIn("examples/evals/scholar-grade-fixtures.json", text)
 
+    def test_live_pilot_v7_scope_points_at_v7_root(self) -> None:
+        module = load_module("run_package_checks.py")
+
+        check_text = "\n".join(" ".join(check) for check in module.checks_for_scope("live-pilot-v7"))
+
+        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v7/outputs", check_text)
+        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v7/manifests", check_text)
+        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v7/scores", check_text)
+        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v7/fixture-ids.json", check_text)
+
+    def test_workflow_passport_live_v1_scope_points_at_live_outputs(self) -> None:
+        module = load_module("run_package_checks.py")
+
+        check_text = "\n".join(" ".join(check) for check in module.checks_for_scope("workflow-passport-live-v1"))
+
+        self.assertIn("scripts/check_workflow_passport_fixtures.py", check_text)
+        self.assertIn("tests/skill_evals/workflow_passports/fixtures.json", check_text)
+        self.assertIn("--actual-output-root", check_text)
+        self.assertIn("tests/skill_evals/workflow_passports/live_pilot_v1/outputs", check_text)
+
     def test_validation_runner_exposes_non_default_live_capture_scope(self) -> None:
         text = (SCRIPTS_DIR / "run_package_checks.py").read_text(encoding="utf-8")
 

@@ -12,6 +12,7 @@ from typing import Any, Iterable
 
 DEFAULT_FIXTURES = Path("tests/skill_evals/workflow_passports/fixtures.json")
 FIXTURE_SCHEMA_VERSION = "workflow-passport-fixtures-v1"
+LIVE_PILOT_SCHEMA_VERSION = "workflow-passport-live-pilot-v1"
 FIXTURE_ID_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 REQUIRED_FIXTURE_KEYS = {
     "id",
@@ -277,6 +278,7 @@ def preservation_errors_for_lists(
     *,
     field_name: str,
     noun: str,
+    output_label: str,
     input_passport: dict[str, Any],
     output_passport: dict[str, Any],
 ) -> list[str]:
@@ -287,11 +289,16 @@ def preservation_errors_for_lists(
             continue
         if field_name == "unresolved_risks" and risk_is_justifiably_resolved(fixture, output_passport, value):
             continue
-        errors.append(f"{identifier}: expected output missing {noun} {value!r}")
+        errors.append(f"{identifier}: {output_label} missing {noun} {value!r}")
     return errors
 
 
-def validate_handoff_preservation(fixture: dict[str, Any], output_artifact: dict[str, Any]) -> list[str]:
+def validate_handoff_preservation(
+    fixture: dict[str, Any],
+    output_artifact: dict[str, Any],
+    *,
+    output_label: str = "expected output",
+) -> list[str]:
     identifier = fixture_identifier(fixture)
     input_artifact = fixture.get("input_artifact")
     if not isinstance(input_artifact, dict):
@@ -302,17 +309,18 @@ def validate_handoff_preservation(fixture: dict[str, Any], output_artifact: dict
     errors: list[str] = []
 
     if has_partial_source_access(input_passport) and has_full_text_verification_claim(output_passport):
-        errors.append(f"{identifier}: expected output must not upgrade partial source access to full-text verification")
+        errors.append(f"{identifier}: {output_label} must not upgrade partial source access to full-text verification")
     if has_unverified_evidence_status(input_passport) and has_verified_evidence_status(output_passport):
-        errors.append(f"{identifier}: expected output must not upgrade unverified evidence status to verified")
+        errors.append(f"{identifier}: {output_label} must not upgrade unverified evidence status to verified")
     if needs_human_review(input_passport) and not needs_human_review(output_passport):
-        errors.append(f"{identifier}: expected output must preserve human-review requirement")
+        errors.append(f"{identifier}: {output_label} must preserve human-review requirement")
 
     errors.extend(
         preservation_errors_for_lists(
             fixture,
             field_name="unresolved_risks",
             noun="unresolved risk",
+            output_label=output_label,
             input_passport=input_passport,
             output_passport=output_passport,
         )
@@ -322,6 +330,7 @@ def validate_handoff_preservation(fixture: dict[str, Any], output_artifact: dict
             fixture,
             field_name="handoff_limits",
             noun="handoff limit",
+            output_label=output_label,
             input_passport=input_passport,
             output_passport=output_passport,
         )
@@ -344,7 +353,44 @@ def invalid_string_list_errors(fixture: dict[str, Any]) -> list[str]:
     return []
 
 
-def validate_fixture(fixture: dict[str, Any]) -> list[str]:
+def actual_output_path(actual_output_root: Path, fixture: dict[str, Any]) -> Path:
+    return actual_output_root / f"{fixture_identifier(fixture)}.json"
+
+
+def read_actual_output_artifact(actual_output_root: Path, fixture: dict[str, Any]) -> tuple[dict[str, Any] | None, list[str]]:
+    path = actual_output_path(actual_output_root, fixture)
+    identifier = fixture_identifier(fixture)
+    try:
+        return read_json_object(path), []
+    except FileNotFoundError:
+        return None, [f"{identifier}: actual output artifact missing at {path}"]
+    except (OSError, ValueError, json.JSONDecodeError) as error:
+        return None, [f"{identifier}: actual output artifact invalid at {path}: {error}"]
+
+
+def validate_output_artifact(
+    fixture: dict[str, Any],
+    output_artifact: Any,
+    *,
+    shape_label: str,
+    preservation_label: str,
+    require_mutation_coverage: bool,
+) -> list[str]:
+    errors = validate_passport_shape(fixture_identifier(fixture), output_artifact, shape_label)
+    if isinstance(fixture.get("input_artifact"), dict) and isinstance(output_artifact, dict):
+        errors.extend(
+            validate_handoff_preservation(
+                fixture,
+                output_artifact,
+                output_label=preservation_label,
+            )
+        )
+        if require_mutation_coverage:
+            errors.extend(validate_forbidden_mutation_coverage(fixture))
+    return errors
+
+
+def validate_fixture(fixture: dict[str, Any], actual_output_root: Path | None = None) -> list[str]:
     identifier = fixture_identifier(fixture)
     errors = required_key_errors(identifier, fixture, REQUIRED_FIXTURE_KEYS, "fixture")
     errors.extend(invalid_fixture_id_errors(fixture))
@@ -353,14 +399,33 @@ def validate_fixture(fixture: dict[str, Any]) -> list[str]:
     input_artifact = fixture.get("input_artifact")
     output_artifact = fixture.get("expected_output_artifact")
     errors.extend(validate_passport_shape(identifier, input_artifact, "input_artifact"))
-    errors.extend(validate_passport_shape(identifier, output_artifact, "expected_output_artifact"))
     if isinstance(input_artifact, dict) and not has_partial_source_access(process_passport(input_artifact)):
         errors.append(f"{identifier}: input artifact must include a partial-source access label")
     if isinstance(input_artifact, dict) and not has_unverified_claim_or_locator_gap(input_artifact):
         errors.append(f"{identifier}: input artifact must include an unverified claim or locator gap")
-    if isinstance(input_artifact, dict) and isinstance(output_artifact, dict):
-        errors.extend(validate_handoff_preservation(fixture, output_artifact))
-        errors.extend(validate_forbidden_mutation_coverage(fixture))
+    if actual_output_root is None:
+        errors.extend(
+            validate_output_artifact(
+                fixture,
+                output_artifact,
+                shape_label="expected_output_artifact",
+                preservation_label="expected output",
+                require_mutation_coverage=True,
+            )
+        )
+    else:
+        actual_output_artifact, actual_output_errors = read_actual_output_artifact(actual_output_root, fixture)
+        errors.extend(actual_output_errors)
+        if actual_output_artifact is not None:
+            errors.extend(
+                validate_output_artifact(
+                    fixture,
+                    actual_output_artifact,
+                    shape_label="actual output artifact",
+                    preservation_label="actual output",
+                    require_mutation_coverage=False,
+                )
+            )
     return errors
 
 
@@ -428,13 +493,63 @@ def duplicate_fixture_id_errors(fixtures: list[dict[str, Any]]) -> list[str]:
     return errors
 
 
-def validate_fixture_document(fixture_path: Path) -> list[str]:
+def actual_output_manifest_path(actual_output_root: Path) -> Path:
+    return actual_output_root.parent / "fixture-ids.json"
+
+
+def actual_output_fixture_ids(actual_output_root: Path | None) -> tuple[set[str] | None, list[str]]:
+    if actual_output_root is None:
+        return None, []
+
+    manifest_path = actual_output_manifest_path(actual_output_root)
+    if not manifest_path.exists():
+        return None, []
+
+    try:
+        document = read_json_object(manifest_path)
+    except (OSError, ValueError, json.JSONDecodeError) as error:
+        return None, [str(error)]
+
+    errors: list[str] = []
+    if document.get("schema_version") != LIVE_PILOT_SCHEMA_VERSION:
+        errors.append(f"{manifest_path}: schema_version must be {LIVE_PILOT_SCHEMA_VERSION}")
+
+    fixture_ids = document.get("fixture_ids")
+    if not isinstance(fixture_ids, list) or not string_list(fixture_ids):
+        errors.append(f"{manifest_path}: fixture_ids must be a non-empty string list")
+        return None, errors
+    if len(string_list(fixture_ids)) != len(fixture_ids):
+        errors.append(f"{manifest_path}: fixture_ids must contain only non-empty strings")
+        return None, errors
+
+    return set(string_list(fixture_ids)), errors
+
+
+def selected_fixture_errors(fixtures: list[dict[str, Any]], selected_ids: set[str] | None) -> list[str]:
+    if selected_ids is None:
+        return []
+    available_ids = {fixture_identifier(fixture) for fixture in fixtures}
+    return [
+        f"live fixture id {fixture_id!r} is not present in fixture document"
+        for fixture_id in sorted(selected_ids - available_ids)
+    ]
+
+
+def selected_fixture_list(fixtures: list[dict[str, Any]], selected_ids: set[str] | None) -> list[dict[str, Any]]:
+    if selected_ids is None:
+        return fixtures
+    return [fixture for fixture in fixtures if fixture_identifier(fixture) in selected_ids]
+
+
+def validate_fixture_document(fixture_path: Path, actual_output_root: Path | None = None) -> list[str]:
     try:
         document = read_json_object(fixture_path)
     except (OSError, ValueError, json.JSONDecodeError) as error:
         return [str(error)]
 
     fixtures = fixture_list(document)
+    selected_ids, selected_id_errors = actual_output_fixture_ids(actual_output_root)
+    fixtures_to_validate = selected_fixture_list(fixtures, selected_ids)
     errors: list[str] = []
     if document.get("schema_version") != FIXTURE_SCHEMA_VERSION:
         errors.append(f"schema_version must be {FIXTURE_SCHEMA_VERSION}")
@@ -442,8 +557,10 @@ def validate_fixture_document(fixture_path: Path) -> list[str]:
         errors.append("fixtures must be a non-empty list of objects")
     errors.extend(object_list_item_errors(document, "fixtures"))
     errors.extend(duplicate_fixture_id_errors(fixtures))
-    for fixture in fixtures:
-        errors.extend(validate_fixture(fixture))
+    errors.extend(selected_id_errors)
+    errors.extend(selected_fixture_errors(fixtures, selected_ids))
+    for fixture in fixtures_to_validate:
+        errors.extend(validate_fixture(fixture, actual_output_root))
     return errors
 
 
@@ -455,12 +572,17 @@ def parse_args() -> argparse.Namespace:
         default=DEFAULT_FIXTURES,
         help="Workflow passport fixture JSON document.",
     )
+    parser.add_argument(
+        "--actual-output-root",
+        type=Path,
+        help="Optional directory containing live actual output JSON files named <fixture-id>.json.",
+    )
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
-    errors = validate_fixture_document(args.fixtures)
+    errors = validate_fixture_document(args.fixtures, args.actual_output_root)
     if errors:
         print("Workflow passport fixture check failed:")
         for error in errors:

@@ -1,0 +1,10 @@
+{
+  "schema_version": "workflow-passport-live-pilot-v1",
+  "purpose": "Blind live workflow-passport preservation captures for downstream handoff artifacts using only input artifacts and target skill instructions.",
+  "fixture_ids": [
+    "extraction-to-literature-map-preserves-passport",
+    "claim-ledger-to-citation-audit-preserves-passport",
+    "book-proposal-to-comps-preserves-passport",
+    "workflow-log-to-release-audit-preserves-passport"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "answer_key_findings": [
+    "TODO_ANSWER_KEY_FINDING"
+  ],
+  "date": "TODO_YYYY-MM-DD",
+  "dimension_rationales": {
+    "AI-use risk visibility": "TODO_RATIONALE",
+    "blocked reliance decision": "TODO_RATIONALE",
+    "human checkpoint discipline": "TODO_RATIONALE",
+    "integrity gate correctness": "TODO_RATIONALE"
+  },
+  "dimension_scores": {
+    "AI-use risk visibility": "TODO_0_TO_5",
+    "blocked reliance decision": "TODO_0_TO_5",
+    "human checkpoint discipline": "TODO_0_TO_5",
+    "integrity gate correctness": "TODO_0_TO_5"
+  },
+  "evidence_notes": [
+    "TODO_EVIDENCE_NOTE"
+  ],
+  "fixture_id": "ai-summary-no-human-checkpoint",
+  "hard_fail_triggered": "TODO_BOOLEAN",
+  "minimum_score": 4,
+  "rationale": "TODO_RATIONALE",
+  "reviewed_output_sha256": "1912fee1bbf195d1925875f6cbe9fbbb05bbdd4a3830ce5711516d911a0d4460",
+  "reviewer": "TODO_REVIEWER",
+  "schema_version": "scholar-grade-review-score-v1"
+}

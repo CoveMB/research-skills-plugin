@@ -1,0 +1,46 @@
+{
+  "schema_version": "workflow-passport-live-run-manifest-v1",
+  "fixture_id": "extraction-to-literature-map-preserves-passport",
+  "from_skill": "extraction-table-builder",
+  "to_skill": "literature-review-mapper",
+  "capture_mode": "manual-live-capture",
+  "capture_interface": "codex-cli",
+  "capture_model": "gpt-5.5",
+  "capture_date": "2026-06-04",
+  "capture_operator": "fresh codex exec blind process",
+  "capture_workspace": "/private/tmp/workflow-passport-live-v1",
+  "capture_sandbox": "read-only",
+  "tool_permissions": "local-only",
+  "network_permissions": "none",
+  "external_lookup_permitted": false,
+  "external_lookup_used": false,
+  "private_material_submitted": false,
+  "raw_output_edited": false,
+  "prompt_file": "tests/skill_evals/workflow_passports/live_pilot_v1/prompts/extraction-to-literature-map-preserves-passport.md",
+  "prompt_sha256": "e9af5282fb53a4515bcdb9914088e7f220c7b2b57be4f9ab4d3f480bfe6bbbac",
+  "process_passport_policy_file": "docs/policy/PROCESS_PASSPORT.md",
+  "process_passport_policy_sha256": "622912b6651a6bcffaa2e58577c66b13eefdebb49439ead8458ace722c8bffe0",
+  "skill_file": "skills/literature-review-mapper/SKILL.md",
+  "skill_file_sha256": "3e02623fe03595375ffcbb2253a698a61cb4cc7267808121a89dcc3c0f7e0cc5",
+  "output_file": "tests/skill_evals/workflow_passports/live_pilot_v1/outputs/extraction-to-literature-map-preserves-passport.json",
+  "output_sha256": "cf103932bb65817196798aef995b223efa870539ed1b72b1965fe5ab05a0f1f1",
+  "prompt_basis": [
+    "live capture prompt packet",
+    "input artifact JSON embedded in prompt packet",
+    "docs/policy/PROCESS_PASSPORT.md",
+    "skills/literature-review-mapper/SKILL.md"
+  ],
+  "excluded_capture_materials": [
+    "workflow passport fixture JSON",
+    "expected output artifacts",
+    "forbidden behavior lists",
+    "checker code",
+    "previous outputs"
+  ],
+  "runtime_environment_notes": [
+    "Codex startup emitted plugin loader warnings unrelated to repository logic.",
+    "The Codex runtime exposed generic Superpowers using-superpowers hook content during capture; this was not fixture, checker, expected-output, previous-output, or answer-key material."
+  ],
+  "validation_command": "python3 scripts/check_workflow_passport_fixtures.py --fixtures tests/skill_evals/workflow_passports/fixtures.json --actual-output-root tests/skill_evals/workflow_passports/live_pilot_v1/outputs",
+  "validation_status": "passed"
+}

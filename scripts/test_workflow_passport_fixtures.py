@@ -58,9 +58,13 @@ def artifact(*, process_passport: dict | None = None, claims: list[dict] | None 
     }
 
 
-def workflow_fixture(*, output_artifact: dict | None = None) -> dict:
+def workflow_fixture(
+    *,
+    output_artifact: dict | None = None,
+    fixture_id: str = "source-discovery-to-extraction-preserves-passport",
+) -> dict:
     return {
-        "id": "source-discovery-to-extraction-preserves-passport",
+        "id": fixture_id,
         "from_skill": "systematic-source-discovery",
         "to_skill": "extraction-table-builder",
         "handoff": "source discovery -> extraction table",
@@ -88,13 +92,20 @@ def write_fixture_document(root: Path, document: dict) -> Path:
     return path
 
 
-def run_checker(path: Path) -> subprocess.CompletedProcess[str]:
+def run_checker(path: Path, *args: str) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
-        [sys.executable, str(SCRIPT), "--fixtures", str(path)],
+        [sys.executable, str(SCRIPT), "--fixtures", str(path), *args],
         check=False,
         text=True,
         capture_output=True,
     )
+
+
+def write_actual_output(root: Path, fixture_id: str, output_artifact: dict) -> Path:
+    output_root = root / "actual-outputs"
+    output_root.mkdir()
+    (output_root / f"{fixture_id}.json").write_text(json.dumps(output_artifact), encoding="utf-8")
+    return output_root
 
 
 class TestWorkflowPassportFixtures(unittest.TestCase):
@@ -206,6 +217,136 @@ class TestWorkflowPassportFixtures(unittest.TestCase):
                 "source-discovery-to-extraction-preserves-passport: expected output must preserve human-review requirement",
                 errors,
             )
+
+    def test_valid_actual_live_output_passes(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            fixture = workflow_fixture()
+            fixture_path = write_fixture_document(root, fixture_document(fixture))
+            output_root = write_actual_output(root, fixture["id"], artifact())
+
+            self.assertEqual(checker.validate_fixture_document(fixture_path, output_root), [])
+
+    def test_actual_live_output_missing_process_passport_fails(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            fixture = workflow_fixture()
+            fixture_path = write_fixture_document(root, fixture_document(fixture))
+            output_root = write_actual_output(root, fixture["id"], {"handoff_artifact": True})
+
+            errors = checker.validate_fixture_document(fixture_path, output_root)
+
+            self.assertIn(
+                "source-discovery-to-extraction-preserves-passport: actual output artifact must include process_passport object",
+                errors,
+            )
+
+    def test_actual_live_output_upgrading_partial_access_to_full_text_verified_fails(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            fixture = workflow_fixture()
+            fixture_path = write_fixture_document(root, fixture_document(fixture))
+            output_root = write_actual_output(
+                root,
+                fixture["id"],
+                artifact(
+                    process_passport=passport(
+                        source_access_level="full text verified",
+                        evidence_status="verified",
+                    )
+                ),
+            )
+
+            errors = checker.validate_fixture_document(fixture_path, output_root)
+
+            self.assertIn(
+                "source-discovery-to-extraction-preserves-passport: actual output must not upgrade partial source access to full-text verification",
+                errors,
+            )
+            self.assertIn(
+                "source-discovery-to-extraction-preserves-passport: actual output must not upgrade unverified evidence status to verified",
+                errors,
+            )
+
+    def test_actual_live_output_dropping_human_review_requirement_fails(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            fixture = workflow_fixture()
+            fixture_path = write_fixture_document(root, fixture_document(fixture))
+            output_root = write_actual_output(
+                root,
+                fixture["id"],
+                artifact(process_passport=passport(human_verification_status="completed")),
+            )
+
+            errors = checker.validate_fixture_document(fixture_path, output_root)
+
+            self.assertIn(
+                "source-discovery-to-extraction-preserves-passport: actual output must preserve human-review requirement",
+                errors,
+            )
+
+    def test_actual_live_output_dropping_inherited_unresolved_risk_fails(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            fixture = workflow_fixture()
+            fixture_path = write_fixture_document(root, fixture_document(fixture))
+            output_root = write_actual_output(
+                root,
+                fixture["id"],
+                artifact(process_passport=passport(unresolved_risks=["New downstream-only risk."])),
+            )
+
+            errors = checker.validate_fixture_document(fixture_path, output_root)
+
+            self.assertIn(
+                "source-discovery-to-extraction-preserves-passport: actual output missing unresolved risk 'Locator gap for the central claim remains unresolved.'",
+                errors,
+            )
+
+    def test_script_reports_success_for_valid_actual_live_output(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            fixture = workflow_fixture()
+            fixture_path = write_fixture_document(root, fixture_document(fixture))
+            output_root = write_actual_output(root, fixture["id"], artifact())
+
+            result = run_checker(fixture_path, "--actual-output-root", str(output_root))
+
+            self.assertEqual(
+                result.returncode,
+                0,
+                msg=f"stdout={result.stdout!r} stderr={result.stderr!r}",
+            )
+            self.assertIn("OK: workflow passport fixtures are valid.", result.stdout)
+
+    def test_actual_output_root_uses_live_fixture_manifest_when_present(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            selected_fixture = workflow_fixture()
+            deferred_fixture = workflow_fixture(fixture_id="deferred-handoff-preserves-passport")
+            fixture_path = write_fixture_document(
+                root,
+                fixture_document(selected_fixture, deferred_fixture),
+            )
+            live_root = root / "live_pilot_v1"
+            output_root = live_root / "outputs"
+            output_root.mkdir(parents=True)
+            (live_root / "fixture-ids.json").write_text(
+                json.dumps(
+                    {
+                        "schema_version": "workflow-passport-live-pilot-v1",
+                        "fixture_ids": [selected_fixture["id"]],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            (output_root / f"{selected_fixture['id']}.json").write_text(
+                json.dumps(artifact()),
+                encoding="utf-8",
+            )
+
+            self.assertEqual(checker.validate_fixture_document(fixture_path, output_root), [])
 
     def test_input_must_have_unverified_claim_or_locator_gap(self) -> None:
         fixture = workflow_fixture()
