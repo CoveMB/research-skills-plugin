@@ -11,7 +11,7 @@
   "source_packet_sha256": "bac864a0d5f2d3bd0437c5ecadc07295693550700a809b64258965cec6581253",
   "prompt_packet_sha256": "65ebb6fa7c9b2c25b056ae23af1fa47e26c3a18b1f8dc05cb878a2bcea6c9c58",
   "skill_file": "skills/dyslexia-friendly-prose-editor/SKILL.md",
-  "skill_file_sha256": "b2748126784c90f7bad293fe33c5263c65ef9914caedb05018cf559d25ece98a",
+  "skill_file_sha256": "3279b09b8a246f3c46a765639ef5c1672b18299db49b32a0dbb81fb479500564",
   "output_file": "prose-edit-strict-meaning-preservation.md",
   "output_sha256": "7d86e38f0fc7e24c6291f8cfc96944ec855c2707b2e5beb1d4a3713be611d3e5",
   "tool_permissions": "none",

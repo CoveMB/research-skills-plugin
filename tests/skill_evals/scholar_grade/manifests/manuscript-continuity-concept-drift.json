@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "manuscript-continuity-editor",
   "skill_file": "skills/manuscript-continuity-editor/SKILL.md",
-  "skill_file_sha256": "8fe423f00411e263244e037f1d647a24b96792db3b3c9a9019bcdc5fd1c3d697",
+  "skill_file_sha256": "fcc96ea9b673b730739a7a721caf04a4aae077242fd9437e115756de1f38cfbc",
   "source_packet": "corpora/manuscript-continuity-concept-drift/source-packet.md",
   "source_packet_sha256": "f17a6fc924f151d531adb3d729e4d93fbefae3bdde3b346c79c4bb442c0ae307",
   "structured_result": {

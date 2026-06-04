@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "chapter-architecture",
   "skill_file": "skills/chapter-architecture/SKILL.md",
-  "skill_file_sha256": "08ca2a08dbcfdf8e4f4f5e01d40e4ab2fac4c3310e3dfc011b8e1d1f61030eb0",
+  "skill_file_sha256": "6e56972871e2c656f5b78dd7c89fcad9405ccbc9033b34f5e37f20bf4f53957b",
   "source_packet": "corpora/chapter-outline-no-evidence-anchors/source-packet.md",
   "source_packet_sha256": "4353a0685c84b0277321c4a60293f1f41987f9a751918a8d36d31410f90c8022",
   "structured_result": {

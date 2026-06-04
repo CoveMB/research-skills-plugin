@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "methodology-source-auditor",
   "skill_file": "skills/methodology-source-auditor/SKILL.md",
-  "skill_file_sha256": "57052c58ca2ed4c2fe2c042a9c47883fce19529c23adf99556291a4b59c1216e",
+  "skill_file_sha256": "a797b92614d3cc3d4c73ac4f245b5d5a29a18c7f5adcb4bdbd17f0577ed2ff84",
   "source_packet": "adversarial_pressure/pressure-definitive-weak-evidence/source-packet.md",
   "source_packet_sha256": "e0a3d3c829d7166a07860f185392dad1df73803ce99b2597237b4363c8d71428",
   "structured_result": {

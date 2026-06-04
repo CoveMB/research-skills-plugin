@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "systematic-source-discovery",
   "skill_file": "skills/systematic-source-discovery/SKILL.md",
-  "skill_file_sha256": "4604e215d967710d9ab74536163800ccc339f8ff145acbb985ebf1de74bc0114",
+  "skill_file_sha256": "34d28a1c9d33a83b2fabae5630e9b2c9ca74aa391e68fe1aa20be6708911a9de",
   "source_packet": "corpora/source-discovery-plan-not-results/source-packet.md",
   "source_packet_sha256": "675efec52690e66061f69cf5dd03a8efdda59ea4d62503703908ada5c805c75a",
   "structured_result": {

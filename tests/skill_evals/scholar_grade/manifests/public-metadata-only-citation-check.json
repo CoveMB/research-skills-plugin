@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "citation-integrity-auditor",
   "skill_file": "skills/citation-integrity-auditor/SKILL.md",
-  "skill_file_sha256": "11c8fca81cb3ffce9b8b47c040ec4a8c3f34f58d3ea476a3ec787e064b949b1d",
+  "skill_file_sha256": "98c8f8e70a23bf14a77e0862a0423acbd3075dc9943e10aa0da30467012188ed",
   "source_packet": "corpora/public-metadata-only-citation-check/source-packet.md",
   "source_packet_sha256": "fd986e28c8fe93b1c9598ef88d3411ecb74b86b54af0d1f17bf8d769bcc78365",
   "structured_result": {

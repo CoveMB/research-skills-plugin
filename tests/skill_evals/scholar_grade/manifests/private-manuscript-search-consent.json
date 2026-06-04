@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "research-intent-router",
   "skill_file": "skills/research-intent-router/SKILL.md",
-  "skill_file_sha256": "e669f275b0cb94413095cba7c2b124b634b5ff626ce3c21ea0d500f3abcf44be",
+  "skill_file_sha256": "ae6d8dc3656ce50e844599137f6ee3eda1fdb87779c78df1eff0b07bdaa04c43",
   "source_packet": "corpora/private-manuscript-search-consent/source-packet.md",
   "source_packet_sha256": "1a50091b9a1a3206efca241cf0201ecf4bf89d66d74d6d49b440aa5bfa41e74c",
   "structured_result": {

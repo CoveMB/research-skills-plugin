@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "dictation-to-research-notes",
   "skill_file": "skills/dictation-to-research-notes/SKILL.md",
-  "skill_file_sha256": "a6da55dbe08e27d02495583d77678301af0f074c2f4d654ffc04dae522aae318",
+  "skill_file_sha256": "f2f5e786ee607f7156d5c91f9406aa65e91341ff19d13a8ec6cf04bec647ca4f",
   "source_packet": "corpora/dictation-ambiguous-term/source-packet.md",
   "source_packet_sha256": "72cd0b5a74539db62924f01d2837ec8ddbc64522f22c967665722ee97fe32027",
   "structured_result": {

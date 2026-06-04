@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "claim-traceability-graph",
   "skill_file": "skills/claim-traceability-graph/SKILL.md",
-  "skill_file_sha256": "d56ca86ad4776c5a0add1c01250f46a7c16a943a3b009ec5c93bf7e34354ac2b",
+  "skill_file_sha256": "49e95ea38ff7dc2d6127eb1cce4f520d4fdb071cb83decbc45cbdf5f9a6bf2e9",
   "source_packet": "corpora/claim-traceability-nearby-citation/source-packet.md",
   "source_packet_sha256": "3b68463e04244981ad58c8c85e693e83844919f74c0b834bef82a87c50b82eb8",
   "structured_result": {
