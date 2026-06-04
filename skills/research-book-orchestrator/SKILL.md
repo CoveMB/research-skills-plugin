@@ -12,7 +12,7 @@ metadata:
 
 Coordinate a research-book workflow with scholarly standards from idea to manuscript and external sharing. This skill does not replace the specialized skills. It decides which skill should be used next, sequences the work, and keeps the project grounded in scholarly standards.
 
-Use `docs/ARCHITECTURE.md` as the stage map and `MODE_REGISTRY.md` as the route registry when the user asks for a full workflow, mode choice, or package-level orchestration.
+Use `docs/reference/ARCHITECTURE.md` as the stage map and `MODE_REGISTRY.md` as the route registry when the user asks for a full workflow, mode choice, or package-level orchestration.
 
 ## When to use
 
@@ -43,7 +43,7 @@ Use `docs/ARCHITECTURE.md` as the stage map and `MODE_REGISTRY.md` as the route 
 
 ## Core routing map
 
-Use `docs/ROUTING_MATRIX.md` as the canonical route table. This skill should summarize only the route sequence needed for the user-designated project or workspace, not duplicate the full route matrix.
+Use `docs/policy/ROUTING_MATRIX.md` as the canonical route table. This skill should summarize only the route sequence needed for the user-designated project or workspace, not duplicate the full route matrix.
 
 ## Operating principles
 
@@ -59,15 +59,15 @@ Use `docs/ROUTING_MATRIX.md` as the canonical route table. This skill should sum
 
 ## Source basis and AI limits
 
-Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
+Use `docs/policy/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
-Use `docs/PROCESS_PASSPORT.md` when a workflow plan, artifact sequence, or generated project artifact is saved as durable project state or handed to another skill. Preserve upstream source-access, evidence-status, corpus-coverage, unresolved-risk, and handoff-limit labels; do not turn routing confidence into scholarly verification.
+Use `docs/policy/PROCESS_PASSPORT.md` when a workflow plan, artifact sequence, or generated project artifact is saved as durable project state or handed to another skill. Preserve upstream source-access, evidence-status, corpus-coverage, unresolved-risk, and handoff-limit labels; do not turn routing confidence into scholarly verification.
 
 ## Files/folders it may read
 
-- Shared operational boundary doc: `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
-- Shared policy docs, especially `docs/SOURCE_LIMITS.md`, `docs/PROCESS_PASSPORT.md`, and `docs/AUTO_SELECTION_GUARDRAILS.md`.
-- `docs/ARCHITECTURE.md`, `MODE_REGISTRY.md`, `docs/QUALITY_STANDARD.md`, and `shared/contracts/book/book_artifact.schema.json` when routing, artifacts, or quality gates matter.
+- Shared operational boundary doc: `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+- Shared policy docs, especially `docs/policy/SOURCE_LIMITS.md`, `docs/policy/PROCESS_PASSPORT.md`, and `docs/policy/AUTO_SELECTION_GUARDRAILS.md`.
+- `docs/reference/ARCHITECTURE.md`, `MODE_REGISTRY.md`, `docs/policy/QUALITY_STANDARD.md`, and `shared/contracts/book/book_artifact.schema.json` when routing, artifacts, or quality gates matter.
 - User-provided files, drafts, notes, bibliographies, and artifacts explicitly named in the request.
 
 ## Files/folders it may write

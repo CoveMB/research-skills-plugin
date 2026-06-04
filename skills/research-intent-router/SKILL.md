@@ -123,13 +123,13 @@ If text friction blocks the user's intended claim or next action, route to the s
 
 ## Per-skill routing rules
 
-Use `docs/ROUTING_MATRIX.md` as the canonical route table. If the request matches several routes, choose the smallest useful skill unless the task genuinely crosses stages.
+Use `docs/policy/ROUTING_MATRIX.md` as the canonical route table. If the request matches several routes, choose the smallest useful skill unless the task genuinely crosses stages.
 
 ## Source basis and AI limits
 
-Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
+Use `docs/policy/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
-This is normally a non-contract routing output and does not require a process passport. If a routing note or workflow plan is saved as durable project state or handed to another skill, follow `docs/PROCESS_PASSPORT.md`; preserve upstream uncertainty, source-access, corpus-coverage, unresolved-risk, and handoff-limit labels.
+This is normally a non-contract routing output and does not require a process passport. If a routing note or workflow plan is saved as durable project state or handed to another skill, follow `docs/policy/PROCESS_PASSPORT.md`; preserve upstream uncertainty, source-access, corpus-coverage, unresolved-risk, and handoff-limit labels.
 
 ## Compact output
 
@@ -137,10 +137,10 @@ Use compact output when the user asks for low reading load, fast routing, or the
 
 ## Files/folders it may read
 
-- Shared operational boundary doc: `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
-- Shared policy docs, especially `docs/SOURCE_LIMITS.md`, `docs/PROCESS_PASSPORT.md`, and `docs/AUTO_SELECTION_GUARDRAILS.md`.
-- `docs/ROUTING_MATRIX.md` for canonical skill-routing choices.
-- `docs/ARCHITECTURE.md`, `MODE_REGISTRY.md`, `docs/SKILL_INDEX.md`, `docs/QUALITY_STANDARD.md`, and `shared/contracts/book/book_artifact.schema.json` when routing, artifacts, or quality gates matter.
+- Shared operational boundary doc: `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+- Shared policy docs, especially `docs/policy/SOURCE_LIMITS.md`, `docs/policy/PROCESS_PASSPORT.md`, and `docs/policy/AUTO_SELECTION_GUARDRAILS.md`.
+- `docs/policy/ROUTING_MATRIX.md` for canonical skill-routing choices.
+- `docs/reference/ARCHITECTURE.md`, `MODE_REGISTRY.md`, `docs/user/SKILL_INDEX.md`, `docs/policy/QUALITY_STANDARD.md`, and `shared/contracts/book/book_artifact.schema.json` when routing, artifacts, or quality gates matter.
 - User-provided files, drafts, notes, bibliographies, artifacts, or source excerpts explicitly named in the request.
 
 ## Files/folders it may write
@@ -232,7 +232,7 @@ Ambiguity: [only if it could change route or lookup decision]
 Next action: [one action]
 ```
 
-Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless a follow-on skill reduces a named scholarly risk.
+Use the optional Suggested next step policy in `docs/policy/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless a follow-on skill reduces a named scholarly risk.
 
 ## Quality checks
 

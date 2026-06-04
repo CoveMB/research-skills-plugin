@@ -43,9 +43,9 @@ Use this before relying on generated research claims, generated reviews, automat
 
 ## Source basis and AI limits
 
-Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
+Use `docs/policy/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
-Use `docs/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` when auditing literature synthesis, source discovery logs, extraction tables, proposal positioning, comp sets, or any artifact that makes consensus, novelty, balance, missing-literature, market-coverage, or absence-of-evidence claims.
+Use `docs/policy/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` when auditing literature synthesis, source discovery logs, extraction tables, proposal positioning, comp sets, or any artifact that makes consensus, novelty, balance, missing-literature, market-coverage, or absence-of-evidence claims.
 
 ## Compact output
 
@@ -53,14 +53,14 @@ Use compact output when the user asks for low reading load, a quick gate decisio
 
 ## Machine-readable artifacts
 
-When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: scholarly_integrity_audit`. If the output is normal Markdown, do not force the JSON contract. For durable handoff artifacts, follow `docs/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits instead of upgrading verification.
+When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: scholarly_integrity_audit`. If the output is normal Markdown, do not force the JSON contract. For durable handoff artifacts, follow `docs/policy/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits instead of upgrading verification.
 
 For multi-stage claim workflows with a workflow trace JSON, use or recommend `python3 scripts/check_workflow_traceability.py --trace path/to/workflow-trace.json` as a deterministic pre-gate. Treat it as structural provenance evidence only: it can detect broken claim IDs, orphan claims, unsupported status upgrades, silent claim drift, removed locators, removed source-basis labels, and unresolved-risk erasure, but it cannot clear source truth, source-claim fit, methodology quality, or argument strength.
 
 ## Files/folders it may read
 
-- Shared operational boundary doc: `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
-- Shared policy docs, especially `docs/SOURCE_LIMITS.md` and `docs/AUTO_SELECTION_GUARDRAILS.md`.
+- Shared operational boundary doc: `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+- Shared policy docs, especially `docs/policy/SOURCE_LIMITS.md` and `docs/policy/AUTO_SELECTION_GUARDRAILS.md`.
 - User-provided drafts, ledgers, source logs, analysis notes, code outputs, figures, tables, audit reports, and project files explicitly named in the request.
 - Related claim, citation, methodology, figure/table, or workflow logs when the integrity decision depends on them.
 
@@ -191,7 +191,7 @@ Gate decision: [pass / pass with conditions / hold / escalate]
 Next action: [one action]
 ```
 
-Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless a follow-on skill reduces a named scholarly risk.
+Use the optional Suggested next step policy in `docs/policy/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless a follow-on skill reduces a named scholarly risk.
 
 ## Quality checks
 

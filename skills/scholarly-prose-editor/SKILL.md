@@ -29,7 +29,7 @@ Use when the user provides a paragraph, section, chapter excerpt, proposal, abst
 - The user needs citation verification; use `citation-integrity-auditor`.
 - The user needs privacy, copyright, quote, license, or release risk checked before sharing; use `rights-privacy-release-auditor`.
 - The user asks for new source-backed claims rather than prose revision.
-- The user needs rough notes, dictation, spelling ambiguity, reading load, or meaning-preserving surface repair before broader style work; use the smallest accessibility entry point in `docs/ROUTING_MATRIX.md`.
+- The user needs rough notes, dictation, spelling ambiguity, reading load, or meaning-preserving surface repair before broader style work; use the smallest accessibility entry point in `docs/policy/ROUTING_MATRIX.md`.
 
 ## Inputs expected
 
@@ -50,16 +50,16 @@ Use when the user provides a paragraph, section, chapter excerpt, proposal, abst
 
 ## Source basis and AI limits
 
-Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
+Use `docs/policy/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
 ## Machine-readable artifacts
 
-When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: style_sheet`. If the output is normal Markdown, do not force the JSON contract. For durable handoff artifacts, follow `docs/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits instead of upgrading verification.
+When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: style_sheet`. If the output is normal Markdown, do not force the JSON contract. For durable handoff artifacts, follow `docs/policy/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits instead of upgrading verification.
 
 ## Files/folders it may read
 
-- Shared operational boundary doc: `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
-- Shared policy docs, especially `docs/SOURCE_LIMITS.md` and `docs/AUTO_SELECTION_GUARDRAILS.md`.
+- Shared operational boundary doc: `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+- Shared policy docs, especially `docs/policy/SOURCE_LIMITS.md` and `docs/policy/AUTO_SELECTION_GUARDRAILS.md`.
 - User-provided passages, manuscript files, style sheets, source notes, and constraints explicitly named in the request.
 - Related claim ledgers or citation audits when evidence issues should remain visible.
 
@@ -130,7 +130,7 @@ Confirm whether the edit introduced any new factual claims. The default should b
 
 ```
 
-Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless a follow-on skill reduces a named scholarly risk.
+Use the optional Suggested next step policy in `docs/policy/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless a follow-on skill reduces a named scholarly risk.
 
 ## Editing modes
 

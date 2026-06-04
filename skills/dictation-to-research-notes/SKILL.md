@@ -43,7 +43,7 @@ Use this instead of `scholarly-prose-editor` when the input is not yet prose. Us
 
 ## Source basis and AI limits
 
-Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
+Use `docs/policy/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
 Treat transcription cleanup as surface repair. If a transcript error can change the claim, responsibility, consent, obligation, commitment, deadline, diagnosis, or evidence status, mark it as an ambiguity instead of guessing.
 
@@ -53,8 +53,8 @@ Use compact output when the user asks for low reading load, when the transcript 
 
 ## Files/folders it may read
 
-- Shared operational boundary doc: `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
-- Shared policy docs, especially `docs/SOURCE_LIMITS.md`, `docs/AUTO_SELECTION_GUARDRAILS.md`, `docs/ROUTING_MATRIX.md`, and `docs/SKILL_INDEX.md`.
+- Shared operational boundary doc: `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+- Shared policy docs, especially `docs/policy/SOURCE_LIMITS.md`, `docs/policy/AUTO_SELECTION_GUARDRAILS.md`, `docs/policy/ROUTING_MATRIX.md`, and `docs/user/SKILL_INDEX.md`.
 - User-provided transcripts, dictated notes, drafts, outlines, source excerpts, artifacts, or style constraints explicitly named in the request.
 
 ## Files/folders it may write
@@ -169,7 +169,7 @@ Ambiguity: [only if meaning could change]
 Next action: [one line]
 ```
 
-Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless a follow-on skill reduces a named scholarly risk.
+Use the optional Suggested next step policy in `docs/policy/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless a follow-on skill reduces a named scholarly risk.
 
 ## Quality checks
 

@@ -39,27 +39,27 @@ Expect an issue table with severity, file or artifact pointer, risk, required fi
 
 ## Procedure
 
-Follow the shared procedure in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
+Follow the shared procedure in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
 
 ## Quality checks
 
-Apply the shared quality checks in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`; keep any skill-specific caveats visible in the output.
+Apply the shared quality checks in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`; keep any skill-specific caveats visible in the output.
 
 ## Failure modes
 
-Use the shared failure modes in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`; call out the skill-specific failure most relevant to the request.
+Use the shared failure modes in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`; call out the skill-specific failure most relevant to the request.
 
 ## Files/folders it may read
 
-Follow the shared read boundary in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
+Follow the shared read boundary in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
 
 ## Files/folders it may write
 
-Follow the shared write boundary in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
+Follow the shared write boundary in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
 
 ## What it must not do
 
-Follow the shared prohibitions in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
+Follow the shared prohibitions in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
 
 ## Best next steps
 

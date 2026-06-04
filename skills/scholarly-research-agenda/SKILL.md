@@ -42,18 +42,18 @@ If inputs are missing, proceed with assumptions and label them.
 
 ## Source basis and AI limits
 
-Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
+Use `docs/policy/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
-Use `docs/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` when a proposed contribution, novelty claim, field-coverage claim, or missing-literature premise depends on a source corpus. At agenda stage, corpus coverage is usually `unknown_coverage` until source discovery or supplied search provenance changes it.
+Use `docs/policy/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` when a proposed contribution, novelty claim, field-coverage claim, or missing-literature premise depends on a source corpus. At agenda stage, corpus coverage is usually `unknown_coverage` until source discovery or supplied search provenance changes it.
 
 ## Machine-readable artifacts
 
-When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: book_research_agenda`. If the output is normal Markdown, do not force the JSON contract. For durable handoff artifacts, follow `docs/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits instead of upgrading verification.
+When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: book_research_agenda`. If the output is normal Markdown, do not force the JSON contract. For durable handoff artifacts, follow `docs/policy/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits instead of upgrading verification.
 
 ## Files/folders it may read
 
-- Shared operational boundary doc: `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
-- Shared policy docs, especially `docs/SOURCE_LIMITS.md` and `docs/AUTO_SELECTION_GUARDRAILS.md`.
+- Shared operational boundary doc: `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+- Shared policy docs, especially `docs/policy/SOURCE_LIMITS.md` and `docs/policy/AUTO_SELECTION_GUARDRAILS.md`.
 - User-provided book premises, notes, outlines, bibliographies, or project files explicitly named in the request.
 - Repository quality docs when the user asks for contract-compatible or workflow-aligned artifacts.
 
@@ -177,7 +177,7 @@ Assess whether the project is answerable at book scale. Check scope size, likely
 
 ```
 
-Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless a follow-on skill reduces a named scholarly risk.
+Use the optional Suggested next step policy in `docs/policy/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless a follow-on skill reduces a named scholarly risk.
 
 ## Quality checks
 

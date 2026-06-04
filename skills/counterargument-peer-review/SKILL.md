@@ -42,18 +42,18 @@ Be charitable first, then direct. Steelman the argument before attacking it, and
 
 ## Source basis and AI limits
 
-Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
+Use `docs/policy/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
-Use `docs/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` before claiming that a literature is missing, settled, one-sided, or adequately covered. In critique mode, likely missing literatures may be named as areas to check, not as proven absences, unless a protocol-bounded search supports that claim.
+Use `docs/policy/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` before claiming that a literature is missing, settled, one-sided, or adequately covered. In critique mode, likely missing literatures may be named as areas to check, not as proven absences, unless a protocol-bounded search supports that claim.
 
 ## Machine-readable artifacts
 
-When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: peer_review_report`. If the output is normal Markdown, do not force the JSON contract. For durable handoff artifacts, follow `docs/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits instead of upgrading verification.
+When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: peer_review_report`. If the output is normal Markdown, do not force the JSON contract. For durable handoff artifacts, follow `docs/policy/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits instead of upgrading verification.
 
 ## Files/folders it may read
 
-- Shared operational boundary doc: `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
-- Shared policy docs, especially `docs/SOURCE_LIMITS.md` and `docs/AUTO_SELECTION_GUARDRAILS.md`.
+- Shared operational boundary doc: `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+- Shared policy docs, especially `docs/policy/SOURCE_LIMITS.md` and `docs/policy/AUTO_SELECTION_GUARDRAILS.md`.
 - User-provided drafts, proposals, outlines, notes, claim ledgers, literature maps, and source excerpts explicitly named in the request.
 - Related argument or chapter artifacts when critique depends on manuscript structure.
 
@@ -161,7 +161,7 @@ For high-severity objections, state what evidence would falsify or materially we
 
 ```
 
-Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless a follow-on skill reduces a named scholarly risk.
+Use the optional Suggested next step policy in `docs/policy/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless a follow-on skill reduces a named scholarly risk.
 
 ## Severity scale
 

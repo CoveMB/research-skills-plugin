@@ -44,7 +44,7 @@ python3 scripts/package_plugin.py --root . --out dist/research-skills-plugin.zip
 
 ## A script option is unclear
 
-Run the script with `--help`. The common commands and write behavior are also documented in [`docs/SCRIPTS.md`](SCRIPTS.md).
+Run the script with `--help`. The common commands and write behavior are also documented in [`docs/reference/SCRIPTS.md`](../reference/SCRIPTS.md).
 
 ## A skill is not being selected automatically
 

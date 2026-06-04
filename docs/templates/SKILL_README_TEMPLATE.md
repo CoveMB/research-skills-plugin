@@ -31,27 +31,27 @@ If compact output is supported, describe it as an output shape, not a route mode
 
 ## Procedure
 
-Follow the shared procedure in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`; add only skill-specific procedure caveats here.
+Follow the shared procedure in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`; add only skill-specific procedure caveats here.
 
 ## Quality checks
 
-Apply the shared quality checks in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`; add only skill-specific checks here.
+Apply the shared quality checks in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`; add only skill-specific checks here.
 
 ## Failure modes
 
-Use the shared failure modes in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`; add only skill-specific failure modes here.
+Use the shared failure modes in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`; add only skill-specific failure modes here.
 
 ## Files/folders it may read
 
-Follow the shared read boundary in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`; add only skill-specific read boundaries here.
+Follow the shared read boundary in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`; add only skill-specific read boundaries here.
 
 ## Files/folders it may write
 
-Follow the shared write boundary in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`; add only skill-specific write boundaries here.
+Follow the shared write boundary in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`; add only skill-specific write boundaries here.
 
 ## What it must not do
 
-Follow the shared prohibitions in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`; add only skill-specific prohibitions here.
+Follow the shared prohibitions in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`; add only skill-specific prohibitions here.
 
 ## Best next steps
 

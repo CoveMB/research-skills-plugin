@@ -287,7 +287,7 @@ class TestPluginStructure(unittest.TestCase):
         self.assertEqual(missing, [])
 
     def test_skill_readmes_defer_common_operational_boundaries_to_shared_doc(self) -> None:
-        shared_doc = ROOT / "docs" / "SKILL_OPERATIONAL_BOUNDARIES.md"
+        shared_doc = ROOT / "docs" / "policy" / "SKILL_OPERATIONAL_BOUNDARIES.md"
         self.assertTrue(shared_doc.is_file())
         shared_text = read_text(shared_doc)
         for heading in REQUIRED_README_HEADINGS[:-1]:
@@ -296,7 +296,7 @@ class TestPluginStructure(unittest.TestCase):
         missing_references = [
             skill_dir.name
             for skill_dir in self.skill_dirs()
-            if "docs/SKILL_OPERATIONAL_BOUNDARIES.md" not in skill_readme(skill_dir)
+            if "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md" not in skill_readme(skill_dir)
         ]
         self.assertEqual(missing_references, [])
 
@@ -315,8 +315,8 @@ class TestPluginStructure(unittest.TestCase):
         self.assertEqual(offenders, [])
 
     def test_skill_readme_template_defers_common_operational_boundaries(self) -> None:
-        template = read_text(ROOT / "docs" / "SKILL_README_TEMPLATE.md")
-        self.assertIn("docs/SKILL_OPERATIONAL_BOUNDARIES.md", template)
+        template = read_text(ROOT / "docs" / "templates" / "SKILL_README_TEMPLATE.md")
+        self.assertIn("docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md", template)
         duplicated_phrases = [
             "State the source basis and source access level",
             "Bundled skill instructions, metadata, and assets if available",
@@ -383,7 +383,7 @@ class TestPluginStructure(unittest.TestCase):
         self.assertEqual(sorted(DIRECT_LOOKUP_SKILLS & ROUTE_ONLY_LOOKUP_SKILLS), [])
 
     def test_operational_boundaries_document_agent_policy_metadata(self) -> None:
-        boundaries = read_text(ROOT / "docs" / "SKILL_OPERATIONAL_BOUNDARIES.md")
+        boundaries = read_text(ROOT / "docs" / "policy" / "SKILL_OPERATIONAL_BOUNDARIES.md")
         required_phrases = [
             "## Agent policy metadata",
             "`external_lookup_allowed`",
@@ -397,7 +397,7 @@ class TestPluginStructure(unittest.TestCase):
         self.assertEqual(missing_phrases(boundaries, required_phrases), [])
 
     def test_shared_source_limits_are_documented_and_referenced(self) -> None:
-        source_limits_path = ROOT / "docs" / "SOURCE_LIMITS.md"
+        source_limits_path = ROOT / "docs" / "policy" / "SOURCE_LIMITS.md"
         self.assertTrue(source_limits_path.is_file())
         source_limits = read_text(source_limits_path)
         required_policy_phrases = [
@@ -415,7 +415,7 @@ class TestPluginStructure(unittest.TestCase):
         self.assertEqual(missing_references, [])
 
     def test_shared_auto_selection_guardrails_are_documented_and_referenced(self) -> None:
-        guardrails_path = ROOT / "docs" / "AUTO_SELECTION_GUARDRAILS.md"
+        guardrails_path = ROOT / "docs" / "policy" / "AUTO_SELECTION_GUARDRAILS.md"
         self.assertTrue(guardrails_path.is_file())
         guardrails = read_text(guardrails_path)
         required_policy_phrases = [
@@ -429,7 +429,7 @@ class TestPluginStructure(unittest.TestCase):
         missing_references = [
             skill_dir.name
             for skill_dir in self.skill_dirs()
-            if "docs/AUTO_SELECTION_GUARDRAILS.md" not in skill_markdown(skill_dir)
+            if "docs/policy/AUTO_SELECTION_GUARDRAILS.md" not in skill_markdown(skill_dir)
         ]
         self.assertEqual(missing_references, [])
 
@@ -443,7 +443,7 @@ class TestPluginStructure(unittest.TestCase):
         self.assertEqual(missing, [])
 
     def test_shared_suggested_next_step_policy_is_documented(self) -> None:
-        guardrails = read_text(ROOT / "docs" / "AUTO_SELECTION_GUARDRAILS.md")
+        guardrails = read_text(ROOT / "docs" / "policy" / "AUTO_SELECTION_GUARDRAILS.md")
         required_phrases = [
             "## Suggested next step policy",
             "optional, risk-gated",
@@ -455,7 +455,7 @@ class TestPluginStructure(unittest.TestCase):
         self.assertEqual(missing_phrases(guardrails, required_phrases), [])
 
     def test_routing_matrix_documents_suggested_next_step_gates(self) -> None:
-        routing_matrix = read_text(ROOT / "docs" / "ROUTING_MATRIX.md")
+        routing_matrix = read_text(ROOT / "docs" / "policy" / "ROUTING_MATRIX.md")
         required_phrases = [
             "## Suggested next step gates",
             "| Risk or prerequisite | Allowed next skill | Blocked early suggestion |",
@@ -470,7 +470,7 @@ class TestPluginStructure(unittest.TestCase):
         output_section = router.split("## Output format", maxsplit=1)[1]
         self.assertIn("## Suggested next step", output_section)
         self.assertIn("optional", output_section)
-        self.assertIn("docs/AUTO_SELECTION_GUARDRAILS.md", output_section)
+        self.assertIn("docs/policy/AUTO_SELECTION_GUARDRAILS.md", output_section)
 
     def test_output_templates_do_not_force_suggested_next_step_heading(self) -> None:
         offenders = {}
@@ -503,7 +503,7 @@ class TestPluginStructure(unittest.TestCase):
         self.assertEqual(missing, [])
 
     def test_suggested_next_step_template_lives_only_in_shared_policy(self) -> None:
-        policy = read_text(ROOT / "docs" / "AUTO_SELECTION_GUARDRAILS.md")
+        policy = read_text(ROOT / "docs" / "policy" / "AUTO_SELECTION_GUARDRAILS.md")
         self.assertEqual(missing_phrases(policy, SUGGESTED_NEXT_STEP_TEMPLATE_PHRASES), [])
 
         duplicated_templates = [
@@ -535,14 +535,14 @@ class TestPluginStructure(unittest.TestCase):
         offenders = [
             str(path.relative_to(ROOT))
             for path in SKILLS_DIR.glob("*/SKILL.md")
-            if read_text(path).count("docs/SKILL_OPERATIONAL_BOUNDARIES.md") > 1
+            if read_text(path).count("docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md") > 1
         ]
         self.assertEqual(offenders, [])
 
     def test_citation_audit_suggestion_is_blocked_before_cited_material_exists(self) -> None:
         files = [
-            ROOT / "docs" / "AUTO_SELECTION_GUARDRAILS.md",
-            ROOT / "docs" / "ROUTING_MATRIX.md",
+            ROOT / "docs" / "policy" / "AUTO_SELECTION_GUARDRAILS.md",
+            ROOT / "docs" / "policy" / "ROUTING_MATRIX.md",
             SKILLS_DIR / "research-intent-router" / "SKILL.md",
         ]
         required_phrase = (
@@ -573,7 +573,7 @@ class TestPluginStructure(unittest.TestCase):
         self.assertEqual(offenders, [])
 
     def test_suggested_next_step_policy_allows_omission(self) -> None:
-        guardrails = read_text(ROOT / "docs" / "AUTO_SELECTION_GUARDRAILS.md")
+        guardrails = read_text(ROOT / "docs" / "policy" / "AUTO_SELECTION_GUARDRAILS.md")
         required_phrases = [
             "Omit the section when no specific unresolved scholarly risk remains.",
             "Omit the section when no one skill clearly reduces the remaining risk.",
@@ -634,7 +634,7 @@ class TestPluginStructure(unittest.TestCase):
 
     def test_router_route_is_documented_as_non_contract_output(self) -> None:
         files = [
-            ROOT / "docs" / "ARCHITECTURE.md",
+            ROOT / "docs" / "reference" / "ARCHITECTURE.md",
             ROOT / "MODE_REGISTRY.md",
             ROOT / "skills" / "research-intent-router" / "SKILL.md",
         ]
@@ -700,10 +700,10 @@ class TestPluginStructure(unittest.TestCase):
 
     def test_router_is_registered_in_user_facing_docs(self) -> None:
         files = [
-            ROOT / "docs" / "SKILL_INDEX.md",
+            ROOT / "docs" / "user" / "SKILL_INDEX.md",
             ROOT / "MODE_REGISTRY.md",
-            ROOT / "docs" / "ARCHITECTURE.md",
-            ROOT / "docs" / "WORKFLOW_PLAYBOOK.md",
+            ROOT / "docs" / "reference" / "ARCHITECTURE.md",
+            ROOT / "docs" / "user" / "WORKFLOW_PLAYBOOK.md",
         ]
         missing = [
             str(path.relative_to(ROOT))
@@ -713,7 +713,7 @@ class TestPluginStructure(unittest.TestCase):
         self.assertEqual(missing, [])
 
     def test_routing_matrix_is_canonical_and_referenced(self) -> None:
-        routing_matrix_path = ROOT / "docs" / "ROUTING_MATRIX.md"
+        routing_matrix_path = ROOT / "docs" / "policy" / "ROUTING_MATRIX.md"
         self.assertTrue(routing_matrix_path.is_file())
         routing_matrix = read_text(routing_matrix_path)
         required_routes = [
@@ -727,28 +727,28 @@ class TestPluginStructure(unittest.TestCase):
 
         files = [
             ROOT / "skills" / "research-intent-router" / "SKILL.md",
-            ROOT / "docs" / "SKILL_INDEX.md",
+            ROOT / "docs" / "user" / "SKILL_INDEX.md",
             ROOT / "MODE_REGISTRY.md",
         ]
         missing_references = [
             str(path.relative_to(ROOT))
             for path in files
-            if "docs/ROUTING_MATRIX.md" not in read_text(path)
+            if "docs/policy/ROUTING_MATRIX.md" not in read_text(path)
         ]
         self.assertEqual(missing_references, [])
 
     def test_skill_index_and_routing_matrix_cover_all_skills(self) -> None:
         skill_names = [skill_dir.name for skill_dir in self.skill_dirs()]
-        skill_index = read_text(ROOT / "docs" / "SKILL_INDEX.md")
-        routing_matrix = read_text(ROOT / "docs" / "ROUTING_MATRIX.md")
+        skill_index = read_text(ROOT / "docs" / "user" / "SKILL_INDEX.md")
+        routing_matrix = read_text(ROOT / "docs" / "policy" / "ROUTING_MATRIX.md")
 
         missing = [
-            f"docs/SKILL_INDEX.md: {skill_name}"
+            f"docs/user/SKILL_INDEX.md: {skill_name}"
             for skill_name in skill_names
             if f"`{skill_name}`" not in skill_index
         ]
         missing.extend(
-            f"docs/ROUTING_MATRIX.md: {skill_name}"
+            f"docs/policy/ROUTING_MATRIX.md: {skill_name}"
             for skill_name in skill_names
             if f"`{skill_name}`" not in routing_matrix
         )
@@ -819,8 +819,8 @@ class TestPluginStructure(unittest.TestCase):
         readme = read_text(ROOT / "README.md")
         self.assertNotIn("| Mode | Primary skill |", readme)
         self.assertNotIn("## Recommended paths", readme)
-        self.assertIn("docs/SKILL_INDEX.md", readme)
-        self.assertIn("docs/ROUTING_MATRIX.md", readme)
+        self.assertIn("docs/user/SKILL_INDEX.md", readme)
+        self.assertIn("docs/policy/ROUTING_MATRIX.md", readme)
 
     def test_manifest_version_matches_public_docs(self) -> None:
         manifest = read_json(ROOT / ".codex-plugin" / "plugin.json")
@@ -857,9 +857,9 @@ class TestPluginStructure(unittest.TestCase):
     def test_router_modes_are_registered_in_user_facing_docs(self) -> None:
         files = [
             ROOT / "README.md",
-            ROOT / "docs" / "SKILL_INDEX.md",
+            ROOT / "docs" / "user" / "SKILL_INDEX.md",
             ROOT / "MODE_REGISTRY.md",
-            ROOT / "docs" / "WORKFLOW_PLAYBOOK.md",
+            ROOT / "docs" / "user" / "WORKFLOW_PLAYBOOK.md",
         ]
         required_phrases = [
             "research-route-normal",
@@ -879,8 +879,8 @@ class TestPluginStructure(unittest.TestCase):
     def test_public_docs_defer_mode_details_to_mode_registry(self) -> None:
         public_docs = [
             ROOT / "README.md",
-            ROOT / "docs" / "SKILL_INDEX.md",
-            ROOT / "docs" / "WORKFLOW_PLAYBOOK.md",
+            ROOT / "docs" / "user" / "SKILL_INDEX.md",
+            ROOT / "docs" / "user" / "WORKFLOW_PLAYBOOK.md",
         ]
         missing_registry_reference = [
             str(path.relative_to(ROOT))
@@ -915,7 +915,7 @@ class TestPluginStructure(unittest.TestCase):
         self.assertNotIn("repo marketplace install", readme)
 
     def test_architecture_uses_compact_router_graph_edges(self) -> None:
-        architecture = read_text(ROOT / "docs" / "ARCHITECTURE.md")
+        architecture = read_text(ROOT / "docs" / "reference" / "ARCHITECTURE.md")
         self.assertLessEqual(architecture.count("Router -->"), 3)
         self.assertLessEqual(architecture.count("T -->"), 3)
         self.assertIn("Specialists", architecture)
@@ -937,9 +937,9 @@ class TestPluginStructure(unittest.TestCase):
         self.assertEqual(missing_phrases(skill_text, required_skill_phrases), [])
 
         required_docs = [
-            ROOT / "docs" / "ARCHITECTURE.md",
-            ROOT / "docs" / "ROUTING_MATRIX.md",
-            ROOT / "docs" / "SKILL_INDEX.md",
+            ROOT / "docs" / "reference" / "ARCHITECTURE.md",
+            ROOT / "docs" / "policy" / "ROUTING_MATRIX.md",
+            ROOT / "docs" / "user" / "SKILL_INDEX.md",
             ROOT / "MODE_REGISTRY.md",
         ]
         missing = [
@@ -1011,7 +1011,7 @@ class TestPluginStructure(unittest.TestCase):
         self.assertEqual(missing_phrases(source_discovery + search_guide, required_phrases), [])
 
     def test_shared_corpus_representativeness_taxonomy_is_wired_into_core_surfaces(self) -> None:
-        taxonomy_path = ROOT / "docs" / "CORPUS_REPRESENTATIVENESS_TAXONOMY.md"
+        taxonomy_path = ROOT / "docs" / "policy" / "CORPUS_REPRESENTATIVENESS_TAXONOMY.md"
         self.assertTrue(taxonomy_path.is_file())
         taxonomy = read_text(taxonomy_path)
         required_phrases = [
@@ -1031,17 +1031,17 @@ class TestPluginStructure(unittest.TestCase):
         self.assertEqual(missing_phrases(taxonomy, CORPUS_REPRESENTATIVENESS_LABELS), [])
 
         for relative_path in [
-            "docs/SOURCE_LIMITS.md",
-            "docs/QUALITY_STANDARD.md",
-            "docs/SKILL_OPERATIONAL_BOUNDARIES.md",
+            "docs/policy/SOURCE_LIMITS.md",
+            "docs/policy/QUALITY_STANDARD.md",
+            "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md",
         ]:
             self.assertIn(
-                "docs/CORPUS_REPRESENTATIVENESS_TAXONOMY.md",
+                "docs/policy/CORPUS_REPRESENTATIVENESS_TAXONOMY.md",
                 read_text(ROOT / relative_path),
             )
         for skill_name in CORPUS_REPRESENTATIVENESS_SKILLS:
             skill_text = skill_markdown(SKILLS_DIR / skill_name)
-            self.assertIn("docs/CORPUS_REPRESENTATIVENESS_TAXONOMY.md", skill_text)
+            self.assertIn("docs/policy/CORPUS_REPRESENTATIVENESS_TAXONOMY.md", skill_text)
             self.assertIn("corpus", skill_text.casefold())
 
         schema = read_json(ROOT / "shared" / "contracts" / "book" / "book_artifact.schema.json")
@@ -1177,9 +1177,9 @@ class TestPluginStructure(unittest.TestCase):
             self.assertNotIn(old_field, passport["properties"])
 
         for path in [
-            ROOT / "docs" / "QUALITY_STANDARD.md",
-            ROOT / "docs" / "SKILL_OPERATIONAL_BOUNDARIES.md",
-            ROOT / "docs" / "SCRIPTS.md",
+            ROOT / "docs" / "policy" / "QUALITY_STANDARD.md",
+            ROOT / "docs" / "policy" / "SKILL_OPERATIONAL_BOUNDARIES.md",
+            ROOT / "docs" / "reference" / "SCRIPTS.md",
         ]:
             text = read_text(path)
             self.assertIn("handoff_artifact", text)
@@ -1385,7 +1385,7 @@ class TestPluginStructure(unittest.TestCase):
         self.assertEqual({skill_name: phrases for skill_name, phrases in missing.items() if phrases}, {})
 
     def test_skill_index_lists_selected_compact_output_skills(self) -> None:
-        skill_index = read_text(ROOT / "docs" / "SKILL_INDEX.md")
+        skill_index = read_text(ROOT / "docs" / "user" / "SKILL_INDEX.md")
         compact_section = skill_index.split("## Compact output support", 1)[1].split("## Core research workflow", 1)[0]
         documented_skills = re.findall(r"^- `([^`]+)`", compact_section, re.MULTILINE)
         self.assertEqual(documented_skills, SELECTED_COMPACT_OUTPUT_SKILLS)
@@ -1456,7 +1456,7 @@ class TestPluginStructure(unittest.TestCase):
                 "These statuses appear only in compact output.",
                 "Escalate from compact output to full review",
             ],
-            ROOT / "docs" / "QUALITY_STANDARD.md": [
+            ROOT / "docs" / "policy" / "QUALITY_STANDARD.md": [
                 "How to use this result",
                 "compact-output-only",
                 "TRIAGE ONLY",
@@ -1464,21 +1464,21 @@ class TestPluginStructure(unittest.TestCase):
                 "LIMITED GATE DECISION",
                 "Escalate from compact output to full review",
             ],
-            ROOT / "docs" / "SKILL_INDEX.md": [
+            ROOT / "docs" / "user" / "SKILL_INDEX.md": [
                 "How to use this result",
                 "compact-output-only",
                 "TRIAGE ONLY",
                 "BLOCKER SUMMARY",
                 "LIMITED GATE DECISION",
             ],
-            ROOT / "docs" / "SKILL_OPERATIONAL_BOUNDARIES.md": [
+            ROOT / "docs" / "policy" / "SKILL_OPERATIONAL_BOUNDARIES.md": [
                 "How to use this result",
                 "TRIAGE ONLY",
                 "BLOCKER SUMMARY",
                 "LIMITED GATE DECISION",
                 "Escalate from compact output to full review",
             ],
-            ROOT / "docs" / "WORKFLOW_PLAYBOOK.md": [
+            ROOT / "docs" / "user" / "WORKFLOW_PLAYBOOK.md": [
                 "How to use this result",
                 "Use these statuses only for compact output",
                 "Escalate from compact output to full review",
@@ -1492,7 +1492,7 @@ class TestPluginStructure(unittest.TestCase):
         self.assertEqual(missing, [])
 
     def test_source_limits_document_external_tool_confidentiality_boundary(self) -> None:
-        source_limits = read_text(ROOT / "docs" / "SOURCE_LIMITS.md")
+        source_limits = read_text(ROOT / "docs" / "policy" / "SOURCE_LIMITS.md")
         required_phrases = [
             "external tool boundary",
             "unpublished manuscript",

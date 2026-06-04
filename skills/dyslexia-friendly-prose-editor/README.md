@@ -40,27 +40,27 @@ Ask for compact output when you want one source-basis line, the revised passage,
 
 ## Procedure
 
-Follow the shared procedure in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
+Follow the shared procedure in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
 
 ## Quality checks
 
-Apply the shared quality checks in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`. Keep meaning preservation, ambiguous corrections, evidence limits, consent language, commitments, and obligations visible in the output.
+Apply the shared quality checks in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`. Keep meaning preservation, ambiguous corrections, evidence limits, consent language, commitments, and obligations visible in the output.
 
 ## Failure modes
 
-Use the shared failure modes in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`. Call out overcorrection, lost uncertainty, or generic style drift when relevant.
+Use the shared failure modes in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`. Call out overcorrection, lost uncertainty, or generic style drift when relevant.
 
 ## Files/folders it may read
 
-Follow the shared read boundary in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
+Follow the shared read boundary in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
 
 ## Files/folders it may write
 
-Follow the shared write boundary in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
+Follow the shared write boundary in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
 
 ## What it must not do
 
-Follow the shared prohibitions in `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
+Follow the shared prohibitions in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
 
 ## Best next steps
 

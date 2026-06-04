@@ -39,18 +39,18 @@ Use when the user has a topic, source list, annotations, or scattered notes and 
 
 ## Source basis and AI limits
 
-Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
+Use `docs/policy/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
-Use `docs/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` when the output could imply coverage, balance, consensus, novelty, missing literature, or absence of counter-literature.
+Use `docs/policy/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` when the output could imply coverage, balance, consensus, novelty, missing literature, or absence of counter-literature.
 
 ## Machine-readable artifacts
 
-When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: literature_map`. If the output is normal Markdown, do not force the JSON contract. For durable handoff artifacts, follow `docs/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits instead of upgrading verification.
+When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: literature_map`. If the output is normal Markdown, do not force the JSON contract. For durable handoff artifacts, follow `docs/policy/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits instead of upgrading verification.
 
 ## Files/folders it may read
 
-- Shared operational boundary doc: `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
-- Shared policy docs, especially `docs/SOURCE_LIMITS.md` and `docs/AUTO_SELECTION_GUARDRAILS.md`.
+- Shared operational boundary doc: `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+- Shared policy docs, especially `docs/policy/SOURCE_LIMITS.md` and `docs/policy/AUTO_SELECTION_GUARDRAILS.md`.
 - User-provided bibliographies, annotations, source notes, literature maps, and project files explicitly named in the request.
 - Related research agenda or source discovery artifacts when available.
 
@@ -76,7 +76,7 @@ List every discipline involved. For interdisciplinary work, explain how each fie
 
 State corpus limits: what source set was supplied, what fields may be missing, and whether the map reflects the provided corpus or a broader field that needs live/current verification.
 
-Assign one or more corpus-representativeness labels from `docs/CORPUS_REPRESENTATIVENESS_TAXONOMY.md`. Treat source count separately from representativeness: a large convenience corpus can still be biased, and an expert-curated corpus is not systematic unless a reproducible protocol is visible.
+Assign one or more corpus-representativeness labels from `docs/policy/CORPUS_REPRESENTATIVENESS_TAXONOMY.md`. Treat source count separately from representativeness: a large convenience corpus can still be biased, and an expert-curated corpus is not systematic unless a reproducible protocol is visible.
 
 Flag corpus bias that could change the conclusion: languages searched, database coverage, open-access availability, famous-author anchoring, geography, publication type, and disciplines excluded by the search terms.
 
@@ -159,7 +159,7 @@ Gaps can be empirical, theoretical, contextual, methodological, geographic, conc
 
 ```
 
-Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless a follow-on skill reduces a named scholarly risk.
+Use the optional Suggested next step policy in `docs/policy/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless a follow-on skill reduces a named scholarly risk.
 
 ## Quality checks
 

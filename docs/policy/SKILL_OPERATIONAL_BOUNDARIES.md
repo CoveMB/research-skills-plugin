@@ -10,9 +10,9 @@ This file is the shared operating policy for skill READMEs. Individual READMEs s
 4. If the user request contains a false premise or asks for unsupported certainty, state the premise gap and proceed with the strongest supportable task.
 5. Produce the stated output format and keep verified facts, interpretation, speculation, and recommendation separate.
 6. End with verification gaps. Add a risk-gated follow-up only when it is useful and does not add avoidable reading load.
-7. When a result depends on corpus coverage, balance, consensus, novelty, missing literature, or absence of evidence, use `docs/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` and carry the label forward.
-8. For durable artifacts or cross-skill handoffs, use `docs/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, emit a valid `process_passport`, and preserve any upstream passport limits unless a visible verification step resolves them.
-9. For accessibility work, follow `docs/ROUTING_MATRIX.md`: use the smallest clear accessibility skill first, and use `dyslexia-research-companion` only for mixed or unclear bottlenecks.
+7. When a result depends on corpus coverage, balance, consensus, novelty, missing literature, or absence of evidence, use `docs/policy/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` and carry the label forward.
+8. For durable artifacts or cross-skill handoffs, use `docs/policy/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, emit a valid `process_passport`, and preserve any upstream passport limits unless a visible verification step resolves them.
+9. For accessibility work, follow `docs/policy/ROUTING_MATRIX.md`: use the smallest clear accessibility skill first, and use `dyslexia-research-companion` only for mixed or unclear bottlenecks.
 10. For compact output in accessibility work, use one source-basis line, one table or revised passage, ambiguity only when it could change meaning, and one next action. Compact output is an output shape, not a route mode.
 11. For compact output in routing, audit, gate, or verifier work, keep the source basis, main route or verdict, decision-changing gaps, and one next action visible.
 12. For compact output, include `How to use this result: [status] - [full sentence]` with `TRIAGE ONLY`, `BLOCKER SUMMARY`, or `LIMITED GATE DECISION`.

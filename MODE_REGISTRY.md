@@ -4,7 +4,7 @@ Book workflow modes for this package.
 
 Last updated: 2026-05-12
 
-Use `docs/ROUTING_MATRIX.md` for canonical skill-routing choices.
+Use `docs/policy/ROUTING_MATRIX.md` for canonical skill-routing choices.
 
 ## Core pipeline modes
 

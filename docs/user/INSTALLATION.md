@@ -44,7 +44,7 @@ Preview the install first if you want to check paths before writing files:
 ./install.sh --dry-run
 ```
 
-More script details are in [`docs/SCRIPTS.md`](SCRIPTS.md).
+More script details are in [`docs/reference/SCRIPTS.md`](../reference/SCRIPTS.md).
 
 ## Option B: Manual personal marketplace install
 
@@ -106,7 +106,7 @@ cp -R skills/* ~/.agents/skills/
 
 ## Option D: ChatGPT Skills upload
 
-Some skill-upload interfaces expect one skill bundle at a time. This package is mainly a multi-skill plugin. If your workspace requires one skill per upload, zip an individual folder under `skills/<skill-name>/` and upload that zip. See `docs/SKILL_INDEX.md` to choose the core skills first.
+Some skill-upload interfaces expect one skill bundle at a time. This package is mainly a multi-skill plugin. If your workspace requires one skill per upload, zip an individual folder under `skills/<skill-name>/` and upload that zip. See `docs/user/SKILL_INDEX.md` to choose the core skills first.
 
 ## Validate after install
 
@@ -127,7 +127,7 @@ For a full source-checkout validation, run from the repository root:
 ./validate.sh
 ```
 
-See [`docs/SCRIPTS.md`](SCRIPTS.md) for the full script list and dependency notes.
+See [`docs/reference/SCRIPTS.md`](../reference/SCRIPTS.md) for the full script list and dependency notes.
 
 ## Uninstall
 

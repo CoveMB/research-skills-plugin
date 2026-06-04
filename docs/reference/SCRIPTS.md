@@ -71,7 +71,7 @@ The validator checks:
 
 Durable handoff artifacts use `handoff_artifact: true`; that conditional marker requires `process_passport`. Draft, casual, non-persisted, or non-handoff artifacts can still validate without a passport. Invalid examples under `examples/book_artifacts/invalid/` must be valid JSON but fail schema validation; the shipped invalid examples currently keep missing-passport coverage executable, while fake-verification and unsupported-upgrade coverage lives in the workflow passport and traceability checkers.
 
-Use this script after changing `shared/contracts/book/book_artifact.schema.json`, `docs/PROCESS_PASSPORT.md`, or any file in `examples/book_artifacts/`.
+Use this script after changing `shared/contracts/book/book_artifact.schema.json`, `docs/policy/PROCESS_PASSPORT.md`, or any file in `examples/book_artifacts/`.
 
 ### Research behavior fixture checker
 

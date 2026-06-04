@@ -39,16 +39,16 @@ Use when the user has a search plan or candidate source export from an academic 
 
 ## Source basis and AI limits
 
-Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
+Use `docs/policy/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
-Use `docs/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` when candidate exports, screening logs, or search-log updates could imply corpus coverage, balance, consensus, missing literature, or absence of evidence. Candidate records are not a representative corpus unless the logged venue, query, date, filter, and protocol basis justify that label.
+Use `docs/policy/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` when candidate exports, screening logs, or search-log updates could imply corpus coverage, balance, consensus, missing literature, or absence of evidence. Candidate records are not a representative corpus unless the logged venue, query, date, filter, and protocol basis justify that label.
 
-For durable candidate matrices, duplicate clusters, screening logs, or search-log update drafts that are saved or handed to another skill, include a human-readable process passport following `docs/PROCESS_PASSPORT.md`. Preserve upstream source-access, corpus-coverage, unresolved-risk, and handoff-limit labels; do not mark planned searches as completed.
+For durable candidate matrices, duplicate clusters, screening logs, or search-log update drafts that are saved or handed to another skill, include a human-readable process passport following `docs/policy/PROCESS_PASSPORT.md`. Preserve upstream source-access, corpus-coverage, unresolved-risk, and handoff-limit labels; do not mark planned searches as completed.
 
 ## Files/folders it may read
 
-- Shared operational boundary doc: `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
-- Shared policy docs, especially `docs/SOURCE_LIMITS.md`, `docs/PROCESS_PASSPORT.md`, and `docs/AUTO_SELECTION_GUARDRAILS.md`.
+- Shared operational boundary doc: `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+- Shared policy docs, especially `docs/policy/SOURCE_LIMITS.md`, `docs/policy/PROCESS_PASSPORT.md`, and `docs/policy/AUTO_SELECTION_GUARDRAILS.md`.
 - User-provided search plans, search logs, candidate exports, bibliography exports, tabular files, source lists, and project files explicitly named in the request.
 
 ## Files/folders it may write
@@ -131,7 +131,7 @@ Produce a search-log update that distinguishes completed search facts from candi
 
 ```
 
-Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless a follow-on skill reduces a named scholarly risk.
+Use the optional Suggested next step policy in `docs/policy/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless a follow-on skill reduces a named scholarly risk.
 
 ## Quality checks
 

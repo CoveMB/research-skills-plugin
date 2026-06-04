@@ -34,7 +34,7 @@ Preview the install first:
 ./install.sh --dry-run
 ```
 
-Full manual install paths are in [`docs/INSTALLATION.md`](docs/INSTALLATION.md). The manual guide covers personal marketplace install, direct skill-folder install, upload notes for single-skill environments, validation, and uninstall steps.
+Full manual install paths are in [`docs/user/INSTALLATION.md`](docs/user/INSTALLATION.md). The manual guide covers personal marketplace install, direct skill-folder install, upload notes for single-skill environments, validation, and uninstall steps.
 
 ## Try it first
 
@@ -150,7 +150,7 @@ Typical jobs:
 
 ## Choose a workflow
 
-Use [`docs/SKILL_INDEX.md`](docs/SKILL_INDEX.md) for the full skill list and [`docs/ROUTING_MATRIX.md`](docs/ROUTING_MATRIX.md) for canonical routing. The short version is:
+Use [`docs/user/SKILL_INDEX.md`](docs/user/SKILL_INDEX.md) for the full skill list and [`docs/policy/ROUTING_MATRIX.md`](docs/policy/ROUTING_MATRIX.md) for canonical routing. The short version is:
 
 - voice transcript only: use `dictation-to-research-notes`
 - too much to read: use `reading-load-reducer`
@@ -166,7 +166,7 @@ Every skill folder has its own `README.md` with example requests, useful inputs,
 
 This package does not install scheduled background jobs. Its "automation" is routing: the router and orchestrator decide which workflow should run, how deep source lookup should go, and what artifact should come next.
 
-The common route modes are `accessibility-companion`, `dictation-notes`, `reading-load`, `accessible-prose-repair`, `research-route-normal`, and `research-route-deep`. See `MODE_REGISTRY.md` for the full registry and [`docs/ROUTING_MATRIX.md`](docs/ROUTING_MATRIX.md) for routing rules.
+The common route modes are `accessibility-companion`, `dictation-notes`, `reading-load`, `accessible-prose-repair`, `research-route-normal`, and `research-route-deep`. See `MODE_REGISTRY.md` for the full registry and [`docs/policy/ROUTING_MATRIX.md`](docs/policy/ROUTING_MATRIX.md) for routing rules.
 
 ## Source lookup modes
 
@@ -296,19 +296,19 @@ python3 -m unittest discover -s scripts -p 'test_*.py'
 python3 -m unittest discover -s tests -p 'test_*.py'
 ```
 
-Script details, arguments, side effects, and dependency notes are in [`docs/SCRIPTS.md`](docs/SCRIPTS.md).
+Script details, arguments, side effects, and dependency notes are in [`docs/reference/SCRIPTS.md`](docs/reference/SCRIPTS.md).
 
 ## Useful docs
 
-- [`docs/INSTALLATION.md`](docs/INSTALLATION.md): manual install options and uninstall steps
-- [`docs/SKILL_INDEX.md`](docs/SKILL_INDEX.md): all skills and when to use them
-- [`docs/SCRIPTS.md`](docs/SCRIPTS.md): script commands, requirements, and write behavior
-- [`docs/WORKFLOW_PLAYBOOK.md`](docs/WORKFLOW_PLAYBOOK.md): practical book workflows
-- [`docs/QUALITY_STANDARD.md`](docs/QUALITY_STANDARD.md): source, claim, and citation standards
+- [`docs/user/INSTALLATION.md`](docs/user/INSTALLATION.md): manual install options and uninstall steps
+- [`docs/user/SKILL_INDEX.md`](docs/user/SKILL_INDEX.md): all skills and when to use them
+- [`docs/reference/SCRIPTS.md`](docs/reference/SCRIPTS.md): script commands, requirements, and write behavior
+- [`docs/user/WORKFLOW_PLAYBOOK.md`](docs/user/WORKFLOW_PLAYBOOK.md): practical book workflows
+- [`docs/policy/QUALITY_STANDARD.md`](docs/policy/QUALITY_STANDARD.md): source, claim, and citation standards
 - [`tests/skill_evals/README.md`](tests/skill_evals/README.md): scholar-grade skill-evaluation standard and fixtures
-- [`docs/SOURCE_LIMITS.md`](docs/SOURCE_LIMITS.md): what counts as verified source access
-- [`docs/ROUTING_MATRIX.md`](docs/ROUTING_MATRIX.md): canonical route choices, including accessibility entry points
-- [`docs/TROUBLESHOOTING.md`](docs/TROUBLESHOOTING.md): common setup and routing issues
+- [`docs/policy/SOURCE_LIMITS.md`](docs/policy/SOURCE_LIMITS.md): what counts as verified source access
+- [`docs/policy/ROUTING_MATRIX.md`](docs/policy/ROUTING_MATRIX.md): canonical route choices, including accessibility entry points
+- [`docs/user/TROUBLESHOOTING.md`](docs/user/TROUBLESHOOTING.md): common setup and routing issues
 
 ## License
 

@@ -53,13 +53,13 @@ Do not let the hierarchy become a corpus-bias shortcut. Track languages, databas
 
 ## Source basis and AI limits
 
-Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
+Use `docs/policy/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
-Use `docs/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` when the output could imply coverage, balance, consensus, novelty, missing literature, or absence of counter-literature.
+Use `docs/policy/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` when the output could imply coverage, balance, consensus, novelty, missing literature, or absence of counter-literature.
 
 ## Machine-readable artifacts
 
-When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: source_discovery_log`. If the output is normal Markdown, do not force the JSON contract. For durable handoff artifacts, follow `docs/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits instead of upgrading verification.
+When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: source_discovery_log`. If the output is normal Markdown, do not force the JSON contract. For durable handoff artifacts, follow `docs/policy/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits instead of upgrading verification.
 
 ## Systematic review mode
 
@@ -90,8 +90,8 @@ For concise guidance and query design reminders, read `references/search-strateg
 
 ## Files/folders it may read
 
-- Shared operational boundary doc: `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
-- Shared policy docs, especially `docs/SOURCE_LIMITS.md` and `docs/AUTO_SELECTION_GUARDRAILS.md`.
+- Shared operational boundary doc: `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+- Shared policy docs, especially `docs/policy/SOURCE_LIMITS.md` and `docs/policy/AUTO_SELECTION_GUARDRAILS.md`.
 - User-provided research agendas, source lists, bibliographies, notes, and search logs explicitly named in the request.
 - Project workflow docs when aligning source discovery with book artifacts.
 
@@ -115,7 +115,7 @@ For concise guidance and query design reminders, read `references/search-strateg
 
 State whether the output is `planned_search`, `partial_search`, `completed_search_log`, `completed_protocol`, or a mixed plan-plus-log. Never imply that a database, catalogue, website, or repository has been searched unless the search was actually performed and logged.
 
-Assign a corpus-representativeness label from `docs/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` when the output includes completed or proposed corpus claims. Use `unknown_coverage` for `planned_search`, `partial_corpus` or a narrower skew label for `partial_search`, and `systematic_protocol` or `scoping_protocol` only for an executed protocol with visible search, screening, appraisal or charting, and limits. A planned search is not evidence of field coverage.
+Assign a corpus-representativeness label from `docs/policy/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` when the output includes completed or proposed corpus claims. Use `unknown_coverage` for `planned_search`, `partial_corpus` or a narrower skew label for `partial_search`, and `systematic_protocol` or `scoping_protocol` only for an executed protocol with visible search, screening, appraisal or charting, and limits. A planned search is not evidence of field coverage.
 
 ### 1. Translate the topic into search families
 
@@ -240,7 +240,7 @@ If systematic review mode is active, include the review type, protocol snapshot,
 
 ```
 
-Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless a follow-on skill reduces a named scholarly risk.
+Use the optional Suggested next step policy in `docs/policy/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless a follow-on skill reduces a named scholarly risk.
 
 ## Quality checks
 

@@ -1,6 +1,6 @@
 # Skill index
 
-Use this file when you already have a sense of the work needed and want the right skill. Use `MODE_REGISTRY.md` for route names and artifact outputs. Use `docs/ROUTING_MATRIX.md` for canonical automatic routing.
+Use this file when you already have a sense of the work needed and want the right skill. Use `MODE_REGISTRY.md` for route names and artifact outputs. Use `docs/policy/ROUTING_MATRIX.md` for canonical automatic routing.
 
 | Skill folder | Display name | When to use |
 |---|---|---|
@@ -102,7 +102,7 @@ Use `research-intent-router` as the light first pass when a prompt could match s
 
 Router modes: `research-route-normal` and `research-route-deep`. See `MODE_REGISTRY.md` for mode behavior.
 
-Suggested next steps are optional, risk-gated. They should appear only when one follow-on skill reduces a named scholarly risk; the shared policy lives in `docs/AUTO_SELECTION_GUARDRAILS.md`, with route gates in `docs/ROUTING_MATRIX.md`.
+Suggested next steps are optional, risk-gated. They should appear only when one follow-on skill reduces a named scholarly risk; the shared policy lives in `docs/policy/AUTO_SELECTION_GUARDRAILS.md`, with route gates in `docs/policy/ROUTING_MATRIX.md`.
 
 ## Later-stage manuscript set
 

@@ -45,9 +45,9 @@ Use this instead of `literature-review-mapper` when the user needs triage before
 
 ## Source basis and AI limits
 
-Use `docs/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
+Use `docs/policy/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
-Use `docs/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` only when triage could imply corpus coverage, field balance, missing counterarguments, or literature synthesis. Keep the label compact in source-basis or uncertainty text; do not add a full taxonomy section to low-load output unless the user asks.
+Use `docs/policy/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` only when triage could imply corpus coverage, field balance, missing counterarguments, or literature synthesis. Keep the label compact in source-basis or uncertainty text; do not add a full taxonomy section to low-load output unless the user asks.
 
 If only titles, abstracts, or snippets are available, mark triage and skip risk as provisional.
 
@@ -59,8 +59,8 @@ Compression must not remove decision-critical caveats. Keep access level, provis
 
 ## Files/folders it may read
 
-- Shared operational boundary doc: `docs/SKILL_OPERATIONAL_BOUNDARIES.md`.
-- Shared policy docs, especially `docs/SOURCE_LIMITS.md`, `docs/AUTO_SELECTION_GUARDRAILS.md`, `docs/ROUTING_MATRIX.md`, and `docs/SKILL_INDEX.md`.
+- Shared operational boundary doc: `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+- Shared policy docs, especially `docs/policy/SOURCE_LIMITS.md`, `docs/policy/AUTO_SELECTION_GUARDRAILS.md`, `docs/policy/ROUTING_MATRIX.md`, and `docs/user/SKILL_INDEX.md`.
 - User-provided source excerpts, abstracts, search results, bibliographies, drafts, notes, artifacts, or constraints explicitly named in the request.
 
 ## Files/folders it may write
@@ -165,7 +165,7 @@ Uncertainty: [only if access is thin or meaning is unclear]
 Next action: [first reading action]
 ```
 
-Use the optional Suggested next step policy in `docs/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless a follow-on skill reduces a named scholarly risk.
+Use the optional Suggested next step policy in `docs/policy/AUTO_SELECTION_GUARDRAILS.md`; it may be omitted unless a follow-on skill reduces a named scholarly risk.
 
 Use `Close-reading targets`, `Skim targets`, and `Park or skip` only when those sections add value beyond the triage table and reading plan. Omit them in compact output unless the user asks.
 

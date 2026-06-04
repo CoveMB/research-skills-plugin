@@ -1,6 +1,6 @@
 # Workflow playbook
 
-Use this playbook when you know the project stage and need the next concrete artifact. For the staged architecture, see `docs/ARCHITECTURE.md`. For route names and outputs, see `MODE_REGISTRY.md`.
+Use this playbook when you know the project stage and need the next concrete artifact. For the staged architecture, see `docs/reference/ARCHITECTURE.md`. For route names and outputs, see `MODE_REGISTRY.md`.
 
 ## Compact output option
 

@@ -9,9 +9,9 @@ This package is organized as a book-length research workflow, not a loose set of
 - Check the quality gates before moving from planning to drafting or from drafting to audit.
 - Use `MODE_REGISTRY.md` as the short routing reference.
 - Use `shared/contracts/book/book_artifact.schema.json` when JSON artifacts are requested or examples are changed.
-- Use `docs/PROCESS_PASSPORT.md` when a durable artifact is handed to another skill, reviewer, gate, release step, or submission workflow.
-- Use `docs/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` when a source set is used to imply coverage, balance, consensus, novelty, or missing literature.
-- Use `docs/SKILL_README_TEMPLATE.md` when adding or refreshing skill README files.
+- Use `docs/policy/PROCESS_PASSPORT.md` when a durable artifact is handed to another skill, reviewer, gate, release step, or submission workflow.
+- Use `docs/policy/CORPUS_REPRESENTATIVENESS_TAXONOMY.md` when a source set is used to imply coverage, balance, consensus, novelty, or missing literature.
+- Use `docs/templates/SKILL_README_TEMPLATE.md` when adding or refreshing skill README files.
 
 ## Pipeline flow
 

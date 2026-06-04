@@ -32,7 +32,7 @@ completeness or independent scholarly truth beyond the recorded human review.
 The inactive templates contain placeholders. They are examples of structure, not
 scholarly claims.
 
-See `docs/GOLDSET_INTAKE_WORKFLOW.md` for the human-guided workflow from source
+See `docs/evaluation/GOLDSET_INTAKE_WORKFLOW.md` for the human-guided workflow from source
 discovery through fixture activation.
 
 ## Activation Rules

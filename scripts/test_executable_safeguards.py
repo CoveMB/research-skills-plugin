@@ -470,7 +470,7 @@ class TestExecutableSafeguards(unittest.TestCase):
     def test_plugin_utils_exposes_shared_skill_policy_snippets(self) -> None:
         plugin_utils = load_module("plugin_utils.py")
 
-        self.assertIn("docs/SOURCE_LIMITS.md", plugin_utils.SOURCE_LIMITS_POLICY_SENTENCE)
+        self.assertIn("docs/policy/SOURCE_LIMITS.md", plugin_utils.SOURCE_LIMITS_POLICY_SENTENCE)
         self.assertIn("Suggested next step", plugin_utils.SUGGESTED_NEXT_STEP_POLICY_SENTENCE)
         self.assertIn("source_basis", plugin_utils.PROVENANCE_FIELDS)
         self.assertIn("Use `skill-name` to [specific next action].", plugin_utils.SUGGESTED_NEXT_STEP_TEMPLATE_PHRASES)
@@ -479,7 +479,7 @@ class TestExecutableSafeguards(unittest.TestCase):
             "When the user explicitly asks for JSON or a contract artifact, use "
             "`shared/contracts/book/book_artifact.schema.json` with `artifact_type: chapter_brief`. "
             "If the output is normal Markdown, do not force the JSON contract. "
-            "For durable handoff artifacts, follow `docs/PROCESS_PASSPORT.md`: "
+            "For durable handoff artifacts, follow `docs/policy/PROCESS_PASSPORT.md`: "
             "set `handoff_artifact: true`, include `process_passport`, and "
             "preserve upstream passport limits instead of upgrading verification.",
         )
