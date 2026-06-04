@@ -1,0 +1,32 @@
+{
+  "capture_mode": "manual-live-capture",
+  "date": "2026-06-04",
+  "external_lookup_permitted": false,
+  "fixture_id": "unsupported-causal-claim",
+  "interface": "codex-cli",
+  "model": "gpt-5.5",
+  "network_permissions": "none",
+  "operator": "fresh codex exec blind process",
+  "output_file": "unsupported-causal-claim.md",
+  "output_sha256": "19e27acbe4fd37bafd400e01b03581d2da7c535c92016d01cdbfd8e6d2d0b315",
+  "prompt_packet_sha256": "8860d025958e86f9e952fa3a630be119bf4bdba4828338e8f376f82fbf1a67b3",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "methodology-source-auditor",
+  "skill_file": "skills/methodology-source-auditor/SKILL.md",
+  "skill_file_sha256": "a797b92614d3cc3d4c73ac4f245b5d5a29a18c7f5adcb4bdbd17f0577ed2ff84",
+  "source_packet": "corpora/unsupported-causal-claim/source-packet.md",
+  "source_packet_sha256": "421187cc133111293fa325d2e946306474ad81b4643a4ef35e47fce3ed476499",
+  "structured_result": {
+    "decision": "Cannot support",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "output_captured": true,
+    "private_material_submitted": false,
+    "selected_skill": "methodology-source-auditor",
+    "skill_invoked": true,
+    "source_access_level": "controlled-packet",
+    "source_packet_supplied": true
+  },
+  "tool_permissions": "none"
+}

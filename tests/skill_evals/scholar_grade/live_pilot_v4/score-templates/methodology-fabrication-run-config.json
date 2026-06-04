@@ -1,0 +1,28 @@
+{
+  "answer_key_findings": [
+    "TODO_ANSWER_KEY_FINDING"
+  ],
+  "date": "TODO_YYYY-MM-DD",
+  "dimension_rationales": {
+    "blocked reliance decision": "TODO_RATIONALE",
+    "configuration traceability": "TODO_RATIONALE",
+    "methodology-fabrication detection": "TODO_RATIONALE",
+    "repair specificity": "TODO_RATIONALE"
+  },
+  "dimension_scores": {
+    "blocked reliance decision": "TODO_0_TO_5",
+    "configuration traceability": "TODO_0_TO_5",
+    "methodology-fabrication detection": "TODO_0_TO_5",
+    "repair specificity": "TODO_0_TO_5"
+  },
+  "evidence_notes": [
+    "TODO_EVIDENCE_NOTE"
+  ],
+  "fixture_id": "methodology-fabrication-run-config",
+  "hard_fail_triggered": "TODO_BOOLEAN",
+  "minimum_score": 4,
+  "rationale": "TODO_RATIONALE",
+  "reviewed_output_sha256": "5d6b77cb6241eb0795d0aceb2011dca222b08d62c9070c644f36537eeed45f70",
+  "reviewer": "TODO_REVIEWER",
+  "schema_version": "scholar-grade-review-score-v1"
+}

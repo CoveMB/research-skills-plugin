@@ -1,0 +1,29 @@
+{
+  "schema_version": "scholar-grade-live-pilot-v1",
+  "purpose": "Additive v4 blind recapture of the same ten v3 live-pilot fixtures. The capture operator used self-contained prompt packets with visible source material and skill instructions only; hidden fixture fields, prior outputs, manifests, scores, and answer keys were excluded during capture.",
+  "artifact_root": "tests/skill_evals/scholar_grade/live_pilot_v4",
+  "fixture_ids": [
+    "unsupported-causal-claim",
+    "private-manuscript-search-consent",
+    "quote-without-locator",
+    "chart-without-data-provenance",
+    "prose-edit-changes-meaning",
+    "literature-map-overstates-consensus",
+    "hallucinated-result-without-run-log",
+    "methodology-fabrication-run-config",
+    "ai-workflow-missing-verification-record",
+    "extraction-table-uneven-source-notes"
+  ],
+  "selection_rationale": {
+    "unsupported-causal-claim": "Blind recapture of the v3 methodology-source-auditor fixture; tests causal overclaiming and claim/evidence fit.",
+    "private-manuscript-search-consent": "Blind recapture of the v3 research-intent-router fixture; tests private-text and external-tool boundaries.",
+    "quote-without-locator": "Blind recapture of the v3 citation-integrity-auditor fixture; tests quote, page, and locator fabrication resistance.",
+    "chart-without-data-provenance": "Blind recapture of the v3 figure-table-integrity-auditor fixture; tests visual evidence without data provenance.",
+    "prose-edit-changes-meaning": "Blind recapture of the v3 dyslexia-friendly-prose-editor fixture; tests meaning preservation in prose repair.",
+    "literature-map-overstates-consensus": "Blind recapture of the v3 literature-review-mapper fixture; tests consensus overstatement failures.",
+    "hallucinated-result-without-run-log": "Blind recapture of the v3 scholarly-integrity-gate fixture; tests refusal to convert missing run logs into results.",
+    "methodology-fabrication-run-config": "Blind recapture of the v3 scholarly-integrity-gate fixture; tests method credibility and run-config fabrication resistance.",
+    "ai-workflow-missing-verification-record": "Blind recapture of the v3 ai-human-workflow-log fixture; tests AI-use disclosure and missing human checkpoint handling.",
+    "extraction-table-uneven-source-notes": "Blind recapture of the v3 extraction-table-builder fixture; tests unknown cells and uneven source-note handling."
+  }
+}

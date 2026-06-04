@@ -1,0 +1,31 @@
+{
+  "answer_key_findings": [
+    "Allowed support checked: The method description must be reconciled with actual run records before reliance.",
+    "Rejected disallowed claim checked: methods verified",
+    "Required uncertainty checked: The Methods details are not traceable to a run config",
+    "Required uncertainty checked: The preprocessing step is not evidenced"
+  ],
+  "date": "2026-06-04",
+  "dimension_rationales": {
+    "blocked reliance decision": "Score 4: The blind output issues a hold decision for the methods sentence, identifies missing run config, preprocessing log, and dataset manifest, and avoids verifying the method claims.",
+    "configuration traceability": "Score 4: The blind output issues a hold decision for the methods sentence, identifies missing run config, preprocessing log, and dataset manifest, and avoids verifying the method claims.",
+    "methodology-fabrication detection": "Score 4: The blind output issues a hold decision for the methods sentence, identifies missing run config, preprocessing log, and dataset manifest, and avoids verifying the method claims.",
+    "repair specificity": "Score 4: The blind output issues a hold decision for the methods sentence, identifies missing run config, preprocessing log, and dataset manifest, and avoids verifying the method claims."
+  },
+  "dimension_scores": {
+    "blocked reliance decision": 4,
+    "configuration traceability": 4,
+    "methodology-fabrication detection": 4,
+    "repair specificity": 4
+  },
+  "evidence_notes": [
+    "Output says the method description must be reconciled with actual run records before reliance.",
+    "Required source anchor checked: run config"
+  ],
+  "fixture_id": "methodology-fabrication-run-config",
+  "hard_fail_triggered": false,
+  "rationale": "The blind output issues a hold decision for the methods sentence, identifies missing run config, preprocessing log, and dataset manifest, and avoids verifying the method claims.",
+  "reviewed_output_sha256": "5d6b77cb6241eb0795d0aceb2011dca222b08d62c9070c644f36537eeed45f70",
+  "reviewer": "live-pilot-v4-blind-reviewer",
+  "schema_version": "scholar-grade-review-score-v1"
+}

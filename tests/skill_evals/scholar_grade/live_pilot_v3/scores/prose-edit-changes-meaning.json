@@ -1,0 +1,29 @@
+{
+  "answer_key_findings": [
+    "Allowed support checked: The revised passage may soften unsupported causal wording.",
+    "Rejected disallowed claim checked: meaning unchanged without ambiguity",
+    "Required uncertainty checked: The causal verb changes the claim strength"
+  ],
+  "date": "2026-06-04",
+  "dimension_rationales": {
+    "accessibility": "Score 4 for accessibility: reviewed output satisfies the fixture requirement while staying inside the visible source basis.",
+    "ambiguity visibility": "Score 4 for ambiguity visibility: reviewed output satisfies the fixture requirement while staying inside the visible source basis.",
+    "claim-strength preservation": "Score 4 for claim-strength preservation: reviewed output satisfies the fixture requirement while staying inside the visible source basis.",
+    "meaning preservation": "Score 4 for meaning preservation: reviewed output satisfies the fixture requirement while staying inside the visible source basis."
+  },
+  "dimension_scores": {
+    "accessibility": 4,
+    "ambiguity visibility": 4,
+    "claim-strength preservation": 4,
+    "meaning preservation": 4
+  },
+  "evidence_notes": [
+    "Reviewed output evidence includes required source anchor: causal verb changes the claim strength"
+  ],
+  "fixture_id": "prose-edit-changes-meaning",
+  "hard_fail_triggered": false,
+  "rationale": "The capture repairs the prose while making the causal-strength ambiguity visible and preserving the evidence limit.",
+  "reviewed_output_sha256": "08320d7167d42687384615e0531ca9b491d07d9d1a8900d0d7b7a6e2f8018ea1",
+  "reviewer": "live-pilot-v3-reviewer",
+  "schema_version": "scholar-grade-review-score-v1"
+}

@@ -1,0 +1,32 @@
+{
+  "capture_mode": "manual-live-capture",
+  "date": "2026-06-04",
+  "external_lookup_permitted": false,
+  "fixture_id": "chart-without-data-provenance",
+  "interface": "codex-cli",
+  "model": "gpt-5.5",
+  "network_permissions": "none",
+  "operator": "fresh codex exec blind process",
+  "output_file": "chart-without-data-provenance.md",
+  "output_sha256": "5194e740fc038ac8c1e9aeb816aefe50bcfc1e223666e7d4872786fd42f72f3c",
+  "prompt_packet_sha256": "997e43cc4d58aca94887d1fbb46e8b702003bbf0ed427c1beeceb1ace98123c7",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "figure-table-integrity-auditor",
+  "skill_file": "skills/figure-table-integrity-auditor/SKILL.md",
+  "skill_file_sha256": "41b3d406670214c1bd206951f301565a35133564a0816f8155715244c60ece39",
+  "source_packet": "corpora/chart-without-data-provenance/source-packet.md",
+  "source_packet_sha256": "90b17336c28e5ba4e80a85edf24c10832f96a250a4e198f5821b159c241c5a0d",
+  "structured_result": {
+    "decision": "Hold visual evidence claim",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "output_captured": true,
+    "private_material_submitted": false,
+    "selected_skill": "figure-table-integrity-auditor",
+    "skill_invoked": true,
+    "source_access_level": "controlled-packet",
+    "source_packet_supplied": true
+  },
+  "tool_permissions": "none"
+}

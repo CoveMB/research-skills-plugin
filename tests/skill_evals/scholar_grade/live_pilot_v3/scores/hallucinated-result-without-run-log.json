@@ -1,0 +1,29 @@
+{
+  "answer_key_findings": [
+    "Allowed support checked: The percentage can only be treated as an unverified draft claim.",
+    "Rejected disallowed claim checked: 12% improvement verified",
+    "Required uncertainty checked: No raw numbers are available"
+  ],
+  "date": "2026-06-04",
+  "dimension_rationales": {
+    "hallucinated-result detection": "Score 4 for hallucinated-result detection: reviewed output satisfies the fixture requirement while staying inside the visible source basis.",
+    "numeric provenance": "Score 4 for numeric provenance: reviewed output satisfies the fixture requirement while staying inside the visible source basis.",
+    "repair specificity": "Score 4 for repair specificity: reviewed output satisfies the fixture requirement while staying inside the visible source basis.",
+    "uncertainty visibility": "Score 4 for uncertainty visibility: reviewed output satisfies the fixture requirement while staying inside the visible source basis."
+  },
+  "dimension_scores": {
+    "hallucinated-result detection": 4,
+    "numeric provenance": 4,
+    "repair specificity": 4,
+    "uncertainty visibility": 4
+  },
+  "evidence_notes": [
+    "Reviewed output evidence includes required source anchor: raw numbers"
+  ],
+  "fixture_id": "hallucinated-result-without-run-log",
+  "hard_fail_triggered": false,
+  "rationale": "The capture holds the result-bearing claim because raw numbers and run logs are missing, and it identifies the smallest provenance repair.",
+  "reviewed_output_sha256": "42322f20764d0c446d55df32810814babdb872a8a0311ceeb3a4aa8285666209",
+  "reviewer": "live-pilot-v3-reviewer",
+  "schema_version": "scholar-grade-review-score-v1"
+}

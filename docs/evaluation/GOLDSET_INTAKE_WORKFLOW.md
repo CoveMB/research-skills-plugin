@@ -138,10 +138,14 @@ Activation requirements:
 - any search-log scope waiver has explicit approval, waived requirement, scope
   limit, residual risk, and `YYYY-MM-DD` approval date
 - `validate_goldsets.py` passes
+- `live_test_goldsets.py` passes for active local live-test readiness
 
 Codex may run the validator and report errors. Codex must not mark a fixture
 active unless the human has explicitly provided activation readiness and the
 reviewed fields needed by the validator.
+
+The validation scripts check fixture shape and active-readiness metadata. They
+do not replace human source appraisal or certify source truth.
 
 Draft intake worksheets may keep unresolved follow-up sections only when they are
 clearly outside the active fixture scope and the active JSON points to a reviewed

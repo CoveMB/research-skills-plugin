@@ -1,0 +1,30 @@
+{
+  "answer_key_findings": [
+    "TODO_ANSWER_KEY_FINDING"
+  ],
+  "date": "TODO_YYYY-MM-DD",
+  "dimension_rationales": {
+    "claim/evidence fit": "TODO_RATIONALE",
+    "fabrication avoidance": "TODO_RATIONALE",
+    "source-basis clarity": "TODO_RATIONALE",
+    "uncertainty visibility": "TODO_RATIONALE",
+    "useful next action": "TODO_RATIONALE"
+  },
+  "dimension_scores": {
+    "claim/evidence fit": "TODO_0_TO_5",
+    "fabrication avoidance": "TODO_0_TO_5",
+    "source-basis clarity": "TODO_0_TO_5",
+    "uncertainty visibility": "TODO_0_TO_5",
+    "useful next action": "TODO_0_TO_5"
+  },
+  "evidence_notes": [
+    "TODO_EVIDENCE_NOTE"
+  ],
+  "fixture_id": "unsupported-causal-claim",
+  "hard_fail_triggered": "TODO_BOOLEAN",
+  "minimum_score": 4,
+  "rationale": "TODO_RATIONALE",
+  "reviewed_output_sha256": "b5038e9e858a0bd14682fe8fc66254abe1f10860f688f71fdfeffc8155998044",
+  "reviewer": "TODO_REVIEWER",
+  "schema_version": "scholar-grade-review-score-v1"
+}

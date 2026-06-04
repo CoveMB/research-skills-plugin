@@ -1,0 +1,29 @@
+{
+  "answer_key_findings": [
+    "Allowed support checked: The chart can be treated as a draft visual pending data provenance.",
+    "Rejected disallowed claim checked: data provenance complete",
+    "Required uncertainty checked: The underlying dataset is missing"
+  ],
+  "date": "2026-06-04",
+  "dimension_rationales": {
+    "blocked reliance decision": "Score 4 for blocked reliance decision: reviewed output satisfies the fixture requirement while staying inside the visible source basis.",
+    "caption and axis review": "Score 4 for caption and axis review: reviewed output satisfies the fixture requirement while staying inside the visible source basis.",
+    "data provenance clarity": "Score 4 for data provenance clarity: reviewed output satisfies the fixture requirement while staying inside the visible source basis.",
+    "visual evidence discipline": "Score 4 for visual evidence discipline: reviewed output satisfies the fixture requirement while staying inside the visible source basis."
+  },
+  "dimension_scores": {
+    "blocked reliance decision": 4,
+    "caption and axis review": 4,
+    "data provenance clarity": 4,
+    "visual evidence discipline": 4
+  },
+  "evidence_notes": [
+    "Reviewed output evidence includes required source anchor: no dataset or transformation log"
+  ],
+  "fixture_id": "chart-without-data-provenance",
+  "hard_fail_triggered": false,
+  "rationale": "The capture treats the chart as draft only, names missing data provenance and calculation basis, and blocks empirical reliance.",
+  "reviewed_output_sha256": "b988603fa4b9b49f77a010c039ca8ea6819817022382be5bc33460d41b9f1bdc",
+  "reviewer": "live-pilot-v3-reviewer",
+  "schema_version": "scholar-grade-review-score-v1"
+}

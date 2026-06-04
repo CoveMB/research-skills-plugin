@@ -1,0 +1,31 @@
+{
+  "answer_key_findings": [
+    "Allowed support checked: The packet can suggest provisional camps for further mapping.",
+    "Rejected disallowed claim checked: field consensus is established",
+    "Required uncertainty checked: The packet is too small for field consensus",
+    "Required uncertainty checked: No systematic search log is provided"
+  ],
+  "date": "2026-06-04",
+  "dimension_rationales": {
+    "consensus restraint": "Score 4: The blind output maps the supplied positions as provisional, repeatedly rejects field-consensus claims, and lists corpus gaps and source-set limits.",
+    "gap visibility": "Score 4: The blind output maps the supplied positions as provisional, repeatedly rejects field-consensus claims, and lists corpus gaps and source-set limits.",
+    "literature-map caution": "Score 4: The blind output maps the supplied positions as provisional, repeatedly rejects field-consensus claims, and lists corpus gaps and source-set limits.",
+    "thesis-use limits": "Score 4: The blind output maps the supplied positions as provisional, repeatedly rejects field-consensus claims, and lists corpus gaps and source-set limits."
+  },
+  "dimension_scores": {
+    "consensus restraint": 4,
+    "gap visibility": 4,
+    "literature-map caution": 4,
+    "thesis-use limits": 4
+  },
+  "evidence_notes": [
+    "Output says no field-level consensus can be claimed and labels the corpus thin, partial, unknown coverage, and convenience corpus.",
+    "Required source anchor checked: three synthetic notes"
+  ],
+  "fixture_id": "literature-map-overstates-consensus",
+  "hard_fail_triggered": false,
+  "rationale": "The blind output maps the supplied positions as provisional, repeatedly rejects field-consensus claims, and lists corpus gaps and source-set limits.",
+  "reviewed_output_sha256": "fcbbe2c84aeae4ba2ba33bb1b2adec98b03fab62dbd12e3fe5ccf502f5b87bc1",
+  "reviewer": "live-pilot-v4-blind-reviewer",
+  "schema_version": "scholar-grade-review-score-v1"
+}

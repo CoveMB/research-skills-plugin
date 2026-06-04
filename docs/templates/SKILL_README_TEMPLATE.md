@@ -28,6 +28,7 @@ Use skill-name to [specific task].
 Describe the main output. Note that follow-up suggestions are optional, risk-gated.
 For low-load or accessibility-facing skills, say whether the output should prefer tables, short chunks, or ambiguity flags.
 If compact output is supported, describe it as an output shape, not a route mode. Require a visible `How to use this result` line with a short status and a full-sentence reliance limit, and say when to escalate from compact output to full review.
+If the skill can produce durable artifacts for downstream reuse, remind users to add `handoff_artifact: true` and a `process_passport` following `docs/policy/PROCESS_PASSPORT.md` when the artifact is saved, handed to another skill, sent to a reviewer, or used in a release/submission workflow.
 
 ## Procedure
 

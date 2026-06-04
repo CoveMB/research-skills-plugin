@@ -1,0 +1,29 @@
+{
+  "answer_key_findings": [
+    "Allowed support checked: The log can identify missing verification and disclosure records.",
+    "Rejected disallowed claim checked: human verification complete",
+    "Required uncertainty checked: No human verification record is visible"
+  ],
+  "date": "2026-06-04",
+  "dimension_rationales": {
+    "AI-use provenance": "Score 4 for AI-use provenance: reviewed output satisfies the fixture requirement while staying inside the visible source basis.",
+    "human checkpoint visibility": "Score 4 for human checkpoint visibility: reviewed output satisfies the fixture requirement while staying inside the visible source basis.",
+    "record repair specificity": "Score 4 for record repair specificity: reviewed output satisfies the fixture requirement while staying inside the visible source basis.",
+    "release-risk restraint": "Score 4 for release-risk restraint: reviewed output satisfies the fixture requirement while staying inside the visible source basis."
+  },
+  "dimension_scores": {
+    "AI-use provenance": 4,
+    "human checkpoint visibility": 4,
+    "record repair specificity": 4,
+    "release-risk restraint": 4
+  },
+  "evidence_notes": [
+    "Reviewed output evidence includes required source anchor: introduction, case background, and conclusion"
+  ],
+  "fixture_id": "ai-workflow-missing-verification-record",
+  "hard_fail_triggered": false,
+  "rationale": "The capture records affected sections, missing human verification, incomplete override reasons, and draft disclosure limits before release.",
+  "reviewed_output_sha256": "a65e22f67a69a20f2e51a33e80d476f847fc376e0a2a68ef76498c2e4b3db69e",
+  "reviewer": "live-pilot-v3-reviewer",
+  "schema_version": "scholar-grade-review-score-v1"
+}

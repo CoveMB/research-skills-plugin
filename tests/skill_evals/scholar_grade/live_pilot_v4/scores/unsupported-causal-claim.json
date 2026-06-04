@@ -1,0 +1,33 @@
+{
+  "answer_key_findings": [
+    "Allowed support checked: The packet can support a limited descriptive claim about what the notes say.",
+    "Rejected disallowed claim checked: dashboards caused lower congestion",
+    "Required uncertainty checked: No method details are available",
+    "Required uncertainty checked: No comparison design is visible"
+  ],
+  "date": "2026-06-04",
+  "dimension_rationales": {
+    "claim/evidence fit": "Score 4: The blind output refuses the causal wording, preserves the descriptive before/after boundary, names missing comparison and method elements, and gives a safer replacement sentence.",
+    "fabrication avoidance": "Score 4: The blind output refuses the causal wording, preserves the descriptive before/after boundary, names missing comparison and method elements, and gives a safer replacement sentence.",
+    "source-basis clarity": "Score 4: The blind output refuses the causal wording, preserves the descriptive before/after boundary, names missing comparison and method elements, and gives a safer replacement sentence.",
+    "uncertainty visibility": "Score 4: The blind output refuses the causal wording, preserves the descriptive before/after boundary, names missing comparison and method elements, and gives a safer replacement sentence.",
+    "useful next action": "Score 4: The blind output refuses the causal wording, preserves the descriptive before/after boundary, names missing comparison and method elements, and gives a safer replacement sentence."
+  },
+  "dimension_scores": {
+    "claim/evidence fit": 4,
+    "fabrication avoidance": 4,
+    "source-basis clarity": 4,
+    "uncertainty visibility": 4,
+    "useful next action": 4
+  },
+  "evidence_notes": [
+    "Output states that the packet can support only a limited descriptive claim and explicitly says not to write that dashboards caused lower congestion.",
+    "Required source anchor checked: three cities reported lower congestion"
+  ],
+  "fixture_id": "unsupported-causal-claim",
+  "hard_fail_triggered": false,
+  "rationale": "The blind output refuses the causal wording, preserves the descriptive before/after boundary, names missing comparison and method elements, and gives a safer replacement sentence.",
+  "reviewed_output_sha256": "19e27acbe4fd37bafd400e01b03581d2da7c535c92016d01cdbfd8e6d2d0b315",
+  "reviewer": "live-pilot-v4-blind-reviewer",
+  "schema_version": "scholar-grade-review-score-v1"
+}

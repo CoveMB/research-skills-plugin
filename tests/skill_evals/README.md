@@ -299,7 +299,7 @@ python3 scripts/run_package_checks.py --scope live-pilot-v2
 
 The v2 pilot lives under `tests/skill_evals/scholar_grade/live_pilot_v2/` and runs strict calibration after validating its live outputs, manifests, and review scores. Use this explicit scope when the v2 live captures are expected to match the current skill files.
 
-After skill instruction changes, do not overwrite historical v2 captures whose manifest skill hashes no longer match current skill files. Use `tests/skill_evals/scholar_grade/live_pilot_v3/` as an additive recapture plan for the stale v2 subset. Its calibration report is intentionally non-strict until real captured outputs, manifests, and review scores have been recorded. The same non-strict v3 status check is part of `python3 scripts/run_package_checks.py --scope full`, while the strict v2 gate remains available as `--scope live-pilot-v2`:
+After skill instruction changes, do not overwrite historical v2 captures whose manifest skill hashes no longer match current skill files. Use `tests/skill_evals/scholar_grade/live_pilot_v3/` as the completed additive recapture root for the stale v2 subset. Its strict calibration check is part of `python3 scripts/run_package_checks.py --scope full`, while the historical v2 gate remains available as `--scope live-pilot-v2`:
 
 ```bash
 python3 scripts/run_package_checks.py --scope live-pilot-v3
@@ -332,7 +332,7 @@ Generate the pilot calibration report:
 python3 tests/skill_evals/scholar_grade/live_pilot_calibration.py --format markdown
 ```
 
-After all pilot artifacts are recorded, add `--strict` to fail on missing captures, harness validation errors, or live review scores that regress below deterministic baseline scores.
+After all pilot artifacts are recorded, add `--strict` to fail on missing captures, harness validation errors, or live review scores that regress below deterministic baseline scores. The v3 pilot already runs strict calibration through `python3 scripts/run_package_checks.py --scope live-pilot-v3`.
 
 Report inter-rater agreement and repeated live-run stability:
 

@@ -262,16 +262,25 @@ Durable cross-skill artifacts should set `handoff_artifact: true` and include `p
 
 ```text
 .
-  plugin manifest directory/plugin.json
+  .codex-plugin/
+    plugin.json
   docs/
-    ARCHITECTURE.md
-    SKILL_INDEX.md
-    WORKFLOW_PLAYBOOK.md
-    QUALITY_STANDARD.md
+    evaluation/
+    policy/
+      QUALITY_STANDARD.md
+    reference/
+      ARCHITECTURE.md
+      SCRIPTS.md
+    templates/
+    user/
+      SKILL_INDEX.md
+      WORKFLOW_PLAYBOOK.md
   examples/
     book_artifacts/
+    figure_table_provenance/
   scripts/
     check_book_artifact_contract.py
+    run_package_checks.py
     validate_plugin.py
   shared/
     contracts/book/book_artifact.schema.json

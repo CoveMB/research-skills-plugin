@@ -37,6 +37,19 @@ PILOT_FIXTURE_IDS = (
     "extraction-table-uneven-source-notes",
 )
 
+PILOT_V3_FIXTURE_IDS = (
+    "unsupported-causal-claim",
+    "private-manuscript-search-consent",
+    "quote-without-locator",
+    "chart-without-data-provenance",
+    "prose-edit-changes-meaning",
+    "literature-map-overstates-consensus",
+    "hallucinated-result-without-run-log",
+    "methodology-fabrication-run-config",
+    "ai-workflow-missing-verification-record",
+    "extraction-table-uneven-source-notes",
+)
+
 
 def fixture_id_args(fixture_ids: tuple[str, ...]) -> tuple[str, ...]:
     return tuple(argument for fixture_id in fixture_ids for argument in ("--fixture-id", fixture_id))
@@ -73,6 +86,7 @@ LIVE_PILOT_V3_CALIBRATION_CHECK = (
     "tests/skill_evals/scholar_grade/live_pilot_v3/fixture-ids.json",
     "--live-root",
     "tests/skill_evals/scholar_grade/live_pilot_v3",
+    "--strict",
     "--quiet",
 )
 
@@ -222,7 +236,21 @@ LIVE_PILOT_V2_CHECKS = (
 )
 
 LIVE_PILOT_V3_CHECKS = (
-    LIVE_PILOT_V3_REPORT_CHECK,
+    (
+        "tests/skill_evals/scholar_grade/scholar_grade_eval_harness.py",
+        "--fixtures",
+        "tests/skill_evals/scholar_grade/fixtures.json",
+        "--outputs-dir",
+        "tests/skill_evals/scholar_grade/live_pilot_v3/outputs",
+        "--manifests-dir",
+        "tests/skill_evals/scholar_grade/live_pilot_v3/manifests",
+        "--scores-dir",
+        "tests/skill_evals/scholar_grade/live_pilot_v3/scores",
+        *fixture_id_args(PILOT_V3_FIXTURE_IDS),
+        "--require-live-captures",
+        "--quiet",
+    ),
+    LIVE_PILOT_V3_CALIBRATION_CHECK,
 )
 
 
@@ -288,7 +316,7 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
             "Use install for pre-install checks, full for source-checkout validation, "
             "package for validation that works from a packaged or installed copy without repo-only tests, "
             "live-pilot for the original pilot report, live-pilot-v2 for the strict calibrated pilot, "
-            "live-pilot-v3 for the planned recapture report, "
+            "live-pilot-v3 for the strict calibrated recapture pilot, "
             "scholar-mutation for evaluator sensitivity mutations, "
             "real-goldsets for active real-source gold-set live-test readiness, "
             "or live for recorded live skill captures."

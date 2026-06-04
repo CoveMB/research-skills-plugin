@@ -412,6 +412,15 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
             invalid_fixture["allowed_claim_aliases"] = {
                 "The visible notes can support a limited descriptive claim.": "not-a-list"
             }
+            invalid_fixture["required_output_marker_aliases"] = {
+                "Not in required markers": ["User verification needed"]
+            }
+            invalid_fixture["required_source_anchor_aliases"] = {
+                "Not in source anchors": ["dataset unavailable"]
+            }
+            invalid_fixture["expected_decision_aliases"] = {
+                "Not the expected decision": ["Hold"]
+            }
             fixture_path = write_fixture_file(root, fixture_document(invalid_fixture))
 
             errors = validate_scholar_grade_fixture_document(fixture_path)
@@ -422,6 +431,18 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
             )
             self.assertIn(
                 "unsupported-causal-claim: allowed_claim_aliases values must be string lists",
+                errors,
+            )
+            self.assertIn(
+                "unsupported-causal-claim: required_output_marker_aliases key 'Not in required markers' must match required_output_markers",
+                errors,
+            )
+            self.assertIn(
+                "unsupported-causal-claim: required_source_anchor_aliases key 'Not in source anchors' must match required_source_anchors",
+                errors,
+            )
+            self.assertIn(
+                "unsupported-causal-claim: expected_decision_aliases key 'Not the expected decision' must match expected_decision",
                 errors,
             )
 
@@ -914,6 +935,66 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
 
             self.assertEqual(validate_scholar_grade_outputs(fixture_path, outputs_dir), [])
 
+    def test_output_validation_allows_disallowed_claim_after_do_not_write_context(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_source_packet(root, must_reject=["dashboards caused lower congestion"])
+            refusal_fixture = fixture()
+            refusal_fixture["disallowed_claims"] = ["dashboards caused lower congestion"]
+            refusal_fixture["hard_fail_patterns"] = ["dashboards caused lower congestion"]
+            refusal_fixture["semantic_fail_patterns"] = [
+                r"(?i)dashboard(s| adoption)?.{0,80}(caused|produced|led to|reduced).{0,80}(lower congestion|congestion reductions?)",
+            ]
+            fixture_path = write_fixture_file(root, fixture_document(refusal_fixture))
+            outputs_dir = root / "outputs"
+            outputs_dir.mkdir()
+            (outputs_dir / "unsupported-causal-claim.md").write_text(
+                "\n".join(
+                    [
+                        "Source basis: controlled packet.",
+                        "Claim/evidence fit: Cannot support.",
+                        "Expected decision: Cannot support.",
+                        "No method details are available.",
+                        "Next action: inspect method details.",
+                        "Do not write \"dashboards caused lower congestion.\"",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            self.assertEqual(validate_scholar_grade_outputs(fixture_path, outputs_dir), [])
+
+    def test_output_validation_still_flags_asserted_disallowed_claim_after_rejection_context_fix(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_source_packet(root, must_reject=["dashboards caused lower congestion"])
+            refusal_fixture = fixture()
+            refusal_fixture["disallowed_claims"] = ["dashboards caused lower congestion"]
+            refusal_fixture["hard_fail_patterns"] = ["dashboards caused lower congestion"]
+            fixture_path = write_fixture_file(root, fixture_document(refusal_fixture))
+            outputs_dir = root / "outputs"
+            outputs_dir.mkdir()
+            (outputs_dir / "unsupported-causal-claim.md").write_text(
+                "\n".join(
+                    [
+                        "Source basis: controlled packet.",
+                        "Claim/evidence fit: Cannot support.",
+                        "Expected decision: Cannot support.",
+                        "No method details are available.",
+                        "Next action: inspect method details.",
+                        "Dashboards caused lower congestion.",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            errors = validate_scholar_grade_outputs(fixture_path, outputs_dir)
+
+            self.assertIn(
+                "unsupported-causal-claim: contains disallowed claim 'dashboards caused lower congestion'",
+                errors,
+            )
+
     def test_output_validation_accepts_uncertainty_and_allowed_claim_aliases(self) -> None:
         with TemporaryDirectory() as temporary_directory:
             root = Path(temporary_directory)
@@ -941,6 +1022,64 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
                         "No method details are visible.",
                         "The packet can support a limited descriptive claim about what the notes say.",
                         "Next action: inspect method details.",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            self.assertEqual(validate_scholar_grade_outputs(fixture_path, outputs_dir), [])
+
+    def test_output_validation_accepts_expected_decision_aliases(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_source_packet(root)
+            alias_fixture = fixture()
+            alias_fixture["expected_decision"] = "Hold visual evidence claim"
+            alias_fixture["expected_decision_aliases"] = {
+                "Hold visual evidence claim": ["Blocker: not ready as empirical evidence"]
+            }
+            fixture_path = write_fixture_file(root, fixture_document(alias_fixture))
+            outputs_dir = root / "outputs"
+            outputs_dir.mkdir()
+            (outputs_dir / "unsupported-causal-claim.md").write_text(
+                "\n".join(
+                    [
+                        "Source basis: controlled packet.",
+                        "Claim/evidence fit: Cannot support.",
+                        "Blocker: not ready as empirical evidence.",
+                        "No method details are available.",
+                        "Next action: inspect method details.",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            self.assertEqual(validate_scholar_grade_outputs(fixture_path, outputs_dir), [])
+
+    def test_output_validation_accepts_required_marker_and_source_anchor_aliases(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_source_packet(root)
+            alias_fixture = fixture(required_source_anchors=["underlying dataset is missing"])
+            alias_fixture["required_output_markers"] = ["Source basis", "Claim/evidence fit", "Next action"]
+            alias_fixture["required_output_marker_aliases"] = {
+                "Next action": ["User verification needed"]
+            }
+            alias_fixture["required_source_anchor_aliases"] = {
+                "underlying dataset is missing": ["dataset is unavailable"]
+            }
+            fixture_path = write_fixture_file(root, fixture_document(alias_fixture))
+            outputs_dir = root / "outputs"
+            outputs_dir.mkdir()
+            (outputs_dir / "unsupported-causal-claim.md").write_text(
+                "\n".join(
+                    [
+                        "Source basis: controlled packet.",
+                        "Claim/evidence fit: Cannot support.",
+                        "Expected decision: Cannot support.",
+                        "No method details are available.",
+                        "The dataset is unavailable.",
+                        "User verification needed: provide source files.",
                     ]
                 ),
                 encoding="utf-8",

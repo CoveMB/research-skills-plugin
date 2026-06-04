@@ -1,0 +1,28 @@
+{
+  "answer_key_findings": [
+    "TODO_ANSWER_KEY_FINDING"
+  ],
+  "date": "TODO_YYYY-MM-DD",
+  "dimension_rationales": {
+    "AI-use provenance": "TODO_RATIONALE",
+    "human checkpoint visibility": "TODO_RATIONALE",
+    "record repair specificity": "TODO_RATIONALE",
+    "release-risk restraint": "TODO_RATIONALE"
+  },
+  "dimension_scores": {
+    "AI-use provenance": "TODO_0_TO_5",
+    "human checkpoint visibility": "TODO_0_TO_5",
+    "record repair specificity": "TODO_0_TO_5",
+    "release-risk restraint": "TODO_0_TO_5"
+  },
+  "evidence_notes": [
+    "TODO_EVIDENCE_NOTE"
+  ],
+  "fixture_id": "ai-workflow-missing-verification-record",
+  "hard_fail_triggered": "TODO_BOOLEAN",
+  "minimum_score": 4,
+  "rationale": "TODO_RATIONALE",
+  "reviewed_output_sha256": "7fe539415f631e60171c3ceca36da9557ccf94d9758ea1bf240d12790a70fcca",
+  "reviewer": "TODO_REVIEWER",
+  "schema_version": "scholar-grade-review-score-v1"
+}

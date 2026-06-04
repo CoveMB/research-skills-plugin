@@ -79,6 +79,11 @@ OPTIONAL_STRING_LIST_KEYS = {
 OPTIONAL_ALIAS_MAP_KEYS = {
     "required_uncertainty_aliases": "required_uncertainties",
     "allowed_claim_aliases": "allowed_claims",
+    "required_output_marker_aliases": "required_output_markers",
+    "required_source_anchor_aliases": "required_source_anchors",
+}
+OPTIONAL_SINGLE_VALUE_ALIAS_MAP_KEYS = {
+    "expected_decision_aliases": "expected_decision",
 }
 VALID_SOURCE_ACCESS_LEVELS = {
     "controlled-packet",
@@ -233,9 +238,9 @@ CLAIM_REJECTION_CONTEXT_RE = re.compile(
     r"\b("
     r"cannot\s+support|can't\s+support|can\s+not\s+support|"
     r"does\s+not\s+(?:show|support|establish|verify)|"
-    r"do\s+not\s+(?:use|claim|treat|rely)|"
-    r"should\s+not\s+(?:use|claim|treat|rely)|"
-    r"must\s+not\s+(?:use|claim|treat|rely)|"
+    r"do\s+not\s+(?:use|claim|treat|rely|write|state|say)|"
+    r"should\s+not\s+(?:use|claim|treat|rely|write|state|say)|"
+    r"must\s+not\s+(?:use|claim|treat|rely|write|state|say)|"
     r"not\s+(?:supported|verified|established|evidenced)|"
     r"avoid\s+wording\s+(?:such\s+as|like)|"
     r"unsupported|unverified|insufficient\s+evidence|no\s+evidence"
@@ -340,6 +345,8 @@ def invalid_string_list_errors(fixture: dict[str, Any]) -> list[str]:
             errors.append(f"{fixture_identifier(fixture)}: {key} must be a string list")
     for alias_key, canonical_key in sorted(OPTIONAL_ALIAS_MAP_KEYS.items()):
         errors.extend(invalid_alias_map_errors(fixture, alias_key, canonical_key))
+    for alias_key, canonical_key in sorted(OPTIONAL_SINGLE_VALUE_ALIAS_MAP_KEYS.items()):
+        errors.extend(invalid_single_value_alias_map_errors(fixture, alias_key, canonical_key))
     return errors
 
 
@@ -356,6 +363,28 @@ def invalid_alias_map_errors(fixture: dict[str, Any], alias_key: str, canonical_
     for canonical_value, alias_values in aliases.items():
         if not isinstance(canonical_value, str) or canonical_value not in canonical_values:
             errors.append(f"{identifier}: {alias_key} key {canonical_value!r} must match {canonical_key}")
+        if (
+            not isinstance(alias_values, list)
+            or not alias_values
+            or len(string_list(alias_values)) != len(alias_values)
+        ):
+            errors.append(f"{identifier}: {alias_key} values must be string lists")
+    return errors
+
+
+def invalid_single_value_alias_map_errors(fixture: dict[str, Any], alias_key: str, canonical_key: str) -> list[str]:
+    if alias_key not in fixture:
+        return []
+    aliases = fixture.get(alias_key)
+    identifier = fixture_identifier(fixture)
+    if not isinstance(aliases, dict):
+        return [f"{identifier}: {alias_key} must be an object mapping canonical strings to string lists"]
+
+    errors: list[str] = []
+    canonical_value = fixture.get(canonical_key)
+    for alias_key_value, alias_values in aliases.items():
+        if not isinstance(alias_key_value, str) or alias_key_value != canonical_value:
+            errors.append(f"{identifier}: {alias_key} key {alias_key_value!r} must match {canonical_key}")
         if (
             not isinstance(alias_values, list)
             or not alias_values
@@ -688,7 +717,11 @@ def validate_scholar_grade_fixture_document(fixture_path: Path) -> list[str]:
 
 def expected_decision_errors(fixture: dict[str, Any], output_text: str) -> list[str]:
     expected_decision = str(fixture.get("expected_decision", ""))
-    if expected_decision and normalized_contains(output_text, expected_decision):
+    if expected_decision and contains_phrase_or_alias(
+        output_text,
+        expected_decision,
+        alias_values(fixture, "expected_decision_aliases", expected_decision),
+    ):
         return []
     return [f"{fixture_identifier(fixture)}: missing expected decision {expected_decision!r}"]
 
@@ -697,7 +730,7 @@ def required_marker_errors(fixture: dict[str, Any], output_text: str) -> list[st
     return [
         f"{fixture_identifier(fixture)}: missing required marker {marker!r}"
         for marker in string_list(fixture.get("required_output_markers"))
-        if not normalized_contains(output_text, marker)
+        if not contains_phrase_or_alias(output_text, marker, alias_values(fixture, "required_output_marker_aliases", marker))
     ]
 
 
@@ -705,7 +738,7 @@ def required_source_anchor_errors(fixture: dict[str, Any], output_text: str) -> 
     return [
         f"{fixture_identifier(fixture)}: missing required source anchor {anchor!r}"
         for anchor in string_list(fixture.get("required_source_anchors"))
-        if not normalized_contains(output_text, anchor)
+        if not contains_phrase_or_alias(output_text, anchor, alias_values(fixture, "required_source_anchor_aliases", anchor))
     ]
 
 

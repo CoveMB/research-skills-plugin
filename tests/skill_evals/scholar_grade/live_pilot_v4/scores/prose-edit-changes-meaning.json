@@ -1,0 +1,31 @@
+{
+  "answer_key_findings": [
+    "Allowed support checked: The revised passage may soften unsupported causal wording.",
+    "Rejected disallowed claim checked: meaning unchanged without ambiguity",
+    "Required uncertainty checked: The causal verb changes the claim strength",
+    "Required uncertainty checked: Evidence limits must remain visible"
+  ],
+  "date": "2026-06-04",
+  "dimension_rationales": {
+    "accessibility": "Score 4: The blind output repairs grammar and readability while visibly softening the unsupported causal claim and flagging the changed claim strength for review.",
+    "ambiguity visibility": "Score 4: The blind output repairs grammar and readability while visibly softening the unsupported causal claim and flagging the changed claim strength for review.",
+    "claim-strength preservation": "Score 4: The blind output repairs grammar and readability while visibly softening the unsupported causal claim and flagging the changed claim strength for review.",
+    "meaning preservation": "Score 4: The blind output repairs grammar and readability while visibly softening the unsupported causal claim and flagging the changed claim strength for review."
+  },
+  "dimension_scores": {
+    "accessibility": 4,
+    "ambiguity visibility": 4,
+    "claim-strength preservation": 4,
+    "meaning preservation": 4
+  },
+  "evidence_notes": [
+    "Output provides a revised passage that says the packet does not show that the dashboard lowered congestion.",
+    "Required source anchor checked: causal verb changes the claim strength"
+  ],
+  "fixture_id": "prose-edit-changes-meaning",
+  "hard_fail_triggered": false,
+  "rationale": "The blind output repairs grammar and readability while visibly softening the unsupported causal claim and flagging the changed claim strength for review.",
+  "reviewed_output_sha256": "90a38fff37dd099575e0d00d97a13264aded0e2ca245f567a7940e1d72ca523b",
+  "reviewer": "live-pilot-v4-blind-reviewer",
+  "schema_version": "scholar-grade-review-score-v1"
+}

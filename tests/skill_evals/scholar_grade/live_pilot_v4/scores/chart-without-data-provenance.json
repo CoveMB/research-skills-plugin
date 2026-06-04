@@ -1,0 +1,31 @@
+{
+  "answer_key_findings": [
+    "Allowed support checked: The chart can be treated as a draft visual pending data provenance.",
+    "Rejected disallowed claim checked: data provenance complete",
+    "Required uncertainty checked: The underlying dataset is missing",
+    "Required uncertainty checked: Data provenance is incomplete"
+  ],
+  "date": "2026-06-04",
+  "dimension_rationales": {
+    "blocked reliance decision": "Score 4: The blind output blocks reliance on the chart as empirical evidence, names missing provenance and rights checks, and requires plotted values before accepting the caption claim.",
+    "caption and axis review": "Score 4: The blind output blocks reliance on the chart as empirical evidence, names missing provenance and rights checks, and requires plotted values before accepting the caption claim.",
+    "data provenance clarity": "Score 4: The blind output blocks reliance on the chart as empirical evidence, names missing provenance and rights checks, and requires plotted values before accepting the caption claim.",
+    "visual evidence discipline": "Score 4: The blind output blocks reliance on the chart as empirical evidence, names missing provenance and rights checks, and requires plotted values before accepting the caption claim."
+  },
+  "dimension_scores": {
+    "blocked reliance decision": 4,
+    "caption and axis review": 4,
+    "data provenance clarity": 4,
+    "visual evidence discipline": 4
+  },
+  "evidence_notes": [
+    "Output labels the chart a blocker and says the caption claim is unsupported without data, denominator, date range, and calculation method.",
+    "Required source anchor checked: no dataset or transformation log"
+  ],
+  "fixture_id": "chart-without-data-provenance",
+  "hard_fail_triggered": false,
+  "rationale": "The blind output blocks reliance on the chart as empirical evidence, names missing provenance and rights checks, and requires plotted values before accepting the caption claim.",
+  "reviewed_output_sha256": "5194e740fc038ac8c1e9aeb816aefe50bcfc1e223666e7d4872786fd42f72f3c",
+  "reviewer": "live-pilot-v4-blind-reviewer",
+  "schema_version": "scholar-grade-review-score-v1"
+}

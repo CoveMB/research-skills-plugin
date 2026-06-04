@@ -1,0 +1,29 @@
+{
+  "answer_key_findings": [
+    "Allowed support checked: The table can preserve unknown cells instead of synthesizing across gaps.",
+    "Rejected disallowed claim checked: consensus established",
+    "Required uncertainty checked: Method field is missing for one source"
+  ],
+  "date": "2026-06-04",
+  "dimension_rationales": {
+    "comparison usefulness": "Score 4 for comparison usefulness: reviewed output satisfies the fixture requirement while staying inside the visible source basis.",
+    "extraction restraint": "Score 4 for extraction restraint: reviewed output satisfies the fixture requirement while staying inside the visible source basis.",
+    "synthesis prevention": "Score 4 for synthesis prevention: reviewed output satisfies the fixture requirement while staying inside the visible source basis.",
+    "unknown-cell visibility": "Score 4 for unknown-cell visibility: reviewed output satisfies the fixture requirement while staying inside the visible source basis."
+  },
+  "dimension_scores": {
+    "comparison usefulness": 4,
+    "extraction restraint": 4,
+    "synthesis prevention": 4,
+    "unknown-cell visibility": 4
+  },
+  "evidence_notes": [
+    "Reviewed output evidence includes required source anchor: Sample field is missing for one source"
+  ],
+  "fixture_id": "extraction-table-uneven-source-notes",
+  "hard_fail_triggered": false,
+  "rationale": "The capture preserves unknown cells, avoids synthesizing across missing method and sample fields, and gives one completion step.",
+  "reviewed_output_sha256": "8f211bdf530d8a0be70e7ec29743be5e3981a531252ca4da34dd769789a8b1db",
+  "reviewer": "live-pilot-v3-reviewer",
+  "schema_version": "scholar-grade-review-score-v1"
+}

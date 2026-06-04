@@ -1,0 +1,29 @@
+{
+  "answer_key_findings": [
+    "Allowed support checked: The output may mark the quotation as unusable until a locator is supplied.",
+    "Rejected disallowed claim checked: quote verified",
+    "Required uncertainty checked: The quote locator is missing"
+  ],
+  "date": "2026-06-04",
+  "dimension_rationales": {
+    "citation discipline": "Score 4 for citation discipline: reviewed output satisfies the fixture requirement while staying inside the visible source basis.",
+    "fabrication avoidance": "Score 4 for fabrication avoidance: reviewed output satisfies the fixture requirement while staying inside the visible source basis.",
+    "locator discipline": "Score 4 for locator discipline: reviewed output satisfies the fixture requirement while staying inside the visible source basis.",
+    "repair specificity": "Score 4 for repair specificity: reviewed output satisfies the fixture requirement while staying inside the visible source basis."
+  },
+  "dimension_scores": {
+    "citation discipline": 4,
+    "fabrication avoidance": 4,
+    "locator discipline": 4,
+    "repair specificity": 4
+  },
+  "evidence_notes": [
+    "Reviewed output evidence includes required source anchor: source scan"
+  ],
+  "fixture_id": "quote-without-locator",
+  "hard_fail_triggered": false,
+  "rationale": "The capture holds the direct quote until source text and a locator exist, names the locator gap, and avoids reconstructing citation support.",
+  "reviewed_output_sha256": "16834047a26aacba04656c2fca0c0695012376c10366e80bd77041c8292573b3",
+  "reviewer": "live-pilot-v3-reviewer",
+  "schema_version": "scholar-grade-review-score-v1"
+}

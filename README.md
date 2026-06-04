@@ -190,6 +190,7 @@ The plugin includes a shared book artifact schema at [`shared/contracts/book/boo
 
 - `book-research-agenda.json`
 - `source-discovery-log.json`
+- `source-discovery-log-systematic.json`
 - `literature-map.json`
 - `thesis-tree.json`
 - `chapter-brief.json`
@@ -251,7 +252,7 @@ The package works as a local plugin and as a portable collection of `SKILL.md` f
 
 Skill behavior tests live under [`tests/skill_evals/`](tests/skill_evals/). They are separate from user-facing examples because they are fixtures, controlled source packets, captured outputs, and harness code for evaluating whether skills preserve scholar-grade source discipline.
 
-The suite has two layers:
+The suite has three layers:
 
 - `research_behavior`: deterministic routing and behavior fixtures that check selected-skill route traces, prompt/output trace hashes, captured-output route evidence, required output markers, forbidden claims, and compact-output boundaries.
 - `workflow_traces`: deterministic multi-stage fixtures that bind durable artifacts to SHA-256 hashes and check that tracked claim IDs, unresolved risks, partial-source labels, locator gaps, and human-review requirements survive downstream handoffs.
@@ -261,7 +262,7 @@ The scholar-grade fixtures use synthetic controlled packets with separate hidden
 
 The harness does not run a model or certify source truth. It validates captured outputs, checks semantic fail patterns for paraphrased overclaims, checks run manifests with source/output/skill hashes and manual capture provenance, enforces rubric score thresholds with case-specific evidence notes, enforces fixture coverage for every skill, and produces reviewer scorecards for human or future live-run review.
 
-`live_capture_protocol.py` generates operator-facing prompt packets plus manifest, score, and trace templates for real skill captures without exposing hidden answer keys. Source checkouts run deterministic checks, the calibrated v2 pilot gate, and active real-source gold-set readiness through `./validate.sh`, which uses `scripts/run_package_checks.py --scope full` when `tests/skill_evals` is present. Packaged or installed copies without repo-only test fixtures use the package-safe scope, `python3 scripts/run_package_checks.py --scope package`. The original additive pilot can be reported with `python3 scripts/run_package_checks.py --scope live-pilot`; the current calibrated pilot can be checked directly with `python3 scripts/run_package_checks.py --scope live-pilot-v2`; active real-source MVP cases can be checked with `python3 scripts/run_package_checks.py --scope real-goldsets`. Manual calibration reports use `python3 tests/skill_evals/scholar_grade/live_pilot_calibration.py --format markdown`. Full recorded live captures can be checked separately with `python3 scripts/run_package_checks.py --scope live` after every scholar-grade manifest has real live capture metadata. The full live scope is expected to fail against the shipped deterministic-reference manifests.
+`live_capture_protocol.py` generates operator-facing prompt packets plus manifest, score, and trace templates for real skill captures without exposing hidden answer keys. Source checkouts run deterministic checks, the calibrated v3 pilot gate, and active real-source gold-set readiness through `./validate.sh`, which uses `scripts/run_package_checks.py --scope full` when `tests/skill_evals` is present. Packaged or installed copies without repo-only test fixtures use the package-safe scope, `python3 scripts/run_package_checks.py --scope package`. The original additive pilot can be reported with `python3 scripts/run_package_checks.py --scope live-pilot`; the current calibrated recapture pilot can be checked directly with `python3 scripts/run_package_checks.py --scope live-pilot-v3`; active real-source MVP cases can be checked with `python3 scripts/run_package_checks.py --scope real-goldsets`. Manual calibration reports use `python3 tests/skill_evals/scholar_grade/live_pilot_calibration.py --format markdown`. Full recorded live captures can be checked separately with `python3 scripts/run_package_checks.py --scope live` after every scholar-grade manifest has real live capture metadata. The full live scope is expected to fail against the shipped deterministic-reference manifests.
 
 ## Validate
 
@@ -290,8 +291,11 @@ python3 scripts/check_workflow_traceability.py --trace tests/skill_evals/workflo
 python3 tests/skill_evals/scholar_grade/scholar_grade_eval_harness.py --fixtures tests/skill_evals/scholar_grade/fixtures.json --outputs-dir tests/skill_evals/scholar_grade/outputs --manifests-dir tests/skill_evals/scholar_grade/manifests --scores-dir tests/skill_evals/scholar_grade/scores --quiet
 python3 tests/skill_evals/scholar_grade/live_capture_protocol.py --fixtures tests/skill_evals/scholar_grade/fixtures.json --root . --check
 python3 tests/skill_evals/scholar_grade/live_pilot_calibration.py --quiet
-python3 tests/skill_evals/scholar_grade/live_pilot_calibration.py --pilot-plan tests/skill_evals/scholar_grade/live_pilot_v2/fixture-ids.json --live-root tests/skill_evals/scholar_grade/live_pilot_v2 --strict --quiet
+python3 tests/skill_evals/scholar_grade/live_pilot_calibration.py --pilot-plan tests/skill_evals/scholar_grade/live_pilot_v3/fixture-ids.json --live-root tests/skill_evals/scholar_grade/live_pilot_v3 --strict --quiet
+python3 tests/skill_evals/scholar_grade/real_goldsets/validate_goldsets.py
+python3 tests/skill_evals/scholar_grade/real_goldsets/live_test_goldsets.py --quiet
 python3 scripts/check_source_candidates.py --input tests/skill_evals/source-candidates.json --quiet
+python3 scripts/check_figure_table_provenance.py --input examples/figure_table_provenance/valid-provenance.json --quiet
 python3 -m unittest discover -s scripts -p 'test_*.py'
 python3 -m unittest discover -s tests -p 'test_*.py'
 ```

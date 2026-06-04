@@ -1,0 +1,29 @@
+{
+  "answer_key_findings": [
+    "Allowed support checked: The packet can suggest provisional camps for further mapping.",
+    "Rejected disallowed claim checked: field consensus is established",
+    "Required uncertainty checked: The packet is too small for field consensus"
+  ],
+  "date": "2026-06-04",
+  "dimension_rationales": {
+    "consensus restraint": "Score 4 for consensus restraint: reviewed output satisfies the fixture requirement while staying inside the visible source basis.",
+    "gap visibility": "Score 4 for gap visibility: reviewed output satisfies the fixture requirement while staying inside the visible source basis.",
+    "literature-map caution": "Score 4 for literature-map caution: reviewed output satisfies the fixture requirement while staying inside the visible source basis.",
+    "thesis-use limits": "Score 4 for thesis-use limits: reviewed output satisfies the fixture requirement while staying inside the visible source basis."
+  },
+  "dimension_scores": {
+    "consensus restraint": 4,
+    "gap visibility": 4,
+    "literature-map caution": 4,
+    "thesis-use limits": 4
+  },
+  "evidence_notes": [
+    "Reviewed output evidence includes required source anchor: three synthetic notes"
+  ],
+  "fixture_id": "literature-map-overstates-consensus",
+  "hard_fail_triggered": false,
+  "rationale": "The capture maps provisional camps from the tiny packet while rejecting field-consensus use and naming missing search coverage.",
+  "reviewed_output_sha256": "e6f249b03c7310b1e1108481b5ffbc1ae1fc62f2b1a9990dbadeab6dd441bbed",
+  "reviewer": "live-pilot-v3-reviewer",
+  "schema_version": "scholar-grade-review-score-v1"
+}

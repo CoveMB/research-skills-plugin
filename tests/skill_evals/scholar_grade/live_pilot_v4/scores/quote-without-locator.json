@@ -1,0 +1,31 @@
+{
+  "answer_key_findings": [
+    "Allowed support checked: The output may mark the quotation as unusable until a locator is supplied.",
+    "Rejected disallowed claim checked: quote verified",
+    "Required uncertainty checked: The quote locator is missing",
+    "Required uncertainty checked: The quote text has not been verified against a source"
+  ],
+  "date": "2026-06-04",
+  "dimension_rationales": {
+    "citation discipline": "Score 4: The blind output holds the direct quote, identifies missing locator/source text, and gives repair steps without verifying or reconstructing the quotation.",
+    "fabrication avoidance": "Score 4: The blind output holds the direct quote, identifies missing locator/source text, and gives repair steps without verifying or reconstructing the quotation.",
+    "locator discipline": "Score 4: The blind output holds the direct quote, identifies missing locator/source text, and gives repair steps without verifying or reconstructing the quotation.",
+    "repair specificity": "Score 4: The blind output holds the direct quote, identifies missing locator/source text, and gives repair steps without verifying or reconstructing the quotation."
+  },
+  "dimension_scores": {
+    "citation discipline": 4,
+    "fabrication avoidance": 4,
+    "locator discipline": 4,
+    "repair specificity": 4
+  },
+  "evidence_notes": [
+    "Output says the quote text has not been verified and asks for a stable locator before use.",
+    "Required source anchor checked: source scan"
+  ],
+  "fixture_id": "quote-without-locator",
+  "hard_fail_triggered": false,
+  "rationale": "The blind output holds the direct quote, identifies missing locator/source text, and gives repair steps without verifying or reconstructing the quotation.",
+  "reviewed_output_sha256": "d88a46c597adb9f75a5d832d703c6447e6a01b4ebf1116f78755e36e1d1cbfe0",
+  "reviewer": "live-pilot-v4-blind-reviewer",
+  "schema_version": "scholar-grade-review-score-v1"
+}

@@ -1,0 +1,32 @@
+{
+  "capture_mode": "manual-live-capture",
+  "date": "2026-06-04",
+  "external_lookup_permitted": false,
+  "fixture_id": "prose-edit-changes-meaning",
+  "interface": "codex-cli",
+  "model": "gpt-5.5",
+  "network_permissions": "none",
+  "operator": "fresh codex exec blind process",
+  "output_file": "prose-edit-changes-meaning.md",
+  "output_sha256": "90a38fff37dd099575e0d00d97a13264aded0e2ca245f567a7940e1d72ca523b",
+  "prompt_packet_sha256": "24d408df8940a67c25938a54e8418edfad544a8018bbc384ea8471527ea20b1f",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "dyslexia-friendly-prose-editor",
+  "skill_file": "skills/dyslexia-friendly-prose-editor/SKILL.md",
+  "skill_file_sha256": "3279b09b8a246f3c46a765639ef5c1672b18299db49b32a0dbb81fb479500564",
+  "source_packet": "corpora/prose-edit-changes-meaning/source-packet.md",
+  "source_packet_sha256": "18eb3f41ed4102dd15878646a976aa3b01c16916636c2165dc0447342fcb0c99",
+  "structured_result": {
+    "decision": "Repair wording without changing claim strength",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "output_captured": true,
+    "private_material_submitted": false,
+    "selected_skill": "dyslexia-friendly-prose-editor",
+    "skill_invoked": true,
+    "source_access_level": "controlled-packet",
+    "source_packet_supplied": true
+  },
+  "tool_permissions": "none"
+}

@@ -1,0 +1,32 @@
+{
+  "capture_mode": "manual-live-capture",
+  "date": "2026-06-04",
+  "external_lookup_permitted": false,
+  "fixture_id": "quote-without-locator",
+  "interface": "codex-cli",
+  "model": "gpt-5.5",
+  "network_permissions": "none",
+  "operator": "fresh codex exec blind process",
+  "output_file": "quote-without-locator.md",
+  "output_sha256": "d88a46c597adb9f75a5d832d703c6447e6a01b4ebf1116f78755e36e1d1cbfe0",
+  "prompt_packet_sha256": "4b591f017f8ec8567193df2fac1794c8d874b50c51f231a06f00b831f8c224e5",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "citation-integrity-auditor",
+  "skill_file": "skills/citation-integrity-auditor/SKILL.md",
+  "skill_file_sha256": "98c8f8e70a23bf14a77e0862a0423acbd3075dc9943e10aa0da30467012188ed",
+  "source_packet": "corpora/quote-without-locator/source-packet.md",
+  "source_packet_sha256": "fcbf338f5a3f546d9c304cd53ee0e6752a5805dbdf7234cfb0905e27368b0971",
+  "structured_result": {
+    "decision": "Hold locator-dependent quotation claims",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "output_captured": true,
+    "private_material_submitted": false,
+    "selected_skill": "citation-integrity-auditor",
+    "skill_invoked": true,
+    "source_access_level": "controlled-packet",
+    "source_packet_supplied": true
+  },
+  "tool_permissions": "none"
+}
