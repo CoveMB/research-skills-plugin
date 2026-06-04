@@ -37,26 +37,27 @@ source truth.
 ### Final Gold Critique Sources
 
 - `candidate-grossman-2023-five-premises`
-  - Access state: open-access full text reviewed from attached PDF; DOI
-    publisher page also available.
+  - Access state: open-access full text reviewed during MVP intake; repository
+    no longer stores the local PDF copy; DOI publisher page also available.
   - Current role: final gold critique source.
   - Use limit: central critique evidence for core physiological and evolutionary
     premises; not a stand-alone verdict on all PVT uses.
 - `candidate-grossman-2024-rsa`
-  - Access state: open-access full text reviewed from attached PDF; DOI
-    publisher page also available.
+  - Access state: open-access full text reviewed during MVP intake; repository
+    no longer stores the local PDF copy; DOI publisher page also available.
   - Current role: final gold RSA methodology and measurement-caveat source.
   - Use limit: central measurement-caveat evidence; not a stand-alone verdict on
     all mechanisms or clinical applications.
 - `candidate-grossman-2026-untenable`
-  - Access state: open-access full text reviewed from attached PDF; publisher
-    page also available through DOI.
+  - Access state: open-access full text reviewed during MVP intake; repository
+    no longer stores the local PDF copy; publisher page also available through
+    DOI.
   - Current role: final gold critique and commentary source.
   - Use limit: central critique evidence; not a formal field-wide consensus
     process.
 - `candidate-taylor-wang-leite-2022-cardiorespiratory-phylogeny`
-  - Access state: open-access full text reviewed from attached PDF; DOI
-    publisher page also available.
+  - Access state: open-access full text reviewed during MVP intake; repository
+    no longer stores the local PDF copy; DOI publisher page also available.
   - Current role: final gold comparative physiology and evolutionary-mechanism
     critique source.
   - Use limit: comparative physiology source; not a psychotherapy,
@@ -65,25 +66,26 @@ source truth.
 ### Acceptable Author-Side And Clinical-Adjacent Sources
 
 - `candidate-porges-2025-current-status`
-  - Access state: open-access full text reviewed from local PDF; DOI publisher
-    page also available.
+  - Access state: open-access full text reviewed during MVP intake; repository
+    no longer stores the local PDF copy; DOI publisher page also available.
   - Current role: acceptable author-side review and defense source.
   - Use limit: represents Porges's current framing; not independent validation.
 - `candidate-porges-2025-journey`
-  - Access state: open-access full text reviewed from attached PDF; DOI
-    publisher page also available.
+  - Access state: open-access full text reviewed during MVP intake; repository
+    no longer stores the local PDF copy; DOI publisher page also available.
   - Current role: acceptable author-side theory articulation source.
   - Use limit: represents Porges's current Frontiers framing; not stand-alone
     proof that contested claims are correct.
 - `candidate-porges-2026-response`
-  - Access state: open-access full text reviewed from attached PDF; publisher
-    page also available through DOI.
+  - Access state: open-access full text reviewed during MVP intake; repository
+    no longer stores the local PDF copy; publisher page also available through
+    DOI.
   - Current role: acceptable author response and rebuttal source.
   - Use limit: represents Porges's rebuttal and clarifications; not independent
     validation or field consensus.
 - `candidate-poli-2021-contemplative-review`
-  - Access state: open-access full text reviewed from attached PDF; DOI
-    publisher page also available.
+  - Access state: open-access full text reviewed during MVP intake; repository
+    no longer stores the local PDF copy; DOI publisher page also available.
   - Current role: acceptable preliminary clinical-adjacent systematic review.
   - Use limit: useful for clinical-adjacent preliminary evidence and
     methodological caution; not mechanistic validation of PVT.

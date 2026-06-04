@@ -4,6 +4,8 @@ This directory is the next additive live-capture root after skill instruction ch
 
 The v3 subset in `fixture-ids.json` contains only the v2 fixtures whose recorded `skill_file_sha256` no longer matches the current skill file. The unchanged v2 fixtures remain historical live-capture evidence and do not need to be copied into this root.
 
+Generated operator packets and manifest, score, and trace templates are checked in under `capture_protocol/`. They are capture setup artifacts only; completed outputs, manifests, and review scores must still come from a fresh live/manual capture and human review.
+
 Generate operator prompt packets for just this subset into a temporary directory:
 
 ```bash

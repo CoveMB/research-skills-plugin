@@ -94,16 +94,16 @@ provisional_role: author-side review/defense candidate, not independent validati
 intake_metadata_ref: goldset_intake.md source_id candidate-porges-2025-current-status
 doi: 10.36131/cnfioritieditore20250301
 review_link: https://doi.org/10.36131/cnfioritieditore20250301
-PDF: Clinical25-3_correzione articolo Porges.pdf
+Former local PDF: Clinical25-3_correzione articolo Porges.pdf
 appraisal_status: human_reviewed
 reviewer_source_decision: acceptable
-access_status: open-access full text reviewed from local PDF Clinical25-3_correzione articolo Porges.pdf; DOI publisher page also available; attached PDF 11_Porges_Clinical26-1.pdf is the 2026 response and was not used for this 2025 record
-full_text_reviewed: yes for machine-assisted draft extraction; human reviewer should verify against PDF
+access_status: open-access full text reviewed during MVP intake; repository no longer stores the local PDF copy; DOI publisher page also available; the reviewed 2026 response record is separate and was not used for this 2025 record
+full_text_reviewed: yes for machine-assisted draft extraction; future human verification should use the DOI/publisher page or a separately obtained full text
 can_support: Porges's current author-side articulation of Polyvagal Theory as an evolutionarily informed, systems-level framework; Porges's framing of hierarchical autonomic state regulation, the ventral vagal complex/social engagement system, neuroception, co-regulation, dorsal-vagal defensive states, and dissolution; Porges's author-side claims about RSA, vagal efficiency, and weighted coherence as autonomic metrics; Porges's clinical and translational framing across trauma, chronic pain or functional disorders, autism or neurodevelopmental conditions, mood disorders, development or attachment, education, public health, and systems design; Porges's responses to critiques about popularization, falsifiability, anatomical specificity, and RSA/respiration interpretation
 cannot_support: independent validation, field consensus, or proof that contested PVT mechanisms are settled; proof that clinical applications are empirically established or PVT-specific; proof that RSA, vagal efficiency, or weighted coherence are accepted direct biomarkers by independent physiology literature; proof that critiques by Grossman, Taylor, Neuhuber, Berthoud, Doody, or others are refuted; proof that clinical uptake validates the theory's physiological mechanisms
-must_remain_uncertain: whether Porges's clarifications resolve independent critiques; whether independent neuroanatomy, comparative physiology, RSA methodology, or clinical-intervention sources support the specific mechanisms claimed; whether clinical usefulness establishes PVT-specific mechanisms; whether the field broadly accepts the theory; exact page range because local PDF and citation metadata conflict
-source_limits: author-side invited paper and narrative/theory review; not independent adjudication, systematic review, meta-analysis, formal consensus statement, or clinical-practice guideline; local PDF header lists Clinical Neuropsychiatry 22(3), 169-184 while the citation block lists 22(3), 175-191, so cite by DOI until reconciled; use to represent Porges's position and programmatic claims, not as stand-alone evidence that those claims are correct
-reviewer_notes: Machine-assisted draft from the matched 2025 PDF for human review. Useful as an author-position source for comparing Porges's current claims against critiques. The user-attached 11_Porges_Clinical26-1.pdf is the 2026 rebuttal, so this entry was filled from the locally found 2025 PDF instead. Pair with Grossman et al. 2026, Porges 2026 response, and independent anatomy/RSA/comparative-physiology/clinical sources before using in the claim matrix.
+must_remain_uncertain: whether Porges's clarifications resolve independent critiques; whether independent neuroanatomy, comparative physiology, RSA methodology, or clinical-intervention sources support the specific mechanisms claimed; whether clinical usefulness establishes PVT-specific mechanisms; whether the field broadly accepts the theory; exact page range because the reviewed PDF copy and citation metadata conflict
+source_limits: author-side invited paper and narrative/theory review; not independent adjudication, systematic review, meta-analysis, formal consensus statement, or clinical-practice guideline; reviewed PDF header lists Clinical Neuropsychiatry 22(3), 169-184 while the citation block lists 22(3), 175-191, so cite by DOI until reconciled; use to represent Porges's position and programmatic claims, not as stand-alone evidence that those claims are correct
+reviewer_notes: Machine-assisted draft from a matched 2025 PDF for human review. Useful as an author-position source for comparing Porges's current claims against critiques. The 2026 response is a separate record and was not used for this 2025 entry. Pair with Grossman et al. 2026, Porges 2026 response, and independent anatomy/RSA/comparative-physiology/clinical sources before using in the claim matrix.
 
 ### candidate-porges-2025-journey
 
@@ -113,11 +113,11 @@ provisional_role: author-side theory-articulation or clinical-insight candidate
 intake_metadata_ref: goldset_intake.md source_id candidate-porges-2025-journey
 doi: 10.3389/fnbeh.2025.1659083
 review_link: https://doi.org/10.3389/fnbeh.2025.1659083
-PDF: fnbeh-19-1659083.pdf
+Former local PDF: fnbeh-19-1659083.pdf
 appraisal_status: human_reviewed
 reviewer_source_decision: acceptable
-access_status: open-access full text reviewed from attached PDF fnbeh-19-1659083.pdf; DOI publisher page also available
-full_text_reviewed: yes for machine-assisted draft extraction; human reviewer should verify against PDF
+access_status: open-access full text reviewed during MVP intake; repository no longer stores the local PDF copy; DOI publisher page also available
+full_text_reviewed: yes for machine-assisted draft extraction; future human verification should use the DOI/publisher page or a separately obtained full text
 can_support: Porges's author-side 2025 Frontiers articulation of PVT as an integrative autonomic-regulation model; Porges's current framing of PVT's historical development from HRV/RSA observations to neural innervation, hierarchical autonomic state regulation, neuroception, social engagement, and clinical translation; Porges's claims that RSA is a functional output of myelinated ventral vagal/nucleus ambiguus pathways rather than a mere respiratory artifact; Porges's claims about the Porges-Bohrer RSA method, vagal efficiency, weighted coherence, transcriptomic/neuropeptidergic extensions, and clinical/translational applications including SSP, Rest and Restore, VNS, and polyvagal-informed therapies; Porges's author-side responses to critiques by Grossman, Taylor, and collaborators, including claims that critiques misrepresent PVT's assertions about mammalian RSA, cardiorespiratory coupling, sympathetic involvement, and empirical support
 cannot_support: independent adjudication of contested claims; field consensus; proof that PVT's mechanistic, evolutionary, RSA, transcriptomic, or clinical claims are settled; proof that Grossman, Taylor, Neuhuber, Berthoud, Doody, or other critiques are refuted; clinical efficacy or mechanism validation for SSP, Rest and Restore, VNS, or polyvagal-informed therapies; neutral evidence synthesis, systematic review, meta-analysis, or guideline-level support
 must_remain_uncertain: whether independent RSA methodology, neuroanatomy, comparative physiology, transcriptomics, and clinical-intervention sources support Porges's claims; whether non-mammalian cardiorespiratory coupling is best treated as merely analogous rather than homologous to mammalian RSA; whether Porges's critique responses accurately represent opposing sources; whether PVT's clinical applications exceed the available evidence; whether broad uptake in clinical settings indicates usefulness, mechanistic validity, both, or neither
@@ -132,15 +132,15 @@ provisional_role: author response/rebuttal candidate
 intake_metadata_ref: goldset_intake.md source_id candidate-porges-2026-response
 doi: 10.36131/cnfioritieditore20260111
 review_link: https://doi.org/10.36131/cnfioritieditore20260111
-PDF: 11_Porges_Clinical26-1.pdf
+Former local PDF: 11_Porges_Clinical26-1.pdf
 appraisal_status: human_reviewed
 reviewer_source_decision: acceptable
-access_status: open-access full text reviewed from attached PDF 11_Porges_Clinical26-1.pdf; publisher page also available through DOI
-full_text_reviewed: yes for machine-assisted draft extraction; human reviewer should verify against PDF
+access_status: open-access full text reviewed during MVP intake; repository no longer stores the local PDF copy; publisher page also available through DOI
+full_text_reviewed: yes for machine-assisted draft extraction; future human verification should use the DOI/publisher page or a separately obtained full text
 can_support: Porges's author-side rebuttal to Grossman et al. 2026; Porges's current framing that PVT is a systems-level, pathway-specific framework with proposed falsifiability conditions; Porges's claim that critiques mischaracterize PVT by treating it as anatomical exclusivity, global vagal tone, or recapitulationist evolution; Porges's argument that disagreement over RSA metrics, comparative anatomy, or evolutionary framing does not by itself falsify PVT unless it engages the theory's specified mechanisms
 cannot_support: independent validation of the theory
 must_remain_uncertain: whether Porges's clarifications resolve independent critiques; whether the broader field accepts Porges's framing; whether PVT-specific mechanisms are empirically established; whether clinical or translational usefulness claims are supported independently of author-side interpretation
-source_limits: author response/rebuttal; not independent adjudication; use to represent Porges's position and clarifications, not field consensus or mechanism validation; page range 113-128 in local PDF; competing-interest statement points to Porges 2025 Clinical Neuropsychiatry paper
+source_limits: author response/rebuttal; not independent adjudication; use to represent Porges's position and clarifications, not field consensus or mechanism validation; page range 113-128 in the reviewed PDF copy; competing-interest statement points to Porges 2025 Clinical Neuropsychiatry paper
 reviewer_notes: Machine-assisted draft from full PDF extraction for human review. Useful for testing whether an answer acknowledges author-side responses without treating them as independent validation. Pair with Grossman et al. 2026 and independent anatomy/RSA/comparative-physiology sources before using in claim matrix.
 
 ### candidate-austin-riniolo-porges-2007-bpd
@@ -205,11 +205,11 @@ provisional_role: systematic review / preliminary clinical-adjacent evidence can
 intake_metadata_ref: goldset_intake.md source_id candidate-poli-2021-contemplative-review
 doi: 10.3390/ijerph182211778
 review_link: https://doi.org/10.3390/ijerph182211778
-PDF: A Systematic Review of a Polyvagal Perspective on Embodied Contemplative Practices.pdf
+Former local PDF: A Systematic Review of a Polyvagal Perspective on Embodied Contemplative Practices.pdf
 appraisal_status: human_reviewed
 reviewer_source_decision: acceptable
-access_status: open-access full text reviewed from attached PDF A Systematic Review of a Polyvagal Perspective on Embodied Contemplative Practices.pdf; DOI publisher page also available
-full_text_reviewed: yes for machine-assisted draft extraction; human reviewer should verify against PDF
+access_status: open-access full text reviewed during MVP intake; repository no longer stores the local PDF copy; DOI publisher page also available
+full_text_reviewed: yes for machine-assisted draft extraction; future human verification should use the DOI/publisher page or a separately obtained full text
 can_support: systematic-review source showing that some clinical-adjacent contemplative-practice literature is explicitly framed through a Polyvagal perspective; evidence that Poli et al. searched PubMed and Scopus using PRISMA 2020 procedures and AMSTAR-2 appraisal; evidence that only six articles met inclusion criteria, with mixed designs including cross-sectional, pre-post, cohort, RCT, and RCT-protocol material; support for the limited claim that some included PTSD/OCD mindfulness-related studies reported parasympathetic activity, increased vagal-tone or HRV-related measures, symptom improvements, or neural findings compatible with a PVT interpretation; support for using this source as an example that PVT-framed clinical-adjacent evidence is preliminary, heterogeneous, and methodologically limited
 cannot_support: strong validation of PVT; proof that mindfulness, compassion meditation, or contemplative practices activate the ventral vagal complex as a demonstrated mechanism; proof that RSA/HRV directly measures VVC activation or safety; strong treatment-efficacy claims for PTSD or OCD; general trauma-therapy validation; SSP or acoustic-intervention claims; field consensus; direct adjudication of PVT's anatomical, evolutionary, dorsal-vagal, or RSA-measurement controversies
 must_remain_uncertain: whether the included studies' physiological outcomes actually support PVT-specific mechanisms rather than broader autonomic or clinical effects; how much weight to give findings from small, uncontrolled, underpowered, or protocol-only studies; whether medication, respiration, expectancy, intervention heterogeneity, or other confounds explain observed HRV/RSA or symptom changes; whether later reviews or trials confirm, weaken, or supersede this 2021 evidence base; whether this source should be cited as acceptable background or kept only as a decoy-resistance example of preliminary clinical translation
@@ -278,16 +278,16 @@ provisional_role: major critique / actively contested candidate
 intake_metadata_ref: goldset_intake.md source_id candidate-grossman-2023-five-premises
 doi: 10.1016/j.biopsycho.2023.108589
 review_link: https://doi.org/10.1016/j.biopsycho.2023.108589
-PDF: Fundamental challenges and likely refutations of the five basic premises of the polyvagal theory.pdf
+Former local PDF: Fundamental challenges and likely refutations of the five basic premises of the polyvagal theory.pdf
 appraisal_status: human_reviewed
 reviewer_source_decision: gold
-access_status: open-access full text reviewed from attached PDF Fundamental challenges and likely refutations of the five basic premises of the polyvagal theory.pdf; DOI publisher page also available
-full_text_reviewed: yes for machine-assisted draft extraction; human reviewer should verify against PDF
+access_status: open-access full text reviewed during MVP intake; repository no longer stores the local PDF copy; DOI publisher page also available
+full_text_reviewed: yes for machine-assisted draft extraction; future human verification should use the DOI/publisher page or a separately obtained full text
 can_support: major single-author review critique of five stated basic premises of PVT; critique that PVT depends heavily on RSA as the main noninvasive index of vagal processes; critique that RSA is an imperfect, indirect, and condition-dependent marker of cardiac vagal tone rather than general vagal tone; critique that dorsal motor nucleus mediation of massive bradycardia, vasovagal syncope, emotional freezing, or trauma-related dissociation is unsupported; critique that nA-mediated cardiac vagal control, myelinated cardiac vagal fibers, and RSA-like cardiorespiratory interactions are not uniquely mammalian; critique that broad claims about mammalian autonomic repurposing for sociality are not supported by comparative biology; critique that emotion, facial expression, vocalization, bronchomotor tone, RSA, and cardiac vagal tone cannot be reduced to a single nucleus ambiguus or vagal mechanism; evidence that Grossman frames the five physiological premises as falsified or highly implausible, while relying on cited physiology/comparative-biology literature rather than new empirical data
 cannot_support: formal field-wide consensus process; dismissal of all clinical metaphors; proof that every body-based or autonomic clinical practice is invalid; proof that broad autonomic regulation or cardiac vagal physiology is irrelevant to emotion or behavior; direct evidence about therapy efficacy, trauma treatment, SSP, or clinical outcomes; independent adjudication of Porges's later 2025 and 2026 clarifications without reading those paired sources; proof that critiques of physiological premises automatically refute all weaker clinical or metaphorical uses of PVT
 must_remain_uncertain: whether Grossman's five-premise framing fully captures current PVT formulations; whether later Porges clarifications change the appraisal of specific claims; whether critiques of core physiological premises invalidate weaker clinical or metaphorical uses; whether the article's statements about expert consensus should be treated as a critic's synthesis rather than a formal consensus process; which component findings about autonomic regulation remain supported outside PVT-specific mechanisms; how to weight this 2023 single-author critique against Grossman et al. 2026, Porges 2025/2026, and independent neuroanatomy/RSA/comparative-physiology sources
 source_limits: single-author review/critique, not a systematic review, meta-analysis, Delphi panel, professional-society statement, clinical-practice guideline, or original empirical study; use as central critique evidence for core physiological and evolutionary premises, not as a stand-alone final verdict on all PVT uses; article is Biological Psychology 180, Article 108589, DOI 10.1016/j.biopsycho.2023.108589
-reviewer_notes: Machine-assisted draft from full PDF extraction for human review. This refreshes the entry from the newly attached Grossman 2023 PDF. Central critique source for testing whether the skill avoids treating PVT-specific RSA, dorsal/ventral vagal, evolutionary, and sociality claims as settled. Short extracted anchors for reviewer verification: "category mistake"; "no credible evidence"; "not a direct measure". Pair with Grossman et al. 2026, Porges 2025 current-status, Porges 2026 response, and independent neuroanatomy/RSA/comparative-physiology sources before using in the claim matrix.
+reviewer_notes: Machine-assisted draft from full-text extraction for human review. Central critique source for testing whether the skill avoids treating PVT-specific RSA, dorsal/ventral vagal, evolutionary, and sociality claims as settled. Short extracted anchors for reviewer verification: "category mistake"; "no credible evidence"; "not a direct measure". Pair with Grossman et al. 2026, Porges 2025 current-status, Porges 2026 response, and independent neuroanatomy/RSA/comparative-physiology sources before using in the claim matrix.
 
 ### candidate-grossman-2024-rsa
 
@@ -297,11 +297,11 @@ provisional_role: RSA methodology / measurement caveats candidate
 intake_metadata_ref: goldset_intake.md source_id candidate-grossman-2024-rsa
 doi: 10.1016/j.biopsycho.2023.108739
 review_link: https://doi.org/10.1016/j.biopsycho.2023.108739
-PDF: Respiratory sinus arrhythmia (RSA), vagal tone and biobehavioral integration- Beyond parasympathetic function.pdf
+Former local PDF: Respiratory sinus arrhythmia (RSA), vagal tone and biobehavioral integration- Beyond parasympathetic function.pdf
 appraisal_status: human_reviewed
 reviewer_source_decision: gold
-access_status: open-access full text reviewed from attached PDF Respiratory sinus arrhythmia (RSA), vagal tone and biobehavioral integration- Beyond parasympathetic function.pdf; DOI publisher page also available
-full_text_reviewed: yes for machine-assisted draft extraction; human reviewer should verify against PDF
+access_status: open-access full text reviewed during MVP intake; repository no longer stores the local PDF copy; DOI publisher page also available
+full_text_reviewed: yes for machine-assisted draft extraction; future human verification should use the DOI/publisher page or a separately obtained full text
 can_support: major RSA-methodology review and conceptual critique; support that RSA is not equivalent to, nor a direct or invariably reliable measure of, cardiac vagal tone or central vagal outflow; support that RSA is at best an imperfect indirect proxy of cardiac vagal effects on heart rate, not whole-body vagal tone; support caveats including respiration rate and volume, cardiac aliasing, abrupt bradycardia, hypercapnia, beta-adrenergic sympathetic effects, central-vagal-output versus final cardiac-effect ambiguity, local cardiac influences, mechanical effects, ageing, and weak between-person validity; support that respiratory-circulatory and behavioral integration are central to RSA's adaptive meaning; support interpreting RSA as an evolutionarily entrenched cardiorespiratory and biobehavioral coordination phenomenon rather than merely a parasympathetic index
 cannot_support: direct adjudication of all PVT clinical claims; proof that RSA is useless or meaningless; proof that all broad autonomic-regulation findings are invalid; proof that clinical interventions validate or fail to validate PVT; formal field consensus; clinical efficacy, trauma-therapy, or SSP claims; page-specific claims about sources cited by this review without checking those sources directly
 must_remain_uncertain: how much of RSA's clinical usefulness survives each caveat in a given study design; whether specific PVT claims about ventral vagal pathways, social engagement, or clinical interventions are supported by independent evidence; whether individual empirical studies adequately controlled respiration, sympathetic tone, and context; how to weight this RSA-focused critique against Porges's RSA-specific rebuttals and newer direct-measurement work
@@ -316,11 +316,11 @@ provisional_role: multi-author expert critique/commentary candidate
 intake_metadata_ref: goldset_intake.md source_id candidate-grossman-2026-untenable
 doi: 10.36131/cnfioritieditore20260110
 review_link: https://doi.org/10.36131/cnfioritieditore20260110
-PDF: 10_Grossmanetal_Clinical26-1.pdf
+Former local PDF: 10_Grossmanetal_Clinical26-1.pdf
 appraisal_status: human_reviewed
 reviewer_source_decision: gold
-access_status: open-access full text reviewed from attached PDF 10_Grossmanetal_Clinical26-1.pdf; publisher page also available through DOI
-full_text_reviewed: yes for machine-assisted draft extraction; human reviewer should verify against PDF
+access_status: open-access full text reviewed during MVP intake; repository no longer stores the local PDF copy; publisher page also available through DOI
+full_text_reviewed: yes for machine-assisted draft extraction; future human verification should use the DOI/publisher page or a separately obtained full text
 can_support: major multi-author expert critique of PVT's core physiological and evolutionary premises; critique that RSA/respiratory heart-rate variability should not be treated as a direct or consistently reliable measure of central vagal outflow, cardiac vagal tone, or general vagal activity; critique of PVT dorsal/ventral vagal pathway mapping, sequential autonomic ladder, and dorsal vagal shutdown claims in humans; critique of mammalian-uniqueness and sociality/evolution claims, including claims about myelinated vagal fibers and cardiorespiratory coupling; distinction that psychological and clinical concepts associated with PVT may predate PVT and may have value apart from PVT's proposed physiological framework
 cannot_support: formal field-wide consensus process; proof that every clinical or metaphorical use of PVT is useless; proof that broad autonomic regulation, HRV/RSA, trauma physiology, or body-based clinical work are invalid; independent adjudication of Porges's rebuttal without reading the paired response
 must_remain_uncertain: whether the article's expert critique should be treated as formal field consensus; whether weaker clinical or metaphorical versions of PVT retain usefulness; which specific PVT claims survive when separated from strong mechanistic and evolutionary claims; how Porges's 2026 response addresses or reframes these objections
@@ -407,16 +407,16 @@ provisional_role: comparative physiology / evolutionary-mechanism critique candi
 intake_metadata_ref: goldset_intake.md source_id candidate-taylor-wang-leite-2022-cardiorespiratory-phylogeny
 doi: 10.1016/j.biopsycho.2022.108382
 review_link: https://doi.org/10.1016/j.biopsycho.2022.108382
-PDF: An overview of the phylogeny of cardiorespiratory control in vertebrates with some reflections on the ‘Polyvagal Theory’ .pdf
+Former local PDF: An overview of the phylogeny of cardiorespiratory control in vertebrates with some reflections on the ‘Polyvagal Theory’ .pdf
 appraisal_status: human_reviewed
 reviewer_source_decision: gold
-access_status: open-access full text reviewed from attached PDF An overview of the phylogeny of cardiorespiratory control in vertebrates with some reflections on the ‘Polyvagal Theory’ .pdf; DOI publisher page also available
-full_text_reviewed: yes for machine-assisted draft extraction; human reviewer should verify against PDF
+access_status: open-access full text reviewed during MVP intake; repository no longer stores the local PDF copy; DOI publisher page also available
+full_text_reviewed: yes for machine-assisted draft extraction; future human verification should use the DOI/publisher page or a separately obtained full text
 can_support: comparative-physiology review evidence that vagal control of heart rate, heart-rate variability, and cardiorespiratory interactions are distributed across vertebrate phylogeny rather than uniquely mammalian; critique of strong PVT mammalian-uniqueness claims about RSA-like cardiorespiratory interactions, myelinated cardiac vagal efferent fibres, and a uniquely mammalian ventral vagal/nucleus ambiguus pathway; evidence synthesis that representatives of all vertebrate groups show inhibitory vagal tonus and respiration-related phasic vagal modulation of heart rate; evidence synthesis that CRI similar to RSA has been identified in air-breathing vertebrates including birds, snakes, lizards, toads, and lungfish; evidence synthesis that myelinated fast-conducting cardiac vagal fibres have been described in shark, bony fish, lungfish, birds, and mammals; distinction that mammalian RSA may be phylogenetically rooted in earlier cardiorespiratory interaction systems rather than a wholly novel mammalian social-engagement mechanism
 cannot_support: full refutation of every PVT claim or clinical application; direct adjudication of whether the vagus nerve supports social engagement, calming, or socializing in humans; clinical usefulness or therapeutic efficacy claims; trauma-therapy claims; formal field-wide consensus; proof that all broad autonomic regulation findings are invalid; proof that all PVT reformulations fail after accounting for comparative physiology limits
 must_remain_uncertain: whether PVT's social-engagement or clinical claims survive when separated from strong mammalian-uniqueness claims; whether later Porges formulations can accommodate the comparative physiology evidence; which exact neural generators produce RSA-like cardiorespiratory interactions in every non-mammalian group where mechanisms remain partly putative; whether RSA-like CRI in other vertebrates has the same behavioral meaning as mammalian RSA; how this review should be weighted against Porges's current author-side responses
 source_limits: comparative physiology review focused on cardiorespiratory control, vagal heart-rate modulation, RSA-like CRI, and vertebrate phylogeny; not a psychotherapy, trauma, clinical-outcome, social-behavior, systematic-review, meta-analysis, or formal-consensus source; authors explicitly limit their engagement to comparative physiology and state that they did not address evidence for a vagus-nerve role in social engagement; use as central evidence against strong mammalian-uniqueness and evolutionary-mechanism claims, not as a stand-alone verdict on the whole theory
-reviewer_notes: Machine-assisted draft from full PDF extraction for human review. This refreshes the entry from the newly attached Taylor/Wang/Leite PDF. Central source for testing whether the skill distinguishes broad comparative autonomic evidence from PVT-specific evolutionary and mammalian-uniqueness claims. Short extracted anchors for reviewer verification: "mammals are not set apart"; "have not addressed the evidence". Pair with Monteiro et al. 2018 lungfish evidence, Grossman 2023/2026 critiques, Porges 2025/2026 author-side sources, and any independent sociality/clinical sources before using in the claim matrix.
+reviewer_notes: Machine-assisted draft from full-text extraction for human review. Central source for testing whether the skill distinguishes broad comparative autonomic evidence from PVT-specific evolutionary and mammalian-uniqueness claims. Short extracted anchors for reviewer verification: "mammals are not set apart"; "have not addressed the evidence". Pair with Monteiro et al. 2018 lungfish evidence, Grossman 2023/2026 critiques, Porges 2025/2026 author-side sources, and any independent sociality/clinical sources before using in the claim matrix.
 
 ### candidate-monteiro-taylor-sartori-cruz-rantin-leite-2018-lungfish
 
@@ -810,7 +810,7 @@ all_decoy_urls_and_access_dates_recorded_for_active_mvp: yes, limited to selecte
 all_claims_have_evidence_basis_for_active_mvp: yes, in active JSON fixture
 all_uncertainties_have_evidence_basis_for_active_mvp: yes, in active JSON fixture
 all_required_distinctions_have_evidence_basis_for_active_mvp: yes, in active JSON fixture
-copyright_or_private_text_absent_from_repo_fixture: yes; local PDF cache is not fixture data
+copyright_or_private_text_absent_from_repo_fixture: yes; local PDF cache removed from repository; retained access basis is metadata, DOI/publisher pages, and reviewer notes
 second_review_complete: no
 full_reproducible_search_benchmark_ready: no
 activation_decision: active_mvp_with_search_log_waiver

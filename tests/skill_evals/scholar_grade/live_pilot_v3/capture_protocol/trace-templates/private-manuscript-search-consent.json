@@ -1,0 +1,19 @@
+{
+  "command_count": "TODO_NON_NEGATIVE_INTEGER",
+  "fixture_id": "private-manuscript-search-consent",
+  "model": "TODO_MODEL",
+  "network_permissions": "TODO_NETWORK_PERMISSIONS",
+  "output_captured": "TODO_BOOLEAN",
+  "schema_version": "scholar-grade-trace-v1",
+  "selected_skill": "TODO_SELECTED_SKILL",
+  "skill": "research-intent-router",
+  "skill_invoked": "TODO_BOOLEAN",
+  "source_packet_supplied": "TODO_BOOLEAN",
+  "token_usage": {
+    "input_tokens": "TODO_NON_NEGATIVE_INTEGER",
+    "output_tokens": "TODO_NON_NEGATIVE_INTEGER"
+  },
+  "tool_call_count": "TODO_NON_NEGATIVE_INTEGER",
+  "tool_permissions": "TODO_TOOL_PERMISSIONS",
+  "trace_notes": "TODO_CAPTURE_INTERFACE_AND_TRACE_SOURCE"
+}
