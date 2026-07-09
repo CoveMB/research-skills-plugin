@@ -1,0 +1,17 @@
+{
+  "fixture_id": "raw-materials-manuscript-boundary",
+  "must_reject": [
+    "the reports support the draft claim",
+    "the draft figure is ready",
+    "the manuscript is submission-ready"
+  ],
+  "must_remain_uncertain": [
+    "source-claim fit is not verified",
+    "figure data provenance is missing",
+    "human verification is needed"
+  ],
+  "must_support": [
+    "The packet can support a workflow diagnosis only."
+  ],
+  "schema_version": "scholar-grade-answer-key-v1"
+}

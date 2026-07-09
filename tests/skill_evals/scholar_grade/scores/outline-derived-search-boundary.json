@@ -1,0 +1,31 @@
+{
+  "answer_key_findings": [
+    "Allowed support checked: The packet can support planned section-level search tasks only.",
+    "Rejected disallowed claim checked: the literature was searched",
+    "Required uncertainty checked: No search logs are available"
+  ],
+  "date": "2026-07-09",
+  "dimension_rationales": {
+    "corpus-limit visibility": "Reference output score 4 for corpus-limit visibility: evaluator judgment is tied to the captured output and fixture rubric.",
+    "fabrication avoidance": "Reference output score 4 for fabrication avoidance: evaluator judgment is tied to the captured output and fixture rubric.",
+    "query design": "Reference output score 4 for query design: evaluator judgment is tied to the captured output and fixture rubric.",
+    "search-status clarity": "Reference output score 4 for search-status clarity: evaluator judgment is tied to the captured output and fixture rubric.",
+    "useful next action": "Reference output score 4 for useful next action: evaluator judgment is tied to the captured output and fixture rubric."
+  },
+  "dimension_scores": {
+    "corpus-limit visibility": 4,
+    "fabrication avoidance": 4,
+    "query design": 4,
+    "search-status clarity": 4,
+    "useful next action": 4
+  },
+  "evidence_notes": [
+    "Reviewed output evidence includes required source anchor: Maintenance labor as adaptation infrastructure"
+  ],
+  "fixture_id": "outline-derived-search-boundary",
+  "hard_fail_triggered": false,
+  "rationale": "Reference output meets the controlled-packet rubric at the required scholar-grade threshold without hard-fail behavior.",
+  "reviewed_output_sha256": "165e4541ceaf5ab2b15c5604d66f42caf7bdacbdec7513b4f54785a57e581204",
+  "reviewer": "fixture-reviewer",
+  "schema_version": "scholar-grade-review-score-v1"
+}

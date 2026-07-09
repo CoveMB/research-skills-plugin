@@ -42,6 +42,81 @@ CERTIFICATION_BOUNDARY_ADVERSARIAL_FIXTURES = {
     "submission-ready-unresolved-citations-certification": "submission-ready",
     "book-comps-market-claims-unverified": "market claim confirmed",
 }
+MANUSCRIPT_PREPARATION_FIXTURES = {
+    "raw-materials-to-manuscript-route": {
+        "expected_route": "research-book-orchestrator",
+        "required_markers": {
+            "raw materials",
+            "Source basis",
+            "What I can verify",
+            "What remains uncertain",
+            "User verification needed",
+            "planned search",
+            "human checkpoint",
+        },
+        "forbidden_claims": {
+            "submission-ready manuscript",
+            "sources verified",
+            "figures cleared",
+            "human verification complete",
+        },
+    },
+    "outline-derived-source-plan-boundary": {
+        "expected_route": "systematic-source-discovery",
+        "required_markers": {
+            "outline-derived",
+            "planned_search",
+            "Source basis",
+            "Search status",
+            "What I can verify",
+            "What remains uncertain",
+            "User verification needed",
+        },
+        "forbidden_claims": {
+            "database searched",
+            "completed search",
+            "field coverage verified",
+        },
+    },
+    "visual-evidence-plan-not-clearance": {
+        "expected_route": "figure-table-integrity-auditor",
+        "required_markers": {
+            "visual evidence plan",
+            "not figure/table clearance",
+            "data provenance",
+            "caption",
+            "rights",
+            "human review",
+        },
+        "forbidden_claims": {
+            "ready for manuscript reliance",
+            "figure verified",
+            "rights cleared",
+        },
+    },
+    "manuscript-prep-refinement-erased-risk-prefilter": {
+        "expected_route": "scholarly-integrity-gate",
+        "required_markers": {
+            "manuscript-preparation workflow",
+            "broken claim lineage",
+            "source-access labels",
+            "unresolved risks",
+            "claim IDs",
+            "human checkpoint",
+            "Gate decision: hold",
+            "Source basis",
+            "What I can verify",
+            "What remains uncertain",
+            "User verification needed",
+        },
+        "forbidden_claims": {
+            "submission-ready",
+            "human checkpoint complete",
+            "risk resolved",
+            "evidence verified",
+        },
+    },
+}
 
 
 def fixture_document(*fixtures: dict) -> dict:
@@ -188,6 +263,28 @@ class TestResearchBehaviorFixtures(unittest.TestCase):
                 self.assertTrue(
                     fixture_payload.get("forbidden_output_patterns"),
                     msg=f"{fixture_id} must include a forbidden certification pattern",
+                )
+
+    def test_shipped_manuscript_preparation_fixtures_cover_required_boundaries(self) -> None:
+        document = json.loads(SHIPPED_RESEARCH_BEHAVIOR_FIXTURES.read_text(encoding="utf-8"))
+        fixtures_by_id = {fixture["id"]: fixture for fixture in document["fixtures"]}
+
+        for fixture_id, expected in MANUSCRIPT_PREPARATION_FIXTURES.items():
+            with self.subTest(fixture_id=fixture_id):
+                fixture_payload = fixtures_by_id[fixture_id]
+                required_markers = set(fixture_payload["required_output_markers"])
+                forbidden_claims = set(fixture_payload["forbidden_claims"])
+
+                self.assertEqual(fixture_payload["expected_route"], expected["expected_route"])
+                self.assertTrue(
+                    expected["required_markers"].issubset(required_markers),
+                    msg=f"{fixture_id} is missing required markers: "
+                    f"{sorted(expected['required_markers'] - required_markers)}",
+                )
+                self.assertTrue(
+                    expected["forbidden_claims"].issubset(forbidden_claims),
+                    msg=f"{fixture_id} is missing forbidden claims: "
+                    f"{sorted(expected['forbidden_claims'] - forbidden_claims)}",
                 )
 
     def test_valid_output_passes(self) -> None:

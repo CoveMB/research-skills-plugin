@@ -58,6 +58,8 @@ Prompt:
 Use research-book-orchestrator. I am writing a research nonfiction book about [topic]. Build a staged research and writing workflow with quality gates.
 ```
 
+For projects that begin with raw notes, research logs, source notes, draft visuals, and manuscript fragments, use `docs/user/RAW_MATERIALS_TO_MANUSCRIPT.md`.
+
 ## 1. Agenda sprint
 
 Use `scholarly-research-agenda` to define:
@@ -148,6 +150,8 @@ Contract artifact type: `claim_evidence_ledger`.
 ## 7.1. Figure/table and integrity sprint
 
 Use `figure-table-integrity-auditor` when tables, charts, figures, screenshots, maps, or image panels carry claims. It should check caption and axis accuracy, data provenance, duplicate visual risk, rights, and repair actions.
+
+Use a visual evidence plan before making or accepting a figure, table, chart, or conceptual diagram. The plan should say what claim the object would support and what data, source file, transformation note, caption limit, rights status, and human review are still needed. Run `figure-table-integrity-auditor` again after the actual object exists.
 
 Use `scholarly-integrity-gate` before AI-assisted analyses, generated syntheses, automated extraction, computed results, or high-stakes evidence artifacts support manuscript claims. It should produce CLEAR, SUSPECTED, INSUFFICIENT EVIDENCE, or OVERRIDDEN verdicts and name any human checkpoint needed.
 

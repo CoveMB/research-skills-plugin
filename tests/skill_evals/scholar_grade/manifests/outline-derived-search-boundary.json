@@ -1,0 +1,28 @@
+{
+  "capture_mode": "deterministic-reference",
+  "date": "2026-07-09",
+  "external_lookup_permitted": false,
+  "fixture_id": "outline-derived-search-boundary",
+  "interface": "local-fixture",
+  "model": "not-run",
+  "network_permissions": "none",
+  "operator": "fixture-author",
+  "output_file": "outline-derived-search-boundary.md",
+  "output_sha256": "165e4541ceaf5ab2b15c5604d66f42caf7bdacbdec7513b4f54785a57e581204",
+  "prompt_packet_sha256": "3eb409074879e9e0b4573a6f9cfa7411d454bb22819a48e17b8c24b3635ae535",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "systematic-source-discovery",
+  "skill_file": "skills/systematic-source-discovery/SKILL.md",
+  "skill_file_sha256": "606128b1c7cf93be7299f1b589be10d7a42a3f0dd09827dfeeb26285370e8ae3",
+  "source_packet": "corpora/outline-derived-search-boundary/source-packet.md",
+  "source_packet_sha256": "3fbe53a9db02c46d39ca25b50b00139267e00999bd7c041584b609a75b11a64a",
+  "structured_result": {
+    "decision": "planned_search",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "private_material_submitted": false,
+    "source_access_level": "controlled-packet"
+  },
+  "tool_permissions": "none"
+}

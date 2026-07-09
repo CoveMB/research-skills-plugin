@@ -1,0 +1,17 @@
+{
+  "fixture_id": "outline-derived-search-boundary",
+  "must_reject": [
+    "the literature was searched",
+    "field consensus is visible",
+    "candidate sources were found"
+  ],
+  "must_remain_uncertain": [
+    "No search logs are available",
+    "No candidate sources are available",
+    "Corpus coverage is not verified"
+  ],
+  "must_support": [
+    "The packet can support planned section-level search tasks only."
+  ],
+  "schema_version": "scholar-grade-answer-key-v1"
+}

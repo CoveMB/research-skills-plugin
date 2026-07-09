@@ -483,6 +483,184 @@
       ]
     },
     {
+      "id": "raw-materials-plan-to-integrity-gate-preserves-passport",
+      "from_skill": "research-book-orchestrator",
+      "to_skill": "scholarly-integrity-gate",
+      "handoff": "raw-materials workflow plan -> scholarly integrity gate",
+      "input_artifact": {
+        "schema_version": "book-artifact-v1",
+        "artifact_type": "workflow_plan",
+        "handoff_artifact": true,
+        "process_passport": {
+          "artifact_id": "raw-materials-plan-to-integrity-gate-preserves-passport-input",
+          "source_basis": "Synthetic upstream workflow_plan built from raw materials; no source, visual, citation, or human verification.",
+          "source_access_level": "controlled-packet; raw materials only; no full text access",
+          "corpus_coverage": "Planned searches only; source coverage and counter-literature are not verified.",
+          "evidence_status": "partial_unverified",
+          "tool_use": [
+            "No external lookup; deterministic local workflow-passport fixture only."
+          ],
+          "human_verification_status": "needed before drafting or manuscript reliance",
+          "unresolved_risks": [
+            "Raw-materials plan contains planned searches, missing source locators, missing visual provenance, and no human checkpoint."
+          ],
+          "handoff_limits": [
+            "Do not treat raw materials, planned searches, or visual plans as verified manuscript support."
+          ],
+          "generated_or_updated_at": "2026-07-09T00:00:00-04:00",
+          "producing_skill": "research-book-orchestrator",
+          "intended_next_skill_or_use": "scholarly-integrity-gate"
+        },
+        "workflow_claims": [
+          {
+            "claim_id": "workflow_plan-claim-1",
+            "claim": "Raw materials can support a staged plan, but manuscript claims remain unverified and lack source locators.",
+            "evidence_status": "unverified",
+            "locator_status": "locator_gap"
+          }
+        ]
+      },
+      "expected_output_artifact": {
+        "schema_version": "book-artifact-v1",
+        "artifact_type": "scholarly_integrity_audit",
+        "handoff_artifact": true,
+        "process_passport": {
+          "artifact_id": "raw-materials-plan-to-integrity-gate-preserves-passport-output",
+          "source_basis": "Consumed upstream workflow_plan process passport and generated provisional scholarly_integrity_audit; no verification step performed.",
+          "source_access_level": "controlled-packet; raw materials only; no full text access",
+          "corpus_coverage": "Planned searches only; source coverage and counter-literature are not verified.",
+          "evidence_status": "hold_for_verification",
+          "tool_use": [
+            "No external lookup; deterministic local workflow-passport fixture only."
+          ],
+          "human_verification_status": "needed before drafting or manuscript reliance",
+          "unresolved_risks": [
+            "Raw-materials plan contains planned searches, missing source locators, missing visual provenance, and no human checkpoint.",
+            "Downstream artifact must preserve upstream uncertainty until a visible verification step resolves it."
+          ],
+          "handoff_limits": [
+            "Do not treat raw materials, planned searches, or visual plans as verified manuscript support.",
+            "Do not upgrade evidence, locator, visual-provenance, or human-verification status from this handoff alone."
+          ],
+          "generated_or_updated_at": "2026-07-09T00:00:00-04:00",
+          "producing_skill": "scholarly-integrity-gate",
+          "intended_next_skill_or_use": "next workflow gate or human reviewer"
+        },
+        "workflow_claims": [
+          {
+            "claim_id": "scholarly_integrity_audit-claim-2",
+            "claim": "Raw materials can support a staged plan, but manuscript claims remain unverified and lack source locators.",
+            "evidence_status": "unverified",
+            "locator_status": "locator_gap"
+          }
+        ]
+      },
+      "forbidden_behavior": [
+        "Removing unresolved risks without a verification note.",
+        "Treating controlled-packet raw materials as full-text verification.",
+        "Dropping human-review requirements.",
+        "Treating planned searches or visual plans as manuscript clearance.",
+        "Silently upgrading unverified claims, missing locators, visual-provenance gaps, or human-checkpoint needs to verified status."
+      ]
+    },
+    {
+      "id": "critique-repair-queue-to-prose-preserves-passport",
+      "from_skill": "counterargument-peer-review",
+      "to_skill": "scholarly-prose-editor",
+      "handoff": "critique repair queue -> prose revision",
+      "input_artifact": {
+        "schema_version": "book-artifact-v1",
+        "artifact_type": "critique_repair_queue",
+        "handoff_artifact": true,
+        "process_passport": {
+          "artifact_id": "critique-repair-queue-to-prose-preserves-passport-input",
+          "source_basis": "Synthetic upstream critique repair queue with controlled source notes; no full-text verification or resolved objection record.",
+          "source_access_level": "controlled-packet; partial source notes only; locator/source-basis gaps remain",
+          "corpus_coverage": "Partial critique packet; objections, source-claim fit, and counter-literature are not verified.",
+          "evidence_status": "partial_unverified",
+          "tool_use": [
+            "No external lookup; deterministic local workflow-passport fixture only."
+          ],
+          "human_verification_status": "needed before treating critique response as resolved",
+          "unresolved_risks": [
+            "Repair queue RQ-1 for claim C-101 still lacks source-basis and locator verification.",
+            "Repair queue RQ-2 for claim C-203 still has an unresolved counterargument and human checkpoint."
+          ],
+          "handoff_limits": [
+            "Do not treat prose polish as evidence verification, critique resolution, or submission readiness.",
+            "Preserve claim IDs, source-access labels, unresolved risks, and human-checkpoint status."
+          ],
+          "generated_or_updated_at": "2026-07-09T00:00:00-04:00",
+          "producing_skill": "counterargument-peer-review",
+          "intended_next_skill_or_use": "scholarly-prose-editor"
+        },
+        "workflow_claims": [
+          {
+            "claim_id": "C-101",
+            "claim": "Maintenance labor is underfunded in the case materials, but source support and locators are unverified.",
+            "evidence_status": "unverified",
+            "locator_status": "locator_gap"
+          },
+          {
+            "claim_id": "C-203",
+            "claim": "The revision must answer the governance objection, but the repair queue remains open.",
+            "evidence_status": "unverified",
+            "locator_status": "source_basis_gap"
+          }
+        ]
+      },
+      "expected_output_artifact": {
+        "schema_version": "book-artifact-v1",
+        "artifact_type": "prose_revision",
+        "handoff_artifact": true,
+        "process_passport": {
+          "artifact_id": "critique-repair-queue-to-prose-preserves-passport-output",
+          "source_basis": "Consumed upstream critique repair queue process passport and generated provisional prose_revision; no verification step performed.",
+          "source_access_level": "controlled-packet; partial source notes only; locator/source-basis gaps remain",
+          "corpus_coverage": "Partial critique packet; objections, source-claim fit, and counter-literature are not verified.",
+          "evidence_status": "hold_for_verification",
+          "tool_use": [
+            "No external lookup; deterministic local workflow-passport fixture only."
+          ],
+          "human_verification_status": "needed before treating critique response as resolved",
+          "unresolved_risks": [
+            "Repair queue RQ-1 for claim C-101 still lacks source-basis and locator verification.",
+            "Repair queue RQ-2 for claim C-203 still has an unresolved counterargument and human checkpoint.",
+            "Downstream prose revision must preserve upstream uncertainty until a visible verification step resolves it."
+          ],
+          "handoff_limits": [
+            "Do not treat prose polish as evidence verification, critique resolution, or submission readiness.",
+            "Preserve claim IDs, source-access labels, unresolved risks, and human-checkpoint status.",
+            "Do not upgrade evidence, locator, critique-resolution, or human-verification status from this handoff alone."
+          ],
+          "generated_or_updated_at": "2026-07-09T00:00:00-04:00",
+          "producing_skill": "scholarly-prose-editor",
+          "intended_next_skill_or_use": "next workflow gate or human reviewer"
+        },
+        "workflow_claims": [
+          {
+            "claim_id": "C-101",
+            "claim": "Maintenance labor is underfunded in the case materials, but source support and locators are unverified.",
+            "evidence_status": "unverified",
+            "locator_status": "locator_gap"
+          },
+          {
+            "claim_id": "C-203",
+            "claim": "The revision must answer the governance objection, but the repair queue remains open.",
+            "evidence_status": "unverified",
+            "locator_status": "source_basis_gap"
+          }
+        ]
+      },
+      "forbidden_behavior": [
+        "Removing repair-queue unresolved risks without a verification note.",
+        "Treating controlled-packet source notes as full-text verification.",
+        "Dropping human-review requirements.",
+        "Dropping claim IDs or source-access labels during prose polish.",
+        "Treating prose revision as critique resolution or submission readiness."
+      ]
+    },
+    {
       "id": "book-proposal-to-comps-preserves-passport",
       "from_skill": "book-proposal-scholarship",
       "to_skill": "book-comps-verifier",

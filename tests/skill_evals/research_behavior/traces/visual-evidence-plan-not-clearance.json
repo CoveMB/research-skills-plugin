@@ -1,0 +1,10 @@
+{
+  "fixture_id": "visual-evidence-plan-not-clearance",
+  "output_captured": true,
+  "output_sha256": "54ae29f2e2bfc63807a92ebffd57f3b0fa7e7337b2e7ce1e22a836c8d6820df5",
+  "prompt_sha256": "3008ec57d97ed5f8cceae3c670c8189b85d316d3982a4ced61bafb8f6e7ef84b",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "figure-table-integrity-auditor",
+  "skill_invoked": true
+}

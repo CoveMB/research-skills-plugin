@@ -89,6 +89,8 @@ Also track claim drift: whether a claim becomes stronger, weaker, broader, or co
 
 When claim drift is intentional, record a version note or explanation tied to the claim ID. Do not silently rewrite claim text, claim type, source basis, locator status, evidence status, or unresolved risks in durable handoff artifacts.
 
+When reviewing a revised manuscript, check whether earlier critique, claim-ledger, traceability, citation, figure/table, or integrity-gate risks were preserved, resolved by visible evidence, or silently dropped. Treat silent risk removal as a continuity problem.
+
 ### 4. Detect repetition and redundancy
 
 Separate productive repetition from accidental repetition.

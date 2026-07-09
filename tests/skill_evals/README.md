@@ -59,6 +59,16 @@ Use these fixture classes together:
 
 Research-behavior fixtures may also use `required_output_patterns` and `forbidden_output_patterns` when marker checks are too weak. Use them for adversarial cases where a model could include the required headings while still following source-contained instructions, agreeing with a false premise, hiding a blocker, or leaving the claim boundary generic. These regex checks are deterministic behavior checks only; they do not certify source truth.
 
+## Manuscript-preparation fixtures
+
+The raw-materials-to-manuscript fixtures cover the workflow boundary added for `paperorchestra`-informed manuscript preparation. They test these risks:
+
+- Raw materials such as idea notes, logs, source notes, outlines, draft visuals, and fragments must route to `research-book-orchestrator` before manuscript claims are drafted.
+- Outline-derived source needs must stay labeled as planned searches until a completed search log or source packet exists.
+- Visual evidence plans must remain planning artifacts until data, provenance, rights, caption, and source-claim support are audited.
+
+Use the `paperorchestra` resource basis for paper-writing pipeline, literature-synthesis, generated-visual, and grounded material-transformation risks. Do not use it to claim source verification, private-material release permission, or transfer of benchmark results to this plugin. Captures still need visible source basis, privacy boundaries, process-passport uncertainty, and human checkpoints.
+
 ## Research-behavior anti-regression policy
 
 `scripts/check_research_behavior_fixtures.py` enforces the fixture schema and, by default, whole-repo coverage safeguards. Use `--schema-only` only for isolated draft fixtures or unit tests; package validation should run the default policy checks.

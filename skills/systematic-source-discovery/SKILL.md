@@ -88,6 +88,21 @@ When active, add:
 
 For concise guidance and query design reminders, read `references/search-strategy-guide.md`.
 
+## Outline-derived source discovery
+
+Use outline-derived source discovery when a chapter brief, section outline, thesis tree, or manuscript plan identifies sections that need sources.
+
+For each section, create search tasks from:
+
+- the section claim
+- key concepts and terms
+- method or evidence type needed
+- likely opposing literature
+- case-study or primary-source targets
+- currentness or source-status needs
+
+Mark the result as `planned_search` unless the search is actually run and logged. A section search task is not evidence that sources exist, that the field is covered, or that the planned source supports the section claim.
+
 ## Files/folders it may read
 
 - Shared operational boundary doc: `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.

@@ -23,6 +23,18 @@ ADVERSARIAL_PRESSURE_FIXTURE_IDS = {
     "pressure-compress-publication-ready",
     "pressure-prose-repair-strengthen-claim",
 }
+MANUSCRIPT_PREPARATION_FIXTURE_IDS = {
+    "raw-materials-manuscript-boundary",
+    "outline-derived-search-boundary",
+    "visual-plan-not-clearance",
+    "review-repair-queue-preservation",
+}
+REVIEW_REPAIR_MUTATION_NAMES = {
+    "review-repair-obscure-claim-ids",
+    "review-repair-critique-resolved",
+    "review-repair-submission-ready",
+    "review-repair-erased-risk-labels",
+}
 
 
 def load_runner_module():
@@ -78,6 +90,25 @@ class TestScholarGradeMutationRunner(unittest.TestCase):
 
         self.assertEqual(pressure_fixture_ids, ADVERSARIAL_PRESSURE_FIXTURE_IDS)
         self.assertTrue(ADVERSARIAL_PRESSURE_FIXTURE_IDS <= mutation_fixture_ids)
+
+    def test_shipped_manuscript_preparation_fixtures_have_mutation_coverage(self) -> None:
+        runner = load_runner_module()
+        fixture_document = json.loads((SCHOLAR_GRADE_ROOT / "fixtures.json").read_text(encoding="utf-8"))
+        fixture_ids = {fixture["id"] for fixture in fixture_document["fixtures"]}
+        mutation_fixture_ids = {case.fixture_id for case in runner.default_mutation_cases()}
+
+        self.assertTrue(MANUSCRIPT_PREPARATION_FIXTURE_IDS <= fixture_ids)
+        self.assertTrue(MANUSCRIPT_PREPARATION_FIXTURE_IDS <= mutation_fixture_ids)
+
+    def test_review_repair_fixture_has_targeted_mutation_cases(self) -> None:
+        runner = load_runner_module()
+        mutation_names = {
+            case.mutation_name
+            for case in runner.default_mutation_cases()
+            if case.fixture_id == "review-repair-queue-preservation"
+        }
+
+        self.assertEqual(mutation_names, REVIEW_REPAIR_MUTATION_NAMES)
 
 
 if __name__ == "__main__":

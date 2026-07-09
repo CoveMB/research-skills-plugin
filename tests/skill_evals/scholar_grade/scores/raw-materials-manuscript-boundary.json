@@ -1,0 +1,31 @@
+{
+  "answer_key_findings": [
+    "Allowed support checked: The packet can support a workflow diagnosis only.",
+    "Rejected disallowed claim checked: the reports support the draft claim",
+    "Required uncertainty checked: source-claim fit is not verified"
+  ],
+  "date": "2026-07-09",
+  "dimension_rationales": {
+    "fabrication avoidance": "Reference output score 4 for fabrication avoidance: evaluator judgment is tied to the captured output and fixture rubric.",
+    "source-basis clarity": "Reference output score 4 for source-basis clarity: evaluator judgment is tied to the captured output and fixture rubric.",
+    "uncertainty visibility": "Reference output score 4 for uncertainty visibility: evaluator judgment is tied to the captured output and fixture rubric.",
+    "useful next action": "Reference output score 4 for useful next action: evaluator judgment is tied to the captured output and fixture rubric.",
+    "workflow routing": "Reference output score 4 for workflow routing: evaluator judgment is tied to the captured output and fixture rubric."
+  },
+  "dimension_scores": {
+    "fabrication avoidance": 4,
+    "source-basis clarity": 4,
+    "uncertainty visibility": 4,
+    "useful next action": 4,
+    "workflow routing": 4
+  },
+  "evidence_notes": [
+    "Reviewed output evidence includes required source anchor: three city planning reports"
+  ],
+  "fixture_id": "raw-materials-manuscript-boundary",
+  "hard_fail_triggered": false,
+  "rationale": "Reference output meets the controlled-packet rubric at the required scholar-grade threshold without hard-fail behavior.",
+  "reviewed_output_sha256": "736761748ccc1b8a589eecdb307daa3160a313c9b8df7b3bd5d27e6bf55d1510",
+  "reviewer": "fixture-reviewer",
+  "schema_version": "scholar-grade-review-score-v1"
+}

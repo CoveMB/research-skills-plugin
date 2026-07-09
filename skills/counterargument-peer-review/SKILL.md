@@ -125,6 +125,18 @@ For each objection, suggest ways to:
 
 For high-severity objections, state what evidence would falsify or materially weaken the thesis.
 
+## Review loop handoff
+
+When this critique feeds a revision pass, include a short repair queue:
+
+- claims to narrow
+- evidence to add
+- rival explanations to address
+- source or corpus checks still needed
+- human decisions needed before the next draft
+
+Do not present critique resolution as completed unless the revised draft, source basis, and human checkpoint are visible.
+
 ## Output format
 
 ```markdown

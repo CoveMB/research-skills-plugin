@@ -35,6 +35,12 @@ I have a thesis, three chapter drafts, and a rough bibliography. Tell me which s
 My project has too many sources and no clear structure. Diagnose the phase and give me the next three deliverables.
 ```
 
+```text
+Use research-book-orchestrator. I have an idea summary, rough research log, source notes, and a few draft figures. Turn these raw materials into a staged manuscript preparation plan with quality gates.
+```
+
+Expected output: a workflow plan that inventories the raw materials, names the next artifact, and marks what is still unverified before any drafting.
+
 ## Typical output
 
 Expect a workflow plan, not a finished chapter. The output usually includes a project diagnosis, assumptions, recommended skill sequence, immediate next deliverable, quality gates, and a longer manuscript roadmap.

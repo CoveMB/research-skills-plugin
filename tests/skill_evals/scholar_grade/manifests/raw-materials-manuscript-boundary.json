@@ -1,0 +1,28 @@
+{
+  "capture_mode": "deterministic-reference",
+  "date": "2026-07-09",
+  "external_lookup_permitted": false,
+  "fixture_id": "raw-materials-manuscript-boundary",
+  "interface": "local-fixture",
+  "model": "not-run",
+  "network_permissions": "none",
+  "operator": "fixture-author",
+  "output_file": "raw-materials-manuscript-boundary.md",
+  "output_sha256": "736761748ccc1b8a589eecdb307daa3160a313c9b8df7b3bd5d27e6bf55d1510",
+  "prompt_packet_sha256": "1624e41a6d51b4bd88ac3899ea3d2d4e895818c69b0b9cfba053fd7f7c717f08",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "research-book-orchestrator",
+  "skill_file": "skills/research-book-orchestrator/SKILL.md",
+  "skill_file_sha256": "9d9ece8121f16cc64c5a9e3fb4f9fcc11c5dd64c61e748894daba12ac961c039",
+  "source_packet": "corpora/raw-materials-manuscript-boundary/source-packet.md",
+  "source_packet_sha256": "252b135ed788f75b9f173d3321377b4dd5e732e890b1839be3119a4476b47ff4",
+  "structured_result": {
+    "decision": "Hold before drafting",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "private_material_submitted": false,
+    "source_access_level": "controlled-packet"
+  },
+  "tool_permissions": "none"
+}

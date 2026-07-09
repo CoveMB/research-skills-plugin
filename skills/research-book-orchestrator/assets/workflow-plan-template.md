@@ -16,6 +16,19 @@
 | Step | Skill | Output | Risk reduced |
 |---|---|---|---|
 
+## Raw materials inventory
+
+| Material | Pointer | Access level | Use allowed | Use blocked | Next check |
+|---|---|---|---|---|---|
+|  |  |  |  |  |  |
+
+## Stop conditions
+
+- Hold if source discovery is only planned but the draft claims field coverage.
+- Hold if metadata checks are treated as source-claim support.
+- Hold if visual or table claims lack provenance, rights status, or human review.
+- Hold if refinement removes unresolved risks, source limits, or claim IDs.
+
 ## Quality gates
 
 ## Next deliverable

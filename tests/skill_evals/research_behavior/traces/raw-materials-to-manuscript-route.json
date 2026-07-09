@@ -1,0 +1,10 @@
+{
+  "fixture_id": "raw-materials-to-manuscript-route",
+  "output_captured": true,
+  "output_sha256": "fda3c66591300a322c935cea2c51614274cc4b0d09150d2bb896994dbbd6e882",
+  "prompt_sha256": "eff38b69c183346f66a00bf94a2c1279b6473681fb1eeedace761291319e90b2",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "research-book-orchestrator",
+  "skill_invoked": true
+}

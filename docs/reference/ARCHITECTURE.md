@@ -89,6 +89,21 @@ flowchart TD
 
 You can enter the workflow at any stage. The research intent router chooses the smallest useful skill first. The orchestrator handles broader multi-stage workflow planning.
 
+## Manuscript preparation lane
+
+The raw-materials-to-manuscript lane starts when a user has notes, logs, source notes, outline fragments, tables, figures, or draft prose. It still uses the same staged architecture. The lane adds an intake inventory and stop conditions before drafting so raw materials do not become unsupported manuscript claims.
+
+Recommended sequence:
+
+1. raw-materials bundle inventory
+2. agenda or chapter brief
+3. outline-derived source discovery
+4. source notes and extraction
+5. literature map and argument architecture
+6. counterargument review and refinement
+7. claim, citation, figure/table, and integrity gates
+8. AI/human workflow log and release audit when external sharing is planned
+
 ## Stage matrix
 
 | Stage | Primary skill | Artifact | Gate |
@@ -251,6 +266,7 @@ Durable cross-skill artifacts should set `handoff_artifact: true` and include `p
 | Evidence gate | Claims stronger than evidence | Prevents overclaiming |
 | Traceability gate | Claims do not connect to source notes, citekeys, locators, or repair tasks | Prevents orphan claims |
 | Citation gate | Citation near a claim but not verified as support | Prevents source-claim mismatch |
+| Visual evidence planning gate | Planned visuals, generated visuals, or draft tables are treated as evidence before data, source basis, caption limits, rights, and human review are visible | Prevents planned or generated visuals from becoming unsupported manuscript evidence |
 | Figure/table gate | Captions, axes, data provenance, duplicate visuals, rights, or visual claim support are unclear | Prevents polished visuals and tables from acting as unsupported evidence |
 | Scholarly integrity gate | AI-assisted workflow, generated synthesis, automated extraction, or computed result lacks provenance or human checkpoint | Prevents implementation bugs, hallucinated evidence, methodology fabrication, shortcut reliance, and frame-lock from entering manuscripts |
 | Continuity gate | Contradictions, repetition, or concept drift across chapters | Prevents manuscript-level incoherence |

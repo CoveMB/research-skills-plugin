@@ -1,0 +1,18 @@
+{
+  "fixture_id": "visual-plan-not-clearance",
+  "must_reject": [
+    "the chart is cleared for manuscript reliance",
+    "numbers can be inferred",
+    "rights are cleared"
+  ],
+  "must_remain_uncertain": [
+    "Data provenance is missing",
+    "Transformation logic is missing",
+    "Rights status is missing",
+    "Human review is needed"
+  ],
+  "must_support": [
+    "The packet can support a visual evidence plan only."
+  ],
+  "schema_version": "scholar-grade-answer-key-v1"
+}

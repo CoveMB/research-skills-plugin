@@ -14,6 +14,12 @@ Audit non-prose evidence objects before they support manuscript claims: figures,
 
 This skill checks data provenance, caption accuracy, axis labels, duplicate visual risk, extraction or transformation basis, source licensing, and whether the figure or table can support the claim attached to it.
 
+## Visual evidence planning
+
+A visual evidence plan is allowed before a figure, table, chart, or diagram exists. It should name the claim the object would support, the data or source basis needed, the transformation or extraction step, the caption limit, the rights check, and the human review needed.
+
+A visual evidence plan is not figure/table clearance. Do not mark an object ready for manuscript reliance until the actual object, data or source files, caption, rights status, and provenance are visible.
+
 ## When to use
 
 Use when a research book, article, proposal, or release packet contains figures, tables, charts, images, screenshots, maps, extracted result tables, or visual evidence that may be cited as support.

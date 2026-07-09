@@ -13,6 +13,8 @@ Set `handoff_artifact: true` and include `process_passport` when an artifact is 
 - generated or edited style sheets, chapter briefs, case dossiers, or workflow plans that will guide later work.
 - compact outputs only when saved as project state or explicitly reused downstream.
 
+Raw-materials bundles need a process passport only when they become durable project state or are handed to another skill. A bundle should usually store pointers, access levels, claim limits, privacy notes, and next checks. It should not copy private manuscripts, copyrighted source text, full PDFs, credentials, or unpublished material unless the project owner explicitly asks for that storage.
+
 ## When Not Required
 
 Do not require a passport for:

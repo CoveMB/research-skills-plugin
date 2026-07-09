@@ -1,0 +1,19 @@
+{
+  "fixture_id": "review-repair-queue-preservation",
+  "must_reject": [
+    "critique resolved",
+    "submission-ready",
+    "evidence verified",
+    "objections answered"
+  ],
+  "must_remain_uncertain": [
+    "unresolved risks preserved",
+    "source-access label preserved",
+    "human checkpoint required",
+    "locator/source-basis gaps remain"
+  ],
+  "must_support": [
+    "The packet can support a clean revision that preserves the critique repair queue and source limits."
+  ],
+  "schema_version": "scholar-grade-answer-key-v1"
+}

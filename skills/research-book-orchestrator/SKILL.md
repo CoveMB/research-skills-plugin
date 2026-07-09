@@ -45,6 +45,20 @@ Use `docs/reference/ARCHITECTURE.md` as the stage map and `MODE_REGISTRY.md` as 
 
 Use `docs/policy/ROUTING_MATRIX.md` as the canonical route table. This skill should summarize only the route sequence needed for the user-designated project or workspace, not duplicate the full route matrix.
 
+## Raw materials to manuscript lane
+
+Use this lane when the user has sparse idea notes, research logs, source notes, outlines, tables, figures, or draft fragments and wants a staged path toward a manuscript.
+
+This lane does not generate a submission-ready manuscript in one pass. It turns raw materials into intermediate artifacts with visible checks: raw-materials bundle, agenda, chapter brief, source discovery plan, source notes or extraction table, literature map, thesis tree, claim ledger, review report, revised passage, figure/table audit, integrity gate, AI/human workflow log, and release audit.
+
+Keep these boundaries visible:
+
+- A raw-materials bundle is an inventory, not source verification.
+- Planned searches are not completed searches.
+- Metadata or source-existence checks are not source-claim support.
+- Generated visuals are not cleared evidence objects until provenance, data, caption, rights, and human review are visible.
+- Review and refinement loops must preserve claim IDs, unresolved risks, source-access labels, and human checkpoint status.
+
 ## Operating principles
 
 1. Start from the book's intellectual contribution, not from prose.
@@ -100,6 +114,23 @@ Classify the project into one or more phases:
 - Phase H1: figure/table integrity and scholarly integrity gate
 - Phase I: whole-manuscript continuity
 - Phase J: proposal, comparable titles, AI/human workflow log, and release review
+
+### 1.1. Detect raw-materials manuscript preparation
+
+If the user asks to turn raw materials, lab notes, research logs, source notes, sparse ideas, outline fragments, result tables, or visuals into a manuscript plan, classify the request as manuscript preparation.
+
+Route through this minimum sequence unless the user's materials clearly start later:
+
+1. raw-materials bundle inventory
+2. research agenda or chapter brief
+3. outline-derived source discovery plan
+4. source notes and extraction
+5. literature map and argument architecture
+6. counterargument review and refinement
+7. claim ledger, traceability, citation, figure/table, and integrity gates
+8. AI/human workflow log and release audit when external sharing is intended
+
+Do not skip directly to drafting when the source plan, evidence status, or visual/table provenance is weak.
 
 ### 2. Identify missing inputs
 

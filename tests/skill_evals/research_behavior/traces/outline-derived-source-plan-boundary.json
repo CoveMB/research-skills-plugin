@@ -1,0 +1,10 @@
+{
+  "fixture_id": "outline-derived-source-plan-boundary",
+  "output_captured": true,
+  "output_sha256": "b4b75838c65814158d134e1975534fe233b41ea201d314894388d850794c2a1d",
+  "prompt_sha256": "36bdcc39ef36785fde8d316f379043697a97a8c54f69b63b282900ee404794c8",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "systematic-source-discovery",
+  "skill_invoked": true
+}

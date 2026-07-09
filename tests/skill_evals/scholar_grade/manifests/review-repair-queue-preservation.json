@@ -1,0 +1,28 @@
+{
+  "capture_mode": "deterministic-reference",
+  "date": "2026-07-09",
+  "external_lookup_permitted": false,
+  "fixture_id": "review-repair-queue-preservation",
+  "interface": "local-fixture",
+  "model": "not-run",
+  "network_permissions": "none",
+  "operator": "fixture-author",
+  "output_file": "review-repair-queue-preservation.md",
+  "output_sha256": "186c152d5461679d5147658425ee959b360f67be974a5968515411311505c241",
+  "prompt_packet_sha256": "3d13edfc9e682fe28722fef5a6ff1707556ab8974571f6357e660e6cf7244e30",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "scholarly-prose-editor",
+  "skill_file": "skills/scholarly-prose-editor/SKILL.md",
+  "skill_file_sha256": "b9a34b258e17a13cafd56734e131fd4dec0944d9dbe40fbe6247b81a7f15ce2f",
+  "source_packet": "corpora/review-repair-queue-preservation/source-packet.md",
+  "source_packet_sha256": "fa8418697062d6e20685199f0567209422fd161b7b8c10627d60debaafdcbc11",
+  "structured_result": {
+    "decision": "Hold: repair queue remains open",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "private_material_submitted": false,
+    "source_access_level": "controlled-packet"
+  },
+  "tool_permissions": "none"
+}

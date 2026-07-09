@@ -1,0 +1,10 @@
+{
+  "fixture_id": "manuscript-prep-refinement-erased-risk-prefilter",
+  "output_captured": true,
+  "output_sha256": "e4c0e6bb608c715635fef1a73631619f803bd9f8b2142c2412773bfb2b17c439",
+  "prompt_sha256": "52eff2139a41bee1c9037d14630ee244b19a04873a69515aa801213b32f5ae2b",
+  "prompt_supplied": true,
+  "schema_version": "research-behavior-route-trace-v2",
+  "selected_skill": "scholarly-integrity-gate",
+  "skill_invoked": true
+}

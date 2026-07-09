@@ -52,6 +52,8 @@ Use when the user provides a paragraph, section, chapter excerpt, proposal, abst
 
 Use `docs/policy/SOURCE_LIMITS.md` for source-access rules. Keep source access level, What I can verify, What remains uncertain, and User verification needed visible. Do not invent citations or source support.
 
+In a review/refinement loop, preserve claim strength, source-access labels, unresolved risks, and claim IDs. If a sentence needs stronger support, mark the evidence problem instead of making the prose sound more confident. If you narrow a claim, say what changed and why.
+
 ## Machine-readable artifacts
 
 When the user explicitly asks for JSON or a contract artifact, use `shared/contracts/book/book_artifact.schema.json` with `artifact_type: style_sheet`. If the output is normal Markdown, do not force the JSON contract. For durable handoff artifacts, follow `docs/policy/PROCESS_PASSPORT.md`: set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits instead of upgrading verification.

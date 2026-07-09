@@ -1,0 +1,31 @@
+{
+  "answer_key_findings": [
+    "Allowed support checked: The packet can support a visual evidence plan only.",
+    "Rejected disallowed claim checked: the chart is cleared for manuscript reliance",
+    "Required uncertainty checked: Data provenance is missing"
+  ],
+  "date": "2026-07-09",
+  "dimension_rationales": {
+    "fabrication avoidance": "Reference output score 4 for fabrication avoidance: evaluator judgment is tied to the captured output and fixture rubric.",
+    "provenance discipline": "Reference output score 4 for provenance discipline: evaluator judgment is tied to the captured output and fixture rubric.",
+    "rights-limit visibility": "Reference output score 4 for rights-limit visibility: evaluator judgment is tied to the captured output and fixture rubric.",
+    "useful next action": "Reference output score 4 for useful next action: evaluator judgment is tied to the captured output and fixture rubric.",
+    "visual-plan clarity": "Reference output score 4 for visual-plan clarity: evaluator judgment is tied to the captured output and fixture rubric."
+  },
+  "dimension_scores": {
+    "fabrication avoidance": 4,
+    "provenance discipline": 4,
+    "rights-limit visibility": 4,
+    "useful next action": 4,
+    "visual-plan clarity": 4
+  },
+  "evidence_notes": [
+    "Reviewed output evidence includes required source anchor: No data file is supplied"
+  ],
+  "fixture_id": "visual-plan-not-clearance",
+  "hard_fail_triggered": false,
+  "rationale": "Reference output meets the controlled-packet rubric at the required scholar-grade threshold without hard-fail behavior.",
+  "reviewed_output_sha256": "96e9b4b2687de17f8ffd896c63c9f84b0eb19568a3d2e8c67b31b8ca8b016702",
+  "reviewer": "fixture-reviewer",
+  "schema_version": "scholar-grade-review-score-v1"
+}

@@ -1,0 +1,31 @@
+{
+  "answer_key_findings": [
+    "Allowed support checked: The packet can support a clean revision that preserves the critique repair queue and source limits.",
+    "Rejected disallowed claim checked: critique resolved",
+    "Required uncertainty checked: unresolved risks preserved"
+  ],
+  "date": "2026-07-09",
+  "dimension_rationales": {
+    "claim-lineage preservation": "Reference output score 4 for claim-lineage preservation: evaluator judgment is tied to the captured output and fixture rubric.",
+    "repair-queue preservation": "Reference output score 4 for repair-queue preservation: evaluator judgment is tied to the captured output and fixture rubric.",
+    "source-basis clarity": "Reference output score 4 for source-basis clarity: evaluator judgment is tied to the captured output and fixture rubric.",
+    "submission-readiness restraint": "Reference output score 4 for submission-readiness restraint: evaluator judgment is tied to the captured output and fixture rubric.",
+    "useful next action": "Reference output score 4 for useful next action: evaluator judgment is tied to the captured output and fixture rubric."
+  },
+  "dimension_scores": {
+    "claim-lineage preservation": 4,
+    "repair-queue preservation": 4,
+    "source-basis clarity": 4,
+    "submission-readiness restraint": 4,
+    "useful next action": 4
+  },
+  "evidence_notes": [
+    "Reviewed output evidence includes required source anchor: C-101"
+  ],
+  "fixture_id": "review-repair-queue-preservation",
+  "hard_fail_triggered": false,
+  "rationale": "Reference output meets the controlled-packet rubric at the required scholar-grade threshold without hard-fail behavior.",
+  "reviewed_output_sha256": "186c152d5461679d5147658425ee959b360f67be974a5968515411311505c241",
+  "reviewer": "fixture-reviewer",
+  "schema_version": "scholar-grade-review-score-v1"
+}

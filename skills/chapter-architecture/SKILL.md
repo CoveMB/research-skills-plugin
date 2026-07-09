@@ -104,6 +104,8 @@ Assign evidence to claims rather than sections alone. Mark where citations, exam
 
 Each section must have an evidence anchor: provided source, planned source type, case dossier, conceptual authority, or verification needed. Warn when a section is only a topic and does not carry an argument.
 
+When a section needs sources that are not yet identified, create an outline-derived search task instead of naming unsupported sources. Route that task to `systematic-source-discovery`. Keep planned source types separate from verified sources, source notes, citations, and locators.
+
 ### 5. Add reader guidance
 
 Write transitions that explain why the reader is moving from one section to the next.

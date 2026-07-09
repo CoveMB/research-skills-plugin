@@ -1,0 +1,28 @@
+{
+  "capture_mode": "deterministic-reference",
+  "date": "2026-07-09",
+  "external_lookup_permitted": false,
+  "fixture_id": "visual-plan-not-clearance",
+  "interface": "local-fixture",
+  "model": "not-run",
+  "network_permissions": "none",
+  "operator": "fixture-author",
+  "output_file": "visual-plan-not-clearance.md",
+  "output_sha256": "96e9b4b2687de17f8ffd896c63c9f84b0eb19568a3d2e8c67b31b8ca8b016702",
+  "prompt_packet_sha256": "d9ff47e3ee55fe90520291978a6d60d81d19b1c8f82666fd801e5594ef3af24d",
+  "schema_version": "scholar-grade-run-manifest-v1",
+  "skill": "figure-table-integrity-auditor",
+  "skill_file": "skills/figure-table-integrity-auditor/SKILL.md",
+  "skill_file_sha256": "71b4e7d1d110c75aac65157b482afda07eb2f3588faa3c61ba0f8db64071721b",
+  "source_packet": "corpora/visual-plan-not-clearance/source-packet.md",
+  "source_packet_sha256": "fbeb5b9137b2f6ed3252366d65e9aaf8faf8e540b944072c7c2499e70668dd28",
+  "structured_result": {
+    "decision": "Not cleared",
+    "external_lookup_used": false,
+    "hard_fail_triggered": false,
+    "next_action_count": 1,
+    "private_material_submitted": false,
+    "source_access_level": "controlled-packet"
+  },
+  "tool_permissions": "none"
+}

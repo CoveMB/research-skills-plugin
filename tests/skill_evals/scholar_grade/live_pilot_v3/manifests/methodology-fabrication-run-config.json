@@ -1,6 +1,6 @@
 {
   "capture_mode": "manual-live-capture",
-  "date": "2026-06-04",
+  "date": "2026-07-09",
   "external_lookup_permitted": false,
   "fixture_id": "methodology-fabrication-run-config",
   "interface": "codex-app",
@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "scholarly-integrity-gate",
   "skill_file": "skills/scholarly-integrity-gate/SKILL.md",
-  "skill_file_sha256": "9de41d267294ebfa98e9ab307f95a84282cfad2e70ce112f08b644fde1368316",
+  "skill_file_sha256": "7135c7146fb3643fe8ea64e966aa2557667d0dc7b7511ad4b29197cf11d444ad",
   "source_packet": "corpora/methodology-fabrication-run-config/source-packet.md",
   "source_packet_sha256": "dd0fcbac3bf509a0803f4030aef5dc40b5bead2f064d82a42fe2e1e3444eb8f4",
   "structured_result": {

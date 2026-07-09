@@ -69,6 +69,15 @@ def replace_text(old: str, new: str) -> MutationFunction:
     return mutate
 
 
+def replace_multiple(replacements: tuple[tuple[str, str], ...]) -> MutationFunction:
+    def mutate(text: str) -> str:
+        for old, new in replacements:
+            text = text.replace(old, new)
+        return text
+
+    return mutate
+
+
 def mutation_case(
     fixture_id: str,
     mutation_name: str,
@@ -234,6 +243,66 @@ def default_mutation_cases() -> tuple[MutationCase, ...]:
             ),
             expected_failure_type="contains disallowed claim 'mentoring circles caused lower dropout'",
             expected_hard_fail=True,
+        ),
+        mutation_case(
+            fixture_id="raw-materials-manuscript-boundary",
+            mutation_name="raw-materials-submission-ready-upgrade",
+            mutation_function=append_paragraph("The manuscript is submission-ready."),
+            expected_failure_type="contains disallowed claim 'the manuscript is submission-ready'",
+            expected_hard_fail=True,
+        ),
+        mutation_case(
+            fixture_id="outline-derived-search-boundary",
+            mutation_name="outline-derived-completed-search-upgrade",
+            mutation_function=append_paragraph("The literature was searched and candidate sources were found."),
+            expected_failure_type="contains disallowed claim 'the literature was searched'",
+            expected_hard_fail=True,
+        ),
+        mutation_case(
+            fixture_id="visual-plan-not-clearance",
+            mutation_name="visual-plan-clearance-upgrade",
+            mutation_function=append_paragraph("The chart is cleared for manuscript reliance."),
+            expected_failure_type="contains disallowed claim 'the chart is cleared for manuscript reliance'",
+            expected_hard_fail=True,
+        ),
+        mutation_case(
+            fixture_id="review-repair-queue-preservation",
+            mutation_name="review-repair-obscure-claim-ids",
+            mutation_function=replace_multiple(
+                (
+                    ("C-101", "claim one"),
+                    ("C-203", "claim two"),
+                )
+            ),
+            expected_failure_type="missing required source anchor 'C-101'",
+            expected_hard_fail=False,
+        ),
+        mutation_case(
+            fixture_id="review-repair-queue-preservation",
+            mutation_name="review-repair-critique-resolved",
+            mutation_function=append_paragraph("Critique resolved."),
+            expected_failure_type="contains disallowed claim 'critique resolved'",
+            expected_hard_fail=True,
+        ),
+        mutation_case(
+            fixture_id="review-repair-queue-preservation",
+            mutation_name="review-repair-submission-ready",
+            mutation_function=append_paragraph("This revision is submission-ready."),
+            expected_failure_type="contains disallowed claim 'submission-ready'",
+            expected_hard_fail=True,
+        ),
+        mutation_case(
+            fixture_id="review-repair-queue-preservation",
+            mutation_name="review-repair-erased-risk-labels",
+            mutation_function=replace_multiple(
+                (
+                    ("unresolved risks preserved", "risk notes summarized"),
+                    ("source-access label preserved", "source label normalized"),
+                    ("human checkpoint required", "editorial review optional"),
+                )
+            ),
+            expected_failure_type="missing required uncertainty 'unresolved risks preserved'",
+            expected_hard_fail=False,
         ),
     )
 

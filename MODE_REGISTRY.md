@@ -18,6 +18,7 @@ Use `docs/policy/ROUTING_MATRIX.md` for canonical skill-routing choices.
 | `research-route-normal` | `research-intent-router` | Plan-first research route; non-contract routing output | Medium | "research normal mode", "normal research mode", "plan first" |
 | `research-route-deep` | `research-intent-router` | Deep research route with lookup attempt; non-contract routing output | High | "research deep mode", "deep research mode", "deep lookup by default" |
 | `orchestrate` | `research-book-orchestrator` | Staged workflow plan | Very High | "full book workflow", "where should I start", "plan my research book" |
+| `manuscript-preparation` | `research-book-orchestrator` | Alias for `orchestrate`: raw-materials inventory and staged manuscript workflow plan | Very High | "raw materials to manuscript", "idea summary and research log", "turn notes into manuscript plan", "draft figures and source notes" |
 | `agenda` | `scholarly-research-agenda` | Book Research Agenda | Very High | "book idea", "research question", "scope", "contribution" |
 | `source-discovery` | `systematic-source-discovery` | Source Discovery Log | High | "find sources", "search strategy", "source plan" |
 | `discovery-dedupe` | `discovery-runner-deduper` | Candidate Matrix and Search-Log Update | High | "dedupe candidates", "screen search results", "CSV", "BIB", "RIS" |
