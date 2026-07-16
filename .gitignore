@@ -25,3 +25,6 @@ secrets.json
 
 # Local real-source review caches
 tests/skill_evals/scholar_grade/real_goldsets/intake/*/PDFs/
+
+# Local generated planning artifacts
+/docs/superpowers/

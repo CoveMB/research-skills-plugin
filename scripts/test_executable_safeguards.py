@@ -138,6 +138,34 @@ class TestExecutableSafeguards(unittest.TestCase):
             self.assertFalse(any("/build/" in name for name in names))
             self.assertFalse(any("/coverage/" in name for name in names))
 
+    def test_package_and_installer_exclude_repository_only_docs(self) -> None:
+        installer = load_module("install_codex_plugin.py")
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory) / "plugin"
+            write_minimal_plugin(root)
+            repository_only_path = root / "docs" / "superpowers" / "plans" / "future-plan.md"
+            public_documentation_path = root / "docs" / "user" / "guide.md"
+            repository_only_path.parent.mkdir(parents=True)
+            public_documentation_path.parent.mkdir(parents=True)
+            repository_only_path.write_text("internal plan", encoding="utf-8")
+            public_documentation_path.write_text("public guide", encoding="utf-8")
+            output_path = Path(temporary_directory) / "bundle.zip"
+
+            result = run_script("package_plugin.py", "--root", str(root), "--out", str(output_path))
+            destination = Path(temporary_directory) / "sample-plugin"
+            installer.copy_plugin(root, destination, dry_run=False)
+
+            self.assertEqual(result.returncode, 0, msg=f"stdout={result.stdout} stderr={result.stderr}")
+            with zipfile.ZipFile(output_path) as archive:
+                names = archive.namelist()
+            self.assertNotIn("sample-plugin/docs/superpowers/plans/future-plan.md", names)
+            self.assertIn("sample-plugin/docs/user/guide.md", names)
+            self.assertFalse((destination / "docs" / "superpowers" / "plans" / "future-plan.md").exists())
+            self.assertEqual(
+                (destination / "docs" / "user" / "guide.md").read_text(encoding="utf-8"),
+                "public guide",
+            )
+
     def test_package_and_installer_exclude_symlinked_files(self) -> None:
         installer = load_module("install_codex_plugin.py")
         with TemporaryDirectory() as temporary_directory:

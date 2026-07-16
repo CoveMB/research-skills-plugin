@@ -48,6 +48,7 @@ EXCLUDED_DIRECTORIES = {
 }
 EXCLUDED_FILE_NAMES = {".DS_Store", ".env", "local-notes.txt", "secrets.json"}
 EXCLUDED_SUFFIXES = {".log", ".pyc", ".zip", ".tmp"}
+REPOSITORY_ONLY_DIRECTORIES = {Path("docs/superpowers")}
 PRIVATE_SOURCE_TEXT_FIELDS = {
     "excerpt",
     "full text",
@@ -457,6 +458,10 @@ def is_generated_path(relative_path: Path) -> bool:
     )
 
 
+def is_repository_only_path(relative_path: Path) -> bool:
+    return bool(REPOSITORY_ONLY_DIRECTORIES.intersection(relative_path.parents))
+
+
 def is_allowed_package_path(relative_path: Path) -> bool:
     if not relative_path.parts:
         return False
@@ -473,7 +478,11 @@ def should_include_package_file(root: Path, path: Path) -> bool:
     except ValueError:
         return False
     relative_path = path.relative_to(root)
-    return is_allowed_package_path(relative_path) and not is_generated_path(relative_path)
+    return (
+        is_allowed_package_path(relative_path)
+        and not is_generated_path(relative_path)
+        and not is_repository_only_path(relative_path)
+    )
 
 
 def package_files(root: Path) -> list[Path]:

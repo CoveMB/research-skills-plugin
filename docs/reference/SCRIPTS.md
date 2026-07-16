@@ -159,6 +159,8 @@ Default mode is deterministic and no-network. It does not inspect image pixels, 
 
 The packager and installer copy only allowed package paths. Allowed top-level directories are `.codex-plugin`, `assets`, `docs`, `examples`, `scripts`, `shared`, and `skills`. Allowed top-level files are `.gitignore`, `AGENTS.md`, `CHANGELOG.md`, `LICENSE`, `MODE_REGISTRY.md`, `README.md`, `install.ps1`, `install.sh`, `marketplace.sample.json`, and `validate.sh`. If a maintainer adds a new top-level package path, update the allowlist in `scripts/plugin_utils.py`; otherwise the packager and installer omit it.
 
+`docs/superpowers/` is reserved for local generated planning artifacts. Git ignores this directory, and the packager and installer exclude it even when files exist locally.
+
 The packager excludes generated files and local state, including `.git`, caches, virtual environments, build output, coverage output, logs, temporary files, and existing zip files.
 
 ### Tests
