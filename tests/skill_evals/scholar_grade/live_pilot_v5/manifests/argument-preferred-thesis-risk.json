@@ -14,6 +14,7 @@
   "skill": "argument-architecture",
   "skill_file": "skills/argument-architecture/SKILL.md",
   "skill_file_sha256": "e2538850ba8d4cba2ecb8f36faf174568c3edc541ebb6944bf63e01ae4c05c12",
+  "skill_instruction_sha256": "7d5b1fa3436a52ecb11b5d3253e3d7922f5d871b5ff700f97bf2faacf981f829",
   "source_packet": "corpora/argument-preferred-thesis-risk/source-packet.md",
   "source_packet_sha256": "b8dffc48a03f7ba39af53d509577a2d9b1a5ecbc54f59ad7b3042094da59a99a",
   "structured_result": {

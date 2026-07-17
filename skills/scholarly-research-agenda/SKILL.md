@@ -3,7 +3,7 @@ name: scholarly-research-agenda
 description: Turn a broad research book idea, topic, thesis intuition, manifesto, or interdisciplinary question into precise research questions, scope boundaries, contribution claims, key terms, evidence needs, and an initial agenda before source gathering or outlining.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   category: research-book-writing
 ---
 # Research agenda

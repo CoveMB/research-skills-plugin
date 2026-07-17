@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "book-proposal-scholarship",
   "skill_file": "skills/book-proposal-scholarship/SKILL.md",
-  "skill_file_sha256": "2615f69910ebd4cbe7bf182c0c5c326d61e06b39fff3d522b37a8fdff983092a",
+  "skill_file_sha256": "f7b7e9799b99059e96b627ea40b1cd7bf4bb5ca0028d709b58ffd7d311ad5623",
   "source_packet": "corpora/book-proposal-unverified-comps/source-packet.md",
   "source_packet_sha256": "8c1aef4f4606ff3d01f2d241478aa31b88c714febfa28926bd1ee6a7dc28d965",
   "structured_result": {

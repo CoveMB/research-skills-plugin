@@ -3,7 +3,7 @@ name: reading-load-reducer
 description: Reduce reading burden for scholarly work by turning dense articles, source excerpts, search results, bibliographies, chapter drafts, or long notes into skim-read-skip triage, close-reading targets, extraction priorities, evidence needs, and next actions without inventing source support.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   category: research-book-writing
 ---
 # Reading load reducer

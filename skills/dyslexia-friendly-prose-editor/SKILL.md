@@ -3,7 +3,7 @@ name: dyslexia-friendly-prose-editor
 description: Repair spelling, grammar, sentence boundaries, punctuation, paragraph breaks, and local readability in existing scholarly prose for dyslexic or dysorthographic authors while preserving meaning, authorial voice, uncertainty, evidence limits, and a brief change summary.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   category: research-book-writing
 ---
 # Dyslexia-friendly prose editor

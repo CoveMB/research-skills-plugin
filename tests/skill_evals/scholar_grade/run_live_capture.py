@@ -187,6 +187,7 @@ def build_run_manifest(
         "prompt_packet_sha256": prompt_packet_sha256,
         "skill_file": skill_manifest_path(fixture),
         "skill_file_sha256": capture["skill_file_sha256"],
+        "skill_instruction_sha256": capture["skill_instruction_sha256"],
         "output_file": output_file_name(fixture_id),
         "output_sha256": output_sha256,
         "tool_permissions": metadata.tool_permissions,

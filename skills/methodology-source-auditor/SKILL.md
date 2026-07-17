@@ -3,7 +3,7 @@ name: methodology-source-auditor
 description: Evaluate source credibility when articles, books, reports, datasets, case studies, journalism, or web sources need method, evidence quality, bias, generalizability, and source-claim support limits audited.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   category: research-book-writing
 ---
 # Methodology source auditor

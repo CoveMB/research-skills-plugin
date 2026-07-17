@@ -88,7 +88,18 @@ def write_fixture_environment(root: Path) -> Path:
         )
         skill_dir = root / "skills" / str(test_fixture["skill"])
         skill_dir.mkdir(parents=True)
-        (skill_dir / "SKILL.md").write_text("skill text", encoding="utf-8")
+        (skill_dir / "SKILL.md").write_text(
+            "---\n"
+            f"name: {test_fixture['skill']}\n"
+            "description: Test skill.\n"
+            "metadata:\n"
+            '  version: "1.0.0"\n'
+            "  category: test\n"
+            "---\n"
+            "\n"
+            "skill text\n",
+            encoding="utf-8",
+        )
     return fixture_path
 
 
@@ -191,6 +202,7 @@ class TestLiveCaptureProtocol(unittest.TestCase):
             self.assertEqual(manifest["structured_result"]["output_captured"], "TODO_BOOLEAN")
             self.assertRegex(str(manifest["source_packet_sha256"]), r"^[0-9a-f]{64}$")
             self.assertRegex(str(manifest["skill_file_sha256"]), r"^[0-9a-f]{64}$")
+            self.assertRegex(str(manifest["skill_instruction_sha256"]), r"^[0-9a-f]{64}$")
             self.assertEqual(manifest["trace_file"], "traces/unsupported-causal-claim.json")
             self.assertEqual(manifest["trace_sha256"], "TODO_FOR_AUTOMATED_CAPTURE")
 

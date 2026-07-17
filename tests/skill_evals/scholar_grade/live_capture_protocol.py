@@ -9,6 +9,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from skill_evaluation_hashes import skill_instruction_sha256
+
 
 ROOT = Path(__file__).resolve().parents[3]
 
@@ -98,6 +100,7 @@ def capture_from_fixture(fixture_path: Path, root: Path, fixture: dict[str, Any]
         "source_packet_text": source_packet.read_text(encoding="utf-8"),
         "skill_file": relative_to_root_or_absolute(skill_file, root),
         "skill_file_sha256": sha256_file(skill_file),
+        "skill_instruction_sha256": skill_instruction_sha256(skill_file),
         "output_file": output_file_name(fixture),
         "trace_file": relative_to_root_or_absolute(trace_file, root),
         "manifest_file": f"{fixture_identifier(fixture)}.json",
@@ -178,6 +181,7 @@ def build_manifest_template(capture: dict[str, Any]) -> dict[str, Any]:
         "prompt_packet_sha256": sha256_text(render_prompt_packet(capture)),
         "skill_file": capture["skill_file"],
         "skill_file_sha256": capture["skill_file_sha256"],
+        "skill_instruction_sha256": capture["skill_instruction_sha256"],
         "output_file": capture["output_file"],
         "output_sha256": "TODO_AFTER_CAPTURE",
         "trace_file": capture["trace_file"],

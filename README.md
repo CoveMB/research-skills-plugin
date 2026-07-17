@@ -1,6 +1,6 @@
 # Research Book Skills
 
-Version: 1.0.0
+Version: 1.1.0
 
 Research Book Skills is a local skills plugin for people writing scholarly nonfiction, research monographs, long-form essays, or book proposals. It turns loose research work into concrete artifacts: low-load research notes, dictation notes, reading triage, meaning-preserving prose repair, a research agenda, source discovery log, source notes, extraction tables, literature map, thesis tree, chapter brief, claim ledger, claim traceability graph, citation audit, figure/table integrity audit, scholarly integrity gate, AI/human workflow log, release audit, continuity review, comparable-title check, and proposal.
 
@@ -12,29 +12,23 @@ The bundled accessibility skills are the research-book integrated variants. For 
 
 ## Install in 30 seconds
 
-We recommend the full plugin because it keeps routing, orchestration, shared policies, contracts, and specialist skills together. Python 3.10 or newer is needed for installation, validation, packaging, and standalone bundle generation. The scripts use the Python standard library, so there is no dependency install step.
-
-From the unzipped folder:
+We recommend the full plugin because it keeps routing, orchestration, shared policies, contracts, and specialist skills on one versioned update path. Add this public Git repository as a Codex marketplace, then install the plugin from that marketplace:
 
 ```bash
-./install.sh
+codex plugin marketplace add https://github.com/CoveMB/research-skills-plugin.git --ref main
+codex plugin add research-skills-plugin@covemb-research-skills
 ```
 
-On Windows PowerShell:
+The marketplace catalog follows `main`, while the plugin entry is pinned to the immutable Git tag for this release. Restart Codex or start a new task after installation so the new skills appear.
 
-```powershell
-.\install.ps1
-```
-
-The installer validates the package, copies it to your local plugin directory, and updates your personal marketplace file. Restart the app after installation, then enable **Research Book Skills** from the plugin directory.
-
-Preview the install first:
+To update after a new release:
 
 ```bash
-./install.sh --dry-run
+codex plugin marketplace upgrade covemb-research-skills
+codex plugin add research-skills-plugin@covemb-research-skills
 ```
 
-Full manual install paths are in [`docs/user/INSTALLATION.md`](docs/user/INSTALLATION.md). The manual guide also covers generated single-skill directories and zips, validation, migration from older raw-folder installs, and uninstall steps.
+Installing from the Git marketplace does not require Python. Python 3.10 or newer is needed only for repository validation, packaging, standalone bundle generation, and Python helpers used by some skills. Full installation, update, standalone bundle, and uninstall instructions are in [`docs/user/INSTALLATION.md`](docs/user/INSTALLATION.md).
 
 ## Portable single-skill bundles
 
@@ -314,7 +308,7 @@ Script details, arguments, side effects, and dependency notes are in [`docs/refe
 
 ## Useful docs
 
-- [`docs/user/INSTALLATION.md`](docs/user/INSTALLATION.md): manual install options and uninstall steps
+- [`docs/user/INSTALLATION.md`](docs/user/INSTALLATION.md): Git marketplace installation, updates, standalone bundles, and uninstall steps
 - [`docs/user/SKILL_INDEX.md`](docs/user/SKILL_INDEX.md): all skills and when to use them
 - [`docs/reference/SCRIPTS.md`](docs/reference/SCRIPTS.md): script commands, requirements, and write behavior
 - [`docs/user/WORKFLOW_PLAYBOOK.md`](docs/user/WORKFLOW_PLAYBOOK.md): practical book workflows

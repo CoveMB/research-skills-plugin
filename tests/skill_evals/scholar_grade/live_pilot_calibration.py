@@ -178,7 +178,10 @@ def validation_error_action(error: str) -> dict[str, str]:
     fixture_id = error.split(":", 1)[0] if ":" in error else "suite"
     action = (
         "record-new-live-capture-after-skill-change"
-        if "manifest skill_file_sha256 does not match skill file" in error
+        if (
+            "manifest skill_file_sha256 does not match skill file" in error
+            or "manifest skill_instruction_sha256 does not match current skill instructions" in error
+        )
         else "repair-live-capture-validation-error"
     )
     return {

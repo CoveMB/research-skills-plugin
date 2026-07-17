@@ -3,7 +3,7 @@ name: scholarly-prose-editor
 description: Edit research nonfiction prose when passages, chapter excerpts, proposals, abstracts, or introductions need clarity, precision, structure, rhythm, compression, readability, or voice while preserving nuance and evidence limits.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   category: research-book-writing
 ---
 # Research prose editor

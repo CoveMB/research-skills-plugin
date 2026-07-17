@@ -3,7 +3,7 @@ name: claim-traceability-graph
 description: Map manuscript or note claims to claim IDs, source notes, citekeys, locators, and evidence status when traceability, unsupported claims, orphan claims, or incomplete evidence chains need review.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   category: research-book-writing
 ---
 # Claim traceability graph

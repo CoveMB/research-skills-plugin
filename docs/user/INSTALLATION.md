@@ -1,94 +1,67 @@
 # Installation guide
 
-Install the full plugin when possible. It keeps the router, orchestrator, shared policies, contracts, and specialist skills on one update path. If an environment accepts only individual skills, use the generated standalone bundles described below.
+Install the full plugin from its public Git marketplace when possible. This keeps the router, orchestrator, shared policies, contracts, and specialist skills on one versioned update path. Generated standalone bundles remain available for environments that accept only individual skills.
 
 ## Requirements
 
-Python 3.10 or newer is required to install or validate the plugin, build or validate standalone bundles, package the plugin, and run any Python helper included in a generated bundle. An instruction-only generated bundle does not require Python during ordinary use. No pip packages are required; all maintenance scripts and bundled helpers use the Python standard library.
+- A Codex release that provides `codex plugin` and `codex plugin marketplace` commands.
+- Git access to `https://github.com/CoveMB/research-skills-plugin.git`.
 
-- macOS and Linux installs use Bash through `./install.sh`.
-- Windows installs use PowerShell through `.\install.ps1`.
-- A local plugin install needs write access to the plugin destination and marketplace JSON.
+The Git marketplace installation does not require Python. Python 3.10 or newer is required only for repository validation, packaging, standalone bundle generation, and Python helpers used by some skills. An instruction-only generated bundle does not require Python during ordinary use. No pip packages are required; repository maintenance scripts use the Python standard library.
 
-## Option A: Install as a local plugin
+## Install from the Git marketplace
 
-### macOS / Linux
-
-```bash
-cd path/to/unzipped-or-cloned-plugin-folder
-./install.sh
-```
-
-### Windows PowerShell
-
-```powershell
-cd path/to/unzipped-or-cloned-plugin-folder
-.\install.ps1
-```
-
-The installed plugin and marketplace entry are named `research-skills-plugin`; the source checkout or unzipped folder may have a different name.
-
-The installer:
-
-1. validates `.codex-plugin/plugin.json`,
-2. validates every `skills/*/SKILL.md`,
-3. validates the book artifact schema and shipped artifact examples,
-4. copies the plugin to `~/.codex/plugins/research-skills-plugin`,
-5. creates or updates `~/.agents/plugins/marketplace.json`,
-6. adds the marketplace entry for this plugin.
-
-Restart the app after installation.
-
-Preview the install first if you want to check paths before writing files:
+Add the repository as a marketplace source:
 
 ```bash
-./install.sh --dry-run
+codex plugin marketplace add https://github.com/CoveMB/research-skills-plugin.git --ref main
 ```
 
-More script details are in [`docs/reference/SCRIPTS.md`](../reference/SCRIPTS.md).
+Install the plugin from the marketplace:
 
-## Option B: Manual personal marketplace install
-
-1. Copy this folder to:
-
-```text
-~/.codex/plugins/research-skills-plugin
+```bash
+codex plugin add research-skills-plugin@covemb-research-skills
 ```
 
-2. Create or update:
+Confirm the installation:
 
-```text
-~/.agents/plugins/marketplace.json
+```bash
+codex plugin list --json
 ```
 
-3. Add an entry like:
+The installed entry should report:
 
-```json
-{
-  "name": "local-personal-plugins",
-  "interface": {
-    "displayName": "Local Personal Plugins"
-  },
-  "plugins": [
-    {
-      "name": "research-skills-plugin",
-      "source": {
-        "source": "local",
-        "path": "./.codex/plugins/research-skills-plugin"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "Productivity"
-    }
-  ]
-}
+- plugin name `research-skills-plugin`
+- marketplace name `covemb-research-skills`
+- the version declared in `.codex-plugin/plugin.json`
+
+Restart Codex or start a new task after installation. Existing tasks may retain the skill inventory that was loaded when the task began.
+
+The marketplace catalog follows `main`, but each released plugin entry points to an immutable `v<version>` Git tag. Adding the marketplace does not install an unpublished branch or an untagged working tree.
+
+## Update
+
+Refresh the Git marketplace snapshot:
+
+```bash
+codex plugin marketplace upgrade covemb-research-skills
 ```
 
-4. Restart the app and look for the plugin in the plugin directory.
+Reinstall the plugin from the refreshed marketplace:
 
-## Option C: Generated local skill install
+```bash
+codex plugin add research-skills-plugin@covemb-research-skills
+```
+
+Verify the installed version:
+
+```bash
+codex plugin list --json
+```
+
+Start a new task after the reinstall so Codex loads the updated skills.
+
+## Generated local skill install
 
 Some agent environments read individual skills from a skills directory. Build one dependency-closed bundle from the repository root:
 
@@ -112,7 +85,7 @@ mkdir -p ~/.agents/skills
 cp -R dist/standalone-skills/<skill-name> ~/.agents/skills/
 ```
 
-## Option D: Generated skill upload
+## Generated skill upload
 
 Some skill-upload interfaces expect one bundle at a time. Build and validate the generated zip before upload:
 
@@ -121,7 +94,7 @@ python3 scripts/build_standalone_skill.py --skill <skill-name>
 python3 scripts/validate_standalone_skill.py dist/standalone-skills/<skill-name>.zip
 ```
 
-Upload `dist/standalone-skills/<skill-name>.zip`. See [`docs/user/SKILL_INDEX.md`](SKILL_INDEX.md) when choosing a specialist.
+Upload `dist/standalone-skills/<skill-name>.zip`. See [`SKILL_INDEX.md`](SKILL_INDEX.md) when choosing a specialist.
 
 ## Build the complete eligible catalog
 
@@ -133,40 +106,41 @@ python3 scripts/validate_standalone_skill.py dist/standalone-skills --registry s
 The registry classifies each source skill before generation:
 
 - `self-sufficient` skills can execute from their generated bundle.
-- `route-only` means the bundle can recommend a specialist but cannot claim that an absent specialist ran.
+- `route-only` bundles can recommend a specialist but cannot claim that an absent specialist ran.
 - `full-plugin-only` skills require the complete plugin. The builder rejects them without replacing existing output.
 
-## Migrate an older raw-folder install
+Rebuild a generated bundle whenever its source skill, shared policy, contract, or helper changes. Replace the older generated directory with the new directory of the same skill name.
 
-If you previously copied `skills/<skill-name>` directly, build that skill, validate it, and replace the old folder with the generated directory of the same skill name. Keep the destination name unchanged so existing skill references continue to resolve. Rebuild from the canonical source whenever the source skill, a shared policy, a contract, or a helper changes.
+## Validate a source checkout
 
-## Validate after install
+Run the marketplace and plugin checks before creating a release:
 
 ```bash
+python3 scripts/check_marketplace.py --root .
 python3 scripts/validate_plugin.py .
-python3 scripts/check_book_artifact_contract.py --path .
+./validate.sh
 ```
 
-For a packaged or installed copy without repo-only test fixtures, run:
+For a packaged or installed plugin copy without repository-only test fixtures, run:
 
 ```bash
 python3 scripts/run_package_checks.py --scope package
 ```
 
-For a full source-checkout validation, run from the repository root:
-
-```bash
-./validate.sh
-```
-
-See [`docs/reference/SCRIPTS.md`](../reference/SCRIPTS.md) for the full script list and dependency notes.
+See [`../reference/SCRIPTS.md`](../reference/SCRIPTS.md) for the full script list.
 
 ## Uninstall
 
-Remove the copied plugin folder:
+Remove the installed plugin:
 
 ```bash
-rm -rf ~/.codex/plugins/research-skills-plugin
+codex plugin remove research-skills-plugin@covemb-research-skills
 ```
 
-Then remove the `research-skills-plugin` entry from `~/.agents/plugins/marketplace.json`.
+Remove the marketplace only when no installed plugin still depends on it:
+
+```bash
+codex plugin marketplace remove covemb-research-skills
+```
+
+Restart Codex or start a new task after removal.

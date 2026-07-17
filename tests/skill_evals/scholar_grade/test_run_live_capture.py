@@ -60,7 +60,18 @@ def write_fixture_environment(root: Path) -> Path:
     )
     skill_dir = root / "skills" / "methodology-source-auditor"
     skill_dir.mkdir(parents=True)
-    (skill_dir / "SKILL.md").write_text("skill text", encoding="utf-8")
+    (skill_dir / "SKILL.md").write_text(
+        "---\n"
+        "name: methodology-source-auditor\n"
+        "description: Test skill.\n"
+        "metadata:\n"
+        '  version: "1.0.0"\n'
+        "  category: test\n"
+        "---\n"
+        "\n"
+        "skill text\n",
+        encoding="utf-8",
+    )
     return fixture_path
 
 
@@ -155,6 +166,7 @@ class TestRunLiveCapture(unittest.TestCase):
             self.assertEqual(manifest["capture_mode"], "manual-live-capture")
             self.assertEqual(manifest["model"], "gpt-test-scholar")
             self.assertEqual(manifest["output_sha256"], sha256_file(output_path))
+            self.assertRegex(str(manifest["skill_instruction_sha256"]), r"^[0-9a-f]{64}$")
             self.assertEqual(score_template["reviewed_output_sha256"], sha256_file(output_path))
             self.assertEqual(manifest["source_packet"], "corpora/unsupported-causal-claim/source-packet.md")
             self.assertEqual(manifest["structured_result"]["decision"], "Cannot support")

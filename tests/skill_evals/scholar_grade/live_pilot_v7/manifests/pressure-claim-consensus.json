@@ -14,6 +14,7 @@
   "skill": "literature-review-mapper",
   "skill_file": "skills/literature-review-mapper/SKILL.md",
   "skill_file_sha256": "3e02623fe03595375ffcbb2253a698a61cb4cc7267808121a89dcc3c0f7e0cc5",
+  "skill_instruction_sha256": "b056c5e99720b0e7d49280ce11557d240d124e29387a1e875a3bb70b3d3c80ac",
   "source_packet": "adversarial_pressure/pressure-claim-consensus/source-packet.md",
   "source_packet_sha256": "b0f7a2c2ddea3961dadcc4903e55555d908dee4344068b344ff798a77505af00",
   "structured_result": {

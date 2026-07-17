@@ -25,6 +25,7 @@ from check_research_behavior_fixtures import (
     string_list,
 )
 from research_behavior_reports import sorted_counts
+from skill_evaluation_hashes import skill_instruction_sha256
 
 
 REQUIRED_FIXTURE_KEYS = {
@@ -1232,7 +1233,6 @@ def manifest_hash_errors(
     output_file = output_path_for_fixture(outputs_dir, fixture)
     hash_checks = [
         ("source_packet_sha256", source_packet, "source packet"),
-        ("skill_file_sha256", skill_file, "skill file"),
         ("output_sha256", output_file, "output file"),
     ]
     errors: list[str] = []
@@ -1243,6 +1243,35 @@ def manifest_hash_errors(
         expected_hash = sha256_file(path)
         if manifest_document.get(key) != expected_hash:
             errors.append(f"{identifier}: manifest {key} does not match {label}")
+
+    exact_skill_hash = manifest_document.get("skill_file_sha256")
+    if not isinstance(exact_skill_hash, str) or SHA256_RE.match(exact_skill_hash) is None:
+        errors.append(f"{identifier}: manifest skill_file_sha256 must be a sha256 hex digest")
+
+    instruction_hash = manifest_document.get("skill_instruction_sha256")
+    uses_instruction_hash = (
+        manifest_document.get("capture_mode") in LIVE_CAPTURE_MODES
+        and instruction_hash is not None
+    )
+    if not skill_file.exists():
+        errors.append(f"{identifier}: manifest referenced skill file does not exist")
+    elif not uses_instruction_hash:
+        if exact_skill_hash != sha256_file(skill_file):
+            errors.append(f"{identifier}: manifest skill_file_sha256 does not match skill file")
+
+    if instruction_hash is not None:
+        if not isinstance(instruction_hash, str) or SHA256_RE.match(instruction_hash) is None:
+            errors.append(f"{identifier}: manifest skill_instruction_sha256 must be a sha256 hex digest")
+        elif skill_file.exists():
+            try:
+                current_instruction_hash = skill_instruction_sha256(skill_file)
+            except (OSError, ValueError) as error:
+                errors.append(f"{identifier}: cannot hash current skill instructions: {error}")
+            else:
+                if instruction_hash != current_instruction_hash:
+                    errors.append(
+                        f"{identifier}: manifest skill_instruction_sha256 does not match current skill instructions"
+                    )
     prompt_packet_sha256 = manifest_document.get("prompt_packet_sha256")
     if not isinstance(prompt_packet_sha256, str) or SHA256_RE.match(prompt_packet_sha256) is None:
         errors.append(f"{identifier}: manifest prompt_packet_sha256 must be a sha256 hex digest")

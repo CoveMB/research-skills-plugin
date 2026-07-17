@@ -3,7 +3,7 @@ name: extraction-table-builder
 description: Turn source notes, annotations, excerpts, or reading notes into structured extraction tables, source matrices, and comparison grids before synthesis, literature mapping, or claim drafting.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   category: research-book-writing
 ---
 # Extraction table builder

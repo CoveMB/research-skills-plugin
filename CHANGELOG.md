@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 1.1.0 - 2026-07-17
+
+- Added a versioned Git marketplace for direct installation with the Codex CLI.
+- Added release validation that keeps the plugin version, Git tag reference, and marketplace metadata consistent.
+- Removed the pre-release personal marketplace installer and manual copy workflow.
 - Added smaller accessibility skills for dictation-to-notes, reading-load triage, and meaning-preserving prose repair.
 - Added dyslexia research companion skill for mixed or unclear accessibility bottlenecks and low-load scholarly next actions.
 - Added six gated research skills for source notes, claim traceability, extraction tables, discovery dedupe, release audits, and comparable-title verification.

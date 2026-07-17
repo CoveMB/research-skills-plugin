@@ -14,6 +14,7 @@
   "skill": "research-intent-router",
   "skill_file": "skills/research-intent-router/SKILL.md",
   "skill_file_sha256": "ae6d8dc3656ce50e844599137f6ee3eda1fdb87779c78df1eff0b07bdaa04c43",
+  "skill_instruction_sha256": "59cc817fba415755e0ad46027de0481892bc8bd1dc289c03d21515dd7d7d76e8",
   "source_packet": "corpora/private-manuscript-search-consent/source-packet.md",
   "source_packet_sha256": "1a50091b9a1a3206efca241cf0201ecf4bf89d66d74d6d49b440aa5bfa41e74c",
   "structured_result": {

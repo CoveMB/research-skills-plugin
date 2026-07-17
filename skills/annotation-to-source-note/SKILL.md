@@ -3,7 +3,7 @@ name: annotation-to-source-note
 description: Convert reference-manager notes, document highlights, manual annotations, excerpts, or reading notes (for example, Zotero notes or PDF highlights) into source-bound notes while preserving quote, paraphrase, summary, interpretation, citekey, metadata, and locator gaps.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   category: research-book-writing
 ---
 # Annotation to source note

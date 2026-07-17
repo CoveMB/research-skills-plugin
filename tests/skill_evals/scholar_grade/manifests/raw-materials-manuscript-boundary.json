@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "research-book-orchestrator",
   "skill_file": "skills/research-book-orchestrator/SKILL.md",
-  "skill_file_sha256": "9d9ece8121f16cc64c5a9e3fb4f9fcc11c5dd64c61e748894daba12ac961c039",
+  "skill_file_sha256": "fb336c9255e74e5ec413f372bdfc34948b6d9c79d3cb9a170fcb3800d878dd99",
   "source_packet": "corpora/raw-materials-manuscript-boundary/source-packet.md",
   "source_packet_sha256": "252b135ed788f75b9f173d3321377b4dd5e732e890b1839be3119a4476b47ff4",
   "structured_result": {

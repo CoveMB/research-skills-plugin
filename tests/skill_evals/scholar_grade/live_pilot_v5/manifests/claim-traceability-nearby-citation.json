@@ -14,6 +14,7 @@
   "skill": "claim-traceability-graph",
   "skill_file": "skills/claim-traceability-graph/SKILL.md",
   "skill_file_sha256": "49e95ea38ff7dc2d6127eb1cce4f520d4fdb071cb83decbc45cbdf5f9a6bf2e9",
+  "skill_instruction_sha256": "c599cf883f9f15e971303af89ced51f1d77c118570a0b30b0b9a4a3a6a690b33",
   "source_packet": "corpora/claim-traceability-nearby-citation/source-packet.md",
   "source_packet_sha256": "3b68463e04244981ad58c8c85e693e83844919f74c0b834bef82a87c50b82eb8",
   "structured_result": {

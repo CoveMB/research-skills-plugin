@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "rights-privacy-release-auditor",
   "skill_file": "skills/rights-privacy-release-auditor/SKILL.md",
-  "skill_file_sha256": "8ffcc7011835857662c6c374e2f570fdac55b16097570983ee0fb27b65b13598",
+  "skill_file_sha256": "4467433d633480f4afc9c52b24abe45d7e2d9100f7b248df12de35bc15e7640f",
   "source_packet": "corpora/compact-output-hides-blocker/source-packet.md",
   "source_packet_sha256": "7bc267ae8ac72d7d2de6a22f118ad47d3fd71fd32896ed57b380e63466aecac6",
   "structured_result": {

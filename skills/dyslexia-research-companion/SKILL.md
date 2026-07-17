@@ -3,7 +3,7 @@ name: dyslexia-research-companion
 description: Route mixed or unclear accessibility bottlenecks for dyslexic, dysorthographic, dictation-heavy, or reading-fatigued scholarly authors when rough notes, spelling ambiguity, voice material, dense sources, or prose repair needs overlap and no smaller accessibility skill clearly owns the task.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   category: research-book-writing
 ---
 # Dyslexia research companion

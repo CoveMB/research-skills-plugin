@@ -14,6 +14,7 @@
   "skill": "ai-human-workflow-log",
   "skill_file": "skills/ai-human-workflow-log/SKILL.md",
   "skill_file_sha256": "4febfabb254f47872fe1a76607c142988cc874b0a12be2adc9b2a82bfecfa3e9",
+  "skill_instruction_sha256": "46916f6c7642ce0512761ea8c9fea90077752d86e5fd9132a4039a54163a0bfb",
   "source_packet": "corpora/ai-workflow-missing-verification-record/source-packet.md",
   "source_packet_sha256": "6b973af7c19f1bdb3abf3e248dd0dcbe173e41f8aea0d46bd5f2088eab625400",
   "structured_result": {

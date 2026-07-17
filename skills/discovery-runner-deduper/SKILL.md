@@ -3,7 +3,7 @@ name: discovery-runner-deduper
 description: Process academic index exports, library catalogue exports, bibliography exports, tabular files, or pasted candidate source records (for example, OpenAlex, Semantic Scholar, Elicit, scite, library catalogues, CSV, BIB, or RIS) into deduped screening records, duplicate clusters, and search-log updates.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   category: research-book-writing
 ---
 # Discovery runner deduper

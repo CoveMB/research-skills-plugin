@@ -3,7 +3,7 @@ name: claim-evidence-ledger
 description: Extract and audit major claims from research drafts, outlines, notes, theses, or arguments by classifying claim type, evidence status, citation need, confidence, overclaiming risk, and safer wording.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   category: research-book-writing
 ---
 # Claim evidence ledger

@@ -14,6 +14,7 @@
   "skill": "reading-load-reducer",
   "skill_file": "skills/reading-load-reducer/SKILL.md",
   "skill_file_sha256": "f7654ef15c200d3f1ab9732a1a395305d9f18c6e362ea4513a889a2a3b4f6302",
+  "skill_instruction_sha256": "aa4b06345ac0cb397cc4b3feecc598d27d2c10a2f0856de1622d2dae6d577503",
   "source_packet": "corpora/reading-load-abstract-only/source-packet.md",
   "source_packet_sha256": "29e026a9d8db1187ab823e69a6edd71a893266fc6af78235dd969ff60f8adcde",
   "structured_result": {

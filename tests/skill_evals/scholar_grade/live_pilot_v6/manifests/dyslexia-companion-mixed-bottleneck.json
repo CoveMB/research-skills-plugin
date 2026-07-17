@@ -14,6 +14,7 @@
   "skill": "dyslexia-research-companion",
   "skill_file": "skills/dyslexia-research-companion/SKILL.md",
   "skill_file_sha256": "2b49e0468eae2c069330cde701a999ea79e8a9450fe844e6211fffbaa310de4e",
+  "skill_instruction_sha256": "18ef79984e470aec7628e79a3ebac7849b0b3da1a03f465d44091a9a6b6002bc",
   "source_packet": "corpora/dyslexia-companion-mixed-bottleneck/source-packet.md",
   "source_packet_sha256": "da4d770c37af1f3ea4727008a1a6934a83de782bd4fb599e3df2cc845d1f3b5a",
   "structured_result": {

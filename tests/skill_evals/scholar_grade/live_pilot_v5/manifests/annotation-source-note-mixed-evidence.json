@@ -14,6 +14,7 @@
   "skill": "annotation-to-source-note",
   "skill_file": "skills/annotation-to-source-note/SKILL.md",
   "skill_file_sha256": "6760efbbaac6a2eae488067ab8f2fef097f32e2e67a03fbc21bce87533e679f4",
+  "skill_instruction_sha256": "330063941c739c4cebeb0ded635ceb63a7bddae1bc2348e2a430e90e509a3eaa",
   "source_packet": "corpora/annotation-source-note-mixed-evidence/source-packet.md",
   "source_packet_sha256": "06109b55a3c53df058e06a800e09d69ff87a3cb0b73c2802cc2af9f46fcf5d02",
   "structured_result": {

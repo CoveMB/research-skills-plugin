@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "discovery-runner-deduper",
   "skill_file": "skills/discovery-runner-deduper/SKILL.md",
-  "skill_file_sha256": "645d9dfe08bd218db02a7b99ad402a6c59c906f79920e3e22ca0da7221004046",
+  "skill_file_sha256": "6c4b8e215818df741fe932d9bcce86b97492e94a724b673093dedcc660c860db",
   "source_packet": "corpora/discovery-dedupe-fuzzy-export/source-packet.md",
   "source_packet_sha256": "868afe425a3b22141bf741191e8b27ed95ca6b7caab3921ab192cfaedec13165",
   "structured_result": {

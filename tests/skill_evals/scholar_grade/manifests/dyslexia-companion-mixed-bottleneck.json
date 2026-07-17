@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "dyslexia-research-companion",
   "skill_file": "skills/dyslexia-research-companion/SKILL.md",
-  "skill_file_sha256": "2b49e0468eae2c069330cde701a999ea79e8a9450fe844e6211fffbaa310de4e",
+  "skill_file_sha256": "50afc7e63e42e2cab9153d4bf58a6b6e5782ea51e642e8c4f7859bcd7dbd1afc",
   "source_packet": "corpora/dyslexia-companion-mixed-bottleneck/source-packet.md",
   "source_packet_sha256": "da4d770c37af1f3ea4727008a1a6934a83de782bd4fb599e3df2cc845d1f3b5a",
   "structured_result": {

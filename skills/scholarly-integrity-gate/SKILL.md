@@ -3,7 +3,7 @@ name: scholarly-integrity-gate
 description: Audit scholar-grade research workflows, AI-assisted papers, draft analyses, source pipelines, or book artifacts for integrity failure modes such as hallucinated evidence, methodology fabrication, implementation bugs, shortcut reliance, frame-lock, weak human checkpoints, and override decisions.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   category: research-book-writing
 ---
 # Scholarly integrity gate

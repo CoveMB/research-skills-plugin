@@ -309,7 +309,7 @@ python3 scripts/run_package_checks.py --scope live-pilot-v2
 
 The v2 pilot lives under `tests/skill_evals/scholar_grade/live_pilot_v2/` and runs strict calibration after validating its live outputs, manifests, and review scores. Use this explicit scope when the v2 live captures are expected to match the current skill files.
 
-After skill instruction changes, do not overwrite historical v2 captures whose manifest skill hashes no longer match current skill files. Use `tests/skill_evals/scholar_grade/live_pilot_v3/` as the completed additive recapture root for the stale v2 subset. Its strict calibration check is part of `python3 scripts/run_package_checks.py --scope full`, while the historical v2 gate remains available as `--scope live-pilot-v2`:
+After skill instruction changes, do not overwrite historical captures. `skill_file_sha256` remains bound to the exact capture-time file. New captures also record `skill_instruction_sha256`, which ignores only `metadata.version` and still fails when any other frontmatter or instruction text changes. Use `tests/skill_evals/scholar_grade/live_pilot_v3/` as the completed additive recapture root for the stale v2 subset. Its strict calibration check is part of `python3 scripts/run_package_checks.py --scope full`, while the historical v2 gate remains available as `--scope live-pilot-v2`:
 
 ```bash
 python3 scripts/run_package_checks.py --scope live-pilot-v3
@@ -414,4 +414,4 @@ Record one completed manual capture:
 python3 tests/skill_evals/scholar_grade/run_live_capture.py --fixtures tests/skill_evals/scholar_grade/fixtures.json --root . --out-root tests/skill_evals/scholar_grade --fixture-id unsupported-causal-claim --captured-output /tmp/unsupported-causal-claim.md --interface codex-app --model gpt-5.4 --date 2026-05-14 --operator "Reviewer Name" --decision "Cannot support"
 ```
 
-The recorder writes the prompt packet, captured output, run manifest, and score template with hashes. It refuses to replace existing artifacts unless `--overwrite` is supplied. For `automated-live-capture`, pass `--trace-source path/to/completed-trace.json`; the manifest will store a repository-root-relative `trace_file` and matching `trace_sha256`.
+The recorder writes the prompt packet, captured output, run manifest, and score template with hashes. The manifest keeps the exact capture-time skill hash and a second instruction fingerprint that ignores only `metadata.version`. It refuses to replace existing artifacts unless `--overwrite` is supplied. For `automated-live-capture`, pass `--trace-source path/to/completed-trace.json`; the manifest will store a repository-root-relative `trace_file` and matching `trace_sha256`.

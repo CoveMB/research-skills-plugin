@@ -14,6 +14,7 @@
   "skill": "citation-integrity-auditor",
   "skill_file": "skills/citation-integrity-auditor/SKILL.md",
   "skill_file_sha256": "98c8f8e70a23bf14a77e0862a0423acbd3075dc9943e10aa0da30467012188ed",
+  "skill_instruction_sha256": "5bb1f4eb3881c0bce668a9dd0b8b5013ec8df258778f85f2a0e0cfd8f2dd8bec",
   "source_packet": "corpora/quote-without-locator/source-packet.md",
   "source_packet_sha256": "fcbf338f5a3f546d9c304cd53ee0e6752a5805dbdf7234cfb0905e27368b0971",
   "structured_result": {

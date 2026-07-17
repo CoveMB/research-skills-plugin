@@ -3,7 +3,7 @@ name: annotated-bibliography-builder
 description: Create structured annotated bibliographies when sources, citations, excerpts, abstracts, notes, PDFs, or bibliographies need notes on argument, method, evidence, relevance, limits, and chapter placement.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   category: research-book-writing
 ---
 # Annotated bibliography builder

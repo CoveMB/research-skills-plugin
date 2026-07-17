@@ -20,6 +20,7 @@ from scholar_grade_eval_harness import (
     validate_scholar_grade_review_scores,
     validate_scholar_grade_run_manifests,
 )
+from skill_evaluation_hashes import skill_instruction_sha256
 
 
 SCRIPT = Path(__file__).resolve().parent / "scholar_grade_eval_harness.py"
@@ -28,6 +29,20 @@ ROOT = Path(__file__).resolve().parents[3]
 
 def sha256_text(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def versioned_skill_text(version: str, body: str = "skill text") -> str:
+    return (
+        "---\n"
+        "name: methodology-source-auditor\n"
+        "description: Test skill.\n"
+        "metadata:\n"
+        f'  version: "{version}"\n'
+        "  category: test\n"
+        "---\n"
+        "\n"
+        f"{body}\n"
+    )
 
 
 def fixture(
@@ -1530,6 +1545,108 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
             self.assertEqual(
                 validate_scholar_grade_run_manifests(fixture_path, outputs_dir, manifests_dir, root),
                 [],
+            )
+
+    def test_live_manifest_keeps_capture_hash_across_release_version_change(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            captured_skill_text = versioned_skill_text("1.0.0")
+            current_skill_text = versioned_skill_text("1.1.0")
+            source_packet_text = "\n".join(
+                [
+                    "# Synthetic source packet",
+                    "",
+                    "Source basis: controlled notes only.",
+                    "Visible method details: none.",
+                ]
+            )
+            output_text = "\n".join(
+                [
+                    "Source basis: controlled packet.",
+                    "Claim/evidence fit: descriptive support only.",
+                    "Expected decision: Cannot support.",
+                    "No method details are available.",
+                    "Next action: inspect method details before relying on the claim.",
+                ]
+            )
+            write_source_packet(root)
+            write_skill_file(root, text=current_skill_text)
+            fixture_path = write_fixture_file(root, fixture_document(fixture()))
+            outputs_dir = root / "outputs"
+            outputs_dir.mkdir()
+            (outputs_dir / "unsupported-causal-claim.md").write_text(output_text, encoding="utf-8")
+            live_manifest = manifest(
+                output_text=output_text,
+                source_packet_text=source_packet_text,
+                skill_text=captured_skill_text,
+            )
+            live_manifest["capture_mode"] = "manual-live-capture"
+            captured_skill_path = root / "captured-SKILL.md"
+            captured_skill_path.write_text(captured_skill_text, encoding="utf-8")
+            live_manifest["skill_instruction_sha256"] = skill_instruction_sha256(captured_skill_path)
+            manifests_dir = write_manifest_file(root, live_manifest)
+            write_prompt_file(root)
+
+            self.assertNotEqual(live_manifest["skill_file_sha256"], sha256_text(current_skill_text))
+            self.assertEqual(
+                validate_scholar_grade_run_manifests(fixture_path, outputs_dir, manifests_dir, root),
+                [],
+            )
+
+            (root / "skills" / "methodology-source-auditor" / "SKILL.md").write_text(
+                versioned_skill_text("1.1.0", body="changed instructions"),
+                encoding="utf-8",
+            )
+            errors = validate_scholar_grade_run_manifests(fixture_path, outputs_dir, manifests_dir, root)
+            self.assertIn(
+                "unsupported-causal-claim: manifest skill_instruction_sha256 does not match current skill instructions",
+                errors,
+            )
+
+    def test_live_manifest_instruction_hash_fails_closed_on_malformed_current_skill(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            captured_skill_text = versioned_skill_text("1.0.0")
+            source_packet_text = "\n".join(
+                [
+                    "# Synthetic source packet",
+                    "",
+                    "Source basis: controlled notes only.",
+                    "Visible method details: none.",
+                ]
+            )
+            output_text = "\n".join(
+                [
+                    "Source basis: controlled packet.",
+                    "Claim/evidence fit: descriptive support only.",
+                    "Expected decision: Cannot support.",
+                    "No method details are available.",
+                    "Next action: inspect method details before relying on the claim.",
+                ]
+            )
+            write_source_packet(root)
+            write_skill_file(root, text="malformed skill")
+            fixture_path = write_fixture_file(root, fixture_document(fixture()))
+            outputs_dir = root / "outputs"
+            outputs_dir.mkdir()
+            (outputs_dir / "unsupported-causal-claim.md").write_text(output_text, encoding="utf-8")
+            live_manifest = manifest(
+                output_text=output_text,
+                source_packet_text=source_packet_text,
+                skill_text=captured_skill_text,
+            )
+            live_manifest["capture_mode"] = "manual-live-capture"
+            captured_skill_path = root / "captured-SKILL.md"
+            captured_skill_path.write_text(captured_skill_text, encoding="utf-8")
+            live_manifest["skill_instruction_sha256"] = skill_instruction_sha256(captured_skill_path)
+            manifests_dir = write_manifest_file(root, live_manifest)
+            write_prompt_file(root)
+
+            errors = validate_scholar_grade_run_manifests(fixture_path, outputs_dir, manifests_dir, root)
+
+            self.assertTrue(
+                any("cannot hash current skill instructions" in error for error in errors),
+                msg=errors,
             )
 
     def test_run_manifest_rejects_missing_prompt_packet_file(self) -> None:

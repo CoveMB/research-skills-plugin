@@ -14,6 +14,7 @@
   "skill": "annotated-bibliography-builder",
   "skill_file": "skills/annotated-bibliography-builder/SKILL.md",
   "skill_file_sha256": "cffea63085ef5cf93eb85ecb949283132221a5229707c81b917489fb4dc79e99",
+  "skill_instruction_sha256": "cc44ad5a2535489ef8315d33d8e397a8da14554974f0b4c0eed76da28460bb4f",
   "source_packet": "corpora/annotated-bibliography-abstract-only/source-packet.md",
   "source_packet_sha256": "f6e4c023c67b61a22e9d89cb413e3a56cb4e424375d064c56bca471ad65b7313",
   "structured_result": {

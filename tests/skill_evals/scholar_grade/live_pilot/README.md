@@ -28,4 +28,4 @@ python3 tests/skill_evals/scholar_grade/live_pilot_calibration.py --format markd
 
 The calibration report compares recorded pilot review scores to deterministic baseline scores and emits actions for missing captures, validation failures, or score regressions. Use `--strict` after the pilot artifacts are complete.
 
-After skill instructions change, do not overwrite the original blind captures. The manifest skill hash should identify the skill text used at capture time. Record the next pilot run in a new additive root with a fresh operator or session that has not read the hidden answer keys.
+After skill instructions change, do not overwrite the original blind captures. `skill_file_sha256` records the exact `SKILL.md` bytes used at capture time and must remain unchanged. `skill_instruction_sha256` ignores only the release-only `metadata.version` line, so a version bump can keep a compatible historical capture active without rewriting its provenance. Any other frontmatter or instruction change invalidates that fingerprint. Record the next pilot run in a new additive root with a fresh operator or session that has not read the hidden answer keys.

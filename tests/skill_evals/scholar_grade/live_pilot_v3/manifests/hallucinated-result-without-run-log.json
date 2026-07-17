@@ -14,6 +14,7 @@
   "skill": "scholarly-integrity-gate",
   "skill_file": "skills/scholarly-integrity-gate/SKILL.md",
   "skill_file_sha256": "7135c7146fb3643fe8ea64e966aa2557667d0dc7b7511ad4b29197cf11d444ad",
+  "skill_instruction_sha256": "cc8057f042553830efffb63b3b0030a1998b6765d5c0aa11028b030c89afaccc",
   "source_packet": "corpora/hallucinated-result-without-run-log/source-packet.md",
   "source_packet_sha256": "ae709ebd8fe8e39d3983159e732207d8242fe74b14165e106bbd3ba2bc7ea7c9",
   "structured_result": {

@@ -14,6 +14,7 @@
   "skill": "claim-evidence-ledger",
   "skill_file": "skills/claim-evidence-ledger/SKILL.md",
   "skill_file_sha256": "577ff8758235cd104969af3dd60e1a4942f0a0727e8601c932bc92bccac1157f",
+  "skill_instruction_sha256": "50c76da0ad76cc36366b1a275744ba8746cf744b42535540a6885d8653eb28ea",
   "source_packet": "corpora/claim-ledger-mixed-claim-types/source-packet.md",
   "source_packet_sha256": "6e2879e2b4eefe7c5d5fc25ba67df6e3feccd2638997d91b259700cf3ee35578",
   "structured_result": {

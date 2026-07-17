@@ -14,6 +14,7 @@
   "skill": "discovery-runner-deduper",
   "skill_file": "skills/discovery-runner-deduper/SKILL.md",
   "skill_file_sha256": "645d9dfe08bd218db02a7b99ad402a6c59c906f79920e3e22ca0da7221004046",
+  "skill_instruction_sha256": "bc705af3bbc74b2e09bd916cf6b4b3f1cf9f6dcb3a63350060dddfb7d5fa065f",
   "source_packet": "corpora/discovery-dedupe-fuzzy-export/source-packet.md",
   "source_packet_sha256": "868afe425a3b22141bf741191e8b27ed95ca6b7caab3921ab192cfaedec13165",
   "structured_result": {

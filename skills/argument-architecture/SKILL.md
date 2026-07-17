@@ -3,7 +3,7 @@ name: argument-architecture
 description: Build a research book-level thesis tree when a thesis, notes, literature map, agenda, outline, or draft needs claims, warrants, evidence paths, assumptions, counterarguments, chapter sequence, and dependencies.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   category: research-book-writing
 ---
 # Argument architecture

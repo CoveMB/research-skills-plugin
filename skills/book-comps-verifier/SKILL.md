@@ -3,7 +3,7 @@ name: book-comps-verifier
 description: Verify comparable titles and positioning claims for research nonfiction proposals, press pitches, agent queries, grant applications, audience claims, market claims, timeliness claims, and publication positioning.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   category: research-book-writing
 ---
 # Book comps verifier

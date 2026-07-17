@@ -3,7 +3,7 @@ name: ai-human-workflow-log
 description: Record AI/human research workflow decisions, human checkpoints, tool use, override reasons, unresolved risks, verification responsibilities, and AI-use disclosure notes for scholarly manuscripts, book projects, proposals, or release packets.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   category: research-book-writing
 ---
 # AI human workflow log

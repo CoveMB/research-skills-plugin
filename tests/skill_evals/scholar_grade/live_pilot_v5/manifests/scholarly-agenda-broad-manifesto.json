@@ -14,6 +14,7 @@
   "skill": "scholarly-research-agenda",
   "skill_file": "skills/scholarly-research-agenda/SKILL.md",
   "skill_file_sha256": "6f126ecf057644164e5cffb265fe3bdaed31a4962b7e4a5de77b12c616eb54d6",
+  "skill_instruction_sha256": "a3bf1856d3b02e6924339b24f94cf451606142ee5842562762c3cb18886e491e",
   "source_packet": "corpora/scholarly-agenda-broad-manifesto/source-packet.md",
   "source_packet_sha256": "5495033d74758423c4a0303dcd6f1fc410bc8b37da7b350226d324bf72b75bd7",
   "structured_result": {

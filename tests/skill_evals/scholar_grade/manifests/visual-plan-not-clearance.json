@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "figure-table-integrity-auditor",
   "skill_file": "skills/figure-table-integrity-auditor/SKILL.md",
-  "skill_file_sha256": "71b4e7d1d110c75aac65157b482afda07eb2f3588faa3c61ba0f8db64071721b",
+  "skill_file_sha256": "bf73c341fe2b6447d3ee6fe918db01c3b9738a426ce0fe13dfe792d122073d12",
   "source_packet": "corpora/visual-plan-not-clearance/source-packet.md",
   "source_packet_sha256": "fbeb5b9137b2f6ed3252366d65e9aaf8faf8e540b944072c7c2499e70668dd28",
   "structured_result": {

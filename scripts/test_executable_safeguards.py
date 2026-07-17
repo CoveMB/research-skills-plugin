@@ -3,7 +3,6 @@ from __future__ import annotations
 
 import importlib.util
 import json
-import os
 import subprocess
 import sys
 import unittest
@@ -138,8 +137,7 @@ class TestExecutableSafeguards(unittest.TestCase):
             self.assertFalse(any("/build/" in name for name in names))
             self.assertFalse(any("/coverage/" in name for name in names))
 
-    def test_package_and_installer_exclude_repository_only_docs(self) -> None:
-        installer = load_module("install_codex_plugin.py")
+    def test_package_excludes_repository_only_docs(self) -> None:
         with TemporaryDirectory() as temporary_directory:
             root = Path(temporary_directory) / "plugin"
             write_minimal_plugin(root)
@@ -152,22 +150,13 @@ class TestExecutableSafeguards(unittest.TestCase):
             output_path = Path(temporary_directory) / "bundle.zip"
 
             result = run_script("package_plugin.py", "--root", str(root), "--out", str(output_path))
-            destination = Path(temporary_directory) / "sample-plugin"
-            installer.copy_plugin(root, destination, dry_run=False)
-
             self.assertEqual(result.returncode, 0, msg=f"stdout={result.stdout} stderr={result.stderr}")
             with zipfile.ZipFile(output_path) as archive:
                 names = archive.namelist()
             self.assertNotIn("sample-plugin/docs/superpowers/plans/future-plan.md", names)
             self.assertIn("sample-plugin/docs/user/guide.md", names)
-            self.assertFalse((destination / "docs" / "superpowers" / "plans" / "future-plan.md").exists())
-            self.assertEqual(
-                (destination / "docs" / "user" / "guide.md").read_text(encoding="utf-8"),
-                "public guide",
-            )
 
-    def test_package_and_installer_exclude_symlinked_files(self) -> None:
-        installer = load_module("install_codex_plugin.py")
+    def test_package_excludes_symlinked_files(self) -> None:
         with TemporaryDirectory() as temporary_directory:
             root = Path(temporary_directory) / "plugin"
             write_minimal_plugin(root)
@@ -183,14 +172,10 @@ class TestExecutableSafeguards(unittest.TestCase):
 
             output_path = Path(temporary_directory) / "bundle.zip"
             result = run_script("package_plugin.py", "--root", str(root), "--out", str(output_path))
-            destination = Path(temporary_directory) / "sample-plugin"
-            installer.copy_plugin(root, destination, dry_run=False)
-
             self.assertEqual(result.returncode, 0, msg=f"stdout={result.stdout} stderr={result.stderr}")
             with zipfile.ZipFile(output_path) as archive:
                 names = archive.namelist()
             self.assertNotIn("sample-plugin/docs/linked-secret.md", names)
-            self.assertFalse((destination / "docs" / "linked-secret.md").exists())
 
     def test_package_validates_plugin_before_writing_zip(self) -> None:
         with TemporaryDirectory() as temporary_directory:
@@ -222,197 +207,8 @@ class TestExecutableSafeguards(unittest.TestCase):
 
         self.assertEqual(
             packager.default_output_path(ROOT).name,
-            "research-skills-plugin-v1.0.0.zip",
+            "research-skills-plugin-v1.1.0.zip",
         )
-
-    def test_installer_refuses_to_replace_unexpected_destination(self) -> None:
-        installer = load_module("install_codex_plugin.py")
-        with TemporaryDirectory() as temporary_directory:
-            destination = Path(temporary_directory) / "important-folder"
-            destination.mkdir()
-            sentinel = destination / "keep.txt"
-            sentinel.write_text("do not delete", encoding="utf-8")
-
-            with self.assertRaises(ValueError):
-                installer.copy_plugin(ROOT, destination, dry_run=False)
-
-            self.assertTrue(sentinel.exists())
-
-    def test_installer_refuses_to_copy_plugin_onto_itself(self) -> None:
-        installer = load_module("install_codex_plugin.py")
-        with TemporaryDirectory() as temporary_directory:
-            source = Path(temporary_directory) / "sample-plugin"
-            write_minimal_plugin(source)
-
-            with self.assertRaises(ValueError):
-                installer.copy_plugin(source, source, dry_run=False)
-
-            self.assertTrue((source / ".codex-plugin" / "plugin.json").exists())
-
-    def test_installer_refuses_existing_file_destination(self) -> None:
-        installer = load_module("install_codex_plugin.py")
-        with TemporaryDirectory() as temporary_directory:
-            source = Path(temporary_directory) / "source" / "sample-plugin"
-            destination = Path(temporary_directory) / "sample-plugin"
-            write_minimal_plugin(source)
-            destination.write_text("not a directory", encoding="utf-8")
-
-            with self.assertRaises(ValueError):
-                installer.copy_plugin(source, destination, dry_run=False)
-
-            self.assertEqual(destination.read_text(encoding="utf-8"), "not a directory")
-
-    def test_installer_excludes_generated_files(self) -> None:
-        installer = load_module("install_codex_plugin.py")
-        with TemporaryDirectory() as temporary_directory:
-            root = Path(temporary_directory) / "source" / "sample-plugin"
-            write_minimal_plugin(root)
-            (root / ".pytest_cache").mkdir()
-            (root / ".pytest_cache" / "state").write_text("cache", encoding="utf-8")
-            (root / "dist").mkdir()
-            (root / "dist" / "artifact.txt").write_text("dist", encoding="utf-8")
-            (root / "debug.log").write_text("log", encoding="utf-8")
-            (root / ".env").write_text("SECRET=1", encoding="utf-8")
-            (root / "local-notes.txt").write_text("notes", encoding="utf-8")
-            destination = Path(temporary_directory) / "sample-plugin"
-
-            installer.copy_plugin(root, destination, dry_run=False)
-
-            self.assertTrue((destination / ".codex-plugin" / "plugin.json").exists())
-            self.assertFalse((destination / ".pytest_cache").exists())
-            self.assertFalse((destination / "dist").exists())
-            self.assertFalse((destination / "debug.log").exists())
-            self.assertFalse((destination / ".env").exists())
-            self.assertFalse((destination / "local-notes.txt").exists())
-
-    def test_installer_builds_plan_without_writing(self) -> None:
-        installer = load_module("install_codex_plugin.py")
-        with TemporaryDirectory() as temporary_directory:
-            root = Path(temporary_directory) / "sample-plugin"
-            write_minimal_plugin(root)
-            marketplace = Path(temporary_directory) / "marketplace.json"
-
-            plan = installer.build_install_plan(
-                plugin_root=root,
-                dest=None,
-                marketplace=marketplace,
-                source_path=None,
-            )
-
-            self.assertEqual(plan.root, root.resolve())
-            self.assertEqual(plan.plugin_name_value, "sample-plugin")
-            self.assertEqual(plan.dest, installer.home() / ".codex" / "plugins" / "sample-plugin")
-            self.assertEqual(plan.marketplace, marketplace)
-            self.assertEqual(plan.source_path, "./.codex/plugins/sample-plugin")
-            self.assertFalse(marketplace.exists())
-
-    def test_installer_keeps_existing_destination_when_copy_fails(self) -> None:
-        installer = load_module("install_codex_plugin.py")
-        with TemporaryDirectory() as temporary_directory:
-            root = Path(temporary_directory)
-            source = root / "source" / "sample-plugin"
-            destination = root / "sample-plugin"
-            write_minimal_plugin(source)
-            write_minimal_plugin(destination)
-            sentinel = destination / "keep.txt"
-            sentinel.write_text("keep", encoding="utf-8")
-
-            original_copy_package_tree = installer.copy_package_tree
-
-            def fail_copy_package_tree(*_args, **_kwargs):
-                raise RuntimeError("copy failed")
-
-            installer.copy_package_tree = fail_copy_package_tree
-            try:
-                with self.assertRaises(RuntimeError):
-                    installer.copy_plugin(source, destination, dry_run=False)
-            finally:
-                installer.copy_package_tree = original_copy_package_tree
-
-            self.assertTrue(sentinel.exists())
-
-    def test_installer_dry_run_does_not_backup_malformed_marketplace(self) -> None:
-        with TemporaryDirectory() as temporary_directory:
-            root = Path(temporary_directory)
-            marketplace = root / "marketplace.json"
-            marketplace.write_text("{not valid json", encoding="utf-8")
-
-            result = run_script(
-                "install_codex_plugin.py",
-                "--plugin-root",
-                str(ROOT),
-                "--dest",
-                str(root / "research-skills-plugin"),
-                "--marketplace",
-                str(marketplace),
-                "--dry-run",
-            )
-
-            self.assertEqual(result.returncode, 0, msg=f"stdout={result.stdout} stderr={result.stderr}")
-            self.assertEqual(marketplace.read_text(encoding="utf-8"), "{not valid json")
-            self.assertEqual(list(root.glob("marketplace.json.backup-*")), [])
-
-    def test_marketplace_write_failure_keeps_existing_file(self) -> None:
-        installer = load_module("install_codex_plugin.py")
-        with TemporaryDirectory() as temporary_directory:
-            marketplace = Path(temporary_directory) / "marketplace.json"
-            original_text = json.dumps(
-                {
-                    "name": "local-personal-plugins",
-                    "interface": {"displayName": "Local Personal Plugins"},
-                    "plugins": [],
-                },
-                indent=2,
-            ) + "\n"
-            marketplace.write_text(original_text, encoding="utf-8")
-            original_write_text = Path.write_text
-
-            def fail_write_text(self, *_args, **_kwargs):
-                original_write_text(self, "partial", encoding="utf-8")
-                raise RuntimeError("write failed")
-
-            Path.write_text = fail_write_text
-            try:
-                with self.assertRaises(RuntimeError):
-                    installer.update_marketplace(
-                        marketplace,
-                        "sample-plugin",
-                        "./.codex/plugins/sample-plugin",
-                        dry_run=False,
-                    )
-            finally:
-                Path.write_text = original_write_text
-
-            self.assertEqual(marketplace.read_text(encoding="utf-8"), original_text)
-
-    def test_marketplace_sample_matches_installer_defaults(self) -> None:
-        installer = load_module("install_codex_plugin.py")
-        sample = json.loads((ROOT / "marketplace.sample.json").read_text(encoding="utf-8"))
-
-        self.assertEqual(sample["name"], installer.MARKETPLACE_NAME)
-        self.assertEqual(sample["interface"]["displayName"], "Local Personal Plugins")
-
-    def test_marketplace_helpers_normalize_and_replace_entries(self) -> None:
-        installer = load_module("install_codex_plugin.py")
-
-        normalized = installer.normalize_marketplace_data({"plugins": "not a list"})
-        entry = installer.marketplace_entry("sample-plugin", "./.codex/plugins/sample-plugin")
-        updated = installer.replace_marketplace_entry(
-            {
-                **normalized,
-                "plugins": [
-                    {"name": "other-plugin"},
-                    {"name": "sample-plugin", "source": {"path": "old"}},
-                ],
-            },
-            entry,
-        )
-
-        self.assertEqual(normalized["name"], installer.MARKETPLACE_NAME)
-        self.assertEqual(normalized["interface"]["displayName"], "Local Personal Plugins")
-        self.assertEqual(normalized["plugins"], [])
-        self.assertEqual([plugin["name"] for plugin in updated["plugins"]], ["other-plugin", "sample-plugin"])
-        self.assertEqual(updated["plugins"][-1]["source"]["path"], "./.codex/plugins/sample-plugin")
 
     def test_plugin_utils_parse_nested_metadata_yaml(self) -> None:
         plugin_utils = load_module("plugin_utils.py")
@@ -814,12 +610,6 @@ class TestExecutableSafeguards(unittest.TestCase):
         self.assertIn("tests/skill_evals", text)
         self.assertIn("scholar-grade", text)
 
-    def test_installer_uses_shared_validation_runner(self) -> None:
-        text = (SCRIPTS_DIR / "install_codex_plugin.py").read_text(encoding="utf-8")
-        self.assertIn("run_package_checks.py", text)
-        self.assertIn("--scope", text)
-        self.assertIn("install", text)
-
     def test_validation_workflow_runs_validate_script(self) -> None:
         workflow_path = ROOT / ".github" / "workflows" / "validate.yml"
 
@@ -829,42 +619,6 @@ class TestExecutableSafeguards(unittest.TestCase):
         self.assertIn("push:", text)
         self.assertIn("python-version: '3.10'", text)
         self.assertIn("bash validate.sh", text)
-
-    def test_install_shell_requires_python_310_or_newer(self) -> None:
-        with TemporaryDirectory() as temporary_directory:
-            fake_bin = Path(temporary_directory)
-            fake_python = fake_bin / "python3"
-            fake_python.write_text(
-                "\n".join(
-                    [
-                        "#!/usr/bin/env sh",
-                        'if [ "$1" = "-c" ]; then',
-                        "  exit 1",
-                        "fi",
-                        "exit 0",
-                        "",
-                    ]
-                ),
-                encoding="utf-8",
-            )
-            fake_python.chmod(0o755)
-            env = {**os.environ, "PATH": f"{fake_bin}{os.pathsep}{os.environ['PATH']}"}
-
-            result = subprocess.run(
-                ["bash", str(ROOT / "install.sh"), "--dry-run"],
-                check=False,
-                capture_output=True,
-                text=True,
-                env=env,
-            )
-
-            self.assertNotEqual(result.returncode, 0)
-            self.assertIn("Python 3.10", result.stderr)
-
-    def test_install_powershell_has_python_version_preflight(self) -> None:
-        text = (ROOT / "install.ps1").read_text(encoding="utf-8")
-        self.assertIn("Python 3.10", text)
-        self.assertIn("sys.version_info", text)
 
     def test_executable_scripts_explain_help(self) -> None:
         expected_help = {
@@ -921,10 +675,9 @@ class TestExecutableSafeguards(unittest.TestCase):
                 "Package this plugin directory as a zip.",
                 "--out",
             ],
-            "install_codex_plugin.py": [
-                "Install Research Book Skills Plugin locally.",
-                "--source-path",
-                "--dry-run",
+            "check_marketplace.py": [
+                "Validate the repository's versioned Git marketplace metadata.",
+                "--root",
             ],
             "run_package_checks.py": [
                 "Run package validation checks.",

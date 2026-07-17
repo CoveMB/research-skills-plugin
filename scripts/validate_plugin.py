@@ -48,7 +48,6 @@ LOCAL_REFERENCE_ROOT_FILES = {
     "LICENSE",
     "MODE_REGISTRY.md",
     "README.md",
-    "marketplace.sample.json",
     "validate.sh",
 }
 REFERENCE_FILE_SUFFIXES = {".md", ".yaml", ".yml"}

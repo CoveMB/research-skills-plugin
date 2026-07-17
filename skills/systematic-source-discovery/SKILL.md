@@ -3,7 +3,7 @@ name: systematic-source-discovery
 description: Design source-discovery strategies when research books or literature reviews need source plans, keyword banks, database searches, inclusion rules, citation chaining, primary-source targets, candidate sources, or search logs.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   category: research-book-writing
 ---
 # Systematic source discovery

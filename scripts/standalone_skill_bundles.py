@@ -58,7 +58,6 @@ LOCAL_REFERENCE_ROOT_FILES = {
     "LICENSE",
     "MODE_REGISTRY.md",
     "README.md",
-    "marketplace.sample.json",
     "validate.sh",
 }
 FORBIDDEN_SOURCE_DIRECTORIES = {

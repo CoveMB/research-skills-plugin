@@ -3,7 +3,7 @@ name: research-intent-router
 description: Auto-detect research intent for scholarly nonfiction tasks and choose the smallest useful research-book skill, with normal mode for light plan-first routing and deep mode for always attempting source lookup within strict verification limits.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   category: research-book-writing
 ---
 # Research intent router

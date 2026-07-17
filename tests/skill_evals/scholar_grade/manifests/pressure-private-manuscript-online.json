@@ -13,7 +13,7 @@
   "schema_version": "scholar-grade-run-manifest-v1",
   "skill": "research-intent-router",
   "skill_file": "skills/research-intent-router/SKILL.md",
-  "skill_file_sha256": "ae6d8dc3656ce50e844599137f6ee3eda1fdb87779c78df1eff0b07bdaa04c43",
+  "skill_file_sha256": "166c0d7c32f0fb1a2a8204c2bd956d575d7ab58cb2247893d9a878c85db16175",
   "source_packet": "adversarial_pressure/pressure-private-manuscript-online/source-packet.md",
   "source_packet_sha256": "ee3caf38a1cb50e44cb48e67cfb5fa02e1972763e7200fed4eb584cbba206601",
   "structured_result": {

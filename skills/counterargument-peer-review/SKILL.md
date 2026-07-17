@@ -3,7 +3,7 @@ name: counterargument-peer-review
 description: Run a research peer-review style critique when a thesis, chapter, outline, proposal, or argument needs objections, rival explanations, missing literatures, positional blind spots, and revision paths.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   category: research-book-writing
 ---
 # Counterargument peer review

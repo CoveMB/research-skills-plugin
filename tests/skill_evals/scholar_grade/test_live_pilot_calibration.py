@@ -10,7 +10,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from live_pilot_calibration import build_calibration_report, score_regressions_for_fixture
+from live_pilot_calibration import build_calibration_report, score_regressions_for_fixture, validation_error_action
 
 
 SCRIPT = Path(__file__).resolve().parent / "live_pilot_calibration.py"
@@ -391,6 +391,21 @@ class TestLivePilotCalibration(unittest.TestCase):
                 },
                 report["actions"],
             )
+
+    def test_instruction_hash_mismatch_requires_a_new_capture(self) -> None:
+        error = (
+            "unsupported-causal-claim: manifest skill_instruction_sha256 "
+            "does not match current skill instructions"
+        )
+
+        self.assertEqual(
+            validation_error_action(error),
+            {
+                "fixture_id": "unsupported-causal-claim",
+                "action": "record-new-live-capture-after-skill-change",
+                "reason": error,
+            },
+        )
 
     def test_cli_strict_fails_when_pilot_is_not_ready(self) -> None:
         with TemporaryDirectory() as temporary_directory:

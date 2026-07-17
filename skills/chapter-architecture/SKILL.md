@@ -3,7 +3,7 @@ name: chapter-architecture
 description: Design or diagnose research nonfiction chapters when chapter purpose, central question, claim, section sequence, concept definitions, evidence placement, counterarguments, transitions, or revision priorities matter.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   category: research-book-writing
 ---
 # Chapter architecture

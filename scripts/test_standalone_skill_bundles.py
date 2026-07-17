@@ -368,7 +368,7 @@ class BuilderTests(unittest.TestCase):
             self.assertEqual(manifest["schema_version"], "standalone-skill-bundle-v1")
             self.assertEqual(manifest["skill_name"], "annotation-to-source-note")
             self.assertEqual(manifest["classification"], "self-sufficient")
-            self.assertEqual(manifest["plugin_version"], "1.0.0")
+            self.assertEqual(manifest["plugin_version"], "1.1.0")
             self.assertTrue(manifest["rationale"])
             self.assertIn(manifest["source_commit"], {"unavailable", module.source_commit(ROOT)})
             self.assertEqual(
@@ -1201,7 +1201,7 @@ class DocumentationTests(unittest.TestCase):
         self.assertIn("generated directory", docs["installation"].lower())
         self.assertIn("generated zip", docs["installation"].lower())
 
-    def test_docs_cover_validation_python_boundaries_classification_and_migration(self) -> None:
+    def test_docs_cover_validation_python_boundaries_classification_and_rebuild_guidance(self) -> None:
         docs = self.load_public_docs()
         installation = docs["installation"]
         scripts = docs["scripts"]

@@ -14,6 +14,7 @@
   "skill": "methodology-source-auditor",
   "skill_file": "skills/methodology-source-auditor/SKILL.md",
   "skill_file_sha256": "a797b92614d3cc3d4c73ac4f245b5d5a29a18c7f5adcb4bdbd17f0577ed2ff84",
+  "skill_instruction_sha256": "c4bd4ff62d075c4f9972065ce6dfcbc788ccd0d6ff85abec438b15f4bf5126e7",
   "source_packet": "corpora/bounded-descriptive-claim-supported/source-packet.md",
   "source_packet_sha256": "71c443bb865b3a16336975167c467359a4b0c8ffd4fe1a5f89211d1811ce789d",
   "structured_result": {

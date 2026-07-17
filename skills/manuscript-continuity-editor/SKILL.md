@@ -3,7 +3,7 @@ name: manuscript-continuity-editor
 description: Review multiple chapters or a whole manuscript when thesis coherence, repetition, contradictions, concept tracking, tone consistency, chapter order, argument drift, or revision priorities need diagnosis.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   category: research-book-writing
 ---
 # Manuscript continuity editor

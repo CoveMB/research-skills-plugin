@@ -3,7 +3,7 @@ name: case-study-integration
 description: Select, compare, and integrate case studies when examples, analogies, counter-cases, comparison sets, or case dossiers must strengthen a research argument without cherry-picking or overgeneralization.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   category: research-book-writing
 ---
 # Case study integration

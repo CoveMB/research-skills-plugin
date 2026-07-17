@@ -2,15 +2,52 @@
 
 ## The plugin does not appear
 
-- Restart the app.
-- Run `python3 scripts/validate_plugin.py .` from the plugin root.
-- Check that `.codex-plugin/plugin.json` exists.
-- Check that the marketplace file contains a `research-skills-plugin` entry.
-- Check that the plugin folder was copied to `~/.codex/plugins/research-skills-plugin`.
+- Confirm that Codex knows about the marketplace:
+
+```bash
+codex plugin marketplace list --json
+```
+
+- Confirm that the plugin is installed from `covemb-research-skills`:
+
+```bash
+codex plugin list --json
+```
+
+- If the marketplace exists but the plugin is missing, run:
+
+```bash
+codex plugin marketplace upgrade covemb-research-skills
+codex plugin add research-skills-plugin@covemb-research-skills
+```
+
+- Restart Codex or start a new task. Existing tasks may retain an older skill inventory.
+
+## The marketplace cannot be added
+
+Check Git access first:
+
+```bash
+git ls-remote https://github.com/CoveMB/research-skills-plugin.git
+```
+
+If Git cannot reach the public repository, resolve the network, proxy, or Git configuration problem before retrying `codex plugin marketplace add`. Do not put access tokens in the marketplace URL or repository files.
+
+## The installed version is stale
+
+Refresh the marketplace before reinstalling:
+
+```bash
+codex plugin marketplace upgrade covemb-research-skills
+codex plugin add research-skills-plugin@covemb-research-skills
+codex plugin list --json
+```
+
+The marketplace upgrade refreshes the catalog. The second command reinstalls the plugin version named by the refreshed catalog.
 
 ## Python is missing or too old
 
-Python is only required for the bundled scripts. If you are copying skill folders by hand, you can skip this section.
+Git marketplace installation does not require Python. You need Python only when running repository maintenance scripts, building standalone bundles, or using a bundled Python helper.
 
 The scripts need Python 3.10 or newer. On macOS or Linux, run:
 
@@ -25,14 +62,6 @@ py --version
 ```
 
 If the command is missing or reports an older version, install a current Python release and make sure the launcher is in `PATH`.
-
-## Install fails with a permission error
-
-Run `./install.sh --dry-run` or `.\install.ps1 --dry-run` to see the paths before writing. The installer needs write access to the plugin destination and marketplace JSON. If you pass `--dest` or `--marketplace`, check those paths first.
-
-## Marketplace JSON cannot be parsed
-
-The installer backs up the existing marketplace file with a timestamped `.backup-*` suffix, then creates a fresh marketplace file. Compare the backup with the new file before deleting anything.
 
 ## Package creation fails
 

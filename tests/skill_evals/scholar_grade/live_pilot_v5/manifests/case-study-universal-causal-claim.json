@@ -14,6 +14,7 @@
   "skill": "case-study-integration",
   "skill_file": "skills/case-study-integration/SKILL.md",
   "skill_file_sha256": "4b37064ed3cf9d94392128ecfa83de3d031ae9b3e9507b1f8f9dfbb06ccf5ad2",
+  "skill_instruction_sha256": "b0d0920d9893610f74d24e67f62066b2dbd1d7e8840622e160c7cef844c2e5c2",
   "source_packet": "corpora/case-study-universal-causal-claim/source-packet.md",
   "source_packet_sha256": "69c3f337d16762e08f9b631b9f3d15c97d876b410e4045ce587bfd2d9f53dcd9",
   "structured_result": {

@@ -3,7 +3,7 @@ name: book-proposal-scholarship
 description: Develop a research nonfiction book proposal when a project needs thesis, contribution, audience, market or field positioning, chapter summaries, comparable titles, and sample-material planning.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   category: research-book-writing
 ---
 # Book proposal scholarship

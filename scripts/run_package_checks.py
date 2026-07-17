@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PackageCheck = tuple[str, ...]
 
 
-INSTALL_CHECKS = (
+PACKAGE_BASE_CHECKS = (
     ("scripts/validate_plugin.py", "."),
     ("scripts/check_book_artifact_contract.py", "--path", "."),
 )
@@ -197,16 +197,18 @@ REAL_GOLDSET_CHECKS = (
 )
 
 STANDALONE_SKILLS_CHECK = ("scripts/check_standalone_skills.py",)
+MARKETPLACE_CHECK = ("scripts/check_marketplace.py", "--root", ".")
 
 
 PACKAGE_CHECKS = (
-    *INSTALL_CHECKS,
+    *PACKAGE_BASE_CHECKS,
     STANDALONE_SKILLS_CHECK,
 )
 
 
 FULL_CHECKS = (
     *PACKAGE_CHECKS,
+    MARKETPLACE_CHECK,
     (
         "scripts/check_research_behavior_fixtures.py",
         "--fixtures",
@@ -368,7 +370,6 @@ WORKFLOW_PASSPORT_LIVE_V1_CHECKS = (
 
 def checks_for_scope(scope: str) -> tuple[PackageCheck, ...]:
     checks_by_scope = {
-        "install": INSTALL_CHECKS,
         "package": PACKAGE_CHECKS,
         "full": FULL_CHECKS,
         "live": LIVE_CHECKS,
@@ -414,7 +415,6 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     parser.add_argument(
         "--scope",
         choices=[
-            "install",
             "package",
             "full",
             "live",
@@ -430,8 +430,8 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
         ],
         default="full",
         help=(
-            "Use install for pre-install checks, full for source-checkout validation, "
-            "package for validation that works from a packaged or installed copy without repo-only tests, "
+            "Use full for source-checkout validation, package for validation that works "
+            "from a packaged or installed copy without repo-only tests, "
             "live-pilot for the original pilot report, live-pilot-v2 for the strict calibrated pilot, "
             "live-pilot-v3 for the strict calibrated recapture pilot, "
             "live-pilot-v5 for the high-risk strict-gap expansion, "

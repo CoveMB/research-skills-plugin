@@ -3,7 +3,7 @@ name: citation-integrity-auditor
 description: Audit citation accuracy when drafts, footnotes, bibliographies, quotes, paraphrases, page numbers, source-claim fit, fabricated-reference risk, or unsupported cited claims need verification.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   category: research-book-writing
 ---
 # Citation integrity auditor

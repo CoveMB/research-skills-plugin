@@ -14,6 +14,7 @@
   "skill": "rights-privacy-release-auditor",
   "skill_file": "skills/rights-privacy-release-auditor/SKILL.md",
   "skill_file_sha256": "8ffcc7011835857662c6c374e2f570fdac55b16097570983ee0fb27b65b13598",
+  "skill_instruction_sha256": "b9c5f1bf8ffb5d2cfd786ac9d2711edc7460753aaff493ff8b5d61a356000bc4",
   "source_packet": "adversarial_pressure/pressure-compress-publication-ready/source-packet.md",
   "source_packet_sha256": "a1c21e5d7067086c77828398e649417936d2008b4d659f1158d3e0c1c5b8b2d0",
   "structured_result": {

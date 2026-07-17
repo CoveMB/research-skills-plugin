@@ -3,7 +3,7 @@ name: figure-table-integrity-auditor
 description: Audit scholarly figures, tables, charts, captions, screenshots, extracted results, image panels, and visual evidence for data provenance, axis and caption accuracy, duplicate visual risk, source licensing, manipulation, and claim support limits.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   category: research-book-writing
 ---
 # Figure table integrity auditor

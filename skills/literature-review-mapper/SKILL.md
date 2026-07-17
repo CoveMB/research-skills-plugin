@@ -3,7 +3,7 @@ name: literature-review-mapper
 description: Map a research literature when a topic, source list, bibliography, annotations, or notes need schools of thought, debates, consensus, intellectual genealogy, methods, gaps, and thesis implications.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   category: research-book-writing
 ---
 # Literature review mapper
