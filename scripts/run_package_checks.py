@@ -196,11 +196,17 @@ REAL_GOLDSET_CHECKS = (
     ),
 )
 
-PACKAGE_CHECKS = INSTALL_CHECKS
+STANDALONE_SKILLS_CHECK = ("scripts/check_standalone_skills.py",)
+
+
+PACKAGE_CHECKS = (
+    *INSTALL_CHECKS,
+    STANDALONE_SKILLS_CHECK,
+)
 
 
 FULL_CHECKS = (
-    *INSTALL_CHECKS,
+    *PACKAGE_CHECKS,
     (
         "scripts/check_research_behavior_fixtures.py",
         "--fixtures",

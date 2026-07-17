@@ -12,7 +12,7 @@ The bundled accessibility skills are the research-book integrated variants. For 
 
 ## Install in 30 seconds
 
-If you use this as a collection of skill folders, you do not need Python. Python 3.10 or newer is only needed for the bundled install, validation, and packaging scripts. Those scripts use the Python standard library, so there is no dependency install step.
+We recommend the full plugin because it keeps routing, orchestration, shared policies, contracts, and specialist skills together. Python 3.10 or newer is needed for installation, validation, packaging, and standalone bundle generation. The scripts use the Python standard library, so there is no dependency install step.
 
 From the unzipped folder:
 
@@ -34,7 +34,17 @@ Preview the install first:
 ./install.sh --dry-run
 ```
 
-Full manual install paths are in [`docs/user/INSTALLATION.md`](docs/user/INSTALLATION.md). The manual guide covers personal marketplace install, direct skill-folder install, upload notes for single-skill environments, validation, and uninstall steps.
+Full manual install paths are in [`docs/user/INSTALLATION.md`](docs/user/INSTALLATION.md). The manual guide also covers generated single-skill directories and zips, validation, migration from older raw-folder installs, and uninstall steps.
+
+## Portable single-skill bundles
+
+When an environment accepts only one skill, build a standalone bundle instead of copying a folder from `skills/`. The builder follows the declared dependency closure, rewrites local paths, includes required policies and runtime helpers, and produces a generated directory plus a generated zip under `dist/standalone-skills`.
+
+```bash
+python3 scripts/build_standalone_skill.py --skill <skill-name>
+```
+
+The full plugin remains the canonical source. Rebuild generated bundles after changing a source skill, shared policy, contract, or helper; do not maintain generated copies separately.
 
 ## Try it first
 
@@ -246,7 +256,7 @@ research-skills-plugin/
   tests/
 ```
 
-The package works as a local plugin and as a portable collection of `SKILL.md` folders.
+The package works as a local plugin and can generate dependency-closed standalone bundles for eligible skills.
 
 ## Skill testing
 

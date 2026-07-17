@@ -274,6 +274,22 @@ Durable cross-skill artifacts should set `handoff_artifact: true` and include `p
 | AI/human workflow gate | AI tool use, affected sections, human decisions, disclosure basis, or override reasons are missing before external sharing | Prevents opaque AI/human collaboration and unsupported disclosure claims |
 | Release gate | Private notes, copied source text, missing quote locators, license problems, or credentials appear in shared artifacts | Prevents avoidable release risk |
 
+## Canonical skills and generated standalone bundles
+
+The full plugin is the canonical source. Skill instructions, agent metadata, skill-owned assets and references, shared policies, the book artifact contract, and repository helpers are maintained here. Files under `dist/standalone-skills` are generated outputs; edit the canonical source and rebuild instead of patching a bundle.
+
+The standalone registry records one classification for every skill:
+
+- `self-sufficient`: the generated dependency closure can perform the skill's own workflow.
+- `route-only`: the generated bundle can select or recommend a route, but it cannot run or claim to have run a specialist that is not installed.
+- `full-plugin-only`: the skill depends on the plugin-wide workflow and is not emitted as a standalone bundle. `research-book-orchestrator` has this classification.
+
+For each eligible skill, the builder starts with `SKILL.md`, `agents/openai.yaml`, skill-owned runtime files, the license, and the registry's declared resources and helpers. It follows local document references and complete Python module paths to build the dependency closure. Dotted submodules keep their package layout and parent package initializer files. Shared resources are copied into a shallow `references/` layout, helper modules are copied under `scripts/`, and local paths are rewritten to their generated locations.
+
+Each generated directory includes `standalone-bundle.json`, which records the classification, rationale, plugin version, source-to-bundle mapping, and file hashes. It records a source commit only when the plugin manifest is tracked and package sources are clean; otherwise the value is `unavailable`. The matching zip contains the same files under one skill-named root. Generation never makes a bundle the source for a later build.
+
+The builder treats publication as an ownership boundary. Plugin-internal output must stay under `dist/`. Existing output may be replaced only after it validates as generated standalone content, and the output root cannot be a symlink. The independent validator also checks every typed agent-policy field, including lookup permissions and payload limits, against the skill-specific package policy.
+
 ## Package structure
 
 ```text
@@ -295,11 +311,16 @@ Durable cross-skill artifacts should set `handoff_artifact: true` and include `p
     book_artifacts/
     figure_table_provenance/
   scripts/
+    build_standalone_skill.py
     check_book_artifact_contract.py
+    check_standalone_skills.py
     run_package_checks.py
+    standalone_skill_bundles.py
+    validate_standalone_skill.py
     validate_plugin.py
   shared/
     contracts/book/book_artifact.schema.json
+    standalone-skill-registry.json
   skills/
     research-book-orchestrator/
       SKILL.md

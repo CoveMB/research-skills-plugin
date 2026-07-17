@@ -21,11 +21,11 @@ from plugin_utils import (
     agent_policy_fields,
     load_json_object_result,
     MIN_SHARED_DESCRIPTION_TERMS,
-    is_generated_path,
     nested_mapping,
     nested_string,
     parse_markdown_frontmatter,
     parse_simple_yaml_mapping,
+    should_include_package_file,
     significant_description_terms,
 )
 
@@ -298,11 +298,9 @@ def validate_skill_dir(
 def validate_project_references(root: Path) -> list[str]:
     errors: list[str] = []
     for path in sorted(root.rglob("*")):
-        if ".git" in path.parts or path.is_dir() or path.is_symlink():
+        if not should_include_package_file(root, path):
             continue
         relative_path = path.relative_to(root)
-        if is_generated_path(relative_path):
-            continue
         if relative_path.parts[:1] == ("skills",):
             continue
         if path.suffix in {".md", ".yaml", ".yml"}:

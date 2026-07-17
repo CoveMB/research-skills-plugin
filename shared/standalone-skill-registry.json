@@ -1,0 +1,420 @@
+{
+  "schema_version": "standalone-skill-registry-v1",
+  "skills": [
+    {
+      "name": "ai-human-workflow-log",
+      "classification": "self-sufficient",
+      "rationale": "Creates workflow logs without relying on another plugin skill when its shared policies and schema are present.",
+      "resources": [
+        "docs/policy/AUTO_SELECTION_GUARDRAILS.md",
+        "docs/policy/PROCESS_PASSPORT.md",
+        "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md",
+        "docs/policy/SOURCE_LIMITS.md",
+        "shared/contracts/book/book_artifact.schema.json"
+      ],
+      "runtime_helpers": []
+    },
+    {
+      "name": "annotated-bibliography-builder",
+      "classification": "self-sufficient",
+      "rationale": "Builds annotated bibliographies independently when its declared policies, schema, and citation checker are bundled.",
+      "resources": [
+        "docs/policy/AUTO_SELECTION_GUARDRAILS.md",
+        "docs/policy/CORPUS_REPRESENTATIVENESS_TAXONOMY.md",
+        "docs/policy/PROCESS_PASSPORT.md",
+        "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md",
+        "docs/policy/SOURCE_LIMITS.md",
+        "shared/contracts/book/book_artifact.schema.json"
+      ],
+      "runtime_helpers": [
+        "scripts/check_citation_metadata.py"
+      ]
+    },
+    {
+      "name": "annotation-to-source-note",
+      "classification": "self-sufficient",
+      "rationale": "Converts annotations into source notes using only its declared shared policies and schema.",
+      "resources": [
+        "docs/policy/AUTO_SELECTION_GUARDRAILS.md",
+        "docs/policy/PROCESS_PASSPORT.md",
+        "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md",
+        "docs/policy/SOURCE_LIMITS.md",
+        "shared/contracts/book/book_artifact.schema.json"
+      ],
+      "runtime_helpers": []
+    },
+    {
+      "name": "argument-architecture",
+      "classification": "self-sufficient",
+      "rationale": "Designs argument structure without invoking another skill when its declared policies and schema are available.",
+      "resources": [
+        "docs/policy/AUTO_SELECTION_GUARDRAILS.md",
+        "docs/policy/CORPUS_REPRESENTATIVENESS_TAXONOMY.md",
+        "docs/policy/PROCESS_PASSPORT.md",
+        "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md",
+        "docs/policy/SOURCE_LIMITS.md",
+        "shared/contracts/book/book_artifact.schema.json"
+      ],
+      "runtime_helpers": []
+    },
+    {
+      "name": "book-comps-verifier",
+      "classification": "self-sufficient",
+      "rationale": "Verifies comparable books independently with the bundled research policies and artifact schema.",
+      "resources": [
+        "docs/policy/AUTO_SELECTION_GUARDRAILS.md",
+        "docs/policy/CORPUS_REPRESENTATIVENESS_TAXONOMY.md",
+        "docs/policy/PROCESS_PASSPORT.md",
+        "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md",
+        "docs/policy/SOURCE_LIMITS.md",
+        "shared/contracts/book/book_artifact.schema.json"
+      ],
+      "runtime_helpers": []
+    },
+    {
+      "name": "book-proposal-scholarship",
+      "classification": "self-sufficient",
+      "rationale": "Develops proposal scholarship without plugin-wide orchestration when its declared policies and schema are bundled.",
+      "resources": [
+        "docs/policy/AUTO_SELECTION_GUARDRAILS.md",
+        "docs/policy/CORPUS_REPRESENTATIVENESS_TAXONOMY.md",
+        "docs/policy/PROCESS_PASSPORT.md",
+        "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md",
+        "docs/policy/SOURCE_LIMITS.md",
+        "shared/contracts/book/book_artifact.schema.json"
+      ],
+      "runtime_helpers": []
+    },
+    {
+      "name": "case-study-integration",
+      "classification": "self-sufficient",
+      "rationale": "Integrates case studies using only its declared shared policies and artifact schema.",
+      "resources": [
+        "docs/policy/AUTO_SELECTION_GUARDRAILS.md",
+        "docs/policy/PROCESS_PASSPORT.md",
+        "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md",
+        "docs/policy/SOURCE_LIMITS.md",
+        "shared/contracts/book/book_artifact.schema.json"
+      ],
+      "runtime_helpers": []
+    },
+    {
+      "name": "chapter-architecture",
+      "classification": "self-sufficient",
+      "rationale": "Plans chapter architecture without another installed skill when its declared policies and schema are present.",
+      "resources": [
+        "docs/policy/AUTO_SELECTION_GUARDRAILS.md",
+        "docs/policy/PROCESS_PASSPORT.md",
+        "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md",
+        "docs/policy/SOURCE_LIMITS.md",
+        "shared/contracts/book/book_artifact.schema.json"
+      ],
+      "runtime_helpers": []
+    },
+    {
+      "name": "citation-integrity-auditor",
+      "classification": "self-sufficient",
+      "rationale": "Audits citation integrity independently with its declared policies, schema, and citation checker.",
+      "resources": [
+        "docs/policy/AUTO_SELECTION_GUARDRAILS.md",
+        "docs/policy/PROCESS_PASSPORT.md",
+        "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md",
+        "docs/policy/SOURCE_LIMITS.md",
+        "shared/contracts/book/book_artifact.schema.json"
+      ],
+      "runtime_helpers": [
+        "scripts/check_citation_metadata.py"
+      ]
+    },
+    {
+      "name": "claim-evidence-ledger",
+      "classification": "self-sufficient",
+      "rationale": "Maintains a claim-evidence ledger independently with its declared policies, schema, and traceability checker.",
+      "resources": [
+        "docs/policy/AUTO_SELECTION_GUARDRAILS.md",
+        "docs/policy/PROCESS_PASSPORT.md",
+        "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md",
+        "docs/policy/SOURCE_LIMITS.md",
+        "shared/contracts/book/book_artifact.schema.json"
+      ],
+      "runtime_helpers": [
+        "scripts/check_workflow_traceability.py"
+      ]
+    },
+    {
+      "name": "claim-traceability-graph",
+      "classification": "self-sufficient",
+      "rationale": "Builds claim traceability graphs independently with its declared policies, schema, and traceability checker.",
+      "resources": [
+        "docs/policy/AUTO_SELECTION_GUARDRAILS.md",
+        "docs/policy/PROCESS_PASSPORT.md",
+        "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md",
+        "docs/policy/SOURCE_LIMITS.md",
+        "shared/contracts/book/book_artifact.schema.json"
+      ],
+      "runtime_helpers": [
+        "scripts/check_workflow_traceability.py"
+      ]
+    },
+    {
+      "name": "counterargument-peer-review",
+      "classification": "self-sufficient",
+      "rationale": "Performs counterargument review without another skill when its declared research policies and schema are bundled.",
+      "resources": [
+        "docs/policy/AUTO_SELECTION_GUARDRAILS.md",
+        "docs/policy/CORPUS_REPRESENTATIVENESS_TAXONOMY.md",
+        "docs/policy/PROCESS_PASSPORT.md",
+        "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md",
+        "docs/policy/SOURCE_LIMITS.md",
+        "shared/contracts/book/book_artifact.schema.json"
+      ],
+      "runtime_helpers": []
+    },
+    {
+      "name": "dictation-to-research-notes",
+      "classification": "self-sufficient",
+      "rationale": "Turns dictation into research notes using its bundled routing and operating guidance without requiring another skill.",
+      "resources": [
+        "docs/policy/AUTO_SELECTION_GUARDRAILS.md",
+        "docs/policy/ROUTING_MATRIX.md",
+        "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md",
+        "docs/policy/SOURCE_LIMITS.md",
+        "docs/user/SKILL_INDEX.md"
+      ],
+      "runtime_helpers": []
+    },
+    {
+      "name": "discovery-runner-deduper",
+      "classification": "self-sufficient",
+      "rationale": "Runs and deduplicates discovery results independently with its declared policies and source-candidate checker.",
+      "resources": [
+        "docs/policy/AUTO_SELECTION_GUARDRAILS.md",
+        "docs/policy/CORPUS_REPRESENTATIVENESS_TAXONOMY.md",
+        "docs/policy/PROCESS_PASSPORT.md",
+        "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md",
+        "docs/policy/SOURCE_LIMITS.md"
+      ],
+      "runtime_helpers": [
+        "scripts/check_source_candidates.py"
+      ]
+    },
+    {
+      "name": "dyslexia-friendly-prose-editor",
+      "classification": "self-sufficient",
+      "rationale": "Edits prose for dyslexia-friendly reading using only its bundled routing and operating guidance.",
+      "resources": [
+        "docs/policy/AUTO_SELECTION_GUARDRAILS.md",
+        "docs/policy/ROUTING_MATRIX.md",
+        "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md",
+        "docs/policy/SOURCE_LIMITS.md",
+        "docs/user/SKILL_INDEX.md"
+      ],
+      "runtime_helpers": []
+    },
+    {
+      "name": "dyslexia-research-companion",
+      "classification": "self-sufficient",
+      "rationale": "Provides research support independently using its bundled routing and operating guidance.",
+      "resources": [
+        "docs/policy/AUTO_SELECTION_GUARDRAILS.md",
+        "docs/policy/ROUTING_MATRIX.md",
+        "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md",
+        "docs/policy/SOURCE_LIMITS.md",
+        "docs/user/SKILL_INDEX.md"
+      ],
+      "runtime_helpers": []
+    },
+    {
+      "name": "extraction-table-builder",
+      "classification": "self-sufficient",
+      "rationale": "Builds extraction tables independently with its declared corpus policies and artifact schema.",
+      "resources": [
+        "docs/policy/AUTO_SELECTION_GUARDRAILS.md",
+        "docs/policy/CORPUS_REPRESENTATIVENESS_TAXONOMY.md",
+        "docs/policy/PROCESS_PASSPORT.md",
+        "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md",
+        "docs/policy/SOURCE_LIMITS.md",
+        "shared/contracts/book/book_artifact.schema.json"
+      ],
+      "runtime_helpers": []
+    },
+    {
+      "name": "figure-table-integrity-auditor",
+      "classification": "self-sufficient",
+      "rationale": "Audits figure and table integrity independently with its declared policies, schema, and provenance checker.",
+      "resources": [
+        "docs/policy/AUTO_SELECTION_GUARDRAILS.md",
+        "docs/policy/PROCESS_PASSPORT.md",
+        "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md",
+        "docs/policy/SOURCE_LIMITS.md",
+        "shared/contracts/book/book_artifact.schema.json"
+      ],
+      "runtime_helpers": [
+        "scripts/check_figure_table_provenance.py"
+      ]
+    },
+    {
+      "name": "literature-review-mapper",
+      "classification": "self-sufficient",
+      "rationale": "Maps a literature review independently with its declared corpus policies and artifact schema.",
+      "resources": [
+        "docs/policy/AUTO_SELECTION_GUARDRAILS.md",
+        "docs/policy/CORPUS_REPRESENTATIVENESS_TAXONOMY.md",
+        "docs/policy/PROCESS_PASSPORT.md",
+        "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md",
+        "docs/policy/SOURCE_LIMITS.md",
+        "shared/contracts/book/book_artifact.schema.json"
+      ],
+      "runtime_helpers": []
+    },
+    {
+      "name": "manuscript-continuity-editor",
+      "classification": "self-sufficient",
+      "rationale": "Edits manuscript continuity independently with its declared policies, schema, and traceability checker.",
+      "resources": [
+        "docs/policy/AUTO_SELECTION_GUARDRAILS.md",
+        "docs/policy/PROCESS_PASSPORT.md",
+        "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md",
+        "docs/policy/SOURCE_LIMITS.md",
+        "shared/contracts/book/book_artifact.schema.json"
+      ],
+      "runtime_helpers": [
+        "scripts/check_workflow_traceability.py"
+      ]
+    },
+    {
+      "name": "methodology-source-auditor",
+      "classification": "self-sufficient",
+      "rationale": "Audits methodology sources independently with its bundled rubric, references, policies, and schema.",
+      "resources": [
+        "docs/policy/AUTO_SELECTION_GUARDRAILS.md",
+        "docs/policy/CORPUS_REPRESENTATIVENESS_TAXONOMY.md",
+        "docs/policy/PROCESS_PASSPORT.md",
+        "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md",
+        "docs/policy/SOURCE_LIMITS.md",
+        "shared/contracts/book/book_artifact.schema.json"
+      ],
+      "runtime_helpers": []
+    },
+    {
+      "name": "reading-load-reducer",
+      "classification": "self-sufficient",
+      "rationale": "Reduces reading load independently using its bundled corpus, routing, and operating guidance.",
+      "resources": [
+        "docs/policy/AUTO_SELECTION_GUARDRAILS.md",
+        "docs/policy/CORPUS_REPRESENTATIVENESS_TAXONOMY.md",
+        "docs/policy/ROUTING_MATRIX.md",
+        "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md",
+        "docs/policy/SOURCE_LIMITS.md",
+        "docs/user/SKILL_INDEX.md"
+      ],
+      "runtime_helpers": []
+    },
+    {
+      "name": "research-book-orchestrator",
+      "classification": "full-plugin-only",
+      "rationale": "Coordinates the complete multi-skill workflow and therefore requires the full plugin rather than a standalone bundle.",
+      "resources": [
+        "MODE_REGISTRY.md",
+        "docs/policy/AUTO_SELECTION_GUARDRAILS.md",
+        "docs/policy/PROCESS_PASSPORT.md",
+        "docs/policy/QUALITY_STANDARD.md",
+        "docs/policy/ROUTING_MATRIX.md",
+        "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md",
+        "docs/policy/SOURCE_LIMITS.md",
+        "docs/reference/ARCHITECTURE.md",
+        "shared/contracts/book/book_artifact.schema.json"
+      ],
+      "runtime_helpers": []
+    },
+    {
+      "name": "research-intent-router",
+      "classification": "route-only",
+      "rationale": "Can identify and explain the appropriate route standalone, but execution still requires the selected downstream skill.",
+      "resources": [
+        "MODE_REGISTRY.md",
+        "docs/policy/AUTO_SELECTION_GUARDRAILS.md",
+        "docs/policy/PROCESS_PASSPORT.md",
+        "docs/policy/QUALITY_STANDARD.md",
+        "docs/policy/ROUTING_MATRIX.md",
+        "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md",
+        "docs/policy/SOURCE_LIMITS.md",
+        "docs/reference/ARCHITECTURE.md",
+        "docs/user/SKILL_INDEX.md",
+        "shared/contracts/book/book_artifact.schema.json"
+      ],
+      "runtime_helpers": []
+    },
+    {
+      "name": "rights-privacy-release-auditor",
+      "classification": "self-sufficient",
+      "rationale": "Audits rights, privacy, and release evidence independently with its declared policies and schema.",
+      "resources": [
+        "docs/policy/AUTO_SELECTION_GUARDRAILS.md",
+        "docs/policy/PROCESS_PASSPORT.md",
+        "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md",
+        "docs/policy/SOURCE_LIMITS.md",
+        "shared/contracts/book/book_artifact.schema.json"
+      ],
+      "runtime_helpers": []
+    },
+    {
+      "name": "scholarly-integrity-gate",
+      "classification": "self-sufficient",
+      "rationale": "Applies the scholarly integrity gate independently with its declared policies, schema, and traceability checker.",
+      "resources": [
+        "docs/policy/AUTO_SELECTION_GUARDRAILS.md",
+        "docs/policy/CORPUS_REPRESENTATIVENESS_TAXONOMY.md",
+        "docs/policy/PROCESS_PASSPORT.md",
+        "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md",
+        "docs/policy/SOURCE_LIMITS.md",
+        "shared/contracts/book/book_artifact.schema.json"
+      ],
+      "runtime_helpers": [
+        "scripts/check_workflow_traceability.py"
+      ]
+    },
+    {
+      "name": "scholarly-prose-editor",
+      "classification": "self-sufficient",
+      "rationale": "Edits scholarly prose independently using its bundled process, routing, and operating guidance.",
+      "resources": [
+        "docs/policy/AUTO_SELECTION_GUARDRAILS.md",
+        "docs/policy/PROCESS_PASSPORT.md",
+        "docs/policy/ROUTING_MATRIX.md",
+        "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md",
+        "docs/policy/SOURCE_LIMITS.md",
+        "shared/contracts/book/book_artifact.schema.json"
+      ],
+      "runtime_helpers": []
+    },
+    {
+      "name": "scholarly-research-agenda",
+      "classification": "self-sufficient",
+      "rationale": "Develops a scholarly research agenda independently with its declared corpus policies and artifact schema.",
+      "resources": [
+        "docs/policy/AUTO_SELECTION_GUARDRAILS.md",
+        "docs/policy/CORPUS_REPRESENTATIVENESS_TAXONOMY.md",
+        "docs/policy/PROCESS_PASSPORT.md",
+        "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md",
+        "docs/policy/SOURCE_LIMITS.md",
+        "shared/contracts/book/book_artifact.schema.json"
+      ],
+      "runtime_helpers": []
+    },
+    {
+      "name": "systematic-source-discovery",
+      "classification": "self-sufficient",
+      "rationale": "Plans systematic source discovery independently with its declared corpus policies and artifact schema.",
+      "resources": [
+        "docs/policy/AUTO_SELECTION_GUARDRAILS.md",
+        "docs/policy/CORPUS_REPRESENTATIVENESS_TAXONOMY.md",
+        "docs/policy/PROCESS_PASSPORT.md",
+        "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md",
+        "docs/policy/SOURCE_LIMITS.md",
+        "shared/contracts/book/book_artifact.schema.json"
+      ],
+      "runtime_helpers": []
+    }
+  ]
+}
