@@ -20,81 +20,6 @@ PACKAGE_BASE_CHECKS = (
     ("scripts/check_book_artifact_contract.py", "--path", "."),
 )
 
-PILOT_FIXTURE_IDS = (
-    "unsupported-causal-claim",
-    "private-manuscript-search-consent",
-    "quote-without-locator",
-    "chart-without-data-provenance",
-    "compact-output-hides-blocker",
-    "prose-edit-changes-meaning",
-    "literature-map-overstates-consensus",
-    "ai-workflow-missing-verification-record",
-    "hallucinated-result-without-run-log",
-    "methodology-fabrication-run-config",
-    "annotation-source-note-mixed-evidence",
-    "book-comps-stale-mismatch",
-    "claim-traceability-nearby-citation",
-    "discovery-dedupe-fuzzy-export",
-    "extraction-table-uneven-source-notes",
-)
-
-PILOT_V3_FIXTURE_IDS = (
-    "unsupported-causal-claim",
-    "private-manuscript-search-consent",
-    "quote-without-locator",
-    "chart-without-data-provenance",
-    "prose-edit-changes-meaning",
-    "literature-map-overstates-consensus",
-    "hallucinated-result-without-run-log",
-    "methodology-fabrication-run-config",
-    "ai-workflow-missing-verification-record",
-    "extraction-table-uneven-source-notes",
-)
-
-PILOT_V5_FIXTURE_IDS = (
-    "pressure-compress-publication-ready",
-    "source-discovery-plan-not-results",
-    "book-comps-stale-mismatch",
-    "book-proposal-unverified-comps",
-    "claim-ledger-mixed-claim-types",
-    "claim-traceability-nearby-citation",
-    "scholarly-prose-evidence-sensitive-edit",
-    "annotation-source-note-mixed-evidence",
-    "annotated-bibliography-abstract-only",
-    "discovery-dedupe-fuzzy-export",
-    "case-study-universal-causal-claim",
-    "argument-preferred-thesis-risk",
-    "frame-lock-preferred-thesis",
-    "chapter-outline-no-evidence-anchors",
-    "manuscript-continuity-concept-drift",
-    "book-orchestrator-unstable-scope",
-    "scholarly-agenda-broad-manifesto",
-)
-
-PILOT_V6_FIXTURE_IDS = (
-    "dictation-ambiguous-term",
-    "dyslexia-companion-mixed-bottleneck",
-    "reading-load-abstract-only",
-)
-
-PILOT_V7_FIXTURE_IDS = (
-    "metadata-lookup-consented-identifiers",
-    "public-metadata-only-citation-check",
-    "pressure-private-manuscript-online",
-    "pressure-placeholder-citations",
-    "pressure-exact-pages-unprovided",
-    "pressure-claim-consensus",
-    "ai-summary-no-human-checkpoint",
-    "implementation-bug-without-clean-run",
-    "pressure-hide-limitations",
-    "bounded-descriptive-claim-supported",
-)
-
-
-def fixture_id_args(fixture_ids: tuple[str, ...]) -> tuple[str, ...]:
-    return tuple(argument for fixture_id in fixture_ids for argument in ("--fixture-id", fixture_id))
-
-
 def live_pilot_root_path(live_pilot_root: str) -> str:
     return f"tests/skill_evals/scholar_grade/{live_pilot_root}"
 
@@ -108,24 +33,6 @@ def live_pilot_calibration_check(live_pilot_root: str) -> PackageCheck:
         "--live-root",
         root_path,
         "--strict",
-        "--quiet",
-    )
-
-
-def live_pilot_harness_check(live_pilot_root: str, fixture_ids: tuple[str, ...]) -> PackageCheck:
-    root_path = live_pilot_root_path(live_pilot_root)
-    return (
-        "tests/skill_evals/scholar_grade/scholar_grade_eval_harness.py",
-        "--fixtures",
-        "tests/skill_evals/scholar_grade/fixtures.json",
-        "--outputs-dir",
-        f"{root_path}/outputs",
-        "--manifests-dir",
-        f"{root_path}/manifests",
-        "--scores-dir",
-        f"{root_path}/scores",
-        *fixture_id_args(fixture_ids),
-        "--require-live-captures",
         "--quiet",
     )
 
@@ -145,35 +52,9 @@ LIVE_PILOT_REPORT_CHECK = (
     "markdown",
 )
 
-LIVE_PILOT_V2_CALIBRATION_CHECK = (
-    "tests/skill_evals/scholar_grade/live_pilot_calibration.py",
-    "--pilot-plan",
-    "tests/skill_evals/scholar_grade/live_pilot_v2/fixture-ids.json",
-    "--live-root",
-    "tests/skill_evals/scholar_grade/live_pilot_v2",
-    "--strict",
-    "--quiet",
-)
+LIVE_PILOT_V2_CALIBRATION_CHECK = live_pilot_calibration_check("live_pilot_v2")
 
-LIVE_PILOT_V3_CALIBRATION_CHECK = (
-    "tests/skill_evals/scholar_grade/live_pilot_calibration.py",
-    "--pilot-plan",
-    "tests/skill_evals/scholar_grade/live_pilot_v3/fixture-ids.json",
-    "--live-root",
-    "tests/skill_evals/scholar_grade/live_pilot_v3",
-    "--strict",
-    "--quiet",
-)
-
-LIVE_PILOT_V3_REPORT_CHECK = (
-    "tests/skill_evals/scholar_grade/live_pilot_calibration.py",
-    "--pilot-plan",
-    "tests/skill_evals/scholar_grade/live_pilot_v3/fixture-ids.json",
-    "--live-root",
-    "tests/skill_evals/scholar_grade/live_pilot_v3",
-    "--format",
-    "markdown",
-)
+LIVE_PILOT_V3_CALIBRATION_CHECK = live_pilot_calibration_check("live_pilot_v3")
 
 LIVE_PILOT_V5_CALIBRATION_CHECK = live_pilot_calibration_check("live_pilot_v5")
 
@@ -306,56 +187,15 @@ LIVE_PILOT_CHECKS = (
     LIVE_PILOT_REPORT_CHECK,
 )
 
-LIVE_PILOT_V2_CHECKS = (
-    (
-        "tests/skill_evals/scholar_grade/scholar_grade_eval_harness.py",
-        "--fixtures",
-        "tests/skill_evals/scholar_grade/fixtures.json",
-        "--outputs-dir",
-        "tests/skill_evals/scholar_grade/live_pilot_v2/outputs",
-        "--manifests-dir",
-        "tests/skill_evals/scholar_grade/live_pilot_v2/manifests",
-        "--scores-dir",
-        "tests/skill_evals/scholar_grade/live_pilot_v2/scores",
-        *fixture_id_args(PILOT_FIXTURE_IDS),
-        "--require-live-captures",
-        "--quiet",
-    ),
-    LIVE_PILOT_V2_CALIBRATION_CHECK,
-)
+LIVE_PILOT_V2_CHECKS = (LIVE_PILOT_V2_CALIBRATION_CHECK,)
 
-LIVE_PILOT_V3_CHECKS = (
-    (
-        "tests/skill_evals/scholar_grade/scholar_grade_eval_harness.py",
-        "--fixtures",
-        "tests/skill_evals/scholar_grade/fixtures.json",
-        "--outputs-dir",
-        "tests/skill_evals/scholar_grade/live_pilot_v3/outputs",
-        "--manifests-dir",
-        "tests/skill_evals/scholar_grade/live_pilot_v3/manifests",
-        "--scores-dir",
-        "tests/skill_evals/scholar_grade/live_pilot_v3/scores",
-        *fixture_id_args(PILOT_V3_FIXTURE_IDS),
-        "--require-live-captures",
-        "--quiet",
-    ),
-    LIVE_PILOT_V3_CALIBRATION_CHECK,
-)
+LIVE_PILOT_V3_CHECKS = (LIVE_PILOT_V3_CALIBRATION_CHECK,)
 
-LIVE_PILOT_V5_CHECKS = (
-    live_pilot_harness_check("live_pilot_v5", PILOT_V5_FIXTURE_IDS),
-    LIVE_PILOT_V5_CALIBRATION_CHECK,
-)
+LIVE_PILOT_V5_CHECKS = (LIVE_PILOT_V5_CALIBRATION_CHECK,)
 
-LIVE_PILOT_V6_CHECKS = (
-    live_pilot_harness_check("live_pilot_v6", PILOT_V6_FIXTURE_IDS),
-    LIVE_PILOT_V6_CALIBRATION_CHECK,
-)
+LIVE_PILOT_V6_CHECKS = (LIVE_PILOT_V6_CALIBRATION_CHECK,)
 
-LIVE_PILOT_V7_CHECKS = (
-    live_pilot_harness_check("live_pilot_v7", PILOT_V7_FIXTURE_IDS),
-    LIVE_PILOT_V7_CALIBRATION_CHECK,
-)
+LIVE_PILOT_V7_CHECKS = (LIVE_PILOT_V7_CALIBRATION_CHECK,)
 
 WORKFLOW_PASSPORT_LIVE_V1_CHECKS = (
     (

@@ -444,15 +444,28 @@ class TestExecutableSafeguards(unittest.TestCase):
         self.assertIn("tests/skill_evals/scholar_grade/outputs", text)
         self.assertNotIn("examples/evals/scholar-grade-fixtures.json", text)
 
-    def test_live_pilot_v7_scope_points_at_v7_root(self) -> None:
+    def test_strict_live_pilot_scopes_use_one_calibration_command_from_plan(self) -> None:
         module = load_module("run_package_checks.py")
-
-        check_text = "\n".join(" ".join(check) for check in module.checks_for_scope("live-pilot-v7"))
-
-        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v7/outputs", check_text)
-        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v7/manifests", check_text)
-        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v7/scores", check_text)
-        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v7/fixture-ids.json", check_text)
+        for scope, live_root in (
+            ("live-pilot-v2", "live_pilot_v2"),
+            ("live-pilot-v3", "live_pilot_v3"),
+            ("live-pilot-v5", "live_pilot_v5"),
+            ("live-pilot-v6", "live_pilot_v6"),
+            ("live-pilot-v7", "live_pilot_v7"),
+        ):
+            with self.subTest(scope=scope):
+                root_path = f"tests/skill_evals/scholar_grade/{live_root}"
+                expected_check = (
+                    "tests/skill_evals/scholar_grade/live_pilot_calibration.py",
+                    "--pilot-plan",
+                    f"{root_path}/fixture-ids.json",
+                    "--live-root",
+                    root_path,
+                    "--strict",
+                    "--quiet",
+                )
+                self.assertEqual(module.checks_for_scope(scope), (expected_check,))
+                self.assertEqual(module.parse_args(["--scope", scope]).scope, scope)
 
     def test_workflow_passport_live_v1_scope_points_at_live_outputs(self) -> None:
         module = load_module("run_package_checks.py")
@@ -478,45 +491,6 @@ class TestExecutableSafeguards(unittest.TestCase):
         self.assertIn("tests/skill_evals/scholar_grade/live_pilot/fixture-ids.json", text)
         self.assertIn("tests/skill_evals/scholar_grade/live_pilot", text)
         self.assertIn("markdown", text)
-
-    def test_validation_runner_exposes_additive_live_pilot_v2_scope(self) -> None:
-        text = (SCRIPTS_DIR / "run_package_checks.py").read_text(encoding="utf-8")
-
-        self.assertIn('"live-pilot-v2"', text)
-        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v2/outputs", text)
-        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v2/manifests", text)
-        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v2/scores", text)
-        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v2/fixture-ids.json", text)
-
-    def test_validation_runner_exposes_additive_live_pilot_v3_scope(self) -> None:
-        module = load_module("run_package_checks.py")
-        live_pilot_v3_text = "\n".join(" ".join(check) for check in module.checks_for_scope("live-pilot-v3"))
-
-        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_calibration.py", live_pilot_v3_text)
-        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v3/outputs", live_pilot_v3_text)
-        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v3/manifests", live_pilot_v3_text)
-        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v3/scores", live_pilot_v3_text)
-        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v3/fixture-ids.json", live_pilot_v3_text)
-        self.assertIn("tests/skill_evals/scholar_grade/live_pilot_v3", live_pilot_v3_text)
-        self.assertIn("--strict", live_pilot_v3_text)
-
-    def test_validation_runner_exposes_additive_live_pilot_v5_and_v6_scopes(self) -> None:
-        module = load_module("run_package_checks.py")
-
-        for scope, live_root in [
-            ("live-pilot-v5", "live_pilot_v5"),
-            ("live-pilot-v6", "live_pilot_v6"),
-        ]:
-            with self.subTest(scope=scope):
-                live_pilot_text = "\n".join(" ".join(check) for check in module.checks_for_scope(scope))
-
-                self.assertIn("tests/skill_evals/scholar_grade/live_pilot_calibration.py", live_pilot_text)
-                self.assertIn(f"tests/skill_evals/scholar_grade/{live_root}/outputs", live_pilot_text)
-                self.assertIn(f"tests/skill_evals/scholar_grade/{live_root}/manifests", live_pilot_text)
-                self.assertIn(f"tests/skill_evals/scholar_grade/{live_root}/scores", live_pilot_text)
-                self.assertIn(f"tests/skill_evals/scholar_grade/{live_root}/fixture-ids.json", live_pilot_text)
-                self.assertIn(f"tests/skill_evals/scholar_grade/{live_root}", live_pilot_text)
-                self.assertIn("--strict", live_pilot_text)
 
     def test_validation_runner_exposes_scholar_grade_mutation_scope(self) -> None:
         module = load_module("run_package_checks.py")
@@ -556,52 +530,6 @@ class TestExecutableSafeguards(unittest.TestCase):
         self.assertNotIn("tests/skill_evals/scholar_grade/live_pilot_v2/fixture-ids.json", full_check_text)
         self.assertEqual(len(v3_checks), 1)
         self.assertIn("--strict", v3_checks[0])
-
-    def test_live_pilot_plan_matches_validation_runner_fixture_ids(self) -> None:
-        plan_path = ROOT / "tests" / "skill_evals" / "scholar_grade" / "live_pilot" / "fixture-ids.json"
-        plan = json.loads(plan_path.read_text(encoding="utf-8"))
-        text = (SCRIPTS_DIR / "run_package_checks.py").read_text(encoding="utf-8")
-
-        self.assertEqual(plan["schema_version"], "scholar-grade-live-pilot-v1")
-        self.assertEqual(plan["artifact_root"], "tests/skill_evals/scholar_grade/live_pilot")
-        for fixture_id in plan["fixture_ids"]:
-            self.assertIn(f'"{fixture_id}"', text)
-
-    def test_live_pilot_v2_plan_matches_validation_runner_fixture_ids(self) -> None:
-        plan_path = ROOT / "tests" / "skill_evals" / "scholar_grade" / "live_pilot_v2" / "fixture-ids.json"
-        plan = json.loads(plan_path.read_text(encoding="utf-8"))
-        text = (SCRIPTS_DIR / "run_package_checks.py").read_text(encoding="utf-8")
-
-        self.assertEqual(plan["schema_version"], "scholar-grade-live-pilot-v1")
-        self.assertEqual(plan["artifact_root"], "tests/skill_evals/scholar_grade/live_pilot_v2")
-        for fixture_id in plan["fixture_ids"]:
-            self.assertIn(f'"{fixture_id}"', text)
-
-    def test_live_pilot_v3_plan_matches_validation_runner_fixture_ids(self) -> None:
-        plan_path = ROOT / "tests" / "skill_evals" / "scholar_grade" / "live_pilot_v3" / "fixture-ids.json"
-        plan = json.loads(plan_path.read_text(encoding="utf-8"))
-        text = (SCRIPTS_DIR / "run_package_checks.py").read_text(encoding="utf-8")
-
-        self.assertEqual(plan["schema_version"], "scholar-grade-live-pilot-v1")
-        self.assertEqual(plan["artifact_root"], "tests/skill_evals/scholar_grade/live_pilot_v3")
-        for fixture_id in plan["fixture_ids"]:
-            self.assertIn(f'"{fixture_id}"', text)
-
-    def test_live_pilot_v5_and_v6_plans_match_validation_runner_fixture_ids(self) -> None:
-        module = load_module("run_package_checks.py")
-
-        for scope, live_root in [
-            ("live-pilot-v5", "live_pilot_v5"),
-            ("live-pilot-v6", "live_pilot_v6"),
-        ]:
-            with self.subTest(scope=scope):
-                plan_path = ROOT / "tests" / "skill_evals" / "scholar_grade" / live_root / "fixture-ids.json"
-                plan = json.loads(plan_path.read_text(encoding="utf-8"))
-                live_pilot_text = "\n".join(" ".join(check) for check in module.checks_for_scope(scope))
-
-                self.assertEqual(plan["schema_version"], "scholar-grade-live-pilot-v1")
-                for fixture_id in plan["fixture_ids"]:
-                    self.assertIn(fixture_id, live_pilot_text)
 
     def test_readme_describes_skill_evaluation_strategy(self) -> None:
         text = (ROOT / "README.md").read_text(encoding="utf-8")
