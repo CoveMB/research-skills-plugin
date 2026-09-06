@@ -300,14 +300,16 @@ class TestPluginStructure(unittest.TestCase):
         offenders: list[str] = []
         for skill_dir in self.skill_dirs():
             text = skill_readme(skill_dir)
+            operational_heading_count = text.count("## Operational boundaries")
             duplicated_headings = [
                 heading
                 for heading in SHARED_OPERATIONAL_BOUNDARY_HEADINGS
                 if heading in text
             ]
-            if text.count(policy_path) != 1 or duplicated_headings:
+            if operational_heading_count != 1 or text.count(policy_path) != 1 or duplicated_headings:
                 offenders.append(
-                    f"{skill_dir.name}: references={text.count(policy_path)}, headings={duplicated_headings}"
+                    f"{skill_dir.name}: operational_headings={operational_heading_count}, "
+                    f"references={text.count(policy_path)}, headings={duplicated_headings}"
                 )
         self.assertEqual(offenders, [])
 
@@ -328,7 +330,7 @@ class TestPluginStructure(unittest.TestCase):
     def test_skill_readme_template_defers_common_operational_boundaries(self) -> None:
         template = read_text(ROOT / "docs" / "templates" / "SKILL_README_TEMPLATE.md")
         policy_path = "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md"
-        self.assertIn("## Operational boundaries", template)
+        self.assertEqual(template.count("## Operational boundaries"), 1)
         self.assertEqual(template.count(policy_path), 1)
         duplicated_headings = [
             heading
