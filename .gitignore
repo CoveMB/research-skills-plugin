@@ -16,6 +16,8 @@ node_modules/
 *.log
 *.tmp
 *.zip
+tests/skill_evals/scholar_grade/live_pilot*/score-templates/
+tests/skill_evals/scholar_grade/live_pilot*/capture_protocol/
 
 # Local OS/editor metadata
 .DS_Store
