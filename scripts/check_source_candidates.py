@@ -14,13 +14,8 @@ from typing import Any, Iterable
 from check_citation_metadata import DOI_RE, PUBLIC_IDENTIFIER_SPECS, normalize_identifier, normalize_title
 from plugin_utils import (
     PRIVATE_SOURCE_TEXT_FIELDS,
-    normalized_field_name,
-    normalized_private_fields,
     private_payload_field_errors,
-    read_csv_records as read_csv_record_objects,
     read_json_or_csv_records,
-    read_json_records as read_json_record_objects,
-    validate_record_objects,
 )
 
 
@@ -69,23 +64,6 @@ LIMITS = [
 ]
 
 
-def read_json_records(path: Path) -> list[dict[str, Any]]:
-    return read_json_record_objects(
-        path,
-        container_keys=("records", "candidates"),
-        json_error_message=JSON_RECORD_ERROR,
-        empty_error_message=EMPTY_RECORD_ERROR,
-    )
-
-
-def read_csv_records(path: Path) -> list[dict[str, Any]]:
-    return read_csv_record_objects(path, empty_error_message=EMPTY_RECORD_ERROR)
-
-
-def validate_candidate_records(records: list[Any]) -> list[dict[str, Any]]:
-    return validate_record_objects(records, empty_error_message=EMPTY_RECORD_ERROR)
-
-
 def read_records(path: Path) -> list[dict[str, Any]]:
     return read_json_or_csv_records(
         path,
@@ -93,14 +71,6 @@ def read_records(path: Path) -> list[dict[str, Any]]:
         json_error_message=JSON_RECORD_ERROR,
         empty_error_message=EMPTY_RECORD_ERROR,
     )
-
-
-NORMALIZED_PRIVATE_FIELDS = normalized_private_fields(PRIVATE_FIELDS)
-
-
-def is_private_field(field: str) -> bool:
-    return normalized_field_name(field) in NORMALIZED_PRIVATE_FIELDS
-
 
 def candidate_identifier(record: dict[str, Any], index: int = 0) -> str:
     for key in ["candidate_id", "id", "source_id", "record_id", "reference_id"]:
