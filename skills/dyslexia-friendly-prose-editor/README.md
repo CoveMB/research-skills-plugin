@@ -38,29 +38,13 @@ Typical output is a revised passage, meaning-preserved note, new-claims check, c
 
 Ask for compact output when you want one source-basis line, the revised passage, only meaning-changing ambiguity, and one next action. Compact output should include `How to use this result: TRIAGE ONLY - Use this only as meaning-preserving prose repair; do not treat it as evidence, citation, expert-review, or release clearance.` It changes output shape, not route selection or evidence requirements.
 
-## Procedure
+## Operational boundaries
 
-Follow the shared procedure in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+Follow `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
 
-## Quality checks
+Keep meaning preservation, ambiguous corrections, evidence limits, consent language, commitments, and obligations visible in the output.
 
-Apply the shared quality checks in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`. Keep meaning preservation, ambiguous corrections, evidence limits, consent language, commitments, and obligations visible in the output.
-
-## Failure modes
-
-Use the shared failure modes in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`. Call out overcorrection, lost uncertainty, or generic style drift when relevant.
-
-## Files/folders it may read
-
-Follow the shared read boundary in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
-
-## Files/folders it may write
-
-Follow the shared write boundary in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
-
-## What it must not do
-
-Follow the shared prohibitions in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+Call out overcorrection, lost uncertainty, or generic style drift when relevant.
 
 ## Best next steps
 

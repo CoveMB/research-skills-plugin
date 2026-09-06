@@ -164,30 +164,7 @@ Recommend a sequence of 3–6 skills. For each, explain:
 
 Create a plan with deliverables. Prefer concrete artifacts: research agenda, search log, literature map, thesis tree, chapter brief, claim ledger, citation audit, continuity memo.
 
-When the user requests machine-readable artifacts, use `shared/contracts/book/book_artifact.schema.json`. Durable handoff artifacts must set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits. The supported artifact types are:
-
-- `book_research_agenda`
-- `source_discovery_log`
-- `literature_map`
-- `thesis_tree`
-- `chapter_brief`
-- `claim_evidence_ledger`
-- `source_note`
-- `extraction_table`
-- `annotated_bibliography`
-- `methodology_source_audit`
-- `claim_traceability_graph`
-- `peer_review_report`
-- `citation_integrity_audit`
-- `figure_table_integrity_audit`
-- `case_study_dossier`
-- `scholarly_integrity_audit`
-- `ai_human_workflow_log`
-- `rights_privacy_release_audit`
-- `comps_verification`
-- `continuity_review`
-- `style_sheet`
-- `book_proposal`
+When the user requests machine-readable artifacts, consult `shared/contracts/book/book_artifact.schema.json` for the current machine-readable artifact vocabulary, including supported artifact types and fields; treat that schema as authoritative. Durable handoff artifacts must set `handoff_artifact: true`, include `process_passport`, and preserve upstream passport limits.
 
 ### 6. Enforce scholarly quality gates
 

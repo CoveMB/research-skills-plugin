@@ -30,29 +30,9 @@ Check whether this generated analysis has hallucinated evidence, methodology fab
 
 Expect source basis, visible verification, integrity checks, verdicts, gate decision, override table, repair priorities, and a risk-gated next step when useful. Ask for compact output when you want the gate decision, blockers, required repair, human checkpoint, and one next action. Compact output should include `How to use this result: LIMITED GATE DECISION - Use this as a proceed/hold/repair decision based only on visible evidence, provenance, and named human checkpoints.` It changes output shape, not route selection or evidence requirements.
 
-## Procedure
+## Operational boundaries
 
-Follow the shared procedure in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
-
-## Quality checks
-
-Apply the shared quality checks in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`; keep any skill-specific caveats visible in the output.
-
-## Failure modes
-
-Use the shared failure modes in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`; call out the skill-specific failure most relevant to the request.
-
-## Files/folders it may read
-
-Follow the shared read boundary in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
-
-## Files/folders it may write
-
-Follow the shared write boundary in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
-
-## What it must not do
-
-Follow the shared prohibitions in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+Follow `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
 
 ## Best next steps
 

@@ -38,29 +38,13 @@ Typical output is a cleaned note table with speaker/source, segment/timecode, or
 
 Ask for compact output when you want one source-basis line, one cleaned note table, only meaningful ambiguity, and one next action. Compact output should include `How to use this result: TRIAGE ONLY - Use this only as cleaned notes from visible meaning; do not treat it as claim, commitment, or external-sharing verification.` It changes output shape, not route selection or evidence requirements.
 
-## Procedure
+## Operational boundaries
 
-Follow the shared procedure in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+Follow `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
 
-## Quality checks
+Keep transcript ambiguity, meaning-preservation checks, commitments, obligations, consent language, and identifiable-person risks visible in the output.
 
-Apply the shared quality checks in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`. Keep transcript ambiguity, meaning-preservation checks, commitments, obligations, consent language, and identifiable-person risks visible in the output.
-
-## Failure modes
-
-Use the shared failure modes in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`. Call out transcript overcorrection, false confidence, or hidden evidence gaps when relevant.
-
-## Files/folders it may read
-
-Follow the shared read boundary in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
-
-## Files/folders it may write
-
-Follow the shared write boundary in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
-
-## What it must not do
-
-Follow the shared prohibitions in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+Call out transcript overcorrection, false confidence, or hidden evidence gaps when relevant.
 
 ## Best next steps
 

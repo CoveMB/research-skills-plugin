@@ -49,29 +49,13 @@ This skill does not verify sources unless source material or lookup permission i
 
 It should not turn rough text into confident scholarly claims without evidence status. It should not hide missing locators, uncertain terms, unsupported claims, consent limits, obligations, commitments, or external-sharing risks.
 
-## Procedure
+## Operational boundaries
 
-Follow the shared procedure in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+Follow `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
 
-## Quality checks
+Keep accessibility-specific ambiguity and meaning-preservation checks visible in the output.
 
-Apply the shared quality checks in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`. Keep accessibility-specific ambiguity and meaning-preservation checks visible in the output.
-
-## Failure modes
-
-Use the shared failure modes in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`. Call out overcorrection, long output, or hidden evidence gaps when relevant.
-
-## Files/folders it may read
-
-Follow the shared read boundary in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
-
-## Files/folders it may write
-
-Follow the shared write boundary in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
-
-## What it must not do
-
-Follow the shared prohibitions in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+Call out overcorrection, long output, or hidden evidence gaps when relevant.
 
 ## Best next steps
 
