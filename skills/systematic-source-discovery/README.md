@@ -38,30 +38,11 @@ I have mostly supportive sources. Design searches that will find opposing litera
 
 Expect a source discovery plan with search families, a query bank, priority venues, inclusion and exclusion criteria, citation-chaining plan, primary-source targets, opposing-literature targets, and a search log template.
 
-## Procedure
+## Operational boundaries
 
-Follow the shared procedure in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+Follow `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+
 Reference: `references/search-strategy-guide.md`. Template: `assets/search-log-template.md`.
-
-## Quality checks
-
-Apply the shared quality checks in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`; keep any skill-specific caveats visible in the output.
-
-## Failure modes
-
-Use the shared failure modes in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`; call out the skill-specific failure most relevant to the request.
-
-## Files/folders it may read
-
-Follow the shared read boundary in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
-
-## Files/folders it may write
-
-Follow the shared write boundary in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
-
-## What it must not do
-
-Follow the shared prohibitions in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
 
 ## Best next steps
 

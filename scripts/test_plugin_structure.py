@@ -42,13 +42,16 @@ REQUIRED_SKILL_HEADINGS = [
     "## What it must not do",
 ]
 REQUIRED_README_HEADINGS = [
+    "## Operational boundaries",
+    "## Best next steps",
+]
+SHARED_OPERATIONAL_BOUNDARY_HEADINGS = [
     "## Procedure",
     "## Quality checks",
     "## Failure modes",
     "## Files/folders it may read",
     "## Files/folders it may write",
     "## What it must not do",
-    "## Best next steps",
 ]
 SELECTED_COMPACT_OUTPUT_SKILLS = [
     "research-intent-router",
@@ -290,15 +293,25 @@ class TestPluginStructure(unittest.TestCase):
         shared_doc = ROOT / "docs" / "policy" / "SKILL_OPERATIONAL_BOUNDARIES.md"
         self.assertTrue(shared_doc.is_file())
         shared_text = read_text(shared_doc)
-        for heading in REQUIRED_README_HEADINGS[:-1]:
+        for heading in SHARED_OPERATIONAL_BOUNDARY_HEADINGS:
             self.assertIn(heading, shared_text)
 
-        missing_references = [
-            skill_dir.name
-            for skill_dir in self.skill_dirs()
-            if "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md" not in skill_readme(skill_dir)
-        ]
-        self.assertEqual(missing_references, [])
+        policy_path = "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md"
+        offenders: list[str] = []
+        for skill_dir in self.skill_dirs():
+            text = skill_readme(skill_dir)
+            operational_heading_count = text.count("## Operational boundaries")
+            duplicated_headings = [
+                heading
+                for heading in SHARED_OPERATIONAL_BOUNDARY_HEADINGS
+                if heading in text
+            ]
+            if operational_heading_count != 1 or text.count(policy_path) != 1 or duplicated_headings:
+                offenders.append(
+                    f"{skill_dir.name}: operational_headings={operational_heading_count}, "
+                    f"references={text.count(policy_path)}, headings={duplicated_headings}"
+                )
+        self.assertEqual(offenders, [])
 
     def test_skill_readmes_do_not_duplicate_shared_operational_bullets(self) -> None:
         duplicated_phrases = [
@@ -316,14 +329,41 @@ class TestPluginStructure(unittest.TestCase):
 
     def test_skill_readme_template_defers_common_operational_boundaries(self) -> None:
         template = read_text(ROOT / "docs" / "templates" / "SKILL_README_TEMPLATE.md")
-        self.assertIn("docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md", template)
-        duplicated_phrases = [
-            "State the source basis and source access level",
-            "Bundled skill instructions, metadata, and assets if available",
-            "Invent missing scholarly facts or verification",
+        policy_path = "docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md"
+        self.assertEqual(template.count("## Operational boundaries"), 1)
+        self.assertEqual(template.count(policy_path), 1)
+        duplicated_headings = [
+            heading
+            for heading in SHARED_OPERATIONAL_BOUNDARY_HEADINGS
+            if heading in template
         ]
-        offenders = [phrase for phrase in duplicated_phrases if phrase in template]
-        self.assertEqual(offenders, [])
+        self.assertEqual(duplicated_headings, [])
+
+    def test_orchestrator_defers_artifact_vocabulary_to_contract_schema(self) -> None:
+        orchestrator = skill_markdown(SKILLS_DIR / "research-book-orchestrator")
+        work_plan_section = orchestrator.split("### 5. Produce a concrete work plan", 1)[1].split(
+            "### 6. Enforce scholarly quality gates",
+            1,
+        )[0]
+        expected_instruction = (
+            "When the user requests machine-readable artifacts, consult "
+            "`shared/contracts/book/book_artifact.schema.json` for the current machine-readable artifact "
+            "vocabulary, including supported artifact types and fields; treat that schema as authoritative. "
+            "Durable handoff artifacts must set `handoff_artifact: true`, include `process_passport`, and "
+            "preserve upstream passport limits."
+        )
+        violations = []
+        if work_plan_section.count(expected_instruction) != 1:
+            violations.append("work-plan section must contain the authoritative schema instruction exactly once")
+
+        schema = read_json(ROOT / "shared" / "contracts" / "book" / "book_artifact.schema.json")
+        artifact_types = schema["properties"]["artifact_type"]["enum"]
+        violations.extend(
+            f"copied artifact-type bullet: {artifact_type}"
+            for artifact_type in artifact_types
+            if re.search(rf"^- `{re.escape(artifact_type)}`$", work_plan_section, re.MULTILINE)
+        )
+        self.assertEqual(violations, [])
 
     def test_each_skill_has_ai_safety_rules(self) -> None:
         missing: list[str] = []

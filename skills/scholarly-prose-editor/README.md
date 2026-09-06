@@ -39,30 +39,11 @@ Compress this section by 25 percent and flag any claims that still need evidence
 
 Expect a revised passage, notes on what changed, confirmation of meaning preserved, claims needing evidence, and optional stronger alternatives.
 
-## Procedure
+## Operational boundaries
 
-Follow the shared procedure in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+Follow `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
 
-## Quality checks
-
-Apply the shared quality checks in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`; keep any skill-specific caveats visible in the output.
-
-## Failure modes
-
-Use the shared failure modes in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`; call out the skill-specific failure most relevant to the request.
-
-## Files/folders it may read
-
-Follow the shared read boundary in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
 Template: `assets/style-sheet-template.md`.
-
-## Files/folders it may write
-
-Follow the shared write boundary in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
-
-## What it must not do
-
-Follow the shared prohibitions in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
 
 ## Best next steps
 

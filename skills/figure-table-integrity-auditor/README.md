@@ -30,30 +30,11 @@ Check whether these tables and screenshots are safe to use as evidence.
 
 Expect a figure/table audit table, provenance gaps, caption and axis issues, duplicate visual risks, rights/release risks, verdicts, repair actions, and a risk-gated next step when useful. Ask for compact output when you want only the visual/table blockers that change manuscript, citation, or release action. Compact output should include `How to use this result: BLOCKER SUMMARY - This lists visible figure/table blockers only; do not treat it as full data, rights, or claim clearance.` It changes output shape, not route selection or evidence requirements.
 
-## Procedure
+## Operational boundaries
 
-Follow the shared procedure in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+Follow `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+
 When a figure/table provenance export exists, run or recommend `python3 scripts/check_figure_table_provenance.py --input path/to/figure-table-provenance.json` before assigning readiness. Treat a clean helper result as structural provenance only, not data-value, rights, or claim-support clearance.
-
-## Quality checks
-
-Apply the shared quality checks in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`; keep any skill-specific caveats visible in the output.
-
-## Failure modes
-
-Use the shared failure modes in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`; call out the skill-specific failure most relevant to the request.
-
-## Files/folders it may read
-
-Follow the shared read boundary in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
-
-## Files/folders it may write
-
-Follow the shared write boundary in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
-
-## What it must not do
-
-Follow the shared prohibitions in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
 
 ## Best next steps
 

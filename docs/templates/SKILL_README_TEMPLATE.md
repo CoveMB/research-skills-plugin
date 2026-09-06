@@ -30,29 +30,9 @@ For low-load or accessibility-facing skills, say whether the output should prefe
 If compact output is supported, describe it as an output shape, not a route mode. Require a visible `How to use this result` line with a short status and a full-sentence reliance limit, and say when to escalate from compact output to full review.
 If the skill can produce durable artifacts for downstream reuse, remind users to add `handoff_artifact: true` and a `process_passport` following `docs/policy/PROCESS_PASSPORT.md` when the artifact is saved, handed to another skill, sent to a reviewer, or used in a release/submission workflow.
 
-## Procedure
+## Operational boundaries
 
-Follow the shared procedure in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`; add only skill-specific procedure caveats here.
-
-## Quality checks
-
-Apply the shared quality checks in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`; add only skill-specific checks here.
-
-## Failure modes
-
-Use the shared failure modes in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`; add only skill-specific failure modes here.
-
-## Files/folders it may read
-
-Follow the shared read boundary in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`; add only skill-specific read boundaries here.
-
-## Files/folders it may write
-
-Follow the shared write boundary in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`; add only skill-specific write boundaries here.
-
-## What it must not do
-
-Follow the shared prohibitions in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`; add only skill-specific prohibitions here.
+Follow `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
 
 ## Best next steps
 

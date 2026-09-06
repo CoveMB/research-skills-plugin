@@ -44,30 +44,11 @@ Review this bibliography and flag missing details, possible fabricated reference
 
 Expect a citation integrity audit with summary verdict, claim-level audit, quotation audit, bibliography issues, high-priority repairs, claims safe as interpretation or argument, severity labels, and a risk-gated follow-up when it is useful. Ask for compact output when you want critical and major citation blockers first, with source access limits still visible. Compact output should include `How to use this result: BLOCKER SUMMARY - This lists visible citation blockers only; no blocker listed does not mean citation clearance.` It changes output shape, not route selection or evidence requirements.
 
-## Procedure
+## Operational boundaries
 
-Follow the shared procedure in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+Follow `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
 
-## Quality checks
-
-Apply the shared quality checks in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`; keep any skill-specific caveats visible in the output.
-
-## Failure modes
-
-Use the shared failure modes in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`; call out the skill-specific failure most relevant to the request.
-
-## Files/folders it may read
-
-Follow the shared read boundary in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
 Template: `assets/citation-audit-checklist.md`.
-
-## Files/folders it may write
-
-Follow the shared write boundary in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
-
-## What it must not do
-
-Follow the shared prohibitions in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
 
 ## Best next steps
 

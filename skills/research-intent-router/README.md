@@ -29,29 +29,9 @@ Use the smallest accessibility skill first when text friction blocks the user's 
 
 Expect a routing recommendation with source basis, active research mode, classification, lookup decision, verification gaps, and one risk-gated next step when useful. Ask for compact output when you want one source-basis line, the best route, lookup-needed status, remaining verification gap, and one next action. Compact output should include `How to use this result: TRIAGE ONLY - Use this only to choose the next review step; do not treat it as source verification.` It changes output shape, not route selection or evidence requirements.
 
-## Procedure
+## Operational boundaries
 
-Follow the shared procedure in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
-
-## Quality checks
-
-Apply the shared quality checks in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`; keep any skill-specific caveats visible in the output.
-
-## Failure modes
-
-Use the shared failure modes in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`; call out the skill-specific failure most relevant to the request.
-
-## Files/folders it may read
-
-Follow the shared read boundary in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
-
-## Files/folders it may write
-
-Follow the shared write boundary in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
-
-## What it must not do
-
-Follow the shared prohibitions in `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
+Follow `docs/policy/SKILL_OPERATIONAL_BOUNDARIES.md`.
 
 ## Best next steps
 
