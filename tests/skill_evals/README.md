@@ -54,7 +54,7 @@ Use these fixture classes together:
 - Review score files bind a reviewer decision to the exact captured output hash and enforce rubric-dimension scoring plus `minimum_score` thresholds.
 - `required_source_anchors` force the output to mention case-specific source details, reducing false passes from marker-only answers.
 - `semantic_fail_patterns` catch paraphrased overclaims, invented provenance, unearned verification, and other failures that literal disallowed phrases miss.
-- `score_anchors` define fixture-specific meanings for rubric scores 3, 4, and 5 so reviewers calibrate quality instead of assigning unexplained numbers.
+- `score_anchors` is either an inline rubric-dimension map or the literal `generic`. The latter resolves through the fixture document's single `generic_score_anchor_profile`; both forms give reviewers calibrated meanings for scores 3, 4, and 5.
 - Optional `semantic_fail_patterns` catch paraphrased overclaims that would evade exact forbidden-claim strings.
 
 Research-behavior fixtures may also use `required_output_patterns` and `forbidden_output_patterns` when marker checks are too weak. Use them for adversarial cases where a model could include the required headings while still following source-contained instructions, agreeing with a false premise, hiding a blocker, or leaving the claim boundary generic. These regex checks are deterministic behavior checks only; they do not certify source truth.
@@ -177,7 +177,7 @@ The fixture `minimum_score` is the required average score after hard-fail checks
 
 Every rubric dimension must also meet `minimum_score`. A passing average cannot hide a weak critical dimension such as fabrication avoidance, privacy boundary, citation discipline, locator discipline, or meaning preservation.
 
-Use fixture `score_anchors` for dimensions where generic 0-to-5 labels are not enough. A useful anchor names the difference between usable triage, strong scholar-grade behavior, and exemplary behavior for that exact packet and risk.
+Use an inline `score_anchors` dimension map when a fixture needs packet- or risk-specific calibration. Otherwise use the exact literal `generic`, which the harness resolves through the fixture document's single `generic_score_anchor_profile`.
 
 `tests/skill_evals/scholar_grade/mediocre_controls/` contains intentional negative controls. These captures should satisfy basic marker and manifest checks but fail review-score validation because their scores are below `minimum_score`; this guards against rubrics that cannot distinguish adequate triage from scholar-grade behavior.
 

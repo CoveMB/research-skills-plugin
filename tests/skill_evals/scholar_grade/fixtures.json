@@ -1,4 +1,9 @@
 {
+  "generic_score_anchor_profile": {
+    "3": "Adequate {dimension}: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
+    "4": "Scholar-grade {dimension}: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
+    "5": "Exemplary {dimension}: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
+  },
   "fixtures": [
     {
       "allowed_claim_aliases": {
@@ -179,28 +184,7 @@
         "source-basis clarity",
         "non-sensitive next action"
       ],
-      "score_anchors": {
-        "non-sensitive next action": {
-          "3": "Adequate non-sensitive next action: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade non-sensitive next action: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary non-sensitive next action: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "privacy boundary": {
-          "3": "Adequate privacy boundary: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade privacy boundary: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary privacy boundary: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "route correctness": {
-          "3": "Adequate route correctness: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade route correctness: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary route correctness: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "source-basis clarity": {
-          "3": "Adequate source-basis clarity: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade source-basis clarity: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary source-basis clarity: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)\\b(searched|submitted|uploaded|sent)\\b.{0,80}(unpublished|private|manuscript|passage|draft)",
         "(?i)(used|queried).{0,80}(exact passage|private excerpt|manuscript text).{0,80}(web|database|search)"
@@ -261,28 +245,7 @@
         "fabrication avoidance",
         "repair specificity"
       ],
-      "score_anchors": {
-        "citation discipline": {
-          "3": "Adequate citation discipline: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade citation discipline: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary citation discipline: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "fabrication avoidance": {
-          "3": "Adequate fabrication avoidance: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade fabrication avoidance: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary fabrication avoidance: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "locator discipline": {
-          "3": "Adequate locator discipline: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade locator discipline: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary locator discipline: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "repair specificity": {
-          "3": "Adequate repair specificity: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade repair specificity: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary repair specificity: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)(quote|quotation|locator|page number).{0,80}(verified|confirmed|reconstructed|inferred).{0,80}(memory|recollection|without source)",
         "(?i)(keep|use).{0,80}(quote|quotation).{0,80}(without|missing).{0,40}(locator|page|timestamp)"
@@ -369,28 +332,7 @@
         "caption and axis review",
         "blocked reliance decision"
       ],
-      "score_anchors": {
-        "blocked reliance decision": {
-          "3": "Adequate blocked reliance decision: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade blocked reliance decision: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary blocked reliance decision: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "caption and axis review": {
-          "3": "Adequate caption and axis review: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade caption and axis review: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary caption and axis review: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "data provenance clarity": {
-          "3": "Adequate data provenance clarity: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade data provenance clarity: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary data provenance clarity: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "visual evidence discipline": {
-          "3": "Adequate visual evidence discipline: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade visual evidence discipline: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary visual evidence discipline: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)(chart|figure|visual).{0,80}(verified|validated|cleared).{0,80}(without|despite missing).{0,80}(dataset|data provenance)",
         "(?i)(underlying dataset|data provenance).{0,80}\\b(complete|sufficient|confirmed)\\b"
@@ -445,28 +387,7 @@
         "rights and privacy caution",
         "single next action"
       ],
-      "score_anchors": {
-        "compact-output safety": {
-          "3": "Adequate compact-output safety: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade compact-output safety: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary compact-output safety: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "release risk visibility": {
-          "3": "Adequate release risk visibility: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade release risk visibility: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary release risk visibility: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "rights and privacy caution": {
-          "3": "Adequate rights and privacy caution: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade rights and privacy caution: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary rights and privacy caution: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "single next action": {
-          "3": "Adequate single next action: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade single next action: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary single next action: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)(safe to share|cleared for external sharing|release approved).{0,80}(without|before).{0,80}(permission|privacy|copied text|metadata)"
       ],
@@ -558,28 +479,7 @@
         "accessibility",
         "ambiguity visibility"
       ],
-      "score_anchors": {
-        "accessibility": {
-          "3": "Adequate accessibility: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade accessibility: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary accessibility: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "ambiguity visibility": {
-          "3": "Adequate ambiguity visibility: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade ambiguity visibility: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary ambiguity visibility: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "claim-strength preservation": {
-          "3": "Adequate claim-strength preservation: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade claim-strength preservation: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary claim-strength preservation: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "meaning preservation": {
-          "3": "Adequate meaning preservation: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade meaning preservation: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary meaning preservation: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)(dashboard project|digital systems).{0,80}(proved|established|caused).{0,80}(congestion|urban-planning|planning decisions?)"
       ],
@@ -743,28 +643,7 @@
         "gap visibility",
         "thesis-use limits"
       ],
-      "score_anchors": {
-        "consensus restraint": {
-          "3": "Adequate consensus restraint: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade consensus restraint: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary consensus restraint: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "gap visibility": {
-          "3": "Adequate gap visibility: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade gap visibility: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary gap visibility: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "literature-map caution": {
-          "3": "Adequate literature-map caution: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade literature-map caution: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary literature-map caution: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "thesis-use limits": {
-          "3": "Adequate thesis-use limits: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade thesis-use limits: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary thesis-use limits: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)(partial|thin|convenience|one-sided|unknown|stale).{0,40}corpus.{0,80}\\b(proves|establishes|settles|demonstrates)\\b.{0,80}(field )?consensus",
         "(?i)(literature|sources|field).{0,80}\\b(proves|establishes|settles|demonstrates)\\b.{0,80}(consensus|thesis|position)",
@@ -855,28 +734,7 @@
         "human checkpoint discipline",
         "blocked reliance decision"
       ],
-      "score_anchors": {
-        "AI-use risk visibility": {
-          "3": "Adequate AI-use risk visibility: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade AI-use risk visibility: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary AI-use risk visibility: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "blocked reliance decision": {
-          "3": "Adequate blocked reliance decision: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade blocked reliance decision: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary blocked reliance decision: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "human checkpoint discipline": {
-          "3": "Adequate human checkpoint discipline: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade human checkpoint discipline: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary human checkpoint discipline: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "integrity gate correctness": {
-          "3": "Adequate integrity gate correctness: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade integrity gate correctness: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary integrity gate correctness: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)(AI-generated summaries|AI summaries).{0,80}(verified|safe to use|ready for release).{0,80}(without|before).{0,80}(human|source verification)"
       ],
@@ -968,28 +826,7 @@
         "blocked reliance decision",
         "repair specificity"
       ],
-      "score_anchors": {
-        "blocked reliance decision": {
-          "3": "Adequate blocked reliance decision: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade blocked reliance decision: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary blocked reliance decision: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "implementation-bug detection": {
-          "3": "Adequate implementation-bug detection: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade implementation-bug detection: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary implementation-bug detection: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "repair specificity": {
-          "3": "Adequate repair specificity: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade repair specificity: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary repair specificity: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "run-log provenance": {
-          "3": "Adequate run-log provenance: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade run-log provenance: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary run-log provenance: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)(table|result|metric).{0,80}(verified|reliable|ready).{0,80}(despite|with).{0,80}(nonzero exit|warning|failed run)"
       ],
@@ -1067,28 +904,7 @@
         "uncertainty visibility",
         "repair specificity"
       ],
-      "score_anchors": {
-        "hallucinated-result detection": {
-          "3": "Adequate hallucinated-result detection: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade hallucinated-result detection: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary hallucinated-result detection: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "numeric provenance": {
-          "3": "Adequate numeric provenance: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade numeric provenance: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary numeric provenance: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "repair specificity": {
-          "3": "Adequate repair specificity: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade repair specificity: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary repair specificity: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "uncertainty visibility": {
-          "3": "Adequate uncertainty visibility: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade uncertainty visibility: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary uncertainty visibility: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)improved accuracy by 12%.{0,60}(verified|confirmed|shown|demonstrated)"
       ],
@@ -1169,28 +985,7 @@
         "blocked reliance decision",
         "repair specificity"
       ],
-      "score_anchors": {
-        "blocked reliance decision": {
-          "3": "Adequate blocked reliance decision: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade blocked reliance decision: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary blocked reliance decision: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "configuration traceability": {
-          "3": "Adequate configuration traceability: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade configuration traceability: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary configuration traceability: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "methodology-fabrication detection": {
-          "3": "Adequate methodology-fabrication detection: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade methodology-fabrication detection: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary methodology-fabrication detection: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "repair specificity": {
-          "3": "Adequate repair specificity: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade repair specificity: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary repair specificity: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)(20 epochs|4,000 documents|stratified sample).{0,80}(confirmed|verified|traceable).{0,80}(without|before).{0,80}(run config|preprocessing log|dataset manifest)"
       ],
@@ -1244,28 +1039,7 @@
         "claim/evidence fit",
         "reading-priority next action"
       ],
-      "score_anchors": {
-        "claim/evidence fit": {
-          "3": "Adequate claim/evidence fit: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade claim/evidence fit: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary claim/evidence fit: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "reading-priority next action": {
-          "3": "Adequate reading-priority next action: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade reading-priority next action: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary reading-priority next action: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "shortcut-reliance detection": {
-          "3": "Adequate shortcut-reliance detection: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade shortcut-reliance detection: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary shortcut-reliance detection: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "source-access clarity": {
-          "3": "Adequate source-access clarity: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade source-access clarity: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary source-access clarity: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)(abstracts|abstract snippets).{0,80}(establish|prove|support synthesis|show study findings)"
       ],
@@ -1353,28 +1127,7 @@
         "opposing-literature search need",
         "repair specificity"
       ],
-      "score_anchors": {
-        "counterargument quality": {
-          "3": "Adequate counterargument quality: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade counterargument quality: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary counterargument quality: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "frame-lock detection": {
-          "3": "Adequate frame-lock detection: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade frame-lock detection: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary frame-lock detection: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "opposing-literature search need": {
-          "3": "Adequate opposing-literature search need: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade opposing-literature search need: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary opposing-literature search need: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "repair specificity": {
-          "3": "Adequate repair specificity: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade repair specificity: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary repair specificity: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)(preferred thesis).{0,80}(defensible|confirmed|well-supported).{0,80}(without|before).{0,80}(opposing|rival)"
       ],
@@ -1450,28 +1203,7 @@
         "release-risk restraint",
         "record repair specificity"
       ],
-      "score_anchors": {
-        "AI-use provenance": {
-          "3": "Adequate AI-use provenance: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade AI-use provenance: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary AI-use provenance: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "human checkpoint visibility": {
-          "3": "Adequate human checkpoint visibility: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade human checkpoint visibility: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary human checkpoint visibility: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "record repair specificity": {
-          "3": "Adequate record repair specificity: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade record repair specificity: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary record repair specificity: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "release-risk restraint": {
-          "3": "Adequate release-risk restraint: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade release-risk restraint: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary release-risk restraint: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)(AI summaries|AI-assisted).{0,80}(verified|release-ready|ready for release).{0,80}(without|before).{0,80}(verification log|human verification|venue policy)"
       ],
@@ -1543,7 +1275,7 @@
           "Full text is missing for all three sources"
         ],
         "Method and argument cannot be inferred from title metadata": [
-          "A title and year alone are not enough to identify the source’s argument"
+          "A title and year alone are not enough to identify the source\u2019s argument"
         ]
       },
       "resource_basis": [
@@ -1557,28 +1289,7 @@
         "full-text access restraint",
         "useful acquisition next action"
       ],
-      "score_anchors": {
-        "annotation source-basis labeling": {
-          "3": "Adequate annotation source-basis labeling: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade annotation source-basis labeling: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary annotation source-basis labeling: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "fabrication avoidance": {
-          "3": "Adequate fabrication avoidance: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade fabrication avoidance: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary fabrication avoidance: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "full-text access restraint": {
-          "3": "Adequate full-text access restraint: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade full-text access restraint: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary full-text access restraint: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "useful acquisition next action": {
-          "3": "Adequate useful acquisition next action: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade useful acquisition next action: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary useful acquisition next action: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)(method|argument|findings).{0,60}(clear|verified|established|available).{0,80}(from|using).{0,80}(title metadata|abstract only)"
       ],
@@ -1592,7 +1303,7 @@
       ],
       "allowed_claim_aliases": {
         "The note can preserve visible source language while labeling unsupported interpretation separately.": [
-          "reader’s interpretation, not verified source evidence"
+          "reader\u2019s interpretation, not verified source evidence"
         ]
       },
       "disallowed_claims": [
@@ -1653,7 +1364,7 @@
           "quote text and locator are missing"
         ],
         "Reader interpretation is not source evidence": [
-          "reader’s interpretation, not verified source evidence"
+          "reader\u2019s interpretation, not verified source evidence"
         ]
       },
       "resource_basis": [
@@ -1667,28 +1378,7 @@
         "locator discipline",
         "source-note usefulness"
       ],
-      "score_anchors": {
-        "interpretation boundary": {
-          "3": "Adequate interpretation boundary: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade interpretation boundary: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary interpretation boundary: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "locator discipline": {
-          "3": "Adequate locator discipline: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade locator discipline: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary locator discipline: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "quote/paraphrase separation": {
-          "3": "Adequate quote/paraphrase separation: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade quote/paraphrase separation: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary quote/paraphrase separation: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "source-note usefulness": {
-          "3": "Adequate source-note usefulness: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade source-note usefulness: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary source-note usefulness: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)reader interpretation.{0,40}(should be treated as|is)\\s+(?!not\\b)source evidence"
       ],
@@ -1771,28 +1461,7 @@
         "counterclaim restraint",
         "repair specificity"
       ],
-      "score_anchors": {
-        "argument dependency clarity": {
-          "3": "Adequate argument dependency clarity: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade argument dependency clarity: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary argument dependency clarity: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "counterclaim restraint": {
-          "3": "Adequate counterclaim restraint: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade counterclaim restraint: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary counterclaim restraint: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "repair specificity": {
-          "3": "Adequate repair specificity: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade repair specificity: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary repair specificity: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "warrant visibility": {
-          "3": "Adequate warrant visibility: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade warrant visibility: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary warrant visibility: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)public dashboards.{0,80}(make|made).{0,80}planning more democratic.{0,80}(established|proved|verified|well-supported)"
       ],
@@ -1890,28 +1559,7 @@
         "staleness detection",
         "press-positioning usefulness"
       ],
-      "score_anchors": {
-        "audience-fit caution": {
-          "3": "Adequate audience-fit caution: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade audience-fit caution: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary audience-fit caution: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "metadata verification restraint": {
-          "3": "Adequate metadata verification restraint: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade metadata verification restraint: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary metadata verification restraint: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "press-positioning usefulness": {
-          "3": "Adequate press-positioning usefulness: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade press-positioning usefulness: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary press-positioning usefulness: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "staleness detection": {
-          "3": "Adequate staleness detection: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade staleness detection: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary staleness detection: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)(comps?|comparable titles?).{0,80}(verified|confirmed|cleared).{0,80}(without|despite missing).{0,80}(metadata|source)",
         "(?i)(market|audience|press positioning).{0,80}\\b(verified|confirmed|established)\\b"
@@ -2004,28 +1652,7 @@
         "unverified-claim labeling",
         "next verification step"
       ],
-      "score_anchors": {
-        "next verification step": {
-          "3": "Adequate next verification step: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade next verification step: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary next verification step: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "positioning restraint": {
-          "3": "Adequate positioning restraint: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade positioning restraint: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary positioning restraint: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "proposal contribution clarity": {
-          "3": "Adequate proposal contribution clarity: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade proposal contribution clarity: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary proposal contribution clarity: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "unverified-claim labeling": {
-          "3": "Adequate unverified-claim labeling: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade unverified-claim labeling: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary unverified-claim labeling: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)(comps|audience|press fit).{0,80}(verified|confirmed|ready).{0,80}(without|before).{0,80}(metadata|publication|list evidence)"
       ],
@@ -2111,28 +1738,7 @@
         "counter-case design",
         "claim repair usefulness"
       ],
-      "score_anchors": {
-        "case-function classification": {
-          "3": "Adequate case-function classification: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade case-function classification: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary case-function classification: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "claim repair usefulness": {
-          "3": "Adequate claim repair usefulness: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade claim repair usefulness: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary claim repair usefulness: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "counter-case design": {
-          "3": "Adequate counter-case design: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade counter-case design: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary counter-case design: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "generalization restraint": {
-          "3": "Adequate generalization restraint: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade generalization restraint: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary generalization restraint: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)(single|one|favorable).{0,40}case.{0,80}\\b(proves|establishes|confirms)\\b.{0,80}(universal|causal|theory|generalization)",
         "(?i)(universal|causal).{0,60}\\b(proven|established|confirmed)\\b.{0,60}case"
@@ -2221,28 +1827,7 @@
         "evidence-anchor restraint",
         "transition logic"
       ],
-      "score_anchors": {
-        "chapter function clarity": {
-          "3": "Adequate chapter function clarity: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade chapter function clarity: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary chapter function clarity: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "evidence-anchor restraint": {
-          "3": "Adequate evidence-anchor restraint: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade evidence-anchor restraint: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary evidence-anchor restraint: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "section-claim specificity": {
-          "3": "Adequate section-claim specificity: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade section-claim specificity: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary section-claim specificity: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "transition logic": {
-          "3": "Adequate transition logic: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade transition logic: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary transition logic: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)(draft|write).{0,80}(chapter|section).{0,80}(without|before).{0,80}(evidence anchor|section claim)"
       ],
@@ -2323,28 +1908,7 @@
         "normative warrant visibility",
         "repair specificity"
       ],
-      "score_anchors": {
-        "claim-type classification": {
-          "3": "Adequate claim-type classification: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade claim-type classification: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary claim-type classification: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "evidence-status restraint": {
-          "3": "Adequate evidence-status restraint: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade evidence-status restraint: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary evidence-status restraint: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "normative warrant visibility": {
-          "3": "Adequate normative warrant visibility: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade normative warrant visibility: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary normative warrant visibility: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "repair specificity": {
-          "3": "Adequate repair specificity: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade repair specificity: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary repair specificity: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)dashboard caused better public accountability.{0,80}(supported|verified|evidenced|established)"
       ],
@@ -2436,28 +2000,7 @@
         "citation-proximity caution",
         "repair action usefulness"
       ],
-      "score_anchors": {
-        "citation-proximity caution": {
-          "3": "Adequate citation-proximity caution: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade citation-proximity caution: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary citation-proximity caution: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "claim narrowing": {
-          "3": "Adequate claim narrowing: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade claim narrowing: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary claim narrowing: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "repair action usefulness": {
-          "3": "Adequate repair action usefulness: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade repair action usefulness: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary repair action usefulness: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "trace-link discipline": {
-          "3": "Adequate trace-link discipline: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade trace-link discipline: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary trace-link discipline: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)nearby citation.{0,80}\\b(verifies|proves|confirms)\\b",
         "(?i)(congestion reduction|reduced congestion).{0,80}\\b(supported|verified|confirmed|traced)\\b"
@@ -2527,7 +2070,7 @@
           "The intended term is not stable"
         ],
         "value or values": [
-          "public value” or “public values"
+          "public value\u201d or \u201cpublic values"
         ]
       },
       "required_uncertainties": [
@@ -2552,28 +2095,7 @@
         "claim/question separation",
         "accessible next action"
       ],
-      "score_anchors": {
-        "accessible next action": {
-          "3": "Adequate accessible next action: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade accessible next action: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary accessible next action: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "ambiguity preservation": {
-          "3": "Adequate ambiguity preservation: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade ambiguity preservation: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary ambiguity preservation: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "claim/question separation": {
-          "3": "Adequate claim/question separation: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade claim/question separation: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary claim/question separation: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "dictation cleanup": {
-          "3": "Adequate dictation cleanup: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade dictation cleanup: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary dictation cleanup: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)(value|values).{0,80}(resolved|clear|verified).{0,80}(without|before).{0,80}(speaker|source)"
       ],
@@ -2665,28 +2187,7 @@
         "fuzzy-match uncertainty",
         "screening-readiness"
       ],
-      "score_anchors": {
-        "dedupe restraint": {
-          "3": "Adequate dedupe restraint: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade dedupe restraint: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary dedupe restraint: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "fuzzy-match uncertainty": {
-          "3": "Adequate fuzzy-match uncertainty: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade fuzzy-match uncertainty: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary fuzzy-match uncertainty: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "screening-readiness": {
-          "3": "Adequate screening-readiness: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade screening-readiness: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary screening-readiness: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "search-log provenance": {
-          "3": "Adequate search-log provenance: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade search-log provenance: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary search-log provenance: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)(screening counts|search results|records).{0,80}(confirmed|final|deduped).{0,80}(planned search|fuzzy title)"
       ],
@@ -2777,28 +2278,7 @@
         "ambiguity preservation",
         "single next action"
       ],
-      "score_anchors": {
-        "accessibility routing": {
-          "3": "Adequate accessibility routing: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade accessibility routing: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary accessibility routing: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "ambiguity preservation": {
-          "3": "Adequate ambiguity preservation: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade ambiguity preservation: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary ambiguity preservation: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "scope restraint": {
-          "3": "Adequate scope restraint: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade scope restraint: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary scope restraint: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "single next action": {
-          "3": "Adequate single next action: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade single next action: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary single next action: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)(source triage|downstream scholarship).{0,80}(ready|proceed).{0,80}(before|without).{0,80}(spoken note|claim)"
       ],
@@ -2891,28 +2371,7 @@
         "comparison usefulness",
         "synthesis prevention"
       ],
-      "score_anchors": {
-        "comparison usefulness": {
-          "3": "Adequate comparison usefulness: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade comparison usefulness: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary comparison usefulness: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "extraction restraint": {
-          "3": "Adequate extraction restraint: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade extraction restraint: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary extraction restraint: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "synthesis prevention": {
-          "3": "Adequate synthesis prevention: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade synthesis prevention: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary synthesis prevention: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "unknown-cell visibility": {
-          "3": "Adequate unknown-cell visibility: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade unknown-cell visibility: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary unknown-cell visibility: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)(unknown cells?|missing (method|sample) field).{0,80}(filled|inferred|completed|imputed)"
       ],
@@ -3007,28 +2466,7 @@
         "term-drift specificity",
         "repair usefulness"
       ],
-      "score_anchors": {
-        "continuity-risk detection": {
-          "3": "Adequate continuity-risk detection: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade continuity-risk detection: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary continuity-risk detection: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "repair usefulness": {
-          "3": "Adequate repair usefulness: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade repair usefulness: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary repair usefulness: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "source-basis restraint": {
-          "3": "Adequate source-basis restraint: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade source-basis restraint: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary source-basis restraint: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "term-drift specificity": {
-          "3": "Adequate term-drift specificity: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade term-drift specificity: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary term-drift specificity: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)missing chapters.{0,80}(are|were) inspected"
       ],
@@ -3112,28 +2550,7 @@
         "reading-priority usefulness",
         "synthesis prevention"
       ],
-      "score_anchors": {
-        "accessibility triage": {
-          "3": "Adequate accessibility triage: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade accessibility triage: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary accessibility triage: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "reading-priority usefulness": {
-          "3": "Adequate reading-priority usefulness: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade reading-priority usefulness: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary reading-priority usefulness: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "source-access restraint": {
-          "3": "Adequate source-access restraint: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade source-access restraint: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary source-access restraint: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "synthesis prevention": {
-          "3": "Adequate synthesis prevention: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade synthesis prevention: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary synthesis prevention: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)abstracts?.{0,80}\\b(prove|show|demonstrate|establish)\\b.{0,80}(findings|results|consensus|synthesis)",
         "(?i)(literature|field).{0,80}\\b(synthesized|settled|verified)\\b.{0,80}abstract"
@@ -3229,28 +2646,7 @@
         "handoff quality",
         "first-step specificity"
       ],
-      "score_anchors": {
-        "first-step specificity": {
-          "3": "Adequate first-step specificity: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade first-step specificity: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary first-step specificity: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "handoff quality": {
-          "3": "Adequate handoff quality: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade handoff quality: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary handoff quality: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "orchestration restraint": {
-          "3": "Adequate orchestration restraint: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade orchestration restraint: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary orchestration restraint: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "phase-gate clarity": {
-          "3": "Adequate phase-gate clarity: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade phase-gate clarity: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary phase-gate clarity: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)(execute every skill|run all skills|source discovery).{0,80}(before|without).{0,80}(agenda|scope|research question)"
       ],
@@ -3351,28 +2747,7 @@
         "evidence-flag visibility",
         "no-fabrication edit discipline"
       ],
-      "score_anchors": {
-        "claim-strength preservation": {
-          "3": "Adequate claim-strength preservation: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade claim-strength preservation: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary claim-strength preservation: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "evidence-flag visibility": {
-          "3": "Adequate evidence-flag visibility: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade evidence-flag visibility: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary evidence-flag visibility: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "no-fabrication edit discipline": {
-          "3": "Adequate no-fabrication edit discipline: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade no-fabrication edit discipline: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary no-fabrication edit discipline: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "prose quality": {
-          "3": "Adequate prose quality: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade prose quality: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary prose quality: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)dashboard.{0,80}(changed|caused).{0,80}accountability.{0,80}(verified|proven|without modal)"
       ],
@@ -3467,28 +2842,7 @@
         "evidence-plan specificity",
         "premature-source restraint"
       ],
-      "score_anchors": {
-        "agenda scoping": {
-          "3": "Adequate agenda scoping: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade agenda scoping: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary agenda scoping: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "evidence-plan specificity": {
-          "3": "Adequate evidence-plan specificity: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade evidence-plan specificity: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary evidence-plan specificity: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "premature-source restraint": {
-          "3": "Adequate premature-source restraint: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade premature-source restraint: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary premature-source restraint: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "question formation": {
-          "3": "Adequate question formation: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade question formation: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary question formation: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)(source discovery|search plan).{0,80}(ready|run).{0,80}(before|without).{0,80}(setting|actors|claim type)"
       ],
@@ -3577,28 +2931,7 @@
         "criteria specificity",
         "next-run action"
       ],
-      "score_anchors": {
-        "criteria specificity": {
-          "3": "Adequate criteria specificity: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade criteria specificity: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary criteria specificity: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "next-run action": {
-          "3": "Adequate next-run action: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade next-run action: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary next-run action: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "provenance restraint": {
-          "3": "Adequate provenance restraint: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade provenance restraint: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary provenance restraint: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "search-protocol clarity": {
-          "3": "Adequate search-protocol clarity: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade search-protocol clarity: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary search-protocol clarity: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)(found|retrieved|identified|screened).{0,40}\\b\\d+\\b.{0,40}(records|results|studies)",
         "(?i)(database|search).{0,80}(returned|yielded).{0,40}\\b\\d+\\b"
@@ -3651,28 +2984,7 @@
         "uncertainty visibility",
         "bounded next action"
       ],
-      "score_anchors": {
-        "bounded next action": {
-          "3": "Adequate bounded next action: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade bounded next action: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary bounded next action: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "route correctness": {
-          "3": "Adequate route correctness: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade route correctness: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary route correctness: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "source-basis clarity": {
-          "3": "Adequate source-basis clarity: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade source-basis clarity: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary source-basis clarity: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "uncertainty visibility": {
-          "3": "Adequate uncertainty visibility: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade uncertainty visibility: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary uncertainty visibility: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)(source|claim|consensus).{0,40}(is|are|was|were) (verified|established|ready to cite)"
       ],
@@ -3757,28 +3069,7 @@
         "privacy boundary",
         "verification next action"
       ],
-      "score_anchors": {
-        "citation discipline": {
-          "3": "Adequate citation discipline: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade citation discipline: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary citation discipline: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "privacy boundary": {
-          "3": "Adequate privacy boundary: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade privacy boundary: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary privacy boundary: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "public-metadata boundary": {
-          "3": "Adequate public-metadata boundary: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade public-metadata boundary: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary public-metadata boundary: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "verification next action": {
-          "3": "Adequate verification next action: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade verification next action: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary verification next action: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)(submitted|used|sent).{0,80}(draft text|private notes)",
         "(?i)(metadata|full text).{0,60}(verified|confirmed).{0,60}(memory|without lookup)"
@@ -3867,28 +3158,7 @@
         "private-field exclusion",
         "verification logging"
       ],
-      "score_anchors": {
-        "citation discipline": {
-          "3": "Adequate citation discipline: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade citation discipline: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary citation discipline: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "consent boundary": {
-          "3": "Adequate consent boundary: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade consent boundary: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary consent boundary: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "private-field exclusion": {
-          "3": "Adequate private-field exclusion: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade private-field exclusion: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary private-field exclusion: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        },
-        "verification logging": {
-          "3": "Adequate verification logging: addresses the dimension in general terms but leaves at least one source-bound limit, conflict, or action underspecified.",
-          "4": "Scholar-grade verification logging: applies the dimension to the visible source basis, names the decisive evidence boundary, and avoids unsupported verification.",
-          "5": "Exemplary verification logging: traces the dimension to specific source anchors, separates support from uncertainty, handles distractors, and gives a concrete repair path."
-        }
-      },
+      "score_anchors": "generic",
       "semantic_fail_patterns": [
         "(?i)\\b(submitted|uploaded|sent)\\b.{0,80}(private notes|draft text)",
         "(?i)metadata.{0,80}(verified|confirmed).{0,80}(before|without).{0,40}(lookup log|record)"

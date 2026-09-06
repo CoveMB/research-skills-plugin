@@ -396,14 +396,55 @@ def invalid_single_value_alias_map_errors(fixture: dict[str, Any], alias_key: st
     return errors
 
 
-def score_anchor_errors(fixture: dict[str, Any]) -> list[str]:
+def valid_generic_score_anchor_profile(profile: Any) -> bool:
+    if not isinstance(profile, dict) or set(profile) != REQUIRED_SCORE_ANCHOR_LEVELS:
+        return False
+    for level in REQUIRED_SCORE_ANCHOR_LEVELS:
+        template = profile.get(level)
+        if not isinstance(template, str) or not template.strip():
+            return False
+        if template.count("{dimension}") != 1:
+            return False
+        remainder = template.replace("{dimension}", "")
+        if "{" in remainder or "}" in remainder:
+            return False
+    return True
+
+
+def generic_score_anchor_profile_errors(
+    document: dict[str, Any],
+    fixtures: list[dict[str, Any]],
+) -> list[str]:
+    profile_present = "generic_score_anchor_profile" in document
+    generic_referenced = any(fixture.get("score_anchors") == "generic" for fixture in fixtures)
+    errors: list[str] = []
+    if generic_referenced and not profile_present:
+        errors.append("generic_score_anchor_profile is required when a fixture references 'generic'")
+    if profile_present and not valid_generic_score_anchor_profile(document.get("generic_score_anchor_profile")):
+        errors.append(
+            "generic_score_anchor_profile must be an object with exactly levels 3, 4, and 5; "
+            "each value must be a non-empty string containing exactly one {dimension} token and no other braces"
+        )
+    if profile_present and not generic_referenced:
+        errors.append("generic_score_anchor_profile is unused because no fixture references 'generic'")
+    return errors
+
+
+def score_anchor_errors(document: dict[str, Any], fixture: dict[str, Any]) -> list[str]:
     if "score_anchors" not in fixture:
         return []
 
     identifier = fixture_identifier(fixture)
     score_anchors = fixture.get("score_anchors")
+    if isinstance(score_anchors, str):
+        if score_anchors == "generic":
+            return []
+        return [f"{identifier}: unknown score_anchors reference {score_anchors!r}"]
     if not isinstance(score_anchors, dict):
-        return [f"{identifier}: score_anchors must be an object mapping rubric_dimensions to anchor objects"]
+        return [
+            f"{identifier}: score_anchors must be an object mapping rubric_dimensions to anchor objects "
+            "or the literal 'generic'"
+        ]
 
     errors: list[str] = []
     expected_dimensions = rubric_dimension_set(fixture)
@@ -428,6 +469,32 @@ def has_required_score_anchors(anchors: Any) -> bool:
         isinstance(anchors.get(level), str) and anchors.get(level).strip()
         for level in REQUIRED_SCORE_ANCHOR_LEVELS
     )
+
+
+def resolved_score_anchors(
+    document: dict[str, Any],
+    fixture: dict[str, Any],
+) -> dict[str, Any]:
+    score_anchors = fixture.get("score_anchors")
+    dimensions = string_list(fixture.get("rubric_dimensions"))
+    if score_anchors == "generic":
+        profile = document.get("generic_score_anchor_profile")
+        if not valid_generic_score_anchor_profile(profile):
+            return {}
+        return {
+            dimension: {
+                level: profile[level].replace("{dimension}", dimension)
+                for level in sorted(REQUIRED_SCORE_ANCHOR_LEVELS, key=int)
+            }
+            for dimension in dimensions
+        }
+    if not isinstance(score_anchors, dict):
+        return {}
+    return {
+        dimension: dict(dimension_anchors)
+        for dimension in dimensions
+        if isinstance((dimension_anchors := score_anchors.get(dimension)), dict)
+    }
 
 
 def rubric_dimension_set(fixture: dict[str, Any]) -> set[str]:
@@ -703,11 +770,12 @@ def validate_scholar_grade_fixture_document(fixture_path: Path) -> list[str]:
 
     errors.extend(duplicate_fixture_id_errors(fixtures))
     errors.extend(resource_basis_registry_errors(fixture_path))
+    errors.extend(generic_score_anchor_profile_errors(document, fixtures))
     for fixture in fixtures:
         errors.extend(missing_fixture_keys(fixture))
         errors.extend(invalid_fixture_id_errors(fixture))
         errors.extend(invalid_string_list_errors(fixture))
-        errors.extend(score_anchor_errors(fixture))
+        errors.extend(score_anchor_errors(document, fixture))
         errors.extend(invalid_source_access_errors(fixture))
         errors.extend(invalid_score_errors(fixture))
         errors.extend(invalid_boolean_errors(fixture))
@@ -1831,10 +1899,8 @@ def score_summary(
     }
 
 
-def score_anchor_entries(fixture: dict[str, Any]) -> list[str]:
-    score_anchors = fixture.get("score_anchors")
-    if not isinstance(score_anchors, dict):
-        return []
+def score_anchor_entries(document: dict[str, Any], fixture: dict[str, Any]) -> list[str]:
+    score_anchors = resolved_score_anchors(document, fixture)
 
     entries: list[str] = []
     for dimension in string_list(fixture.get("rubric_dimensions")):
@@ -1848,7 +1914,11 @@ def score_anchor_entries(fixture: dict[str, Any]) -> list[str]:
     return entries
 
 
-def fixture_case_report(fixture: dict[str, Any], outputs_dir: Path | None) -> dict[str, Any]:
+def fixture_case_report(
+    document: dict[str, Any],
+    fixture: dict[str, Any],
+    outputs_dir: Path | None,
+) -> dict[str, Any]:
     output_path = output_path_for_fixture(outputs_dir, fixture) if outputs_dir else None
     return {
         "id": fixture_identifier(fixture),
@@ -1870,7 +1940,7 @@ def fixture_case_report(fixture: dict[str, Any], outputs_dir: Path | None) -> di
         "hard_fail_patterns": string_list(fixture.get("hard_fail_patterns")),
         "semantic_fail_patterns": string_list(fixture.get("semantic_fail_patterns")),
         "rubric_dimensions": string_list(fixture.get("rubric_dimensions")),
-        "score_anchors": score_anchor_entries(fixture),
+        "score_anchors": score_anchor_entries(document, fixture),
         "minimum_score": fixture.get("minimum_score"),
         "human_review_required": bool(fixture.get("human_review_required")),
         "output_file": output_filename_for_fixture(fixture),
@@ -1912,7 +1982,7 @@ def build_scholar_grade_report(
         "scores": score_summary(scores_dir, fixtures, outputs_dir),
         "limits": LIMITS,
         "manual_review_expectations": MANUAL_REVIEW_EXPECTATIONS,
-        "cases": [fixture_case_report(fixture, outputs_dir) for fixture in fixtures],
+        "cases": [fixture_case_report(document, fixture, outputs_dir) for fixture in fixtures],
     }
 
 

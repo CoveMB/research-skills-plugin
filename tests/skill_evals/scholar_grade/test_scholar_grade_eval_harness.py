@@ -10,6 +10,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import scholar_grade_eval_harness as harness
 from scholar_grade_eval_harness import (
     build_scholar_grade_report,
     format_markdown_scorecard,
@@ -52,7 +53,7 @@ def fixture(
     hard_fail_patterns: list[str] | None = None,
     allowed_claims: list[str] | None = None,
     required_source_anchors: list[str] | None = None,
-    score_anchors: dict[str, dict[str, str]] | None = None,
+    score_anchors: dict[str, dict[str, str]] | str | None = None,
 ) -> dict[str, object]:
     rubric_dimensions = [
         "source-basis clarity",
@@ -95,6 +96,14 @@ def fixture_document(*fixtures: dict[str, object]) -> dict[str, object]:
         "schema_version": "scholar-grade-eval-fixtures-v1",
         "purpose": "Strict scholar-grade fixture document for tests.",
         "fixtures": list(fixtures),
+    }
+
+
+def generic_profile() -> dict[str, str]:
+    return {
+        "3": "Adequate {dimension}.",
+        "4": "Scholar-grade {dimension}.",
+        "5": "Exemplary {dimension}.",
     }
 
 
@@ -509,6 +518,144 @@ class TestScholarGradeEvalHarness(unittest.TestCase):
             self.assertIn(
                 "unsupported-causal-claim: score_anchors for 'source-basis clarity' must include non-empty anchors for 3, 4, and 5",
                 errors,
+            )
+
+    def test_fixture_document_accepts_generic_score_anchor_profile(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_source_packet(root)
+            document = fixture_document(fixture(score_anchors="generic"))
+            document["generic_score_anchor_profile"] = generic_profile()
+            fixture_path = write_fixture_file(root, document)
+
+            self.assertEqual(validate_scholar_grade_fixture_document(fixture_path), [])
+
+    def test_fixture_document_rejects_malformed_generic_score_anchor_profile(self) -> None:
+        malformed_profiles: list[object] = [
+            [],
+            {"3": "Adequate {dimension}.", "4": "Scholar-grade {dimension}."},
+            {**generic_profile(), "6": "Unsupported {dimension}."},
+            {**generic_profile(), "3": ""},
+            {**generic_profile(), "3": "Adequate."},
+            {**generic_profile(), "3": "Adequate {dimension} and {dimension}."},
+            {**generic_profile(), "3": "Adequate {dimension} with {other}."},
+        ]
+        for profile in malformed_profiles:
+            with self.subTest(profile=profile), TemporaryDirectory() as temporary_directory:
+                root = Path(temporary_directory)
+                write_source_packet(root)
+                document = fixture_document(fixture(score_anchors="generic"))
+                document["generic_score_anchor_profile"] = profile
+                fixture_path = write_fixture_file(root, document)
+
+                errors = validate_scholar_grade_fixture_document(fixture_path)
+
+                self.assertTrue(
+                    any("generic_score_anchor_profile" in error for error in errors),
+                    msg=errors,
+                )
+
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_source_packet(root)
+            document = fixture_document(fixture())
+            document["generic_score_anchor_profile"] = generic_profile()
+            fixture_path = write_fixture_file(root, document)
+
+            self.assertIn(
+                "generic_score_anchor_profile is unused because no fixture references 'generic'",
+                validate_scholar_grade_fixture_document(fixture_path),
+            )
+
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_source_packet(root)
+            fixture_path = write_fixture_file(
+                root,
+                fixture_document(fixture(score_anchors="generic")),
+            )
+
+            self.assertIn(
+                "generic_score_anchor_profile is required when a fixture references 'generic'",
+                validate_scholar_grade_fixture_document(fixture_path),
+            )
+
+    def test_fixture_document_rejects_unknown_score_anchor_reference(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_source_packet(root)
+            fixture_path = write_fixture_file(
+                root,
+                fixture_document(fixture(score_anchors="shared")),
+            )
+
+            self.assertIn(
+                "unsupported-causal-claim: unknown score_anchors reference 'shared'",
+                validate_scholar_grade_fixture_document(fixture_path),
+            )
+
+    def test_resolved_score_anchors_does_not_mutate_inputs(self) -> None:
+        generic_fixture = fixture(score_anchors="generic")
+        document = fixture_document(generic_fixture)
+        document["generic_score_anchor_profile"] = generic_profile()
+        original_document = json.loads(json.dumps(document))
+        original_fixture = json.loads(json.dumps(generic_fixture))
+        inline_fixture = fixture()
+        original_inline_fixture = json.loads(json.dumps(inline_fixture))
+
+        resolved = harness.resolved_score_anchors(document, generic_fixture)
+        resolved_inline = harness.resolved_score_anchors(document, inline_fixture)
+
+        self.assertEqual(document, original_document)
+        self.assertEqual(generic_fixture, original_fixture)
+        self.assertEqual(inline_fixture, original_inline_fixture)
+        self.assertIsNot(resolved, document["generic_score_anchor_profile"])
+        self.assertEqual(list(resolved), generic_fixture["rubric_dimensions"])
+        for anchors in resolved.values():
+            self.assertEqual(list(anchors), ["3", "4", "5"])
+            self.assertIsNot(anchors, document["generic_score_anchor_profile"])
+        self.assertIsNot(resolved_inline, inline_fixture["score_anchors"])
+        for dimension, anchors in resolved_inline.items():
+            self.assertIsNot(anchors, inline_fixture["score_anchors"][dimension])
+
+    def test_inline_and_generic_score_anchors_render_identically(self) -> None:
+        inline_fixture = fixture()
+        generic_fixture = fixture(score_anchors="generic")
+        document = fixture_document(generic_fixture)
+        document["generic_score_anchor_profile"] = generic_profile()
+        inline_fixture["score_anchors"] = {
+            dimension: {
+                level: template.replace("{dimension}", dimension)
+                for level, template in generic_profile().items()
+            }
+            for dimension in inline_fixture["rubric_dimensions"]
+        }
+
+        self.assertEqual(
+            harness.score_anchor_entries(document, inline_fixture),
+            harness.score_anchor_entries(document, generic_fixture),
+        )
+
+    def test_report_resolves_three_anchors_per_rubric_dimension(self) -> None:
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            write_source_packet(root)
+            generic_fixture = fixture(score_anchors="generic")
+            document = fixture_document(generic_fixture)
+            document["generic_score_anchor_profile"] = generic_profile()
+            fixture_path = write_fixture_file(root, document)
+
+            report = build_scholar_grade_report(fixture_path)
+
+            expected_count = len(generic_fixture["rubric_dimensions"]) * 3
+            self.assertEqual(len(report["cases"][0]["score_anchors"]), expected_count)
+            self.assertEqual(
+                report["cases"][0]["score_anchors"][0],
+                "source-basis clarity 3: Adequate source-basis clarity.",
+            )
+            self.assertEqual(
+                report["cases"][0]["score_anchors"][-1],
+                "uncertainty visibility 5: Exemplary uncertainty visibility.",
             )
 
     def test_source_packet_requires_hidden_answer_key(self) -> None:
