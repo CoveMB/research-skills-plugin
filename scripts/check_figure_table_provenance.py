@@ -8,12 +8,7 @@ import sys
 from pathlib import Path
 from typing import Any, Iterable, NamedTuple
 
-from plugin_utils import (
-    read_csv_records as read_csv_record_objects,
-    read_json_or_csv_records,
-    read_json_records as read_json_record_objects,
-    validate_record_objects,
-)
+from plugin_utils import read_json_or_csv_records
 
 
 JSON_RECORD_ERROR = "JSON input must be a list or an object with a records, figures, tables, or objects list"
@@ -56,23 +51,6 @@ class Issue(NamedTuple):
     code: str
     severity: str
     message: str
-
-
-def read_json_records(path: Path) -> list[dict[str, Any]]:
-    return read_json_record_objects(
-        path,
-        container_keys=("records", "figures", "tables", "objects", "figure_table_checks"),
-        json_error_message=JSON_RECORD_ERROR,
-        empty_error_message=EMPTY_RECORD_ERROR,
-    )
-
-
-def read_csv_records(path: Path) -> list[dict[str, Any]]:
-    return read_csv_record_objects(path, empty_error_message=EMPTY_RECORD_ERROR)
-
-
-def validate_provenance_records(records: list[Any]) -> list[dict[str, Any]]:
-    return validate_record_objects(records, empty_error_message=EMPTY_RECORD_ERROR)
 
 
 def read_records(path: Path) -> list[dict[str, Any]]:

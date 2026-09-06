@@ -17,13 +17,8 @@ from typing import Any, Callable, NamedTuple
 
 from plugin_utils import (
     PRIVATE_SOURCE_TEXT_FIELDS,
-    normalized_field_name,
-    normalized_private_fields,
     private_payload_field_errors,
-    read_csv_records as read_csv_record_objects,
     read_json_or_csv_records,
-    read_json_records as read_json_record_objects,
-    validate_record_objects,
 )
 
 PRIVATE_FIELDS = {
@@ -151,23 +146,6 @@ class MetadataPairSpec(NamedTuple):
 NO_PUBLIC_LOOKUP = PublicLookupState(attempted=False, metadata_returned=False)
 
 
-def read_json_records(path: Path) -> list[dict[str, Any]]:
-    return read_json_record_objects(
-        path,
-        container_keys=("records",),
-        json_error_message=JSON_RECORD_ERROR,
-        empty_error_message=EMPTY_RECORD_ERROR,
-    )
-
-
-def read_csv_records(path: Path) -> list[dict[str, Any]]:
-    return read_csv_record_objects(path, empty_error_message=EMPTY_RECORD_ERROR)
-
-
-def validate_metadata_records(records: list[Any]) -> list[dict[str, Any]]:
-    return validate_record_objects(records, empty_error_message=EMPTY_RECORD_ERROR)
-
-
 def read_records(path: Path) -> list[dict[str, Any]]:
     return read_json_or_csv_records(
         path,
@@ -180,14 +158,6 @@ def read_records(path: Path) -> list[dict[str, Any]]:
 def record_id(record: dict[str, Any], index: int = 0) -> str:
     value = record.get("reference_id") or record.get("id") or record.get("citation_key")
     return str(value) if value else f"record-{index + 1}"
-
-
-NORMALIZED_PRIVATE_FIELDS = normalized_private_fields(PRIVATE_FIELDS)
-
-
-def is_private_field(field: str) -> bool:
-    return normalized_field_name(field) in NORMALIZED_PRIVATE_FIELDS
-
 
 def private_field_errors(records: list[dict[str, Any]]) -> list[str]:
     return private_payload_field_errors(
@@ -985,17 +955,6 @@ def enrich_records_with_public_lookup_result(
         enriched_records.append(enrich_record_with_public_metadata(record, metadata))
         lookup_states.append(PublicLookupState(attempted=True, metadata_returned=bool(metadata)))
     return enriched_records, lookup_states
-
-
-def enrich_records_with_public_lookup(
-    records: list[dict[str, Any]], *, lookup_provider: str, timeout: float
-) -> list[dict[str, Any]]:
-    enriched_records, _lookup_states = enrich_records_with_public_lookup_result(
-        records,
-        lookup_provider=lookup_provider,
-        timeout=timeout,
-    )
-    return enriched_records
 
 
 def parse_args(argv: list[str]) -> argparse.Namespace:

@@ -231,10 +231,6 @@ def has_source_claim_fit_note(claim: dict[str, Any]) -> bool:
     return string_value_present(claim, SOURCE_CLAIM_FIT_NOTE_KEYS)
 
 
-def has_explanation_value(value: Any) -> bool:
-    return bool(normalized_strings(value))
-
-
 def event_records_from_value(value: Any) -> list[dict[str, Any]]:
     if isinstance(value, dict):
         return [value]
