@@ -1,6 +1,6 @@
 ---
 name: research-book-orchestrator
-description: Coordinate a full research nonfiction or research book workflow when a project spans multiple stages, has an unclear next step, or mixes accessibility triage, agenda, sources, literature review, argument, chapters, evidence ledgers, citation audits, and manuscript revision.
+description: "Coordinate research nonfiction/book work spanning multiple stages or an unclear next step, including accessibility, agenda, sources, argument, chapters, evidence/citation audits, and manuscript revision."
 license: MIT
 metadata:
   version: "1.1.0"
