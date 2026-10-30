@@ -42,6 +42,8 @@ These requirements apply when you run repository scripts or a Python helper incl
 | Run unit tests | `python3 -m unittest discover -s scripts -p 'test_*.py' && python3 -m unittest discover -s tests -p 'test_*.py'` | Runs the script, package policy, and skill-evaluation tests. |
 | Run package checks | `python3 scripts/run_package_checks.py --scope full` | Runs deterministic source-checkout validation plus the strict v3 additive live-pilot gate and active real-source gold-set readiness. Use `--scope package` for a packaged or installed copy without repo-only tests, `--scope live-pilot` for the original additive pilot report, `--scope live-pilot-v2` for the historical calibrated v2 pilot gate, `--scope live-pilot-v3` for the current strict calibrated recapture pilot, `--scope live-pilot-v5`, `--scope live-pilot-v6`, or `--scope live-pilot-v7` for later additive live-pilot roots, `--scope workflow-passport-live-v1` for live workflow-passport handoff validation, `--scope scholar-mutation` for evaluator mutation tests, `--scope real-goldsets` for active real-source readiness, or `--scope live` only after replacing the shipped deterministic references with recorded live skill captures. |
 | Package a zip | `python3 scripts/package_plugin.py --root .` | Writes a versioned zip in the current directory unless `--out` is supplied. |
+| Export the full portable plugin | `python3 scripts/package_plugin.py --portable` | Writes a new 29-skill archive under `dist/portable-plugin/`, with an Antigravity adapter and document-relative resources. Existing output is refused. |
+| Check an extracted portable plugin | `python3 scripts/portable_plugin.py --check /absolute/path/extracted-plugin` | Requires the adapter and checks the full catalog, metadata, and bundled resource paths without source fallback, building, installation, or network access. |
 
 ## Script details
 
@@ -175,6 +177,14 @@ The packager copies only allowed package paths. Allowed top-level directories ar
 The repository-only planning directory under `docs` is ignored by Git and excluded from packaged or installed copies, even when it exists locally.
 
 The packager excludes generated files and local state, including `.git`, caches, virtual environments, build output, coverage output, logs, temporary files, and existing zip files.
+
+### Portable full-plugin exporter
+
+`scripts/package_plugin.py --portable [--root PATH] [--out PATH]` validates canonical source, renders the full catalog, stages a unique temporary ZIP beside the destination, and checks its actual extracted bytes before atomic no-clobber publication. The default is `<source-root>/dist/portable-plugin/<manifest-name>-v<version>-portable.zip`. Any pre-existing destination is refused; there is no force flag. Symlinked destinations and source overlap outside `dist/` are refused. Validation reads the open staging file; publication and cleanup use the original directory descriptor. A replaced output directory stops publication while cleanup removes the owned staging entry from its original directory. If the staging entry itself changes identity, the replacement is left untouched and the operation fails; an externally moved archive may remain for recovery. Platforms without safe directory-relative operations, or filesystems without atomic hard-link publication, fail without a pathname-cleanup or overwrite fallback.
+
+`scripts/portable_plugin.py` reuses the full-package allowlist and the standalone private/generated exclusions, including `credentials.json`. Referenced excluded, missing, ambiguous, symlinked, or escaping resources fail. Located Markdown paths and runtime helper operands are rewritten; illustrative directory trees, user arguments, source-maintenance commands, binary assets, JSON contracts, and Python code remain unchanged. The generated resource note belongs to the exporter. Same-directory paths retain `./` so dependency scanners can follow them.
+
+The adapter copies canonical identity/presentation fields, omits default `skills/`, and limits starter prompts to three. Neither canonical metadata nor version changes. Ordinary `validate_plugin.py` also checks portable structure when the adapter is present. Explicit `--check` requires it. Use `run_package_checks.py --scope package` from the extracted copy to validate contracts and rebuild all 28 eligible standalone pairs. See [installation](../user/INSTALLATION.md#opencode-v2-and-antigravity-full-catalog) for the complete workflow and unverified native-host boundary.
 
 ### Tests
 

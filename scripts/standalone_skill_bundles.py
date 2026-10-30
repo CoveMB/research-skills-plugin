@@ -38,7 +38,7 @@ MARKDOWN_LINK_RE = re.compile(r"\[[^\]]+\]\(([^)#]+)(?:#[^)]+)?\)")
 BACKTICK_REFERENCE_RE = re.compile(r"`([^`\n]+)`")
 INLINE_PATH_TOKEN_RE = re.compile(
     r"(?<![A-Za-z0-9_./-])"
-    r"((?:\.codex-plugin|assets|docs|examples|references|scripts|shared|skills)/"
+    r"((?:\.\./|\./)*(?:\.codex-plugin|assets|docs|examples|references|scripts|shared|skills)/"
     r"[A-Za-z0-9_./-]+)"
 )
 EXTERNAL_SCHEME_RE = re.compile(r"^[a-zA-Z][a-zA-Z0-9+.-]*:")
@@ -341,7 +341,7 @@ def _plugin_relative(root: Path, path: Path) -> str:
         raise ValueError(f"source path escapes the plugin: {path}") from error
 
 
-def _resolve_reference(root: Path, source_relative: str, raw_reference: str) -> str:
+def resolve_source_reference(root: Path, source_relative: str, raw_reference: str) -> str:
     source_path = safe_source_path(root, source_relative)
     candidates: list[Path] = []
     for candidate in (source_path.parent / raw_reference, root / raw_reference):
@@ -401,7 +401,7 @@ def discover_direct_dependencies(root: Path, skill_name: str) -> tuple[tuple[str
             continue
         text = source_path.read_text(encoding="utf-8")
         for raw_reference in extract_local_references(text):
-            target = _resolve_reference(root, source_relative, raw_reference)
+            target = resolve_source_reference(root, source_relative, raw_reference)
             if target.startswith(skill_prefix):
                 continue
             if target.startswith("scripts/") and target.endswith(".py"):
@@ -411,7 +411,7 @@ def discover_direct_dependencies(root: Path, skill_name: str) -> tuple[tuple[str
     return tuple(sorted(resources)), tuple(sorted(helpers))
 
 
-def _local_python_imports(root: Path, source_relative: str) -> tuple[str, ...]:
+def local_python_imports(root: Path, source_relative: str) -> tuple[str, ...]:
     source_path = safe_source_path(root, source_relative)
     try:
         tree = ast.parse(source_path.read_text(encoding="utf-8"), filename=source_relative)
@@ -584,12 +584,12 @@ def create_bundle_plan(root: Path, skill_name: str) -> BundlePlan:
         if source_path.suffix.lower() in TEXT_SUFFIXES:
             text = source_path.read_text(encoding="utf-8")
             for raw_reference in extract_local_references(text):
-                target = _resolve_reference(root, source_relative, raw_reference)
+                target = resolve_source_reference(root, source_relative, raw_reference)
                 edges.add(DependencyEdge(source_relative, raw_reference, target))
                 if target not in sources:
                     pending.append(target)
         if source_path.suffix.lower() == ".py":
-            for target in _local_python_imports(root, source_relative):
+            for target in local_python_imports(root, source_relative):
                 edges.add(DependencyEdge(source_relative, f"import:{PurePosixPath(target).stem}", target))
                 if target not in sources:
                     pending.append(target)
@@ -691,7 +691,7 @@ def source_commit(root: Path) -> str:
     return commit.lower()
 
 
-def _relative_bundle_reference(source_destination: str, target_destination: str) -> str:
+def relative_resource_reference(source_destination: str, target_destination: str) -> str:
     source_parent = PurePosixPath(source_destination).parent.as_posix()
     return posixpath.relpath(target_destination, source_parent)
 
@@ -716,7 +716,7 @@ def _rewrite_text_source(
             raise ValueError(
                 f"{source_relative}: dependency target is absent from bundle plan: {edge.target}"
             )
-        replacement = _relative_bundle_reference(source_destination, target_destination)
+        replacement = relative_resource_reference(source_destination, target_destination)
         text = text.replace(edge.raw_reference, replacement)
     if plan.classification == "route-only" and source_destination == "SKILL.md":
         text = text.rstrip() + (

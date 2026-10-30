@@ -2,6 +2,12 @@
 
 This package is organized as a book-length research workflow, not a loose set of writing prompts. Each stage has a skill, an expected artifact, and a quality gate before the next stage. Accessibility skills can be used before or between stages when rough input, dictation, spelling ambiguity, dense material, or reading fatigue blocks the next scholarly action.
 
+## Portable full-plugin distribution
+
+The full source tree remains canonical. The opt-in portable export produces a derived 29-skill runtime for OpenCode v2 and Antigravity. Resource references in reachable runtime documents become relative to their containing files. Helpers are resolved to absolute script paths and run from the user's workspace. Canonical frontmatter, discovery policy, routing, schemas, and historical capture fingerprints are unchanged.
+
+The generated Antigravity manifest projects identity and presentation fields from the canonical Codex manifest. It adds no hooks, rules, custom agents, tools, or permissions. Default Codex packaging and the 28 eligible standalone classifications retain their existing contracts. The complete export includes the orchestrator and can rebuild the eligible standalone catalog after relocation. Native host discovery, permissions, and model behavior remain unverified. Installation and packaging procedures belong to the installation and script guides; they are not runtime dependencies of an individual research skill.
+
 ## How to read this file
 
 - Use the flow diagram for the high-level sequence.

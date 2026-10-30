@@ -30,6 +30,18 @@ codex plugin add research-skills-plugin@covemb-research-skills
 
 Installing from the Git marketplace does not require Python. Python 3.10 or newer is needed only for repository validation, packaging, standalone bundle generation, and Python helpers used by some skills. Full installation, update, standalone bundle, and uninstall instructions are in [`docs/user/INSTALLATION.md`](docs/user/INSTALLATION.md).
 
+## OpenCode v2 and Antigravity
+
+Build the complete 29-skill catalog, including the router and orchestrator, from a source checkout:
+
+```bash
+python3 scripts/package_plugin.py --portable
+```
+
+The generated archive is `dist/portable-plugin/research-skills-plugin-v1.1.0-portable.zip`. It contains document-relative resources and a generated Antigravity manifest. Existing output is never replaced; use a fresh `--out` path for another candidate. Follow the [portable installation guide](docs/user/INSTALLATION.md#opencode-v2-and-antigravity-full-catalog) to extract, validate, and connect the complete package to your host.
+
+This is an unreleased portable candidate carrying the canonical version, not a new release. Deterministic export, relocation, helper, and package checks do not establish native host discovery, permission handling, or model behavior; native invocation remains unverified. Codex marketplace installation and default packaging retain their existing behavior.
+
 ## Portable single-skill bundles
 
 When an environment accepts only one skill, build a standalone bundle instead of copying a folder from `skills/`. The builder follows the declared dependency closure, rewrites local paths, includes required policies and runtime helpers, and produces a generated directory plus a generated zip under `dist/standalone-skills`.

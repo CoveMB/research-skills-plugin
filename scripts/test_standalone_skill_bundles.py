@@ -223,7 +223,7 @@ Load `docs/policy/SOURCE_LIMITS.md` and [the schema](shared/contracts/book/book_
             (scripts / "main.py").write_text("from . import helper\n", encoding="utf-8")
             (scripts / "helper.py").write_text("VALUE = 1\n", encoding="utf-8")
             self.assertEqual(
-                module._local_python_imports(root, "scripts/main.py"),
+                module.local_python_imports(root, "scripts/main.py"),
                 ("scripts/helper.py",),
             )
 
@@ -243,7 +243,7 @@ Load `docs/policy/SOURCE_LIMITS.md` and [the schema](shared/contracts/book/book_
             (package / "sibling.py").write_text("VALUE = 2\n", encoding="utf-8")
 
             self.assertEqual(
-                module._local_python_imports(root, "scripts/main.py"),
+                module.local_python_imports(root, "scripts/main.py"),
                 (
                     "scripts/localpkg/__init__.py",
                     "scripts/localpkg/sibling.py",

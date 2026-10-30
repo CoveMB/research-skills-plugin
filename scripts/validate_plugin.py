@@ -352,6 +352,10 @@ def main() -> int:
     expected_version = str(manifest.get("version", "")) if manifest else ""
     errors.extend(validate_skills(root, skills_dir, expected_version))
     errors.extend(validate_project_references(root))
+    if (root / ".antigravity-plugin" / "plugin.json").exists():
+        from portable_plugin import validate_portable_tree
+
+        errors.extend(validate_portable_tree(root))
 
     if errors:
         print("Validation failed:")
