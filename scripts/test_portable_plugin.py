@@ -455,12 +455,12 @@ class PortablePublicationTests(PortableFixture):
                     info = zipfile.ZipInfo(name)
                     info.external_attr = mode << 16
                     archive.writestr(info, b"invalid")
-                with self.assertRaises(ValueError):
+                with self.assertRaisesRegex(ValueError, "unsafe portable archive member"):
                     self.packager.validate_portable_archive(archive_path, "research-skills-plugin", set())
         with zipfile.ZipFile(archive_path, "w") as archive:
             archive.writestr("research-skills-plugin/file", b"a")
             archive.writestr("research-skills-plugin/FILE", b"b")
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(ValueError, "duplicate portable archive member"):
             self.packager.validate_portable_archive(archive_path, "research-skills-plugin", set())
 
 

@@ -42,7 +42,7 @@ INLINE_PATH_TOKEN_RE = re.compile(
     r"[A-Za-z0-9_./-]+)"
 )
 CLI_ARGUMENT_RE = re.compile(
-    r"(?<![\w./-])--?[\w-]+(?:=|[ \t]+)"
+    r"(?<![\w./-])--?[\w-]+(?:=|[ \t]+)(?:\\\r?\n[ \t]*)*"
     r'''(?:"(?:\\.|[^"\\\n])*"|'(?:\\.|[^'\\\n])*'|`[^`\n]*`|(?!-)[^\s`]+)'''
 )
 EXTERNAL_SCHEME_RE = re.compile(r"^[a-zA-Z][a-zA-Z0-9+.-]*:")

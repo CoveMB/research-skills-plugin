@@ -217,6 +217,10 @@ Load `docs/policy/SOURCE_LIMITS.md` and [the schema](shared/contracts/book/book_
     def test_workspace_cli_arguments_are_preserved_without_becoming_dependencies(self) -> None:
         module = load_library(self)
         arguments = (
+            '--input \\\n    ../docs/input.json',
+            '--input \\\n    "../docs/input.json"',
+            '--output=\\\n../shared/output.json',
+            '--input \\\n    \\\n    ../docs/input.json',
             '--input ../docs/input.json',
             '--input="../docs/input.json"',
             "--output '../shared/output.json'",
@@ -233,6 +237,10 @@ Load `docs/policy/SOURCE_LIMITS.md` and [the schema](shared/contracts/book/book_
             commands = '\n'.join(f'python3 ../../scripts/check_source_candidates.py {argument}' for argument in arguments)
             skill.write_text(original + '\n```sh\n' + commands + '\n```\n')
             self.assertEqual(module.discover_direct_dependencies(root, name), expected)
+            self.assertIn(
+                '../docs/input.json',
+                module.extract_local_references('--input\n../docs/input.json'),
+            )
             directory, archive = module.build_standalone_skill(root, name, root.parent / "bundles")
             self.assertTrue(archive.is_file())
             bundled_text = (directory / "SKILL.md").read_text()
