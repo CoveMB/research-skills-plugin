@@ -41,6 +41,10 @@ INLINE_PATH_TOKEN_RE = re.compile(
     r"((?:\.\./|\./)*(?:\.codex-plugin|assets|docs|examples|references|scripts|shared|skills)/"
     r"[A-Za-z0-9_./-]+)"
 )
+CLI_ARGUMENT_RE = re.compile(
+    r"(?<![\w./-])--?[\w-]+(?:=|[ \t]+)"
+    r'''(?:"(?:\\.|[^"\\\n])*"|'(?:\\.|[^'\\\n])*'|`[^`\n]*`|(?!-)[^\s`]+)'''
+)
 EXTERNAL_SCHEME_RE = re.compile(r"^[a-zA-Z][a-zA-Z0-9+.-]*:")
 LOCAL_REFERENCE_PREFIXES = (
     ".codex-plugin/",
@@ -306,13 +310,14 @@ def _is_path_like_reference(reference: str) -> bool:
         or reference in LOCAL_REFERENCE_ROOT_FILES
     )
     return is_local_prefix and (
-        reference in LOCAL_REFERENCE_ROOT_FILES or bool(PurePosixPath(reference).suffix)
+        PurePosixPath(reference).name in LOCAL_REFERENCE_ROOT_FILES or bool(PurePosixPath(reference).suffix)
     )
 
 
 def extract_local_references(text: str) -> tuple[str, ...]:
     markdown_values = MARKDOWN_LINK_RE.findall(text)
-    inline_values = BACKTICK_REFERENCE_RE.findall(text)
+    resource_text = CLI_ARGUMENT_RE.sub(" ", text)
+    inline_values = BACKTICK_REFERENCE_RE.findall(resource_text)
     references = [
         *markdown_values,
         *(
@@ -321,7 +326,7 @@ def extract_local_references(text: str) -> tuple[str, ...]:
             if value.startswith(("./", "../", *LOCAL_REFERENCE_PREFIXES))
             or value == "MODE_REGISTRY.md"
         ),
-        *INLINE_PATH_TOKEN_RE.findall(text),
+        *INLINE_PATH_TOKEN_RE.findall(resource_text),
     ]
     return tuple(
         sorted(
@@ -1408,7 +1413,8 @@ def _validate_skill_and_agent(files: dict[str, bytes], expected_name: str) -> No
 
 def _extract_bundle_references(text: str) -> tuple[str, ...]:
     markdown_values = MARKDOWN_LINK_RE.findall(text)
-    inline_values = BACKTICK_REFERENCE_RE.findall(text)
+    resource_text = CLI_ARGUMENT_RE.sub(" ", text)
+    inline_values = BACKTICK_REFERENCE_RE.findall(resource_text)
     candidates = [
         *markdown_values,
         *(
@@ -1421,7 +1427,7 @@ def _extract_bundle_references(text: str) -> tuple[str, ...]:
                 and value not in GENERIC_INLINE_FILE_LABELS
             )
         ),
-        *INLINE_PATH_TOKEN_RE.findall(text),
+        *INLINE_PATH_TOKEN_RE.findall(resource_text),
     ]
     references: set[str] = set()
     for candidate in candidates:
@@ -1431,7 +1437,7 @@ def _extract_bundle_references(text: str) -> tuple[str, ...]:
         if cleaned.startswith(("/", "~", "#")) or EXTERNAL_SCHEME_RE.match(cleaned):
             continue
         if cleaned.endswith("/") or not PurePosixPath(cleaned).suffix:
-            if cleaned not in LOCAL_REFERENCE_ROOT_FILES:
+            if PurePosixPath(cleaned).name not in LOCAL_REFERENCE_ROOT_FILES:
                 continue
         references.add(cleaned)
     return tuple(sorted(references))

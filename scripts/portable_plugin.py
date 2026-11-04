@@ -149,7 +149,8 @@ def resource_occurrences(text: str, source: str, helpers: set[str]) -> list[Occu
                         continue
                     raw = match.group(1)
                     reference = raw.split("#", 1)[0]
-                    if reference in extract_local_references(f"`{reference}`"):
+                    candidate = match.group() if pattern is MARKDOWN_LINK_RE else f"`{reference}`"
+                    if reference in extract_local_references(candidate):
                         start = offset + match.start(1)
                         line_occurrences.append(Occurrence(start, start + len(reference), reference))
             if source == "skills/research-intent-router/SKILL.md":

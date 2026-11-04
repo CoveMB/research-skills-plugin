@@ -22,7 +22,6 @@ from plugin_utils import (
 )
 from portable_plugin import (
     ADAPTER_PATH,
-    portable_inventory,
     reject_symlink_components,
     render_portable_files,
     validate_portable_tree,
@@ -70,7 +69,7 @@ def default_portable_output_path(root: Path) -> Path:
     return root / "dist" / "portable-plugin" / f"{plugin_name(root)}-v{plugin_version(root)}-portable.zip"
 
 
-def validate_portable_archive(archive_path: Path | BinaryIO, prefix: str) -> None:
+def validate_portable_archive(archive_path: Path | BinaryIO, prefix: str, expected_files: set[str]) -> None:
     """Inspect actual members before extracting into a new, private scratch tree."""
     with zipfile.ZipFile(archive_path) as archive, tempfile.TemporaryDirectory() as temporary:
         names: set[str] = set()
@@ -86,11 +85,11 @@ def validate_portable_archive(archive_path: Path | BinaryIO, prefix: str) -> Non
                 raise ValueError(f"duplicate portable archive member: {member.filename}")
             names.add(member.filename)
             folded_names.add(member.filename.casefold())
+        expected_names = {f"{prefix}/{name}" for name in expected_files}
+        if names != expected_names:
+            raise ValueError("portable archive members do not match the rendered source manifest")
         archive.extractall(temporary)
         root = Path(temporary) / prefix
-        expected_names = {f"{prefix}/{name}" for name in (*portable_inventory(root), ADAPTER_PATH)}
-        if names != expected_names:
-            raise ValueError("portable archive contains excluded or unexpected members")
         errors = validate_portable_tree(root)
         if errors:
             raise ValueError("invalid portable archive:\n- " + "\n- ".join(errors))
@@ -144,7 +143,7 @@ def write_portable_package(root: Path, output_path: Path) -> None:
                         archive.writestr(info, data)
                 stream.flush()
                 stream.seek(0)
-                validate_portable_archive(stream, prefix)
+                validate_portable_archive(stream, prefix, set(files))
             reject_symlink_components(output_path)
             if not os.path.samestat(directory_identity, os.stat(output_path.parent, follow_symlinks=False)):
                 raise ValueError("portable output directory changed during validation")
@@ -155,6 +154,9 @@ def write_portable_package(root: Path, output_path: Path) -> None:
                 temporary_name, output_path.name, src_dir_fd=directory_descriptor,
                 dst_dir_fd=directory_descriptor, follow_symlinks=False,
             )
+            reject_symlink_components(output_path)
+            if not os.path.samestat(directory_identity, os.stat(output_path.parent, follow_symlinks=False)):
+                raise ValueError("portable output directory changed during publication; archive remains in the original directory")
         finally:
             try:
                 try:

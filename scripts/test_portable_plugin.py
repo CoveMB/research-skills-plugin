@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import importlib
+import io
 import json
 import os
 import shutil
@@ -10,6 +11,7 @@ import sys
 import tempfile
 import unittest
 import zipfile
+from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
 from unittest.mock import patch
 
@@ -88,6 +90,25 @@ class PortableRenderingTests(PortableFixture):
         resources, helpers = discover_direct_dependencies(installed, "discovery-runner-deduper")
         self.assertIn("scripts/check_source_candidates.py", helpers)
         self.assertIn("docs/policy/SOURCE_LIMITS.md", resources)
+
+    def test_root_file_links_are_rewritten_and_checked_after_relocation(self) -> None:
+        self.append_reference('[License](LICENSE#notice)')
+        registry_path = self.source / "shared/standalone-skill-registry.json"
+        registry = json.loads(registry_path.read_text())
+        for entry in registry["skills"]:
+            if entry["name"] == "research-intent-router":
+                entry["resources"] = sorted([*entry["resources"], "LICENSE"])
+        registry_path.write_text(json.dumps(registry))
+        files = self.portable.render_portable_files(self.source)
+        self.assertTrue('[License](../../LICENSE#notice)' in files[SKILL].decode())
+        installed = self.directory / "installed"
+        write_files(installed, files)
+        self.assertEqual(self.portable.validate_portable_tree(installed), [])
+        (installed / "LICENSE").unlink()
+        self.assertTrue(self.portable.validate_portable_tree(installed))
+        (self.source / "LICENSE").unlink()
+        with self.assertRaises(ValueError):
+            self.portable.render_portable_files(self.source)
 
     def test_router_bare_registry_reference_preserves_nonresource_spans(self) -> None:
         preserved = [
@@ -299,6 +320,58 @@ class PortablePublicationTests(PortableFixture):
             self.packager.write_portable_package(installed, output)
         self.assertFalse(output.exists())
 
+    def test_archive_inventory_must_match_rendered_source_files(self) -> None:
+        real_write = zipfile.ZipFile.writestr
+        for change in ("missing", "extra"):
+            with self.subTest(change=change):
+                output = self.directory / (change + ".zip")
+
+                def alter_members(archive, member, data, *args, **kwargs):
+                    if member.filename == "research-skills-plugin/scripts/portable_plugin.py":
+                        if change == "missing":
+                            return
+                        real_write(archive, "research-skills-plugin/docs/unexpected.md", b"unexpected")
+                    return real_write(archive, member, data, *args, **kwargs)
+
+                with patch.object(zipfile.ZipFile, "writestr", new=alter_members):
+                    with self.assertRaisesRegex(ValueError, "archive.*(members|manifest)"):
+                        self.packager.write_portable_package(self.source, output)
+                self.assertFalse(output.exists())
+                self.assertEqual(list(self.directory.glob(".*.tmp")), [])
+
+    def test_parent_rename_during_link_does_not_report_requested_path_success(self) -> None:
+        real_link = os.link
+        for replacement_kind in ("absent", "directory", "symlink"):
+            with self.subTest(replacement_kind=replacement_kind):
+                parent = self.directory / replacement_kind
+                parent.mkdir()
+                moved = self.directory / (replacement_kind + "-moved")
+                output = parent / "candidate.zip"
+
+                def rename_during_link(source, destination, **options):
+                    parent.rename(moved)
+                    if replacement_kind == "directory":
+                        parent.mkdir()
+                    elif replacement_kind == "symlink":
+                        unrelated = self.directory / "unrelated"
+                        unrelated.mkdir()
+                        parent.symlink_to(unrelated, target_is_directory=True)
+                    if replacement_kind != "absent":
+                        output.write_bytes(b"unrelated sentinel")
+                    real_link(source, destination, **options)
+
+                stdout, stderr = io.StringIO(), io.StringIO()
+                arguments = ["package_plugin.py", "--portable", "--root", str(self.source), "--out", str(output)]
+                with patch.object(self.packager.os, "link", side_effect=rename_during_link), patch.object(sys, "argv", arguments), redirect_stdout(stdout), redirect_stderr(stderr):
+                    status = self.packager.main()
+                self.assertEqual(status, 1, "publication reported success at a stale output path")
+                self.assertNotIn("Wrote ", stdout.getvalue())
+                self.assertIn("Portable packaging failed:", stderr.getvalue())
+                self.assertEqual(sorted(path.name for path in moved.iterdir()), ["candidate.zip"])
+                self.assertTrue(zipfile.is_zipfile(moved / "candidate.zip"))
+                if replacement_kind != "absent":
+                    self.assertEqual(output.read_bytes(), b"unrelated sentinel")
+
     def test_parent_replacement_preserves_sentinel_and_cleans_original_staging(self) -> None:
         real_validator = self.packager.validate_portable_archive
         for replacement_kind in ("symlink", "directory"):
@@ -311,9 +384,9 @@ class PortablePublicationTests(PortableFixture):
                 unrelated.mkdir()
                 sentinel = None
 
-                def replace_parent(archive: object, prefix: str) -> None:
+                def replace_parent(archive: object, prefix: str, expected_files: set[str]) -> None:
                     nonlocal sentinel
-                    real_validator(archive, prefix)
+                    real_validator(archive, prefix, expected_files)
                     staging_name = next(parent.glob(".*.tmp")).name
                     parent.rename(moved_parent)
                     if replacement_kind == "symlink":
@@ -340,9 +413,9 @@ class PortablePublicationTests(PortableFixture):
         real_validator = self.packager.validate_portable_archive
         sentinel = None
 
-        def replace_staging(archive: object, prefix: str) -> None:
+        def replace_staging(archive: object, prefix: str, expected_files: set[str]) -> None:
             nonlocal sentinel
-            real_validator(archive, prefix)
+            real_validator(archive, prefix, expected_files)
             sentinel = next(parent.glob(".*.tmp"))
             sentinel.rename(retained)
             sentinel.write_bytes(b"replacement sentinel")
@@ -383,12 +456,12 @@ class PortablePublicationTests(PortableFixture):
                     info.external_attr = mode << 16
                     archive.writestr(info, b"invalid")
                 with self.assertRaises(ValueError):
-                    self.packager.validate_portable_archive(archive_path, "research-skills-plugin")
+                    self.packager.validate_portable_archive(archive_path, "research-skills-plugin", set())
         with zipfile.ZipFile(archive_path, "w") as archive:
             archive.writestr("research-skills-plugin/file", b"a")
             archive.writestr("research-skills-plugin/FILE", b"b")
         with self.assertRaises(ValueError):
-            self.packager.validate_portable_archive(archive_path, "research-skills-plugin")
+            self.packager.validate_portable_archive(archive_path, "research-skills-plugin", set())
 
 
 class PortableInstalledRuntimeTests(unittest.TestCase):
