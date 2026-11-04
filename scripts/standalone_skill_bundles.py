@@ -38,8 +38,12 @@ MARKDOWN_LINK_RE = re.compile(r"\[[^\]]+\]\(([^)#]+)(?:#[^)]+)?\)")
 BACKTICK_REFERENCE_RE = re.compile(r"`([^`\n]+)`")
 INLINE_PATH_TOKEN_RE = re.compile(
     r"(?<![A-Za-z0-9_./-])"
-    r"((?:\.codex-plugin|assets|docs|examples|references|scripts|shared|skills)/"
+    r"((?:\.\./|\./)*(?:\.codex-plugin|assets|docs|examples|references|scripts|shared|skills)/"
     r"[A-Za-z0-9_./-]+)"
+)
+CLI_ARGUMENT_RE = re.compile(
+    r"(?<![\w./-])--?[\w-]+(?:=|[ \t]+)(?:\\\r?\n[ \t]*)*"
+    r'''(?:"(?:\\.|[^"\\\n])*"|'(?:\\.|[^'\\\n])*'|`[^`\n]*`|(?!-)[^\s`]+)'''
 )
 EXTERNAL_SCHEME_RE = re.compile(r"^[a-zA-Z][a-zA-Z0-9+.-]*:")
 LOCAL_REFERENCE_PREFIXES = (
@@ -306,13 +310,14 @@ def _is_path_like_reference(reference: str) -> bool:
         or reference in LOCAL_REFERENCE_ROOT_FILES
     )
     return is_local_prefix and (
-        reference in LOCAL_REFERENCE_ROOT_FILES or bool(PurePosixPath(reference).suffix)
+        PurePosixPath(reference).name in LOCAL_REFERENCE_ROOT_FILES or bool(PurePosixPath(reference).suffix)
     )
 
 
 def extract_local_references(text: str) -> tuple[str, ...]:
     markdown_values = MARKDOWN_LINK_RE.findall(text)
-    inline_values = BACKTICK_REFERENCE_RE.findall(text)
+    resource_text = CLI_ARGUMENT_RE.sub(" ", text)
+    inline_values = BACKTICK_REFERENCE_RE.findall(resource_text)
     references = [
         *markdown_values,
         *(
@@ -321,7 +326,7 @@ def extract_local_references(text: str) -> tuple[str, ...]:
             if value.startswith(("./", "../", *LOCAL_REFERENCE_PREFIXES))
             or value == "MODE_REGISTRY.md"
         ),
-        *INLINE_PATH_TOKEN_RE.findall(text),
+        *INLINE_PATH_TOKEN_RE.findall(resource_text),
     ]
     return tuple(
         sorted(
@@ -341,7 +346,7 @@ def _plugin_relative(root: Path, path: Path) -> str:
         raise ValueError(f"source path escapes the plugin: {path}") from error
 
 
-def _resolve_reference(root: Path, source_relative: str, raw_reference: str) -> str:
+def resolve_source_reference(root: Path, source_relative: str, raw_reference: str) -> str:
     source_path = safe_source_path(root, source_relative)
     candidates: list[Path] = []
     for candidate in (source_path.parent / raw_reference, root / raw_reference):
@@ -401,7 +406,7 @@ def discover_direct_dependencies(root: Path, skill_name: str) -> tuple[tuple[str
             continue
         text = source_path.read_text(encoding="utf-8")
         for raw_reference in extract_local_references(text):
-            target = _resolve_reference(root, source_relative, raw_reference)
+            target = resolve_source_reference(root, source_relative, raw_reference)
             if target.startswith(skill_prefix):
                 continue
             if target.startswith("scripts/") and target.endswith(".py"):
@@ -411,7 +416,7 @@ def discover_direct_dependencies(root: Path, skill_name: str) -> tuple[tuple[str
     return tuple(sorted(resources)), tuple(sorted(helpers))
 
 
-def _local_python_imports(root: Path, source_relative: str) -> tuple[str, ...]:
+def local_python_imports(root: Path, source_relative: str) -> tuple[str, ...]:
     source_path = safe_source_path(root, source_relative)
     try:
         tree = ast.parse(source_path.read_text(encoding="utf-8"), filename=source_relative)
@@ -584,12 +589,12 @@ def create_bundle_plan(root: Path, skill_name: str) -> BundlePlan:
         if source_path.suffix.lower() in TEXT_SUFFIXES:
             text = source_path.read_text(encoding="utf-8")
             for raw_reference in extract_local_references(text):
-                target = _resolve_reference(root, source_relative, raw_reference)
+                target = resolve_source_reference(root, source_relative, raw_reference)
                 edges.add(DependencyEdge(source_relative, raw_reference, target))
                 if target not in sources:
                     pending.append(target)
         if source_path.suffix.lower() == ".py":
-            for target in _local_python_imports(root, source_relative):
+            for target in local_python_imports(root, source_relative):
                 edges.add(DependencyEdge(source_relative, f"import:{PurePosixPath(target).stem}", target))
                 if target not in sources:
                     pending.append(target)
@@ -691,7 +696,7 @@ def source_commit(root: Path) -> str:
     return commit.lower()
 
 
-def _relative_bundle_reference(source_destination: str, target_destination: str) -> str:
+def relative_resource_reference(source_destination: str, target_destination: str) -> str:
     source_parent = PurePosixPath(source_destination).parent.as_posix()
     return posixpath.relpath(target_destination, source_parent)
 
@@ -716,7 +721,7 @@ def _rewrite_text_source(
             raise ValueError(
                 f"{source_relative}: dependency target is absent from bundle plan: {edge.target}"
             )
-        replacement = _relative_bundle_reference(source_destination, target_destination)
+        replacement = relative_resource_reference(source_destination, target_destination)
         text = text.replace(edge.raw_reference, replacement)
     if plan.classification == "route-only" and source_destination == "SKILL.md":
         text = text.rstrip() + (
@@ -1408,7 +1413,8 @@ def _validate_skill_and_agent(files: dict[str, bytes], expected_name: str) -> No
 
 def _extract_bundle_references(text: str) -> tuple[str, ...]:
     markdown_values = MARKDOWN_LINK_RE.findall(text)
-    inline_values = BACKTICK_REFERENCE_RE.findall(text)
+    resource_text = CLI_ARGUMENT_RE.sub(" ", text)
+    inline_values = BACKTICK_REFERENCE_RE.findall(resource_text)
     candidates = [
         *markdown_values,
         *(
@@ -1421,7 +1427,7 @@ def _extract_bundle_references(text: str) -> tuple[str, ...]:
                 and value not in GENERIC_INLINE_FILE_LABELS
             )
         ),
-        *INLINE_PATH_TOKEN_RE.findall(text),
+        *INLINE_PATH_TOKEN_RE.findall(resource_text),
     ]
     references: set[str] = set()
     for candidate in candidates:
@@ -1431,7 +1437,7 @@ def _extract_bundle_references(text: str) -> tuple[str, ...]:
         if cleaned.startswith(("/", "~", "#")) or EXTERNAL_SCHEME_RE.match(cleaned):
             continue
         if cleaned.endswith("/") or not PurePosixPath(cleaned).suffix:
-            if cleaned not in LOCAL_REFERENCE_ROOT_FILES:
+            if PurePosixPath(cleaned).name not in LOCAL_REFERENCE_ROOT_FILES:
                 continue
         references.add(cleaned)
     return tuple(sorted(references))

@@ -1,6 +1,6 @@
 # Installation guide
 
-Install the full plugin from its public Git marketplace when possible. This keeps the router, orchestrator, shared policies, contracts, and specialist skills on one versioned update path. Generated standalone bundles remain available for environments that accept only individual skills.
+For Codex, install the full plugin from its public Git marketplace when possible. This keeps the router, orchestrator, shared policies, contracts, and specialist skills on one versioned update path. OpenCode v2 and Antigravity use the generated full-catalog export below. Generated standalone bundles remain available for environments that accept only individual skills.
 
 ## Requirements
 
@@ -60,6 +60,62 @@ codex plugin list --json
 ```
 
 Start a new task after the reinstall so Codex loads the updated skills.
+
+## OpenCode v2 and Antigravity full catalog
+
+From the source checkout, build with Python 3.10 or newer:
+
+```bash
+python3 scripts/package_plugin.py --portable
+```
+
+The output is `dist/portable-plugin/research-skills-plugin-v1.1.0-portable.zip`. Choose a new `--out /absolute/path/candidate.zip` if that output already exists. Portable builds refuse existing outputs, symlinked destinations, and destinations inside source areas other than `dist/`. They never replace a previous candidate. Build from canonical source; an extracted portable export cannot be used to generate another portable export.
+
+Extract into a new directory you choose; do not extract over an existing installation. Replace the two absolute paths below with your archive and fresh destination:
+
+```bash
+python3 -m zipfile -e /absolute/path/candidate.zip /absolute/path/new-installation
+python3 /absolute/path/new-installation/research-skills-plugin/scripts/portable_plugin.py --check /absolute/path/new-installation/research-skills-plugin
+python3 /absolute/path/new-installation/research-skills-plugin/scripts/run_package_checks.py --scope package
+```
+
+Keep the entire extracted `research-skills-plugin` directory together. It contains all 29 skills and their shared policies, schemas, references, templates, and Python helpers. The standalone catalog still has 28 eligible bundles: 27 `self-sufficient` skills and a `route-only` router; the `full-plugin-only` orchestrator is available in this complete export.
+
+### OpenCode v2
+
+Add the absolute extracted skills directory to the `skills` array in your existing `opencode.json` or `opencode.jsonc`, preserving its other entries and settings:
+
+```json
+{
+  "skills": ["/absolute/path/new-installation/research-skills-plugin/skills"]
+}
+```
+
+OpenCode v2 combines configured arrays; relative paths resolve from the active working directory. Later sources win when skill IDs collide, so avoid registering both a standalone and full-catalog copy of the same skill. Start a fresh session and check the discovered inventory. Invoke `@research-intent-router` or `@research-book-orchestrator` explicitly. These are v2 instructions; do not substitute the v1 `skills.paths` configuration. See the [OpenCode v2 skill documentation](https://opencode.ai/v2/docs/skills/).
+
+### Antigravity
+
+The generated manifest is `.antigravity-plugin/plugin.json`, with components at the extracted plugin root. Direct installation of this unbuilt Git repository is unsupported: build and extract first.
+
+With an already installed Antigravity CLI, you can validate and install that local directory yourself:
+
+```bash
+agy plugin validate --strict /absolute/path/new-installation/research-skills-plugin
+agy plugin install /absolute/path/new-installation/research-skills-plugin
+agy plugin list --json
+```
+
+The interactive CLI also supports `/plugin install <local-path>`. For App or standalone IDE manual loading, place the complete plugin directory in a fresh workspace `.agents/plugins/` location or a fresh `~/.gemini/config/plugins/` location; inspect existing installations first. App plugins are managed under Customizations → Installed. Invoke `/research-intent-router` or `/research-book-orchestrator` in a new session and check that all 29 skills are available. See the [native plugin guide](https://antigravity.google/docs/plugins/) and [manifest/validation guide](https://antigravity.google/docs/build-plugins/).
+
+For individual bundles only, App/IDE global skills use `~/.gemini/config/skills`, while CLI global skills use `~/.gemini/antigravity-cli/skills`. These are separate from the full-plugin installation above. See [skills by surface](https://antigravity.google/docs/skills/).
+
+### Permissions, updates, and evidence
+
+Host instructions were checked against official documentation on 2026-10-30. Native OpenCode/Antigravity discovery and invocation remain unverified. Package validation is deterministic structural evidence; historical Codex captures do not certify the transformed runtime. The candidate keeps version `1.1.0` and does not create a release or update a marketplace tag.
+
+The host must provide file access and, when needed, Python execution or consented lookup. Missing tools or denied permissions are blockers, not verification. The preserved `agents/openai.yaml` research fields are not claimed to be permissions enforced by other hosts. Resolve bundled helper paths to absolute paths while keeping the user's workspace as the working directory, so user input/output paths keep their meaning. Do not bypass host permission prompts.
+
+For updates, build and validate a fresh candidate and extract into a new directory before changing host registration or replacing a live installation. Keep the previous candidate for rollback, avoid duplicate IDs, and check the inventory in a fresh session after switching. Edit canonical sources and rebuild; do not maintain generated instructions separately.
 
 ## Generated local skill install
 

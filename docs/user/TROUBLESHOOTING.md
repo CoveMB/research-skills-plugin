@@ -65,11 +65,21 @@ If the command is missing or reports an older version, install a current Python 
 
 ## Package creation fails
 
-`scripts/package_plugin.py` writes the zip to the current directory by default. If that directory is read-only, pass `--out` with a writable path:
+Without `--portable`, `scripts/package_plugin.py` writes the zip to the current directory by default. If that directory is read-only, pass `--out` with a writable path:
 
 ```bash
 python3 scripts/package_plugin.py --root . --out dist/research-skills-plugin.zip
 ```
+
+Portable output defaults under `dist/portable-plugin/`. If it already exists, choose a new `--out`; do not delete an unrelated output to make the build pass. Symlinked output paths are refused, including parent aliases; use the real directory path. Missing, ambiguous, excluded, or symlinked resource dependencies fail the build. Repair the canonical dependency rather than copying private files into the archive.
+
+## OpenCode v2 or Antigravity cannot find the full catalog
+
+Follow the [full-catalog installation guide](INSTALLATION.md#opencode-v2-and-antigravity-full-catalog). Use the generated export and keep its whole directory intact. OpenCode v2 needs the absolute extracted `skills` path in its additive `skills` array. Antigravity needs the extracted local plugin with its generated manifest; the unbuilt Git repository is not an Antigravity installation artifact.
+
+Validate the extracted tree with its `scripts/portable_plugin.py --check` command and package checks, then inspect the host's inventory in a new session. Look for duplicate IDs from earlier standalone or full installations. Try `@research-intent-router` in OpenCode v2 or `/research-intent-router` in Antigravity. Native discovery and invocation have not yet been verified by this project.
+
+If a helper cannot find a user file, resolve the bundled Python script to an absolute path and run it from the user's workspace. Preserve a filename containing spaces as one quoted argument. Missing Python, unavailable lookup, or denied permissions must be reported as blockers; neither a successful package check nor Codex agent metadata grants access in another host.
 
 ## A script option is unclear
 

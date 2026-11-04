@@ -214,6 +214,44 @@ Load `docs/policy/SOURCE_LIMITS.md` and [the schema](shared/contracts/book/book_
                 with self.subTest(path=unsafe), self.assertRaises(ValueError):
                     module.safe_source_path(root, unsafe)
 
+    def test_workspace_cli_arguments_are_preserved_without_becoming_dependencies(self) -> None:
+        module = load_library(self)
+        arguments = (
+            '--input \\\n    ../docs/input.json',
+            '--input \\\n    "../docs/input.json"',
+            '--output=\\\n../shared/output.json',
+            '--input \\\n    \\\n    ../docs/input.json',
+            '--input ../docs/input.json',
+            '--input="../docs/input.json"',
+            "--output '../shared/output.json'",
+            '--output=./examples/output.json',
+            '--input `../docs/input.json`',
+        )
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory) / "source"
+            copy_packaged_plugin(self, root)
+            name = "discovery-runner-deduper"
+            skill = root / "skills" / name / "SKILL.md"
+            original = skill.read_text()
+            expected = module.discover_direct_dependencies(root, name)
+            commands = '\n'.join(f'python3 ../../scripts/check_source_candidates.py {argument}' for argument in arguments)
+            skill.write_text(original + '\n```sh\n' + commands + '\n```\n')
+            self.assertEqual(module.discover_direct_dependencies(root, name), expected)
+            self.assertIn(
+                '../docs/input.json',
+                module.extract_local_references('--input\n../docs/input.json'),
+            )
+            directory, archive = module.build_standalone_skill(root, name, root.parent / "bundles")
+            self.assertTrue(archive.is_file())
+            bundled_text = (directory / "SKILL.md").read_text()
+            for argument in arguments:
+                self.assertTrue(argument in bundled_text, f"workspace argument changed: {argument}")
+            for missing in ('`../references/missing.md`', '`python3 ../../scripts/missing_helper.py --input ../docs/input.json`'):
+                with self.subTest(missing=missing):
+                    skill.write_text(original + '\n' + missing + '\n')
+                    with self.assertRaisesRegex(ValueError, "missing local reference"):
+                        module.create_bundle_plan(root, name)
+
     def test_python_closure_resolves_from_dot_imports(self) -> None:
         module = load_library(self)
         with tempfile.TemporaryDirectory() as temporary_directory:
@@ -223,7 +261,7 @@ Load `docs/policy/SOURCE_LIMITS.md` and [the schema](shared/contracts/book/book_
             (scripts / "main.py").write_text("from . import helper\n", encoding="utf-8")
             (scripts / "helper.py").write_text("VALUE = 1\n", encoding="utf-8")
             self.assertEqual(
-                module._local_python_imports(root, "scripts/main.py"),
+                module.local_python_imports(root, "scripts/main.py"),
                 ("scripts/helper.py",),
             )
 
@@ -243,7 +281,7 @@ Load `docs/policy/SOURCE_LIMITS.md` and [the schema](shared/contracts/book/book_
             (package / "sibling.py").write_text("VALUE = 2\n", encoding="utf-8")
 
             self.assertEqual(
-                module._local_python_imports(root, "scripts/main.py"),
+                module.local_python_imports(root, "scripts/main.py"),
                 (
                     "scripts/localpkg/__init__.py",
                     "scripts/localpkg/sibling.py",
